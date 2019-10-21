@@ -8,10 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      first_name: {
+        allowNull: true,
         type: Sequelize.STRING
       },
-      lastName: {
+      last_name: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       email: {
@@ -20,6 +22,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       password: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
@@ -31,9 +34,9 @@ module.exports = {
         type: Sequelize.DATE
       },
       deletedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
-      },
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
