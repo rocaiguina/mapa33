@@ -1,0 +1,19 @@
+.ds_store
+
+# Ignore all node_modules
+node_modules
+
+# Yarn lockfile
+yarn.lock
+yarn-debug.log
+yarn-error.log
+
+# NPM errors
+npm-debug.log
+npm-error.log
+
+# Compiled JS
+public/dist
+
+# Environment variables
+.env
