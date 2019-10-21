@@ -2,6 +2,12 @@
 
 The awesome web app. :)
 
+## Requirements
+
+- NodeJs v8.10.0 or higher
+- Npm v5.6.0 or higher
+- Postgresql v9 or higher
+
 
 ## How to start the project
 
