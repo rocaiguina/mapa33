@@ -1,5 +1,10 @@
 'use strict';
 
+require('dotenv-safe').config({
+  allowEmptyValues: true,
+  example: 'config/.env.config'
+});
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
