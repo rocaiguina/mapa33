@@ -39,14 +39,16 @@ PORT=3000
 }
 ```
 
-5. Run database migrations (You must to run this command when there are changes into database schema)
+5. Run database migrations (You must run this command when there are changes into database schema)
 
 `node_modules/.bin/sequelize db:migrate`
 
-6. Run the project and open your browser `http://localhost:3000/`
+6. Run the server project.
 
 `npm run dev-start`
 
 7. Open a new terminal and build the "react app"
 
 `npm run build`
+
+8. Open your browser `http://localhost:3000/` and enjoy!. :)
