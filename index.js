@@ -36,3 +36,5 @@ app.listen(port, () => {
   })
   .catch(err => console.error(err));
 });
+
+module.exports = app;

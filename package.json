@@ -11,7 +11,7 @@
     "build": "webpack -w --progress --colors",
     "dev-start": "export NODE_ENV=development && nodemon index.js",
     "start": "export NODE_ENV=production && webpack && node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --colors --timeout 5000 --exit"
   },
   "keywords": [
     "yeoman-generator",
@@ -47,6 +47,7 @@
     "@babel/preset-react": "7.0.0",
     "babel-loader": "8.0.0",
     "chai": "4.1.2",
+    "chai-http": "^4.3.0",
     "chalk": "2.1.0",
     "css-loader": "1.0.0",
     "mocha": "5.1.1",
