@@ -8,6 +8,15 @@ const server = require('./server');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
+const nunjucks = require('nunjucks');
+
+// configure template engine
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app,
+  noCache: process.env.NODE_ENV == 'development'
+});
+app.set('view engine', 'html');
 
 // logging middleware
 app.use(morgan('dev'));
@@ -16,8 +25,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// prepend '/api' to URIs
+// prepend '/' to URIs
 app.use('/api', server);
+app.use('/admin', require('./server/admin'));
 
 // serve static files from public
 app.use(express.static(resolve(__dirname, 'public')))

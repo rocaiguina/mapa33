@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="block-header">
+    <h2>Lands</h2>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Lorem Ipsum
+            <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+        </h2>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-vmiddle">
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Location</th>
+                <th>Entity</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><a href="/admin/land/1"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
+                <td><a href="/admin/land/1">{{ item.name }}Las Palmas</a></td>
+                <td>{{ item.level }}<span class="label label-warning">BASIC</span></td>
+                <td>{{ item.location }}Santa Cruz</td>
+                <td>{{ item.entity }}UNE</td>
+                <td>{{ item.status }}<span class="label label-info">NEW</span></td>
+                <td style="white-space: nowrap; width: 1%;">
+                  <a href="/admin/land/1" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
+                  <a href="/admin/land/{{ item._id }}/remove" class="btn btn-default btn-icon waves-effect waves-circle remove-link"><span class="zmdi zmdi-delete"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="/admin/land/1"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
+                <td><a href="/admin/land/1">{{ item.name }}Estación Argentina</a></td>
+                <td>{{ item.level }}<span class="label label-warning">BASIC</span></td>
+                <td>{{ item.location }}Cochabamba</td>
+                <td>{{ item.entity }}NUR</td>
+                <td>{{ item.status }}<span class="label label-danger">DENIED</span></td>
+                <td style="white-space: nowrap; width: 1%;">
+                  <a href="/admin/land/1" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
+                  <a href="/admin/land/{{ item._id }}/remove" class="btn btn-default btn-icon waves-effect waves-circle remove-link"><span class="zmdi zmdi-delete"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
+                <td><a href="/admin/land/{{ item._id }}">{{ item.name }}Los Lotes</a></td>
+                <td>{{ item.level }}<span class="label label-warning">BASIC</span></td>
+                <td>{{ item.location }}La Paz</td>
+                <td>{{ item.entity }}NUR</td>
+                <td>{{ item.status }}<span class="label label-success">APPROVED</span></td>
+                <td style="white-space: nowrap; width: 1%;">
+                  <a href="/admin/land/1" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
+                  <a href="/admin/land/{{ item._id }}/remove" class="btn btn-default btn-icon waves-effect waves-circle remove-link"><span class="zmdi zmdi-delete"></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <ul class="pagination">
+            <li {% if paginator.page <= 1 %}class="disabled"{% endif %}>
+              <a href="{% if paginator.page <= 1 %}#{% else %}/admin/land?page={{ paginator.page - 1 }}{% endif %}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
+            </li>
+            <li {% if paginator.page >= paginator.pages %}class="disabled"{% endif %}>
+              <a href="{% if paginator.page >= paginator.pages %}#{% else %}/admin/land?page={{ paginator.page + 1 }}{% endif %}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<form id="delete-form" method="POST">
+  <input type="hidden" name="crumb" value="{{crumb}}"/>
+</form>
+
+<a href="/admin/land/create" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-original-title="Add Land"><i class="zmdi zmdi-plus"></i></a>
+
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var delete_form = $('#delete-form');
+
+    $('.remove-link').click(function (event) {
+      event.preventDefault();
+      var self = $(this);
+      swal({
+        title: "¿Estas seguro?",
+        text: "No podrás recuperar este recurso!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          // var href = self.attr('href');
+          // delete_form.attr('action', href);
+          // delete_form.submit();
+        }
+      });
+    });
+
+  });
+</script>
+{% endblock %}

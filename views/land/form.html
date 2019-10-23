@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="block-header">
+    <h2>Land <small>{{ land.name }}</small></h2>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <h2>Details
+                <small>(*) Required fields.</small>
+            </h2>
+        </div>
+        <div class="card-body card-padding">
+            <form id="user-form" method="POST" action="/admin/land/{{ land.id }}" autocomplete="off">
+                <input type="hidden" name="crumb" value="{{crumb}}"/>
+
+                <div class="form-group {{ 'has-error' if errors.name else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Name*</label>
+                        <input type="text" class="form-control input-sm" name="name" value="{{ land.name if land.id else old.name }}">
+                    </div>
+                    {% if errors.name %}
+                    <small class="help-block">{{ errors.name }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.level else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Level*</label>
+                        <div class="select">
+                            <select name="level" class="form-control">
+                                <option {% if land.role == 'basic' %}selected{% endif %} value="basic">Basic</option>
+                                <option {% if land.role == 'pledge' %}selected{% endif %} value="pledge">Pledge</option>
+                                <option {% if land.role == 'conserved' %}selected{% endif %} value="conserved">Conserved</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% if errors.level %}
+                    <small class="help-block">{{ errors.level }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.location else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Location</label>
+                        <input type="text" class="form-control input-sm" name="location" value="{{ land.email if land.id else old.email }}">
+                    </div>
+                    {% if errors.location %}
+                    <small class="help-block">{{ errors.location }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.entity else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Entity*</label>
+                        <input type="text" class="form-control input-sm" name="entity" value="{{ land.phone if land.id else old.phone }}">
+                    </div>
+                    {% if errors.entity %}
+                    <small class="help-block">{{ errors.entity }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.use_type else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Use Type*</label>
+                        <input type="text" class="form-control input-sm" name="use_type">
+                    </div>
+                    {% if errors.use_type %}
+                    <small class="help-block">{{ errors.use_type }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.acquisition_type else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Acquisition Type*</label>
+                        <input type="text" class="form-control input-sm" name="acquisition_type">
+                    </div>
+                    {% if errors.acquisition_type %}
+                    <small class="help-block">{{ errors.acquisition_type }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.year_acquisition else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Year Acquisition*</label>
+                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition">
+                    </div>
+                    {% if errors.year_acquisition %}
+                    <small class="help-block">{{ errors.year_acquisition }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.status else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Status*</label>
+                        <div class="select">
+                            <select name="status" class="form-control ">
+                                <option {% if land.role == 'new' %}selected{% endif %} value="new">New</option>
+                                <option {% if land.role == 'denied' %}selected{% endif %} value="denied">Denied</option>
+                                <option {% if land.role == 'approved' %}selected{% endif %} value="approved">Approved</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% if errors.status %}
+                    <small class="help-block">{{ errors.status }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group {{ 'has-error' if errors.reason_conservation else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Reason Conservation*</label>
+                        <textarea class="form-control" rows="5" name="reason_conservation"></textarea>
+                    </div>
+                    {% if errors.reason_conservation %}
+                    <small class="help-block">{{ errors.reason_conservation }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <a href="/admin/land" class="btn btn-danger">CANCELAR</a>
+                </div>
+            </form>
+        </div>
+    </div>    
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body card-padding">
+        <div class="form-group">
+          <img src="https://dummyimage.com/600x400/cccccc/000000" class="img-responsive" />
+        </div>
+        <div class="text-center"><a href="https://dummyimage.com/600x400/cccccc/000000" target="_blank">View Map</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}
