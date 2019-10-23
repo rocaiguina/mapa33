@@ -5,8 +5,8 @@ const LandController = require('../controllers/land');
 
 router.get('/', LandController.findAll);
 router.post('/', LandController.store);
-router.get('/:id', LandController.get);
-router.put('/:id', LandController.update);
-router.delete('/:id', LandController.remove);
+router.get('/:id', LandController.lookup, LandController.get);
+router.put('/:id', LandController.lookup, LandController.update);
+router.delete('/:id', LandController.lookup, LandController.remove);
 
 module.exports = router;

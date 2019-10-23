@@ -25,16 +25,18 @@ app.use(express.static(resolve(__dirname, 'public')))
 // request any page and receive index.html
 app.get('/*', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));
 
-// server listening!
-const port = process.env.PORT || 3000;
-const dbName = process.env.DATABASE_NAME;
-app.listen(port, () => {
-  console.log(chalk.cyan('Server is listening'), chalk.yellow(process.env.SERVER_URL || `http://localhost:${port}`));
-  db.sequelize.sync({force: false})
-  .then(() => {
-    console.log(chalk.cyan('Database is running'), chalk.blue(process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`));
-  })
-  .catch(err => console.error(err));
-});
+if (process.env.NODE_ENV != 'test') {
+  // server listening!
+  const port = process.env.PORT || 3000;
+  const dbName = process.env.DATABASE_NAME;
+  app.listen(port, () => {
+    console.log(chalk.cyan('Server is listening'), chalk.yellow(process.env.SERVER_URL || `http://localhost:${port}`));
+    db.sequelize.sync({force: false})
+    .then(() => {
+      console.log(chalk.cyan('Database is running'), chalk.blue(process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`));
+    })
+    .catch(err => console.error(err));
+  });
+}
 
 module.exports = app;

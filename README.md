@@ -58,3 +58,134 @@ PORT=3000
 `npm run build`
 
 8. Open your browser `http://localhost:3000/` and enjoy!. :)
+
+
+# API DOCS
+
+## List land
+
+#### `GET /api/land/`
+
+List all available lands.
+
+#### `200 OK` - Response
+
+```
+{
+  data: [
+    {
+      name: '',
+      level: '',
+      status: '',
+      geom: '',
+      location: '',
+      entity: '',
+      use_type: '',
+      acquisition_type: '',
+      year_acquisition: '',
+      reason_conservation: ''
+    },
+    ...
+  ]
+}
+```
+
+## Create land
+
+#### `POST /api/land/`
+
+Create a new land.
+
+#### Request body
+
+| Field                 | Type          | Required      |
+| --------------------- | ------------- | ------------- |
+| name                  | string        | yes           |
+| level                 | string        | yes           |
+| status                | string        | yes           |
+| geom                  | object        | yes           |
+| location              | string        | yes           |
+| entity                | string        | yes           |
+| use_type              | string        | yes           |
+| acquisition_type      | string        | yes           |
+| year_acquisition      | integer       | yes           |
+| reason_conservation   | string        | yes           |
+
+#### `200 OK` - Response
+
+```
+{
+  id: '',
+  name: '',
+  level: '',
+  status: '',
+  geom: '',
+  location: '',
+  entity: '',
+  use_type: '',
+  acquisition_type: '',
+  year_acquisition: 2019,
+  reason_conservation: ''
+}
+```
+
+## Get land
+
+#### `GET /api/land/:id`
+
+Get a specific land.
+
+#### `200 OK` - Response
+
+```
+{
+  id: '',
+  name: '',
+  level: '',
+  status: '',
+  geom: '',
+  location: '',
+  entity: '',
+  use_type: '',
+  acquisition_type: '',
+  year_acquisition: 2019,
+  reason_conservation: ''
+}
+```
+
+## Update land
+
+#### `PUT /api/land/:id`
+
+Update a specific land.
+
+#### Request body
+
+| Field                 | Type          | Required      |
+| --------------------- | ------------- | ------------- |
+| name                  | string        | yes           |
+| level                 | string        | yes           |
+| status                | string        | yes           |
+| geom                  | object        | yes           |
+| location              | string        | yes           |
+| entity                | string        | yes           |
+| use_type              | string        | yes           |
+| acquisition_type      | string        | yes           |
+| year_acquisition      | integer       | yes           |
+| reason_conservation   | string        | yes           |
+
+#### `200 OK` - Response
+
+`Empty`
+
+## Delete land
+
+#### `DEL /api/land/:id`
+
+Remove a specific land.
+
+#### `200 OK` - Response
+
+`Empty`
+
+

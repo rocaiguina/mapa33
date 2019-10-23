@@ -7,26 +7,53 @@ const Land          = Models.Land;
 class LandController {
 
   findAll (req, res, next) {
-    res.send('');
-    next();
+    Land
+      .findAll({ raw: true })
+      .then(function (lands) {
+        res.json({ data: lands });
+      })
+      .catch(function (err) {
+        res.status(400).send(err);
+      })
+      .finally(function () {
+        next();
+      });    
+  }
+
+  lookup (req, res, next) {
+    Land
+      .findOne({ where: { id: req.params.id } })
+      .then(function (land) {
+        if (!land) { return res.status(404).send(''); }
+
+        req.land = land;
+        next();
+      })
+      .catch(function (err) {
+        res.status(400).send(err);
+      });
   }
     
   store (req, res, next) {
     var data = req.body;
     const validationSchema = {
-      level:                Joi.string(),
-      status:               Joi.string(),
-      use_type:             Joi.string(),
-      acquisition_type:     Joi.string(),
-      year_acquisition:     Joi.number().integer(),
-      reason_conservation:  Joi.string()
+      name:                 Joi.string().required(),
+      level:                Joi.string().required(),
+      status:               Joi.string().required(),
+      geom:                 Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
+      location:             Joi.string().required(),
+      entity:               Joi.string().required(),
+      use_type:             Joi.string().required(),
+      acquisition_type:     Joi.string().required(),
+      year_acquisition:     Joi.number().integer().required(),
+      reason_conservation:  Joi.string().required()
     };
 
     // Validata data.
     const result = Joi.validate(data, validationSchema);
 
     if (result.error) {
-      res.send(400, error);
+      res.status(400).send(result.error);
       return next();
     }
 
@@ -35,8 +62,12 @@ class LandController {
     // Save new land.
     Land
       .create({
+        name:                  cleaned_data.name,
         level:                 cleaned_data.level,
         status:                cleaned_data.status,
+        geom:                  cleaned_data.geom,
+        location:              cleaned_data.location,
+        entity:                cleaned_data.entity,
         use_type:              cleaned_data.use_type,
         acquisition_type:      cleaned_data.acquisition_type,
         year_acquisition:      cleaned_data.year_acquisition,
@@ -46,8 +77,7 @@ class LandController {
         res.json(land.get({plain: true}));
       })
       .catch(function (err) {
-        res.status(400);
-        res.send(err);
+        res.status(400).send(err);
       })
       .finally(function () {
         next();
@@ -57,81 +87,69 @@ class LandController {
   update (req, res, next) {
     var data = req.body;
     const validationSchema = {
-      level:                Joi.string(),
-      status:               Joi.string(),
-      use_type:             Joi.string(),
-      acquisition_type:     Joi.string(),
-      year_acquisition:     Joi.number().integer(),
-      reason_conservation:  Joi.string()
+      name:                 Joi.string().required(),
+      level:                Joi.string().required(),
+      status:               Joi.string().required(),
+      geom:                 Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
+      location:             Joi.string().required(),
+      entity:               Joi.string().required(),
+      use_type:             Joi.string().required(),
+      acquisition_type:     Joi.string().required(),
+      year_acquisition:     Joi.number().integer().required(),
+      reason_conservation:  Joi.string().required()
     };
 
     // Validata data.
     const result = Joi.validate(data, validationSchema);
 
     if (result.error) {
-      res.send(400, error);
+      res.status(400).send(result.error);
       return next();
     }
 
     const cleaned_data = result.value;
 
-    Land
-      .findOne({ where: { id: req.params.id } })
-      .then(function (land) {
-        if (!land) {
-          res.send(404);
-          return next();
-        }
+    var land = req.land;
 
-        land.level                = cleaned_data.level;
-        land.status               = cleaned_data.status;
-        land.use_type             = cleaned_data.use_type;
-        land.acquisition_type     = cleaned_data.acquisition_type;
-        land.year_acquisition     = cleaned_data.year_acquisition;
-        land.reason_conservation  = cleaned_data.reason_conservation;
+    land.level                = cleaned_data.level;
+    land.status               = cleaned_data.status;
+    land.geom                 = cleaned_data.geom;
+    land.location             = cleaned_data.location;
+    land.entity               = cleaned_data.entity;
+    land.use_type             = cleaned_data.use_type;
+    land.acquisition_type     = cleaned_data.acquisition_type;
+    land.year_acquisition     = cleaned_data.year_acquisition;
+    land.reason_conservation  = cleaned_data.reason_conservation;
 
-        return land.save();
-      })
+    land
+      .save()
       .then(function () {
-        res.send(200, '');
+        res.send('');
       })
       .catch(function (err) {
-        res.send(400, err);
-      })
-      .finally(function () {
-        next();
-      });;
-  }
-
-  get (req, res, next) {
-    Land
-      .findOne({ where: { id: req.params.id } })
-      .then(function (land) {
-        if (!land) { return res.send(404); }
-
-        res.json(land.get({plain: true}));
-      })
-      .catch(function (err) {
-        res.send(400, err);
+        res.status(400).send(err);
       })
       .finally(function () {
         next();
       });
   }
 
-  remove (req, res, next) {
-    Land
-      .findOne({ where: { id: req.params.id } })
-      .then(function (land) {
-        if (!land) { return res.send(404); }
+  get (req, res, next) {
+    var land = req.land;
+    res.json(land.get({plain: true}));
+    next();
+  }
 
-        return land.destroy();
-      })
+  remove (req, res, next) {
+    var land = req.land;
+
+    land
+      .destroy()
       .then(function () {
-        res.send(200, '');
+        res.send('');
       })
-      .catch(function (err) {
-        res.send(400, err);
+      .catch(function () {
+        res.status(400).send(err);
       })
       .finally(function () {
         next();
