@@ -8,6 +8,7 @@ const server = require('./server');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
+const UserRoute  =require('./server/routes/user');
 
 // logging middleware
 app.use(morgan('dev'));
@@ -18,12 +19,13 @@ app.use(bodyParser.json());
 
 // prepend '/api' to URIs
 app.use('/api', server);
-
+//app.use('/api/user/', UserRoute);
+//app.use()
 // serve static files from public
-app.use(express.static(resolve(__dirname, 'public')))
+app.use(express.static(resolve(__dirname, 'public')));
 
 // request any page and receive index.html
-app.get('/*', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));
+app.get('/', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));
 
 // server listening!
 const port = process.env.PORT || 3000;

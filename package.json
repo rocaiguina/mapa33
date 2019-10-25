@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "webpack -w --progress --colors",
-    "dev-start": "export NODE_ENV=development && nodemon index.js",
+    "dev-start": "nodemon index.js",
     "start": "export NODE_ENV=production && webpack && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,19 +27,21 @@
     "axios": "0.18.0",
     "body-parser": "1.17.1",
     "dotenv-safe": "6.0.0",
-    "express": "4.15.2",
+    "express": "^4.15.2",
+    "express-jwt": "^5.3.1",
     "joi": "^14.3.1",
     "pg": "6.4.2",
     "pg-hstore": "2.3.2",
-    "react": "16.3.2",
+    "react": "^16.3.2",
     "react-dom": "16.3.2",
     "react-redux": "5.0.4",
-    "react-router-dom": "4.1.1",
-    "redux": "4.0.0",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.5.2",
     "redux-logger": "3.0.1",
     "redux-thunk": "2.2.0",
     "sequelize": "4.8.4",
-    "sequelize-cli": "5.5.1"
+    "sequelize-cli": "5.5.1",
+    "sequelize-version": "0.0.58"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",
@@ -51,9 +53,7 @@
     "css-loader": "1.0.0",
     "mocha": "5.1.1",
     "morgan": "1.8.1",
-    "node-sass": "4.5.2",
     "nodemon": "1.11.0",
-    "sass-loader": "7.0.1",
     "style-loader": "0.23.0",
     "webpack": "4.8.3",
     "webpack-cli": "3.1.0"
