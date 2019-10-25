@@ -31,6 +31,7 @@
                         <label class="control-label">Level*</label>
                         <div class="select">
                             <select name="level" class="form-control">
+                                <option value="">--------</option>
                                 <option {% if land.role == 'basic' %}selected{% endif %} value="basic">Basic</option>
                                 <option {% if land.role == 'pledge' %}selected{% endif %} value="pledge">Pledge</option>
                                 <option {% if land.role == 'conserved' %}selected{% endif %} value="conserved">Conserved</option>
@@ -91,6 +92,7 @@
                         <label class="control-label">Status*</label>
                         <div class="select">
                             <select name="status" class="form-control ">
+                                <option value="">--------</option>
                                 <option {% if land.role == 'new' %}selected{% endif %} value="new">New</option>
                                 <option {% if land.role == 'denied' %}selected{% endif %} value="denied">Denied</option>
                                 <option {% if land.role == 'approved' %}selected{% endif %} value="approved">Approved</option>
