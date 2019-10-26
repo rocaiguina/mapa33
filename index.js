@@ -9,6 +9,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const nunjucks = require('nunjucks');
+const session = require('express-session');
+const flash = require('./server/middlewares/flash');
 
 // configure template engine
 nunjucks.configure('views', {
@@ -20,6 +22,17 @@ app.set('view engine', 'html');
 
 // logging middleware
 app.use(morgan('dev'));
+
+// session middleware
+let sessionConfig = {
+  secret: 'mapa33secretcookie',
+  cookie: {
+    maxAge: 60000,
+    secure: false
+  }
+};
+app.use(session(sessionConfig));
+app.use(flash());
 
 // bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

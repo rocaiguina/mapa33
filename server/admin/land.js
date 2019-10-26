@@ -5,6 +5,7 @@ const Paginator     = require('paginator');
 
 const Models        = require('../../db/models');
 const Land          = Models.Land;
+const Validator     = require('../utils/validator');
 
 
 class LandAdminController {
@@ -30,21 +31,60 @@ class LandAdminController {
       });
   }
 
-  create (req, res, next) {
-    let context = {};
-    res.render('land/form', context);
-  }
+  save (req, res, next) {
+    var land = req.land;
+    var data = req.body;
+    const validationSchema = {
+      name:                 Joi.string().required(),
+      level:                Joi.string().required(),
+      status:               Joi.string().required(),
+      location:             Joi.string().required(),
+      entity:               Joi.string().required(),
+      use_type:             Joi.string().required(),
+      acquisition_type:     Joi.string().required(),
+      year_acquisition:     Joi.number().integer().required(),
+      reason_conservation:  Joi.string().required()
+    };
 
-  store (req, res, next) {
-    res.redirect('/admin/land');
-  }
+    // Validata data.
+    const result = Joi.validate(data, validationSchema, { abortEarly: false, allowUnknown: true });
 
-  update (req, res, next) {
-    res.redirect('/admin/land');
+    if (result.error) {
+      // Add error flash messages.
+      req.flash('errors', Validator.getErrors(result.error.details));
+
+      return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
+    }
+
+    const cleaned_data = result.value;
+
+    land.name                 = cleaned_data.name;
+    land.level                = cleaned_data.level;
+    land.status               = cleaned_data.status;
+    land.geom                 = cleaned_data.geom;
+    land.location             = cleaned_data.location;
+    land.entity               = cleaned_data.entity;
+    land.use_type             = cleaned_data.use_type;
+    land.acquisition_type     = cleaned_data.acquisition_type;
+    land.year_acquisition     = cleaned_data.year_acquisition;
+    land.reason_conservation  = cleaned_data.reason_conservation;
+
+    land
+      .save()
+      .then(function () {
+        req.flash('messages', { type: 'success', content: 'Your data has been saved.' });
+      })
+      .catch(function (err) {
+        req.flash('messages', { type: 'danger', content: err.message });
+      })
+      .finally(function () {
+        res.redirect('/admin/land/' + land.id);
+      });
   }
 
   get (req, res, next) {
-    res.render('land/form');
+    let land = req.land.get({plain: true});
+    res.render('land/form', { object: land });
   }
 
   remove (req, res, next) {

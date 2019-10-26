@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="block-header">
-    <h2>Land <small>{{ land.name }}</small></h2>
+    <h2>Land <small>{{ object.name }}</small></h2>
 </div>
 
 <div class="row">
@@ -14,16 +14,16 @@
             </h2>
         </div>
         <div class="card-body card-padding">
-            <form id="user-form" method="POST" action="/admin/land/{{ land.id }}" autocomplete="off">
+            <form id="user-form" method="POST" autocomplete="off">
                 <input type="hidden" name="crumb" value="{{crumb}}"/>
 
                 <div class="form-group {{ 'has-error' if errors.name else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Name*</label>
-                        <input type="text" class="form-control input-sm" name="name" value="{{ land.name if land.id else old.name }}">
+                        <input type="text" class="form-control input-sm" name="name" value="{{ errors.name.value if errors.name else object.name }}">
                     </div>
                     {% if errors.name %}
-                    <small class="help-block">{{ errors.name }}</small>
+                    <small class="help-block">{{ errors.name.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.level else '' }}">
@@ -32,59 +32,59 @@
                         <div class="select">
                             <select name="level" class="form-control">
                                 <option value="">--------</option>
-                                <option {% if land.role == 'basic' %}selected{% endif %} value="basic">Basic</option>
-                                <option {% if land.role == 'pledge' %}selected{% endif %} value="pledge">Pledge</option>
-                                <option {% if land.role == 'conserved' %}selected{% endif %} value="conserved">Conserved</option>
+                                <option {% if object.level == 'basic' %}selected{% endif %} value="basic">Basic</option>
+                                <option {% if object.level == 'pledge' %}selected{% endif %} value="pledge">Pledge</option>
+                                <option {% if object.level == 'conserved' %}selected{% endif %} value="conserved">Conserved</option>
                             </select>
                         </div>
                     </div>
                     {% if errors.level %}
-                    <small class="help-block">{{ errors.level }}</small>
+                    <small class="help-block">{{ errors.level.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.location else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Location</label>
-                        <input type="text" class="form-control input-sm" name="location" value="{{ land.email if land.id else old.email }}">
+                        <input type="text" class="form-control input-sm" name="location" value="{{ errors.location.value if errors.location else object.location }}">
                     </div>
                     {% if errors.location %}
-                    <small class="help-block">{{ errors.location }}</small>
+                    <small class="help-block">{{ errors.location.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.entity else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Entity*</label>
-                        <input type="text" class="form-control input-sm" name="entity" value="{{ land.phone if land.id else old.phone }}">
+                        <input type="text" class="form-control input-sm" name="entity" value="{{ errors.entity.value if errors.entity else object.entity }}">
                     </div>
                     {% if errors.entity %}
-                    <small class="help-block">{{ errors.entity }}</small>
+                    <small class="help-block">{{ errors.entity.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.use_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Use Type*</label>
-                        <input type="text" class="form-control input-sm" name="use_type">
+                        <input type="text" class="form-control input-sm" name="use_type" value="{{ errors.use_type.value if errors.use_type else object.use_type }}">
                     </div>
                     {% if errors.use_type %}
-                    <small class="help-block">{{ errors.use_type }}</small>
+                    <small class="help-block">{{ errors.use_type.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.acquisition_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Acquisition Type*</label>
-                        <input type="text" class="form-control input-sm" name="acquisition_type">
+                        <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ errors.acquisition_type.value if errors.acquisition_type else object.acquisition_type }}">
                     </div>
                     {% if errors.acquisition_type %}
-                    <small class="help-block">{{ errors.acquisition_type }}</small>
+                    <small class="help-block">{{ errors.acquisition_type.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.year_acquisition else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Year Acquisition*</label>
-                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition">
+                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ errors.year_acquisition.value if errors.year_acquisition else object.year_acquisition }}">
                     </div>
                     {% if errors.year_acquisition %}
-                    <small class="help-block">{{ errors.year_acquisition }}</small>
+                    <small class="help-block">{{ errors.year_acquisition.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.status else '' }}">
@@ -93,28 +93,28 @@
                         <div class="select">
                             <select name="status" class="form-control ">
                                 <option value="">--------</option>
-                                <option {% if land.role == 'new' %}selected{% endif %} value="new">New</option>
-                                <option {% if land.role == 'denied' %}selected{% endif %} value="denied">Denied</option>
-                                <option {% if land.role == 'approved' %}selected{% endif %} value="approved">Approved</option>
+                                <option {% if object.status == 'new' %}selected{% endif %} value="new">New</option>
+                                <option {% if object.status == 'denied' %}selected{% endif %} value="denied">Denied</option>
+                                <option {% if object.status == 'approved' %}selected{% endif %} value="approved">Approved</option>
                             </select>
                         </div>
                     </div>
                     {% if errors.status %}
-                    <small class="help-block">{{ errors.status }}</small>
+                    <small class="help-block">{{ errors.status.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group {{ 'has-error' if errors.reason_conservation else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Reason Conservation*</label>
-                        <textarea class="form-control" rows="5" name="reason_conservation"></textarea>
+                        <textarea class="form-control" rows="5" name="reason_conservation">{{ errors.reason_conservation.value if errors.reason_conservation else object.reason_conservation }}</textarea>
                     </div>
                     {% if errors.reason_conservation %}
-                    <small class="help-block">{{ errors.reason_conservation }}</small>
+                    <small class="help-block">{{ errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">GUARDAR</button>
-                    <a href="/admin/land" class="btn btn-danger">CANCELAR</a>
+                    <a href="/admin/land" class="btn btn-default">CANCELAR</a>
                 </div>
             </form>
         </div>

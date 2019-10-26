@@ -11,10 +11,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/land', LandAdminController.findAll);
-router.post('/land', LandAdminController.store);
-router.get('/land/create', LandAdminController.create);
-router.get('/land/:id', LandAdminController.get);
-router.post('/land/:id', LandAdminController.update);
+router.get('/land/:id', LandMiddleware.lookup, LandAdminController.get);
+router.post('/land/:id', LandMiddleware.lookup, LandAdminController.save);
 router.post('/land/:id/remove', LandMiddleware.lookup, LandAdminController.remove);
 
 module.exports = router;

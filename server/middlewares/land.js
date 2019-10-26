@@ -5,6 +5,11 @@ const Land          = Models.Land;
 
 module.exports = {
   lookup: function (req, res, next) {
+    if (req.params.id == '-1') {
+      req.land = Land.build({});
+      return next();
+    }
+
     Land
       .findOne({ where: { id: req.params.id } })
       .then(function (land) {
@@ -12,6 +17,7 @@ module.exports = {
 
         req.land = land;
         next();
+        return land;
       })
       .catch(function (err) {
         res.status(400).send(err);
