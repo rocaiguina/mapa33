@@ -24,9 +24,24 @@ exports = module.exports = function () {
       // retrieved right before the render function is executed
       var render = res.render;
       res.render = function () {
-        // attach flash messages to res.locals
-        res.locals.messages = req.flash('messages');
-        res.locals.errors = req.flash('errors').shift();
+        // attach validation error fields.
+        res.locals.field_errors = req.flash('field_errors').shift();
+
+        // attach flash messages to res.locals.messages
+        let messages = [];
+        req.flash('info').forEach(function (value) {
+          messages.push({ type: 'info', content: value });
+        });
+        req.flash('success').forEach(function (value) {
+          messages.push({ type: 'success', content: value });
+        });
+        req.flash('warning').forEach(function (value) {
+          messages.push({ type: 'warning', content: value });
+        });
+        req.flash('error').forEach(function (value) {
+          messages.push({ type: 'danger', content: value });
+        });
+        res.locals.messages = messages;
 
         render.apply(res, arguments);
       }

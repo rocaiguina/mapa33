@@ -17,16 +17,16 @@
             <form id="user-form" method="POST" autocomplete="off">
                 <input type="hidden" name="crumb" value="{{crumb}}"/>
 
-                <div class="form-group {{ 'has-error' if errors.name else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.name else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Name*</label>
-                        <input type="text" class="form-control input-sm" name="name" value="{{ errors.name.value if errors.name else object.name }}">
+                        <input type="text" class="form-control input-sm" name="name" value="{{ field_errors.name.value if field_errors.name else object.name }}">
                     </div>
-                    {% if errors.name %}
-                    <small class="help-block">{{ errors.name.message }}</small>
+                    {% if field_errors.name %}
+                    <small class="help-block">{{ field_errors.name.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.level else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.level else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Level*</label>
                         <div class="select">
@@ -38,56 +38,56 @@
                             </select>
                         </div>
                     </div>
-                    {% if errors.level %}
-                    <small class="help-block">{{ errors.level.message }}</small>
+                    {% if field_errors.level %}
+                    <small class="help-block">{{ field_errors.level.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.location else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.location else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Location</label>
-                        <input type="text" class="form-control input-sm" name="location" value="{{ errors.location.value if errors.location else object.location }}">
+                        <input type="text" class="form-control input-sm" name="location" value="{{ field_errors.location.value if field_errors.location else object.location }}">
                     </div>
-                    {% if errors.location %}
-                    <small class="help-block">{{ errors.location.message }}</small>
+                    {% if field_errors.location %}
+                    <small class="help-block">{{ field_errors.location.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.entity else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.entity else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Entity*</label>
-                        <input type="text" class="form-control input-sm" name="entity" value="{{ errors.entity.value if errors.entity else object.entity }}">
+                        <input type="text" class="form-control input-sm" name="entity" value="{{ field_errors.entity.value if field_errors.entity else object.entity }}">
                     </div>
-                    {% if errors.entity %}
-                    <small class="help-block">{{ errors.entity.message }}</small>
+                    {% if field_errors.entity %}
+                    <small class="help-block">{{ field_errors.entity.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.use_type else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Use Type*</label>
-                        <input type="text" class="form-control input-sm" name="use_type" value="{{ errors.use_type.value if errors.use_type else object.use_type }}">
+                        <input type="text" class="form-control input-sm" name="use_type" value="{{ field_errors.use_type.value if field_errors.use_type else object.use_type }}">
                     </div>
-                    {% if errors.use_type %}
-                    <small class="help-block">{{ errors.use_type.message }}</small>
+                    {% if field_errors.use_type %}
+                    <small class="help-block">{{ field_errors.use_type.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.acquisition_type else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.acquisition_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Acquisition Type*</label>
-                        <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ errors.acquisition_type.value if errors.acquisition_type else object.acquisition_type }}">
+                        <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ field_errors.acquisition_type.value if field_errors.acquisition_type else object.acquisition_type }}">
                     </div>
-                    {% if errors.acquisition_type %}
-                    <small class="help-block">{{ errors.acquisition_type.message }}</small>
+                    {% if field_errors.acquisition_type %}
+                    <small class="help-block">{{ field_errors.acquisition_type.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.year_acquisition else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.year_acquisition else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Year Acquisition*</label>
-                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ errors.year_acquisition.value if errors.year_acquisition else object.year_acquisition }}">
+                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ field_errors.year_acquisition.value if field_errors.year_acquisition else object.year_acquisition }}">
                     </div>
-                    {% if errors.year_acquisition %}
-                    <small class="help-block">{{ errors.year_acquisition.message }}</small>
+                    {% if field_errors.year_acquisition %}
+                    <small class="help-block">{{ field_errors.year_acquisition.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.status else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Status*</label>
                         <div class="select">
@@ -99,17 +99,17 @@
                             </select>
                         </div>
                     </div>
-                    {% if errors.status %}
-                    <small class="help-block">{{ errors.status.message }}</small>
+                    {% if field_errors.status %}
+                    <small class="help-block">{{ field_errors.status.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if errors.reason_conservation else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Reason Conservation*</label>
-                        <textarea class="form-control" rows="5" name="reason_conservation">{{ errors.reason_conservation.value if errors.reason_conservation else object.reason_conservation }}</textarea>
+                        <textarea class="form-control" rows="5" name="reason_conservation">{{ field_errors.reason_conservation.value if field_errors.reason_conservation else object.reason_conservation }}</textarea>
                     </div>
-                    {% if errors.reason_conservation %}
-                    <small class="help-block">{{ errors.reason_conservation.message }}</small>
+                    {% if field_errors.reason_conservation %}
+                    <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
                 <div class="form-group">

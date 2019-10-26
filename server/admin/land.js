@@ -51,7 +51,7 @@ class LandAdminController {
 
     if (result.error) {
       // Add error flash messages.
-      req.flash('errors', Validator.getErrors(result.error.details));
+      req.flash('field_errors', Validator.getErrors(result.error.details));
 
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }
@@ -72,10 +72,10 @@ class LandAdminController {
     land
       .save()
       .then(function () {
-        req.flash('messages', { type: 'success', content: 'Your data has been saved.' });
+        req.flash('success', 'Your data has been saved.');
       })
       .catch(function (err) {
-        req.flash('messages', { type: 'danger', content: err.message });
+        req.flash('error', err.message);
       })
       .finally(function () {
         res.redirect('/admin/land/' + land.id);

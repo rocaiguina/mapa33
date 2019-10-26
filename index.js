@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const nunjucks = require('nunjucks');
 const session = require('express-session');
+const passport = require('passport');
 const flash = require('./server/middlewares/flash');
 
 // configure template engine
@@ -33,6 +34,11 @@ let sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+// passport 
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport');
 
 // bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
