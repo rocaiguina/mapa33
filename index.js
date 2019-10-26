@@ -43,7 +43,7 @@ app.use('/api', server);
 app.use('/admin', require('./server/admin'));
 
 // serve static files from public
-app.use(express.static(resolve(__dirname, 'public')))
+app.use(express.static(resolve(__dirname, 'public')));
 
 // request any page and receive index.html
 app.get('/*', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));
