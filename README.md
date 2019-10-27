@@ -49,15 +49,21 @@ PORT=3000
 
 `node_modules/.bin/sequelize db:migrate`
 
-6. Run the server project.
+6. Run database seeds. (Optional, you must run this command only when there are new seeds).
+
+`node_modules/.bin/sequelize db:seed:all`
+
+*This command will insert into database the administrator user*
+
+7. Run the server project.
 
 `npm run dev-start`
 
-7. Open a new terminal and build the "react app"
+8. Open a new terminal and build the "react app"
 
 `npm run build`
 
-8. Open your browser `http://localhost:3000/` and enjoy!. :)
+9. Open your browser `http://localhost:3000/` and enjoy!. :)
 
 
 # API DOCS
