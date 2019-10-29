@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="block-header">
+    <h2>Users</h2>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Users
+            <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+        </h2>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-vmiddle">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in paginator.docs %}
+            <tr>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.last_name }}</td>
+                <td>{{ item.email }}</td>
+                <td style="white-space: nowrap; width: 1%;">
+                    <a href="/admin/user/{{ item.id }}" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
+                    <a href="/admin/user/{{ item.id }}/remove" class="btn btn-default btn-icon waves-effect waves-circle remove-link"><span class="zmdi zmdi-delete"></span></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7"><p class="text-center">Empty data.</p></td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <ul class="pagination">
+            <li {% if not paginator.has_previous_page %}class="disabled"{% endif %}>
+                <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/user?page={{ paginator.previous_page }}{% endif %}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
+            </li>
+            <li {% if not paginator.has_next_page %}class="disabled"{% endif %}>
+                <a href="{% if not paginator.has_next_page %}#{% else %}/admin/user?page={{ paginator.next_page }}{% endif %}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<form id="delete-form" method="POST">
+    <input type="hidden" name="crumb" value="{{crumb}}"/>
+</form>
+
+<a href="/admin/user/-1" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-original-title="Add User"><i class="zmdi zmdi-plus"></i></a>
+
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var delete_form = $('#delete-form');
+
+        $('.remove-link').click(function (event) {
+            event.preventDefault();
+            var self = $(this);
+            swal({
+                    title: "¿Estas seguro?",
+                    text: "No podrás recuperar este recurso!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, eliminar!",
+                    cancelButtonText: "No, cancelar!",
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        var href = self.attr('href');
+                        delete_form.attr('action', href);
+                        delete_form.submit();
+                    }
+                });
+        });
+
+    });
+</script>
+{% endblock %}
