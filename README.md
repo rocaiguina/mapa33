@@ -194,4 +194,124 @@ Remove a specific land.
 
 `Empty`
 
+## List User
+
+#### `GET /api/user/`
+
+List all available users.
+
+#### `200 OK` - Response
+
+```
+{
+  data: [
+    {
+      id:
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: ''
+    },
+    ...
+  ]
+}
+```
+
+## Create User
+
+#### `POST /api/user/`
+
+Create a new user.
+
+#### Request body
+
+| Field                 | Type          | Required      |
+| --------------------- | ------------- | ------------- |
+| first_name            | string        | yes           |
+| last_name             | string        | yes           |         
+| email                 | string        | yes           |
+| password              | string        | yes           |
+
+
+#### `200 OK` - Response
+
+```
+{
+  id: ,
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: ''
+}
+```
+
+## Get User
+
+#### `GET /api/user/:id`
+
+Get a specific user.
+
+#### `200 OK` - Response
+
+```
+{
+  id: ,
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: ''
+}
+```
+
+## Update User
+
+#### `PUT /api/user/:id`
+
+Update a specific user.
+
+#### Request body
+
+| Field                 | Type          | Required      | 
+| --------------------- | ------------- | ------------- |
+| first_name            | string        | yes           |
+| last_name             | string        | yes           |         
+| email                 | string        | yes           |
+| password              | string        | yes           |
+
+
+#### `200 OK` - Response
+
+`Empty`
+
+## Delete User
+
+#### `DEL /api/user/:id`
+
+Remove a specific user.
+
+#### `200 OK` - Response
+
+`Empty`
+## Login 
+
+#### `POST /api/auth`
+
+User authentication.
+
+#### Request body
+
+| Field                 | Type          | Required      | 
+| --------------------- | ------------- | ------------- |       
+| email                 | string        | yes           |
+| password              | string        | yes           |
+
+
+#### `200 OK` - Response
+
+```
+{
+    token:"asdfg"
+}
+````
+
 

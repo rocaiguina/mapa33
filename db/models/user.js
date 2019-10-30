@@ -1,4 +1,5 @@
 'use strict';
+const sequelizePaginate = require('sequelize-paginate');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -21,5 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     User.hasOne(models.Survey, { as: 'Survey', foreignKey: 'user_id' });
   };
+  sequelizePaginate.paginate(User);
   return User;
 };
