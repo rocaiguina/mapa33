@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-import AppContainer from './containers/AppContainer.jsx';
+import AppContainer from './containers/AppContainer';
 
 export default () => (
   <Router>

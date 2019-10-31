@@ -4,7 +4,7 @@ const path = require('path');
 process.traceDeprecation = true;
 
 module.exports = {
-  entry: './app/origin.jsx',
+  entry: './app/origin.js',
   output: {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js'
@@ -12,14 +12,23 @@ module.exports = {
   mode: 'development',
   context: __dirname,
   devtool: 'source-map',
+  externals: {
+    "fs": "require('fs')"
+  },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/react', '@babel/env']
+          presets: ['@babel/preset-env', '@babel/react']
+        }
+      }, {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
         }
       }, {
         test: /\.(scss|sass)$/,

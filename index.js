@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const { resolve } = require('path');
+const cors = require('cors');
 const db = require('./db/models');
 const server = require('./server');
 const morgan = require('morgan');
@@ -20,6 +21,9 @@ nunjucks.configure('views', {
   noCache: process.env.NODE_ENV == 'development'
 });
 app.set('view engine', 'html');
+
+// cors
+app.use(cors());
 
 // logging middleware
 app.use(morgan('dev'));
@@ -49,7 +53,7 @@ app.use('/api', server);
 app.use('/admin', require('./server/admin'));
 
 // serve static files from public
-app.use(express.static(resolve(__dirname, 'public')));
+app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
 // request any page and receive index.html
 app.get('/*', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));

@@ -7,17 +7,28 @@ const Land          = Models.Land;
 class LandController {
 
   findAll (req, res, next) {
-    Land
-      .findAll({ raw: true })
-      .then(function (lands) {
-        res.json({ data: lands });
+    Models
+      .sequelize
+      .query("SELECT row_to_json ( fc ) AS geojson FROM (SELECT 'FeatureCollection' AS TYPE, array_to_json ( ARRAY_AGG ( f ) ) AS features FROM (SELECT 'Feature' AS TYPE, ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry, row_to_json ( ( SELECT l FROM ( SELECT ID, name, entity, status, location, year_acquisition ) AS l ) ) AS properties FROM lands AS lg ) AS f ) AS fc", 
+        { type: Models.sequelize.QueryTypes.SELECT })
+      .then(function (result) {
+        console.dir(result);
+        res.send(result);
       })
       .catch(function (err) {
-        res.status(400).send(err);
-      })
-      .finally(function () {
-        next();
-      });    
+        res.send('');
+      });
+    // Land
+    //   .findAll({ raw: true })
+    //   .then(function (lands) {
+    //     res.json({ data: lands });
+    //   })
+    //   .catch(function (err) {
+    //     res.status(400).send(err);
+    //   })
+    //   .finally(function () {
+    //     next();
+    //   });    
   }
 
   lookup (req, res, next) {
