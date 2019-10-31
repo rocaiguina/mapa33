@@ -1,23 +1,12 @@
 'use strict';
 
-require('dotenv-safe').config({
-  allowEmptyValues: true,
-  example: 'config/.env.config'
-});
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const db = {};
-let config;
-
-try {
-  config = require(__dirname + '/../../config/database.json')[env];
-} catch (err) {
-  config = { use_env_variable: 'DATABASE_URL' }
-}
+const config = require(__dirname + '/../../config/database')[env];
 
 let sequelize;
 if (config.use_env_variable) {

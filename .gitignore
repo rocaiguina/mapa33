@@ -1,5 +1,4 @@
 .ds_store
-database.json
 
 # Ignore all node_modules
 node_modules
