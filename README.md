@@ -209,8 +209,7 @@ List all available users.
       id:
       first_name: '',
       last_name: '',
-      email: '',
-      password: ''
+      email: ''
     },
     ...
   ]
@@ -240,8 +239,7 @@ Create a new user.
   id: ,
   first_name: '',
   last_name: '',
-  email: '',
-  password: ''
+  email: ''
 }
 ```
 
@@ -258,8 +256,7 @@ Get a specific user.
   id: ,
   first_name: '',
   last_name: '',
-  email: '',
-  password: ''
+  email: ''
 }
 ```
 
@@ -275,7 +272,6 @@ Update a specific user.
 | --------------------- | ------------- | ------------- |
 | first_name            | string        | yes           |
 | last_name             | string        | yes           |         
-| email                 | string        | yes           |
 | password              | string        | yes           |
 
 

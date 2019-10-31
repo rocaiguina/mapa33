@@ -35,6 +35,17 @@
                     <small class="help-block">{{ field_errors.last_name.message }}</small>
                     {% endif %}
                 </div>
+                {% if object|length < 2 %}
+                <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Email*</label>
+                        <input type="email" class="form-control input-sm" name="email" value="{{ field_errors.email.value if field_errors.email else object.email }}">
+                    </div>
+                    {% if field_errors.email %}
+                    <small class="help-block">{{ field_errors.email.message }}</small>
+                    {% endif %}
+                </div>
+                {% endif%}
                 <div class="form-group {{ 'has-error' if field_errors.password else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Password*</label>
