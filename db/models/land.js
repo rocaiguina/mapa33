@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     level: {
-      type: DataTypes.ENUM,
-      values: ['basic', 'pledge', 'conserved']
+      type: DataTypes.STRING,
+      allowNull: true
     },
     status: {
-      type: DataTypes.ENUM,
-      values: ['new', 'denied', 'approved']
+      type: DataTypes.STRING,
+      allowNull: true
     },
     geom: {
       type: DataTypes.GEOMETRY,
@@ -28,12 +28,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    use_type: DataTypes.STRING,
-    acquisition_type: DataTypes.STRING,
-    year_acquisition: DataTypes.INTEGER,
-    reason_conservation: DataTypes.STRING
+    year_estab: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    use_type: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    acquisition_type: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    year_acquisition: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    reason_conservation: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
-    paranoid: true
+    tableName: 'lands',
+    paranoid: true,
   });
   Land.associate = function(models) {
     // associations can be defined here
