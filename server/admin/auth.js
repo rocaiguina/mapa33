@@ -18,6 +18,14 @@ class AuthAdminController {
     req.logout();
     res.redirect(LOGIN_URL);
   }
+
+  forgotPassword (req, res, next) {
+    res.render('auth/forgot-password');
+  }
+
+  resetPassword (req, res, next) {
+    res.render('auth/reset-password');
+  }
 }
 
 module.exports = new AuthAdminController();

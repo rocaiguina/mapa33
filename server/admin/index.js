@@ -20,6 +20,8 @@ router.get('/', AuthMiddleware.login_required, function (req, res, next) {
 router.get('/login', AuthAdminController.login);
 router.post('/login', AuthAdminController.authenticate);
 router.get('/logout', AuthAdminController.logout);
+router.get('/forgot-password', AuthAdminController.forgotPassword);
+router.get('/reset-password', AuthAdminController.resetPassword);
 //TODO: Routes land
 router.get('/land', AuthMiddleware.login_required, LandAdminController.findAll);
 router.get('/land/:id', AuthMiddleware.login_required, LandMiddleware.lookup, LandAdminController.get);
