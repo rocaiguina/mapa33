@@ -6,7 +6,7 @@
             </div>
 
             <div class="sp-info">
-                User Full Name
+                {{ user.first_name}}&nbsp;{{user.last_name}}
 
                 <i class="zmdi zmdi-caret-down"></i>
             </div>
@@ -14,7 +14,7 @@
 
         <ul class="main-menu">
             <li>
-                <a href="#"><i class="zmdi zmdi-lock"></i> Change Password</a>
+                <a href="/admin/account/change-password"><i class="zmdi zmdi-lock"></i> Change Password</a>
             </li>
             <li>
                 <a href="#"><i class="zmdi zmdi-power"></i> Logout</a>

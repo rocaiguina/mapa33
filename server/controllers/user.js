@@ -3,6 +3,8 @@
 const Joi           = require('joi');
 const Models        = require('../../db/models');
 const User          = Models.User;
+const encryptor = require('../../server/utils/encryptor');
+
 
 class UserController {
 
@@ -10,6 +12,9 @@ class UserController {
         User
             .findAll({ raw: true })
             .then(function (users) {
+                for (let i = 0; i < users.length; i++) {
+                    delete users[i]['password'];
+                }
                 res.json({ data: users });
             })
             .catch(function (err) {
@@ -34,8 +39,8 @@ class UserController {
     }
 
     store (req, res, next) {
+        req.body.password = encryptor.encrypt(req.body.password);
         var data = req.body;
-
         const validationSchema = {
             first_name:           Joi.string().required(),
             last_name:            Joi.string().required(),
@@ -62,6 +67,8 @@ class UserController {
                 password:              cleaned_data.password,
             })
             .then(function (user) {
+                console.log(user);
+                delete user['dataValues']['password'];
                 res.json(user.get({plain: true}));
             })
             .catch(function (err) {
@@ -73,11 +80,13 @@ class UserController {
     }
 
     update (req, res, next) {
+        req.body.password = encryptor.encrypt(req.body.password);
         var data = req.body;
+        console.log('DATOS:');
+        console.log(data);
         const validationSchema = {
             first_name:           Joi.string().required(),
             last_name:            Joi.string().required(),
-            //email:                Joi.string().required(),
             password:             Joi.string().required(),
         };
 
@@ -112,8 +121,8 @@ class UserController {
     }
 
     get (req, res, next) {
+        delete req.user['dataValues']['password'];
         var user = req.user;
-
         res.json(user.get({plain: true}));
         next();
     }

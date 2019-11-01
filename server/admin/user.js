@@ -6,6 +6,7 @@ const Paginator     = require('paginator');
 const Models        = require('../../db/models');
 const User          = Models.User;
 const Validator     = require('../utils/validator');
+const encryptor = require('../../server/utils/encryptor');
 
 
 class UserAdminController{
@@ -40,6 +41,10 @@ class UserAdminController{
             password:            Joi.string().required().regex(/^[a-zA-Z0-9]{6,18}$/)
         };
 
+        if(data.email != null){
+            Object.assign(validationSchema,{email: Joi.string().required().email({ minDomainAtoms: 2 })})
+        }
+
         // Validata data.
         const result = Joi.validate(data, validationSchema, { abortEarly: false, allowUnknown: true });
 
@@ -50,11 +55,16 @@ class UserAdminController{
             return res.redirect('/admin/user/' + (user.isNewRecord ? '-1' : user.id));
         }
 
+        result['value']['password'] = encryptor.encrypt(result['value']['password']);
         const cleaned_data = result.value;
 
         user.first_name         = cleaned_data.first_name;
         user.last_name          = cleaned_data.last_name;
         user.password           = cleaned_data.password;
+
+        if(cleaned_data.email != null){
+            user.email           = cleaned_data.email;
+        }
 
         user
             .save()
@@ -62,6 +72,7 @@ class UserAdminController{
                 req.flash('success', 'Your data has been saved.');
             })
             .catch(function (err) {
+                console.error(err)
                 req.flash('error', err.message);
             })
             .finally(function () {
