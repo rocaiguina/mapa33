@@ -28,14 +28,14 @@ router.get('/land/:id', AuthMiddleware.login_required, LandMiddleware.lookup, La
 router.post('/land/:id', AuthMiddleware.login_required, LandMiddleware.lookup, LandAdminController.save);
 router.post('/land/:id/remove', AuthMiddleware.login_required, LandMiddleware.lookup, LandAdminController.remove);
 //TODO: Routes User
-router.get('/user',UserAdminController.findAll);
-router.get('/user/:id',UserMiddleware.lookup,UserAdminController.get);
-router.post('/user/:id',UserMiddleware.lookup,UserAdminController.save);
-router.post('/user/:id/remove',UserMiddleware.lookup,UserAdminController.remove);
+router.get('/user', AuthMiddleware.login_required, UserAdminController.findAll);
+router.get('/user/:id', AuthMiddleware.login_required, UserMiddleware.lookup,UserAdminController.get);
+router.post('/user/:id', AuthMiddleware.login_required, UserMiddleware.lookup,UserAdminController.save);
+router.post('/user/:id/remove', AuthMiddleware.login_required, UserMiddleware.lookup,UserAdminController.remove);
 //TODO: Route password change
-router.get('/account/change-password',AuthMiddleware.login_required, function(req,res,next){
+router.get('/account/change-password', AuthMiddleware.login_required, function(req,res,next){
   res.render('account/change-password');
 });
-router.post('/account/change-password',AuthMiddleware.login_required, AccountAdminController.save);
+router.post('/account/change-password', AuthMiddleware.login_required, AccountAdminController.save);
 
 module.exports = router;
