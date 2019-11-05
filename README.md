@@ -29,41 +29,25 @@ SERVER_URL=http://localhost:3000
 PORT=3000
 ```
 
-4. Config your database variables into `config/database.json` file. Example:
-
-```
-{
-  "development": {
-    "username": "postgres",
-    "password": null,
-    "database": "mapa33-dev",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
-  },
-  ...
-}
-```
-
-5. Run database migrations (You must run this command when there are changes into database schema)
+4. Run database migrations (You must run this command when there are changes into database schema)
 
 `node_modules/.bin/sequelize db:migrate`
 
-6. Run database seeds. (Optional, you must run this command only when there are new seeds).
+5. Run database seeds. (Optional, you must run this command only when there are new seeds).
 
 `node_modules/.bin/sequelize db:seed:all`
 
 *This command will insert into database the administrator user*
 
-7. Run the server project.
+6. Run the server project.
 
 `npm run dev-start`
 
-8. Open a new terminal and build the "react app"
+7. Open a new terminal and build the "react app"
 
 `npm run build`
 
-9. Open your browser `http://localhost:3000/` and enjoy!. :)
+8. Open your browser `http://localhost:3000/` and enjoy!. :)
 
 
 # API DOCS
@@ -288,6 +272,7 @@ Remove a specific user.
 #### `200 OK` - Response
 
 `Empty`
+
 ## Login 
 
 #### `POST /api/auth`
@@ -310,4 +295,121 @@ User authentication.
 }
 ````
 
+## Create User Survey
 
+#### `POST /api/user/:userId/survey`
+
+Create a new user survey.
+
+#### Request body
+
+| Field                 | Type            | Required      |
+| --------------------- | --------------- | ------------- |
+| answers               | array objects   | yes           |
+
+```
+[
+  {
+    question: '',
+    answer: ''
+  },
+  ...
+]
+```
+
+
+#### `200 OK` - Response
+
+```
+{
+  id: 1,
+  score: 4,
+  user_id: 1,
+  Answers: [
+    {
+      id: 1,
+      question: '',
+      answer: '',
+      points: 2
+    },
+    ...
+  ]
+}
+```
+
+## Get User Survey
+
+#### `GET /api/user/:userId/survey`
+
+Get a specific user survey.
+
+#### `200 OK` - Response
+
+```
+{
+  id: 1,
+  score: 4,
+  user_id: 1,
+  Answers: [
+    {
+      id: 1,
+      question: '',
+      answer: '',
+      points: 2
+    },
+    ...
+  ]
+}
+```
+
+## Update User Survey
+
+#### `PUT /api/user/:userId/survey`
+
+Update a specific user survey.
+
+#### Request body
+
+| Field                 | Type            | Required      |
+| --------------------- | --------------- | ------------- |
+| answers               | array objects   | yes           |
+
+```
+[
+  {
+    question: '',
+    answer: ''
+  },
+  ...
+]
+```
+
+
+#### `200 OK` - Response
+
+```
+{
+  id: 1,
+  score: 4,
+  user_id: 1,
+  Answers: [
+    {
+      id: 1,
+      question: '',
+      answer: '',
+      points: 2
+    },
+    ...
+  ]
+}
+```
+
+## Delete User Survey
+
+#### `DEL /api/user/:userId/survey`
+
+Remove a specific user survey.
+
+#### `200 OK` - Response
+
+`Empty`
