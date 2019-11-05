@@ -88,6 +88,24 @@ Create a new land.
 
 #### Request body
 
+```
+{
+  name: '',
+  level: '',
+  status: '',
+  geom: {
+    type: 'Polygon',
+    coordinates: [0,0]
+  },
+  location: '',
+  entity: '',
+  use_type: '',
+  acquisition_type: '',
+  year_acquisition: '2019',
+  reason_conservation: ''
+}
+```
+
 | Field                 | Type          | Required      |
 | --------------------- | ------------- | ------------- |
 | name                  | string        | yes           |
@@ -98,7 +116,7 @@ Create a new land.
 | entity                | string        | yes           |
 | use_type              | string        | yes           |
 | acquisition_type      | string        | yes           |
-| year_acquisition      | integer       | yes           |
+| year_acquisition      | string        | yes           |
 | reason_conservation   | string        | yes           |
 
 #### `200 OK` - Response
@@ -151,6 +169,24 @@ Update a specific land.
 
 #### Request body
 
+```
+{
+  name: '',
+  level: '',
+  status: '',
+  geom: {
+    type: 'Polygon',
+    coordinates: [0,0]
+  },
+  location: '',
+  entity: '',
+  use_type: '',
+  acquisition_type: '',
+  year_acquisition: '2019',
+  reason_conservation: ''
+}
+```
+
 | Field                 | Type          | Required      |
 | --------------------- | ------------- | ------------- |
 | name                  | string        | yes           |
@@ -161,7 +197,7 @@ Update a specific land.
 | entity                | string        | yes           |
 | use_type              | string        | yes           |
 | acquisition_type      | string        | yes           |
-| year_acquisition      | integer       | yes           |
+| year_acquisition      | string        | yes           |
 | reason_conservation   | string        | yes           |
 
 #### `200 OK` - Response
@@ -303,19 +339,21 @@ Create a new user survey.
 
 #### Request body
 
+```
+{
+  answers: [
+    {
+      question: '',
+      answer: ''
+    },
+    ...
+  ]
+}
+```
+
 | Field                 | Type            | Required      |
 | --------------------- | --------------- | ------------- |
 | answers               | array objects   | yes           |
-
-```
-[
-  {
-    question: '',
-    answer: ''
-  },
-  ...
-]
-```
 
 
 #### `200 OK` - Response
@@ -370,19 +408,21 @@ Update a specific user survey.
 
 #### Request body
 
+```
+{
+  answers: [
+    {
+      question: '',
+      answer: ''
+    },
+    ...
+  ]
+}
+```
+
 | Field                 | Type            | Required      |
 | --------------------- | --------------- | ------------- |
 | answers               | array objects   | yes           |
-
-```
-[
-  {
-    question: '',
-    answer: ''
-  },
-  ...
-]
-```
 
 
 #### `200 OK` - Response
