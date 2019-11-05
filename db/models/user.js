@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     },
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    role: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
     paranoid: true
   });

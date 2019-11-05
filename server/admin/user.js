@@ -38,7 +38,8 @@ class UserAdminController{
         const validationSchema = {
             first_name:          Joi.string().required().regex(/^[A-Za-z.\s_-]+$/),
             last_name:           Joi.string().required().regex(/^[A-Za-z.\s_-]+$/),
-            password:            Joi.string().required().regex(/^[a-zA-Z0-9]{6,18}$/)
+            //password:            Joi.string().required().regex(/^[a-zA-Z0-9]{6,18}$/),
+            role:                Joi.string().required()
         };
 
         if(data.email != null){
@@ -60,7 +61,8 @@ class UserAdminController{
 
         user.first_name         = cleaned_data.first_name;
         user.last_name          = cleaned_data.last_name;
-        user.password           = cleaned_data.password;
+        //user.password           = cleaned_data.password;
+        user.role               = cleaned_data.role;
 
         if(cleaned_data.email != null){
             user.email           = cleaned_data.email;

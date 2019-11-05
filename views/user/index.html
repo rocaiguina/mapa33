@@ -19,6 +19,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th></th>
             </tr>
             </thead>
@@ -28,6 +29,7 @@
                 <td>{{ item.first_name }}</td>
                 <td>{{ item.last_name }}</td>
                 <td>{{ item.email }}</td>
+                <td><span class="text-capitalize">{{ item.role }}</span></td>
                 <td style="white-space: nowrap; width: 1%;">
                     <a href="/admin/user/{{ item.id }}" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
                     <a href="/admin/user/{{ item.id }}/remove" class="btn btn-default btn-icon waves-effect waves-circle remove-link"><span class="zmdi zmdi-delete"></span></a>
