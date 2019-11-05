@@ -23,7 +23,7 @@ module.exports = {
       },
       survey_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       }
     })
     .then(function () {

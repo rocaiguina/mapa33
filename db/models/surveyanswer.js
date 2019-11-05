@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     question: DataTypes.STRING,
     answer: DataTypes.STRING,
     points: DataTypes.INTEGER,
-    survey_id: DataTypes.INTEGER
+    survey_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    }
   }, {
     paranoid: false,
   });
