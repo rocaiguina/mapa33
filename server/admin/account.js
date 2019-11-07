@@ -6,10 +6,10 @@ const Paginator     = require('paginator');
 const Models        = require('../../db/models');
 const User          = Models.User;
 const Validator     = require('../utils/validator');
-const encryptor = require('../../server/utils/encryptor');
-var express               = require("express");
-const passport = require('passport');
-const app      = express();
+const encryptor     = require('../../server/utils/encryptor');
+var express         = require("express");
+const passport      = require('passport');
+const app           = express();
 
 class AccountController{
     save (req, res, next) {
@@ -31,13 +31,11 @@ class AccountController{
             // compare current password
             const compare = encryptor.compare(data.current_password, user.password);
             if(!compare) error.invalid = {message :'Please enter your current password'};
-            console.log(error);
             req.flash('field_errors', error);
             return res.redirect('/admin/account/change-password');
         }else if(!encryptor.compare(data.current_password, user.password)){
             const error = {};
             error.invalid = {message :'Please enter your current password'};
-            console.log(error);
             req.flash('field_errors', error);
             return res.redirect('/admin/account/change-password');
         }
@@ -46,12 +44,11 @@ class AccountController{
         const cleaned_data = result.value;
         user.password           = cleaned_data.new_password;
 
-        User.update(
-            {password : user.password},
-            {where:
-                    {id: user.id}
-            }
-        )
+        User.
+            update(
+                { password : user.password },
+                { where: {id: user.id} }
+            )
             .then(function () {
                 req.flash('success', 'Your data has been saved.');
             })
@@ -63,7 +60,6 @@ class AccountController{
                 res.redirect('/admin');
             });
     }
-
 }
 
 module.exports = new AccountController();

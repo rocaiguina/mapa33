@@ -21,7 +21,14 @@ router.get('/login', AuthAdminController.login);
 router.post('/login', AuthAdminController.authenticate);
 router.get('/logout', AuthAdminController.logout);
 router.get('/forgot-password', AuthAdminController.forgotPassword);
-router.get('/reset-password', AuthAdminController.resetPassword);
+router.post('/reset-password', AuthAdminController.resetPassword);
+router.get('/reset-password',function (req, res, next) {
+  console.log('??????=========================================================================');
+  console.log(req.body);
+  res.render('auth/reset-password')
+});
+router.post('/confirm-reset-password', AuthAdminController.resetPasswordForm);
+router.post('/forgot-password', AuthAdminController.forgotpassword);
 //TODO: Routes land
 router.get('/land', AuthMiddleware.login_required, LandAdminController.findAll);
 router.get('/land/:id', AuthMiddleware.login_required, LandMiddleware.lookup, LandAdminController.get);
