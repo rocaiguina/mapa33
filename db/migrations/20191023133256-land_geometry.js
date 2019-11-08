@@ -10,14 +10,14 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
     return Promise.all([
-      queryInterface.addColumn(
+      /*queryInterface.addColumn(
         'Lands',
         'name', {
           type: Sequelize.STRING,
           allowNull: true
         }
-      ),
-      queryInterface.addColumn(
+      ),*/
+      /*queryInterface.addColumn(
         'Lands',
         'location', {
           type: Sequelize.STRING,
@@ -31,7 +31,7 @@ module.exports = {
           allowNull: true
         }
       ),
-      queryInterface.addColumn(
+      */queryInterface.addColumn(
         'Lands',
         'geom', {
           type: Sequelize.GEOMETRY,
