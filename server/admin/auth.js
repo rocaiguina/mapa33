@@ -111,8 +111,8 @@ class AuthAdminController {
         }).then(resetPassword =>{
             const auth = {
                 auth:{
-                    api_key: process.env.API_KEY,
-                    domain: process.env.DOMAIN
+                    api_key: process.env.MAILGUN_API_KEY,
+                    domain: process.env.MAILGUN_DOMAIN
                 }
             }
             var transporter = nodemailer.createTransport(NodeMailer(auth));
@@ -121,7 +121,7 @@ class AuthAdminController {
             const html = TemplateEngine.render('template_email/reset_password.html',{site: sitio, token:token})
 
             const mailOptions = {
-                from: process.env.EMAIL, // sender address
+                from: process.env.DEFAULT_EMAIL_FROM, // sender address
                 to: req.body.email, // list of receivers
                 subject: 'Password Reset Request', // Subject line
                 html: html
@@ -130,7 +130,7 @@ class AuthAdminController {
                 if(err) console.log(err);
                 else console.log(info);
             });
-            req.flash('success', 'Your e-mail has been sent.');
+            req.flash('success', 'Please check your email. We have sent you the instructions to revover your password.');
             return res.redirect('/admin/login');
         }).catch(error => {
             console.log(error)
