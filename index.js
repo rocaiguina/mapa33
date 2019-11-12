@@ -32,7 +32,7 @@ app.use(morgan('dev'));
 let sessionConfig = {
   secret: 'mapa33secretcookie',
   cookie: {
-    maxAge: 60000,
+    maxAge: 60 * 60 * 1000,
     secure: false
   }
 };
