@@ -61,6 +61,7 @@
                     <small class="help-block">{{ field_errors.role.message }}</small>
                     {% endif %}
                 </div>
+                {% if not object.password %}
                 <div class="form-group {{ 'has-error' if field_errors.password else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Password*</label>
@@ -70,7 +71,7 @@
                     <small class="help-block">{{ field_errors.password.message }}</small>
                     {% endif %}
                 </div>
-
+                {% endif %}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">GUARDAR</button>
                     <a href="/admin/user" class="btn btn-default">CANCELAR</a>
