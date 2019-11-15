@@ -39,13 +39,16 @@ class UserController {
     }
 
     store (req, res, next) {
+        if(Object.keys(req.body).length == 0){
+            return res.status(400).send('Your data is empty');
+        }
         req.body.password = encryptor.encrypt(req.body.password);
         var data = req.body;
         const validationSchema = {
             first_name:           Joi.string().required(),
             last_name:            Joi.string().required(),
             email:                Joi.string().required(),
-            password:             Joi.string().required()
+            password:             Joi.string().required(),
         };
 
         // Validata data.
@@ -80,10 +83,11 @@ class UserController {
     }
 
     update (req, res, next) {
+        if(Object.keys(req.body).length == 0){
+            return res.status(400).send('Your data is empty');
+        }
         req.body.password = encryptor.encrypt(req.body.password);
         var data = req.body;
-        console.log('DATOS:');
-        console.log(data);
         const validationSchema = {
             first_name:           Joi.string().required(),
             last_name:            Joi.string().required(),
@@ -104,15 +108,16 @@ class UserController {
 
         user.first_name           = cleaned_data.first_name;
         user.last_name            = cleaned_data.last_name;
-        //user.email                = cleaned_data.email;
         user.password             = cleaned_data.password;
 
         user
             .save()
-            .then(function () {
+            .then(function (user) {
+                console.log(user)
                 res.send('');
             })
             .catch(function (err) {
+                console.log(err)
                 res.status(400).send(err);
             })
             .finally(function () {
