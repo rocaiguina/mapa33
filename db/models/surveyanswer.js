@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     paranoid: false,
+    createdAt: false,
+    updatedAt: false
   });
   SurveyAnswer.associate = function(models) {
     // associations can be defined here

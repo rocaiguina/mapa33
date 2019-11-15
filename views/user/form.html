@@ -8,74 +8,125 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-        <div class="card-header">
-            <h2>Details
-                <small>(*) Required fields.</small>
-            </h2>
-        </div>
         <div class="card-body card-padding">
             <form id="user-form" method="POST" autocomplete="off">
-                <input type="hidden" name="crumb" value="{{crumb}}"/>
+                <div role="tabpanel">
+                    <ul class="tab-nav" role="tablist">
+                        <li class="active">
+                            <a href="#details11" aria-controls="details11" role="tab" data-toggle="tab">Details</a>
+                        </li>
+                        {% if survey %}
+                        <li>
+                            <a href="#survey11" aria-controls="survey11" role="tab" data-toggle="tab">Survey</a>
+                        </li>
+                        {% endif %}
+                    </ul>
 
-                <div class="form-group {{ 'has-error' if field_errors.first_name else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">First Name*</label>
-                        <input type="text" class="form-control input-sm" name="first_name" value="{{ field_errors.first_name.value if field_errors.first_name else object.first_name }}">
-                    </div>
-                    {% if field_errors.first_name %}
-                    <small class="help-block">{{ field_errors.first_name.message }}</small>
-                    {% endif %}
-                </div>
-                <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Last Name*</label>
-                        <input type="text" class="form-control input-sm" name="last_name" value="{{ field_errors.last_name.value if field_errors.last_name else object.last_name }}">
-                    </div>
-                    {% if field_errors.last_name %}
-                    <small class="help-block">{{ field_errors.last_name.message }}</small>
-                    {% endif %}
-                </div>
-                {% if object|length < 2 %}
-                <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Email*</label>
-                        <input type="email" class="form-control input-sm" name="email" value="{{ field_errors.email.value if field_errors.email else object.email }}">
-                    </div>
-                    {% if field_errors.email %}
-                    <small class="help-block">{{ field_errors.email.message }}</small>
-                    {% endif %}
-                </div>
-                {% endif%}
-                <div class="form-group {{ 'has-error' if field_errors.role else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Role*</label>
-                        <div class="select">
-                            <select name="role" class="form-control">
-                                <option value="">--------</option>
-                                <option {% if object.role == 'administrator' %}selected{% endif %} value="administrator">Administrator</option>
-                                <option {% if object.role == 'subscriptor' %}selected{% endif %} value="subscriptor">Subscriptor</option>
-                            </select>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="details11">
+                            <h5><small>(*) Required fields.</small></h5>
+                            <br/>
+
+                            <input type="hidden" name="crumb" value="{{crumb}}"/>
+
+                            <div class="form-group {{ 'has-error' if field_errors.first_name else '' }}">
+                                <div class="fg-line">
+                                    <label class="control-label">First Name*</label>
+                                    <input type="text" class="form-control input-sm" name="first_name" value="{{ field_errors.first_name.value if field_errors.first_name else object.first_name }}">
+                                </div>
+                                {% if field_errors.first_name %}
+                                <small class="help-block">{{ field_errors.first_name.message }}</small>
+                                {% endif %}
+                            </div>
+                            <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
+                                <div class="fg-line">
+                                    <label class="control-label">Last Name*</label>
+                                    <input type="text" class="form-control input-sm" name="last_name" value="{{ field_errors.last_name.value if field_errors.last_name else object.last_name }}">
+                                </div>
+                                {% if field_errors.last_name %}
+                                <small class="help-block">{{ field_errors.last_name.message }}</small>
+                                {% endif %}
+                            </div>
+                            <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
+                                <div class="fg-line">
+                                    <label class="control-label">Email*</label>
+                                    <input type="email" class="form-control input-sm" name="email" value="{{ field_errors.email.value if field_errors.email else object.email }}" {% if object.id %}readonly disabled="disabled"{% endif %}>
+                                </div>
+                                {% if field_errors.email %}
+                                <small class="help-block">{{ field_errors.email.message }}</small>
+                                {% endif %}
+                            </div>
+                            <div class="form-group {{ 'has-error' if field_errors.role else '' }}">
+                                <div class="fg-line">
+                                    <label class="control-label">Role*</label>
+                                    <div class="select">
+                                        <select name="role" class="form-control">
+                                            <option value="">--------</option>
+                                            <option {% if object.role == 'administrator' %}selected{% endif %} value="administrator">Administrator</option>
+                                            <option {% if object.role == 'subscriptor' %}selected{% endif %} value="subscriptor">Subscriptor</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {% if field_errors.role %}
+                                <small class="help-block">{{ field_errors.role.message }}</small>
+                                {% endif %}
+                            </div>
+                            {% if not object.id %}
+                            <div class="form-group {{ 'has-error' if field_errors.password else '' }}">
+                                <div class="fg-line">
+                                    <label class="control-label">Password*</label>
+                                    <input type="password" class="form-control input-sm" name="password" value="{{ field_errors.password.value if field_errors.password else object.password }}">
+                                </div>
+                                {% if field_errors.password %}
+                                <small class="help-block">{{ field_errors.password.message }}</small>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                                <a href="/admin/user" class="btn btn-default">CANCELAR</a>
+                            </div>
                         </div>
+                        {% if survey %}
+                        <div role="tabpanel" class="tab-pane" id="survey11">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="thumbnail">
+                                        <img src="https://dummyimage.com/300x300/cccccc/000000"/>
+                                        <div class="caption">
+                                          <h4>
+                                            <span class="pull-right"><i class="zmdi zmdi-ticket-star"></i> {{ survey.score }}</span>
+                                            Insignia
+                                          </h4>
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="list-group lg-odd-black">
+                                        {% for item in survey.Answers %}
+                                        <div class="list-group-item media">
+                                            <div class="pull-left">
+                                                <label>{{ loop.index }}.</label>
+                                            </div>
+
+                                            <div class="pull-right">
+                                                <span class="label label-info">{{ item.points }} PTS</span>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <div class="lgi-heading">{{ item.question }}</div>
+                                                <small class="lgi-text">{{ item.answer }}</small>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if field_errors.role %}
-                    <small class="help-block">{{ field_errors.role.message }}</small>
-                    {% endif %}
-                </div>
-                {% if not object.id %}
-                <div class="form-group {{ 'has-error' if field_errors.password else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Password*</label>
-                        <input type="password" class="form-control input-sm" name="password" value="{{ field_errors.password.value if field_errors.password else object.password }}">
-                    </div>
-                    {% if field_errors.password %}
-                    <small class="help-block">{{ field_errors.password.message }}</small>
-                    {% endif %}
-                </div>
-                {% endif %}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">GUARDAR</button>
-                    <a href="/admin/user" class="btn btn-default">CANCELAR</a>
-                </div>
+                </div>                        
             </form>
         </div>
     </div>    

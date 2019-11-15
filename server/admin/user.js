@@ -3,6 +3,7 @@
 const Joi               = require('joi');
 const Paginator         = require('paginator');
 const Models            = require('../../db/models');
+const SurveyAnswer      = Models.SurveyAnswer;
 const User              = Models.User;
 const Validator         = require('../utils/validator');
 const encryptor         = require('../../server/utils/encryptor');
@@ -83,7 +84,20 @@ class UserAdminController{
     }
     get (req, res, next) {
         let user = req.user.get({plain: true});
-        res.render('user/form', { object: user});
+        req.user.getSurvey({
+          include: [
+            {
+              model: SurveyAnswer,
+              as: 'Answers'
+            }
+          ]
+        })
+        .then(survey => {
+          res.render('user/form', { object: user, survey: survey});
+        })
+        .catch(err => {
+          next(err);
+        });
     }
     remove (req, res, next) {
         var user = req.user;
