@@ -66,7 +66,7 @@ class UserAdminController{
             user.email           = cleaned_data.email;
         }
         if(cleaned_data.password){
-            user.password       = cleaned_data.password;
+            user.password       = encryptor.encrypt(result['value']['password']);
         }
 
         user

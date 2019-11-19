@@ -13,7 +13,7 @@
                     </div>
                     <div class="count">
                         <small>NEW LANDS</small>
-                        <h2>10</h2>
+                        <h2>{{new_land}}</h2>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="count">
                         <small>APPROVED LANDS</small>
-                        <h2>10</h2>
+                        <h2>{{approved_land}}</h2>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="count">
                         <small>DENIED LANDS</small>
-                        <h2>2</h2>
+                        <h2>{{denied_land}}</h2>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="count">
                         <small>TOTAL LANDS</small>
-                        <h2>22</h2>
+                        <h2>{{total_land}}</h2>
                     </div>
                 </div>
             </div>
@@ -85,31 +85,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for land in data_new_land %}
                         <tr>
                             <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
-                            <td><a href="#">Lorem ipsum dolor sit amet</a></td>
-                            <td><span class="label label-info text-uppercase">new</span></td>
+                            <td><a href="#">{{land.name}}</a></td>
+                            <td><span class="label label-info text-uppercase">{{land.status}}</span></td>
                         </tr>
-                        <tr>
-                            <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
-                            <td><a href="#">Lorem ipsum dolor sit amet</a></td>
-                            <td><span class="label label-info text-uppercase">new</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
-                            <td><a href="#">Lorem ipsum dolor sit amet</a></td>
-                            <td><span class="label label-info text-uppercase">new</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
-                            <td><a href="#">Lorem ipsum dolor sit amet</a></td>
-                            <td><span class="label label-info text-uppercase">new</span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#"><img src="https://dummyimage.com/100x70/cccccc/000000"/></a></td>
-                            <td><a href="#">Lorem ipsum dolor sit amet</a></td>
-                            <td><span class="label label-info text-uppercase">new</span></td>
-                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
                 <a href="#" class="view-more">VIEW ALL</a>
@@ -124,13 +106,14 @@
 
             <div class="card-body">
                 <div class="list-group">
+                    {% for users in new_users %}
                     <a class="list-group-item media" href="">
                         <div class="pull-left">
                             <img class="lgi-img" src="/assets/admin/img/profile-pics/1.jpg" alt="">
                         </div>
                         <div class="media-body">
-                            <div class="lgi-heading">David Belle</div>
-                            <small class="lgi-text">Joined 17 May, 2019</small>
+                            <div class="lgi-heading">{{users.first_name}}&nbsp;{{users.last_name}}</div>
+                            <small class="lgi-text">{{users.createdAt}}</small>
                             <div class="rating-list p-b-0">
                                 <div class="rl-star">
                                     <i class="f-16 zmdi zmdi-star active"></i>
@@ -142,78 +125,8 @@
                             </div>
                         </div>
                     </a>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img class="lgi-img" src="/assets/admin/img/profile-pics/2.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <div class="lgi-heading">Jonathan Morris</div>
-                            <small class="lgi-text">Joined 17 May, 2019</small>
-                            <div class="rating-list p-b-0">
-                                <div class="rl-star">
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img class="lgi-img" src="/assets/admin/img/profile-pics/1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <div class="lgi-heading">Fredric Mitchell Jr.</div>
-                            <small class="lgi-text">Joined 17 May, 2019</small>
-                            <div class="rating-list p-b-0">
-                                <div class="rl-star">
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img class="lgi-img" src="/assets/admin/img/profile-pics/2.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <div class="lgi-heading">Glenn Jecobs</div>
-                            <small class="lgi-text">Joined 17 May, 2019</small>
-                            <div class="rating-list p-b-0">
-                                <div class="rl-star">
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img class="lgi-img" src="/assets/admin/img/profile-pics/1.jpg" alt="">
-                        </div>
-                        <div class="media-body">
-                            <div class="lgi-heading">Bill Phillips</div>
-                            <small class="lgi-text">Joined 17 May, 2019</small>
-                            <div class="rating-list p-b-0">
-                                <div class="rl-star">
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star active"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                    <i class="f-16 zmdi zmdi-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    {% endfor %}
+
 
                     <a class="view-more" href="">View All</a>
                 </div>

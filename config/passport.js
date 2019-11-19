@@ -16,12 +16,14 @@ const local = new LocalStrategy({
     .then(function (user) {
       if (!user) { return done(null, false, { message: 'Authentication failed.' }) }
 
+
       const isValidPassword = encryptor.compare(password, user.password);
 
       if (!isValidPassword) {
         return done(null, false, { message: 'Authentication failed.' });
       }
 
+      if (user.role != 'administrator') { return done(null, false, { message: 'Access Denied.'}) }
       return done(null, user.get({plain: true}));
     })
     .catch(function (err) {
