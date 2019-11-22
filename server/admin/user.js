@@ -7,7 +7,7 @@ const SurveyAnswer      = Models.SurveyAnswer;
 const User              = Models.User;
 const Validator         = require('../utils/validator');
 const encryptor         = require('../../server/utils/encryptor');
-const createCsvWriter   = require('csv-writer').createObjectCsvWriter;
+const stringify         = require('csv-stringify');
 
 class UserAdminController{
     findAll (req, res, next) {
@@ -112,41 +112,23 @@ class UserAdminController{
             });
     }
     export(req, res, next){
-        Object.defineProperty(Date.prototype, 'YYYYMMDDHHMMSS', {
-            value: function() {
-                function pad2(n) {
-                    return (n < 10 ? '0' : '') + n;
-                }
-                return this.getFullYear() +
-                    pad2(this.getMonth() + 1) +
-                    pad2(this.getDate()) +
-                    pad2(this.getHours()) +
-                    pad2(this.getMinutes()) +
-                    pad2(this.getSeconds());
-            }
-        });
-        var now = new Date().YYYYMMDDHHMMSS();
         User.findAll({
-            attributes:["id", "first_name", "last_name","email"]
         })
-        .then(function (data) {
-            const csvWriter = createCsvWriter({
-                path: 'public/csv/user'+now+'.csv',
-                header: [
-                    {id: 'id', title: 'ID'},
-                    {id: 'first_name', title: 'First Name'},
-                    {id: 'last_name', title: 'Last Name'},
-                    {id: 'email', title: 'Email'},
-                ]
+        .then(function (users) {
+            const stringifier = stringify({
+                delimiter: ','
+            })
+
+            res.setHeader('Content-type', 'text/csv');
+            res.setHeader('Content-Disposition', 'attachment; filename="users.csv"');
+
+            stringifier.pipe(res);
+
+            users.forEach(function (user) {
+               stringifier.write([user.id, user.first_name, user.last_name, user.role, user.createdAt, user.updatedAt]);
             });
-            csvWriter
-                .writeRecords(data)
-                .then(message => console.log('The CSV file was written successfully: '+ message))
-                .catch(error => {
-                    console.log('Salio un error '+error)
-                });
-            res.redirect('/csv/user'+now+'.csv');
-            return res.redirect('/admin/user');
+            stringifier.end();
+
         }).catch(error => {
             console.log(error)
         })

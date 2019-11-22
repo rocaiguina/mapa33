@@ -97,7 +97,7 @@ class AuthAdminController {
       }).
       then(user =>{
         if(!user){
-            req.flash('field_errors','Is not Registered')
+            req.flash('field_errors','Is not Registered');
             return res.redirect('/admin/forgot-password')
         }
         // variables para resetpassword
