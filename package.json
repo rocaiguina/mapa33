@@ -15,7 +15,10 @@
     "heroku-postbuild": "webpack -p"
   },
   "nodemonConfig": {
-    "ignore": ["app/*", "test/*"],
+    "ignore": [
+      "app/*",
+      "test/*"
+    ],
     "delay": "2500"
   },
   "keywords": [
@@ -38,37 +41,25 @@
     "bcryptjs": "2.4.3",
     "body-parser": "1.17.1",
     "connect-flash": "0.1.1",
-<<<<<<< HEAD
-    "cors": "^2.8.5",
-    "csv-writer": "^1.5.0",
-=======
     "cors": "2.8.5",
->>>>>>> jmoreira
+    "csv-writer": "1.5.0",
     "dotenv-safe": "6.0.0",
     "express": "4.15.2",
     "express-jwt": "5.3.1",
     "express-session": "1.17.0",
     "joi": "14.3.1",
-<<<<<<< HEAD
-    "mapbox-gl": "^1.5.0",
+    "mapbox-gl": "1.5.0",
     "nodemailer": "^6.3.1",
     "nodemailer-mailgun-transport": "^1.4.0",
-=======
-    "mapbox-gl": "1.5.0",
->>>>>>> jmoreira
     "nunjucks": "3.2.0",
     "paginator": "1.0.0",
     "passport": "0.4.0",
     "passport-local": "1.0.0",
     "pg": "6.4.2",
     "pg-hstore": "2.3.2",
-<<<<<<< HEAD
-    "random-token": "0.0.8",
-    "react": "^16.3.2",
-=======
     "prop-types": "15.7.2",
+    "random-token": "0.0.8",
     "react": "16.3.2",
->>>>>>> jmoreira
     "react-dom": "16.3.2",
     "react-mapbox-gl": "4.7.2",
     "react-redux": "5.0.4",
