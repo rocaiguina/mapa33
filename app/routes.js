@@ -1,12 +1,14 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import AppContainer from './containers/AppContainer';
+import HomeContainer from './containers/HomeContainer';
 
 export default () => (
   <Router>
-    <AppContainer>
+    <Switch>
+      <Route path="/home" component={HomeContainer}/>
       <Route path="/" component={AppContainer} />
-    </AppContainer>
+    </Switch>
   </Router>
 );
