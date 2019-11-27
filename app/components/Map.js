@@ -10,6 +10,9 @@ import { setActive, setCenter } from '../actions/MapActions';
 import logo from '../assets/logo.svg';
 import Triangle from '../assets/Triangle.svg';
 
+//const API_URL = 'http://localhost:3000';
+const API_URL = 'https://mapa33.herokuapp.com';
+
 const Mapbox = ReactMapboxGl({
     accessToken: 'pk.eyJ1IjoibWFrb2hvbmRvIiwiYSI6ImNpaGY5cW03YzA0ODV0aGo3Z21sd3VvbDgifQ.VpvOmpodQ47duuB_jzVFTQ'
 });
@@ -25,7 +28,7 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/api/land`)
+        fetch(API_URL + '/api/land')
             .then(response => response.json())
             .then(data => {
                 console.log(data[0].geojson);
