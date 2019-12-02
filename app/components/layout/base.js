@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-import Header from './header';
 import Footer from './footer';
 
 class BaseLayout extends Component {
   render () {
+    const layoutClass = ClassNames('main', {
+      'main-dark': this.props.dark
+    });
+
     return (
-      <div>
-        <Header />
-        <div>
-          { props.children }
+      <div className={layoutClass}>
+        <div className="container">
+          { this.props.children }
         </div>
-        <Footer />
+        <Footer dark={this.props.dark}/>
       </div>
     );
   }
 }
-
-BaseLayout.propTypes = {
-  children: PropTypes.element.isRequired
-};
 
 export default BaseLayout;

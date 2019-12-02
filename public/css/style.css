@@ -1,0 +1,210 @@
+/*!
+ * Bootstrap Grid v4.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container, .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container, .container-sm, .container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container, .container-sm, .container-md, .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1140px;
+  }
+}
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.embed-responsive::before {
+  display: block;
+  content: "";
+}
+
+.embed-responsive .embed-responsive-item,
+.embed-responsive iframe,
+.embed-responsive embed,
+.embed-responsive object,
+.embed-responsive video {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.embed-responsive-21by9::before {
+  padding-top: 42.857143%;
+}
+
+.embed-responsive-16by9::before {
+  padding-top: 56.25%;
+}
+
+.embed-responsive-4by3::before {
+  padding-top: 75%;
+}
+
+.embed-responsive-1by1::before {
+  padding-top: 100%;
+}
+
+/* Layout */
+#root {
+  height: 100%;
+}
+.main {
+  min-height: 100%;
+}
+.main.main-dark {
+  background-color: #000;
+  color: #fff;
+}
+.main > .container {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+}
+
+.footer .first-column,
+.footer .second-column,
+.footer .third-column {
+  border-top: 2px solid transparent;
+}
+
+.footer .first-column {
+  padding: 20px 20px 20px 0;
+}
+
+.footer .second-column {
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  padding: 20px 40px;
+}
+
+.footer .third-column {
+  padding: 20px 30px;
+}
+
+.footer .line {
+  background-repeat: repeat-x;
+  height: 4px;
+  margin-top: 5px;
+}
+
+.footer {
+  background-color: #fff;
+  color: #000;
+}
+
+.footer .first-column,
+.footer .second-column,
+.footer .third-column {
+  border-color: #000;
+}
+
+.footer-dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.footer-dark .first-column,
+.footer-dark .second-column,
+.footer-dark .third-column {
+  border-color: #fff;
+}
+
+.footer .line {
+    background-image: url('../images/colorline.png');
+}
+
+/* Intro */
+.intro-text {
+  padding: 200px 0;
+  text-align: center;
+}
+
+.intro-text h1 {
+  color: #fff;
+}
+
+/* Custom cards */
+.ant-card.ant-card-round {
+  border-radius: 40px;
+}
+
+/* Cards theme */
+.ant-card.ant-card-green {
+  background-color: #5bbcae;
+  color: #231f20;
+}
+.ant-card.ant-card-green.ant-card-bordered {
+  border-color: #5bbcae;
+}

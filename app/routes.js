@@ -1,13 +1,15 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import './style/App.css';
 
 import AppContainer from './containers/AppContainer';
-import HomeContainer from './containers/HomeContainer';
+import IntroContainer from './containers/IntroContainer';
 
 export default () => (
   <Router>
     <Switch>
-      <Route path="/home" component={HomeContainer}/>
+      <Route path="/intro" component={IntroContainer}/>
       <Route path="/" component={AppContainer} />
     </Switch>
   </Router>

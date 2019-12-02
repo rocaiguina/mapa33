@@ -1,4 +1,4 @@
-.ds_store
+.DS_Store
 
 # Ignore all node_modules
 node_modules

@@ -10,7 +10,6 @@ html {
 
 /*Grid*/
 .container {
-    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -223,4 +222,3 @@ html {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
 }
-

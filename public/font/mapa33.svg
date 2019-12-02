@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
+<defs>
+<font id="mapa33" horiz-adv-x="1000" >
+<font-face font-family="mapa33" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="plus" unicode="&#xe800;" d="M529-150h-53v471h-476v53h476v476h53v-476h471v-53h-471v-471z" horiz-adv-x="1000" />
+
+<glyph glyph-name="less" unicode="&#xe801;" d="M0 374h1000v-53h-1000v53z" horiz-adv-x="1000" />
+
+<glyph glyph-name="menu" unicode="&#xe802;" d="M0 850h1274v-226h-1274v226z m0-389h1274v-227h-1274v227z m0-390h1274v-221h-1274v221z" horiz-adv-x="1274" />
+
+<glyph glyph-name="user" unicode="&#xe803;" d="M1145 24c0 0-149-178-591-174-141 0-261-4-351 21-75 16-145 53-203 107h0c0 0 70 252 380 327-78 53-128 144-128 248 0 165 136 301 302 301 82 0 157-33 215-87s86-128 86-214c0-100-49-186-124-244 352-62 414-285 414-285z" horiz-adv-x="1145" />
+
+<glyph glyph-name="eye" unicode="&#xe804;" d="M736 850c-276 0-736-224-736-500s460-500 736-500 794 224 794 500-518 500-794 500z m234-735a330 330 0 0 0-564 222 328 328 0 0 1 342 342 330 330 0 0 0 222-564z" horiz-adv-x="1530" />
+
+<glyph glyph-name="layers" unicode="&#xe806;" d="M1745 157l-552 335h450l-589 358h-953l455-278h-556l505-307h-505l683-415h1062l-504 307z m-1542 359h450l38-23h394l455-279h-398l-78 47-7 4h-443z m1337-609h-841l-496 301h395l85-51h448z" horiz-adv-x="1745" />
+
+<glyph glyph-name="arrow-left" unicode="&#xe807;" d="M1714 326h-1198c405-143 468-444 476-460l-79-16c0 16-103 476-905 476v80c492 0 730 119 841 230 103 103 103 214 103 214h80c0-16-8-302-445-444h1119v-80z" horiz-adv-x="1714" />
+
+<glyph glyph-name="arrow-right" unicode="&#xe808;" d="M1714 374v-80c-492 0-730-119-841-230-111-111-119-214-119-222h-79c0 16 8 302 436 445h-1111v87h1214c-412 143-476 452-476 460l80 16c-8-16 95-476 896-476z" horiz-adv-x="1714" />
+
+<glyph glyph-name="arrow-left-2" unicode="&#xe809;" d="M500-150l-500 500 500 500 59-59-442-441 443-441z" horiz-adv-x="559" />
+
+<glyph glyph-name="arrow-right-2" unicode="&#xe80a;" d="M60 850l500-500-500-500-60 59 441 441-441 441z" horiz-adv-x="559" />
+
+<glyph glyph-name="close" unicode="&#xe80b;" d="M937-150l-937 941 59 59 937-937-59-63z m-878 0l-59 63 937 937 59-59-937-941z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

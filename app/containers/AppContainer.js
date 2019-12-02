@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 //import { connect } from 'react-redux';
 
 import Map from '../components/Map';
-import '../style/App.css';
 //import { exampleUpdate } from '../redux/reducers/example';
 
 class AppContainer extends Component {
