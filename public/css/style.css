@@ -182,12 +182,12 @@
 }
 
 .footer .line {
-    background-image: url('../images/colorline.png');
+  background-image: url('../images/colorline.png');
 }
 
 /* Intro */
 .intro-text {
-  padding: 200px 0;
+  padding: 180px 0;
   text-align: center;
 }
 
