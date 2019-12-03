@@ -130,6 +130,7 @@
 
 /* Footer */
 .footer {
+  padding-bottom: 20px;
   position: relative;
 }
 
@@ -150,7 +151,7 @@
 }
 
 .footer .third-column {
-  padding: 20px 30px;
+  padding: 16px 30px;
 }
 
 .footer .line {
@@ -195,6 +196,104 @@
   color: #fff;
 }
 
+/* Map */
+.map-legend h2 {
+  border-bottom: 1px dotted transparent;
+}
+
+.map-legend dl {
+  margin-bottom: 1.5em;
+}
+
+.map-legend dt {
+  float: left;
+  width: 25px;
+  overflow: hidden;
+}
+
+.map-legend dd {
+  margin-left: 35px;
+}
+
+.map-legend h2 {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.map-legend span {
+  border-radius: 6px;
+  display: block;
+  height: 6px;
+  margin-top: 8px;
+}
+
+.map-legend .legend-protected {
+  background-color: #5bbcae;
+}
+
+.map-legend .legend-proposed {
+  background-color: #f073a8;
+}
+
+/* Slick map slider */
+.slick-slider-maplist .slick-slide .ant-card {
+  margin: 30px 10px;
+  transition: all .3s ease;
+}
+
+.slick-slider-maplist .slick-center .ant-card {
+  transform: scaleY(1.1);
+}
+
+.slick-slider-paginator {
+  margin-top: 1em;
+  margin-bottom: 1.8em;
+  text-align: center;
+}
+
+/* Land cards */
+.land-card .ant-card-meta-title {
+  font-size: 18px;
+}
+.land-card .ant-card-meta-description {
+  font-size: 14px;
+}
+.land-card .ant-card-actions {
+  border-top: none;
+  border-bottom: 8px solid transparent;
+}
+
+.land-card .ant-card-actions > li {
+  margin-top: 0px;
+  padding: 0 24px;
+}
+
+.land-card .ant-card-actions > li > span {
+  cursor: auto;
+}
+
+.land-card .ant-card-actions > li:not(:last-child) {
+  border-right: none;
+}
+
+.land-card .ant-card-meta-title,
+.land-card .ant-card-meta-description,
+.land-card .ant-card-actions > li > span {
+  color: #000000;
+}
+
+.land-card .ant-card-actions {
+  background: #fff;
+}
+
+.land-protected .ant-card-actions {
+  border-bottom-color: #5bbcae;
+}
+
+.land-proposed .ant-card-actions {
+  border-bottom-color: #f073a8;
+}
+
 /* Custom cards */
 .ant-card.ant-card-round {
   border-radius: 40px;
@@ -207,4 +306,15 @@
 }
 .ant-card.ant-card-green.ant-card-bordered {
   border-color: #5bbcae;
+}
+
+/* Utils */
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
 }

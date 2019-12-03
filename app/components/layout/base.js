@@ -14,7 +14,7 @@ class BaseLayout extends Component {
         <div className="container">
           { this.props.children }
         </div>
-        <Footer dark={this.props.dark}/>
+        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent}/>
       </div>
     );
   }
