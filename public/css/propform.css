@@ -1,0 +1,99 @@
+@media (min-width: 576px) {
+  #propcol1{
+    padding: 20px;
+    padding-bottom: 0px;
+  }
+  #propcol2{
+    padding: 20px;
+    padding-top: 0px;
+  }
+}
+
+@media (min-width: 768px) {
+  #propcol1{
+    padding: 20px;
+  }
+  #propcol2{
+    padding: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  #propcol1{
+    padding: 20px;
+  }
+  #propcol2{
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #propcol1{
+    padding: 20px;
+  }
+  #propcol2{
+    padding: 20px;
+  }
+}
+
+.inputprop{
+  border: 2px black dotted !important;
+  border-radius: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.btnprimary{
+  background-color: #f576a9 !important;
+  color: Black !important;
+  border-radius: 15px !important;
+  height: 50px !important;
+}
+.radioprop{
+  height: 90px !important;
+  width: 120px !important;
+  border-color: black !important;
+  color: black !important;
+}
+.radiosi{
+  border-radius: 50px !important;
+  margin-left: 20px !important;
+  margin-right: 10px !important;
+}
+.radiono{
+  border-radius: 0px !important;
+  margin-left: 10px !important;
+  margin-right: 20px !important;
+}
+.ant-modal{
+  max-width: 1140px !important;
+}
+.inputCalendar input{
+  border: 2px black dotted !important;
+  background-color: transparent !important;
+  color: black !important;
+  border-radius: 15px !important;
+  font-size: 20px;
+
+}
+.form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+  background: #008ac9 !important;
+}
+.form2.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+  background: #4fbdb0 !important;
+}
+.form3.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+  background: #f576a9 !important;
+}
+.radiono span:nth-child(2n),
+.radiosi span:nth-child(2n)
+{
+  line-height: 90px !important;
+  font-size: 20px !important;
+  font-weight: bolder !important;
+}
+.spacecalendar{
+  height: 90px !important;
+}
+.inputCalendar{
+  line-height: 90px !important;
+}
