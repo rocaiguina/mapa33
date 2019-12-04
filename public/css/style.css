@@ -123,10 +123,6 @@
   background-color: #000;
   color: #fff;
 }
-.main > .container {
-  padding-bottom: 20px;
-  padding-top: 20px;
-}
 
 /* Footer */
 .footer {
@@ -187,13 +183,29 @@
 }
 
 /* Intro */
+.intro {
+  padding: 30px 0;
+  position: relative;
+}
+.intro-close {
+  margin-bottom: 15px;
+  text-align: right;
+}
 .intro-text {
-  padding: 180px 0;
+  padding-top: 170px;
   text-align: center;
 }
 
 .intro-text h1 {
   color: #fff;
+}
+
+.intro-img {
+  text-align: center;
+}
+
+.intro-img img {
+  display: inline-block !important;
 }
 
 /* Map */
@@ -301,7 +313,26 @@
 
 /* Custom buttons */
 .m33-btn.ant-btn {
-  border-radius: 14px;
+  border-radius: 20px;
+}
+
+.m33-btn.ant-btn-lg {
+  height: 50px;
+  padding: 0 16px;
+  font-size: 20px;
+  border-radius: 24px;
+}
+
+.m33-btn.ant-btn-primary {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.m33-btn.ant-btn-primary:hover,
+.m33-btn.ant-btn-primary:focus {
+  background-color: #222;
+  border-color: #222;
 }
 
 .m33-btn.ant-btn-background-ghost.ant-btn-primary {
@@ -316,13 +347,13 @@
   color: #000;
 }
 
-.m33-btn.ant-btn-background-ghost
-
 /* Cards theme */
+
 .ant-card.ant-card-green {
-  background-color: #5bbcae;
+  background: #5bbcae;
   color: #231f20;
 }
+
 .ant-card.ant-card-green.ant-card-bordered {
   border-color: #5bbcae;
 }
@@ -336,6 +367,11 @@
 }
 .text-right {
   text-align: right;
+}
+.img-responsive {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
 }
 
 /* Generics */
@@ -369,4 +405,23 @@
 }
 .m-t-20 {
   margin-top: 20px;
+}
+
+/* Responsive */
+@media (min-width: 992px) {
+  .intro-text {
+    padding-top: 250px;
+  }
+  .intro .intro-close {
+    position: absolute;
+    right: -54px;
+    top: 0;
+    z-index: 10;
+  }
+  .intro .intro-close-ls {
+    right: -104px;
+  }
+  .intro-img img {
+    margin-top: 120px;
+  }
 }

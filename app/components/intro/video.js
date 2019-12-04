@@ -22,7 +22,7 @@ class Video extends React.Component {
     };
 
     return (
-      <div>
+      <div className="intro">
         <div className="embed-responsive embed-responsive-21by9">
           <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
         </div>

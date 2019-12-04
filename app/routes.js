@@ -11,10 +11,10 @@ import RegisterLandContainer from './containers/RegisterLandContainer';
 export default () => (
   <Router>
     <Switch>
-      <Route path="/intro" component={IntroContainer}/>
+      <Route path="/map" component={AppContainer}/>
       <Route path="/home" component={HomeContainer} />
       <Route path="/register-land" component={RegisterLandContainer} />
-      <Route path="/" component={AppContainer} />
+      <Route path="/" component={IntroContainer} />
     </Switch>
   </Router>
 );
