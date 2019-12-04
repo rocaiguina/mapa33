@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Card, Icon } from 'antd';
+import { Button, Card, Icon, Row, Col } from 'antd';
 import ClassNames from 'classnames';
 
 const { Meta } = Card;
@@ -17,6 +17,14 @@ class ListView extends React.Component {
     this.setState({
       current: index + 1
     });
+  }
+
+  handleOnPrev = (event) => {
+    this.slider.slickPrev();
+  }
+
+  handleOnNext = (event) => {
+    this.slider.slickNext();
   }
 
   render () {
@@ -44,7 +52,10 @@ class ListView extends React.Component {
 
     return (
       <div className="slick-slider-maplist">
-        <Slider afterChange={this.handleAfterChange} {...options}>
+        <Slider
+          ref={slider => (this.slider = slider)}
+          afterChange={this.handleAfterChange}
+          {...options}>
           {
             this.props.items.map((item) => 
               <div key={item}>
@@ -71,6 +82,12 @@ class ListView extends React.Component {
           }
         </Slider>
         <p className="slick-slider-paginator">{ this.state.current }/{this.props.items.length}</p>
+        <Row>
+          <Col sm={24} xs={0}>
+            <Button onClick={this.handleOnPrev}><i className="m33-icon m33-icon-arrow-left-2"></i></Button>
+            <Button onClick={this.handleOnNext}><i className="m33-icon m33-icon-arrow-right-2"></i></Button>
+          </Col>
+        </Row>
       </div>
     )
   }

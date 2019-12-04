@@ -10,39 +10,19 @@ class MapView extends React.Component {
     this.state = {
       mapView: 'list',             // map, list
       areaView: 'protected',       // protected, proposals
-      datalist: [
-        {
-          id: 1,
-          name: 'El Terreno del futuro Junior Caño 1',
-          location: 'Fajardo',
-          use_type: 'protected'
-        },
-        {
-          id: 2,
-          name: 'El Terreno del futuro Junior Caño 2',
-          location: 'Fajardo',
-          use_type: 'protected'
-        },
-        {
-          id: 3,
-          name: 'El Terreno del futuro Junior Caño 3',
-          location: 'Fajardo',
-          use_type: 'proposed'
-        },
-        {
-          id: 4,
-          name: 'El Terreno del futuro Junior Caño 4',
-          location: 'Fajardo',
-          use_type: 'proposed'
-        },
-        {
-          id: 5,
-          name: 'El Terreno del futuro Junior Caño 5',
-          location: 'Fajardo',
-          use_type: 'proposed'
-        }
-      ]
     }
+  }
+
+  handleOnChangeMapView = (event) => {
+    this.setState({
+      mapView: event.target.value
+    });
+  }
+
+  handleOnChangeAreaView = (event) => {
+    this.setState({
+      areaView: event.target.value
+    });
   }
 
   render () {
@@ -50,9 +30,13 @@ class MapView extends React.Component {
       <div>
         <Legend />
         {
-          this.state.mapView == 'map' ? <Map/> : <List items={this.state.datalist}/>
+          this.state.mapView == 'map' ? <Map/> : <List items={this.props.data}/>
         }
-        <ToolBar />
+        <ToolBar 
+          mapView={this.state.mapView}
+          areaView={this.state.areaView}
+          onChangeMapView={this.handleOnChangeMapView}
+          onChangeAreaView={this.handleOnChangeAreaView}/>
       </div>
     );
   }
