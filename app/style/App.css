@@ -29,6 +29,7 @@ html {
 /*Helpers*/
 .flex-1 {
     flex: 1;
+    height: 70vh;
 }
 
 .flex-2 {

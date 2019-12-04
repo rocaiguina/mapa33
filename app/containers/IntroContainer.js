@@ -1,7 +1,6 @@
 import React from 'react';
 import BaseLayout from '../components/layout/base';
 import Intro from '../components/intro';
-import ModalPropuesta from '../components/ModalPropuesta';
 
 class IntroContainer extends React.Component {
 
@@ -13,7 +12,6 @@ class IntroContainer extends React.Component {
     return (
       <BaseLayout dark>
         <Intro onEnd={this.handleOnEndIntro}/>
-        <ModalPropuesta/>
       </BaseLayout>
     );
   }
