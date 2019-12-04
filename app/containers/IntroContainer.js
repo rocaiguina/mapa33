@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import BaseLayout from '../components/layout/base';
 import Footer from '../components/layout/footer';
 import Intro from '../components/intro';
+import ModalPropuesta from '../components/ModalPropuesta';
 
 class IntroContainer extends React.Component {
 
@@ -14,6 +15,7 @@ class IntroContainer extends React.Component {
     return (
       <BaseLayout dark>
         <Intro onEnd={this.handleOnEndIntro}/>
+        <ModalPropuesta/>
       </BaseLayout>
     );
   }
