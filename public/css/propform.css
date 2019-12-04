@@ -37,16 +37,22 @@
 }
 
 .inputprop{
-  border: 2px black dotted !important;
+  border: 2px black solid !important;
   border-radius: 15px !important;
   margin-bottom: 15px !important;
+  color: black !important;
 }
-
+.inputprop::placeholder{
+  color: black !important;
+  font-weight: bold;
+}
 .btnprimary{
   background-color: #f576a9 !important;
   color: Black !important;
   border-radius: 15px !important;
   height: 50px !important;
+  font-weight: bolder !important;
+  width: 100% !important;
 }
 .radioprop{
   height: 90px !important;
@@ -67,22 +73,25 @@
 .ant-modal{
   max-width: 1140px !important;
 }
+.inputCalendar{
+  line-height: 90px !important;
+}
 .inputCalendar input{
-  border: 2px black dotted !important;
   background-color: transparent !important;
   color: black !important;
-  border-radius: 15px !important;
   font-size: 20px;
-
 }
 .form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #008ac9 !important;
+  border:none !important;
 }
 .form2.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #4fbdb0 !important;
+  border:none !important;
 }
 .form3.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #f576a9 !important;
+  border:none !important;
 }
 .radiono span:nth-child(2n),
 .radiosi span:nth-child(2n)
@@ -94,6 +103,7 @@
 .spacecalendar{
   height: 90px !important;
 }
-.inputCalendar{
-  line-height: 90px !important;
+
+.ant-checkbox-wrapper-checked span input::selection{
+  background: #008ac9 !important;
 }
