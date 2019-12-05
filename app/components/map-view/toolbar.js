@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Popover, Radio, Row } from 'antd';
+import { Popover, Radio } from 'antd';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
 
@@ -14,25 +14,31 @@ class MapToolBar extends React.Component {
 
     const RadioAreaView = (
       <Radio.Group onChange={this.props.onChangeAreaView} value={this.props.areaView}>
-        <Radio value="proposed">Areas Naturales Propuestas</Radio>
-        <Radio value="protected">Areas Naturales Protegidas</Radio>
+        <Radio value="lots">Areas Naturales Propuestas</Radio>
+        <Radio value="protected_areas">Areas Naturales Protegidas</Radio>
       </Radio.Group>
     );
 
     return (
-      <div>
-        <Row>
-          <Col md={12}>
-            <Button ghost><Icon type="menu" /></Button>
-            <Button ghost><Icon type="user" /></Button>
-            <Popover content={RadioMapView} trigger="click">
-              <Button ghost><Icon type="eye" /></Button>
+      <div className="toolbar toolbar-menu">
+        <ul>
+          <li>
+            <Button size="large" ghost><Icon type="menu" /></Button>
+          </li>
+          <li>
+            <Button size="large" ghost><Icon type="user" /></Button>
+          </li>
+          <li>
+            <Popover content={RadioMapView} trigger="click" className="m33-btn">
+              <Button size="large" ghost><Icon type="eye" /></Button>
             </Popover>
-            <Popover content={RadioAreaView} trigger="click">
-              <Button ghost><Icon type="layers" /></Button>
+          </li>
+          <li>
+            <Popover content={RadioAreaView} trigger="click" className="m33-btn">
+              <Button size="large" ghost><Icon type="layers" /></Button>
             </Popover>
-          </Col>
-        </Row>
+          </li>
+        </ul>
       </div>
     );
   }

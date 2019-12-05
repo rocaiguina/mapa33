@@ -1,15 +1,15 @@
 import React from 'react';
-import Legend from './legend';
-import Map from './map';
-import List from './list';
-import ToolBar from './toolbar';
+import Legend from './Legend';
+import Map from './Map';
+import List from './List';
+import ToolBar from './Toolbar';
 
 class MapView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      mapView: 'list',             // map, list
-      areaView: 'protected',       // protected, proposals
+      mapView: 'map',                     // map, list
+      areaView: 'protected_areas',        // protected_areas, lots
     }
   }
 
@@ -27,10 +27,16 @@ class MapView extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="map-view">
         <Legend />
         {
-          this.state.mapView == 'map' ? <Map/> : <List items={this.props.data}/>
+          this.state.mapView == 'map' ?
+            <Map
+              areaView={this.state.areaView}
+            /> :
+            <List
+              items={this.props.data}
+            />
         }
         <ToolBar 
           mapView={this.state.mapView}

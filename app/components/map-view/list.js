@@ -84,12 +84,16 @@ class ListView extends React.Component {
           }
         </Slider>
         <p className="slick-slider-paginator">{ this.state.current }/{this.props.items.length}</p>
-        <Row>
-          <Col sm={24} xs={0}>
-            <Button ghost onClick={this.handleOnPrev}><Icon type="arrow-left-2"/></Button>
-            <Button ghost onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
-          </Col>
-        </Row>
+        <div className="toolbar hidden-sm hidden-xs">
+          <ul>
+            <li>
+              <Button size="large" ghost onClick={this.handleOnPrev}><Icon type="arrow-left-2"/></Button>
+            </li>
+            <li>
+              <Button size="large" ghost onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }
