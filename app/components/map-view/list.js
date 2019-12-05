@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Card, Row, Col } from 'antd';
+import { Card, Col, Row, Icon as AntIcon } from 'antd';
 import ClassNames from 'classnames';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
@@ -74,8 +74,8 @@ class ListView extends React.Component {
                   bordered={false}
                   cover={<img src="https://dummyimage.com/300x300/dddddd/ffffff"/>}
                   actions={[
-                    <div className="text-left"><Icon type="heart" key="heart" /> 10,999</div>,
-                    <div className="text-right"><Icon type="share-alt" key="share-alt" /></div>
+                    <div className="text-left"><AntIcon type="heart" key="heart" /> 10,999</div>,
+                    <div className="text-right"><AntIcon type="share-alt" key="share-alt" /></div>
                   ]}>
                   <Meta title={item.name} description={item.location}/>
                 </Card>

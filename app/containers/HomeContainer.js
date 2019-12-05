@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../components/ui/Button';
 import BaseLayout from '../components/layout/base';
+import Icon from '../components/ui/Icon';
 import MapView from '../components/map-view';
 
 class HomeContainer extends React.Component {
@@ -50,7 +51,7 @@ class HomeContainer extends React.Component {
   render () {
     return (
       <BaseLayout dark
-        footerRightComponent={<Button type="secondary" onClick={this.handleOnAddProposal}><i className="m33-icon m33-icon-plus"></i></Button>}>
+        footerRightComponent={<Button type="secondary" onClick={this.handleOnAddProposal}><Icon type="plus"/></Button>}>
         <MapView data={this.state.maplist}/>
       </BaseLayout>
     );
