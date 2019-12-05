@@ -1,6 +1,7 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 
 class Video extends React.Component {
   handleOnReady = (event) => {
@@ -27,7 +28,7 @@ class Video extends React.Component {
           <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
         </div>
         <div className="m-t-15 text-right">
-          <Button type="primary" ghost onClick={this.handleOnSkip}>SKIP <i className="m33-icon m33-icon-arrow-right"></i></Button>
+          <Button type="primary" ghost onClick={this.handleOnSkip}>SKIP <Icon type="arrow-right"/></Button>
         </div>
       </div>
     );

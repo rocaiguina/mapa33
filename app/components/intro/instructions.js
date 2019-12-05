@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
 import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 
 export default (props) => {
   return (
@@ -9,7 +10,7 @@ export default (props) => {
         <Col lg={{ span: 6, offset: 9 }}>
           <div className="intro-close intro-close-ls">
             <Button type="primary" ghost size="large" onClick={props.onClose}>
-              <i className="m33-icon m33-icon-close"></i>
+              <Icon type="close" />
             </Button>
           </div>
           <Card className="ant-card-round ant-card-green">

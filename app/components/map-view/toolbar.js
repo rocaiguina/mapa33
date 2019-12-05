@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Col, Popover, Radio, Row } from 'antd';
+import { Col, Popover, Radio, Row } from 'antd';
+import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 
 class MapToolBar extends React.Component {
   render () {
@@ -21,13 +23,13 @@ class MapToolBar extends React.Component {
       <div>
         <Row>
           <Col md={12}>
-            <Button><i className="m33-icon m33-icon-menu"></i></Button>
-            <Button><i className="m33-icon m33-icon-user"></i></Button>
+            <Button ghost><Icon type="menu" /></Button>
+            <Button ghost><Icon type="user" /></Button>
             <Popover content={RadioMapView} trigger="click">
-              <Button><i className="m33-icon m33-icon-eye"></i></Button>
+              <Button ghost><Icon type="eye" /></Button>
             </Popover>
             <Popover content={RadioAreaView} trigger="click">
-              <Button><i className="m33-icon m33-icon-layers"></i></Button>
+              <Button ghost><Icon type="layers" /></Button>
             </Popover>
           </Col>
         </Row>

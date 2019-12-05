@@ -26,7 +26,10 @@ module.exports = {
           plugins: ['@babel/plugin-proposal-class-properties']
         }
       }, {
-        test: /\.(png|jpe?g|gif|svg)$/,
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'file-loader'],
+      }, {
+        test: /\.(png|jpe?g|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]'

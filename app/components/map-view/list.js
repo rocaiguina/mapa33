@@ -1,7 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Button, Card, Icon, Row, Col } from 'antd';
+import { Card, Row, Col } from 'antd';
 import ClassNames from 'classnames';
+import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 
 const { Meta } = Card;
 
@@ -84,8 +86,8 @@ class ListView extends React.Component {
         <p className="slick-slider-paginator">{ this.state.current }/{this.props.items.length}</p>
         <Row>
           <Col sm={24} xs={0}>
-            <Button onClick={this.handleOnPrev}><i className="m33-icon m33-icon-arrow-left-2"></i></Button>
-            <Button onClick={this.handleOnNext}><i className="m33-icon m33-icon-arrow-right-2"></i></Button>
+            <Button ghost onClick={this.handleOnPrev}><Icon type="arrow-left-2"/></Button>
+            <Button ghost onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
           </Col>
         </Row>
       </div>
