@@ -1,6 +1,6 @@
 import React from 'react';
 import Legend from './Legend';
-import Map from './Map1';
+import Map from './Map';
 import List from './List';
 import ToolBar from './Toolbar';
 
