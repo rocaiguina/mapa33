@@ -5,8 +5,8 @@ const LandController = require('../controllers/land');
 
 router.get('/', LandController.findAll);
 router.post('/', LandController.store);
-router.get('/intersect', LandController.intersect);
-router.get('/select', LandController.select);
+router.post('/intersect', LandController.intersect);
+router.post('/select', LandController.select);
 router.get('/:id', LandController.lookup, LandController.get);
 router.put('/:id', LandController.lookup, LandController.update);
 router.delete('/:id', LandController.lookup, LandController.remove);
