@@ -73,7 +73,7 @@ class Map extends Component {
                 'waterway-label'
             );
 
-            fetch(`/lands`)
+            fetch(`/api/land`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data[0].geojson);

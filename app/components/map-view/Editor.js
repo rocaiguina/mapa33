@@ -280,7 +280,7 @@ class Editor extends Component {
     };
 
     getPolygons = () => {
-        fetch(`/select`, {
+        fetch(`/api/land/select`, {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.selection
@@ -394,7 +394,7 @@ class Editor extends Component {
         const drawings = Draw.getAll();
 
         if (drawings.features.length > 0) {
-            fetch(`/intersect`, {
+            fetch(`/api/land/intersect`, {
                 method: 'post',
                 body: JSON.stringify({
                     geom: drawings.features[0].geometry
