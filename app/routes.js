@@ -5,13 +5,13 @@ import './style/App.css';
 
 import IntroContainer from './containers/IntroContainer';
 import MapContainer from './containers/MapContainer';
-import RegisterLandContainer from './containers/RegisterLandContainer';
+import RegisterContainer from './containers/RegisterContainer';
 
 export default () => (
   <Router>
     <Switch>
       <Route path="/map" component={MapContainer} />
-      <Route path="/register" component={RegisterLandContainer} />
+      <Route path="/register" component={RegisterContainer} />
       <Route path="/" component={IntroContainer} />
     </Switch>
   </Router>
