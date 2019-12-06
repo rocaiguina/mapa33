@@ -1,8 +1,8 @@
 import React from 'react';
-import Legend from './Legend';
+import Legend from './Legend1';
 import Map from './Map';
-import List from './List';
-import ToolBar from './Toolbar';
+import List from './List1';
+import ToolBar from './Toolbar1';
 
 class MapView extends React.Component {
   constructor (props) {
