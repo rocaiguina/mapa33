@@ -3,7 +3,6 @@ import { Wizard, Steps, Step } from 'react-albus';
 
 import RegisterStep from './steps/RegisterStep';
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
-import CatastroNumberStep from './steps/CatastroNumberStep';
 import ProposeLandStep from './steps/ProposeLandStep';
 
 class RegisterWizard extends React.Component {
@@ -20,7 +19,13 @@ class RegisterWizard extends React.Component {
 
   render () {
     return (
-      <h2>WIZARD HERE</h2>
+      <Wizard> 
+        <Steps>
+          <Step id="register" render={(wizard) => (<RegisterStep wizard={wizard}/>)} />
+          <Step id="owner" render={(wizard) => (<AreYouOwnerStep wizard={wizard}/>)}/>
+          <Step id="propose" render={(wizard) => (<ProposeLandStep wizard={wizard}/>)} />
+        </Steps>
+      </Wizard>
     )
   }
 }

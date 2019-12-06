@@ -15,8 +15,12 @@ class RegisterContainer extends React.Component {
       <BaseLayout>
         <div className="m-t-20">
           <div className="page-title">
-            <h2>Formulario de Propuesta</h2>
-            <Button size="large" type="link" onClick={this.handleOnClose}><Icon type="close"/></Button>
+            <h2>FORMULARIO<br/>DE PROPUESTA</h2>
+            <ul className="actions">
+              <li>
+                <Button size="large" type="link" onClick={this.handleOnClose}><Icon type="close"/></Button>
+              </li>
+            </ul>
           </div>
         </div>
         <RegisterWizard/>
