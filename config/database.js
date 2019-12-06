@@ -8,7 +8,11 @@ module.exports = {
   development: {
     dialect: "postgres",
     operatorsAliases: false,
-    use_env_variable: "DATABASE_URL"
+    use_env_variable: "DATABASE_URL",
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": true
+    }
   },test: {
     username: "postgres",
     password: null,
@@ -22,6 +26,10 @@ module.exports = {
   production: {
     dialect: "postgres",
     operatorsAliases: false,
-    use_env_variable: "DATABASE_URL"
+    use_env_variable: "DATABASE_URL",
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": true
+    }
   }
 };
