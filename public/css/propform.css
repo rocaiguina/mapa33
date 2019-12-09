@@ -38,7 +38,7 @@
 
 .inputprop{
   border: 2px black solid !important;
-  border-radius: 15px !important;
+  border-radius: 20px !important;
   margin-bottom: 15px !important;
   color: black !important;
 }
@@ -106,4 +106,61 @@
 
 .ant-checkbox-wrapper-checked span input::selection{
   background: #008ac9 !important;
+}
+.radiobutton{
+  width: 100% !important;
+  font-weight: bolder !important;
+  text-align: center !important;
+}
+.buttonok{
+  height: 48px !important;
+  font-weight: bolder !important;
+  font-size: 18px !important;
+}
+.inputprop.ant-checkbox-wrapper span:nth-child(2n+1){
+  display: none;
+}
+.inputprop.ant-checkbox-wrapper{
+  height: 40px !important;
+  line-height: 40px !important
+}
+.inputprop.ant-checkbox-wrapper-checked{
+  background-color: #008ac9 !important;
+  border:none !important;
+  }
+
+.radiosi .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: transparent !important;
+}
+.blockstyleradio{
+  white-space: pre-wrap !important;
+  display: block;
+}
+
+.abcradio{
+  width: 75px !important;
+  height: 50px !important;
+}
+.abcradio span:nth-child(2n){
+  line-height: 50px !important;
+}
+.abcradio:not(:first-child)::before{
+  width: 0px !important;
+  content: none !important;
+}
+
+.blockstyleradio span span{
+  border-color: black !important;
+  border-width: 2px !important;
+  height: 44px !important;
+  width: 65px !important;
+  border-radius: 25px !important;
+}
+.blockstyleradio span .ant-radio-inner::after{
+  top: 2px !important;
+  left: 2px !important;
+  width: 57px !important;
+  height: 36px !important;
+  background-color: #008ac9 !important;
+  border-radius: 19px !important;
 }
