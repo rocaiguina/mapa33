@@ -31,6 +31,36 @@ class LandController {
     //   });    
   }
 
+  intersect (req, res, next) {
+    Models
+      .sequelize
+      .query(`SELECT row_to_json ( fc ) AS geojson FROM ( SELECT 'FeatureCollection' AS TYPE, array_to_json ( ARRAY_AGG ( f ) ) AS features FROM ( SELECT 'Feature' AS TYPE, ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry, row_to_json ( ( SELECT l FROM ( SELECT ID, num_catast, catastro, INITCAP( dir_fisica ) AS address, muni_norml AS municipality ) AS l ) ) AS properties FROM lots AS lg WHERE ST_Intersects ( lg.geom, ST_SETSRID ( ST_GeomFromGeoJSON ('${JSON.stringify(
+            req.body.geom
+        )}'), 4326 ) ) ) AS f ) AS fc`, 
+        { type: Models.sequelize.QueryTypes.SELECT })
+      .then(function (result) {
+        console.dir(result);
+        res.send(result);
+      })
+      .catch(function (err) {
+        res.send('');
+      });
+  }
+
+  select (req, res, next) {
+    Models
+      .sequelize
+      .query(`SELECT row_to_json ( fc ) AS geojson FROM ( SELECT 'FeatureCollection' AS TYPE, array_to_json ( ARRAY_AGG ( f ) ) AS features FROM ( SELECT 'Feature' AS TYPE, ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry, row_to_json ( ( SELECT l FROM ( SELECT id, num_catast, catastro, INITCAP( dir_fisica ) as address, muni_norml as municipality ) AS l ) ) AS properties FROM lots AS lg WHERE id IN ( ${req.body.id} ) ) AS f ) AS fc`, 
+        { type: Models.sequelize.QueryTypes.SELECT })
+      .then(function (result) {
+        console.dir(result);
+        res.send(result);
+      })
+      .catch(function (err) {
+        res.send('');
+      });
+  }
+
   lookup (req, res, next) {
     Land
       .findOne({ where: { id: req.params.id } })

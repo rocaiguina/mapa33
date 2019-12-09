@@ -1,7 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Button, Card, Icon, Row, Col } from 'antd';
+import { Card, Col, Row, Icon as AntIcon } from 'antd';
 import ClassNames from 'classnames';
+import Button from '../ui/Button';
+import Icon from '../ui/Icon';
 
 const { Meta } = Card;
 
@@ -72,8 +74,8 @@ class ListView extends React.Component {
                   bordered={false}
                   cover={<img src="https://dummyimage.com/300x300/dddddd/ffffff"/>}
                   actions={[
-                    <div className="text-left"><Icon type="heart" key="heart" /> 10,999</div>,
-                    <div className="text-right"><Icon type="share-alt" key="share-alt" /></div>
+                    <div className="text-left"><AntIcon type="heart" key="heart" /> 10,999</div>,
+                    <div className="text-right"><AntIcon type="share-alt" key="share-alt" /></div>
                   ]}>
                   <Meta title={item.name} description={item.location}/>
                 </Card>
@@ -82,12 +84,16 @@ class ListView extends React.Component {
           }
         </Slider>
         <p className="slick-slider-paginator">{ this.state.current }/{this.props.items.length}</p>
-        <Row>
-          <Col sm={24} xs={0}>
-            <Button onClick={this.handleOnPrev}><i className="m33-icon m33-icon-arrow-left-2"></i></Button>
-            <Button onClick={this.handleOnNext}><i className="m33-icon m33-icon-arrow-right-2"></i></Button>
-          </Col>
-        </Row>
+        <div className="toolbar hidden-sm hidden-xs">
+          <ul>
+            <li>
+              <Button size="large" ghost onClick={this.handleOnPrev}><Icon type="arrow-left-2"/></Button>
+            </li>
+            <li>
+              <Button size="large" ghost onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }

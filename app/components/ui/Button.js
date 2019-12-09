@@ -5,7 +5,7 @@ import ClassNames from 'classnames';
 export default function (props) {
   const buttonclass = ClassNames({
     'm33-btn': true,
-    'ant-btn-xlarge': props.size == 'xlarge'
+    'ant-btn-xlg': props.size == 'xlarge',
   });
 
   return (

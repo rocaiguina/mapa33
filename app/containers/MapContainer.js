@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button } from 'antd';
+import Button from '../components/ui/Button';
 import BaseLayout from '../components/layout/base';
+import Icon from '../components/ui/Icon';
 import MapView from '../components/map-view';
 
-class HomeContainer extends React.Component {
+class MapContainer extends React.Component {
 
   constructor (props) {
     super(props);
@@ -44,17 +45,17 @@ class HomeContainer extends React.Component {
   }
 
   handleOnAddProposal = (event) => {
-    this.props.history.push('/register-land');
+    this.props.history.push('/register');
   }
 
   render () {
     return (
       <BaseLayout dark
-        footerRightComponent={<Button onClick={this.handleOnAddProposal}><i className="m33-icon m33-icon-plus"></i></Button>}>
+        footerRightComponent={<Button size="xlarge" type="secondary" onClick={this.handleOnAddProposal}><Icon type="plus"/></Button>}>
         <MapView data={this.state.maplist}/>
       </BaseLayout>
     );
   }
 }
 
-export default HomeContainer;
+export default MapContainer;
