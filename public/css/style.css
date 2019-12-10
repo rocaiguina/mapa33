@@ -126,8 +126,12 @@
 
 /* Footer */
 .footer {
-  padding-bottom: 20px;
-  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 15px;
+  position: fixed;
+  width: 100%;
 }
 
 .footer .first-column,
@@ -147,7 +151,7 @@
 }
 
 .footer .third-column {
-  padding: 16px 30px;
+  padding: 16px 0px 16px 15px;
   text-align: center;
 }
 
@@ -207,15 +211,26 @@ ul.actions {
 
 /* Intro */
 .intro {
-  padding: 30px 0;
+  align-items: center;
+  display: flex;
+  height: 82vh;
   position: relative;
 }
+
 .intro-close {
-  margin-bottom: 15px;
+  position: absolute;
+  right: 0px;
   text-align: right;
+  top: 20px;
 }
+
+.intro-text,
+.intro-img,
+.intro-video {
+  flex: 1;
+}
+
 .intro-text {
-  padding-top: 170px;
   text-align: center;
 }
 
@@ -469,21 +484,9 @@ ul.actions {
 }
 
 /* Responsive */
-@media (min-width: 992px) {
-  .intro-text {
-    padding-top: 250px;
-  }
-  .intro .intro-close {
-    position: absolute;
-    right: -54px;
-    top: 0;
-    z-index: 10;
-  }
-  .intro .intro-close-ls {
-    right: -104px;
-  }
-  .intro-img img {
-    margin-top: 120px;
+@media (min-width: 992px) {  
+  .footer .third-column {
+    padding: 16px 30px;
   }
   .toolbar {
     margin: 0 -5px 20px -5px;

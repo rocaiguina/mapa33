@@ -16,7 +16,7 @@ class Footer extends Component {
           <Row gutter={0}>
             <Col md={8} xs={16}>
               <div className="first-column">
-                <img src={'/images/' + logo} />
+                <img src={'/images/' + logo} className="img-responsive" />
               </div>
             </Col>
             <Col md={12} xs={0}>
@@ -28,7 +28,7 @@ class Footer extends Component {
               <div className="third-column">
                 { this.props.rightComponent ?
                   this.props.rightComponent :
-                  <img src="/images/naturaleza.png"/>
+                  <img src="/images/naturaleza.png" className="img-responsive" />
                 }
               </div>
             </Col>

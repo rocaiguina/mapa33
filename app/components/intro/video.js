@@ -24,11 +24,13 @@ class Video extends React.Component {
 
     return (
       <div className="intro">
-        <div className="embed-responsive embed-responsive-21by9">
-          <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
-        </div>
-        <div className="m-t-15 text-right">
-          <Button type="primary" ghost onClick={this.handleOnSkip}>SKIP <Icon type="arrow-right"/></Button>
+        <div className="intro-video">
+          <div className="embed-responsive embed-responsive-21by9">
+            <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
+          </div>
+          <div className="m-t-15 text-right">
+            <Button type="primary" ghost onClick={this.handleOnSkip}>SKIP <Icon type="arrow-right"/></Button>
+          </div>
         </div>
       </div>
     );
