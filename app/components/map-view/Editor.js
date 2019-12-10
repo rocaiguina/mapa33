@@ -440,6 +440,7 @@ class Editor extends Component {
     };
 
     render() {
+    	console.log(this.state.selection);
         return (
             <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '100vh', width: '100%' }}>
                 <div ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
@@ -467,6 +468,7 @@ class Editor extends Component {
                         type="button"
                         onClick={() => {
                             const img = miniMap.getCanvas().toDataURL();
+                            console.log(this.state.geojson);
                             console.log(img);
                         }}
                     >
