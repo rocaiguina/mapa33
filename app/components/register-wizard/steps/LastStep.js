@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row, Checkbox } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class LastStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -25,16 +25,13 @@ class AreYouOwnerStep extends React.Component {
         <br/>
         <Row>
           <Col md={4}/>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
-              <h1>
-                ¿Eres Dueño del terreno?
-              </h1>
+          <Col md={8} style={{paddingLeft:"20px"}}>
+              <h3>Gracias, estaremos evaluando tu propuesta.</h3>
+              <h3>Recibiras confirmaci&oacute;n por correo electr&oacute;nico cuando este aprobada tu selecci&oacute;n.</h3>
+              <h3>De tener alguna duda con su selecci&oacute;n para la Naturaleza se comunicar&aacute; con usted.</h3>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
-              </Radio.Group>
+          <Col md={8} style={{textAlign:"center", marginTop:"20px"}}>
+              <Button className="inputprop radiobutton buttonok" onClick={() => this.handleOnClose()}>VOLVER AL MAPA</Button>
           </Col>
           <Col md={4}/>
         </Row>
@@ -61,4 +58,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default LastStep;

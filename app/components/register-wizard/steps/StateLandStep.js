@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class StateLandStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,13 +27,17 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿En qu&eacute; estado se encuentra el terreno?
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+              <Radio.Group defaultValue="Si" buttonStyle="solid" size="large">
+                <Col md={24}>
+                  <Radio.Button className="inputprop radiobutton" value="Si">Abandono</Radio.Button>
+                </Col>
+                <Col md={24}>
+                  <Radio.Button className="inputprop radiobutton" value="No">Recibe Mantenimiento</Radio.Button>
+                </Col>
               </Radio.Group>
           </Col>
           <Col md={4}/>
@@ -61,4 +65,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default StateLandStep;

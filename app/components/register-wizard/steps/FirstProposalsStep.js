@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row, Checkbox } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class FirstProposalsStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,14 +27,20 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿Primeras dos propuestas?
               </h1>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
-              </Radio.Group>
+          <Col md={8} style={{textAlign:"left"}}>
+              <Radio.Group defaultValue="Si">
+                <div style={{display:"flex"}}>
+                  <Radio value="Si" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#1.<br/>Proponemos que utop&iacute;a se mantenga cerrada al público con el fin de preservar sus cualidades y belleza natural.</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"30px"}}>
+                  <Radio value="No" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#2.<br/>Proponemos que utop&iacute;a sea visitada por personas para fines de recreación y aprender sobre el medio ambiente.</h3></div>
+                </div>
+            </Radio.Group>
           </Col>
           <Col md={4}/>
         </Row>
@@ -61,4 +67,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default FirstProposalsStep;

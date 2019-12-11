@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class SecondProposalsStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,13 +27,19 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿Segundas dos propuestas?
               </h1>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+          <Col md={8} style={{textAlign:"left"}}>
+              <Radio.Group defaultValue="Si">
+                <div style={{display:"flex"}}>
+                  <Radio value="Si" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#3.<br/>Proponemos que utop&iacute;a se mantenga cerrada como una reserva biol&oacute;gica y que conserve su nombre actual pues ah&iacute; se capta la conexi&oacute;n simb&oacute;lica entre la montaña y la comunidad.</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"30px"}}>
+                  <Radio value="No" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#4.<br/>Proponemos esperar hasta que utop&iacute;a se recupere del huracas con la opci&oacute;n de dar acceso en el futuro a personas de bajos recursos de nuestra comunidad para que puedan recolectar frutos del bosque y plantas medicinales, y madera para combustible o construcci&oacute;.</h3></div>
+                </div>
               </Radio.Group>
           </Col>
           <Col md={4}/>
@@ -61,4 +67,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default SecondProposalsStep;

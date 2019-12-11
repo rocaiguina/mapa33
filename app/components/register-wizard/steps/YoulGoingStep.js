@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class YoulGoingStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -24,19 +24,27 @@ class AreYouOwnerStep extends React.Component {
         <br/>
         <br/>
         <Row>
-          <Col md={4}/>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
-              <h1>
-                ¿Eres Dueño del terreno?
-              </h1>
+          <Col md={8}/>
+          <Col md={8}>
+            <h1>Vas a:</h1>
+              <h2>a. Donar un terreno</h2>
+              <h2>b. Proponer un terreno</h2>
+              <h2>c. Apoyar una propuesta existente</h2>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+        </Row>
+        <br/>
+        <br/>
+        <br/>
+        <Row>
+          <Col md={4}/>
+          <Col md={16} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
+              <Radio.Group defaultValue="a" buttonStyle="solid">
+                <Radio.Button className="inputprop radioprop radiosi form1 abcradio" value="a">a</Radio.Button>
+                <Radio.Button className="inputprop radioprop radiosi form1 abcradio" value="b">b</Radio.Button>
+                <Radio.Button className="inputprop radioprop radiosi form1 abcradio" value="c">c</Radio.Button>
               </Radio.Group>
           </Col>
-          <Col md={4}/>
+          <Col md={4} />
         </Row>
         <br/>
         <br/>
@@ -61,4 +69,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default YoulGoingStep;

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row, Checkbox } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class ImportanceOfKnowingStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,13 +27,19 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿Por qu&eacute; es importante saber que Utop&iacute;a existe?
               </h1>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+          <Col md={8} style={{textAlign:"left"}}>
+              <Radio.Group defaultValue="Si">
+                <div style={{display:"flex"}}>
+                  <Radio value="Si" className="blockstyleradio" ></Radio>
+                  <div><h3>Es importante que sus recursos apoyan la supervivencia de la flora y fauna de ese lugar.</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"30px"}}>
+                  <Radio value="No" className="blockstyleradio" ></Radio>
+                  <div><h3>Es importante saber que ese lugar proporciona aire fresco y agua limpia a mi comunidad.</h3></div>
+                </div>
               </Radio.Group>
           </Col>
           <Col md={4}/>
@@ -61,4 +67,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default ImportanceOfKnowingStep;

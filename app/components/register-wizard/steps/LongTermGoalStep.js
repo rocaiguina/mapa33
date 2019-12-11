@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row, Checkbox } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class LongTermGoalStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -25,18 +25,28 @@ class AreYouOwnerStep extends React.Component {
         <br/>
         <Row>
           <Col md={4}/>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
-              <h1>
-                ¿Eres Dueño del terreno?
-              </h1>
+          <Col md={8}>
+            <h1>¿Cu&aacute;l es su meta a largo plazo con esta propiedad?</h1>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
-              </Radio.Group>
+          <Col md={8}>
+            <Checkbox.Group style={{ width: '100%' }}>
+              <Row>
+                <Col span={24}>
+                  <Checkbox value="A" className="inputprop radiobutton">Opción 1</Checkbox>
+                </Col>
+                <Col span={24}>
+                  <Checkbox value="B" className="inputprop radiobutton">Opción 2</Checkbox>
+                </Col>
+                <Col span={24}>
+                  <Checkbox value="C" className="inputprop radiobutton">Opción 3</Checkbox>
+                </Col>
+                <Col span={24}>
+                  <Checkbox value="D" className="inputprop radiobutton">Opción 4</Checkbox>
+                </Col>
+              </Row>
+            </Checkbox.Group>
           </Col>
-          <Col md={4}/>
+          <Col md={4} />
         </Row>
         <br/>
         <br/>
@@ -61,4 +71,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default LongTermGoalStep;

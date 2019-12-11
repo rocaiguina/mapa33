@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class ThirdProposalsStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,13 +27,19 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿Tercer grupo de propuestas?
               </h1>
           </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+          <Col md={8} style={{textAlign:"left"}}>
+              <Radio.Group defaultValue="Si">
+                <div style={{display:"flex"}}>
+                  <Radio className="blockstyleradio" value="Si"></Radio>
+                  <div><h3>Grupos de vecinos#5.<br/>Proponemos preservar utop&iacute;a como un santuario natural cerrado al p&uacute;blico para conservar sus cualidades an&iacute;micas y conexi&oacute;n con el planeta.</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"30px"}}>
+                  <Radio className="blockstyleradio" value="No"></Radio>
+                  <div><h3>Grupos de vecinos#6.<br/>Proponemos que utop&iacute;a se mantenga abierta para el beneficio uso y disfrute econ&oacute;mico, social y cultural de toda la comunidad.</h3></div>
+                </div>
               </Radio.Group>
           </Col>
           <Col md={4}/>
@@ -61,4 +67,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default ThirdProposalsStep;

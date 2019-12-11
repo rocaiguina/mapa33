@@ -1,9 +1,9 @@
 import React from 'react';
-import { Col, Row, Radio } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 
-class AreYouOwnerStep extends React.Component {
+class OwnerSuccessionStep extends React.Component {
 
   handleOnChange = (event) => {
     this.props.wizard.next();
@@ -27,14 +27,30 @@ class AreYouOwnerStep extends React.Component {
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Eres Dueño del terreno?
+                ¿El due&ntilde;o del terreno es una sucesi&oacute;n?
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid" onChange={this.handleOnChange}>
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
-              </Radio.Group>
+            <Radio.Group defaultValue="Si" buttonStyle="solid">
+              <Radio.Button className="inputprop radioprop radiosi form2" value="Si">Si</Radio.Button>
+              <Radio.Button className="inputprop radioprop radiono form2" value="No">No</Radio.Button>
+            </Radio.Group>
+          </Col>
+          <Col md={4}/>
+        </Row>
+        <br/>
+        <br/>
+        <br/>
+        <Row>
+          <Col md={4}/>
+          <Col md={8} style={{textAlign:"center",marginLeft:"auto", marginRight:"auto"}}>
+            <h1>¿Todos los miembros están de acuerdo?</h1>
+          </Col>
+          <Col md={8} style={{textAlign:"center",marginLeft:"auto", marginRight:"auto"}}>
+            <Radio.Group defaultValue="Si" buttonStyle="solid">
+              <Radio.Button className="inputprop radioprop radiosi form3" value="Si">Si</Radio.Button>
+              <Radio.Button className="inputprop radioprop radiono form3" value="No">No</Radio.Button>
+            </Radio.Group>
           </Col>
           <Col md={4}/>
         </Row>
@@ -61,4 +77,4 @@ class AreYouOwnerStep extends React.Component {
   }
 }
 
-export default AreYouOwnerStep;
+export default OwnerSuccessionStep;
