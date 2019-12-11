@@ -12,8 +12,8 @@ class RegisterContainer extends React.Component {
 
   render () {
     return (
-      <BaseLayout>
-        <div className="m-t-20">
+      <BaseLayout
+        header={
           <div className="page-title">
             <h2>FORMULARIO<br/>DE PROPUESTA</h2>
             <ul className="actions">
@@ -22,8 +22,13 @@ class RegisterContainer extends React.Component {
               </li>
             </ul>
           </div>
+        }
+      >
+        <div className="m33-wizard">
+          <div className="m33-wizard-vcenter">
+            <RegisterWizard/>
+          </div>
         </div>
-        <RegisterWizard/>
       </BaseLayout>
     );
   }

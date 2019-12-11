@@ -1,12 +1,19 @@
 import React from 'react';
 import { Col, Input, Row } from 'antd';
+import Pager from '../../ui/Pager';
 
 class CatastroNumberStep extends React.Component {
+  
+  handleOnNext = (event) => {
+    this.props.wizard.next();
+  }
+
+  handleOnPrevious = (event) => {
+    this.props.wizard.previous();
+  }
+
   render() {
     return (
-      <br/>
-      <br/>
-      <br/>
       <div>
           <Row>
               <Col md={8}/>
@@ -20,24 +27,10 @@ class CatastroNumberStep extends React.Component {
                 <Input className="inputprop" size="large" placeholder="__/__/__/__"/>
             </Col>
           </Row>
-          <br/>
-          <br/>
-          <br/>
-          <Row>
-            <Col xs={12}>
-              <div className="text-left">
-                <Button type="primary" onClick={this.handleOnPrevious}><Icon type="arrow-left-2"/></Button>
-              </div>
-            </Col>
-            <Col xs={12}>
-              <div className="text-right">
-                <Button type="primary" onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
-              </div>
-              </Col>
-          </Row>
-          <br/>
-          <br/>
-          <br/>
+          <Pager
+            onPrevious={this.handleOnPrevious}
+            onNext={this.handleOnNext}
+          />
       </div>
     );
   }

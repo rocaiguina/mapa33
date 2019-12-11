@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Radio, Row } from 'antd';
-import Button from '../../ui/Button';
-import Icon from '../../ui/Icon';
+import Pager from '../../ui/Pager';
 
 class YoulGoingStep extends React.Component {
 
@@ -20,9 +19,6 @@ class YoulGoingStep extends React.Component {
   render() {
     return (
       <div className="m-t-20">
-        <br/>
-        <br/>
-        <br/>
         <Row>
           <Col md={8}/>
           <Col md={8}>
@@ -32,8 +28,6 @@ class YoulGoingStep extends React.Component {
               <h2>c. Apoyar una propuesta existente</h2>
           </Col>
         </Row>
-        <br/>
-        <br/>
         <br/>
         <Row>
           <Col md={4}/>
@@ -46,24 +40,10 @@ class YoulGoingStep extends React.Component {
           </Col>
           <Col md={4} />
         </Row>
-        <br/>
-        <br/>
-        <br/>
-        <Row>
-            <Col xs={12}>
-              <div className="text-left">
-                <Button type="primary" onClick={this.handleOnPrevious}><Icon type="arrow-left-2"/></Button>
-              </div>
-            </Col>
-            <Col xs={12}>
-              <div className="text-right">
-                <Button type="primary" onClick={this.handleOnNext}><Icon type="arrow-right-2"/></Button>
-              </div>
-            </Col>
-        </Row>
-        <br/>
-        <br/>
-        <br/>
+        <Pager
+          onPrevious={this.handleOnPrevious}
+          onNext={this.handleOnNext}
+        />
       </div>
     );
   }

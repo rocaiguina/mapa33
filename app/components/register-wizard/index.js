@@ -67,8 +67,6 @@ class RegisterWizard extends React.Component {
           <Step id="yesfillform" render={(wizard) => (<YesFillFormStep wizard={wizard}/>)} />
           <Step id="stateland" render={(wizard) => (<StateLandStep wizard={wizard}/>)} />
           <Step id="wichuse" render={(wizard) => (<WichUseStep wizard={wizard}/>)} />
-          <Step id="submit" render={(wizard) => (<SubmitStep wizard={wizard}/>)} />
-          <Step id="laststep" render={(wizard) => (<LastStep wizard={wizard}/>)} />
           <Step id="youlgoing" render={(wizard) => (<YoulGoingStep wizard={wizard}/>)} />
           <Step id="longtermgoal" render={(wizard) => (<LongTermGoalStep wizard={wizard}/>)} />
           <Step id="valueplace" render={(wizard) => (<ValuePlaceStep wizard={wizard}/>)} />
@@ -76,7 +74,9 @@ class RegisterWizard extends React.Component {
           <Step id="firstproposals" render={(wizard) => (<FirstProposalsStep wizard={wizard}/>)} />
           <Step id="secondproposals" render={(wizard) => (<SecondProposalsStep wizard={wizard}/>)} />
           <Step id="thirdproposals" render={(wizard) => (<ThirdProposalsStep wizard={wizard}/>)} />
-          <Step id="map" render={(wizard) => (<MapStep wizard={wizard}/>)} />
+          { /* <Step id="map" render={(wizard) => (<MapStep wizard={wizard}/>)} /> */ }
+          { /* <Step id="submit" render={(wizard) => (<SubmitStep wizard={wizard}/>)} /> */}
+          <Step id="laststep" render={(wizard) => (<LastStep wizard={wizard}/>)} />
         </Steps>
       </Wizard>
     )
