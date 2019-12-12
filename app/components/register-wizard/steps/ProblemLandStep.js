@@ -11,16 +11,14 @@ class ProblemLandStep extends React.Component {
       };
   }
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/mortgage`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/succession`);
   }
 
   mostrarinput(e){
@@ -29,32 +27,53 @@ class ProblemLandStep extends React.Component {
     });
   }
 
+  handleOnChange = (checkedValue) => {
+    const { setFieldValue } = this.props.formik;
+    setFieldValue('lands_problem', checkedValue);
+  }
+
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
           <Col md={4}/>
           <Col md={8}>
-            <h1>¿El terreno tiene alg&uacute;n problema?</h1>
+            <h1>¿El terreno tiene algún problema?</h1>
           </Col>
           <Col md={8}>
-            <Checkbox.Group style={{ width: '100%' }}>
+            <Checkbox.Group
+              name="lands_problem"
+              style={{ width: '100%' }}
+              value={formik.values.lands_problem}
+              onChange={this.handleOnChange}
+            >
               <Row>
                 <Col span={24}>
-                  <Checkbox value="A" className="inputprop radiobutton">Deuda en el CRIM</Checkbox>
+                  <Checkbox value="crim_owed" className="inputprop radiobutton">Deuda en el CRIM</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="B" className="inputprop radiobutton">Problemas legales</Checkbox>
+                  <Checkbox value="legality_problems" className="inputprop radiobutton">Problemas legales</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="C" className="inputprop radiobutton">Problemas de titularidad</Checkbox>
+                  <Checkbox value="ownership_problems" className="inputprop radiobutton">Problemas de titularidad</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="D" id="inputotro" className="inputprop radiobutton" onChange={this.mostrarinput}>Otros</Checkbox>
+                  <Checkbox value="others" id="inputotro" className="inputprop radiobutton" onChange={this.mostrarinput}>Otros</Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>
-              {this.state.inputotro ? <Input className="inputprop" id="otro" size="large"/>: null}
+              {
+                this.state.inputotro &&
+                <Input
+                  name="lands_other_problem"
+                  className="inputprop"
+                  id="otro"
+                  size="large"
+                  value={formik.values.lands_other_problem}
+                  onChange={formik.handleChange}
+                />
+              }
           </Col>
           <Col md={4} />
         </Row>

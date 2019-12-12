@@ -5,14 +5,17 @@ import Pager from '../../ui/Pager';
 class CatastroNumberStep extends React.Component {
   
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/phoneowner`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/owner`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div>
           <Row>
@@ -24,7 +27,14 @@ class CatastroNumberStep extends React.Component {
           <Row>
             <Col md={8}/>
             <Col id="propcol1" md={8} >
-                <Input className="inputprop" size="large" placeholder="__/__/__/__"/>
+                <Input
+                  name="catastro_number"
+                  className="inputprop"
+                  size="large"
+                  placeholder="__/__/__/__"
+                  value={formik.values.catastro_number}
+                  onChange={formik.handleChange}
+                />
             </Col>
           </Row>
           <Pager

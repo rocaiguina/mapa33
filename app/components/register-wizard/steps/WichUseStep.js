@@ -4,29 +4,40 @@ import Pager from '../../ui/Pager';
 
 class WichUseStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/valueplace`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.are_u_owner === true) {
+      history.push(`${basename}/contamination`);
+    }
+
+    if (formik.values.are_u_owner === false) {
+      history.push(`${basename}/mainuses`);
+    }
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
           <Col md={4}/>
           <Col md={8} style={{paddingLeft:"20px"}}>
-              <h1>¿Cu&aacute;l uso le dar&iacute;as al terreno?</h1>
+              <h1>¿Cuál uso le darías al terreno?</h1>
               <h1>Explica brevemente</h1>
           </Col>
           <Col md={8} >
-            <Input.TextArea className="inputprop" placeholder=""/>
+            <Input.TextArea
+              name="wich_use"
+              className="inputprop"
+              value={formik.values.wich_use}
+              onChange={formik.handleChange}
+            />
           </Col>
           <Col md={4}/>
         </Row>

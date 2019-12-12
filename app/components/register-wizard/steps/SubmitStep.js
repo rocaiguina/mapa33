@@ -9,7 +9,7 @@ class SubmitStep extends React.Component {
         <Row>
           <Col md={4}/>
           <Col md={16} style={{textAlign:"center"}}>
-              <Button className="inputprop buttonok" onClick={() => this.sentencia(true)} > SOMETE </Button>
+              <Button htmlType="submit" className="inputprop buttonok">SOMETE</Button>
           </Col>
           <Col md={4}/>
         </Row>

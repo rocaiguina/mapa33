@@ -11,24 +11,29 @@ class MainUsesStep extends React.Component {
       };
   }
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/howmanystructures`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/surveying`);
   }
+
   mostrarinput(e){
     this.setState({
       inputotro1: e.target.checked
     });
   }
 
+  handleOnChange = (checkedValue) => {
+    const { setFieldValue } = this.props.formik;
+    setFieldValue('lands_main_uses', checkedValue);
+  }
+
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -37,24 +42,38 @@ class MainUsesStep extends React.Component {
             <h1>¿Cu&aacute;les son los usos principales actuales de la propiedad?</h1>
           </Col>
           <Col md={8}>
-            <Checkbox.Group style={{ width: '100%' }}>
+            <Checkbox.Group 
+              style={{ width: '100%' }}
+              value={formik.values.lands_main_uses}
+              onChange={this.handleOnChange}
+            >
               <Row>
                 <Col span={24}>
-                  <Checkbox value="A" className="inputprop radiobutton">Residencial</Checkbox>
+                  <Checkbox value="residential" className="inputprop radiobutton">Residencial</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="B" className="inputprop radiobutton">Comercial</Checkbox>
+                  <Checkbox value="commercial" className="inputprop radiobutton">Comercial</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="C" className="inputprop radiobutton">Natural / Bosque</Checkbox>
+                  <Checkbox value="nature_forest" className="inputprop radiobutton">Natural / Bosque</Checkbox>
                 </Col>
                 <Col span={24}>
-                  <Checkbox value="D" id="inputotro1" className="inputprop radiobutton" onChange={this.mostrarinput}>Otros</Checkbox>
+                  <Checkbox value="others" id="inputotro1" className="inputprop radiobutton" onChange={this.mostrarinput}>Otros</Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>
-              {this.state.inputotro1 ? <Input className="inputprop" id="otro1" size="large"/>: null}
-            </Col>
+              {
+                this.state.inputotro1 &&
+                <Input
+                  name="lands_other_main_uses"
+                  className="inputprop"
+                  id="otro1"
+                  size="large"
+                  value={formik.values.lands_other_main_uses}
+                  onChange={formik.handleChange}
+                />
+              }
+          </Col>
           <Col md={4} />
         </Row>
         <Pager

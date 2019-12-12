@@ -4,32 +4,44 @@ import Pager from '../../ui/Pager';
 
 class PhoneOwnerStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/succession`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/catastronumber`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
           <Col md={8}/>
           <Col md={8} style={{paddingLeft:"20px"}}>
-              <h1>¿Telefono del due&ntilde;o (si tiene) (nombre completo) </h1>
+              <h1>¿Telefono del dueño (si tiene) (nombre completo) </h1>
           </Col>
         </Row>
         <Row>
           <Col md={8}/>
           <Col id="propcol1" md={8} >
-              <Input className="inputprop" size="large" placeholder="T:"/>
-              <Input.TextArea className="inputprop" placeholder="N:"/>
+              <Input
+                name="owner_phone"
+                className="inputprop"
+                size="large"
+                placeholder="T:"
+                value={formik.values.owner_phone}
+                onChange={formik.handleChange}
+              />
+              <Input.TextArea
+                name="owner_name"
+                className="inputprop"
+                placeholder="N:"
+                value={formik.values.owner_name}
+                onChange={formik.handleChange}
+              />
           </Col>
         </Row>
         <Pager
