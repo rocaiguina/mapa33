@@ -37,11 +37,6 @@ import MapStep from './steps/MapStep';
 class RegisterWizard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: {},
-      isOwner: false,
-      isProposing: false,
-    };
   }
 
   handleOnSubmit = (values) => {
