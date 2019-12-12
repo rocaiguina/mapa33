@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
-import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import _ from 'lodash';
@@ -16,9 +14,6 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sa
 let map = null;
 let miniMap = null;
 let hoveredStateId = null;
-const Draw = new MapboxDraw({
-    displayControlsDefault: false
-});
 const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     countries: 'us',
@@ -48,7 +43,6 @@ class Editor extends Component {
             error: '',
             activeLoc: false,
             activeSel: true,
-            activeDra: false,
             latitude: 0.0,
             longitude: 0.0
         };
@@ -59,7 +53,8 @@ class Editor extends Component {
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/satellite-streets-v10',
             center: [-66.45, 18.2],
-            zoom: 8.5
+            zoom: 8.5,
+	        attributionControl: false
         });
 
         miniMap = new mapboxgl.Map({
@@ -91,12 +86,27 @@ class Editor extends Component {
                     'source-layer': 'lots',
                     minzoom: 14,
                     paint: {
-                        'fill-color': '#000000',
-                        'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.5, 0.35]
+                        'fill-color': '#FFFFFF',
+                        'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.5, 0.25]
                     }
                 },
                 'waterway-label'
             );
+
+	        map.addLayer(
+		        {
+			        id: 'lots-borders',
+			        type: 'line',
+			        source: 'source',
+			        'source-layer': 'lots',
+			        minzoom: 14,
+			        paint: {
+				        'line-color': '#333333',
+				        'line-width': 1.5
+			        }
+		        },
+		        'waterway-label'
+	        );
 
             map.addLayer(
                 {
@@ -105,22 +115,7 @@ class Editor extends Component {
                     source: 'geojson',
                     paint: {
                         'fill-color': '#E36D9D',
-                        'fill-opacity': 1
-                    }
-                },
-                'waterway-label'
-            );
-
-            map.addLayer(
-                {
-                    id: 'lots-borders',
-                    type: 'line',
-                    source: 'source',
-                    'source-layer': 'lots',
-                    minzoom: 14,
-                    paint: {
-                        'line-color': '#E36D9D',
-                        'line-width': 0.35
+                        'fill-opacity': 0.75
                     }
                 },
                 'waterway-label'
@@ -144,11 +139,6 @@ class Editor extends Component {
                 },
                 'waterway-label'
             );
-
-            map.addControl(Draw);
-            map.on('draw.create', this.updateArea);
-            map.on('draw.delete', this.updateArea);
-            map.on('draw.update', this.updateArea);
         });
 
         miniMap.on('load', () => {
@@ -164,7 +154,7 @@ class Editor extends Component {
                     source: 'geojson',
                     paint: {
                         'fill-color': '#E36D9D',
-                        'fill-opacity': 1
+                        'fill-opacity': 0.75
                     }
                 },
                 'waterway-label'
@@ -191,7 +181,6 @@ class Editor extends Component {
         });
 
         map.on('mousemove', 'lots', e => {
-            if (e.features.length > 0 && this.state.activeSel) {
                 map.getCanvas().style.cursor = 'pointer';
 
                 let html = `<span><b>Catastro:</b> ${e.features[0].properties.catastro || 'No hay número'}</span><br>`;
@@ -208,7 +197,6 @@ class Editor extends Component {
                 }
                 hoveredStateId = e.features[0].id;
                 map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: true });
-            }
         });
 
         map.on('mouseleave', 'lots', () => {
@@ -326,7 +314,6 @@ class Editor extends Component {
     };
 
     trashPolygons = () => {
-        Draw.trash();
         miniMap.getSource('geojson').setData({
             type: 'FeatureCollection',
             features: []
@@ -374,71 +361,6 @@ class Editor extends Component {
         }
     };
 
-    setSel = () => {
-        Draw.trash();
-        this.setState({
-            activeSel: true,
-            activeDra: false
-        });
-    };
-
-    setDra = () => {
-        this.setState({
-            activeSel: false,
-            activeDra: true
-        });
-        Draw.changeMode('draw_polygon');
-    };
-
-    updateArea = () => {
-        const drawings = Draw.getAll();
-
-        if (drawings.features.length > 0) {
-            fetch(`/api/land/intersect`, {
-                method: 'post',
-                body: JSON.stringify({
-                    geom: drawings.features[0].geometry
-                }),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    this.setState({
-                        selection: _.map(data[0].geojson.features, e => {
-                            return e.properties.id;
-                        })
-                    });
-
-                    const selection = this.merge(data[0].geojson);
-                    this.area(selection);
-                    this.getAddress(selection);
-                    const bounds = bbox(selection);
-                    // Fields for database
-                    selection.properties.area = this.state.area;
-                    selection.properties.lots = this.state.selection.length;
-
-                    miniMap.fitBounds(bounds, { padding: 50 });
-                    miniMap.getSource('geojson').setData(selection);
-                    map.getSource('geojson').setData(selection);
-
-                    this.setState({
-                        geojson: selection
-                    });
-
-                    Draw.deleteAll();
-                    Draw.changeMode('draw_polygon');
-                })
-                .catch(error => {
-                    this.setState({
-                        error: error.message
-                    });
-                });
-        }
-    };
-
     render() {
         return (
             <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '100vh', width: '100%' }}>
@@ -460,13 +382,11 @@ class Editor extends Component {
                     <button type="button" onClick={this.setSel} style={this.state.activeSel ? { background: 'orange' } : { background: '#fff' }}>
                         Select
                     </button>
-                    <button type="button" onClick={this.setDra} style={this.state.activeDra ? { background: 'orange' } : { background: '#fff' }}>
-                        Polygon
-                    </button>
                     <button
                         type="button"
                         onClick={() => {
                             const img = miniMap.getCanvas().toDataURL();
+                            console.log(this.state.geojson);
                             console.log(img);
                         }}
                     >

@@ -793,3 +793,9 @@ ul.actions {
     display: none !important;
   }
 }
+
+
+/*MAPBOX HACKS*/
+a.mapboxgl-ctrl-logo {
+    display: none !important;
+}
