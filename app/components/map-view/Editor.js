@@ -181,7 +181,6 @@ class Editor extends Component {
         });
 
         map.on('mousemove', 'lots', e => {
-            if (e.features.length > 0 && this.state.activeSel) {
                 map.getCanvas().style.cursor = 'pointer';
 
                 let html = `<span><b>Catastro:</b> ${e.features[0].properties.catastro || 'No hay número'}</span><br>`;
@@ -198,7 +197,6 @@ class Editor extends Component {
                 }
                 hoveredStateId = e.features[0].id;
                 map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: true });
-            }
         });
 
         map.on('mouseleave', 'lots', () => {
@@ -361,12 +359,6 @@ class Editor extends Component {
             });
             marker.remove();
         }
-    };
-
-    setSel = () => {
-        this.setState({
-            activeSel: true,
-        });
     };
 
     render() {
