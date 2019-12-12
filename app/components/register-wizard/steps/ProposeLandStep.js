@@ -6,8 +6,15 @@ import Pager from '../../ui/Pager';
 class ProposeLandStep extends React.Component {
   
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/location`);
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.want_propose === false) {
+      history.push('/map');  
+    }
+    
+    if (formik.values.want_propose === true) {
+      history.push(`${basename}/location`);
+    }
   }
 
   handleOnPrevious = (event) => {
@@ -16,6 +23,7 @@ class ProposeLandStep extends React.Component {
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -26,9 +34,14 @@ class ProposeLandStep extends React.Component {
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group buttonStyle="solid">
-                <Radio.Button className="inputprop radioprop radiosi form1" value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value="No">No</Radio.Button>
+              <Radio.Group
+                name="want_propose"
+                buttonStyle="solid"
+                value={formik.values.want_propose}
+                onChange={formik.handleChange}
+              >
+                <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
+                <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>
               </Radio.Group>
           </Col>
           <Col md={4}/>

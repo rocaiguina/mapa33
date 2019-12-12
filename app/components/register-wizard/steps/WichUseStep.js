@@ -19,6 +19,10 @@ class WichUseStep extends React.Component {
     if (formik.values.are_u_owner === false) {
       history.push(`${basename}/mainuses`);
     }
+
+    if (formik.values.are_u_owner === null) {
+      history.push(`${basename}/owner`);
+    }
   }
 
   render() {

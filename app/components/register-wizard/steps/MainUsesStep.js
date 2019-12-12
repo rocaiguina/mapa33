@@ -12,13 +12,35 @@ class MainUsesStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/howmanystructures`);
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.are_u_owner === true) {
+      history.push(`${basename}/howmanystructures`);
+    }
+
+    if (formik.values.are_u_owner === false) {
+      history.push(`${basename}/wichuse`);
+    }
+
+    if (formik.values.are_u_owner === null) {
+      history.push(`${basename}/owner`); 
+    }
   }
 
   handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/surveying`);
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.are_u_owner === true) {
+      history.push(`${basename}/surveying`);
+    }
+
+    if (formik.values.are_u_owner === false) {
+      history.push(`${basename}/stateland`);
+    }
+
+    if (formik.values.are_u_owner === null) {
+      history.push(`${basename}/owner`); 
+    }
   }
 
   mostrarinput(e){

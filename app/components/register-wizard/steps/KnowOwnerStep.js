@@ -4,32 +4,43 @@ import Pager from '../../ui/Pager';
 
 class KnowOwnerStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.know_owner === true) {
+      history.push(`${basename}/yesfillform`);
+    }
+
+    if (formik.values.know_owner === false) {
+      history.push(`${basename}/stateland`);
+    }
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/map`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">        
         <Row>
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Conoces al due&ntilde;o(a) del terreno?
+                ¿Conoces al dueño(a) del terreno?
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group defaultValue="Si" buttonStyle="solid">
-                <Radio.Button className="inputprop radioprop radiosi form1" onClick={() => this.sentencia(true)} value="Si">Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" onClick={() => this.sentencia(false)} value="No">No</Radio.Button>
+              <Radio.Group
+                name="know_owner"
+                buttonStyle="solid"
+                value={formik.values.know_owner}
+                onChange={formik.handleChange}
+              >
+                <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
+                <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>
               </Radio.Group>
           </Col>
           <Col md={4}/>

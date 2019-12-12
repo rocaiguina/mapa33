@@ -4,19 +4,18 @@ import Pager from '../../ui/Pager';
 
 class YesFillFormStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/stateland`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/knowowner`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -25,9 +24,30 @@ class YesFillFormStep extends React.Component {
               <h1>Si contesta (si) llene el formulario </h1>
           </Col>
           <Col id="propcol1" md={8} >
-              <Input className="inputprop" size="large" placeholder="Nombre:"/>
-              <Input className="inputprop" size="large" placeholder="Tel:"/>
-              <Input className="inputprop" size="large" placeholder="@:"/>
+              <Input
+                name="owner_name"
+                className="inputprop"
+                size="large"
+                placeholder="Nombre:"
+                value={formik.values.owner_name}
+                onChange={formik.handleChange}
+              />
+              <Input 
+                name="owner_phone"
+                className="inputprop"
+                size="large"
+                placeholder="Tel:"
+                value={formik.values.owner_phone}
+                onChange={formik.handleChange}
+              />
+              <Input 
+                name="owner_email"
+                className="inputprop"
+                size="large"
+                placeholder="@:"
+                value={formik.values.owner_email}
+                onChange={formik.handleChange}
+              />
           </Col>
           <Col md={4}/>
         </Row>

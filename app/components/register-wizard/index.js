@@ -85,6 +85,11 @@ class RegisterWizard extends React.Component {
           first_proposals: '',
           second_proposals: '',
           third_proposals: '',
+
+          want_propose: null,
+          know_owner: null,
+          owner_email: '',
+          land_status: '',
         }}
         onSubmit={this.handleOnSubmit}
       >
@@ -140,22 +145,22 @@ class RegisterWizard extends React.Component {
 
                 {/* NO Owner Flow */}
                 <Route path={`${match.path}/propose`}>
-                  <ProposeLandStep basename={match.path} />
+                  <ProposeLandStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/location`}>
-                  <LocationStep basename={match.path} />
+                  <LocationStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/map`}>
-                  <MapStep basename={match.path} />
+                  <MapStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/knowowner`}>
-                  <KnowOwnerStep basename={match.path} />
+                  <KnowOwnerStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/yesfillform`}>
-                  <YesFillFormStep basename={match.path} />
+                  <YesFillFormStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/stateland`}>
-                  <StateLandStep basename={match.path} />
+                  <StateLandStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/mainuses`}>
                   <MainUsesStep basename={match.path} />
