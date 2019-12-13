@@ -41,7 +41,6 @@ class RegisterWizard extends React.Component {
   }
 
   render () {
-    const { match, history } = this.props;
     return (
       <Formik
         initialValues={{
