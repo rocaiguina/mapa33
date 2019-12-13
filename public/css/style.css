@@ -196,6 +196,9 @@
 .main-content.with-header {
   padding-top: 95px;
 }
+.main-content.with-subheader {
+  padding-top: 115px;
+}
 
 .header-dark {
   background-color: #000;
@@ -270,7 +273,7 @@
 .page-title {
   border-bottom: 1px solid #000;
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .page-title h2 {
   line-height: 1.1em;

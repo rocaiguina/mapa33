@@ -6,37 +6,12 @@ import bbox from '@turf/bbox';
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
 let map = null;
 
-// Cambiar this.state.data por el redux props que tenga el geojson
+// Cambiar this.props.data por el redux props que tenga el geojson
 // Para capturar la imagen: onClick{() => { const img = map.getCanvas().toDataURL();  console.log(img) }
 
 class MiniMap extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			data: {
-				type: 'FeatureCollection',
-				features: [
-					{
-						type: 'Feature',
-						properties: {},
-						geometry: {
-							type: 'Polygon',
-							coordinates: [
-								[
-									[-66.08437299728394, 18.455857514453832],
-									[-66.08741998672485, 18.451807009214097],
-									[-66.08497381210327, 18.44834670293207],
-									[-66.07879400253296, 18.447695343364394],
-									[-66.07722759246826, 18.451277790416675],
-									[-66.07926607131957, 18.454656620855836],
-									[-66.08437299728394, 18.455857514453832]
-								]
-							]
-						}
-					}
-				]
-			}
-		};
 	}
 
 	componentDidMount() {
@@ -53,7 +28,7 @@ class MiniMap extends Component {
 		map.on('load', () => {
 			map.addSource('source', {
 				type: 'geojson',
-				data: this.state.data
+				data: this.props.data
 			});
 
 			map.addLayer(
@@ -88,13 +63,13 @@ class MiniMap extends Component {
 				'waterway-label'
 			);
 
-			const bounds = bbox(this.state.data);
+			const bounds = bbox(this.props.data);
 			map.fitBounds(bounds, { padding: 50 });
 		});
 	}
 
 	render() {
-		return <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '100vh', width: '100%' }} />;
+		return <div ref={el => (this.mapContainer = el)} style={{ marginBottom: '15px', position: 'relative', height: '300px', width: '100%' }} />;
 	}
 }
 

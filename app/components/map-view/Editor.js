@@ -295,6 +295,16 @@ class Editor extends Component {
                 this.setState({
                     geojson: features
                 });
+
+                if (this.props.onSelect) {
+                  var data = {
+                    lands: this.state.selection,
+                    area: this.state.area,
+                    address: this.state.address,
+                    geojson: features
+                  };
+                  this.props.onSelect(data);
+                }
             })
             .catch(error => {
                 this.setState({
@@ -363,7 +373,7 @@ class Editor extends Component {
 
     render() {
         return (
-            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '100vh', width: '100%' }}>
+            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '454px', width: '100%' }}>
                 <div ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
                 <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 350, margin: 10 }}>
                     <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
