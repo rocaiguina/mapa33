@@ -74,20 +74,12 @@ class LandController {
         res.status(400).send(err);
       });
   }
-    
+
   store (req, res, next) {
     var data = req.body;
     const validationSchema = {
-      name:                 Joi.string().required(),
-      level:                Joi.string().required(),
-      status:               Joi.string().required(),
-      geom:                 Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
-      location:             Joi.string().required(),
-      entity:               Joi.string().required(),
-      use_type:             Joi.string().required(),
-      acquisition_type:     Joi.string().required(),
-      year_acquisition:     Joi.number().integer().required(),
-      reason_conservation:  Joi.string().required()
+      metadata:     Joi.object().required(),
+      geom:         Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
     };
 
     // Validata data.
@@ -103,16 +95,17 @@ class LandController {
     // Save new land.
     Land
       .create({
-        name:                  cleaned_data.name,
-        level:                 cleaned_data.level,
-        status:                cleaned_data.status,
+        name:                  'undefined',
+        level:                 'undefined',
+        status:                'web',
         geom:                  cleaned_data.geom,
-        location:              cleaned_data.location,
-        entity:                cleaned_data.entity,
-        use_type:              cleaned_data.use_type,
-        acquisition_type:      cleaned_data.acquisition_type,
-        year_acquisition:      cleaned_data.year_acquisition,
-        reason_conservation:   cleaned_data.reason_conservation
+        metadata:              cleaned_data.metadata,
+        location:              '',
+        entity:                '',
+        use_type:              '',
+        acquisition_type:      '',
+        year_acquisition:      '',
+        reason_conservation:   ''
       })
       .then(function (land) {
         res.json(land.get({plain: true}));
@@ -124,6 +117,56 @@ class LandController {
         next();
       });
   }
+    
+  // store (req, res, next) {
+  //   var data = req.body;
+  //   const validationSchema = {
+  //     name:                 Joi.string().required(),
+  //     level:                Joi.string().required(),
+  //     status:               Joi.string().required(),
+  //     geom:                 Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
+  //     location:             Joi.string().required(),
+  //     entity:               Joi.string().required(),
+  //     use_type:             Joi.string().required(),
+  //     acquisition_type:     Joi.string().required(),
+  //     year_acquisition:     Joi.number().integer().required(),
+  //     reason_conservation:  Joi.string().required()
+  //   };
+
+  //   // Validata data.
+  //   const result = Joi.validate(data, validationSchema);
+
+  //   if (result.error) {
+  //     res.status(400).send(result.error);
+  //     return next();
+  //   }
+
+  //   const cleaned_data = result.value;
+    
+  //   // Save new land.
+  //   Land
+  //     .create({
+  //       name:                  cleaned_data.name,
+  //       level:                 cleaned_data.level,
+  //       status:                cleaned_data.status,
+  //       geom:                  cleaned_data.geom,
+  //       location:              cleaned_data.location,
+  //       entity:                cleaned_data.entity,
+  //       use_type:              cleaned_data.use_type,
+  //       acquisition_type:      cleaned_data.acquisition_type,
+  //       year_acquisition:      cleaned_data.year_acquisition,
+  //       reason_conservation:   cleaned_data.reason_conservation
+  //     })
+  //     .then(function (land) {
+  //       res.json(land.get({plain: true}));
+  //     })
+  //     .catch(function (err) {
+  //       res.status(400).send(err);
+  //     })
+  //     .finally(function () {
+  //       next();
+  //     });
+  // }
 
   update (req, res, next) {
     var data = req.body;
