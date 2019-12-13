@@ -3,7 +3,7 @@ import { Col, Input, Row } from 'antd';
 import Button from '../../ui/Button';
 import Joyride from 'react-joyride';
 class PruebaTour extends React.Component {
-
+/* Se hicieron cambios en nombres de Tooltips de joyride, ademas de colores, y la función de close se integro en la de skip, lo más probable es que se pierda-*/
   handleOnSubmit = (event) => {
     this.props.wizard.next();
   }
