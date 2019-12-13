@@ -6,7 +6,7 @@ class CatastroNumberStep extends React.Component {
   
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/phoneowner`);
+    history.push(`${basename}/owner-phone`);
   }
 
   handleOnPrevious = (event) => {

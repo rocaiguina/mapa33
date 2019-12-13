@@ -12,13 +12,13 @@ class KnowOwnerStep extends React.Component {
     }
 
     if (formik.values.know_owner === false) {
-      history.push(`${basename}/stateland`);
+      history.push(`${basename}/mainuses`);
     }
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/map`);
+    history.push(`${basename}/owner`);
   }
 
   render() {

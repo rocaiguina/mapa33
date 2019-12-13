@@ -12,13 +12,13 @@ class AreYouOwnerStep extends React.Component {
     }
 
     if (formik.values.are_u_owner === false) {
-      history.push(`${basename}/propose`);
+      history.push(`${basename}/knowowner`);
     }
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}`);
+    history.push(`${basename}/propose`);
   }
 
   render() {

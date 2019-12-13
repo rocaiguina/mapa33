@@ -18,7 +18,7 @@ class ProblemLandStep extends React.Component {
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/succession`);
+    history.push(`${basename}/inheritance-agree`);
   }
 
   mostrarinput(e){

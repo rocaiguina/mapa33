@@ -6,7 +6,7 @@ class MortgageStep extends React.Component {
 
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/document`);
+    history.push(`${basename}/surveying`);
   }
 
   handleOnPrevious = (event) => {

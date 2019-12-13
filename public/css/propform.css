@@ -152,15 +152,15 @@
 .blockstyleradio span span{
   border-color: black !important;
   border-width: 2px !important;
-  height: 44px !important;
-  width: 65px !important;
+  height: 36px !important;
+  width: 48px !important;
   border-radius: 25px !important;
 }
 .blockstyleradio span .ant-radio-inner::after{
   top: 2px !important;
   left: 2px !important;
-  width: 57px !important;
-  height: 36px !important;
+  width: 40px !important;
+  height: 28px !important;
   background-color: #008ac9 !important;
   border-radius: 19px !important;
 }

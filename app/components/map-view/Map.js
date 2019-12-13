@@ -154,7 +154,7 @@ class Map extends Component {
     render() {
         return (
             <div>
-                <div ref={el => (this.mapContainer = el)} style={{ height: '440px', width: '100%', marginBottom: '20px' }} />
+                <div ref={el => (this.mapContainer = el)} style={{ height: '50vh', width: '100%', marginBottom: '20px' }} />
                 <div className="toolbar hidden-sm hidden-xs">
                     <ul>
                         <li>

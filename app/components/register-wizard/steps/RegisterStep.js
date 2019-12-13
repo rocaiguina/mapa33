@@ -6,7 +6,7 @@ class RegisterStep extends React.Component {
 
   handleOnSubmit = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/owner`);
+    history.push(`${basename}/propose`);
   }
 
   render() {

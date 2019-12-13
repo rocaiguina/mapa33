@@ -11,7 +11,7 @@ class SurveyingStep extends React.Component {
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/document`);
+    history.push(`${basename}/mortgage`);
   }
 
   render() {

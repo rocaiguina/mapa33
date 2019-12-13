@@ -6,12 +6,12 @@ class ContaminationStep extends React.Component {
 
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/wichuse`);
+    history.push(`${basename}/importanceofknowing`);
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/historicuses`);
+    history.push(`${basename}/mainattributes`);
   }
 
   render() {

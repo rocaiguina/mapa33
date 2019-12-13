@@ -12,19 +12,8 @@ class MainUsesStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-
-    if (formik.values.are_u_owner === true) {
-      history.push(`${basename}/howmanystructures`);
-    }
-
-    if (formik.values.are_u_owner === false) {
-      history.push(`${basename}/wichuse`);
-    }
-
-    if (formik.values.are_u_owner === null) {
-      history.push(`${basename}/owner`); 
-    }
+    const { basename, history } = this.props;
+    history.push(`${basename}/howmanystructures`);
   }
 
   handleOnPrevious = (event) => {
@@ -34,8 +23,10 @@ class MainUsesStep extends React.Component {
       history.push(`${basename}/surveying`);
     }
 
-    if (formik.values.are_u_owner === false) {
-      history.push(`${basename}/stateland`);
+    if (formik.values.are_u_owner === false && formik.values.know_owner === true) {
+      history.push(`${basename}/yesfillform`);
+    } else {
+      history.push(`${basename}/knowowner`);
     }
 
     if (formik.values.are_u_owner === null) {
@@ -61,7 +52,7 @@ class MainUsesStep extends React.Component {
         <Row>
           <Col md={4}/>
           <Col md={8}>
-            <h1>¿Cu&aacute;les son los usos principales actuales de la propiedad?</h1>
+            <h1>¿Cuáles son los usos principales actuales de la propiedad?</h1>
           </Col>
           <Col md={8}>
             <Checkbox.Group 

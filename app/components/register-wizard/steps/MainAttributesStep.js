@@ -13,7 +13,7 @@ class MainAttributesStep extends React.Component {
 
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/historicuses`);
+    history.push(`${basename}/contamination`);
   }
 
   handleOnPrevious = (event) => {

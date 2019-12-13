@@ -51,7 +51,7 @@ class MapContainer extends React.Component {
   render () {
     return (
       <BaseLayout dark
-        footerRightComponent={<Button size="xlarge" type="secondary" onClick={this.handleOnAddProposal}><Icon type="plus"/></Button>}>
+        footerRightComponent={<Button className="m33-btn ant-btn-xlg" type="secondary" onClick={this.handleOnAddProposal}><Icon type="plus"/></Button>}>
         <MapView data={this.state.maplist}/>
       </BaseLayout>
     );

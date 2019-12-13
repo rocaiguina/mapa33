@@ -8,18 +8,18 @@ class ProposeLandStep extends React.Component {
   handleOnNext = (event) => {
     const { basename, history, formik } = this.props;
 
-    if (formik.values.want_propose === false) {
-      history.push('/map');  
-    }
-    
     if (formik.values.want_propose === true) {
-      history.push(`${basename}/location`);
+      history.push(`${basename}/map`);
+    }
+
+    if (formik.values.want_propose === false) {
+      history.push('/map');
     }
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/owner`);
+    history.push(`${basename}`);
   }
 
   render() {

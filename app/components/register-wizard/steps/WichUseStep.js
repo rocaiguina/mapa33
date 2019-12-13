@@ -1,28 +1,17 @@
 import React from 'react';
-import { Col, Row, Input } from 'antd';
+import { Col, Radio, Row } from 'antd';
 import Pager from '../../ui/Pager';
 
 class WichUseStep extends React.Component {
 
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/valueplace`);
+    history.push(`${basename}/submit`);
   }
 
   handleOnPrevious = (event) => {
-    const { basename, history, formik } = this.props;
-
-    if (formik.values.are_u_owner === true) {
-      history.push(`${basename}/contamination`);
-    }
-
-    if (formik.values.are_u_owner === false) {
-      history.push(`${basename}/mainuses`);
-    }
-
-    if (formik.values.are_u_owner === null) {
-      history.push(`${basename}/owner`);
-    }
+    const { basename, history } = this.props;
+    history.push(`${basename}/importanceofknowing`);
   }
 
   render() {
@@ -30,18 +19,46 @@ class WichUseStep extends React.Component {
     return (
       <div className="m-t-20">
         <Row>
-          <Col md={4}/>
-          <Col md={8} style={{paddingLeft:"20px"}}>
-              <h1>¿Cuál uso le darías al terreno?</h1>
-              <h1>Explica brevemente</h1>
+          <Col md={12}>
+            <h1>
+              ¿Cuál uso le darías al terreno?
+            </h1>
           </Col>
-          <Col md={8} >
-            <Input.TextArea
-              name="wich_use"
-              className="inputprop"
-              value={formik.values.wich_use}
-              onChange={formik.handleChange}
-            />
+          <Col md={12} style={{textAlign:"left"}}>
+              <Radio.Group
+                name="wich_use"
+                value={formik.values.wich_use}
+                onChange={formik.handleChange}
+              >
+                <div style={{display:"flex"}}>
+                  <Radio value="scientist_research" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Investigación Científica</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="environment_monitoring" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Monitoreo Ambiental</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="spirit_uses" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Usos espirituales</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="educational" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Educación</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="recreation" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Recreación</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="turism" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Turismo</h3></div>
+                </div>
+                <div style={{display:"flex", marginTop:"15px"}}>
+                  <Radio value="sustainable_uses" className="blockstyleradio" ></Radio>
+                  <div><h3 style={{ lineHeight: '32px' }}>Usos sostenibles</h3></div>
+                </div>
+              </Radio.Group>
           </Col>
           <Col md={4}/>
         </Row>

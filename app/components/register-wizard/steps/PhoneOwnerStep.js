@@ -6,12 +6,12 @@ class PhoneOwnerStep extends React.Component {
 
   handleOnNext = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/succession`);
+    history.push(`${basename}/inheritance`);
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
-    history.push(`${basename}/catastronumber`);
+    history.push(`${basename}/catastro-number`);
   }
 
   render() {
