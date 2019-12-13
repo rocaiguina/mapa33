@@ -30,6 +30,7 @@ import FirstProposalsStep from './steps/FirstProposalsStep';
 import SecondProposalsStep from './steps/SecondProposalsStep';
 import ThirdProposalsStep from './steps/ThirdProposalsStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
+import PruebaTourStep from './steps/PruebaTour';
 
 import MapStep from './steps/MapStep';
 
@@ -47,7 +48,7 @@ class RegisterWizard extends React.Component {
     return (
       <Wizard>
         <Steps>
-          <Step id="register" render={(wizard) => (<RegisterStep wizard={wizard}/>)} />
+          <Step id="register" render={(wizard) => (<PruebaTourStep wizard={wizard}/>)} />
           <Step id="owner" render={(wizard) => (<AreYouOwnerStep wizard={wizard}/>)}/>
           <Step id="propose" render={(wizard) => (<ProposeLandStep wizard={wizard}/>)} />
           <Step id="location" render={(wizard) => (<LocationStep wizard={wizard}/>)} />
