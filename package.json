@@ -80,7 +80,8 @@
     "sequelize": "4.8.4",
     "sequelize-cli": "5.5.1",
     "sequelize-paginate": "1.1.6",
-    "sequelize-version": "0.0.58"
+    "sequelize-version": "0.0.58",
+    "lodash": "latest"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",

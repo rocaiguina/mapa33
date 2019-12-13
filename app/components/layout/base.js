@@ -10,18 +10,19 @@ class BaseLayout extends Component {
       'main-dark': this.props.dark
     });
     const contentClass = ClassNames('main-content', {
-      'with-header': this.props.header
+      'with-header': this.props.header,
+      'with-subheader': this.props.subheader
     });
 
     return (
       <div className={layoutClass}>
-        { this.props.header && <Header>{this.props.header}</Header> }
+        { this.props.header && <Header>{this.props.header}{this.props.subheader}</Header> }
         <div className={contentClass}>
           <div className="container">
             { this.props.children }
           </div>
         </div>
-        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent}/>
+        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent} xs={this.props.footerXs}/>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import { Formik } from 'formik';
+import Step from './Step';
 import RegisterStep from './steps/RegisterStep';
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
 import ProposeLandStep from './steps/ProposeLandStep';
@@ -44,6 +45,10 @@ class RegisterWizard extends React.Component {
 
   handleOnSubmit = (values) => {
     console.log(values);
+  }
+
+  handleOnClose = (e) => {
+    this.props.history.push('/map');
   }
 
   render () {
@@ -87,6 +92,7 @@ class RegisterWizard extends React.Component {
           know_owner: null,
           owner_email: '',
           land_status: '',
+          geojson: null,
         }}
         onSubmit={this.handleOnSubmit}
       >
@@ -95,96 +101,203 @@ class RegisterWizard extends React.Component {
             <form onSubmit={formik.handleSubmit}>
               <Switch>
                 <Route exact path={match.path}>
-                  <RegisterStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<RegisterStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/owner`}>
-                  <AreYouOwnerStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<AreYouOwnerStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
 
                 {/* Owner Flow */}
                 <Route path={`${match.path}/catastronumber`}>
-                  <CatastroNumberStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<CatastroNumberStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/phoneowner`}>
-                  <PhoneOwnerStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<PhoneOwnerStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/succession`}>
-                  <OwnerSuccessionStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<OwnerSuccessionStep basename={match.path} history={history} formik={formik} />}
+                  />
                 </Route>
                 <Route path={`${match.path}/problem`}>
-                  <ProblemLandStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ProblemLandStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/mortgage`}>
-                  <MortgageStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<MortgageStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/document`}>
-                  <DocumentStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<DocumentStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/surveying`}>
-                  <SurveyingStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<SurveyingStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/mainuses`}>
-                  <MainUsesStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<MainUsesStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/howmanystructures`}>
-                  <HowManyStructuresStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<HowManyStructuresStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/mainattributes`}>
-                  <MainAttributesStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<MainAttributesStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/historicuses`}>
-                  <HistoricUsesStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<HistoricUsesStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/contamination`}>
-                  <ContaminationStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ContaminationStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 {/* End Owner Flow */}
 
                 {/* NO Owner Flow */}
                 <Route path={`${match.path}/propose`}>
-                  <ProposeLandStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ProposeLandStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/location`}>
-                  <LocationStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<LocationStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/map`}>
                   <MapStep basename={match.path} history={history} formik={formik} />
                 </Route>
                 <Route path={`${match.path}/knowowner`}>
-                  <KnowOwnerStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<KnowOwnerStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/yesfillform`}>
-                  <YesFillFormStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<YesFillFormStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/stateland`}>
-                  <StateLandStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<StateLandStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/mainuses`}>
-                  <MainUsesStep basename={match.path} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<MainUsesStep basename={match.path} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 {/* End NO Owner Flow */}
 
                 {/* Common steps */}
                 <Route path={`${match.path}/wichuse`}>
-                  <WichUseStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<WichUseStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                  <Route path={`${match.path}/valueplace`}>
-                  <ValuePlaceStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ValuePlaceStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/importanceofknowing`}>
-                  <ImportanceOfKnowingStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ImportanceOfKnowingStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/firstproposals`}>
-                  <FirstProposalsStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<FirstProposalsStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/secondproposals`}>
-                  <SecondProposalsStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<SecondProposalsStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/thirdproposals`}>
-                  <ThirdProposalsStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<ThirdProposalsStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
                 <Route path={`${match.path}/submit`}>
-                  <SubmitStep basename={match.path} history={history} formik={formik} />
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    component={<SubmitStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
                 </Route>
               </Switch>
             </form>

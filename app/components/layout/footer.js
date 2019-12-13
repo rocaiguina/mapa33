@@ -10,21 +10,23 @@ class Footer extends Component {
       'footer-dark': this.props.dark
     });
 
+    const xs = this.props.xs || [16, 0, 8];
+
     return (
       <footer className={footerClass}>
         <div className="container">
           <Row gutter={0}>
-            <Col md={8} xs={16}>
+            <Col md={8} xs={xs[0]}>
               <div className="first-column">
                 <img src={'/images/' + logo} className="img-responsive" />
               </div>
             </Col>
-            <Col md={12} xs={0}>
+            <Col md={12} xs={xs[1]}>
               <div className="second-column">
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore</p>
               </div>
             </Col>
-            <Col md={4} xs={8}>
+            <Col md={4} xs={xs[2]}>
               <div className="third-column">
                 { this.props.rightComponent ?
                   this.props.rightComponent :
