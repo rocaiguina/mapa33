@@ -4,35 +4,45 @@ import Pager from '../../ui/Pager';
 
 class StateLandStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/mainuses`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history, formik } = this.props;
+
+    if (formik.values.know_owner === true) {
+      history.push(`${basename}/yesfillform`);
+    } else {
+      history.push(`${basename}/knowowner`);
+    }
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿En qu&eacute; estado se encuentra el terreno?
+                ¿En qué estado se encuentra el terreno?
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
-              <Radio.Group defaultValue="Si" buttonStyle="solid" size="large">
+              <Radio.Group
+                name="land_status"
+                buttonStyle="solid"
+                size="large"
+                value={formik.values.land_status}
+                onChange={formik.handleChange}
+              >
                 <Col md={24}>
-                  <Radio.Button className="inputprop radiobutton" value="Si">Abandono</Radio.Button>
+                  <Radio.Button className="inputprop radiobutton" value="abandoned">Abandono</Radio.Button>
                 </Col>
                 <Col md={24}>
-                  <Radio.Button className="inputprop radiobutton" value="No">Recibe Mantenimiento</Radio.Button>
+                  <Radio.Button className="inputprop radiobutton" value="maintenance">Recibe Mantenimiento</Radio.Button>
                 </Col>
               </Radio.Group>
           </Col>

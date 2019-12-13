@@ -11,7 +11,7 @@ export default () => (
   <Router>
     <Switch>
       <Route path="/map" component={MapContainer} />
-      <Route path="/register" component={RegisterContainer} />
+      <Route path="/register" exact={false} component={RegisterContainer} />
       <Route path="/" component={IntroContainer} />
     </Switch>
   </Router>

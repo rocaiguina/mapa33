@@ -5,11 +5,13 @@ import Pager from '../../ui/Pager';
 class LocationStep extends React.Component {
 
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/map`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/propose`);
   }
 
   render() {

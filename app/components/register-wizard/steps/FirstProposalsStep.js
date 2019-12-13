@@ -5,14 +5,17 @@ import Pager from '../../ui/Pager';
 class FirstProposalsStep extends React.Component {
 
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/secondproposals`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/importanceofknowing`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -23,14 +26,18 @@ class FirstProposalsStep extends React.Component {
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"left"}}>
-              <Radio.Group defaultValue="Si">
+              <Radio.Group
+                name="first_proposals"
+                value={formik.values.first_proposals}
+                onChange={formik.handleChange}
+              >
                 <div style={{display:"flex"}}>
-                  <Radio value="Si" className="blockstyleradio" ></Radio>
-                  <div><h3>Grupos de vecinos#1.<br/>Proponemos que utop&iacute;a se mantenga cerrada al público con el fin de preservar sus cualidades y belleza natural.</h3></div>
+                  <Radio value="group1" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#1.<br/>Proponemos que Utopía se mantenga cerrada al público con el fin de preservar sus cualidades y belleza natural.</h3></div>
                 </div>
                 <div style={{display:"flex", marginTop:"30px"}}>
-                  <Radio value="No" className="blockstyleradio" ></Radio>
-                  <div><h3>Grupos de vecinos#2.<br/>Proponemos que utop&iacute;a sea visitada por personas para fines de recreación y aprender sobre el medio ambiente.</h3></div>
+                  <Radio value="group2" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#2.<br/>Proponemos que utopía sea visitada por personas para fines de recreación y aprender sobre el medio ambiente.</h3></div>
                 </div>
             </Radio.Group>
           </Col>

@@ -5,14 +5,17 @@ import Pager from '../../ui/Pager';
 class SecondProposalsStep extends React.Component {
 
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/thirdproposals`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/firstproposals`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -23,14 +26,18 @@ class SecondProposalsStep extends React.Component {
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"left"}}>
-              <Radio.Group defaultValue="Si">
+              <Radio.Group
+                name="second_proposals"
+                value={formik.values.second_proposals}
+                onChange={formik.handleChange}
+              >
                 <div style={{display:"flex"}}>
-                  <Radio value="Si" className="blockstyleradio" ></Radio>
-                  <div><h3>Grupos de vecinos#3.<br/>Proponemos que utop&iacute;a se mantenga cerrada como una reserva biol&oacute;gica y que conserve su nombre actual pues ah&iacute; se capta la conexi&oacute;n simb&oacute;lica entre la montaña y la comunidad.</h3></div>
+                  <Radio value="group3" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#3.<br/>Proponemos que utopía se mantenga cerrada como una reserva biológica y que conserve su nombre actual pues ahí se capta la conexión simbólica entre la montaña y la comunidad.</h3></div>
                 </div>
                 <div style={{display:"flex", marginTop:"30px"}}>
-                  <Radio value="No" className="blockstyleradio" ></Radio>
-                  <div><h3>Grupos de vecinos#4.<br/>Proponemos esperar hasta que utop&iacute;a se recupere del huracas con la opci&oacute;n de dar acceso en el futuro a personas de bajos recursos de nuestra comunidad para que puedan recolectar frutos del bosque y plantas medicinales, y madera para combustible o construcci&oacute;.</h3></div>
+                  <Radio value="group4" className="blockstyleradio" ></Radio>
+                  <div><h3>Grupos de vecinos#4.<br/>Proponemos esperar hasta que utopía se recupere del huracas con la opción de dar acceso en el futuro a personas de bajos recursos de nuestra comunidad para que puedan recolectar frutos del bosque y plantas medicinales, y madera para combustible o construcció.</h3></div>
                 </div>
               </Radio.Group>
           </Col>

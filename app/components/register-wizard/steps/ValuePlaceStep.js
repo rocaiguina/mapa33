@@ -5,32 +5,39 @@ import Pager from '../../ui/Pager';
 class ValuePlaceStep extends React.Component {
 
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/importanceofknowing`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/wichuse`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">        
         <Row>
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
               <h1>
-                ¿Qu&eacute; valor tiene ese lugar?
+                ¿Qué valor tiene ese lugar?
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"left"}}>
-              <Radio.Group defaultValue="Si">
+              <Radio.Group
+                name="value_place"
+                value={formik.values.value_place}
+                onChange={formik.handleChange}
+              >
                 <div style={{display:"flex"}}>
-                  <Radio value="Si" className="blockstyleradio" ></Radio>
-                  <div><h3>Tiene derecho a existir, independencia de su valor de m&iacute;.</h3></div>
+                  <Radio value="existence" className="blockstyleradio" ></Radio>
+                  <div><h3>Tiene derecho a existir, independiente de su valor para mí.</h3></div>
                 </div>
                 <div style={{display:"flex", marginTop:"30px"}}>
-                  <Radio value="No" className="blockstyleradio" ></Radio>
-                  <div><h3>Valoro sus recursos aunque nunca llegue a usuarios.</h3></div>
+                  <Radio value="resources" className="blockstyleradio" ></Radio>
+                  <div><h3>Valoro sus recursos aunque nunca llegue a usarlos.</h3></div>
                 </div>
               </Radio.Group>
           </Col>

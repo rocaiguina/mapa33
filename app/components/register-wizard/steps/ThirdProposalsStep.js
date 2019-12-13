@@ -4,19 +4,18 @@ import Pager from '../../ui/Pager';
 
 class ThirdProposalsStep extends React.Component {
 
-  handleOnChange = (event) => {
-    this.props.wizard.next();
-  }
-
   handleOnNext = (event) => {
-    this.props.wizard.next();
+    const { basename, history } = this.props;
+    history.push(`${basename}/submit`);
   }
 
   handleOnPrevious = (event) => {
-    this.props.wizard.previous();
+    const { basename, history } = this.props;
+    history.push(`${basename}/secondproposals`);
   }
 
   render() {
+    const { formik } = this.props;
     return (
       <div className="m-t-20">
         <Row>
@@ -27,14 +26,18 @@ class ThirdProposalsStep extends React.Component {
               </h1>
           </Col>
           <Col md={8} style={{textAlign:"left"}}>
-              <Radio.Group defaultValue="Si">
+              <Radio.Group
+                name="third_proposals"
+                value={formik.values.third_proposals}
+                onChange={formik.handleChange}
+              >
                 <div style={{display:"flex"}}>
-                  <Radio className="blockstyleradio" value="Si"></Radio>
-                  <div><h3>Grupos de vecinos#5.<br/>Proponemos preservar utop&iacute;a como un santuario natural cerrado al p&uacute;blico para conservar sus cualidades an&iacute;micas y conexi&oacute;n con el planeta.</h3></div>
+                  <Radio className="blockstyleradio" value="group5"></Radio>
+                  <div><h3>Grupos de vecinos#5.<br/>Proponemos preservar utopía como un santuario natural cerrado al público para conservar sus cualidades anímicas y conexión con el planeta.</h3></div>
                 </div>
                 <div style={{display:"flex", marginTop:"30px"}}>
-                  <Radio className="blockstyleradio" value="No"></Radio>
-                  <div><h3>Grupos de vecinos#6.<br/>Proponemos que utop&iacute;a se mantenga abierta para el beneficio uso y disfrute econ&oacute;mico, social y cultural de toda la comunidad.</h3></div>
+                  <Radio className="blockstyleradio" value="group6"></Radio>
+                  <div><h3>Grupos de vecinos#6.<br/>Proponemos que utopía se mantenga abierta para el beneficio uso y disfrute económico, social y cultural de toda la comunidad.</h3></div>
                 </div>
               </Radio.Group>
           </Col>
