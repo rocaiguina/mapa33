@@ -33,7 +33,7 @@ class RegisterWizard extends React.Component {
   }
 
   handleOnSubmit = (values) => {
-    console.log(values);
+    this.props.onSubmit(values);
   }
 
   handleOnClose = (e) => {
@@ -41,6 +41,7 @@ class RegisterWizard extends React.Component {
   }
 
   render () {
+    const { match, history } = this.props;
     return (
       <Formik
         initialValues={{

@@ -28,7 +28,7 @@ class MapStep extends React.Component {
   handleOnSubmit = (e) => {
     const { basename, history, formik } = this.props;
     if (formik.values.geojson) {
-      history.push(`${basename}/knowowner`);
+      history.push(`${basename}/owner`);
     }
   }
 

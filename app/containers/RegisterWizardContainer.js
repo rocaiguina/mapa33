@@ -6,9 +6,18 @@ import RegisterWizard from '../components/register-wizard';
 
 class WizardContainer extends React.Component {
 
+  handleOnSubmit = (data) => {
+    const { history } = this.props;
+    setTimeout(function () {
+      history.push('/register/success');
+    }, 1000);
+  }
+
   render () {
     return (
-      <RegisterWizard/>
+      <RegisterWizard
+        onSubmit={this.handleOnSubmit}
+      />
     );
   }
 }
