@@ -9,6 +9,7 @@ import union from '@turf/union';
 import clone from '@turf/clone';
 import area from '@turf/area';
 import centroid from '@turf/centroid';
+import Button from '../ui/Button';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
 let map = null;
@@ -373,8 +374,27 @@ class Editor extends Component {
 
     render() {
         return (
-            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '454px', width: '100%' }}>
+            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '420px', width: '100%' }}>
                 <div ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
+
+                <div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
+                  <ul>
+                    <li>
+                      <Button onClick={this.trashPolygons}>Trash</Button>
+                    </li>
+                    <li>
+                      <Button onClick={this.setLoc}>My Location</Button>
+                    </li>
+                    <li>
+                      <Button onClick={this.setLoc} onClick={() => { map.setZoom(map.getZoom() + 0.5);}}>+</Button>
+                    </li>
+                    <li>
+                      <Button onClick={this.setLoc} onClick={() => { map.setZoom(map.getZoom() - 0.5);}}>-</Button>
+                    </li>
+                  </ul>
+                </div>
+                <div ref={el => (this.miniMapContainer = el)} style={{ height: 250, display: 'none' }} />
+                {/*
                 <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 350, margin: 10 }}>
                     <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
                     <div>
@@ -392,7 +412,7 @@ class Editor extends Component {
                     <button type="button" onClick={this.setSel} style={this.state.activeSel ? { background: 'orange' } : { background: '#fff' }}>
                         Select
                     </button>
-                    <button
+                      <button
                         type="button"
                         onClick={() => {
                             const img = miniMap.getCanvas().toDataURL();
@@ -419,6 +439,7 @@ class Editor extends Component {
                         Zoom Out
                     </button>
                 </div>
+                */}
             </div>
         );
     }

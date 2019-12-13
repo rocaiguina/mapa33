@@ -8,7 +8,7 @@ class AreYouOwnerStep extends React.Component {
     const { basename, history, formik } = this.props;
 
     if (formik.values.are_u_owner === true) {
-      history.push(`${basename}/catastronumber`);
+      history.push(`${basename}/catastro-number`);
     }
 
     if (formik.values.are_u_owner === false) {
