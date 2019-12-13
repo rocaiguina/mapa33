@@ -376,8 +376,9 @@ class Editor extends Component {
         return (
             <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '420px', width: '100%' }}>
                 <div ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
-
-                <div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
+                {
+                  /*
+                    <div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
                   <ul>
                     <li>
                       <Button onClick={this.trashPolygons}>Trash</Button>
@@ -394,7 +395,8 @@ class Editor extends Component {
                   </ul>
                 </div>
                 <div ref={el => (this.miniMapContainer = el)} style={{ height: 250, display: 'none' }} />
-                {/*
+                  */
+                }
                 <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 350, margin: 10 }}>
                     <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
                     <div>
@@ -439,7 +441,6 @@ class Editor extends Component {
                         Zoom Out
                     </button>
                 </div>
-                */}
             </div>
         );
     }
