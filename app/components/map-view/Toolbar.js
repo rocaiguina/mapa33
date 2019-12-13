@@ -1,21 +1,33 @@
 import React from 'react';
-import { Popover, Radio } from 'antd';
+import { Popover, Radio, Col, Row } from 'antd';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
 
 class MapToolBar extends React.Component {
   render () {
     const RadioMapView = (
-      <Radio.Group onChange={this.props.onChangeMapView} value={this.props.mapView}>
-        <Radio value="list">List View</Radio>
-        <Radio value="map">Map View</Radio>
+      <Radio.Group onChange={this.props.onChangeMapView} value={this.props.mapView}
+        size="large"
+        className="popeditblack">
+        <Row>
+          <Radio value="list">List View</Radio>
+        </Row>
+        <Row>
+          <Radio value="map">Map View</Radio>
+        </Row>
       </Radio.Group>
     );
 
     const RadioAreaView = (
-      <Radio.Group onChange={this.props.onChangeAreaView} value={this.props.areaView}>
-        <Radio value="lots">Areas Naturales Propuestas</Radio>
-        <Radio value="protected_areas">Areas Naturales Protegidas</Radio>
+      <Radio.Group onChange={this.props.onChangeAreaView} value={this.props.areaView}
+        className="popeditblack"
+        size="large">
+        <Row>
+          <Radio value="lots">Areas Naturales Propuestas</Radio>
+        </Row>
+        <Row>
+          <Radio value="protected_areas">Areas Naturales Protegidas</Radio>
+        </Row>
       </Radio.Group>
     );
 
