@@ -390,7 +390,7 @@ ul.actions {
 
 /* Slick map slider */
 .slick-slider-maplist .slick-slide .ant-card {
-  margin: 30px 10px;
+  margin: 15px 10px;
   transition: all .3s ease;
 }
 
@@ -399,8 +399,8 @@ ul.actions {
 }
 
 .slick-slider-paginator {
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -579,7 +579,7 @@ ul.actions {
     padding: 16px 30px;
   }
   .toolbar {
-    margin: 0 -5px 20px -5px;
+    margin: 0 -5px 15px -5px;
   }
   .toolbar-menu {
     bottom: 0;

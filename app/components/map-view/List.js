@@ -35,7 +35,7 @@ class ListView extends React.Component {
       infinite: true,
       arrows: false,
       slidesToShow: 3,
-      centerPadding: '60px',
+      centerPadding: '120px',
       responsive: [
         {
           breakpoint: 576,
@@ -72,7 +72,7 @@ class ListView extends React.Component {
                     )
                   }
                   bordered={false}
-                  cover={<img src="https://dummyimage.com/300x300/dddddd/ffffff"/>}
+                  cover={<img src="https://dummyimage.com/300x168/dddddd/ffffff"/>}
                   actions={[
                     <div className="text-left"><AntIcon type="heart" key="heart" /> 10,999</div>,
                     <div className="text-right"><AntIcon type="share-alt" key="share-alt" /></div>
