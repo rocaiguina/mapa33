@@ -4,7 +4,8 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import Step from './Step';
 import RegisterStep from './steps/RegisterStep';
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
@@ -75,6 +76,26 @@ class RegisterWizard extends React.Component {
           owner_email: '',
           geojson: null,
         }}
+        validationSchema={Yup.object().shape({
+            u_name: Yup.string()
+                .required('Nombre(s) requerido(s)'),
+            u_lastname: Yup.string()
+                .required('Apellido(s) requerido(s)'),
+            u_username: Yup.string()
+                .required('Nombre de usuario requerido'),
+            u_email: Yup.string()
+                .email('Correo inválido')
+                .required('Correo requerido'),
+            u_password: Yup.string()
+                .min(6, 'Debe tener más de 6 carácteres')
+                .required('Contraseña requerida'),
+            u_zip:  Yup.string()
+                .required('CodeZip requerido'),
+            catastro_number: Yup.string()
+                .required('Número de Catastro requerido'),
+            owner_name: Yup.string(),
+            owner_phone: Yup.string(),
+        })}
         onSubmit={this.handleOnSubmit}
       >
         {
