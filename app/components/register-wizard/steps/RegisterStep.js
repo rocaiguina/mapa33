@@ -11,20 +11,20 @@ class RegisterStep extends React.Component {
   }
   renderSwitch(param, errors, initialValues) {
     if(param == initialValues){
-      return <Button type="secondary" size="large" block disabled >Someter vacío</Button>;
+      return <Button type="secondary" size="large" block disabled >Someter</Button>;
     }else if (errors){
       if (errors.u_name) {
-        return <Button type="secondary" size="large" block disabled >Someter uname </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       }else if (errors.u_lastname) {
-        return <Button type="secondary" size="large" block disabled >Someter lastname </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       } else if (errors.u_email) {
-        return <Button type="secondary" size="large" block disabled >Someter email </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       }else if (errors.u_username) {
-        return <Button type="secondary" size="large" block disabled >Someter username </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       }else if (errors.u_zip) {
-        return <Button type="secondary" size="large" block disabled >Someter zipcode </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       }else if (errors.u_password) {
-        return <Button type="secondary" size="large" block disabled >Someter password </Button>;
+        return <Button type="secondary" size="large" block disabled >Someter</Button>;
       }else{
         return <Button type="secondary" size="large" block onClick={this.handleOnSubmit}>Someter</Button>;
       }
@@ -44,6 +44,7 @@ class RegisterStep extends React.Component {
           <Row>
               <Col md={4}/>
               <Col id="propcol1" md={8} >
+                <span>
                   <Input
                     name="u_name"
                     className="inputprop"
@@ -53,6 +54,7 @@ class RegisterStep extends React.Component {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.u_name ? <div>{formik.errors.u_name}</div> : null}
+                </span>
                   <Input
                     name="u_lastname"
                     className="inputprop"
@@ -61,7 +63,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_lastname}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.u_lastname ? <div>{formik.errors.u_lastname}</div> : null}
+                {formik.errors.u_lastname ? <label>{formik.errors.u_lastname}</label> : null}
                   <Input
                     name="u_username"
                     className="inputprop"
@@ -70,9 +72,10 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_username}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.u_username ? <div>{formik.errors.u_username}</div> : null}
+                {formik.errors.u_username ? <label>{formik.errors.u_username}</label> : null}
               </Col>
               <Col id="propcol2" md={8} >
+                <span>
                   <Input
                     name="u_password"
                     className="inputprop"
@@ -82,7 +85,9 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_password}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.u_password ? <div>{formik.errors.u_password}</div> : null}
+                {formik.errors.u_password ? <label>{formik.errors.u_password}</label> : null}
+                </span>
+                <span>
                   <Input
                     name="u_email"
                     className="inputprop"
@@ -91,7 +96,8 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_email}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.u_email ? <div>{formik.errors.u_email}</div> : null}
+                  {formik.errors.u_email ? <label>{formik.errors.u_email}</label> : null}
+                </span>
                   <Input
                     name="u_zip"
                     className="inputprop"
@@ -100,7 +106,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_zip}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.u_zip ? <div>{formik.errors.u_zip}</div> : null}
+                {formik.errors.u_zip ? <label>{formik.errors.u_zip}</label> : null}
               </Col>
               <Col md={4}/>
           </Row>

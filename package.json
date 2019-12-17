@@ -34,6 +34,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@hapi/joi": "^16.1.8",
     "@mapbox/mapbox-gl-draw": "1.1.2",
     "@mapbox/mapbox-gl-geocoder": "^4.5.0",
     "@turf/area": "^6.0.1",
@@ -56,6 +57,7 @@
     "express-session": "1.17.0",
     "formik": "^1.5.8",
     "joi": "14.3.1",
+    "lodash": "latest",
     "mapbox-gl": "1.5.0",
     "nodemailer": "^6.3.1",
     "nodemailer-mailgun-transport": "^1.4.0",
@@ -70,6 +72,7 @@
     "react": "^16.12.0",
     "react-dom": "16.3.2",
     "react-full-page": "^0.1.7",
+    "react-joyride": "^2.1.1",
     "react-redux": "5.0.4",
     "react-router-dom": "4.1.1",
     "react-slick": "^0.25.2",
@@ -81,7 +84,7 @@
     "sequelize-cli": "5.5.1",
     "sequelize-paginate": "1.1.6",
     "sequelize-version": "0.0.58",
-    "lodash": "latest"
+    "yup": "^0.28.0"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",
