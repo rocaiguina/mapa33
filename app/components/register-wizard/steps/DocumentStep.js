@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class DocumentStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/surveying`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.has_documents != null){
+      history.push(`${basename}/surveying`);
+    }
   }
 
   handleOnPrevious = (event) => {

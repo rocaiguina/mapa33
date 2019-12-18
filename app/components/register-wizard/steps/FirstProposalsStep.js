@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class FirstProposalsStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/secondproposals`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.first_proposals != null){
+      history.push(`${basename}/secondproposals`);
+    }
   }
 
   handleOnPrevious = (event) => {

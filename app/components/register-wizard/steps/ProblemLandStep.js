@@ -12,8 +12,19 @@ class ProblemLandStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/mortgage`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.lands_problem.length > 0){
+      var found = formik.values.lands_problem.find(function(element) {
+        return element == "others";
+      });
+      if(found == "others"){
+        if(formik.values.lands_other_problem != null){
+          history.push(`${basename}/mortgage`);
+        }
+      }else{
+        history.push(`${basename}/mortgage`);
+      }
+    }
   }
 
   handleOnPrevious = (event) => {

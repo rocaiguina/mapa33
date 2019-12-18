@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class SurveyingStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/mainuses`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.has_surveying != null){
+      history.push(`${basename}/mainuses`);
+    }
   }
 
   handleOnPrevious = (event) => {

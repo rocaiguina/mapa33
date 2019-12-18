@@ -12,8 +12,20 @@ class MainUsesStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/howmanystructures`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.lands_main_uses.length > 0){
+      var found = formik.values.lands_main_uses.find(function(element) {
+        return element == "others";
+      });
+      if(found == "others"){
+        if(formik.values.lands_other_main_uses != null){
+          history.push(`${basename}/howmanystructures`);
+        }
+      }else{
+        history.push(`${basename}/howmanystructures`);
+      }
+    }
+
   }
 
   handleOnPrevious = (event) => {
@@ -30,7 +42,7 @@ class MainUsesStep extends React.Component {
     }
 
     if (formik.values.are_u_owner === null) {
-      history.push(`${basename}/owner`); 
+      history.push(`${basename}/owner`);
     }
   }
 
@@ -55,7 +67,7 @@ class MainUsesStep extends React.Component {
             <h1>¿Cuáles son los usos principales actuales de la propiedad?</h1>
           </Col>
           <Col md={8}>
-            <Checkbox.Group 
+            <Checkbox.Group
               style={{ width: '100%' }}
               value={formik.values.lands_main_uses}
               onChange={this.handleOnChange}

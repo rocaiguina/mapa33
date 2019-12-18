@@ -12,8 +12,19 @@ class HistoricUsesStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/contamination`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.lands_historic_uses.length > 0){
+      var found = formik.values.lands_historic_uses.find(function(element) {
+        return element == "others";
+      });
+      if(found == "others"){
+        if(formik.values.lands_other_historic_uses != null){
+          history.push(`${basename}/contamination`);
+        }
+      }else{
+        history.push(`${basename}/contamination`);
+      }
+    }
   }
 
   handleOnPrevious = (event) => {

@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class ImportanceOfKnowingStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/wichuse`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.importance_of_knowing != null){
+      history.push(`${basename}/wichuse`);
+    }
   }
 
   handleOnPrevious = (event) => {

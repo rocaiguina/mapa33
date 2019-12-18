@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class InheritanceLandStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/inheritance-agree`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.inheritance_land != null){
+      history.push(`${basename}/inheritance-agree`);
+    }
   }
 
   handleOnPrevious = (event) => {

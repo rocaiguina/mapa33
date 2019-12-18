@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class StateLandStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/mainuses`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.land_status != null){
+      history.push(`${basename}/mainuses`);
+    }
   }
 
   handleOnPrevious = (event) => {

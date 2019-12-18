@@ -12,8 +12,10 @@ class HowManyStructuresStep extends React.Component {
   }
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/mainattributes`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.lands_structures != formik.initialValues.lands_structures){
+      history.push(`${basename}/mainattributes`);
+    }
   }
 
   handleOnPrevious = (event) => {

@@ -5,13 +5,24 @@ import Pager from '../../ui/Pager';
 class YesFillFormStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/stateland`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.owner_name && formik.values.owner_email && formik.values.owner_phone){
+      if(!formik.errors.owner_email){
+        history.push(`${basename}/stateland`);
+      }
+    }
   }
 
   handleOnPrevious = (event) => {
     const { basename, history } = this.props;
     history.push(`${basename}/knowowner`);
+  }
+
+  requiredform(){
+    const { formik } = this.props;
+    if(!formik.values.owner_name || !formik.values.owner_email || !formik.values.owner_phone){
+      return <label class="mensajerror">Rellene todos los espacios</label>;
+    }
   }
 
   render() {
@@ -24,6 +35,7 @@ class YesFillFormStep extends React.Component {
               <h1>Si contesta (si) llene el formulario </h1>
           </Col>
           <Col id="propcol1" md={8} >
+              {formik.errors.owner_name ? <label class="mensajerror">{formik.errors.owner_name}</label> : null}
               <Input
                 name="owner_name"
                 className="inputprop"
@@ -32,7 +44,8 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_name}
                 onChange={formik.handleChange}
               />
-              <Input 
+              {formik.errors.owner_phone ? <label class="mensajerror">{formik.errors.owner_phone}</label> : null}
+              <Input
                 name="owner_phone"
                 className="inputprop"
                 size="large"
@@ -40,7 +53,8 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_phone}
                 onChange={formik.handleChange}
               />
-              <Input 
+              {formik.errors.owner_email ? <label class="mensajerror">{formik.errors.owner_email}</label> : null}
+              <Input
                 name="owner_email"
                 className="inputprop"
                 size="large"
@@ -48,6 +62,7 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_email}
                 onChange={formik.handleChange}
               />
+            {this.requiredform()}
           </Col>
           <Col md={4}/>
         </Row>

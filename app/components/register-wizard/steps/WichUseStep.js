@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class WichUseStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/submit`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.wich_use != null){
+      history.push(`${basename}/submit`);
+    }
   }
 
   handleOnPrevious = (event) => {

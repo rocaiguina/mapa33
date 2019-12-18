@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class ContaminationStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/importanceofknowing`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.has_contamination != null){
+      history.push(`${basename}/importanceofknowing`);
+    }
   }
 
   handleOnPrevious = (event) => {

@@ -95,6 +95,8 @@ class RegisterWizard extends React.Component {
                 .required('Número de Catastro requerido'),
             owner_name: Yup.string(),
             owner_phone: Yup.string(),
+            owner_email: Yup.string()
+                .email('Correo inválido'),
         })}
         onSubmit={this.handleOnSubmit}
       >

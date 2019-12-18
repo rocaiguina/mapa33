@@ -5,8 +5,10 @@ import Pager from '../../ui/Pager';
 class ValuePlaceStep extends React.Component {
 
   handleOnNext = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/importanceofknowing`);
+    const { basename, history, formik } = this.props;
+    if(formik.values.value_place != null){
+      history.push(`${basename}/importanceofknowing`);
+    }
   }
 
   handleOnPrevious = (event) => {
@@ -17,7 +19,7 @@ class ValuePlaceStep extends React.Component {
   render() {
     const { formik } = this.props;
     return (
-      <div className="m-t-20">        
+      <div className="m-t-20">
         <Row>
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
