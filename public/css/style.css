@@ -1,9 +1,30 @@
+@font-face {
+  font-family: 'Whyte';
+  src: url('../fonts/whyte-book.woff2') format('woff2'), url('../fonts/whyte-book.woff') format('woff'), url('../fonts/whyte-book.ttf') format('truetype'), url('../fonts/whyte-book.svg') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Whyte';
+  src: url('../fonts/whyte-bold.woff2') format('woff2'), url('../fonts/whyte-bold.woff') format('woff'), url('../fonts/whyte-bold.ttf') format('truetype'), url('../fonts/whyte-bold.svg') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
 /*!
  * Bootstrap Grid v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+body {
+  font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.42857143 !important;
+  color: #333333;
+  background-color: #fff;
+}
 
 .container {
   width: 100%;
@@ -317,6 +338,10 @@ ul.actions {
 }
 
 .intro-text h1 {
+  font-size: 40px;
+}
+
+.intro-text h1 {
   color: #fff;
 }
 
@@ -335,6 +360,7 @@ ul.actions {
 }
 .map-legend h2 {
   border-bottom: 1px dotted transparent;
+  font-size: 14px;
 }
 
 .map-legend dl {
@@ -349,6 +375,7 @@ ul.actions {
 
 .map-legend dd {
   margin-left: 35px;
+  line-height: 1.2;
 }
 
 .map-legend h2 {
@@ -388,6 +415,20 @@ ul.actions {
   text-align: center;
 }
 
+.toolbar .ant-btn.m33-btn {
+  border-radius: 18px;
+  height: 36px;
+  font-size: 26px;
+  padding: 0 10px;
+}
+
+.toolbar .ant-btn-background-ghost.m33-btn:hover,
+.toolbar .ant-btn-background-ghost.m33-btn:focus {
+  background-color: #fff !important;
+  border-color: #fff;
+  color: #000;
+}
+
 /* Slick map slider */
 .slick-slider-maplist .slick-slide .ant-card {
   margin: 15px 10px;
@@ -406,19 +447,22 @@ ul.actions {
 
 /* Land cards */
 .land-card .ant-card-meta-title {
-  font-size: 18px;
+  font-size: 20px;
 }
 .land-card .ant-card-meta-description {
   font-size: 14px;
 }
+.land-card .ant-card-body {
+  padding: 15px;
+}
 .land-card .ant-card-actions {
   border-top: none;
-  border-bottom: 8px solid transparent;
+  border-bottom: 8px solid transparent; 
 }
 
 .land-card .ant-card-actions > li {
   margin-top: 0px;
-  padding: 0 24px;
+  padding: 0 15px;
 }
 
 .land-card .ant-card-actions > li > span {
@@ -453,20 +497,30 @@ ul.actions {
 }
 
 /* Custom buttons */
+.m33-btn-bordered {
+  display: inline-block;
+  padding: 4px;
+  border: 2px dotted #fff;
+}
+.m33-btn-bordered-lg {
+  border-radius: 38px;
+}
 .m33-btn.ant-btn {
   border-radius: 20px;
+  height: 34px;
+  font-size: 14px;
 }
 
 .m33-btn.ant-btn-lg {
-  height: 50px;
-  padding: 0 18px;
-  font-size: 20px;
-  border-radius: 22px;
+  height: 48px;
+  padding: 0 22px;
+  font-size: 22px;
+  border-radius: 24px;
 }
 
 .m33-btn.ant-btn-xlg {
-  height: 64px;
-  padding: 0 24px;
+  height: 56px;
+  padding: 0 22px;
   font-size: 30px;
   border-radius: 30px;
 }
@@ -489,6 +543,13 @@ ul.actions {
   border-color: #222;
 }
 
+.m33-btn.ant-btn-secondary:hover,
+.m33-btn.ant-btn-secondary:focus {
+  background-color: #fff;
+  border-color: #fff;
+  color: #f073a8;
+}
+
 .m33-btn.ant-btn-background-ghost.ant-btn-primary {
   color: #fff;
   border-color: #fff;
@@ -499,6 +560,11 @@ ul.actions {
   background: #fff !important;
   border-color: #fff;
   color: #000;
+}
+
+.ant-card.ant-card-intro {
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 /* Cards theme */

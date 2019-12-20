@@ -14,7 +14,7 @@ export default (props) => {
         </div>
         <Row>
           <Col lg={{ span: 6, offset: 9 }}>
-            <Card className="ant-card-round ant-card-green">
+            <Card className="ant-card-intro ant-card-round ant-card-green">
               <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
                 ut laoreet dolore magna aliquam erat volutpat. Ut wisi.
@@ -25,7 +25,7 @@ export default (props) => {
               </p>
               <br/>
               <div className="text-center">
-                <Button type="primary" onClick={props.onExploreMap}>EXPLORA EL MAPA <i className="m33-icon m33-icon-arrow-right"></i></Button>
+                <Button type="primary" onClick={props.onExploreMap}>EXPLORA EL MAPA <Icon type="arrow-right"/></Button>
               </div>
             </Card>
           </Col>

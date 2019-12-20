@@ -35,18 +35,20 @@ class ListView extends React.Component {
       infinite: true,
       arrows: false,
       slidesToShow: 3,
-      centerPadding: '120px',
+      centerPadding: '90px',
       responsive: [
         {
-          breakpoint: 576,
+          breakpoint: 780,
           settings: {
-            slidesToShow: 1
+            slidesToShow: 1,
+            centerPadding: '40px'
           }
         },
         {
-          breakpoint: 768,
+          breakpoint: 480,
           settings: {
-            slidesToShow: 2
+            slidesToShow: 1,
+            centerPadding: '20px',
           }
         }
       ]
@@ -72,7 +74,7 @@ class ListView extends React.Component {
                     )
                   }
                   bordered={false}
-                  cover={<img src="https://dummyimage.com/300x168/dddddd/ffffff"/>}
+                  cover={<img src="https://dummyimage.com/300x200/dddddd/ffffff"/>}
                   actions={[
                     <div className="text-left"><AntIcon type="heart" key="heart" /> 10,999</div>,
                     <div className="text-right"><AntIcon type="share-alt" key="share-alt" /></div>

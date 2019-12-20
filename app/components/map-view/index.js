@@ -8,7 +8,7 @@ class MapView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      mapView: 'map',                     // map, list
+      mapView: 'list',                     // map, list
       areaView: 'protected_areas',        // protected_areas, lots
     }
   }

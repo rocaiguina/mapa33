@@ -23,10 +23,10 @@ class MapToolBar extends React.Component {
         className="popeditblack"
         size="large">
         <Row>
-          <Radio value="lots">Areas Naturales Propuestas</Radio>
+          <Radio value="lots">Areas Naturales<br/>Propuestas</Radio>
         </Row>
         <Row>
-          <Radio value="protected_areas">Areas Naturales Protegidas</Radio>
+          <Radio value="protected_areas">Areas Naturales<br/>Protegidas</Radio>
         </Row>
       </Radio.Group>
     );
@@ -35,19 +35,19 @@ class MapToolBar extends React.Component {
       <div className="toolbar toolbar-menu">
         <ul>
           <li>
-            <Button size="large" ghost><Icon type="menu" /></Button>
+            <Button ghost><Icon type="menu" /></Button>
           </li>
           <li>
-            <Button size="large" ghost><Icon type="user" /></Button>
+            <Button ghost><Icon type="user" /></Button>
           </li>
           <li>
             <Popover content={RadioMapView} trigger="click" className="m33-btn">
-              <Button size="large" ghost><Icon type="eye" /></Button>
+              <Button ghost><Icon type="eye" /></Button>
             </Popover>
           </li>
           <li>
             <Popover content={RadioAreaView} trigger="click" className="m33-btn">
-              <Button size="large" ghost><Icon type="layers" /></Button>
+              <Button ghost><Icon type="layers" /></Button>
             </Popover>
           </li>
         </ul>

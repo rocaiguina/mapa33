@@ -5,10 +5,16 @@ import ClassNames from 'classnames';
 export default function (props) {
   const buttonclass = ClassNames({
     'm33-btn': true,
-    'ant-btn-xlg': props.size == 'xlarge',
+  });
+
+  const buttonWrapperClass = ClassNames({
+    'm33-btn-bordered': props.bordered ? true : false,
+    'm33-btn-bordered-lg': props.size == 'large',
   });
 
   return (
-    <Button className={buttonclass} {...props}>{props.children}</Button>
+    <div className={buttonWrapperClass}>
+      <Button className={buttonclass} {...props}>{props.children}</Button>
+    </div>
   )
 }
