@@ -16,7 +16,7 @@ class BaseLayout extends Component {
 
     return (
       <div className={layoutClass}>
-        { this.props.header && <Header>{this.props.header}{this.props.subheader}</Header> }
+        { this.props.header && <Header dark={this.props.darkHeader}>{this.props.header}{this.props.subheader}</Header> }
         <div className={contentClass}>
           <div className="container">
             { this.props.children }
