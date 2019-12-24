@@ -7,6 +7,7 @@
     padding: 20px;
     padding-top: 0px;
   }
+
 }
 
 @media (min-width: 768px) {
@@ -34,6 +35,13 @@
   #propcol2{
     padding: 20px;
   }
+  /*button[data-test-id="button-skip"]{
+    position: absolute !important;
+    top: -185% !important;
+    left: 288% !important;
+    background-color: red !important;
+  }*/
+
 }
 
 .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow{
@@ -223,8 +231,38 @@
   height: 28px !important;
   background-color: #008ac9 !important;
   border-radius: 19px !important;
+  tes
 }
 .mensajerror{
   color: red;
   font-weight: bold;
+}
+.react-joyride__tooltip{
+  width: 210px !important;
+  padding: 10px !important;
+  padding-bottom: 0px;
+}
+.react-joyride__tooltip div div{
+  padding: 0px !important;
+}
+.react-joyride__tooltip div:nth-child(2) {
+  padding: 0px !important;
+  margin-top: 0px !important;
+}
+button[data-test-id="button-close"]{
+  display: none;
+}
+button[data-test-id="button-primary"]{
+  background-color: white !important;
+  color: #4b95ce !important;
+  padding: 4px !important;
+  font-weight: lighter !important;
+  font-size: 14px !important;
+}
+
+.ant-btn-background-blackstep{
+  background-color: black !important;
+  color: white !important;
+  border-radius: 15px !important;
+  border: 1px white solid !important;
 }

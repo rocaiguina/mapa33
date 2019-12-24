@@ -4,12 +4,53 @@ import BaseLayout from '../../layout/base';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 import MapEditor from '../../map-view/Editor';
+import Joyride,{ ACTIONS, EVENTS, STATUS } from 'react-joyride';
 
 class MapStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lands: []
+      run: true,
+      lands: [],
+      names: {
+        next: 'Siguiente',
+        last: 'Siguiente'
+      },
+      steps: [
+        {
+          target: '.selectbtn',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Selecciona la parcela haciendo tap o click</h5></div>,
+          disableBeacon: "false",
+          placement: "top",
+        },
+        {
+          target: '.subirbtn',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Dibuja un polígono con tu mouse o dedo (móvil)</h5></div>,
+          placement: "top",
+        },
+        {
+          target: '.trashbtn',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
+          placement: "top",
+        },
+        {
+          target: '.MyLocationbtn',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Encuentra tu posición exacta en el mapa</h5></div>,
+          placement: "top",
+        },
+        {
+          target: '.searchinput',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
+          placement: "bottomh5",
+        },
+        {
+          target: '.submitbtn',
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Cuando tengas tu terreno seleccionado pulsa aquí para someter</h5></div>,
+          placement: "top",
+        },
+      ],
+      stepIndex: 0,
+      stepIndex2: 1,
     };
   }
 
@@ -32,12 +73,52 @@ class MapStep extends React.Component {
     }
   }
 
+  handleOnCloseTutorial = (e) => {
+
+    this.setState({
+      isRunning: false
+    });
+  }
+
+  handleJoyrideCallback = data => {
+   const { action, index, status, type } = data;
+
+   if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+     // Update state to advance the tour
+     this.setState({ stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) });
+     if(index < 5){
+       this.setState({ stepIndex2: index+1 + (action === ACTIONS.PREV ? -1 : 1) });
+     }
+   }
+   else if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+     // Need to set our running state to false, so we can restart if we click start again.
+     this.setState({ run: false });
+   }
+
+   console.groupCollapsed(type);
+   console.log(data); //eslint-disable-line no-console
+   console.groupEnd();
+ };
+
   render() {
     const footerXs = [14, 0, 10];
+    const { steps, run, stepIndex, stepIndex2, names} = this.state;
+
     return (
       <BaseLayout
         header={
           <div className="page-title">
+            <Joyride
+                callback={this.handleJoyrideCallback}
+                steps={steps}
+                stepIndex={stepIndex}
+                run={this.state.run}
+                locale={names}
+                continuous={true}
+                disableOverlayClose={true}
+                hideBackButton={true}
+                spotlightPadding={0}
+              />
             <h2>ESCOGE TU<br/>TERRENO/PROPUESTA</h2>
             <ul className="actions">
               <li>
@@ -49,20 +130,22 @@ class MapStep extends React.Component {
         subheader={
           <div className="page-subtitle">
             <h5>{this.state.lands.length} Parcelas escogidas</h5>
+            {this.state.run? <Button className="ant-btn m33-btn submitbtn ant-btn-secondary ant-btn-lg" onClick={this.handleOnCloseTutorial}>Cerrar</Button> : null}
+            {this.state.run? <h1>Step {this.state.stepIndex2}/6</h1> : null}
           </div>
         }
         footerXs={footerXs}
         footerRightComponent={
           <Button
             size="large"
-            className="m33-btn ant-btn-xlg"
-            style={{ fontSize: '16px' }}
+            className="m33-btn ant-btn-xlg submitbtn"
+            style={{ fontSize: '16px',borderRadius:"15px !important" }}
             type="secondary"
             onClick={this.handleOnSubmit}
-            block
-          >Submit</Button>
-        }
-      >
+            block>
+            Submit
+          </Button>
+        }>
         <div className="m33-wizard">
           <div className="m33-wizard-vcenter">
             <MapEditor onSelect={this.handleOnSelect}/>

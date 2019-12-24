@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ui/Button';
 import { withRouter } from 'react-router';
 import {
   Switch,
@@ -27,6 +28,7 @@ import SubmitStep from './steps/SubmitStep';
 import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
 import MapStep from './steps/MapStep';
+import PruebaTour from './steps/PruebaTour';
 
 class RegisterWizard extends React.Component {
   constructor(props) {
@@ -107,13 +109,31 @@ class RegisterWizard extends React.Component {
                 <Route exact path={match.path}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={
+                      <Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      1/30
+                    </Button>}
                     component={<RegisterStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
+
                   />
                 </Route>
                 <Route path={`${match.path}/propose`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      2/30
+                    </Button>}
                     component={<ProposeLandStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -124,6 +144,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/owner`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      4/30
+                    </Button>}
                     component={<AreYouOwnerStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -134,6 +162,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/catastro-number`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      5/30
+                    </Button>}
                     component={<CatastroNumberStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -141,6 +177,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/owner-phone`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      6/30
+                    </Button>}
                     component={<PhoneOwnerStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -148,18 +192,42 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/inheritance`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      7/30
+                    </Button>}
                     component={<InheritanceLandStep basename={match.path} history={history} formik={formik} />}
                   />
                 </Route>
                 <Route path={`${match.path}/inheritance-agree`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      8/30
+                    </Button>}
                     component={<InheritanceAgreeStep basename={match.path} history={history} formik={formik} />}
                   />
                 </Route>
                 <Route path={`${match.path}/problem`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      9/30
+                    </Button>}
                     component={<ProblemLandStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -167,6 +235,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/mortgage`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      10/30
+                    </Button>}
                     component={<MortgageStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -174,6 +250,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/surveying`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      11/30
+                    </Button>}
                     component={<SurveyingStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -185,6 +269,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/knowowner`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      5/30
+                    </Button>}
                     component={<KnowOwnerStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -192,6 +284,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/yesfillform`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      6/30
+                    </Button>}
                     component={<YesFillFormStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -202,6 +302,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/mainuses`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      7/30
+                    </Button>}
                     component={<MainUsesStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -209,6 +317,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/howmanystructures`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      8/30
+                    </Button>}
                     component={<HowManyStructuresStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -216,6 +332,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/mainattributes`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      9/30
+                    </Button>}
                     component={<MainAttributesStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -223,6 +347,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/contamination`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      10/30
+                    </Button>}
                     component={<ContaminationStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -230,6 +362,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/importanceofknowing`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      Survey
+                    </Button>}
                     component={<ImportanceOfKnowingStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -237,6 +377,14 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/wichuse`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                      Survey
+                    </Button>}
                     component={<WichUseStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
@@ -244,6 +392,13 @@ class RegisterWizard extends React.Component {
                 <Route path={`${match.path}/submit`}>
                   <Step
                     title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={<Button
+                      size="large"
+                      className="ant-btn m33-btn ant-btn-lg ant-btn-background-blackstep"
+                      style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                      type="secondary"
+                      block>
+                    </Button>}
                     component={<SubmitStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />

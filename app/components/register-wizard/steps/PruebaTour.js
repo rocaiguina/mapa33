@@ -2,47 +2,57 @@ import React from 'react';
 import { Col, Input, Row } from 'antd';
 import Button from '../../ui/Button';
 import Joyride from 'react-joyride';
+
 class PruebaTour extends React.Component {
 /* Se hicieron cambios en nombres de Tooltips de joyride, ademas de colores, y la función de close se integro en la de skip, lo más probable es que se pierda-*/
   handleOnSubmit = (event) => {
     this.props.wizard.next();
   }
+  constructor(props) {
+      super(props);
+      this.state = {
+        steps: [
+          {
+            target: '.nombre',
+            content: 'This is my awesome feature!',
+            placementBeacon: "top",
+            disableBeacon: "false"
+          },
+          {
+            target: '.apellido',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+          {
+            target: '.usuario',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+          {
+            target: '.password',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+          {
+            target: '.email',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+          {
+            target: '.zipcode',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+          {
+            target: '.eso',
+            content: 'This another awesome feature!',
+            placementBeacon: "top",
+          },
+        ],
+      };
+  }
 
-  state = {
-    steps: [
-      {
-        target: '.nombre',
-        content: 'This is my awesome feature!',
-        placementBeacon: "top",
-        disableBeacon: "false"
-      },
-      {
-        target: '.apellido',
-        content: 'This another awesome feature!',
-        placementBeacon: "top",
-      },
-      {
-        target: '.usuario',
-        content: 'This another awesome feature!',
-        placementBeacon: "top",
-      },
-      {
-        target: '.password',
-        content: 'This another awesome feature!',
-        placementBeacon: "top",
-      },
-      {
-        target: '.email',
-        content: 'This another awesome feature!',
-        placementBeacon: "top",
-      },
-      {
-        target: '.zipcode',
-        content: 'This another awesome feature!',
-        placementBeacon: "top",
-      },
-    ]
-  };
+
 
   render() {
     const { steps } = this.state;
@@ -84,7 +94,7 @@ class PruebaTour extends React.Component {
           <br/>
           <Row>
               <Col lg={{ span: 6, offset: 9 }}>
-                  <Button type="secondary" size="large" block onClick={this.handleOnSubmit}>Someter</Button>
+                  <Button style={{borderRadius:"25px"}} className="eso" type="secondary" size="large" block onClick={this.handleOnSubmit}>Someter</Button>
               </Col>
           </Row>
       </div>

@@ -45,7 +45,9 @@ class Editor extends Component {
             activeLoc: false,
             activeSel: true,
             latitude: 0.0,
-            longitude: 0.0
+            longitude: 0.0,
+
+
         };
     }
 
@@ -375,16 +377,16 @@ class Editor extends Component {
     render() {
         return (
             <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '420px', width: '100%' }}>
-                <div ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
-                {
-                  /*
-                    <div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
+
+                <div className="searchinput" ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
+
+                    {/*<div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
                   <ul>
                     <li>
-                      <Button onClick={this.trashPolygons}>Trash</Button>
+                      <Button className="trashbtn" onClick={this.trashPolygons}>Trash</Button>
                     </li>
                     <li>
-                      <Button onClick={this.setLoc}>My Location</Button>
+                      <Button className="MyLocationbtn" onClick={this.setLoc}>My Location</Button>
                     </li>
                     <li>
                       <Button onClick={this.setLoc} onClick={() => { map.setZoom(map.getZoom() + 0.5);}}>+</Button>
@@ -395,9 +397,10 @@ class Editor extends Component {
                   </ul>
                 </div>
                 <div ref={el => (this.miniMapContainer = el)} style={{ height: 250, display: 'none' }} />
-                  */
-                }
+                */}
                 <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 350, margin: 10 }}>
+
+
                     <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
                     <div>
                         Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
@@ -405,41 +408,40 @@ class Editor extends Component {
                     <div>Cerca de: {this.state.address}</div>
                     <div ref={el => (this.miniMapContainer = el)} style={{ height: 250 }} />
                     {this.state.error && this.state.error}
-                    <button type="button" onClick={this.trashPolygons}>
+
+                    <Button className="trashbtn" type="button" onClick={this.trashPolygons}>
                         Trash
-                    </button>
-                    <button type="button" onClick={this.setLoc} style={this.state.activeLoc ? { background: 'orange' } : { background: '#fff' }}>
+                    </Button>
+                    <Button className="MyLocationbtn" type="button" onClick={this.setLoc} style={this.state.activeLoc ? { background: 'orange' } : { background: '#fff' }}>
                         My Location
-                    </button>
-                    <button type="button" onClick={this.setSel} style={this.state.activeSel ? { background: 'orange' } : { background: '#fff' }}>
+                    </Button>
+                    <Button className="selectbtn" type="button" onClick={this.setSel} style={this.state.activeSel ? { background: 'orange' } : { background: '#fff' }}>
                         Select
-                    </button>
-                      <button
-                        type="button"
-                        onClick={() => {
+                    </Button>
+                    <Button className="subirbtn" type="button"  onClick={() => {
                             const img = miniMap.getCanvas().toDataURL();
                             console.log(this.state.geojson);
                             console.log(img);
                         }}
                     >
                         Submit
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="button"
                         onClick={() => {
                             map.setZoom(map.getZoom() + 0.5);
                         }}
                     >
                         Zoom In
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="button"
                         onClick={() => {
                             map.setZoom(map.getZoom() - 0.5);
                         }}
                     >
                         Zoom Out
-                    </button>
+                    </Button>
                 </div>
             </div>
         );
