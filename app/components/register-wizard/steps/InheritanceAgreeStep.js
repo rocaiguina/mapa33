@@ -23,7 +23,7 @@ class InheritanceAgreeStep extends React.Component {
         <Row>
           <Col md={4}/>
           <Col md={8} style={{textAlign:"center",marginLeft:"auto", marginRight:"auto"}}>
-            <h1>¿Todos los miembros están de acuerdo?</h1>
+            <h1>¿Todos los herederos están de acuerdo?</h1>
           </Col>
           <Col md={8} style={{textAlign:"center",marginLeft:"auto", marginRight:"auto"}}>
             <Radio.Group

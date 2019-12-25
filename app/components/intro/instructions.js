@@ -16,12 +16,10 @@ export default (props) => {
           <Col lg={{ span: 6, offset: 9 }}>
             <Card className="ant-card-intro ant-card-round ant-card-green">
               <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                ut laoreet dolore magna aliquam erat volutpat. Ut wisi.
+              Si tu propuesta recibe suficiente apoyo, te daremos todas las herramientas para que comiences tu iniciativa. También puedes formar parte del proyecto apoyando las propuestas que te gustan, compartiendolas, y escribiendo en la parte de los comentarios.
               </p>
               <p>
-                Lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit
-                in vulputate velit.
+              Tu participación nos ayuda a escribir una nueva historia para la naturaleza, compartiendo cómo ella forma parte de la tuya.
               </p>
               <br/>
               <div className="text-center">

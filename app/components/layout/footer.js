@@ -23,7 +23,7 @@ class Footer extends Component {
             </Col>
             <Col md={12} xs={xs[1]}>
               <div className="second-column">
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore</p>
+                <p>Nuestra meta es proteger el 33% de las islas de Puerto Rico para el 2033. Ayúdanos a hacer historia.</p>
               </div>
             </Col>
             <Col md={4} xs={xs[2]}>

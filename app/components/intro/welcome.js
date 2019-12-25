@@ -4,7 +4,7 @@ export default (props) => {
   return (
     <div className="intro">
       <div className="intro-text">
-        <h1>BIENVENIDO</h1>
+        <h1>¡HOLA!</h1>
       </div>
     </div>
   );

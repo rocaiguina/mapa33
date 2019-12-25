@@ -31,9 +31,6 @@ class YesFillFormStep extends React.Component {
       <div className="m-t-20">
         <Row>
           <Col md={4}/>
-          <Col md={8} style={{paddingLeft:"20px"}}>
-              <h1>Si contesta (si) llene el formulario </h1>
-          </Col>
           <Col id="propcol1" md={8} >
               {formik.errors.owner_name ? <label class="mensajerror">{formik.errors.owner_name}</label> : null}
               <Input

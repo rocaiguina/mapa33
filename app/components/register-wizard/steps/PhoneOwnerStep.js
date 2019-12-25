@@ -21,7 +21,7 @@ class PhoneOwnerStep extends React.Component {
         <Row>
           <Col md={8}/>
           <Col md={8} style={{paddingLeft:"20px"}}>
-              <h1>¿Telefono del dueño (si tiene) (nombre completo) </h1>
+              <h1>¿Cuál es el nombre y el teléfono del dueño?</h1>
           </Col>
         </Row>
         <Row>

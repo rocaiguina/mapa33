@@ -41,8 +41,7 @@ class HowManyStructuresStep extends React.Component {
         <Row>
           <Col md={4}/>
           <Col md={8}>
-            <h1>¿Cuántas estructuras hay en el terreno?</h1>
-            <h1>Especificar cantidad y tipo</h1>
+            <h1>¿Qué tipo de estructuras hay en el terreno?</h1>
           </Col>
           <Col md={8}>
             <Checkbox.Group
