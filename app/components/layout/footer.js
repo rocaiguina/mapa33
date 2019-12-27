@@ -27,7 +27,7 @@ class Footer extends Component {
               </div>
             </Col>
             <Col md={4} xs={xs[2]}>
-              <div className="third-column">
+              <div className="third-column" >
                 { this.props.rightComponent ?
                   this.props.rightComponent :
                   <img src="/images/naturaleza.png" className="img-responsive" />

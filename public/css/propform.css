@@ -266,3 +266,34 @@ button[data-test-id="button-primary"]{
   border-radius: 15px !important;
   border: 1px white solid !important;
 }
+.overlay{
+  position: absolute; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 9; /* Specify a stack order in case you're using a different order for other elements */
+}
+.tourup{
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 999 !important;
+  margin: 10px !important;
+}
+.react-joyride__overlay{
+    z-index: 9 !important;
+}
+.footer{
+  z-index: 9 !important;
+}
+.stepguideborder .m33-btn-bordered{
+  border: 2px solid #f073a8 !important;
+}
+.stepguide{
+  height: 56px !important;
+  width: 80px !important;
+  border-radius: 50px !important;
+}

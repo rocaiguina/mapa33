@@ -74,9 +74,8 @@ class MapStep extends React.Component {
   }
 
   handleOnCloseTutorial = (e) => {
-
     this.setState({
-      isRunning: false
+      run: false
     });
   }
 
@@ -112,7 +111,7 @@ class MapStep extends React.Component {
                 callback={this.handleJoyrideCallback}
                 steps={steps}
                 stepIndex={stepIndex}
-                run={this.state.run}
+                run={run}
                 locale={names}
                 continuous={true}
                 disableOverlayClose={true}
@@ -130,8 +129,9 @@ class MapStep extends React.Component {
         subheader={
           <div className="page-subtitle">
             <h5>{this.state.lands.length} Parcelas escogidas</h5>
-            {this.state.run? <Button className="ant-btn m33-btn submitbtn ant-btn-secondary ant-btn-lg" onClick={this.handleOnCloseTutorial}>Cerrar</Button> : null}
-            {this.state.run? <h1>Step {this.state.stepIndex2}/6</h1> : null}
+            {this.state.run? <div className="overlay"></div> : null}
+            {this.state.run? <Button style={{right: "0"}} className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup" onClick={this.handleOnCloseTutorial}>Cerrar Tutorial</Button> : null}
+            {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/6</h1> : null}
           </div>
         }
         footerXs={footerXs}
