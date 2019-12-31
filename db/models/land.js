@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     level: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING,       // basic, pledge, conserved
       allowNull: true
     },
     status: {

@@ -572,9 +572,6 @@ ul.actions {
 }
 
 /* Custom buttons */
-.ant-btn.m33-btn > span {
-  display: block;
-}
 .ant-btn.m33-btn > small {
   font-size: 13px;
 }

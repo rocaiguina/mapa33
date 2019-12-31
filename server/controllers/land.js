@@ -7,28 +7,51 @@ const Land          = Models.Land;
 class LandController {
 
   findAll (req, res, next) {
+    let area = req.query.area;
+    let paramLevels = [];
+
+    switch (area) {
+      case 'proposed':
+        paramLevels = ['basic', 'pledge'];
+      break;
+      case 'conserved':
+        paramLevels = ['conserved'];
+      break;
+    }
+
+    let query = `
+      SELECT
+        row_to_json ( fc ) AS geojson
+        FROM (
+          SELECT 
+            'FeatureCollection' AS TYPE,
+            array_to_json ( ARRAY_AGG ( f ) ) AS features
+          FROM (
+            SELECT 
+              'Feature' AS TYPE,
+              ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry,
+              row_to_json (( SELECT l FROM ( SELECT ID, name, entity, status, location, year_acquisition ) AS l )) AS properties
+            FROM lands AS lg WHERE level IN (:levels)
+          ) AS f
+        ) AS fc
+    `;
+
     Models
       .sequelize
-      .query("SELECT row_to_json ( fc ) AS geojson FROM (SELECT 'FeatureCollection' AS TYPE, array_to_json ( ARRAY_AGG ( f ) ) AS features FROM (SELECT 'Feature' AS TYPE, ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry, row_to_json ( ( SELECT l FROM ( SELECT ID, name, entity, status, location, year_acquisition ) AS l ) ) AS properties FROM lands AS lg ) AS f ) AS fc", 
-        { type: Models.sequelize.QueryTypes.SELECT })
-      .then(function (result) {
-        console.dir(result);
+      .query(query, 
+        { 
+          replacements: { levels: paramLevels },
+          type: Models.sequelize.QueryTypes.SELECT
+        }
+      ).then(function (result) {
+        if (result.length > 0 && result[0].geojson.features == null) {
+          result[0].geojson.features = [];
+        }
         res.send(result);
       })
       .catch(function (err) {
         res.send('');
       });
-    // Land
-    //   .findAll({ raw: true })
-    //   .then(function (lands) {
-    //     res.json({ data: lands });
-    //   })
-    //   .catch(function (err) {
-    //     res.status(400).send(err);
-    //   })
-    //   .finally(function () {
-    //     next();
-    //   });    
   }
 
   intersect (req, res, next) {

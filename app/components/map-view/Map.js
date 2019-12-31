@@ -73,10 +73,9 @@ class Map extends Component {
                 'waterway-label'
             );
 
-            fetch(`/api/land`)
+            fetch(`/api/land?area=proposed`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data[0].geojson);
                     map.getSource('lots').setData(data[0].geojson);
                 })
                 .catch(error => {
@@ -133,15 +132,10 @@ class Map extends Component {
 
     componentDidUpdate(prevProps) {
       if (this.props.areaView !== prevProps.areaView) {
-        map.setLayoutProperty('protected_areas', 'visibility', this.props.areaView == 'protected_areas' ? 'visible' : 'none');
-        map.setLayoutProperty('lots', 'visibility', this.props.areaView == 'lots' ? 'visible' : 'none');
+        map.setLayoutProperty('protected_areas', 'visibility', this.props.areaView == 'conserved' ? 'visible' : 'none');
+        map.setLayoutProperty('lots', 'visibility', this.props.areaView == 'proposed' ? 'visible' : 'none');
       }
     }
-
-    layerVisibility = id => {
-        const visibility = map.getLayoutProperty(id, 'visibility');
-        map.setLayoutProperty(id, 'visibility', visibility === 'visible' ? 'none' : 'visible');
-    };
 
     handleOnZoomIn = (event) => {
         map.setZoom(map.getZoom() + 0.5);

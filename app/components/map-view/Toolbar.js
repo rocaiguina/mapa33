@@ -6,7 +6,7 @@ import Icon from '../ui/Icon';
 class MapToolBar extends React.Component {
   render () {
     const RadioMapView = (
-      <Radio.Group onChange={this.props.onChangeMapView} value={this.props.mapView}
+      <Radio.Group onChange={this.props.onChangeModeView} value={this.props.mapView}
         size="large"
         className="popeditblack">
         <Row>
@@ -23,10 +23,10 @@ class MapToolBar extends React.Component {
         className="popeditblack"
         size="large">
         <Row>
-          <Radio value="lots">Areas Naturales<br/>Propuestas</Radio>
+          <Radio value="proposed">Areas Naturales<br/>Propuestas</Radio>
         </Row>
         <Row>
-          <Radio value="protected_areas">Areas Naturales<br/>Protegidas</Radio>
+          <Radio value="conserved">Areas Naturales<br/>Protegidas</Radio>
         </Row>
       </Radio.Group>
     );

@@ -8,12 +8,12 @@ class MapView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      mapView: 'list',                     // map, list
-      areaView: 'protected_areas',        // protected_areas, lots
-    }
+      mapView: 'list',        // map, list
+      areaView: '',           // conserved, proposed
+    };
   }
 
-  handleOnChangeMapView = (event) => {
+  handleOnChangeModeView = (event) => {
     this.setState({
       mapView: event.target.value
     });
@@ -41,7 +41,7 @@ class MapView extends React.Component {
         <ToolBar 
           mapView={this.state.mapView}
           areaView={this.state.areaView}
-          onChangeMapView={this.handleOnChangeMapView}
+          onChangeModeView={this.handleOnChangeModeView}
           onChangeAreaView={this.handleOnChangeAreaView}/>
       </div>
     );
