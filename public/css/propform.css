@@ -116,6 +116,10 @@
   color: black !important;
   font-weight: bold;
 }
+.ant-input.inputprop:hover,
+.ant-input.inputprop:focus { 
+  border-right-width: 2px !important;
+}
 .btnprimary{
   background-color: #f576a9 !important;
   color: Black !important;
@@ -132,13 +136,16 @@
 }
 .radiosi{
   border-radius: 50px !important;
-  margin-left: 20px !important;
+  margin-left: 10px !important;
   margin-right: 10px !important;
 }
 .radiono{
   border-radius: 0px !important;
   margin-left: 10px !important;
-  margin-right: 20px !important;
+  margin-right: 10px !important;
+}
+.radiono.ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: #000;
 }
 .ant-modal{
   max-width: 1140px !important;
@@ -153,15 +160,30 @@
 }
 .form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #008ac9 !important;
-  border:none !important;
+  border-color: #008ac9 !important;
+  box-shadow: none;
+}
+.form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+.form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus {
+  box-shadow: none;
 }
 .form2.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #4fbdb0 !important;
-  border:none !important;
+  border-color: #4fbdb0 !important;
+  box-shadow: none;
+}
+.form2.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+.form2.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus {
+  box-shadow: none;
 }
 .form3.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
   background: #f576a9 !important;
-  border:none !important;
+  border-color: #f576a9 !important;
+  box-shadow: none;
+}
+.form3.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+.form3.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus {
+  box-shadow: none;
 }
 .radiono span:nth-child(2n),
 .radiosi span:nth-child(2n)
@@ -196,8 +218,8 @@
 }
 .inputprop.ant-checkbox-wrapper-checked{
   background-color: #008ac9 !important;
-  border:none !important;
-  }
+  border-color: #008ac9 !important;
+}
 
 .radiosi .ant-radio-button-wrapper:not(:first-child)::before {
   background-color: transparent !important;

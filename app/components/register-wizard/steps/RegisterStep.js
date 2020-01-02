@@ -91,7 +91,7 @@ class RegisterStep extends React.Component {
           <br/>
           <Row>
               <Col lg={{ span: 6, offset: 9 }}>
-                <Button type="secondary" size="large" block onClick={this.handleOnSubmit}>Someter</Button>;
+                <Button type="secondary" size="large" block onClick={this.handleOnSubmit}>Someter</Button>
               </Col>
           </Row>
       </div>
