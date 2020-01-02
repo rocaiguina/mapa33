@@ -5,6 +5,7 @@ const LandController = require('../controllers/land');
 
 router.get('/', LandController.findAll);
 router.post('/', LandController.store);
+router.get('/geojson', LandController.findGeoJson);
 router.post('/intersect', LandController.intersect);
 router.post('/select', LandController.select);
 router.get('/:id', LandController.lookup, LandController.get);

@@ -44,11 +44,13 @@
 
 }
 
-.ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow{
+.ant-popover > .ant-popover-content > .ant-popover-arrow{
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
 }
-.ant-popover-placement-top > .ant-popover-content > .ant-popover-inner{
+.ant-popover > .ant-popover-content > .ant-popover-inner{
   background-color: transparent !important;
   -webkit-box-shadow: none;
   box-shadow: none;

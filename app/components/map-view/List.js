@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Card, Col, Row, Icon as AntIcon } from 'antd';
+import { Card, Col, Row } from 'antd';
 import ClassNames from 'classnames';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
+import LandCard from './LandCard';
 
 const { Meta } = Card;
 
@@ -63,24 +64,12 @@ class ListView extends React.Component {
           {
             this.props.items.map((item) => 
               <div key={item}>
-                <Card 
-                  className={ 
-                    ClassNames(
-                      'land-card',
-                      { 
-                        'land-protected': item.use_type == 'protected',
-                        'land-proposed': item.use_type == 'proposed'
-                      }
-                    )
-                  }
-                  bordered={false}
-                  cover={<img src="https://dummyimage.com/300x200/dddddd/ffffff"/>}
-                  actions={[
-                    <div className="text-left"><AntIcon type="heart" key="heart" /> 10,999</div>,
-                    <div className="text-right"><AntIcon type="share-alt" key="share-alt" /></div>
-                  ]}>
-                  <Meta title={item.name} description={item.location}/>
-                </Card>
+                <LandCard 
+                  id={item.id}
+                  name={item.name}
+                  level={item.level}
+                  location={item.location}
+                />
               </div>
               )
           }

@@ -1,21 +1,58 @@
 'use strict';
 
 const Joi           = require('joi');
+const Sequelize     = require('sequelize');
 const Models        = require('../../db/models');
 const Land          = Models.Land;
+const Op            = Sequelize.Op;
+
+const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
+const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
 
   findAll (req, res, next) {
     let area = req.query.area;
+
+    let conditions = {};
+
+    switch (area) {
+      case 'proposed':
+        conditions.level = {
+          [Op.in]: PROPOSED_LAND_LEVELS
+        };
+      break;
+      case 'conserved':
+        conditions.level = {
+          [Op.in]: CONSERVED_LAND_LEVELS
+        };
+      break;
+    }
+
+    Land
+      .findAll({
+        where: conditions,
+        attributes: { exclude: ['geom'] },
+        limit: 10
+      })
+      .then(function (lands) {
+        res.send(lands);
+      })
+      .catch(function (err) {
+        res.status(400).send(err);
+      });
+  }
+
+  findGeoJson (req, res, next) {
+    let area = req.query.area;
     let paramLevels = [];
 
     switch (area) {
       case 'proposed':
-        paramLevels = ['basic', 'pledge'];
+        paramLevels = PROPOSED_LAND_LEVELS
       break;
       case 'conserved':
-        paramLevels = ['conserved'];
+        paramLevels = CONSERVED_LAND_LEVELS
       break;
     }
 

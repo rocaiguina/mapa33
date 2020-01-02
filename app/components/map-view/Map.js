@@ -73,7 +73,7 @@ class Map extends Component {
                 'waterway-label'
             );
 
-            fetch(`/api/land?area=proposed`)
+            fetch(`/api/land/geojson?area=proposed`)
                 .then(response => response.json())
                 .then(data => {
                     map.getSource('lots').setData(data[0].geojson);
@@ -85,8 +85,8 @@ class Map extends Component {
             map.on('click', 'protected_areas', e => {
                 const img = `https://api.mapbox.com/v4/mapbox.satellite/${e.lngLat.lng},${e.lngLat.lat},16/250x150@2x.png?access_token=${mapboxgl.accessToken}`;
                 let html = '<div>';
-                html += `<div style="text-align: center"><strong>${e.features[0].properties.NAME}</strong></div>`;
-                html += `<img src='${img}' alt='Imágen de Satélite' style='width: 100%'/>`;
+                html += `<div style="text-align: center"><a href="/land/1"><strong>${e.features[0].properties.NAME}</strong></a></div>`;
+                html += `<a href="/land/1"><img src='${img}' alt='Imágen de Satélite' style='width: 100%'/></a>`;
                 html += `<div><strong>Dueño: </strong>${e.features[0].properties.OWNERSHIP}</div>`;
                 html += `<div><strong>Manejado: </strong>${e.features[0].properties.MGMT}</div>`;
                 html += `<div><strong>Establecido: </strong>${e.features[0].properties.YEAR_ESTAB} | ${e.features[0].properties.ACRES.toLocaleString()} acres</div>`;
@@ -101,8 +101,8 @@ class Map extends Component {
             map.on('click', 'lots', e => {
                 const img = `https://api.mapbox.com/v4/mapbox.satellite/${e.lngLat.lng},${e.lngLat.lat},16/250x150@2x.png?access_token=${mapboxgl.accessToken}`;
                 let html = '<div>';
-                html += `<div style="text-align: center"><strong>${e.features[0].properties.name}</strong></div>`;
-                html += `<img src='${img}' alt='Imágen de Satélite' style='width: 100%'/>`;
+                html += `<div style="text-align: center"><a href="/land/${e.features[0].properties.id}"><strong>${e.features[0].properties.name}</strong></a></div>`;
+                html += `<a href="/land/${e.features[0].properties.id}"><img src='${img}' alt='Imágen de Satélite' style='width: 100%'/></a>`;
                 html += `<div><strong>Municipio: </strong>${e.features[0].properties.location}</div>`;
                 html += `<div><strong>Entidad: </strong>${e.features[0].properties.entity}</div>`;
                 html += `<div><strong>Establecido: </strong>${e.features[0].properties.year_acquisition}</div>`;

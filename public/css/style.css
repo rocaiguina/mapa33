@@ -521,6 +521,9 @@ ul.actions {
 }
 
 /* Land cards */
+.land-card .ant-card-cover img {
+  width: 100%;
+}
 .land-card .ant-card-meta-title {
   font-size: 20px;
 }

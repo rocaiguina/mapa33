@@ -80,7 +80,7 @@
     "redux": "3.5.2",
     "redux-logger": "3.0.1",
     "redux-thunk": "2.2.0",
-    "sequelize": "4.8.4",
+    "sequelize": "^4.44.3",
     "sequelize-cli": "5.5.1",
     "sequelize-paginate": "1.1.6",
     "sequelize-version": "0.0.58",
