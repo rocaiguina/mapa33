@@ -16,6 +16,12 @@ class ContaminationStep extends React.Component {
     history.push(`${basename}/mainattributes`);
   }
 
+  handleOnChange = (event) => {
+    const { basename, formik, history } = this.props;
+    formik.setFieldValue('has_contamination', event.target.value);
+    history.push(`${basename}/importanceofknowing`);
+  }
+
   render() {
     const { formik } = this.props;
     return (
@@ -32,7 +38,7 @@ class ContaminationStep extends React.Component {
                 name="has_contamination"
                 buttonStyle="solid"
                 value={formik.values.has_contamination}
-                onChange={formik.handleChange}
+                onChange={this.handleOnChange}
               >
                 <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
                 <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>

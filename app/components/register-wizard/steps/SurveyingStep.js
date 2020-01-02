@@ -16,6 +16,12 @@ class SurveyingStep extends React.Component {
     history.push(`${basename}/mortgage`);
   }
 
+  handleOnChange = (event) => {
+    const { basename, formik, history } = this.props;
+    formik.setFieldValue('has_surveying', event.target.value);
+    history.push(`${basename}/mainuses`);
+  }
+
   render() {
     const { formik } = this.props;
     return (
@@ -32,7 +38,7 @@ class SurveyingStep extends React.Component {
                 name="has_surveying"
                 buttonStyle="solid"
                 value={formik.values.has_surveying}
-                onChange={formik.handleChange}
+                onChange={this.handleOnChange}
               >
                 <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
                 <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>

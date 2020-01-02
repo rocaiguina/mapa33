@@ -16,6 +16,12 @@ class InheritanceLandStep extends React.Component {
     history.push(`${basename}/owner-phone`);
   }
 
+  handleOnChange = (event) => {
+    const { basename, formik, history } = this.props;
+    formik.setFieldValue('inheritance_land', event.target.value);
+    history.push(`${basename}/inheritance-agree`);
+  }
+
   render() {
     const { formik } = this.props;
     return (
@@ -32,7 +38,7 @@ class InheritanceLandStep extends React.Component {
               name="inheritance_land"
               buttonStyle="solid"
               value={formik.values.inheritance_land}
-              onChange={formik.handleChange}
+              onChange={this.handleOnChange}
             >
               <Radio.Button className="inputprop radioprop radiosi form2" value={true}>Si</Radio.Button>
               <Radio.Button className="inputprop radioprop radiono form2" value={false}>No</Radio.Button>

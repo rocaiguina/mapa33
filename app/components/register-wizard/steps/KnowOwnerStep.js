@@ -21,6 +21,19 @@ class KnowOwnerStep extends React.Component {
     history.push(`${basename}/owner`);
   }
 
+  handleOnChange = (event) => {
+    const { basename, formik, history } = this.props;
+    formik.setFieldValue('know_owner', event.target.value);
+
+    if (event.target.value === true) {
+      history.push(`${basename}/yesfillform`);
+    }
+
+    if (event.target.value === false) {
+      history.push(`${basename}/mainuses`);
+    }
+  }
+
   render() {
     const { formik } = this.props;
     return (
@@ -37,7 +50,7 @@ class KnowOwnerStep extends React.Component {
                 name="know_owner"
                 buttonStyle="solid"
                 value={formik.values.know_owner}
-                onChange={formik.handleChange}
+                onChange={this.handleOnChange}
               >
                 <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
                 <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>

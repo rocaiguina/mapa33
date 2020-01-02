@@ -8,7 +8,7 @@ class YesFillFormStep extends React.Component {
     const { basename, history, formik } = this.props;
     if(formik.values.owner_name && formik.values.owner_email && formik.values.owner_phone){
       if(!formik.errors.owner_email){
-        history.push(`${basename}/stateland`);
+        history.push(`${basename}/mainuses`);
       }
     }
   }
@@ -30,7 +30,7 @@ class YesFillFormStep extends React.Component {
     return (
       <div className="m-t-20">
         <Row>
-          <Col md={4}/>
+          <Col md={8}/>
           <Col id="propcol1" md={8} >
               {formik.errors.owner_name ? <label class="mensajerror">{formik.errors.owner_name}</label> : null}
               <Input
@@ -61,7 +61,7 @@ class YesFillFormStep extends React.Component {
               />
             {this.requiredform()}
           </Col>
-          <Col md={4}/>
+          <Col md={8}/>
         </Row>
         <Pager
           onPrevious={this.handleOnPrevious}
