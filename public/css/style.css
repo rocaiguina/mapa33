@@ -771,6 +771,19 @@ ul.actions {
   margin-top: 20px;
 }
 
+/* Wizard */
+.m33-wizard {
+  position: relative;
+  height: 440px;
+}
+
+.m33-wizard .pager {
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 /* Responsive */
 @media (min-width: 992px) {  
   .m33-wizard {
