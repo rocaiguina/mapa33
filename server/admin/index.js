@@ -14,7 +14,9 @@ const LandMiddleware      = require('../middlewares/land');
 const UserMiddleware      = require('../middlewares/user');
 const AdminMiddleware      = require('../middlewares/admin');
 
-router.get('/', AuthMiddleware.login_required,AdminMiddleware.admin_access, DashboardAdminController.index);
+router.get('/', function(req, res){
+  res.redirect('/admin/land')
+});
 // TODO: Routes account
 router.get('/login', AuthAdminController.login,AdminMiddleware.admin_access);
 router.post('/login', AuthAdminController.authenticate,AdminMiddleware.admin_access);

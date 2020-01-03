@@ -4,11 +4,28 @@ import Button from '../../ui/Button';
 import { ErrorMessage } from 'formik';
 
 class RegisterStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ingresado: false,
+    };
+  }
 
   handleOnSubmit = (event) => {
     const { basename, history, formik } = this.props;
+    this.setState({
+      ingresado:true,
+    });
+
     if(formik.values != formik.initialValues){
-      if (!formik.errors.u_name || !formik.errors.u_lastname || !formik.errors.u_email || !formik.errors.u_username || !formik.errors.u_zip || !formik.errors.u_password) {
+      if (formik.errors.u_name   ||
+        formik.errors.u_lastname ||
+        formik.errors.u_email    ||
+        formik.errors.u_username ||
+        formik.errors.u_zip      ||
+        formik.errors.u_password) {
+        //history.push(`${basename}/propose`);
+      }else{
         history.push(`${basename}/propose`);
       }
     }
@@ -27,7 +44,7 @@ class RegisterStep extends React.Component {
           <Row>
               <Col md={4}/>
               <Col id="propcol1" md={8} >
-                  {formik.errors.u_name ? <label class="mensajerror">{formik.errors.u_name}</label> : null}
+                  {this.state.ingresado && formik.errors.u_name ? <label class="mensajerror">{formik.errors.u_name}</label> : null}
                   <Input
                     name="u_name"
                     className="inputprop"
@@ -36,7 +53,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_name}
                     onChange={formik.handleChange}
                   />
-                {formik.errors.u_lastname ? <label class="mensajerror">{formik.errors.u_lastname}</label> : null}
+                {this.state.ingresado && formik.errors.u_lastname ? <label class="mensajerror">{formik.errors.u_lastname}</label> : null}
                   <Input
                     name="u_lastname"
                     className="inputprop"
@@ -45,7 +62,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_lastname}
                     onChange={formik.handleChange}
                   />
-                {formik.errors.u_username ? <label class="mensajerror">{formik.errors.u_username}</label> : null}
+                {this.state.ingresado && formik.errors.u_username ? <label class="mensajerror">{formik.errors.u_username}</label>  : null}
                   <Input
                     name="u_username"
                     className="inputprop"
@@ -56,7 +73,7 @@ class RegisterStep extends React.Component {
                   />
               </Col>
               <Col id="propcol2" md={8} >
-                  {formik.errors.u_password ? <label class="mensajerror">{formik.errors.u_password}</label> : null}
+                {this.state.ingresado && formik.errors.u_password ? <label class="mensajerror">{formik.errors.u_password}</label> : null}
                   <Input
                     name="u_password"
                     className="inputprop"
@@ -66,7 +83,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_password}
                     onChange={formik.handleChange}
                   />
-                {formik.errors.u_email ? <label class="mensajerror">{formik.errors.u_email}</label> : null}
+                {this.state.ingresado && formik.errors.u_email ? <label class="mensajerror">{formik.errors.u_email}</label> : null}
                   <Input
                     name="u_email"
                     className="inputprop"
@@ -75,7 +92,7 @@ class RegisterStep extends React.Component {
                     value={formik.values.u_email}
                     onChange={formik.handleChange}
                   />
-                {formik.errors.u_zip ? <label class="mensajerror">{formik.errors.u_zip}</label> : null}
+                {this.state.ingresado && formik.errors.u_zip ? <label class="mensajerror">{formik.errors.u_zip}</label> : null}
                   <Input
                     name="u_zip"
                     className="inputprop"

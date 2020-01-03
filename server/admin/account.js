@@ -57,7 +57,7 @@ class AccountController{
                 req.flash('error', err.message);
             })
             .finally(function () {
-                res.redirect('/admin');
+                res.redirect('/admin/land');
             });
     }
 }
