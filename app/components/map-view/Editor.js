@@ -9,6 +9,7 @@ import union from '@turf/union';
 import clone from '@turf/clone';
 import area from '@turf/area';
 import centroid from '@turf/centroid';
+import { Icon } from 'antd';
 import Button from '../ui/Button';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
@@ -374,40 +375,58 @@ class Editor extends Component {
         }
     };
 
+    handleZoomIn = (event) => {
+      event.preventDefault();
+      map.setZoom(map.getZoom() + 0.5);
+    }
+
+    handleZoomOut = (event) => {
+      event.preventDefault();
+      map.setZoom(map.getZoom() - 0.5);
+    }    
+
     render() {
         return (
             <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '420px', width: '100%' }}>
 
                 <div className="searchinput" ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
 
-                    {/*<div className="toolbar" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
+                <div className="toolbar toolbar-mapeditor" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
                   <ul>
                     <li>
-                      <Button className="trashbtn" onClick={this.trashPolygons}>Trash</Button>
+                      <Button id="zoomInBtn" onClick={this.handleZoomIn}><i class="fas fa-fw fa-search-plus"></i></Button>
                     </li>
                     <li>
-                      <Button className="MyLocationbtn" onClick={this.setLoc}>My Location</Button>
+                      <Button id="zoomOutBtn" onClick={this.handleZoomOut}><i class="fas fa-fw fa-search-minus"></i></Button>
                     </li>
                     <li>
-                      <Button onClick={this.setLoc} onClick={() => { map.setZoom(map.getZoom() + 0.5);}}>+</Button>
+                      <Button id="mapPointerBtn" onClick={this.setSel}><i class="fas fa-fw fa-hand-pointer"></i></Button>
                     </li>
                     <li>
-                      <Button onClick={this.setLoc} onClick={() => { map.setZoom(map.getZoom() - 0.5);}}>-</Button>
+                      <Button id="trashBtn" onClick={this.trashPolygons}><i class="fas fa-fw fa-trash-alt"></i></Button>
+                    </li>
+                    <li>
+                      <Button id="myLocationBtn" onClick={this.setLoc}><i class="fas fa-fw fa-map-marker-alt"></i></Button>
                     </li>
                   </ul>
                 </div>
-                <div ref={el => (this.miniMapContainer = el)} style={{ height: 250, display: 'none' }} />
-                */}
-                <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 350, margin: 10 }}>
 
+                <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 320, margin: 10 }}>
 
+                  {
+                    /*
                     <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
                     <div>
                         Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
                     </div>
                     <div>Cerca de: {this.state.address}</div>
-                    <div ref={el => (this.miniMapContainer = el)} style={{ height: 250 }} />
+                    */
+                  }
+                    <div ref={el => (this.miniMapContainer = el)} style={{ height: 220 }} />
                     {this.state.error && this.state.error}
+
+                    {
+                      /*
 
                     <Button className="trashbtn" type="button" onClick={this.trashPolygons}>
                         Trash
@@ -442,6 +461,8 @@ class Editor extends Component {
                     >
                         Zoom Out
                     </Button>
+                    */
+                    }
                 </div>
             </div>
         );

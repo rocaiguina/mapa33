@@ -264,7 +264,7 @@ body {
   padding-top: 95px;
 }
 .main-content.with-subheader {
-  padding-top: 115px;
+  padding-top: 105px;
 }
 
 .header-dark {
@@ -500,6 +500,20 @@ ul.actions {
 .toolbar .ant-btn-background-ghost.m33-btn:hover,
 .toolbar .ant-btn-background-ghost.m33-btn:focus {
   background-color: #fff !important;
+  border-color: #fff;
+  color: #000;
+}
+
+.toolbar-mapeditor .ant-btn.m33-btn {
+  background-color: #000;
+  border-color: #fff;
+  color: #fff;
+  font-size: 18px;
+}
+
+.toolbar-mapeditor .ant-btn.m33-btn:hover,
+.toolbar-mapeditor .ant-btn.m33-btn:focus {
+  background-color: #fff;
   border-color: #fff;
   color: #000;
 }

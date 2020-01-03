@@ -18,29 +18,24 @@ class MapStep extends React.Component {
       },
       steps: [
         {
-          target: '.selectbtn',
+          target: '#mapPointerBtn',
           content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Selecciona la parcela haciendo tap o click</h5></div>,
           disableBeacon: "false",
           placement: "top",
         },
         {
-          target: '.subirbtn',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Dibuja un polígono con tu mouse o dedo (móvil)</h5></div>,
-          placement: "top",
-        },
-        {
-          target: '.trashbtn',
+          target: '#trashBtn',
           content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
           placement: "top",
         },
         {
-          target: '.MyLocationbtn',
+          target: '#myLocationBtn',
           content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Encuentra tu posición exacta en el mapa</h5></div>,
           placement: "top",
         },
         {
           target: '.searchinput',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
+          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Busca un municipio o dirección</h5></div>,
           placement: "bottomh5",
         },
         {
@@ -85,7 +80,7 @@ class MapStep extends React.Component {
    if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
      // Update state to advance the tour
      this.setState({ stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) });
-     if(index < 5){
+     if(index < 4){
        this.setState({ stepIndex2: index+1 + (action === ACTIONS.PREV ? -1 : 1) });
      }
    }
@@ -131,7 +126,7 @@ class MapStep extends React.Component {
             <h5>{this.state.lands.length} Parcelas escogidas</h5>
             {this.state.run? <div className="overlay"></div> : null}
             {this.state.run? <Button style={{right: "0"}} className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup" onClick={this.handleOnCloseTutorial}>Cerrar Tutorial</Button> : null}
-            {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/6</h1> : null}
+            {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/5</h1> : null}
           </div>
         }
         footerXs={footerXs}
