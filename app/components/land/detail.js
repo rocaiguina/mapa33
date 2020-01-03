@@ -15,7 +15,7 @@ class LandDetail extends React.Component {
               <h5 style={{ flex: '1 0 auto' }}>Junior Caño</h5>
               <Row gutter={16} className="hidden-xs">
                 <Col xs={12}>
-                  <Button color="orange" block xlg style={{ fontSize: '14px', fontWeight: 'bold' }}>Share</Button>
+                  <Button color="orange" block xlg style={{ fontSize: '14px', fontWeight: 'bold' }}>Compartir</Button>
                 </Col>
                 <Col xs={12}>
                   <Button color="white" block xlg style={{ lineHeight: '10px', borderRadius: '6px' }}><span><Icon type="heart" theme="filled"/></span><small>10,999</small></Button>
@@ -32,13 +32,13 @@ class LandDetail extends React.Component {
               <p className="lead" style={{ flex: '1 0 auto' }}>Es un lugar con rasgos naturales especiales (p.e. arboledas, mogotes, lagunas, cuevas).</p>
               <Row gutter={16} className="visible-xs m-b-20">
                 <Col xs={12}>
-                  <Button color="orange" block xlg style={{ fontSize: '14px', fontWeight: 'bold' }}>Share</Button>
+                  <Button color="orange" block xlg style={{ fontSize: '14px', fontWeight: 'bold' }}>Compartir</Button>
                 </Col>
                 <Col xs={12}>
                   <Button color="white" block xlg style={{ lineHeight: '10px', borderRadius: '6px' }}><span><Icon type="heart" theme="filled"/></span><small>10,999</small></Button>
                 </Col>
               </Row>
-              <Button color="blue" block xxlg>Support this</Button>
+              <Button color="blue" block xxlg>Apoyar</Button>
             </Col>
           </Row>
         </div>
@@ -73,7 +73,7 @@ class LandDetail extends React.Component {
           </Col>
           <Col md={8}>
             <p className="land-feature">Sus usos principales<br/>propuestos son:</p>
-            <Badge block size="large" color="orange" round>Educacion</Badge>
+            <Badge block size="large" color="orange" round>Educación</Badge>
             <Badge block size="large" color="pink" round>Recreacion</Badge>
             <Badge block size="large" color="green" round>Usos Sostenibles</Badge>
           </Col>

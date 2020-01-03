@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="block-header">
-    <h2>User <small>{{ object.first_name }}&nbsp;{{ object.last_name}}</small></h2>
+    <h2>Usuarios <small>{{ object.first_name }}&nbsp;{{ object.last_name}}</small></h2>
 </div>
 
 <div class="row">
@@ -13,25 +13,25 @@
                 <div role="tabpanel">
                     <ul class="tab-nav" role="tablist">
                         <li class="active">
-                            <a href="#details11" aria-controls="details11" role="tab" data-toggle="tab">Details</a>
+                            <a href="#details11" aria-controls="details11" role="tab" data-toggle="tab">Detalles</a>
                         </li>
                         {% if survey %}
                         <li>
-                            <a href="#survey11" aria-controls="survey11" role="tab" data-toggle="tab">Survey</a>
+                            <a href="#survey11" aria-controls="survey11" role="tab" data-toggle="tab">Encuesta</a>
                         </li>
                         {% endif %}
                     </ul>
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="details11">
-                            <h5><small>(*) Required fields.</small></h5>
+                            <h5><small>(*) Datos requeridos.</small></h5>
                             <br/>
 
                             <input type="hidden" name="crumb" value="{{crumb}}"/>
 
                             <div class="form-group {{ 'has-error' if field_errors.first_name else '' }}">
                                 <div class="fg-line">
-                                    <label class="control-label">First Name*</label>
+                                    <label class="control-label">Nombre *</label>
                                     <input type="text" class="form-control input-sm" name="first_name" value="{{ field_errors.first_name.value if field_errors.first_name else object.first_name }}">
                                 </div>
                                 {% if field_errors.first_name %}
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group {{ 'has-error' if field_errors.last_name else '' }}">
                                 <div class="fg-line">
-                                    <label class="control-label">Last Name*</label>
+                                    <label class="control-label">Apellido*</label>
                                     <input type="text" class="form-control input-sm" name="last_name" value="{{ field_errors.last_name.value if field_errors.last_name else object.last_name }}">
                                 </div>
                                 {% if field_errors.last_name %}
@@ -58,11 +58,11 @@
                             </div>
                             <div class="form-group {{ 'has-error' if field_errors.role else '' }}">
                                 <div class="fg-line">
-                                    <label class="control-label">Role*</label>
+                                    <label class="control-label">Rol*</label>
                                     <div class="select">
                                         <select name="role" class="form-control">
                                             <option value="">--------</option>
-                                            <option {% if object.role == 'administrator' %}selected{% endif %} value="administrator">Administrator</option>
+                                            <option {% if object.role == 'administrator' %}selected{% endif %} value="administrator">Administrador</option>
                                             <option {% if object.role == 'subscriptor' %}selected{% endif %} value="subscriptor">Subscriptor</option>
                                         </select>
                                     </div>
@@ -74,7 +74,7 @@
                             {% if not object.id %}
                             <div class="form-group {{ 'has-error' if field_errors.password else '' }}">
                                 <div class="fg-line">
-                                    <label class="control-label">Password*</label>
+                                    <label class="control-label">Contraseña*</label>
                                     <input type="password" class="form-control input-sm" name="password" value="{{ field_errors.password.value if field_errors.password else object.password }}">
                                 </div>
                                 {% if field_errors.password %}

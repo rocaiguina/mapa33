@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="block-header">
-    <h2>Lands</h2>
+    <h2>Terrenos</h2>
 </div>
 
 <div class="card">
@@ -16,12 +16,12 @@
         <table class="table table-hover table-vmiddle">
             <thead>
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Level</th>
-                <th>Location</th>
-                <th>Entity</th>
-                <th>Status</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Nivel</th>
+                <th>Ubicación</th>
+                <th>Entidad</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
             </thead>
@@ -60,7 +60,7 @@
                 </td>
             </tr>
             {% else %}
-            <tr><td colspan="7"><p class="text-center">Empty data.</p></td></tr>
+            <tr><td colspan="7"><p class="text-center">Datos vacíos.</p></td></tr>
             {% endfor %}
             </tbody>
         </table>
@@ -101,7 +101,7 @@
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, eliminar!",
+        confirmButtonText: "Sí, eliminar!",
         cancelButtonText: "No, cancelar!",
         closeOnConfirm: true,
         closeOnCancel: true

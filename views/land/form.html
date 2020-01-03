@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="block-header">
-    <h2>Land <small>{{ object.name }}</small></h2>
+    <h2>Terrenos<small>{{ object.name }}</small></h2>
 </div>
 
 <div class="row">
   <div class="col-md-8">
     <div class="card">
         <div class="card-header">
-            <h2>Details
-                <small>(*) Required fields.</small>
+            <h2>Detalles
+                <small>(*) Datos requeridos.</small>
             </h2>
         </div>
         <div class="card-body card-padding">
@@ -19,7 +19,7 @@
 
                 <div class="form-group {{ 'has-error' if field_errors.name else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Name*</label>
+                        <label class="control-label">Nombre*</label>
                         <input type="text" class="form-control input-sm" name="name" value="{{ field_errors.name.value if field_errors.name else object.name }}">
                     </div>
                     {% if field_errors.name %}
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.level else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Level*</label>
+                        <label class="control-label">Nivel*</label>
                         <div class="select">
                             <select name="level" class="form-control">
                                 <option value="">--------</option>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.location else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Location</label>
+                        <label class="control-label">Ubicación</label>
                         <input type="text" class="form-control input-sm" name="location" value="{{ field_errors.location.value if field_errors.location else object.location }}">
                     </div>
                     {% if field_errors.location %}
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.entity else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Entity*</label>
+                        <label class="control-label">Entidad*</label>
                         <input type="text" class="form-control input-sm" name="entity" value="{{ field_errors.entity.value if field_errors.entity else object.entity }}">
                     </div>
                     {% if field_errors.entity %}
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Use Type*</label>
+                        <label class="control-label">Tipo de uso*</label>
                         <input type="text" class="form-control input-sm" name="use_type" value="{{ field_errors.use_type.value if field_errors.use_type else object.use_type }}">
                     </div>
                     {% if field_errors.use_type %}
@@ -71,7 +71,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.acquisition_type else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Acquisition Type*</label>
+                        <label class="control-label">Tipo de adquisición*</label>
                         <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ field_errors.acquisition_type.value if field_errors.acquisition_type else object.acquisition_type }}">
                     </div>
                     {% if field_errors.acquisition_type %}
@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.year_acquisition else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Year Acquisition*</label>
+                        <label class="control-label">Año de adquisición*</label>
                         <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ field_errors.year_acquisition.value if field_errors.year_acquisition else object.year_acquisition }}">
                     </div>
                     {% if field_errors.year_acquisition %}
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Status*</label>
+                        <label class="control-label">Estado*</label>
                         <div class="select">
                             <select name="status" class="form-control ">
                                 <option value="">--------</option>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Reason Conservation*</label>
+                        <label class="control-label">Motivo de conservación*</label>
                         <textarea class="form-control" rows="5" name="reason_conservation">{{ field_errors.reason_conservation.value if field_errors.reason_conservation else object.reason_conservation }}</textarea>
                     </div>
                     {% if field_errors.reason_conservation %}

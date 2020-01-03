@@ -429,7 +429,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          Survey
+                         Encuesta
                         </Button>
                       </div>
                     }
@@ -448,7 +448,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          Survey
+                          Encuesta
                         </Button>
                       </div>
                     }
