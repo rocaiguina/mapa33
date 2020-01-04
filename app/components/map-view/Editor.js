@@ -303,7 +303,7 @@ class Editor extends Component {
                 if (this.props.onSelect) {
                   var data = {
                     lands: this.state.selection,
-                    area: this.state.area,
+                    area: this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 }),
                     address: this.state.address,
                     geojson: features
                   };

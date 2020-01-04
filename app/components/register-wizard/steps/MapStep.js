@@ -12,6 +12,7 @@ class MapStep extends React.Component {
     this.state = {
       run: true,
       lands: [],
+      area: 0,
       names: {
         next: 'Siguiente',
         last: 'Siguiente'
@@ -55,7 +56,8 @@ class MapStep extends React.Component {
 
   handleOnSelect = (data) => {
     this.setState({
-      lands: data.lands
+      lands: data.lands,
+      area: data.area
     });
     const { setFieldValue } = this.props.formik;
     setFieldValue('geojson', data.geojson);
@@ -123,7 +125,7 @@ class MapStep extends React.Component {
         }
         subheader={
           <div className="page-subtitle">
-            <h5>{this.state.lands.length} Parcelas escogidas</h5>
+            <h5>{this.state.lands.length} Parcelas escogidas - Área: {this.state.area} m<sup>2</sup> </h5>
             {this.state.run? <div className="overlay"></div> : null}
             {this.state.run? <Button style={{right: "0"}} className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup" onClick={this.handleOnCloseTutorial}>Cerrar Tutorial</Button> : null}
             {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/5</h1> : null}
