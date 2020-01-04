@@ -29,7 +29,7 @@ class Video extends React.Component {
             <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
           </div>
           <div className="m-t-15 text-right">
-            <Button type="primary" ghost onClick={this.handleOnSkip}>SKIP <Icon type="arrow-right"/></Button>
+            <Button type="primary" ghost onClick={this.handleOnSkip}>OMITIR <Icon type="arrow-right"/></Button>
           </div>
         </div>
       </div>

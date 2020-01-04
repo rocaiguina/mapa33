@@ -10,10 +10,10 @@ class MapToolBar extends React.Component {
         size="large"
         className="popeditblack">
         <Row>
-          <Radio value="list">List View</Radio>
+          <Radio value="list">Ver Lista</Radio>
         </Row>
         <Row>
-          <Radio value="map">Map View</Radio>
+          <Radio value="map">Ver Mapa</Radio>
         </Row>
       </Radio.Group>
     );

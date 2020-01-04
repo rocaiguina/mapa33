@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="block-header">
-    <h2>Users</h2>
+    <h2>Usuarios</h2>
 </div>
 
 <div class="card">
     <div class="card-header">
-        <h2>Users
+        <h2>Usuarios
             <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
         </h2>
         <ul class="actions">
@@ -18,7 +18,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="/admin/exportUsers">Export CSV</a>
+                        <a href="/admin/exportUsers">Exportar a CSV</a>
                     </li>
                 </ul>
             </li>
@@ -29,10 +29,10 @@
         <table class="table table-hover table-vmiddle">
             <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Email</th>
-                <th>Role</th>
+                <th>Rol</th>
                 <th></th>
             </tr>
             </thead>
@@ -49,7 +49,7 @@
                 </td>
             </tr>
             {% else %}
-            <tr><td colspan="7"><p class="text-center">Empty data.</p></td></tr>
+            <tr><td colspan="7"><p class="text-center">Datos vacíos.</p></td></tr>
             {% endfor %}
             </tbody>
         </table>
@@ -90,7 +90,7 @@
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, eliminar!",
+                    confirmButtonText: "Sí, eliminar!",
                     cancelButtonText: "No, cancelar!",
                     closeOnConfirm: true,
                     closeOnCancel: true
