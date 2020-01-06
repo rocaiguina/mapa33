@@ -10,7 +10,8 @@ class MapStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      run: true,
+      hasRunned: false,
+      run: false,
       lands: [],
       area: 0,
       names: {
@@ -20,28 +21,28 @@ class MapStep extends React.Component {
       steps: [
         {
           target: '#mapPointerBtn',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Selecciona la parcela haciendo tap o click</h5></div>,
-          disableBeacon: "false",
+          content: <div><img height="140" width="190" src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Selecciona la parcela haciendo tap o click</h5></div>,
+          disableBeacon: true,
           placement: "top",
         },
         {
           target: '#trashBtn',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
+          content: <div><img height="140" width="190" src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Borra puntos o parcelas de tu selección</h5></div>,
           placement: "top",
         },
         {
           target: '#myLocationBtn',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Encuentra tu posición exacta en el mapa</h5></div>,
+          content: <div><img height="140" width="190" src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Encuentra tu posición exacta en el mapa</h5></div>,
           placement: "top",
         },
         {
           target: '.searchinput',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Busca un municipio o dirección</h5></div>,
+          content: <div><img height="140" width="190" src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Busca un municipio o dirección</h5></div>,
           placement: "bottomh5",
         },
         {
           target: '.submitbtn',
-          content: <div><img src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Cuando tengas tu terreno seleccionado pulsa aquí para someter</h5></div>,
+          content: <div><img height="140" width="190" src="https://dummyimage.com/190x140/474747/fff" alt="imagen proporsicion"/ ><h5 style={{textAlign:"left", paddingTop:"5px"}}>Cuando tengas tu terreno seleccionado pulsa aquí para someter</h5></div>,
           placement: "top",
         },
       ],
@@ -76,6 +77,15 @@ class MapStep extends React.Component {
     });
   }
 
+  handleOnZoom = (map) => {
+    if (map.getZoom() > 14 && this.state.hasRunned == false) {
+      this.setState({
+        run: true,
+        hasRunned: true
+      });
+    }
+  }
+
   handleJoyrideCallback = data => {
    const { action, index, status, type } = data;
 
@@ -90,10 +100,6 @@ class MapStep extends React.Component {
      // Need to set our running state to false, so we can restart if we click start again.
      this.setState({ run: false });
    }
-
-   console.groupCollapsed(type);
-   console.log(data); //eslint-disable-line no-console
-   console.groupEnd();
  };
 
   render() {
@@ -104,31 +110,12 @@ class MapStep extends React.Component {
       <BaseLayout
         header={
           <div className="page-title">
-            <Joyride
-                callback={this.handleJoyrideCallback}
-                steps={steps}
-                stepIndex={stepIndex}
-                run={run}
-                locale={names}
-                continuous={true}
-                disableOverlayClose={true}
-                hideBackButton={true}
-                spotlightPadding={0}
-              />
             <h2>ESCOGE TU<br/>TERRENO/PROPUESTA</h2>
             <ul className="actions">
               <li>
                 <Button size="large" type="link" onClick={this.handleOnClose}><Icon type="close"/></Button>
               </li>
             </ul>
-          </div>
-        }
-        subheader={
-          <div className="page-subtitle">
-            <h5>{this.state.lands.length} Parcelas escogidas - Área: {this.state.area} m<sup>2</sup> </h5>
-            {this.state.run? <div className="overlay"></div> : null}
-            {this.state.run? <Button style={{right: "0"}} className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup" onClick={this.handleOnCloseTutorial}>Cerrar Tutorial</Button> : null}
-            {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/5</h1> : null}
           </div>
         }
         footerXs={footerXs}
@@ -140,12 +127,30 @@ class MapStep extends React.Component {
             type="secondary"
             onClick={this.handleOnSubmit}
             block>
-            Submit
+            Continuar
           </Button>
-        }>
+        }
+        afterFooter={
+          <Joyride
+            callback={this.handleJoyrideCallback}
+            steps={steps}
+            stepIndex={stepIndex}
+            run={run}
+            locale={names}
+            continuous={true}
+            disableOverlayClose={true}
+            hideBackButton={true}
+            spotlightPadding={0}
+          />
+        }
+      >
+        {this.state.run? <Button style={{right: "0"}} className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup" onClick={this.handleOnCloseTutorial}>Cerrar Tutorial</Button> : null}
+        {this.state.run? <h1 style={{left: "0", color:"white", fontWeight:"bold"}} className="tourup">{this.state.stepIndex2}/5</h1> : null}
         <div className="m33-wizard">
           <div className="m33-wizard-vcenter">
-            <MapEditor onSelect={this.handleOnSelect}/>
+            <MapEditor
+              onSelect={this.handleOnSelect}
+              onZoom={this.handleOnZoom}/>
           </div>
         </div>
       </BaseLayout>

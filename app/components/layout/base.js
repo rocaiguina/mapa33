@@ -23,6 +23,7 @@ class BaseLayout extends Component {
           </div>
         </div>
         <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent} xs={this.props.footerXs}/>
+        { this.props.afterFooter }
       </div>
     );
   }

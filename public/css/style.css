@@ -261,10 +261,10 @@ body {
 }
 
 .main-content.with-header {
-  padding-top: 95px;
+  padding-top: 90px;
 }
 .main-content.with-subheader {
-  padding-top: 105px;
+  padding-top: 110px;
 }
 
 .header-dark {
@@ -731,6 +731,21 @@ ul.actions {
 /* Mapbox */
 .mapboxgl-popup {
   color: #000;
+}
+
+.box-map-preview {
+  background-color: #fff;
+  box-shadow: 0 0px 10px -6px #222;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
+  width: 320px;
+}
+.box-map-info {
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 /* Utils */

@@ -307,9 +307,6 @@ button[data-test-id="button-primary"]{
   z-index: 999 !important;
   margin: 10px !important;
 }
-.react-joyride__overlay{
-    z-index: 9 !important;
-}
 .footer{
   z-index: 9 !important;
 }

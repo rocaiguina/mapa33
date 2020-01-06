@@ -241,6 +241,12 @@ class Editor extends Component {
             }
         });
 
+        map.on('zoomend', data => {
+          if (this.props.onZoom) {
+            this.props.onZoom(data.target);
+          }
+        });
+
         this.geocoderContainer.append(geocoder.onAdd(map));
     }
 
@@ -387,42 +393,37 @@ class Editor extends Component {
 
     render() {
         return (
-            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '420px', width: '100%' }}>
+            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '440px', width: '100%' }}>
 
                 <div className="searchinput" ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
 
                 <div className="toolbar toolbar-mapeditor" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
                   <ul>
                     <li>
-                      <Button id="zoomInBtn" onClick={this.handleZoomIn}><i class="fas fa-fw fa-search-plus"></i></Button>
+                      <Button id="zoomInBtn" onClick={this.handleZoomIn}><i className="fas fa-fw fa-search-plus"></i></Button>
                     </li>
                     <li>
-                      <Button id="zoomOutBtn" onClick={this.handleZoomOut}><i class="fas fa-fw fa-search-minus"></i></Button>
+                      <Button id="zoomOutBtn" onClick={this.handleZoomOut}><i className="fas fa-fw fa-search-minus"></i></Button>
                     </li>
                     <li>
-                      <Button id="mapPointerBtn" onClick={this.setSel}><i class="fas fa-fw fa-hand-pointer"></i></Button>
+                      <Button id="mapPointerBtn" onClick={this.setSel}><i className="fas fa-fw fa-hand-pointer"></i></Button>
                     </li>
                     <li>
-                      <Button id="trashBtn" onClick={this.trashPolygons}><i class="fas fa-fw fa-trash-alt"></i></Button>
+                      <Button id="trashBtn" onClick={this.trashPolygons}><i className="fas fa-fw fa-trash-alt"></i></Button>
                     </li>
                     <li>
-                      <Button id="myLocationBtn" onClick={this.setLoc}><i class="fas fa-fw fa-map-marker-alt"></i></Button>
+                      <Button id="myLocationBtn" onClick={this.setLoc}><i className="fas fa-fw fa-map-marker-alt"></i></Button>
                     </li>
                   </ul>
                 </div>
 
-                <div style={{ position: 'absolute', zIndex: 2, padding: 10, background: '#FFF', width: 320, margin: 10 }}>
-
-                  {
-                    /*
-                    <div>Parcelas Seleccionadas: {this.state.selection.length}</div>
-                    <div>
+                <div className="box-map-preview">
+                    <div className="box-map-info">Parcelas Seleccionadas: {this.state.selection.length}</div>
+                    <div className="box-map-info">
                         Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
                     </div>
-                    <div>Cerca de: {this.state.address}</div>
-                    */
-                  }
-                    <div ref={el => (this.miniMapContainer = el)} style={{ height: 220 }} />
+                  
+                    <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 200 }} />
                     {this.state.error && this.state.error}
 
                     {
