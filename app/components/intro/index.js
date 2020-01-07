@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import Video from './video';
 import Welcome from './welcome';
 import Land from './lands';
-import Intructions from './instructions';
 
 class Intro extends React.Component {
 
@@ -39,12 +38,9 @@ class Intro extends React.Component {
             onSkip={this.goNextSlide}/>
         </div>
         <div>
-          <Land onClose={this.goNextSlide}/>
+          <Land onClose={this.props.onEnd}/>
         </div>
-        <div>
-          <Intructions onClose={this.props.onEnd}
-            onExploreMap={this.props.onEnd}/>
-        </div>
+       
       </Slider>
     );
   }
