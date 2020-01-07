@@ -4,7 +4,7 @@ const router = express.Router();
 const LandController = require('../controllers/land');
 
 router.get('/', LandController.findAll);
-router.post('/', LandController.store);
+router.post('/', LandController.storePhotograph, LandController.store);
 router.get('/geojson', LandController.findGeoJson);
 router.post('/intersect', LandController.intersect);
 router.post('/select', LandController.select);

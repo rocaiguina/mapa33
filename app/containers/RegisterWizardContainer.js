@@ -44,6 +44,11 @@ class WizardContainer extends React.Component {
 
     Axios
       .post('/api/land', {
+        level: 'basic',
+        status: 'new',
+        base64Img: '',
+        plots_count: 1,
+        area_size: 1,
         geom,
         metadata,
       })

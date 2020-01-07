@@ -1,8 +1,10 @@
 'use strict';
 
+const Base64Img     = require('base64-img');
 const Joi           = require('joi');
 const Sequelize     = require('sequelize');
 const Models        = require('../../db/models');
+const RandomToken   = require('random-token');
 const Land          = Models.Land;
 const Op            = Sequelize.Op;
 
@@ -140,6 +142,11 @@ class LandController {
     const validationSchema = {
       metadata:     Joi.object().required(),
       geom:         Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
+      level:        Joi.string(),
+      status:       Joi.string(),
+      area:         Joi.number(),
+      plots:        Joi.number(),
+      file:         Joi.string().allow(''),
     };
 
     // Validata data.
@@ -155,11 +162,14 @@ class LandController {
     // Save new land.
     Land
       .create({
-        name:                  'undefined',
-        level:                 'undefined',
-        status:                'web',
+        name:                  'Unknow',
+        level:                 cleaned_data.level,
+        status:                cleaned_data.status,
         geom:                  cleaned_data.geom,
         metadata:              cleaned_data.metadata,
+        photograph:            cleaned_data.file,
+        plots_count:           cleaned_data.plots_count,
+        area_size:             cleaned_data.area_size,
         location:              '',
         entity:                '',
         use_type:              '',
@@ -177,6 +187,20 @@ class LandController {
         next();
       });
   }
+
+  storePhotograph (req, res, next) {
+    if (req.body.base64Img) {
+      let filename =  RandomToken(10) + '.png';
+      Base64Img.img(req.body.base64Img, 'public/uploads/lands', filename, function (err, filepath) {
+        if (err) { return next(err); }
+
+        req.body.file = `/uploads/lands/${filename}`;
+        next();
+      });
+    }
+    next();
+  }
+
     
   // store (req, res, next) {
   //   var data = req.body;
