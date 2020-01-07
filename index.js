@@ -46,7 +46,7 @@ require('./config/passport');
 
 // bodyParser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb' }));
 
 // prepend '/' to URIs
 app.use('/api', server);

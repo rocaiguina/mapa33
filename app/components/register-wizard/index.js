@@ -77,6 +77,9 @@ class RegisterWizard extends React.Component {
           know_owner: null,
           owner_email: '',
           geojson: null,
+          plots_count: 0,
+          area_size: 0,
+          base64Img: '',
         }}
         validationSchema={Yup.object().shape({
             u_name: Yup.string()
@@ -93,12 +96,12 @@ class RegisterWizard extends React.Component {
                 .required('Contraseña requerida'),
             u_zip:  Yup.string()
                 .required('CodeZip requerido'),
-            catastro_number: Yup.string()
-                .required('Número de Catastro requerido'),
-            owner_name: Yup.string(),
-            owner_phone: Yup.string(),
-            owner_email: Yup.string()
-                .email('Correo inválido'),
+            // catastro_number: Yup.string()
+            //     .required('Número de Catastro requerido'),
+            // owner_name: Yup.string(),
+            // owner_phone: Yup.string(),
+            // owner_email: Yup.string()
+            //     .email('Correo inválido'),
         })}
         onSubmit={this.handleOnSubmit}
       >

@@ -46,9 +46,9 @@ class WizardContainer extends React.Component {
       .post('/api/land', {
         level: 'basic',
         status: 'new',
-        base64Img: '',
-        plots_count: 1,
-        area_size: 1,
+        base64Img: data.base64Img,
+        plots_count: data.plots_count,
+        area_size: data.area_size,
         geom,
         metadata,
       })
@@ -56,6 +56,7 @@ class WizardContainer extends React.Component {
         history.push('/register/success');
       })
       .catch(err => {
+        alert('Error on register land: ' + err);
         console.log(err);
       });
   }

@@ -144,13 +144,13 @@ class LandController {
       geom:         Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
       level:        Joi.string(),
       status:       Joi.string(),
-      area:         Joi.number(),
-      plots:        Joi.number(),
+      area_size:    Joi.number(),
+      plots_count:  Joi.number(),
       file:         Joi.string().allow(''),
     };
 
     // Validata data.
-    const result = Joi.validate(data, validationSchema);
+    const result = Joi.validate(data, validationSchema, { allowUnknown: true, abortEarly: false });
 
     if (result.error) {
       res.status(400).send(result.error);
@@ -158,7 +158,7 @@ class LandController {
     }
 
     const cleaned_data = result.value;
-    
+
     // Save new land.
     Land
       .create({
@@ -190,67 +190,16 @@ class LandController {
 
   storePhotograph (req, res, next) {
     if (req.body.base64Img) {
-      let filename =  RandomToken(10) + '.png';
+      let filename =  RandomToken(10);
       Base64Img.img(req.body.base64Img, 'public/uploads/lands', filename, function (err, filepath) {
         if (err) { return next(err); }
 
-        req.body.file = `/uploads/lands/${filename}`;
+        req.body.file = filepath.replace('public', '');
         next();
       });
     }
     next();
   }
-
-    
-  // store (req, res, next) {
-  //   var data = req.body;
-  //   const validationSchema = {
-  //     name:                 Joi.string().required(),
-  //     level:                Joi.string().required(),
-  //     status:               Joi.string().required(),
-  //     geom:                 Joi.object({ type: Joi.string(), coordinates: Joi.array() }).required(),
-  //     location:             Joi.string().required(),
-  //     entity:               Joi.string().required(),
-  //     use_type:             Joi.string().required(),
-  //     acquisition_type:     Joi.string().required(),
-  //     year_acquisition:     Joi.number().integer().required(),
-  //     reason_conservation:  Joi.string().required()
-  //   };
-
-  //   // Validata data.
-  //   const result = Joi.validate(data, validationSchema);
-
-  //   if (result.error) {
-  //     res.status(400).send(result.error);
-  //     return next();
-  //   }
-
-  //   const cleaned_data = result.value;
-    
-  //   // Save new land.
-  //   Land
-  //     .create({
-  //       name:                  cleaned_data.name,
-  //       level:                 cleaned_data.level,
-  //       status:                cleaned_data.status,
-  //       geom:                  cleaned_data.geom,
-  //       location:              cleaned_data.location,
-  //       entity:                cleaned_data.entity,
-  //       use_type:              cleaned_data.use_type,
-  //       acquisition_type:      cleaned_data.acquisition_type,
-  //       year_acquisition:      cleaned_data.year_acquisition,
-  //       reason_conservation:   cleaned_data.reason_conservation
-  //     })
-  //     .then(function (land) {
-  //       res.json(land.get({plain: true}));
-  //     })
-  //     .catch(function (err) {
-  //       res.status(400).send(err);
-  //     })
-  //     .finally(function () {
-  //       next();
-  //     });
-  // }
 
   update (req, res, next) {
     var data = req.body;

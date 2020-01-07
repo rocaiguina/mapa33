@@ -62,6 +62,9 @@ class MapStep extends React.Component {
     });
     const { setFieldValue } = this.props.formik;
     setFieldValue('geojson', data.geojson);
+    setFieldValue('plots_count', data.lands.length);
+    setFieldValue('area_size', data.area);
+    setFieldValue('base64Img', data.base64Img);
   }
 
   handleOnSubmit = (e) => {

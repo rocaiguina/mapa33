@@ -47,6 +47,22 @@ module.exports = (sequelize, DataTypes) => {
     reason_conservation: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    photograph: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    coordinates: {
+      type: DataTypes.GEOMETRY,
+      allowNull: true
+    },
+    plots_count: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    area_size: {
+      type: DataTypes.DOUBLE,
+      allowNull: true
     }
   }, {
     tableName: 'lands',

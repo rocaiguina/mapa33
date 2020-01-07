@@ -309,8 +309,9 @@ class Editor extends Component {
                 if (this.props.onSelect) {
                   var data = {
                     lands: this.state.selection,
-                    area: this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 }),
+                    area: this.state.area,
                     address: this.state.address,
+                    base64Img: miniMap.getCanvas().toDataURL(),
                     geojson: features
                   };
                   this.props.onSelect(data);
