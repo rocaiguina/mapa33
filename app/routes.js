@@ -8,7 +8,7 @@ import LandMapViewContainer from './containers/LandMapViewContainer';
 import RegisterSuccessContainer from './containers/RegisterSuccessContainer';
 import RegisterWizardContainer from './containers/RegisterWizardContainer';
 import LandDetailContainer from './containers/LandDetailContainer';
-import LandListViewContainer from './containers/landListViewContainer';
+import LandListViewContainer from './containers/LandListViewContainer';
 
 export default () => (
   <Router>
