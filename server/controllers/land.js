@@ -146,7 +146,6 @@ class LandController {
       status:       Joi.string(),
       area_size:    Joi.number(),
       plots_count:  Joi.number(),
-      file:         Joi.string().allow(''),
     };
 
     // Validata data.
@@ -167,7 +166,7 @@ class LandController {
         status:                cleaned_data.status,
         geom:                  cleaned_data.geom,
         metadata:              cleaned_data.metadata,
-        photograph:            cleaned_data.file,
+        photograph:            req.photograph_filepath,
         plots_count:           cleaned_data.plots_count,
         area_size:             cleaned_data.area_size,
         location:              '',
@@ -194,11 +193,12 @@ class LandController {
       Base64Img.img(req.body.base64Img, 'public/uploads/lands', filename, function (err, filepath) {
         if (err) { return next(err); }
 
-        req.body.file = filepath.replace('public', '');
+        req.photograph_filepath = filepath.replace('public', '');
         next();
       });
+    } else {
+      next();
     }
-    next();
   }
 
   update (req, res, next) {

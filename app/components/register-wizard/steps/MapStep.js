@@ -64,7 +64,11 @@ class MapStep extends React.Component {
     setFieldValue('geojson', data.geojson);
     setFieldValue('plots_count', data.lands.length);
     setFieldValue('area_size', data.area);
-    setFieldValue('base64Img', data.base64Img);
+  }
+
+  handleOnRenderMiniMap = (base64Img) => {
+    const { setFieldValue } = this.props.formik;
+    setFieldValue('base64Img', base64Img);
   }
 
   handleOnSubmit = (e) => {
@@ -152,6 +156,7 @@ class MapStep extends React.Component {
         <div className="m33-wizard">
           <div className="m33-wizard-vcenter">
             <MapEditor
+              onRenderMinimap={this.handleOnRenderMiniMap}
               onSelect={this.handleOnSelect}
               onZoom={this.handleOnZoom}/>
           </div>

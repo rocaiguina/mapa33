@@ -184,6 +184,12 @@ class Editor extends Component {
             );
         });
 
+        miniMap.on('render', () => {
+          if (this.props.onRenderMinimap) {
+            this.props.onRenderMinimap(miniMap.getCanvas().toDataURL());
+          }
+        });
+
         map.on('mousemove', 'lots', e => {
                 map.getCanvas().style.cursor = 'pointer';
 
@@ -311,7 +317,6 @@ class Editor extends Component {
                     lands: this.state.selection,
                     area: this.state.area,
                     address: this.state.address,
-                    base64Img: miniMap.getCanvas().toDataURL(),
                     geojson: features
                   };
                   this.props.onSelect(data);
