@@ -40,7 +40,7 @@ class Intro extends React.Component {
         <div>
           <Land onClose={this.props.onEnd}/>
         </div>
-       
+
       </Slider>
     );
   }

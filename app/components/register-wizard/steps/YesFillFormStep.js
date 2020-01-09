@@ -3,12 +3,27 @@ import { Col, Row, Input } from 'antd';
 import Pager from '../../ui/Pager';
 
 class YesFillFormStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        error_name: false,
+        error_value: false,
+        error_message_email: '',
+        error_message_name: ''
+    }
+  }
 
   handleOnNext = (event) => {
     const { basename, history, formik } = this.props;
-    if(formik.values.owner_name && formik.values.owner_email && formik.values.owner_phone){
-      if(!formik.errors.owner_email){
-        history.push(`${basename}/mainuses`);
+    if(formik.values.know_owner){   
+      if(formik.initialValues.owner_name == formik.values.owner_name){      
+        console.log(formik.values.owner_name+ " value");    
+        this.setState({
+            error_name: true,
+            error_message_name: 'Debe ingresar el nombre obligatoriamente'
+        })
+      }else{
+          history.push(`${basename}/mainuses`);
       }
     }
   }
@@ -32,7 +47,7 @@ class YesFillFormStep extends React.Component {
         <Row>
           <Col md={8}/>
           <Col id="propcol1" md={8} >
-              {formik.errors.owner_name ? <label class="mensajerror">{formik.errors.owner_name}</label> : null}
+              {this.state.error_name ? <label class="mensajerror">{this.state.error_message_name}</label> : null}
               <Input
                 name="owner_name"
                 className="inputprop"
@@ -41,7 +56,6 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_name}
                 onChange={formik.handleChange}
               />
-              {formik.errors.owner_phone ? <label class="mensajerror">{formik.errors.owner_phone}</label> : null}
               <Input
                 name="owner_phone"
                 className="inputprop"
@@ -50,7 +64,7 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_phone}
                 onChange={formik.handleChange}
               />
-              {formik.errors.owner_email ? <label class="mensajerror">{formik.errors.owner_email}</label> : null}
+              {this.state.error_value ? <label class="mensajerror">{this.state.error_message_email}</label> : null}
               <Input
                 name="owner_email"
                 className="inputprop"
@@ -59,7 +73,6 @@ class YesFillFormStep extends React.Component {
                 value={formik.values.owner_email}
                 onChange={formik.handleChange}
               />
-            {this.requiredform()}
           </Col>
           <Col md={8}/>
         </Row>
