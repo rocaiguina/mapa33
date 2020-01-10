@@ -7,7 +7,6 @@ class IntroContainer extends React.Component {
   handleOnEndIntro = () => {
     this.props.history.push('/map');
   }
-
   render () {
     return (
       <BaseLayout dark>

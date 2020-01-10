@@ -29,13 +29,11 @@ import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
 import MapStep from './steps/MapStep';
 import PruebaTour from './steps/PruebaTour';
+import NameLandStep from './steps/NameLand';
 
 class RegisterWizard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-        step: 1
-    }
   }
 
   handleOnSubmit = (values) => {
@@ -48,6 +46,8 @@ class RegisterWizard extends React.Component {
 
   render () {
     const { match, history, step } = this.props;
+    console.log('match')
+    console.log(match)
     return (
       <Formik
         initialValues={{
@@ -83,6 +83,7 @@ class RegisterWizard extends React.Component {
           plots_count: 0,
           area_size: 0,
           base64Img: '',
+          land_name: '',
         }}
         validationSchema={Yup.object().shape({
             u_name: Yup.string()
@@ -99,12 +100,8 @@ class RegisterWizard extends React.Component {
                 .required('Contraseña requerida'),
             u_zip:  Yup.string()
                 .required('CodeZip requerido'),
-            // catastro_number: Yup.string()
-            //     .required('Número de Catastro requerido'),
-            // owner_name: Yup.string(),
-            // owner_phone: Yup.string(),
-            // owner_email: Yup.string()
-            //     .email('Correo inválido'),
+            land_name: Yup.string()
+                .required('Nombre del terreno requerido'),
         })}
         onSubmit={this.handleOnSubmit}
       >
@@ -123,12 +120,11 @@ class RegisterWizard extends React.Component {
                         style={{ fontSize: '16px',borderRadius:"15px !important" }}
                         type="secondary"
                         bordered>
-                        1/17
+                        1/18
                       </Button>
                       </div>}
                     component={<RegisterStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
-
                   />
                 </Route>
                 <Route path={`${match.path}/propose`}>
@@ -142,7 +138,7 @@ class RegisterWizard extends React.Component {
                         style={{ fontSize: '16px',borderRadius:"15px !important" }}
                         type="secondary"
                         bordered>
-                        2/17
+                        2/18
                       </Button>
                       </div>}
                     component={<ProposeLandStep basename={match.path} history={history} formik={formik} />}
@@ -163,7 +159,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          4/17
+                          4/18
                         </Button>
                       </div>
                     }
@@ -185,7 +181,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>5/17</span> : <span>5/11</span>}
+                          {formik.values.are_u_owner ? <span>5/18</span> : <span>5/12</span>}
                         </Button>
                       </div>
                     }
@@ -203,7 +199,7 @@ class RegisterWizard extends React.Component {
                         style={{ fontSize: '16px',borderRadius:"15px !important" }}
                         type="secondary"
                         bordered>
-                        {formik.values.are_u_owner ? <span>6/17</span> : <span>6/11</span>}
+                        {formik.values.are_u_owner ? <span>6/18</span> : <span>6/12</span>}
                       </Button>
                       </div>
                     }
@@ -222,7 +218,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>7/17</span> : <span>7/11</span>}
+                          {formik.values.are_u_owner ? <span>7/18</span> : <span>7/12</span>}
                         </Button></div>
                     }
                     component={<InheritanceLandStep basename={match.path} history={history} formik={formik} />}
@@ -239,7 +235,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>8/17</span> : <span>8/11</span>}
+                          {formik.values.are_u_owner ? <span>8/18</span> : <span>8/12</span>}
                         </Button>
                       </div>
                     }
@@ -257,7 +253,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>9/17</span> : <span>9/11</span>}
+                          {formik.values.are_u_owner ? <span>9/18</span> : <span>9/12</span>}
                         </Button>
                       </div>
                     }
@@ -276,7 +272,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>10/17</span> : <span>10/11</span>}
+                          {formik.values.are_u_owner ? <span>10/18</span> : <span>10/12</span>}
                         </Button>
                       </div>
                     }
@@ -295,7 +291,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>11/17</span> : <span>11/11</span>}
+                          {formik.values.are_u_owner ? <span>11/18</span> : <span>12/12</span>}
                         </Button>
                       </div>
                     }
@@ -318,7 +314,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner ? <span>5/17</span> : <span>5/11</span>}
+                          {formik.values.are_u_owner ? <span>5/18</span> : <span>5/12</span>}
                         </Button>
                       </div>
                     }
@@ -337,7 +333,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.know_owner ? <span>6/12</span> : <span>5/11</span>}
+                          {formik.values.know_owner ? <span>6/13</span> : <span>5/12</span>}
                         </Button>
                       </div>
                     }
@@ -359,7 +355,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner  ? <span>12/17</span>: formik.values.know_owner ? <span>7/12</span> : <span>6/11</span> }
+                          {formik.values.are_u_owner  ? <span>12/18</span>: formik.values.know_owner ? <span>7/13</span> : <span>6/12</span> }
                         </Button>
                       </div>
                     }
@@ -378,7 +374,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner  ? <span>13/17</span> : formik.values.know_owner ? <span>8/12</span> : <span>7/11</span> }
+                          {formik.values.are_u_owner  ? <span>13/18</span> : formik.values.know_owner ? <span>8/13</span> : <span>7/12</span> }
                         </Button>
                       </div>
                     }
@@ -397,7 +393,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner  ? <span>14/17</span> : formik.values.know_owner ? <span>9/12</span> : <span>8/11</span> }
+                          {formik.values.are_u_owner  ? <span>14/18</span> : formik.values.know_owner ? <span>9/13</span> : <span>8/12</span> }
                         </Button>
                       </div>
                     }
@@ -416,7 +412,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner  ? <span>15/17</span> : formik.values.know_owner ? <span>10/12</span> : <span>9/11</span> }
+                          {formik.values.are_u_owner  ? <span>15/18</span> : formik.values.know_owner ? <span>10/13</span> : <span>9/12</span> }
                         </Button>
                       </div>
                     }
@@ -435,7 +431,7 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                         {formik.values.are_u_owner  ? <span>16/17</span> : formik.values.know_owner ? <span>11/12</span> : <span>10/11</span>}
+                         {formik.values.are_u_owner  ? <span>16/18</span> : formik.values.know_owner ? <span>11/13</span> : <span>10/12</span>}
                         </Button>
                       </div>
                     }
@@ -454,11 +450,31 @@ class RegisterWizard extends React.Component {
                           style={{ fontSize: '16px',borderRadius:"15px !important" }}
                           type="secondary"
                           bordered>
-                          {formik.values.are_u_owner  ? <span>17/17</span> : formik.values.know_owner ? <span>12/12</span> : <span>11/11</span> }
+                          {formik.values.are_u_owner  ? <span>17/18</span> : formik.values.know_owner ? <span>12/13</span> : <span>11/12</span> }
                         </Button>
                       </div>
                     }
                     component={<WichUseStep basename={match.path} history={history} formik={formik} />}
+                    onClose={this.handleOnClose}
+                  />
+                </Route>
+                <Route path={`${match.path}/nameland`}>
+                  <Step
+                    title={<h2>Formulario de<br/>Propuesta</h2>}
+                    footerRightComponent={
+                      <div className="stepguideborder">
+                        <Button
+                          size="large"
+                          className="stepguide ant-btn m33-btn ant-btn-lg ant-btn-background-blackstep"
+                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
+                          type="secondary"
+                          bordered>
+                        </Button>
+                        {formik.values.are_u_owner  ? <span>18/18</span> : formik.values.know_owner ? <span>13/13</span> : <span>12/12</span> }
+
+                      </div>
+                    }
+                    component={<NameLandStep basename={match.path} history={history} formik={formik} />}
                     onClose={this.handleOnClose}
                   />
                 </Route>

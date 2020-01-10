@@ -7,7 +7,7 @@ class WichUseStep extends React.Component {
   handleOnNext = (event) => {
     const { basename, history, formik } = this.props;
     if(formik.values.wich_use != null){
-      history.push(`${basename}/submit`);
+      history.push(`${basename}/nameland`);
     }
   }
 
