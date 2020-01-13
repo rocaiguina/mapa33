@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    metadata: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
     photograph: {
       type: DataTypes.TEXT,
       allowNull: true
@@ -63,10 +67,15 @@ module.exports = (sequelize, DataTypes) => {
     area_size: {
       type: DataTypes.DOUBLE,
       allowNull: true
-    }
+    },
   }, {
     tableName: 'lands',
     paranoid: true,
+    getterMethods: {
+      photographURL() {
+        return process.env.SERVER_URL + this.photograph;
+      }
+    }
   });
   Land.associate = function(models) {
     // associations can be defined here

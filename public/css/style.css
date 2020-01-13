@@ -467,10 +467,16 @@ ul.actions {
   color: inherit;
   font-weight: bold;
 }
+.land-detail #disqus_thread {
+  margin: 20px 0 30px 0;
+}
 .land-feature {
   font-weight: bold;
   line-height: 1.2;
   margin-bottom: 20px;
+}
+.land-picture {
+  text-align: center;
 }
 
 /* Toolbar */

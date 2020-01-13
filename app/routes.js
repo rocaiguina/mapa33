@@ -19,7 +19,7 @@ export default () => (
       <Route path="/map/list" component={LandListViewContainer} />
       <Route path="/register/success" component={RegisterSuccessContainer} />
       <Route path="/register" component={RegisterWizardContainer} />
-      <Route path="/land/:id" component={LandDetailContainer} />
+      <Route path="/land/:landId" component={LandDetailContainer} />
       <Route path="/info" component={InfoContainer} />
       <Route path="/" component={IntroContainer} />
 
