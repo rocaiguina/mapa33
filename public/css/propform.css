@@ -301,6 +301,57 @@ button[data-test-id="button-primary"]{
   background-color: rgba(0,0,0,0.5); /* Black background with opacity */
   z-index: 9; /* Specify a stack order in case you're using a different order for other elements */
 }
+.overlaymenu{
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  right: 0;
+  right: 0;
+  bottom: 0;
+  background-color:#f073a8; /* Black background with opacity */
+  z-index: 10; /* Specify a stack order in case you're using a different order for other elements */
+  display: inline-flex;
+  width: 220px;
+}
+.buttonmenu{
+   display: inline-flex;
+   left: -125px;
+   position: absolute;
+   margin-top: 60px;
+}
+.ant-btn-simplebtn{
+    color: white !important;    
+    font-size: 20px !important;
+    text-align: left !important;
+    background-color: #f073a8!important;
+    border:none !important;
+    font-weight: 100 !important;
+    font-family: "Calibri", arial;
+    margin-bottom: 8px;
+    padding-left: 0px !important;
+}
+.ant-btn-simplebtn2{
+    color: white !important;    
+    font-size: 16px !important;
+    text-align: left !important;
+    background-color: #f073a8!important;
+    border:none !important;
+    font-weight: 100 !important;
+    font-family: "Calibri", arial;
+    margin-bottom: 8px;
+    padding-left: 0px !important;
+}
+.menublock{
+    text-align: left !important;
+    margin-top: 60px;
+    margin-left: 35px !important;
+}
+.menubottom{
+    position: absolute;
+    bottom: 40px;
+    margin-left: 35px;
+}
 .tourup{
   position: fixed !important;
   top: 0 !important;

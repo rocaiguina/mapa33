@@ -2,8 +2,32 @@ import React from 'react';
 import { Popover, Radio, Col, Row } from 'antd';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
+import Menu from '../intro/menu';
 
 class MapToolBar extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            mostrar: false
+        };
+    }
+    
+    closeOverlay = (event) => {
+        this.setState(
+            {
+                mostrar: false
+            }
+        )
+    }    
+    openOverlay = (event) => {
+        this.setState(
+            {
+                mostrar: true
+            }
+        )
+    }    
+    
   render () {
     const RadioMapView = (
       <Radio.Group onChange={this.props.onChangeModeView} value={this.props.mapView}
@@ -33,9 +57,27 @@ class MapToolBar extends React.Component {
 
     return (
       <div className="toolbar toolbar-menu">
+          {this.state.mostrar ? ( 
+          <div className={"overlaymenu"}>
+            <div className={"buttonmenu"}>
+                <Button type="primary" ghost size="large" >
+                    <Icon type="user" />
+                </Button>
+                <Button style={{marginLeft:"10px"}} type="primary" ghost size="large" onClick={this.closeOverlay}>
+                    <Icon type="close" />
+                </Button>
+            </div>
+            <Menu/>
+            <div className={"menubottom"}>
+                <div>
+                <Button type="simplebtn2">Visitar página <Icon type="arrow-right" /></Button>
+                <img src="/images/naturaleza.png" className="img-responsive" />
+              </div>
+            </div>
+        </div>): null}
         <ul>
           <li>
-            <Button ghost><Icon type="menu" /></Button>
+            <Button ghost onClick={this.openOverlay} ><Icon type="menu" /></Button>
           </li>
           <li>
             <Button ghost><Icon type="user" /></Button>
