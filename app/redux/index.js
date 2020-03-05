@@ -6,7 +6,7 @@ import map from './reducers/MapReducer';
 
 const store = combineReducers({
   example,
-  map
+  map,
 });
 
 export default store;

@@ -1,13 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
-import { Col, Row } from 'antd';
 import Button from '../components/ui/Button';
 import BaseLayout from '../components/layout/base';
 import Icon from '../components/ui/Icon';
 import LandDetail from '../components/land/detail';
 
 class LandDetailContainer extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -25,15 +23,14 @@ class LandDetailContainer extends React.Component {
   }
 
   componentDidMount() {
-    const { landId } = this.props.match.params
+    const { landId } = this.props.match.params;
     this.fetchLand(landId);
   }
 
   fetchLand(landId) {
     const self = this;
-    Axios
-      .get(`/api/land/${landId}`)
-      .then(response => {        
+    Axios.get(`/api/land/${landId}`)
+      .then(response => {
         const metadata = response.data.metadata || {};
         self.setState({
           name: response.data.name,
@@ -49,19 +46,19 @@ class LandDetailContainer extends React.Component {
         });
       })
       .catch(err => {
-        alert(err);
+        window.alert(err);
       });
   }
 
-  handleOnAddProposal = (event) => {
+  handleOnAddProposal = () => {
     this.props.history.push('/register');
-  }
+  };
 
-  handleOnClose = (event) => {
+  handleOnClose = () => {
     this.props.history.push('/map');
-  }
+  };
 
-  render () {
+  render() {
     const id = this.props.match.params.landId;
     const {
       name,
@@ -76,18 +73,20 @@ class LandDetailContainer extends React.Component {
       photograph,
     } = this.state;
     return (
-      <BaseLayout dark darkHeader
+      <BaseLayout
+        dark
+        darkHeader
         header={
           <div className="page-title">
-            <h2>TARJETA<br/>DE PROPUESTA</h2>
+            <h2>
+              TARJETA
+              <br />
+              DE PROPUESTA
+            </h2>
             <ul className="actions">
               <li>
-                <Button
-                  size="large"
-                  type="link"
-                  onClick={this.handleOnClose}
-                >
-                  <Icon type="close"/>
+                <Button size="large" type="link" onClick={this.handleOnClose}>
+                  <Icon type="close" />
                 </Button>
               </li>
             </ul>
@@ -101,7 +100,7 @@ class LandDetailContainer extends React.Component {
             onClick={this.handleOnAddProposal}
             bordered
           >
-            <Icon type="plus"/>
+            <Icon type="plus" />
           </Button>
         }
       >

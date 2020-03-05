@@ -1,13 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-import { Button } from 'antd';
-import Icon from '../components/ui/Icon';
-import BaseLayout from '../components/layout/base';
 import RegisterWizard from '../components/register-wizard';
 
 class WizardContainer extends React.Component {
-
-  handleOnSubmit = (data) => {
+  handleOnSubmit = data => {
     const { history } = this.props;
 
     const geom = data.geojson.geometry;
@@ -42,31 +38,26 @@ class WizardContainer extends React.Component {
       owner_email: data.owner_email,
     };
 
-    Axios
-      .post('/api/land', {
-        level: 'basic',
-        status: 'new',
-        base64Img: data.base64Img,
-        plots_count: data.plots_count,
-        area_size: data.area_size,
-        geom,
-        metadata,
-      })
+    Axios.post('/api/land', {
+      level: 'basic',
+      status: 'new',
+      base64Img: data.base64Img,
+      plots_count: data.plots_count,
+      area_size: data.area_size,
+      geom,
+      metadata,
+    })
       .then(response => {
+        console.log(response);
         history.push('/register/success');
       })
       .catch(err => {
-        alert('Error on register land: ' + err);
-        console.log(err);
+        window.alert('Error on register land: ' + err);
       });
-  }
+  };
 
-  render () {
-    return (
-      <RegisterWizard
-        onSubmit={this.handleOnSubmit}
-      />
-    );
+  render() {
+    return <RegisterWizard onSubmit={this.handleOnSubmit} />;
   }
 }
 

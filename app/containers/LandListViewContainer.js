@@ -8,13 +8,12 @@ import Legend from '../components/map-view/Legend';
 import ListView from '../components/map-view/List';
 import ToolBar from '../components/map-view/Toolbar';
 
-
 class LandListViewContainer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      areaView: '',             // conserved, proposed
-      maplist: []
+      areaView: '', // conserved, proposed
+      maplist: [],
     };
   }
 
@@ -24,36 +23,36 @@ class LandListViewContainer extends React.Component {
 
   fetchAreas(areaView) {
     const self = this;
-    Axios
-      .get(`/api/land/?area=${areaView}`)
-      .then(response => {        
+    Axios.get(`/api/land/?area=${areaView}`)
+      .then(response => {
         self.setState({
-          maplist: response.data
-        })
+          maplist: response.data,
+        });
       })
       .catch(err => {
-        alert(err);
+        window.alert(err);
       });
   }
 
-  handleOnAddProposal = (event) => {
+  handleOnAddProposal = () => {
     this.props.history.push('/register');
-  }
+  };
 
-  handleOnChangeModeView = (event) => {
+  handleOnChangeModeView = () => {
     this.props.history.push('/map');
-  }
+  };
 
-  handleOnChangeAreaView = (event) => {
+  handleOnChangeAreaView = event => {
     this.setState({
-      areaView: event.target.value
+      areaView: event.target.value,
     });
     this.fetchAreas(event.target.value);
-  }
+  };
 
-  render () {
+  render() {
     return (
-      <BaseLayout dark
+      <BaseLayout
+        dark
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -62,14 +61,14 @@ class LandListViewContainer extends React.Component {
             onClick={this.handleOnAddProposal}
             bordered
           >
-            <Icon type="plus"/>
+            <Icon type="plus" />
           </Button>
         }
       >
         <div className="map-view">
           <Legend />
           <ListView items={this.state.maplist} />
-          <ToolBar 
+          <ToolBar
             mapView="list"
             areaView={this.state.areaView}
             onChangeModeView={this.handleOnChangeModeView}
@@ -77,7 +76,7 @@ class LandListViewContainer extends React.Component {
           />
         </div>
       </BaseLayout>
-    )
+    );
   }
 }
 
