@@ -5,13 +5,17 @@ import BaseLayout from '../components/layout/base';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import Legend from '../components/map-view/Legend';
-import ListView from '../components/map-view/List';
-import ToolBar from '../components/map-view/Toolbar';
+import FilterLand from '../components/land/Filter';
+import LandList from '../components/land/List';
+import LandCarousel from '../components/land/Carousel';
 
 class LandListViewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      region: '',
+      view: 'list',
+      status: '',
       areaView: '', // conserved, proposed
       maplist: [],
     };
@@ -49,6 +53,24 @@ class LandListViewContainer extends React.Component {
     this.fetchAreas(event.target.value);
   };
 
+  handleOnChangeRegion = value => {
+    this.setState({
+      region: value,
+    });
+  };
+
+  handleOnChangeView = value => {
+    this.setState({
+      view: value,
+    });
+  };
+
+  handleOnChangeStatus = value => {
+    this.setState({
+      status: value,
+    });
+  };
+
   render() {
     return (
       <BaseLayout
@@ -67,13 +89,19 @@ class LandListViewContainer extends React.Component {
       >
         <div className="map-view">
           <Legend />
-          <ListView items={this.state.maplist} />
-          <ToolBar
-            mapView="list"
-            areaView={this.state.areaView}
-            onChangeModeView={this.handleOnChangeModeView}
-            onChangeAreaView={this.handleOnChangeAreaView}
+          <FilterLand
+            defaultRegion={this.state.region}
+            defaultView={this.state.view}
+            defaultStatus={this.state.status}
+            onChangeRegion={this.handleOnChangeRegion}
+            onChangeView={this.handleOnChangeView}
+            onChangeStatus={this.handleOnChangeStatus}
           />
+          {this.state.view == 'list' ? (
+            <LandList lands={this.state.maplist} />
+          ) : (
+            <LandCarousel lands={[]} />
+          )}
         </div>
       </BaseLayout>
     );
