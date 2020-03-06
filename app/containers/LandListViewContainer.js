@@ -13,7 +13,7 @@ class LandListViewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: '',
+      region: 'San Juan',
       view: 'list',
       status: '',
       areaView: '', // conserved, proposed
@@ -100,7 +100,7 @@ class LandListViewContainer extends React.Component {
           {this.state.view == 'list' ? (
             <LandList lands={this.state.maplist} />
           ) : (
-            <LandCarousel lands={[]} />
+            <LandCarousel lands={this.state.maplist} />
           )}
         </div>
       </BaseLayout>

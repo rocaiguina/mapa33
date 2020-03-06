@@ -9,41 +9,64 @@ const { Option } = Select;
 class Filter extends React.Component {
   render() {
     return (
-      <Row>
-        <Col>Región</Col>
-        <Col>
-          <Select
-            defaultValue={this.props.defaultRegion}
-            onChange={this.props.onChangeRegion}
-          >
-            <Option value="lajas">Lajas</Option>
-          </Select>
-        </Col>
-        <Col>Vista</Col>
-        <Col>
-          <Select
-            defaultValue={this.props.defaultView}
-            onChange={this.props.onChangeView}
-          >
-            <Option value="list">Lista</Option>
-            <Option value="card">Tarjetas</Option>
-          </Select>
-        </Col>
-        <Col>Estatus</Col>
-        <Col>
-          <Select
-            defaultValue={this.props.defaultStatus}
-            onChange={this.props.onChangeStatus}
-          >
-            <Option value="ambas">Ambas</Option>
-          </Select>
-        </Col>
-        <Col>
-          <Link to="/land">
-            <Icon type="close" />
-          </Link>
-        </Col>
-      </Row>
+      <div className="land-filter">
+        <Row gutter={12}>
+          <Col span={2}>
+            <label>Región</label>
+          </Col>
+          <Col span={6}>
+            <Select
+              size="large"
+              className="ant-select-black ant-select-round"
+              defaultValue={this.props.defaultRegion}
+              onChange={this.props.onChangeRegion}
+              style={{ width: '100%' }}
+            >
+              <Option value="Lajas">Lajas</Option>
+              <Option value="San Juan">San Juan</Option>
+            </Select>
+          </Col>
+          <Col span={2} className="text-right">
+            <label>Vista</label>
+          </Col>
+          <Col span={4}>
+            <Select
+              size="large"
+              className="ant-select-black ant-select-round"
+              defaultValue={this.props.defaultView}
+              onChange={this.props.onChangeView}
+              style={{ width: '100%' }}
+            >
+              <Option value="list">Lista</Option>
+              <Option value="card">Tarjetas</Option>
+            </Select>
+          </Col>
+          <Col span={2} className="text-right">
+            <label>Estatus</label>
+          </Col>
+          <Col span={4}>
+            <Select
+              size="large"
+              className="ant-select-black ant-select-round"
+              defaultValue={this.props.defaultStatus}
+              onChange={this.props.onChangeStatus}
+              style={{ width: '100%' }}
+            >
+              <Option value="">Todas</Option>
+              <Option value="conserved">Protegidas</Option>
+              <Option value="proposed">Propuestas</Option>
+            </Select>
+          </Col>
+          <Col span={4} className="text-right">
+            <Link
+              to="/land"
+              className="ant-btn ant-btn-round ant-btn-white ant-btn-lg"
+            >
+              <Icon type="close" />
+            </Link>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

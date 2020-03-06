@@ -228,6 +228,39 @@ body {
   text-align: center;
 }
 
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px dotted #dee2e6;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cell-fit {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.align-middle {
+  vertical-align: middle !important;
+}
+
+/* Colors */
+.text-purple {
+  color: #f073a8;
+}
+
 /* Layout */
 #root {
   height: 100%;
@@ -453,6 +486,21 @@ ul.actions {
   background-color: #f073a8;
 }
 
+.land-level {
+  background-color: #ccc;
+  border-radius: 6px;
+  display: block;
+  height: 6px;
+  margin-top: 4px;
+  width: 25px;
+}
+.land-level.land-level-protected {
+  background-color: #5bbcae;
+}
+.land-level.land-level-proposed {
+  background-color: #f073a8;
+}
+
 /* Land detail */
 .land-detail h2 {
   font-size: 24px;
@@ -540,6 +588,11 @@ ul.actions {
   text-align: center;
 }
 
+/* Land filter */
+.land-filter label {
+  font-weight: bold;
+}
+
 /* Land cards */
 .land-card .ant-card-cover img {
   width: 100%;
@@ -557,36 +610,64 @@ ul.actions {
   border-top: none;
   border-bottom: 8px solid transparent; 
 }
-
 .land-card .ant-card-actions > li {
   margin-top: 0px;
   padding: 0 15px;
 }
-
 .land-card .ant-card-actions > li > span {
   cursor: auto;
 }
-
 .land-card .ant-card-actions > li:not(:last-child) {
   border-right: none;
 }
-
 .land-card .ant-card-meta-title,
 .land-card .ant-card-meta-description,
 .land-card .ant-card-actions > li > span {
   color: #000000;
 }
-
 .land-card .ant-card-actions {
   background: #fff;
 }
-
 .land-protected .ant-card-actions {
   border-bottom-color: #5bbcae;
 }
-
 .land-proposed .ant-card-actions {
   border-bottom-color: #f073a8;
+}
+
+/* Empty result */
+.empty-result {
+  margin: 60px 0 40px 0;
+  text-align: center;
+}
+.empty-result h2 {
+  color: inherit;
+  margin-bottom: 30px;
+}
+
+/* Custom select */
+.ant-select {
+  margin-bottom: 15px !important;
+}
+
+.ant-select-round .ant-select-selection {
+  border-radius: 24px;
+}
+
+.ant-select-black .ant-select-selection {
+  background-color: #000;
+  border-color: #fff;
+  color: #fff;
+}
+
+.ant-select-black .ant-select-selection:hover,
+.ant-select-black.ant-select-open .ant-select-selection,
+.ant-select-black.ant-select-focused .ant-select-selection {
+  border-color: #fff;
+}
+
+.ant-select-black .ant-select-selection .ant-select-arrow {
+  color: #F073A8;
 }
 
 /* Custom cards */
@@ -595,6 +676,18 @@ ul.actions {
 }
 
 /* Custom buttons */
+.ant-btn.ant-btn-purple {
+  background-color: #F073A8;
+  border-color: #F073A8;
+  color: #fff;
+}
+.ant-btn.ant-btn-purple:hover,
+.ant-btn.ant-btn-purple:focus {
+  background-color: #fff;
+  border-color: #fff;
+  color: #F073A8;
+}
+
 .ant-btn.m33-btn > small {
   font-size: 13px;
 }
@@ -724,7 +817,7 @@ ul.actions {
   line-height: 1.2;
 }
 
-/* Cards theme */
+/* Custom cards theme */
 .ant-card.ant-card-green {
   background: #5bbcae;
   color: #231f20;
@@ -752,6 +845,24 @@ ul.actions {
   color: #000;
   font-size: 12px;
   font-weight: bold;
+}
+
+/* Custom tables */
+.table-land-dark td h4 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Like counter */
+.like-counter {
+  font-weight: bold;
+  font-size: 14px;
+}
+.like-counter .anticon {
+  font-size: 22px;
+  margin-right: 20px;
+  vertical-align: middle;
 }
 
 /* Utils */
@@ -788,6 +899,19 @@ ul.actions {
 }
 .m-b-20 {
   margin-bottom: 20px;
+}
+
+.m-l-10 {
+  margin-left: 10px;
+}
+.m-l-15 {
+  margin-left: 15px;
+}
+.m-l-20 {
+  margin-left: 20px;
+}
+.m-l-50 {
+  margin-left: 50px;
 }
 
 .m-t-0 {

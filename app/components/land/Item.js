@@ -2,26 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import ClassNames from 'classnames';
+import Numeral from 'numeral';
 
 class Item extends React.Component {
   render() {
+    const badgeLevelClass = ClassNames('land-level', {
+      'land-level-protected': this.props.level == 'conserved',
+      'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
+    });
     return (
       <tr>
-        <td>{this.props.level}</td>
+        <td className="cell-fit">
+          <span className={badgeLevelClass}></span>
+        </td>
         <td>
-          <h5>{this.props.name}</h5>
-          {this.props.owner}
+          <h4>{this.props.name}</h4>
+          Nombre de persona
         </td>
         <td>
           {this.props.location}
           <br />
-          {this.props.area_size} cuerdas de extensión
+          {Numeral(this.props.area_size).format('0,0')} cuerdas de extensión
         </td>
         <td>
-          <Icon type="heart" theme="filled" /> 1,290
+          <span className="like-counter">
+            <Icon type="heart" theme="filled" />
+            {Numeral(1290).format('0,0')}
+          </span>
         </td>
-        <td>
-          <Link to={`/land/${this.props.id}`}>Ver ficha</Link>
+        <td className="align-middle text-center">
+          <Link className="text-purple" to={`/land/${this.props.id}`}>
+            <strong>Ver ficha</strong>
+          </Link>
         </td>
       </tr>
     );

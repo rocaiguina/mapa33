@@ -12,8 +12,8 @@ class List extends React.Component {
     }
 
     return (
-      <div>
-        <table>
+      <div className="table-responsive">
+        <table className="table table-land-dark">
           <tbody>
             {lands &&
               lands.map(land => (
