@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  admin_access: function (req, res, next) {
+  admin_access: function(req, res, next) {
     if (req.user.role == 'administrator') {
       res.locals.user = req.user;
       return next();
@@ -11,5 +11,5 @@ module.exports = {
     }
 
     res.redirect('/admin/login');
-  }
+  },
 };

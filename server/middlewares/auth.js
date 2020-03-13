@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  login_required: function (req, res, next) {
+  login_required: function(req, res, next) {
     if (req.user) {
       res.locals.user = req.user;
       return next();
@@ -12,5 +12,5 @@ module.exports = {
     }
 
     res.redirect('/admin/login');
-  }
+  },
 };

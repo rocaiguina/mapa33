@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 
@@ -12,6 +14,6 @@ router.get('/:id', LandController.lookup, LandController.get);
 router.put('/:id', LandController.lookup, LandController.update);
 router.delete('/:id', LandController.lookup, LandController.remove);
 router.post('/:id/like', LandController.like);
-router.get('/:id/like/:user_id', LandController.checkUserLike)
+router.get('/:id/like/:user_id', LandController.checkUserLike);
 
 module.exports = router;

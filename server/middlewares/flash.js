@@ -16,39 +16,37 @@ var connectFlash = require('connect-flash')();
  * @return {Function} middleware function
  * @api public
  */
-exports = module.exports = function () {
-
-  return function (req, res, next) {
-    connectFlash(req, res, function () {
+exports = module.exports = function() {
+  return function(req, res, next) {
+    connectFlash(req, res, function() {
       // Proxy the render function so that the flash is
       // retrieved right before the render function is executed
       var render = res.render;
-      res.render = function () {
+      res.render = function() {
         // attach validation error fields.
         res.locals.field_errors = req.flash('field_errors').shift();
 
         // attach flash messages to res.locals.messages
         let messages = [];
-        req.flash('info').forEach(function (value) {
+        req.flash('info').forEach(function(value) {
           messages.push({ type: 'info', content: value });
         });
-        req.flash('success').forEach(function (value) {
+        req.flash('success').forEach(function(value) {
           messages.push({ type: 'success', content: value });
         });
-        req.flash('warning').forEach(function (value) {
+        req.flash('warning').forEach(function(value) {
           messages.push({ type: 'warning', content: value });
         });
-        req.flash('error').forEach(function (value) {
+        req.flash('error').forEach(function(value) {
           messages.push({ type: 'danger', content: value });
         });
         res.locals.messages = messages;
 
         render.apply(res, arguments);
-      }
+      };
       next();
-    })
+    });
   };
-
 };
 
 /**
