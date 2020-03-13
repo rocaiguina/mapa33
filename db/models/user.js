@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
     },
     role: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, // administrator, subscriptor
       allowNull: true,
     },
   }, {
@@ -74,7 +74,6 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     // associations can be defined here
     User.hasOne(models.Survey, { as: 'Survey', foreignKey: 'user_id' });
-    User.hasOne(models.ResetPassword, { as:'ResetPassword', foreignKey: 'user_id' });
   };
   sequelizePaginate.paginate(User);
   return User;

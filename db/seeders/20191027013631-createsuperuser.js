@@ -2,7 +2,6 @@
 
 const encryptor = require('../../server/utils/encryptor');
 
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
@@ -20,8 +19,7 @@ module.exports = {
       last_name: 'Administrator',
       email: 'admin@mapa33.com',
       password: encryptor.encrypt('admin123'),
-      createdAt: new Date(),
-      updatedAt: new Date()
+      role: 'administrator',
     }], {});
   },
 
