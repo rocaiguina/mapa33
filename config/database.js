@@ -9,12 +9,10 @@ module.exports = {
     dialect: "postgres",
     operatorsAliases: false,
     use_env_variable: "DATABASE_URL",
-    "dialectOptions": {
-      "ssl": true
-    }
+
   },test: {
     username: "postgres",
-    password: null,
+    password: "dbroot",
     database: "mapa33-test",
     host: "127.0.0.1",
     dialect: "postgres",
