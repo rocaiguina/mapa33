@@ -5,16 +5,19 @@ import BaseLayout from '../components/layout/base';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import Legend from '../components/map-view/Legend';
-import ListView from '../components/map-view/List';
-import ToolBar from '../components/map-view/Toolbar';
-
+import FilterLand from '../components/land/Filter';
+import LandList from '../components/land/List';
+import LandCarousel from '../components/land/Carousel';
 
 class LandListViewContainer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      areaView: '',             // conserved, proposed
-      maplist: []
+      region: 'San Juan',
+      view: 'list',
+      status: '',
+      areaView: '', // conserved, proposed
+      maplist: [],
     };
   }
 
@@ -24,36 +27,54 @@ class LandListViewContainer extends React.Component {
 
   fetchAreas(areaView) {
     const self = this;
-    Axios
-      .get(`/api/land/?area=${areaView}`)
-      .then(response => {        
+    Axios.get(`/api/land/?area=${areaView}`)
+      .then(response => {
         self.setState({
-          maplist: response.data
-        })
+          maplist: response.data,
+        });
       })
       .catch(err => {
-        alert(err);
+        window.alert(err);
       });
   }
 
-  handleOnAddProposal = (event) => {
+  handleOnAddProposal = () => {
     this.props.history.push('/register');
-  }
+  };
 
-  handleOnChangeModeView = (event) => {
+  handleOnChangeModeView = () => {
     this.props.history.push('/map');
-  }
+  };
 
-  handleOnChangeAreaView = (event) => {
+  handleOnChangeAreaView = event => {
     this.setState({
-      areaView: event.target.value
+      areaView: event.target.value,
     });
     this.fetchAreas(event.target.value);
-  }
+  };
 
-  render () {
+  handleOnChangeRegion = value => {
+    this.setState({
+      region: value,
+    });
+  };
+
+  handleOnChangeView = value => {
+    this.setState({
+      view: value,
+    });
+  };
+
+  handleOnChangeStatus = value => {
+    this.setState({
+      status: value,
+    });
+  };
+
+  render() {
     return (
-      <BaseLayout dark
+      <BaseLayout
+        dark
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -62,22 +83,28 @@ class LandListViewContainer extends React.Component {
             onClick={this.handleOnAddProposal}
             bordered
           >
-            <Icon type="plus"/>
+            <Icon type="plus" />
           </Button>
         }
       >
         <div className="map-view">
           <Legend />
-          <ListView items={this.state.maplist} />
-          <ToolBar 
-            mapView="list"
-            areaView={this.state.areaView}
-            onChangeModeView={this.handleOnChangeModeView}
-            onChangeAreaView={this.handleOnChangeAreaView}
+          <FilterLand
+            defaultRegion={this.state.region}
+            defaultView={this.state.view}
+            defaultStatus={this.state.status}
+            onChangeRegion={this.handleOnChangeRegion}
+            onChangeView={this.handleOnChangeView}
+            onChangeStatus={this.handleOnChangeStatus}
           />
+          {this.state.view == 'list' ? (
+            <LandList lands={this.state.maplist} />
+          ) : (
+            <LandCarousel lands={this.state.maplist} />
+          )}
         </div>
       </BaseLayout>
-    )
+    );
   }
 }
 

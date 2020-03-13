@@ -3,9 +3,7 @@ import BaseLayout from '../components/layout/base';
 import Info from '../components/info';
 
 class InfoContainer extends React.Component {
-
-  render () {
-    console.log('entro a infocontainer')
+  render() {
     return (
       <BaseLayout dark>
         <Info />

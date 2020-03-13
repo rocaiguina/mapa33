@@ -7,32 +7,32 @@ import Legend from '../components/map-view/Legend';
 import MapView from '../components/map-view/Map';
 import ToolBar from '../components/map-view/Toolbar';
 
-
 class LandMapViewContainer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      areaView: '',           // conserved, proposed
+      areaView: '', // conserved, proposed
     };
   }
 
-  handleOnAddProposal = (event) => {
+  handleOnAddProposal = () => {
     this.props.history.push('/register');
-  }
+  };
 
-  handleOnChangeModeView = (event) => {
+  handleOnChangeModeView = () => {
     this.props.history.push('/map/list');
-  }
+  };
 
-  handleOnChangeAreaView = (event) => {
+  handleOnChangeAreaView = event => {
     this.setState({
-      areaView: event.target.value
+      areaView: event.target.value,
     });
-  }
+  };
 
-  render () {
+  render() {
     return (
-      <BaseLayout dark
+      <BaseLayout
+        dark
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -41,18 +41,19 @@ class LandMapViewContainer extends React.Component {
             onClick={this.handleOnAddProposal}
             bordered
           >
-            <Icon type="plus"/>
+            <Icon type="plus" />
           </Button>
         }
       >
         <div className="map-view">
           <Legend />
           <MapView areaView={this.state.areaView} />
-          <ToolBar 
+          <ToolBar
             mapView="map"
             areaView={this.state.areaView}
             onChangeModeView={this.handleOnChangeModeView}
-            onChangeAreaView={this.handleOnChangeAreaView}/>
+            onChangeAreaView={this.handleOnChangeAreaView}
+          />
         </div>
       </BaseLayout>
     );

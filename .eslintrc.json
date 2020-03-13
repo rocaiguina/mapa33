@@ -1,0 +1,35 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:node/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": 2,
+    "node/no-unsupported-features/es-syntax": 0,
+    "node/no-unpublished-import": ["off"],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true
+      }
+    ]
+  },
+  "plugins": [
+    "react",
+    "prettier",
+    "node"
+  ]
+}
