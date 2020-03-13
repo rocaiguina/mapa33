@@ -2,29 +2,27 @@ import React from 'react';
 import Slider from 'react-slick';
 import Video from './video';
 import Welcome from './welcome';
-import Land from './lands';
 
 class Intro extends React.Component {
-
-  componentDidMount () {
+  componentDidMount() {
     let self = this;
-    setTimeout(function () {
+    setTimeout(function() {
       self.slider.slickNext();
     }, 2000);
   }
 
   goNextSlide = () => {
     this.slider.slickNext();
-  }
+  };
 
-  render () {
+  render() {
     const options = {
       infinite: false,
       dots: false,
       arrows: false,
       swipe: false,
       swipeToSlide: false,
-      touchMove: false
+      touchMove: false,
     };
 
     return (
@@ -33,14 +31,12 @@ class Intro extends React.Component {
           <Welcome />
         </div>
         <div>
-          <Video videoId="HNK6EyNCWrg"
-            onEnd={this.goNextSlide}
-            onSkip={this.goNextSlide}/>
+          <Video
+            videoId="HNK6EyNCWrg"
+            onEnd={this.props.onEnd}
+            onSkip={this.props.onEnd}
+          />
         </div>
-        <div>
-          <Land onClose={this.props.onEnd}/>
-        </div>
-
       </Slider>
     );
   }

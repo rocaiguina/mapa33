@@ -3,27 +3,44 @@ import { Card, Col, Row } from 'antd';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
 
-export default (props) => {
+export default props => {
   return (
     <div className="intro">
       <div className="intro-text">
         <div className="intro-close">
-          <Button type="primary" ghost size="large" onClick={props.onClose}>
+          <Button type="primary" ghost size="medium" onClick={props.onClose}>
             <Icon type="close" />
           </Button>
         </div>
         <Row>
-          <Col lg={{ span: 6, offset: 9 }}>
+          <Col lg={{ span: 8, offset: 8 }}>
             <Card className="ant-card-intro ant-card-round ant-card-green">
               <p>
-              Si tu propuesta recibe suficiente apoyo, te daremos todas las herramientas para que comiences tu iniciativa. También puedes formar parte del proyecto apoyando las propuestas que te gustan, compartiendolas, y escribiendo en la parte de los comentarios.
+                <b>¿Que puedes hacer en Mapa 33?</b>
+                <br />
+                En este mapa especial tu puedes proponer áreas para crear
+                iniciativas junto a PLN, para proteger o crear usos de beneficio
+                para el bienestar ecológico-cultural de Puerto Rico.
               </p>
               <p>
-              Tu participación nos ayuda a escribir una nueva historia para la naturaleza, compartiendo cómo ella forma parte de la tuya.
+                <b>Maneras de usar este mapa:</b>
+                <br />
+                1 - Proponiendo áreas por medio del botón de ”Proponer Área”
+                <br />2 - Explorando el mapa de las áreas propuestas, en el cual
+                podrás accesar y ver en detalle las áreas propuestas e
+                interactuar con las mismas por medio de apoyarlas y compartir en
+                sus redes sociales en señal de apoyo.
               </p>
-              <br/>
+              <p>
+                <b>Una colaboración con PLN:</b>
+                <br />
+                Aquí un enlace que explica como PLN hará uso de este mapa.
+              </p>
+              <br />
               <div className="text-center">
-                <Button type="primary" onClick={props.onExploreMap}>EXPLORA EL MAPA <Icon type="arrow-right"/></Button>
+                <Button type="primary" onClick={props.onExploreMap}>
+                  EXPLORA EL MAPA <Icon type="arrow-right" />
+                </Button>
               </div>
             </Card>
           </Col>
@@ -31,4 +48,4 @@ export default (props) => {
       </div>
     </div>
   );
-}
+};

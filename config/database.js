@@ -11,7 +11,7 @@ module.exports = {
     use_env_variable: "DATABASE_URL",
   },test: {
     username: "postgres",
-    password: null,
+    password: "dbroot",
     database: "mapa33-test",
     host: "127.0.0.1",
     dialect: "postgres",
