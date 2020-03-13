@@ -35,7 +35,7 @@ module.exports = {
         type: 'foreign key',
         name: 'survey_user_fkey_constraint',
         references: {
-          table: 'Users',
+          table: 'users',
           field: 'id'
         },
         onDelete: 'CASCADE',

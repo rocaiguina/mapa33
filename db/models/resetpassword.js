@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    tableName: 'reset_passwords',
     paranoid: false
   });
   ResetPassword.associate = function(models) {

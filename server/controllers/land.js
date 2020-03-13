@@ -6,6 +6,7 @@ const Sequelize     = require('sequelize');
 const Models        = require('../../db/models');
 const RandomToken   = require('random-token');
 const Land          = Models.Land;
+const LandLikes     = Models.LandLikes;
 const Op            = Sequelize.Op;
 
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
@@ -273,6 +274,65 @@ class LandController {
       });
   }
 
+  checkUserLike (req, res) {
+    LandLikes.findOne({
+      where: {
+        land_id: req.params.id,
+        user_id: req.params.user_id,
+      },
+    })
+    .then(function (landlike) {
+      res.json(landlike.get({ plain: true }));
+    })
+    .catch(function (err) {
+      res.status(400).send(err);
+    });
+  }
+
+  like (req, res) {
+    const validationSchema = {
+      user_id: Joi.number().required(),
+    };
+
+    const result = Joi.validate(req.body, validationSchema);
+
+    if (result.error) {
+      return res.status(400).send(result.error);
+    }
+
+    const cleaned_data = result.value;
+
+    LandLikes.findOne({ 
+      where: {
+        land_id: req.params.id,
+        user_id: cleaned_data.user_id,
+      },
+    })
+    .then(function (landlike) {
+      if (landlike) {
+        return res.json(landlike.get({ plain: true }));
+      }
+      Land.increment('likes',
+        { where: { id: req.params.id }
+      })
+      .then(function () {
+        return LandLikes.create({
+          land_id: req.params.id,
+          user_id: cleaned_data.user_id,
+          liked_at: new Date(),
+        });
+      })
+      .then(function (created) {
+        res.json(created.get({ plain: true }));
+      })
+      .catch(function (err) {
+        res.status(400).send(err);
+      });
+    })
+    .catch(function (err) {
+      res.status(400).send(err);
+    });
+  }
 }
 
 module.exports = new LandController();

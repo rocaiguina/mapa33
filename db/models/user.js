@@ -11,15 +11,64 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        isEmail: true
+        isEmail: true,
       }
     },
     password: DataTypes.STRING,
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    birthday: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    company: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    estate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    zip_code: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    advs_by_email: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    advs_by_zip: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    interested_volunteer: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     role: {
       type: DataTypes.STRING,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {
+    tableName: 'users',
     paranoid: true
   });
   User.associate = function(models) {

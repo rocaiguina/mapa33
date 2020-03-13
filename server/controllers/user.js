@@ -39,47 +39,52 @@ class UserController {
     }
 
     store (req, res, next) {
-        if(Object.keys(req.body).length == 0){
-            return res.status(400).send('Your data is empty');
-        }
-        req.body.password = encryptor.encrypt(req.body.password);
-        var data = req.body;
-        const validationSchema = {
-            first_name:           Joi.string().required(),
-            last_name:            Joi.string().required(),
-            email:                Joi.string().required(),
-            password:             Joi.string().required(),
-        };
+      const validationSchema = {
+        first_name: Joi.string().required(),
+        last_name: Joi.string().required(),
+        email: Joi.string().required(),
+        password: Joi.string().required(),
+        phone: Joi.string().required(),
+        birthday: Joi.string().required(),
+        gender: Joi.string().allow(''),
+        company: Joi.string().allow(''),
+        address: Joi.string().required(),
+        city: Joi.string().required(),
+        estate: Joi.string().required(),
+        country: Joi.string().required(),
+        zip_code: Joi.string().required(),
+      };
 
-        // Validata data.
-        const result = Joi.validate(data, validationSchema);
+      const result = Joi.validate(req.body, validationSchema);
 
-        if (result.error) {
-            res.status(400).send(result.error);
-            return next();
-        }
+      if (result.error) {
+        return res.status(400).send(result.error);
+      }
 
-        const cleaned_data = result.value;
+      const cleaned_data = result.value;
 
-        // Save new user.
-        User
-            .create({
-                first_name:            cleaned_data.first_name,
-                last_name:             cleaned_data.last_name,
-                email:                 cleaned_data.email,
-                password:              cleaned_data.password,
-            })
-            .then(function (user) {
-                console.log(user);
-                delete user['dataValues']['password'];
-                res.json(user.get({plain: true}));
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            })
-            .finally(function () {
-                next();
-            });
+      // Save new user.
+      User.create({
+        first_name: cleaned_data.first_name,
+        last_name: cleaned_data.last_name,
+        email: cleaned_data.email,
+        password: encryptor.encrypt(cleaned_data.password),
+        phone: cleaned_data.phone,
+        birthday: cleaned_data.birthday,
+        gender: cleaned_data.gender,
+        company: cleaned_data.company,
+        address: cleaned_data.address,
+        city: cleaned_data.city,
+        estate: cleaned_data.estate,
+        country: cleaned_data.country,
+        zip_code: cleaned_data.zip_code,
+      })
+      .then(function (user) {
+        res.json(user.get({plain: true}));
+      })
+      .catch(function (err) {
+        res.status(400).send(err);
+      });
     }
 
     update (req, res, next) {

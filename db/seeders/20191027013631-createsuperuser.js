@@ -15,7 +15,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Users', [{
+    return queryInterface.bulkInsert('users', [{
       first_name: 'Super',
       last_name: 'Administrator',
       email: 'admin@mapa33.com',
@@ -33,6 +33,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Users', { email: 'admin@mapa33.com' }, {});
+    return queryInterface.bulkDelete('users', { email: 'admin@mapa33.com' }, {});
   }
 };

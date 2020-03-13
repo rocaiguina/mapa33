@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -25,6 +25,58 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      birthday: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      gender: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      company: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      estate: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      country: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      zip_code: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      advs_by_email: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      advs_by_zip: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      interested_volunteer: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      role: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,6 +92,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('users');
   }
 };
