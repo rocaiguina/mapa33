@@ -45,15 +45,22 @@ class UserController {
       phone: Joi.string().required(),
       birthday: Joi.string().required(),
       gender: Joi.string().allow(''),
-      company: Joi.string().allow(''),
+      company: Joi.string()
+        .optional()
+        .allow(null, ''),
       address: Joi.string().required(),
       city: Joi.string().required(),
-      estate: Joi.string().required(),
+      estate: Joi.string()
+        .optional()
+        .allow(null, ''),
       country: Joi.string().required(),
       zip_code: Joi.string().required(),
     };
 
-    const result = Joi.validate(req.body, validationSchema);
+    const result = Joi.validate(req.body, validationSchema, {
+      abortEarly: false,
+      allowUnknown: true,
+    });
 
     if (result.error) {
       return res.status(400).send(result.error);
