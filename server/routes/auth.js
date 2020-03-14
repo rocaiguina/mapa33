@@ -2,32 +2,39 @@
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const encryptor = require('../utils/encryptor');
 var db = require('../../db/models');
-const User = db.User;
+
 const router = express.Router();
+const User = db.User;
 
 router.post('/', function(req, res) {
   User.findOne({
     where: {
       email: req.body.email,
-      password: req.body.password,
     },
   })
     .then(function(user) {
       if (user != null) {
-        const user = {
-          email: req.body.email,
-          password: req.body.password,
-        };
-        jwt.sign({ user: user }, 'llave', function(err, token) {
-          res.json({ token });
-        });
-      } else {
-        res.json('NO VÁLIDO');
+        const matchCredentials = encryptor.compare(
+          req.body.password,
+          user.password
+        );
+        if (matchCredentials) {
+          const credentials = {
+            id: user.id,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+          };
+          const token = jwt.sign({ user: credentials }, 'private key here');
+          return res.json({ token });
+        }
       }
+      res.status(400).send('Authentication failed.');
     })
     .catch(err => {
-      res.json(err);
+      return res.status(400).send(err);
     });
 });
 

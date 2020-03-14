@@ -1031,6 +1031,10 @@ ul.actions {
   margin-bottom: 20px;
 }
 
+.m-b-30 {
+  margin-bottom: 30px;
+}
+
 .m-l-10 {
   margin-left: 10px;
 }
@@ -1065,6 +1069,10 @@ ul.actions {
 
 .m-t-20 {
   margin-top: 20px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
 }
 
 /* Wizard */

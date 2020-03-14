@@ -13,10 +13,12 @@ import LandDetailContainer from './containers/LandDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
 import RegisterUser from './containers/user/RegisterUser';
 import RegisterUserSuccessful from './containers/user/RegisterUserSuccessful';
+import Login from './containers/auth/Login';
 
 export default () => (
   <Router>
     <Switch>
+      <Route exact={true} path="/login" component={Login}/>
       <Route exact={true} path="/map" component={LandMapViewContainer} />
       <Route exact={true} path="/map/list" component={LandListViewContainer} />
       <Route exact={true} path="/register/success" component={RegisterSuccessContainer} />
