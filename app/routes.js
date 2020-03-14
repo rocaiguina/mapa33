@@ -11,7 +11,7 @@ import RegisterSuccessContainer from './containers/RegisterSuccessContainer';
 import RegisterWizardContainer from './containers/RegisterWizardContainer';
 import LandDetailContainer from './containers/LandDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
-import UserContainer from './containers/UserContainer';
+import UserRegisterContainer from './containers/UserRegisterContainer';
 
 export default () => (
   <Router>
@@ -21,10 +21,9 @@ export default () => (
       <Route path="/register/success" component={RegisterSuccessContainer} />
       <Route path="/register" component={RegisterWizardContainer} />
       <Route path="/land/:landId" component={LandDetailContainer} />
-      <Route path="/user" component={UserContainer}/>
+      <Route path="/user/register" component={UserRegisterContainer}/>
       <Route path="/info" component={InfoContainer} />
       <Route path="/" component={IntroContainer} />
-
     </Switch>
   </Router>
 );
