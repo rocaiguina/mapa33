@@ -8,7 +8,7 @@ export default props => {
     <div className="intro">
       <div className="intro-text">
         <div className="intro-close">
-          <Button type="primary" ghost size="medium" onClick={props.onClose}>
+          <Button type="primary" ghost size="default" onClick={props.onClose}>
             <Icon type="close" />
           </Button>
         </div>
