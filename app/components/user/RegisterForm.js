@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Col,
   Input,
   Row,
@@ -9,9 +10,9 @@ import {
   Typography,
 } from 'antd';
 import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
-import Button from '../ui/Button';
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -30,8 +31,8 @@ const registerValidationSchema = Yup.object().shape({
   country: Yup.string().required('Campo requerido.'),
   zip_code: Yup.string().required('Campo requerido.'),
   terms_and_conditions: Yup.boolean()
-    .required('Debes aceptar los términos y condiciones')
-    .oneOf([true], 'Debes aceptar los términos y condiciones'),
+    .required('Debes aceptar los términos y condiciones.')
+    .oneOf([true], 'Debes aceptar los términos y condiciones.'),
 });
 
 class RegisterForm extends React.Component {
@@ -69,9 +70,12 @@ class RegisterForm extends React.Component {
               </Col>
               <Col md={8}>
                 <h2 className="text-right">
-                  <a style={{ color: '#f576a9', fontWeight: 'bold' }}>
+                  <Link
+                    to="/login"
+                    style={{ color: '#f576a9', fontWeight: 'bold' }}
+                  >
                     Ya estoy registrado/a
-                  </a>
+                  </Link>
                 </h2>
               </Col>
             </Row>
@@ -278,8 +282,8 @@ class RegisterForm extends React.Component {
                     defaultChecked={false}
                     onChange={handleChange}
                   >
-                    Deseo recibir promociones de Para la Naturaleza en mi
-                    correo electrónico
+                    Deseo recibir promociones de Para la Naturaleza en mi correo
+                    electrónico
                   </Checkbox>
                 </div>
                 <div className="form-check">
@@ -307,7 +311,13 @@ class RegisterForm extends React.Component {
                     defaultChecked={false}
                     onChange={handleChange}
                   >
-                    He leído y acepto la <a href="#">POLÍTICA DE PRIVACIDAD</a>
+                    He leído y acepto la{' '}
+                    <Link
+                      to="/page/terms-and-conditions"
+                      style={{ color: '#222' }}
+                    >
+                      POLÍTICA DE PRIVACIDAD
+                    </Link>
                   </Checkbox>
                   <Text type="danger">{errors.terms_and_conditions}</Text>
                 </div>
@@ -318,13 +328,15 @@ class RegisterForm extends React.Component {
                 <span>* Campos requeridos.</span>
               </Col>
               <Col md={8}>
-                <div className="text-right">
+                <div className="form-group text-right">
                   <Button
+                    size="large"
+                    shape="round"
+                    className="ant-btn-purple"
                     htmlType="submit"
-                    type="secondary"
                     loading={isSubmitting}
                   >
-                    Registrar
+                    REGISTRAR
                   </Button>
                 </div>
               </Col>

@@ -5,7 +5,7 @@ import Header from './header';
 import Footer from './footer';
 
 class BaseLayout extends Component {
-  render () {
+  render() {
     const layoutClass = ClassNames('main', {
       'main-dark': this.props.dark
     });
@@ -16,7 +16,12 @@ class BaseLayout extends Component {
 
     return (
       <div className={layoutClass}>
-        { this.props.header && <Header dark={this.props.darkHeader}>{this.props.header}{this.props.subheader}</Header> }
+        <Header
+          dark={this.props.dark}
+          title={this.props.title}
+          actions={this.props.actions}
+        />
+        { /*this.props.header && <Header dark={this.props.darkHeader}>{this.props.header}{this.props.subheader}</Header> */}
         <div className={contentClass}>
           <div className="container">
             { this.props.children }
@@ -28,5 +33,11 @@ class BaseLayout extends Component {
     );
   }
 }
+
+BaseLayout.propTypes = {
+  title: PropTypes.string,
+  dark: PropTypes.bool,
+  actions: PropTypes.array,
+};
 
 export default BaseLayout;
