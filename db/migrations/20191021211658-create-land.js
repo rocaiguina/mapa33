@@ -44,6 +44,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true,
       },
+      area_type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       likes: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
@@ -60,7 +64,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      year_stab: {
+      year_estab: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -74,6 +78,14 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      ownership: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      notes: {
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       status: {

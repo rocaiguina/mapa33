@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     level: {
-      type: DataTypes.STRING,       // basic, pledge, conserved
+      type: DataTypes.STRING, // basic, pledge, conserved
       allowNull: true,
     },
     photograph: {
@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     area_size: {
       type: DataTypes.DOUBLE,
+      allowNull: true,
+    },
+    area_type: {
+      type: DataTypes.STRING, // marina, terrestre
       allowNull: true,
     },
     likes: {
@@ -72,8 +76,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    status: {
+    ownership: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING, // new, approved, rejected
       allowNull: true,
     },
   }, {
@@ -87,7 +99,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Land.associate = function(models) {
     // associations can be defined here
-    Land.belongsTo(models.User, { as: 'Owner', foreignKey: 'user_id' });
+    Land.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
   };
 
   // Paginate plugin

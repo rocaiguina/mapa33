@@ -25,6 +25,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    })
+    .then(function () {
+      return queryInterface.addConstraint('reset_passwords', ['user_id'], {
+        type: 'foreign key',
+        name: 'reset_password_user_fkey_constraint',
+        references: {
+          table: 'users',
+          field: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     });
   },
   down: (queryInterface, Sequelize) => {

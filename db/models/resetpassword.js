@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   ResetPassword.associate = function(models) {
     // associations can be defined here
+    ResetPassword.belongsTo(models.User, { as:'user', foreignKey: 'user_id' });
   };
   return ResetPassword;
 };
