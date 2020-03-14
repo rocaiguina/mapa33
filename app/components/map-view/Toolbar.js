@@ -28,6 +28,10 @@ class MapToolBar extends React.Component {
         )
     }    
     
+    userLogin = (event) => {
+        window.location.href = '/user/login'; 
+    }
+    
   render () {
     const RadioMapView = (
       <Radio.Group onChange={this.props.onChangeModeView} value={this.props.mapView}
@@ -60,7 +64,7 @@ class MapToolBar extends React.Component {
           {this.state.mostrar ? ( 
           <div className={"overlaymenu"}>
             <div className={"buttonmenu"}>
-                <Button type="primary" ghost size="large" >
+                <Button type="primary" ghost size="large" onClick={this.userLogin} >
                     <Icon type="user" />
                 </Button>
                 <Button style={{marginLeft:"10px"}} type="primary" ghost size="large" onClick={this.closeOverlay}>

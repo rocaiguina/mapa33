@@ -1,5 +1,7 @@
 import React from 'react';
 import Register from './register';
+import Login from './login';
+import Profile from './profile';
 import { withRouter } from 'react-router';
 import {
   Switch,
@@ -16,6 +18,12 @@ class User extends React.Component {
     <Switch>
         <Route exact path={`/user/register`} >          
            <Register/>
+        </Route>        
+        <Route exact path={`/user/login`} >          
+           <Login/>
+        </Route>        
+        <Route exact path={`/user/profile`} >          
+           <Profile/>
         </Route>        
     </Switch>
     );
