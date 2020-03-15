@@ -19,6 +19,7 @@ class Header extends Component {
               ))}
             </ul>
           </div>
+          <div>{this.props.subtitle}</div>
         </div>
       </header>
     );
@@ -33,6 +34,7 @@ Header.propTypes = {
   title: PropTypes.string,
   dark: PropTypes.bool,
   actions: PropTypes.array,
+  subtitle: PropTypes.node,
 };
 
 export default Header;

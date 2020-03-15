@@ -6,6 +6,7 @@ const Sequelize = require('sequelize');
 const Models = require('../../db/models');
 const RandomToken = require('random-token');
 const Land = Models.Land;
+const User = Models.User;
 const LandLikes = Models.LandLikes;
 const Op = Sequelize.Op;
 
@@ -14,11 +15,12 @@ const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
   findAll(req, res) {
-    let area = req.query.area;
+    let level = req.query.level;
+    let location = req.query.location;
 
     let conditions = {};
 
-    switch (area) {
+    switch (level) {
       case 'proposed':
         conditions.level = {
           [Op.in]: PROPOSED_LAND_LEVELS,
@@ -31,10 +33,22 @@ class LandController {
         break;
     }
 
+    if (location) {
+      conditions.location = {
+        [Op.like]: '%' + location,
+      };
+    }
+
     Land.findAll({
       where: conditions,
       attributes: { exclude: ['geom'] },
-      limit: 10,
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['first_name', 'last_name'],
+        },
+      ],
     })
       .then(function(lands) {
         res.send(lands);

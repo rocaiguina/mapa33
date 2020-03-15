@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
+import Numeral from 'numeral';
 
 const { Meta } = Card;
 
@@ -23,7 +24,7 @@ class LandCard extends React.Component {
         }
         actions={[
           <div key="1" className="text-left">
-            <Icon type="heart" key="heart" /> 10,999
+            <Icon type="heart" key="heart" /> {Numeral(this.props.likes).format('0,0')}
           </div>,
           <div key="2" className="text-right">
             <Icon type="share-alt" key="share-alt" />
@@ -44,6 +45,7 @@ LandCard.propTypes = {
   level: PropTypes.string,
   owner: PropTypes.string,
   location: PropTypes.string,
+  likes: PropTypes.number,
 };
 
 export default LandCard;

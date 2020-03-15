@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Select } from 'antd';
-import { Link } from 'react-router-dom';
-import Icon from '../ui/Icon';
 
 const { Option } = Select;
 
@@ -22,6 +20,7 @@ class Filter extends React.Component {
               onChange={this.props.onChangeRegion}
               style={{ width: '100%' }}
             >
+              <Option value="Bosque Estatal">Bosque Estatal</Option>
               <Option value="Lajas">Lajas</Option>
               <Option value="San Juan">San Juan</Option>
             </Select>
@@ -56,14 +55,6 @@ class Filter extends React.Component {
               <Option value="conserved">Protegidas</Option>
               <Option value="proposed">Propuestas</Option>
             </Select>
-          </Col>
-          <Col span={4} className="text-right">
-            <Link
-              to="/land"
-              className="ant-btn ant-btn-round ant-btn-white ant-btn-lg"
-            >
-              <Icon type="close" />
-            </Link>
           </Col>
         </Row>
       </div>

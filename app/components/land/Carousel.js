@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Button from '../ui/Button';
+import { Button } from 'antd';
 import Card from './Card';
 import Empty from './Empty';
 import Icon from '../ui/Icon';
@@ -75,26 +75,28 @@ class Carousel extends React.Component {
                 owner={land.owner}
                 location={land.location}
                 area_size={land.area_size}
+                likes={land.likes}
               />
             ))}
         </Slider>
-        <p className="slick-slider-paginator">
-          {this.state.current}/{lands.length}
-        </p>
-        <div className="toolbar hidden-sm hidden-xs">
-          <ul>
-            <li>
-              <Button size="large" ghost onClick={this.handleOnPrev}>
-                <Icon type="arrow-left-2" />
-              </Button>
-            </li>
-            <li>
-              <Button size="large" ghost onClick={this.handleOnNext}>
-                <Icon type="arrow-right-2" />
-              </Button>
-            </li>
-          </ul>
-        </div>
+        <ul
+          style={{ marginTop: '0' }}
+          className="pager pager-justified hidden-sm hidden-xs"
+        >
+          <li className="previous">
+            <Button shape="round" ghost onClick={this.handleOnPrev}>
+              <Icon type="arrow-left-2" />
+            </Button>
+          </li>
+          <li>
+            {this.state.current}/{lands.length}
+          </li>
+          <li className="next">
+            <Button shape="round" ghost onClick={this.handleOnNext}>
+              <Icon type="arrow-right-2" />
+            </Button>
+          </li>
+        </ul>
       </div>
     );
   }

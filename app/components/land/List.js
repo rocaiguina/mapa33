@@ -22,7 +22,7 @@ class List extends React.Component {
                   id={land.id}
                   name={land.name}
                   level={land.level}
-                  owner={land.owner}
+                  owner={land.user}
                   location={land.location}
                   area_size={land.area_size}
                 />

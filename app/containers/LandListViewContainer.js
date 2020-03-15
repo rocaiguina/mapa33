@@ -1,5 +1,6 @@
 import React from 'react';
-import Axios from 'axios';
+import PropTypes from 'prop-types';
+import { notification, Spin } from 'antd';
 
 import BaseLayout from '../components/layout/base';
 import Button from '../components/ui/Button';
@@ -8,33 +9,42 @@ import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
 import LandList from '../components/land/List';
 import LandCarousel from '../components/land/Carousel';
+import LandApi from '../api/land';
 
 class LandListViewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       region: 'San Juan',
       view: 'list',
-      status: '',
-      areaView: '', // conserved, proposed
+      status: '', // conserved, proposed
       maplist: [],
     };
   }
 
   componentDidMount() {
-    this.fetchAreas(this.state.areaView);
+    const level = this.state.status;
+    const location = this.state.region;
+    this.fetchAreas(level, location);
   }
 
-  fetchAreas(areaView) {
+  fetchAreas(level, location) {
     const self = this;
-    Axios.get(`/api/land/?area=${areaView}`)
-      .then(response => {
+    this.setState({ loading: true });
+    LandApi.find({ level, location })
+      .then(lands => {
         self.setState({
-          maplist: response.data,
+          maplist: lands,
+          loading: false,
         });
       })
-      .catch(err => {
-        window.alert(err);
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró recuperar las áreas naturales. Por favor intenta nuevamente.',
+        });
       });
   }
 
@@ -42,21 +52,12 @@ class LandListViewContainer extends React.Component {
     this.props.history.push('/register');
   };
 
-  handleOnChangeModeView = () => {
-    this.props.history.push('/map');
-  };
-
-  handleOnChangeAreaView = event => {
-    this.setState({
-      areaView: event.target.value,
-    });
-    this.fetchAreas(event.target.value);
-  };
-
   handleOnChangeRegion = value => {
     this.setState({
       region: value,
     });
+    const level = this.state.status;
+    this.fetchAreas(level, value);
   };
 
   handleOnChangeView = value => {
@@ -69,12 +70,26 @@ class LandListViewContainer extends React.Component {
     this.setState({
       status: value,
     });
+    const region = this.state.region;
+    this.fetchAreas(value, region);
+  };
+
+  handleOnClose = () => {
+    const { history } = this.props;
+    history.push('/');
   };
 
   render() {
     return (
       <BaseLayout
         dark
+        title="LEYENDA DE ÁREAS NATURALES"
+        subtitle={<Legend />}
+        actions={[
+          <Button key="1" size="large" type="link" onClick={this.handleOnClose}>
+            <Icon type="close" />
+          </Button>,
+        ]}
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -87,8 +102,7 @@ class LandListViewContainer extends React.Component {
           </Button>
         }
       >
-        <div className="map-view">
-          <Legend />
+        <div className="m-t-15">
           <FilterLand
             defaultRegion={this.state.region}
             defaultView={this.state.view}
@@ -97,15 +111,21 @@ class LandListViewContainer extends React.Component {
             onChangeView={this.handleOnChangeView}
             onChangeStatus={this.handleOnChangeStatus}
           />
-          {this.state.view == 'list' ? (
-            <LandList lands={this.state.maplist} />
-          ) : (
-            <LandCarousel lands={this.state.maplist} />
-          )}
+          <Spin spinning={this.state.loading}>
+            {this.state.view == 'list' ? (
+              <LandList lands={this.state.maplist} />
+            ) : (
+              <LandCarousel lands={this.state.maplist} />
+            )}
+          </Spin>
         </div>
       </BaseLayout>
     );
   }
 }
+
+LandListViewContainer.propTypes = {
+  history: PropTypes.object,
+};
 
 export default LandListViewContainer;

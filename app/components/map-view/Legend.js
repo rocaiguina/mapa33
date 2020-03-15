@@ -4,7 +4,6 @@ import { Col, Row } from 'antd';
 export default (props) => {
   return (
     <div className="map-legend">
-      <h2>LEYENDA</h2>
       <Row>
         <Col lg={5} md={8} xs={12}>
           <dl>

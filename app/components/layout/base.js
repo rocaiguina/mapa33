@@ -13,16 +13,18 @@ class BaseLayout extends Component {
       'with-header': this.props.header,
       'with-subheader': this.props.subheader
     });
+    const paddingTop = this.props.subtitle != null ? '94px': '54px';
 
     return (
       <div className={layoutClass}>
         <Header
           dark={this.props.dark}
           title={this.props.title}
+          subtitle={this.props.subtitle}
           actions={this.props.actions}
         />
         { /*this.props.header && <Header dark={this.props.darkHeader}>{this.props.header}{this.props.subheader}</Header> */}
-        <div className={contentClass}>
+        <div className={contentClass} style={{ paddingTop: paddingTop }}>
           <div className="container">
             { this.props.children }
           </div>
@@ -36,6 +38,7 @@ class BaseLayout extends Component {
 
 BaseLayout.propTypes = {
   title: PropTypes.string,
+  subtitle: PropTypes.node,
   dark: PropTypes.bool,
   actions: PropTypes.array,
 };

@@ -5,7 +5,7 @@ import Icon from '../ui/Icon';
 function Empty() {
   return (
     <div className="empty-result">
-      <h2>No hay áreas propuestas activas.</h2>
+      <h2>No hay áreas propuestas activas en esta región.</h2>
       <Link
         to="/land"
         className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"

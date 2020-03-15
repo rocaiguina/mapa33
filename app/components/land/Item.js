@@ -11,6 +11,12 @@ class Item extends React.Component {
       'land-level-protected': this.props.level == 'conserved',
       'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
     });
+    
+    let owner = '';
+    if (this.props.owner != null) {
+      owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
+    }
+
     return (
       <tr>
         <td className="cell-fit">
@@ -18,7 +24,7 @@ class Item extends React.Component {
         </td>
         <td>
           <h4>{this.props.name}</h4>
-          Nombre de persona
+          {owner}
         </td>
         <td>
           {this.props.location}
@@ -28,7 +34,7 @@ class Item extends React.Component {
         <td>
           <span className="like-counter">
             <Icon type="heart" theme="filled" />
-            {Numeral(1290).format('0,0')}
+            {Numeral(this.props.likes).format('0,0')}
           </span>
         </td>
         <td className="align-middle text-center">
@@ -41,13 +47,23 @@ class Item extends React.Component {
   }
 }
 
+Item.defaultProps = {
+  area_size: 0,
+  likes: 0,
+  owner: {
+    first_name: '',
+    last_name: '',
+  },
+};
+
 Item.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
   level: PropTypes.string,
-  owner: PropTypes.string,
+  owner: PropTypes.object,
   location: PropTypes.string,
   area_size: PropTypes.number,
+  likes: PropTypes.number,
 };
 
 export default Item;

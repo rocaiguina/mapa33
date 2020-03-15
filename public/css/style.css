@@ -256,6 +256,12 @@ body {
   clear: both;
 }
 
+.pager-justified li {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1%;
+}
+
 .badge {
   display: inline-block;
   color: #000;
@@ -375,7 +381,6 @@ body {
 
 .main-content {
   padding-bottom: 120px;
-  padding-top: 60px;
 }
 
 .main-content.with-header {
@@ -465,7 +470,7 @@ body {
 
 /* Pages */
 .page-title {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px dotted #000;
   position: relative;
   margin-bottom: 10px;
 }
@@ -484,6 +489,10 @@ body {
 
 .page-title .actions .ant-btn {
   color: #000;
+}
+
+.main-dark .page-title .actions .ant-btn {
+  color: #fff;
 }
 
 ul.actions {
@@ -546,7 +555,7 @@ ul.actions {
 }
 
 .map-legend dl {
-  margin-bottom: 1.5em;
+  margin-bottom: 0.6em;
 }
 
 .map-legend dt {
@@ -678,12 +687,12 @@ ul.actions {
 
 /* Slick map slider */
 .slick-slider-maplist .slick-slide .ant-card {
-  margin: 15px 10px;
+  margin: 10px;
   transition: all .3s ease;
 }
 
 .slick-slider-maplist .slick-center .ant-card {
-  transform: scaleY(1.1);
+  transform: scaleY(1.06);
 }
 
 .slick-slider-paginator {
@@ -759,6 +768,14 @@ ul.actions {
 .empty-result h2 {
   color: inherit;
   margin-bottom: 30px;
+}
+
+/* Custom spin */
+.ant-spin .ant-spin-text {
+  color: #999;
+}
+.ant-spin .ant-spin-dot-item {
+  background-color: #999;
 }
 
 /* Custom select */
