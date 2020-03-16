@@ -22,6 +22,7 @@ class Filter extends React.Component {
                   onChange={this.props.onChangeRegion}
                   style={{ width: '100%' }}
                 >
+                  <Option value="">Todas</Option>
                   <Option value="Bosque Estatal">Bosque Estatal</Option>
                   <Option value="Lajas">Lajas</Option>
                   <Option value="San Juan">San Juan</Option>
