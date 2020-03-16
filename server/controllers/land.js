@@ -321,7 +321,10 @@ class LandController {
       },
     })
       .then(function(landlike) {
-        res.json(landlike.get({ plain: true }));
+        if (landlike != null) {
+          return res.json(landlike.get({ plain: true }));  
+        }
+        res.json(null);
       })
       .catch(function(err) {
         res.status(400).send(err);

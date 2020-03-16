@@ -15,7 +15,7 @@ class LandDetailContainer extends React.Component {
       name: '',
       photograph: '',
       owner: '',
-      likes: '',
+      likes: 0,
       reason_conservation: '',
       location: '',
       area_size: 0,
@@ -23,12 +23,14 @@ class LandDetailContainer extends React.Component {
       plots_count: 1,
       coordinates: '',
       attributes: '',
+      disabledLike: true,
     };
   }
 
   componentDidMount() {
     const { landId } = this.props.match.params;
     this.fetchLand(landId);
+    this.checkUserLike(landId, 3);
   }
 
   fetchLand(landId) {
@@ -54,8 +56,21 @@ class LandDetailContainer extends React.Component {
         notification.error({
           message: 'Error',
           description:
-            'No se logró recuperar las áreas naturales. Por favor intenta nuevamente.',
+            'No se logró recuperar el área. Por favor intenta nuevamente.',
         });
+      });
+  }
+
+  checkUserLike(landId, userId) {
+    const self = this;
+    LandApi.isLikedByUser(landId, userId)
+      .then(liked => {
+        self.setState({
+          disabledLike: liked,
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
@@ -63,11 +78,38 @@ class LandDetailContainer extends React.Component {
     this.props.history.push('/register');
   };
 
+  handleOnClickLike = (land, setSubmitting) => {
+    const self = this;
+    const userId = 3;
+    LandApi.like(land.id, userId)
+      .then(() => {
+        self.setState(prevState => ({
+          likes: prevState.likes + 1,
+          disabledLike: true,
+        }));
+        notification.success({
+          message: 'Registros satisfactorio',
+          description: 'Gracias por darnos tu apoyo.',
+        });
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró registrar tu apoyo. Por favor intenta nuevamente.',
+        });
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
+
   render() {
     const id = this.props.match.params.landId;
     const {
       name,
       owner,
+      likes,
       location,
       area,
       status,
@@ -76,6 +118,7 @@ class LandDetailContainer extends React.Component {
       coordinates,
       attributes,
       photograph,
+      disabledLike,
     } = this.state;
     return (
       <BaseLayout
@@ -99,6 +142,7 @@ class LandDetailContainer extends React.Component {
             id={id}
             name={name}
             owner={owner}
+            likes={likes}
             location={location}
             area={area}
             status={status}
@@ -107,6 +151,8 @@ class LandDetailContainer extends React.Component {
             coordinates={coordinates}
             attributes={attributes}
             photograph={photograph}
+            disabledLike={disabledLike}
+            onClickLike={this.handleOnClickLike}
           />
         </div>
       </BaseLayout>

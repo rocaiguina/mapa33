@@ -6,6 +6,26 @@ import Numeral from 'numeral';
 import Badge from '../ui/Badge';
 
 class LandDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
+  setSubmitting = loading => {
+    this.setState({ loading });
+  };
+
+  handleOnClickLike = () => {
+    if (this.props.onClickLike) {
+      this.setState({
+        loading: true,
+      });
+      this.props.onClickLike({ id: this.props.id }, this.setSubmitting);
+    }
+  };
+
   render() {
     const photograph =
       this.props.photograph || 'https://dummyimage.com/600x400/dddddd/ffffff';
@@ -72,6 +92,9 @@ class LandDetail extends React.Component {
                     shape="round"
                     className="ant-btn-blue"
                     size="large"
+                    disabled={this.props.disabledLike}
+                    loading={this.state.loading}
+                    onClick={this.handleOnClickLike}
                   >
                     Apoyar
                   </Button>
@@ -91,6 +114,9 @@ class LandDetail extends React.Component {
                   shape="round"
                   className="ant-btn-blue"
                   size="large"
+                  disabled={this.props.disabledLike}
+                  loading={this.state.loading}
+                  onClick={this.handleOnClickLike}
                 >
                   Apoyar
                 </Button>
@@ -187,6 +213,8 @@ LandDetail.propTypes = {
   plots_count: PropTypes.number,
   coordinates: PropTypes.string,
   attributes: PropTypes.string,
+  onClickLike: PropTypes.func,
+  disabledLike: PropTypes.bool,
 };
 
 export default LandDetail;
