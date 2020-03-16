@@ -14,6 +14,7 @@ class Header extends Component {
   render() {
     const headerClass = ClassNames('header', {
       'header-dark': this.props.dark,
+      'has-actions': this.props.showProfileBtn || this.props.showMenuBtn,
     });
 
     return (

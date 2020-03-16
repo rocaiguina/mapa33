@@ -66,7 +66,7 @@ class RegisterForm extends React.Component {
           <form onSubmit={handleSubmit}>
             <Row gutter={16}>
               <Col md={16}>
-                <h1 style={{ marginBottom: '25px' }}>Regístrate:</h1>
+                <h1 style={{ marginBottom: '20px' }}>Regístrate:</h1>
               </Col>
               <Col md={8}>
                 <h2 className="text-right">

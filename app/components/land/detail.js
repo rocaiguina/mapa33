@@ -20,11 +20,11 @@ class LandDetail extends React.Component {
             <Col md={6} style={{ display: 'flex', flexDirection: 'column' }}>
               <h2 className="land-title">{this.props.name}</h2>
               <h5 className="land-owner">{owner}</h5>
-              <div className="land-likes">
+              <div className="land-likes hidden-xs">
                 <Icon type="heart" theme="filled" />
                 {Numeral(this.props.likes).format('0,0')}
               </div>
-              <div className="land-share">
+              <div className="land-share hidden-xs">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -43,6 +43,40 @@ class LandDetail extends React.Component {
               </div>
             </Col>
             <Col md={8} style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="visible-xs">
+                <Row gutter={12}>
+                  <Col span={12}>
+                    <div className="land-likes">
+                      <Icon type="heart" theme="filled" />
+                      {Numeral(this.props.likes).format('0,0')}
+                    </div>
+                  </Col>
+                  <Col span={12}>
+                    <div className="land-share">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+                          document.location.href
+                        )}`}
+                        className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg ant-btn-block"
+                      >
+                        Compartir
+                      </a>
+                    </div>
+                  </Col>
+                </Row>
+                <div className="land-support">
+                  <Button
+                    block
+                    shape="round"
+                    className="ant-btn-blue"
+                    size="large"
+                  >
+                    Apoyar
+                  </Button>
+                </div>
+              </div>
               <p className="land-reason-conservation">
                 ¿Por qué es importante la protección de este terreno en
                 particular?
@@ -51,7 +85,7 @@ class LandDetail extends React.Component {
                 Es un lugar con rasgos naturales especiales (p.e. arboledas,
                 mogotes, lagunas, cuevas).
               </p>
-              <div className="land-support">
+              <div className="land-support hidden-xs">
                 <Button
                   block
                   shape="round"

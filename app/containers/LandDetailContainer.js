@@ -94,7 +94,7 @@ class LandDetailContainer extends React.Component {
           </Button>
         }
       >
-        <div className="main-content">
+        <div className="main-content m-t-15">
           <LandDetail
             id={id}
             name={name}

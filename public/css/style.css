@@ -396,6 +396,10 @@ body {
 
 .header .bottom-actions {
   top: 54px;
+  display: none;
+}
+.header.has-actions .bottom-actions {
+  display: block;
 }
 
 .header .top-actions .ant-btn .anticon {
@@ -425,15 +429,15 @@ body {
 }
 
 @media (max-width: 767px) {
-  .header .top-actions {
-    float: left;
-  }
-  .header .top-actions,
+  .header.has-actions .top-actions,
   .header .bottom-actions {
     position: initial;
   }
   .header .bottom-actions {
     text-align: right;
+  }
+  .header.has-actions .top-actions {
+    float: left;
   }
 }
 
@@ -658,7 +662,9 @@ ul.actions {
 }
 
 .land-likes .anticon {
+  color: #f073a8;
   font-size: 24px;
+  line-height: 28px;
   margin-right: 10px;
   vertical-align: middle;
 }
@@ -682,8 +688,30 @@ ul.actions {
 }
 
 .land-features ul {
+  margin-bottom: 20px;
   padding: 0;
   list-style-position: inside;
+}
+
+@media (max-width: 767px) {
+  .land-detail .land-likes,
+  .land-detail .land-share {
+    margin-bottom: 10px;
+  }
+  .land-detail .land-support {
+    margin-bottom: 20px;
+  }
+  .land-detail .land-likes {
+    border: 1px dotted #fff;
+    border-radius: 40px;
+    height: 54px;
+    line-height: 52px;
+    margin: 0;
+    padding: 0 20px;
+  }
+  .land-detail .land-likes .anticon {
+    line-height: 48px;
+  }
 }
 
 /* Toolbar */
@@ -812,7 +840,7 @@ ul.actions {
 
 /* Empty result */
 .empty-result {
-  margin: 60px 0 40px 0;
+  margin: 50px 0 40px 0;
   text-align: center;
 }
 

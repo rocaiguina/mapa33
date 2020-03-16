@@ -36,7 +36,9 @@ class RegisterUser extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <RegisterForm onSubmit={this.handleOnSubmit} />
+        <div className="main-content m-t-10">
+          <RegisterForm onSubmit={this.handleOnSubmit} />
+        </div>
       </BaseLayout>
     );
   }
