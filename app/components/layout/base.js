@@ -5,15 +5,19 @@ import Header from './header';
 import Footer from './footer';
 
 class BaseLayout extends Component {
+  handleOnMenuClick = () => {
+
+  };
+
   render() {
     const layoutClass = ClassNames('main', {
-      'main-dark': this.props.dark
+      'main-dark': this.props.dark,
     });
-    const contentClass = ClassNames('main-content', {
-      'with-header': this.props.header,
-      'with-subheader': this.props.subheader
-    });
-    const paddingTop = this.props.subtitle != null ? '94px': '54px';
+    let paddingTop = this.props.title != null ? 54 : 0;
+    if (this.props.subtitle != null) {
+      paddingTop += 40;
+    }
+    paddingTop = paddingTop + 'px';
 
     return (
       <div className={layoutClass}>
@@ -21,26 +25,34 @@ class BaseLayout extends Component {
           dark={this.props.dark}
           title={this.props.title}
           subtitle={this.props.subtitle}
-          actions={this.props.actions}
+          showCloseBtn={this.props.showCloseBtn}
+          showMenuBtn={this.props.enableMenu}
+          showProfileBtn={this.props.enableMenu}
+          onMenuClick={this.handleOnMenuClick}
         />
-        { /*this.props.header && <Header dark={this.props.darkHeader}>{this.props.header}{this.props.subheader}</Header> */}
-        <div className={contentClass} style={{ paddingTop: paddingTop }}>
+        <div style={{ paddingTop: paddingTop }}>
           <div className="container">
             { this.props.children }
           </div>
         </div>
-        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent} xs={this.props.footerXs}/>
+        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent} xs={this.props.footerXs} />
         { this.props.afterFooter }
       </div>
     );
   }
 }
 
+BaseLayout.defaultProps = {
+  enableMenu: true,
+};
+
 BaseLayout.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.node,
   dark: PropTypes.bool,
-  actions: PropTypes.array,
+  children: PropTypes.node,
+  showCloseBtn: PropTypes.bool,
+  enableMenu: PropTypes.bool,
 };
 
 export default BaseLayout;

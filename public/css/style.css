@@ -368,7 +368,6 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  padding-top: 15px;
   position: fixed;
   width: 100%;
   z-index: 10;
@@ -377,6 +376,11 @@ body {
 .header {
   background-color: #fff;
   color: #000;
+}
+
+.header-wrap {
+  padding-top: 15px;
+  position: relative;
 }
 
 .main-content {
@@ -402,6 +406,61 @@ body {
 
 .header-dark .page-title {
   border-bottom-color: #fff;
+}
+
+.header .top-actions,
+.header .bottom-actions {
+  margin-bottom: 15px;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+}
+
+.header .top-actions {
+  top: 3px;
+}
+
+.header .bottom-actions {
+  top: 54px;
+}
+
+.header .top-actions .ant-btn .anticon {
+  font-size: 20px;
+}
+
+.header .bottom-actions .ant-btn .anticon {
+  font-size: 28px;
+  line-height: 44px;
+}
+
+.header .bottom-actions .ant-btn {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.header .bottom-actions .ant-btn + .ant-btn {
+  margin-left: 10px;
+}
+
+.top-actions .ant-btn {
+  color: #000;
+}
+
+.main-dark .top-actions .ant-btn {
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .header .top-actions {
+    float: left;
+  }
+  .header .top-actions,
+  .header .bottom-actions {
+    position: initial;
+  }
+  .header .bottom-actions {
+    text-align: right;
+  }
 }
 
 /* Footer */
@@ -479,20 +538,6 @@ body {
   font-size: 16px;
   line-height: 1.2em;
   font-weight: bold;
-}
-
-.page-title .actions {
-  bottom: 0;
-  position: absolute;
-  right: 0;
-}
-
-.page-title .actions .ant-btn {
-  color: #000;
-}
-
-.main-dark .page-title .actions .ant-btn {
-  color: #fff;
 }
 
 ul.actions {
@@ -578,7 +623,7 @@ ul.actions {
   border-radius: 6px;
   display: block;
   height: 6px;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .map-legend .legend-protected {
@@ -703,7 +748,9 @@ ul.actions {
 
 /* Land filter */
 .land-filter label {
+  display: block;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 /* Land cards */
@@ -808,6 +855,16 @@ ul.actions {
   border-radius: 40px;
 }
 
+.ant-btn:hover,
+.ant-btn:focus {
+  color: #F073A8 !important;
+  border-color: #F073A8 !important;
+}
+.ant-btn-link:hover,
+.ant-btn-link:focus {
+  color: #F073A8 !important;
+  border-color: transparent !important;
+}
 /* Custom buttons */
 .ant-btn.ant-btn-purple {
   background-color: #F073A8;
@@ -819,7 +876,7 @@ ul.actions {
 .ant-btn.ant-btn-purple:focus {
   background-color: #dc6396;
   border-color: #dc6396;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .ant-btn.m33-btn>small {
@@ -896,15 +953,16 @@ ul.actions {
 
 .m33-btn.ant-btn-primary:hover,
 .m33-btn.ant-btn-primary:focus {
-  background-color: #222;
-  border-color: #222;
+  background-color: #222 !important;
+  border-color: #222 !important;
+  color: #fff !important;
 }
 
 .m33-btn.ant-btn-secondary:hover,
 .m33-btn.ant-btn-secondary:focus {
-  background-color: #fff;
-  border-color: #f073a8;
-  color: #f073a8;
+  background-color: #fff !important;
+  border-color: #f073a8 !important;
+  color: #f073a8 !important;
 }
 
 .m33-btn.m33-btn-blue:hover,
@@ -936,8 +994,8 @@ ul.actions {
 .m33-btn.ant-btn-background-ghost.ant-btn-primary:hover,
 .m33-btn.ant-btn-background-ghost.ant-btn-primary:focus {
   background: #fff !important;
-  border-color: #fff;
-  color: #000;
+  border-color: #fff !important;
+  color: #000 !important;
 }
 
 .m33-btn.ant-btn-link {

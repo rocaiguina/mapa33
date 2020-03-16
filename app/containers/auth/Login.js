@@ -34,11 +34,8 @@ class Login extends React.Component {
     return (
       <BaseLayout
         title="LOGIN"
-        actions={[
-          <Button key="1" size="large" type="link" onClick={this.handleOnClose}>
-            <Icon type="close" />
-          </Button>,
-        ]}
+        showCloseBtn={true}
+        enableMenu={false}
       >
         <LoginForm onSubmit={this.handleOnSubmit} />
       </BaseLayout>

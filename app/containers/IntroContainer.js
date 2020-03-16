@@ -9,7 +9,11 @@ class IntroContainer extends React.Component {
 
   render() {
     return (
-      <BaseLayout dark>
+      <BaseLayout
+        dark
+        enableMenu={false}
+        showCloseBtn={false}
+      >
         <Intro onEnd={this.handleOnEndIntro} />
       </BaseLayout>
     );

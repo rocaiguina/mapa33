@@ -81,7 +81,7 @@ class Carousel extends React.Component {
         </Slider>
         <ul
           style={{ marginTop: '0' }}
-          className="pager pager-justified hidden-sm hidden-xs"
+          className="pager pager-justified"
         >
           <li className="previous">
             <Button shape="round" ghost onClick={this.handleOnPrev}>

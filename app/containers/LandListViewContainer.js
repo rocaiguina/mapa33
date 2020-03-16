@@ -74,22 +74,12 @@ class LandListViewContainer extends React.Component {
     this.fetchAreas(value, region);
   };
 
-  handleOnClose = () => {
-    const { history } = this.props;
-    history.push('/');
-  };
-
   render() {
     return (
       <BaseLayout
         dark
         title="LEYENDA DE ÁREAS NATURALES"
         subtitle={<Legend />}
-        actions={[
-          <Button key="1" size="large" type="link" onClick={this.handleOnClose}>
-            <Icon type="close" />
-          </Button>,
-        ]}
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -102,7 +92,7 @@ class LandListViewContainer extends React.Component {
           </Button>
         }
       >
-        <div className="m-t-15">
+        <div className="main-content m-t-15">
           <FilterLand
             defaultRegion={this.state.region}
             defaultView={this.state.view}

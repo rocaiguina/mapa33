@@ -5,7 +5,11 @@ import BaseLayout from '../../components/layout/base';
 
 function RegisterUserSuccessful() {
   return (
-    <BaseLayout title="BIENVENIDO A MAPA33">
+    <BaseLayout
+      title="BIENVENIDO A MAPA33"
+      showCloseBtn={true}
+      enableMenu={false}
+    >
       <div className="jumbotron text-center m-t-20">
         <h1>Registro Satisfactorio</h1>
         <p className="lead">
