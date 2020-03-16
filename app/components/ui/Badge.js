@@ -1,26 +1,28 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import PropTypes from 'prop-types';
 
 class Badge extends React.Component {
-  render () {
+  render() {
     const badgeClass = ClassNames('badge', {
-      'badge-lg': this.props.size == 'large',
-      'badge-xlg': this.props.size == 'xlarge',
-      'badge-blue': this.props.color == 'blue',
-      'badge-orange': this.props.color == 'orange',
-      'badge-pink': this.props.color == 'pink',
-      'badge-green': this.props.color == 'green',
       'badge-white': this.props.color == 'white',
-      'badge-round': this.props.round ? true : false,
-      'badge-block': this.props.block ? true : false
+      'badge-round': this.props.shape == 'round',
     });
 
     return (
       <div className={badgeClass} {...this.props}>
-        {this.props.children}
+        <h5>{this.props.title}</h5>
+        {this.props.description}
       </div>
     );
   }
 }
+
+Badge.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  color: PropTypes.string,
+  shape: PropTypes.string,
+};
 
 export default Badge;

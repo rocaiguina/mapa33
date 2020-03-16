@@ -136,7 +136,17 @@ class LandController {
   }
 
   lookup(req, res, next) {
-    Land.findOne({ where: { id: req.params.id } })
+    Land.findOne({
+      where: { id: req.params.id },
+      attributes: { exclude: ['geom'] },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['first_name', 'last_name'],
+        },
+      ],
+    })
       .then(function(land) {
         if (!land) {
           return res.status(404).send('');

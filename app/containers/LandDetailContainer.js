@@ -1,24 +1,28 @@
 import React from 'react';
-import Axios from 'axios';
+import { notification } from 'antd';
+import PropTypes from 'prop-types';
 import Button from '../components/ui/Button';
 import BaseLayout from '../components/layout/base';
 import Icon from '../components/ui/Icon';
 import LandDetail from '../components/land/detail';
+
+import LandApi from '../api/land';
 
 class LandDetailContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      owner: '',
-      location: '',
-      area: 0,
-      status: '',
-      uses: [],
-      plots_count: 0,
-      coordinates: [],
-      attributes: '',
       photograph: '',
+      owner: '',
+      likes: '',
+      reason_conservation: '',
+      location: '',
+      area_size: 0,
+      status: '',
+      plots_count: 1,
+      coordinates: '',
+      attributes: '',
     };
   }
 
@@ -29,33 +33,34 @@ class LandDetailContainer extends React.Component {
 
   fetchLand(landId) {
     const self = this;
-    Axios.get(`/api/land/${landId}`)
-      .then(response => {
-        const metadata = response.data.metadata || {};
+    LandApi.get(landId)
+      .then(land => {
+        const metadata = land.metadata || {};
         self.setState({
-          name: response.data.name,
-          owner: response.data.owner,
-          location: response.data.location,
-          area: response.data.area_size,
-          status: metadata.status,
-          uses: metadata.uses,
-          plots_count: response.data.plots_count,
-          coordinates: response.data.coordinates,
+          name: land.name,
+          photograph: land.photograph,
+          owner: land.user,
+          likes: land.likes,
+          reason_conservation: land.reason_conservation,
+          location: land.location,
+          area_size: land.area_size,
+          status: land.status,
+          plots_count: land.plots_count,
+          coordinates: land.coordinates,
           attributes: metadata.attributes,
-          photograph: response.data.photographURL,
         });
       })
-      .catch(err => {
-        window.alert(err);
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró recuperar las áreas naturales. Por favor intenta nuevamente.',
+        });
       });
   }
 
   handleOnAddProposal = () => {
     this.props.history.push('/register');
-  };
-
-  handleOnClose = () => {
-    this.props.history.push('/map');
   };
 
   render() {
@@ -75,23 +80,8 @@ class LandDetailContainer extends React.Component {
     return (
       <BaseLayout
         dark
-        darkHeader
-        header={
-          <div className="page-title">
-            <h2>
-              TARJETA
-              <br />
-              DE PROPUESTA
-            </h2>
-            <ul className="actions">
-              <li>
-                <Button size="large" type="link" onClick={this.handleOnClose}>
-                  <Icon type="close" />
-                </Button>
-              </li>
-            </ul>
-          </div>
-        }
+        title="TARJETA DE PROPUESTA"
+        enableMenu={false}
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"
@@ -104,22 +94,29 @@ class LandDetailContainer extends React.Component {
           </Button>
         }
       >
-        <LandDetail
-          id={id}
-          name={name}
-          owner={owner}
-          location={location}
-          area={area}
-          status={status}
-          uses={uses}
-          plots_count={plots_count}
-          coordinates={coordinates}
-          attributes={attributes}
-          photograph={photograph}
-        />
+        <div className="main-content">
+          <LandDetail
+            id={id}
+            name={name}
+            owner={owner}
+            location={location}
+            area={area}
+            status={status}
+            uses={uses}
+            plots_count={plots_count}
+            coordinates={coordinates}
+            attributes={attributes}
+            photograph={photograph}
+          />
+        </div>
       </BaseLayout>
     );
   }
 }
+
+LandDetailContainer.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object,
+};
 
 export default LandDetailContainer;
