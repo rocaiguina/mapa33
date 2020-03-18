@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const LandController = require('../controllers/land');
+const JWTMiddleware = require('../middlewares/jwt');
 
 router.get('/', LandController.findAll);
 router.post('/', LandController.storePhotograph, LandController.store);
@@ -13,7 +14,7 @@ router.post('/select', LandController.select);
 router.get('/:id', LandController.lookup, LandController.get);
 router.put('/:id', LandController.lookup, LandController.update);
 router.delete('/:id', LandController.lookup, LandController.remove);
-router.post('/:id/like', LandController.like);
-router.get('/:id/like/:user_id', LandController.checkUserLike);
+router.post('/:id/like', JWTMiddleware.requireJWT, LandController.like);
+router.get('/:id/like', JWTMiddleware.verifyJWT, LandController.checkUserLike);
 
 module.exports = router;

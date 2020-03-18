@@ -21,14 +21,18 @@ router.post('/', function(req, res) {
           user.password
         );
         if (matchCredentials) {
-          const credentials = {
+          const payload = {
             id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
-            email: user.email,
           };
-          const token = jwt.sign({ user: credentials }, 'private key here');
-          return res.json({ token });
+          const token = jwt.sign(payload, process.env.JWT_SECRET);
+          res.cookie('access_token', token, {
+            expires: new Date(Date.now() + 3600000),
+            httpOnly: true,
+            secure: false, // set to true if your using https
+          });
+          res.send(payload);
         }
       }
       res.status(400).send('Authentication failed.');

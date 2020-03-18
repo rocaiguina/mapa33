@@ -30,9 +30,9 @@ export const find = function(filters) {
   });
 };
 
-export const isLikedByUser = function(landId, userId) {
+export const isLikedByUser = function(landId) {
   return new Promise((resolve, reject) => {
-    Axios.get(`/api/land/${landId}/like/${userId}`)
+    Axios.get(`/api/land/${landId}/like`)
       .then(response => {
         if (response.status == 200) {
           return resolve(response.data != null);
@@ -45,9 +45,9 @@ export const isLikedByUser = function(landId, userId) {
   });
 };
 
-export const like = function(landId, userId) {
+export const like = function(landId) {
   return new Promise((resolve, reject) => {
-    Axios.post(`/api/land/${landId}/like`, { user_id: userId })
+    Axios.post(`/api/land/${landId}/like`)
       .then(response => {
         if (response.status == 200) {
           return resolve(response.data);
@@ -55,7 +55,7 @@ export const like = function(landId, userId) {
         reject(response.data);
       })
       .catch(err => {
-        reject(err);
+        reject(err.response);
       });
   });
 };
