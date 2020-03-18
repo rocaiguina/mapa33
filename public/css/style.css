@@ -646,7 +646,6 @@ ul.actions {
 }
 
 .land-detail .land-likes {
-  flex: 1 0 auto;
   margin: 30px 0;
 }
 
@@ -1252,6 +1251,11 @@ ul.actions {
   .land-picture {
     margin-bottom: 20px;
   }
+}
+
+/* Visibility utilities */
+.hidden {
+  display: none !important;
 }
 
 /* Responsive utilities */

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Divider, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
 import Badge from '../ui/Badge';
@@ -33,6 +34,9 @@ class LandDetail extends React.Component {
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
     }
+    const landLikesClass = ClassNames('land-likes', {
+      hidden: this.props.level == 'conserved',
+    });
     return (
       <div className="land-detail">
         <div className="m-b-20">
@@ -40,10 +44,11 @@ class LandDetail extends React.Component {
             <Col md={6} style={{ display: 'flex', flexDirection: 'column' }}>
               <h2 className="land-title">{this.props.name}</h2>
               <h5 className="land-owner">{owner}</h5>
-              <div className="land-likes hidden-xs">
+              <div className={landLikesClass + ' hidden-xs'}>
                 <Icon type="heart" theme="filled" />
                 {Numeral(this.props.likes).format('0,0')}
               </div>
+              <div style={{ flex: '1 0 auto' }}></div>
               <div className="land-share hidden-xs">
                 <a
                   target="_blank"
@@ -66,7 +71,7 @@ class LandDetail extends React.Component {
               <div className="visible-xs">
                 <Row gutter={12}>
                   <Col span={12}>
-                    <div className="land-likes">
+                    <div className={landLikesClass}>
                       <Icon type="heart" theme="filled" />
                       {Numeral(this.props.likes).format('0,0')}
                     </div>
@@ -92,11 +97,13 @@ class LandDetail extends React.Component {
                     shape="round"
                     className="ant-btn-blue"
                     size="large"
-                    disabled={this.props.disabledLike}
+                    disabled={
+                      this.props.disabledLike || this.props.level == 'conserved'
+                    }
                     loading={this.state.loading}
                     onClick={this.handleOnClickLike}
                   >
-                    Apoyar
+                    {this.props.level == 'conserved' ? 'Conservado' : 'Apoyar'}
                   </Button>
                 </div>
               </div>
@@ -114,11 +121,13 @@ class LandDetail extends React.Component {
                   shape="round"
                   className="ant-btn-blue"
                   size="large"
-                  disabled={this.props.disabledLike}
+                  disabled={
+                    this.props.disabledLike || this.props.level == 'conserved'
+                  }
                   loading={this.state.loading}
                   onClick={this.handleOnClickLike}
                 >
-                  Apoyar
+                  {this.props.level == 'conserved' ? 'Conservado' : 'Apoyar'}
                 </Button>
               </div>
             </Col>
@@ -203,6 +212,7 @@ class LandDetail extends React.Component {
 LandDetail.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
+  level: PropTypes.string,
   photograph: PropTypes.string,
   owner: PropTypes.object,
   likes: PropTypes.number,

@@ -12,6 +12,7 @@ import RegisterWizardContainer from './containers/RegisterWizardContainer';
 import LandDetailContainer from './containers/LandDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
 import RegisterUser from './containers/user/RegisterUser';
+import ProfileUser from './containers/user/ProfileUser';
 import RegisterUserSuccessful from './containers/user/RegisterUserSuccessful';
 import Login from './containers/auth/Login';
 
@@ -26,7 +27,8 @@ export default () => (
       <Route exact={true} path="/land/:landId" component={LandDetailContainer} />
       <Route exact={true} path="/register/user" component={RegisterUser}/>
       <Route exact={true} path="/register/user/successful" component={RegisterUserSuccessful}/>
-      <Route exact={true} path="/info" component={InfoContainer} />
+      <Route exact={true} path="/profile" component={ProfileUser}/>
+      <Route exact={true} path="/info" component={InfoContainer} />      
       <Route path="/" component={IntroContainer} />
     </Switch>
   </Router>

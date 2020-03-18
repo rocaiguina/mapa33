@@ -3,14 +3,14 @@ import { notification } from 'antd';
 import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import LoginForm from '../../components/auth/LoginForm';
-import AuthApi from '../../api/auth';
+import Auth from '../../services/auth';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/ui/Icon';
 
 class Login extends React.Component {
   handleOnSubmit = (values, { setSubmitting }) => {
     const { history } = this.props;
-    AuthApi.login(values)
+    Auth.login(values)
       .then(() => {
         history.push('/profile');
       })
