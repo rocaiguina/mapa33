@@ -7,11 +7,6 @@ export default props => {
   return (
     <div className="intro">
       <div className="intro-text">
-        <div className="intro-close">
-          <Button type="primary" ghost size="default" onClick={props.onClose}>
-            <Icon type="close" />
-          </Button>
-        </div>
         <Row>
           <Col lg={{ span: 8, offset: 8 }}>
             <Card className="ant-card-intro ant-card-round ant-card-green">

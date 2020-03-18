@@ -16,7 +16,7 @@ class LandListViewContainer extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      region: 'San Juan',
+      region: '',
       view: 'list',
       status: '', // conserved, proposed
       maplist: [],
