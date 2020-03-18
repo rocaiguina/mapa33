@@ -561,3 +561,16 @@ button[data-test-id="button-primary"]{
 .blockprofilecheckbox .form-check .ant-checkbox-checked .ant-checkbox-inner::after{
     border-color: #f576a9 !important;
 }
+.ant-btn-grey{
+    background-color: #cccccc !important;
+    color:  #696969 !important;
+    font-weight: 500 !important;
+    margin-right: 10px !important;
+}
+
+.ant-btn.ant-btn-grey:hover,
+.ant-btn.ant-btn-grey:focus {
+  background-color: #BBBBBB !important;
+  border-color: #BBBBBB !important;
+  color: #999999 !important;
+}

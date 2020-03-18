@@ -15,10 +15,17 @@ import RegisterUser from './containers/user/RegisterUser';
 import ProfileUser from './containers/user/ProfileUser';
 import RegisterUserSuccessful from './containers/user/RegisterUserSuccessful';
 import Login from './containers/auth/Login';
+import ResetPassword from './containers/auth/ResetPassword';
+import RecoveryPassword from './containers/auth/RecoveryPassword';
+import SuccesRecoveryPassword from './containers/auth/SuccesRecoveryPassword';
 
 export default () => (
   <Router>
     <Switch>
+      <Route exact={true} path="/login" component={Login}/>
+      <Route exact={true} path="/login/forgot-password" component={RecoveryPassword}/>
+      <Route exact={true} path="/login/success-recovery" component={SuccesRecoveryPassword}/>
+      <Route exact={true} path="/login/reset-password" component={ResetPassword}/>
       <Route exact={true} path="/login" component={Login}/>
       <Route exact={true} path="/map" component={LandMapViewContainer} />
       <Route exact={true} path="/map/list" component={LandListViewContainer} />
