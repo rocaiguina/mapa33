@@ -2,11 +2,27 @@ import React, { Component } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import Header from './header';
+import Sidebar from './sidebar';
 import Footer from './footer';
 
 class BaseLayout extends Component {
-  handleOnMenuClick = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSidebarVisible: false,
+    };
+  }
 
+  handleOnMenuClick = () => {
+    this.setState({
+      isSidebarVisible: true,
+    });
+  };
+
+  handleOnCloseSidebar = () => {
+    this.setState({
+      isSidebarVisible: false,
+    });
   };
 
   render() {
@@ -31,12 +47,22 @@ class BaseLayout extends Component {
           onMenuClick={this.handleOnMenuClick}
         />
         <div style={{ paddingTop: paddingTop }}>
-          <div className="container">
-            { this.props.children }
-          </div>
+          <div className="container">{this.props.children}</div>
         </div>
-        <Footer dark={this.props.dark} rightComponent={this.props.footerRightComponent} xs={this.props.footerXs} />
-        { this.props.afterFooter }
+        <Footer
+          dark={this.props.dark}
+          rightComponent={this.props.footerRightComponent}
+          xs={this.props.footerXs}
+        />
+        {this.props.afterFooter}
+        {this.props.enableMenu && (
+          <Sidebar
+            placement="right"
+            closable={true}
+            visible={this.state.isSidebarVisible}
+            onClose={this.handleOnCloseSidebar}
+          />
+        )}
       </div>
     );
   }
@@ -53,6 +79,9 @@ BaseLayout.propTypes = {
   children: PropTypes.node,
   showCloseBtn: PropTypes.bool,
   enableMenu: PropTypes.bool,
+  afterFooter: PropTypes.node,
+  footerRightComponent: PropTypes.node,
+  footerXs: PropTypes.node,
 };
 
 export default BaseLayout;
