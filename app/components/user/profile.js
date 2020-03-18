@@ -23,7 +23,7 @@ class Profile extends React.Component {
             <div className="page-title profiletitle" style={{borderBottomColor: "#fff" }}>
             <span className="leftblockprofile" >
                 <h1 style={{color:"#fff"}}>Fulano de Tal Jímenez</h1>            
-                <h4 style={{color:"#fff"}}>Registrado desde: Enero 2019</h4>
+                <h4 style={{color:"#fff"}}>Registrado desde: Febrero 2019</h4>
             </span>
             <span className="rightblockprofile" >
                 <Link
@@ -91,6 +91,7 @@ class Profile extends React.Component {
                         <p>Código postal</p>
                     </Col>                
                 </Col>
+                
                 <Col md={12} >
                     <Row style={{borderBottom:"1px dotted #fff"}}>
                         <Col md={12} className="blockprofilecheckbox">

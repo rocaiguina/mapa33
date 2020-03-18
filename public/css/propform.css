@@ -14,6 +14,7 @@
   }
   .lefttableprofile{
       border-right: 1px dotted #fff;
+      
   }
   .toptableprofile h2 span,
   .lefttableprofile h2 span,
@@ -40,6 +41,11 @@
   .leftblockprofile{
     float: left;
   }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: inline;
+  }
   .profileContent{
     margin-top: 5px;
   }
@@ -49,11 +55,7 @@
   .lefttableprofile{
       border-right: 1px dotted #fff;
   }
-  .toptableprofile h2 span,
-  .lefttableprofile h2 span,
-  .righttableprofile h2 span{
-      display: inline;
-  }
+  
 }
 
 @media (min-width: 768px) {

@@ -20,12 +20,13 @@ class ProfileUser extends React.Component {
         dark
         title="MI PERFÍL"
         footerRightComponent={
+        
           <Button
             className="m33-btn ant-btn-xlg"
             size="large"
             type="secondary"            
             bordered
-          >
+          >          
             <Icon type="plus" />
           </Button>
         }

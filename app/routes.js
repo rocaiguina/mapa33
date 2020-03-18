@@ -27,8 +27,8 @@ export default () => (
       <Route exact={true} path="/land/:landId" component={LandDetailContainer} />
       <Route exact={true} path="/register/user" component={RegisterUser}/>
       <Route exact={true} path="/register/user/successful" component={RegisterUserSuccessful}/>
-      <Route exact={true} path="/info" component={InfoContainer} />
-      <Route exact={true} path="/profile" component={ProfileUser} />
+      <Route exact={true} path="/profile" component={ProfileUser}/>
+      <Route exact={true} path="/info" component={InfoContainer} />      
       <Route path="/" component={IntroContainer} />
     </Switch>
   </Router>
