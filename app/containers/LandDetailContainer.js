@@ -13,8 +13,9 @@ class LandDetailContainer extends React.Component {
     super(props);
     this.state = {
       name: '',
+      level: '',
       photograph: '',
-      owner: '',
+      owner: null,
       likes: 0,
       reason_conservation: '',
       location: '',
@@ -40,6 +41,7 @@ class LandDetailContainer extends React.Component {
         const metadata = land.metadata || {};
         self.setState({
           name: land.name,
+          level: land.level,
           photograph: land.photograph,
           owner: land.user,
           likes: land.likes,
@@ -80,9 +82,9 @@ class LandDetailContainer extends React.Component {
 
   handleOnClickLike = (land, setSubmitting) => {
     const self = this;
-    const userId = 3;
-    LandApi.like(land.id, userId)
+    LandApi.like(land.id)
       .then(() => {
+        setSubmitting(false);
         self.setState(prevState => ({
           likes: prevState.likes + 1,
           disabledLike: true,
@@ -92,22 +94,25 @@ class LandDetailContainer extends React.Component {
           description: 'Gracias por darnos tu apoyo.',
         });
       })
-      .catch(() => {
-        notification.error({
-          message: 'Error',
-          description:
-            'No se logró registrar tu apoyo. Por favor intenta nuevamente.',
-        });
-      })
-      .finally(() => {
-        setSubmitting(false);
+      .catch(err => {
+        if (err.status == 401) {
+          self.props.history.push('/login');
+        } else {
+          setSubmitting(false);
+          notification.error({
+            message: 'Error',
+            description:
+              'No se logró registrar tu apoyo. Por favor intenta nuevamente.',
+          });
+        }
       });
   };
 
   render() {
-    const id = this.props.match.params.landId;
+    const id = parseInt(this.props.match.params.landId);
     const {
       name,
+      level,
       owner,
       likes,
       location,
@@ -141,6 +146,7 @@ class LandDetailContainer extends React.Component {
           <LandDetail
             id={id}
             name={name}
+            level={level}
             owner={owner}
             likes={likes}
             location={location}

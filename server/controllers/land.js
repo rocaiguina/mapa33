@@ -314,10 +314,14 @@ class LandController {
   }
 
   checkUserLike(req, res) {
+    let user_id = '-1';
+    if (req.user) {
+      user_id = req.user.id;
+    }
     LandLikes.findOne({
       where: {
         land_id: req.params.id,
-        user_id: req.params.user_id,
+        user_id: user_id,
       },
     })
       .then(function(landlike) {
@@ -332,22 +336,10 @@ class LandController {
   }
 
   like(req, res) {
-    const validationSchema = {
-      user_id: Joi.number().required(),
-    };
-
-    const result = Joi.validate(req.body, validationSchema);
-
-    if (result.error) {
-      return res.status(400).send(result.error);
-    }
-
-    const cleaned_data = result.value;
-
     LandLikes.findOne({
       where: {
         land_id: req.params.id,
-        user_id: cleaned_data.user_id,
+        user_id: req.user.id,
       },
     })
       .then(function(landlike) {
@@ -358,7 +350,7 @@ class LandController {
           .then(function() {
             return LandLikes.create({
               land_id: req.params.id,
-              user_id: cleaned_data.user_id,
+              user_id: req.user.id,
               liked_at: new Date(),
             });
           })

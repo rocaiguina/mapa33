@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const { resolve } = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const db = require('./db/models');
 const server = require('./server');
 const morgan = require('morgan');
@@ -24,6 +25,9 @@ app.set('view engine', 'html');
 
 // cors
 app.use(cors());
+
+// cookie parser
+app.use(cookieParser());
 
 // logging middleware
 app.use(morgan('dev'));
