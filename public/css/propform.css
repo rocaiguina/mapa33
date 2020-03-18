@@ -1,3 +1,26 @@
+@media (max-width: 576px) {
+  .profiletitle{
+    margin-top: 50px;
+  }
+  .rightblockprofile{
+    float: right;
+    text-align: right;
+  }
+  .leftblockprofile{
+    float: left;
+  }
+  .toptableprofile{
+      border-bottom: 1px dotted #fff;
+  }
+  .lefttableprofile{
+      border-right: 1px dotted #fff;
+  }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: inline;
+  }
+}
 @media (min-width: 576px) {
   #propcol1{
     padding: 20px;
@@ -7,7 +30,30 @@
     padding: 20px;
     padding-top: 0px;
   }
-
+  .profiletitle{
+    margin-top: 50px;
+  }
+  .rightblockprofile{
+    float: right;
+    text-align: right;
+  }
+  .leftblockprofile{
+    float: left;
+  }
+  .profileContent{
+    margin-top: 5px;
+  }
+  .toptableprofile{
+      border-bottom: 1px dotted #fff;
+  }
+  .lefttableprofile{
+      border-right: 1px dotted #fff;
+  }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: inline;
+  }
 }
 
 @media (min-width: 768px) {
@@ -16,6 +62,36 @@
   }
   #propcol2{
     padding: 20px;
+  }
+  .profiletitle{
+    margin-top: 50px;  
+  }
+  .rightblockprofile{
+    float: right;
+    text-align: right;
+    margin-top: 50px;
+  }
+  .leftblockprofile{
+    float: left;    
+  }
+  .profileContent{
+    margin-top: 5px;
+  }
+  .toptableprofile{
+      border-bottom: 1px dotted #fff;
+      border-right: 1px dotted #fff; 
+  }
+  .lefttableprofile{
+      border: none;
+      border-bottom: 1px dotted #fff;      
+  }
+  .righttableprofile{
+      border-right: 1px dotted #fff;
+  }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: block;
   }
 }
 
@@ -26,6 +102,36 @@
   #propcol2{
     padding: 20px;
   }
+  .borderprofiledotted{
+      padding-bottom: 25px;
+  }
+  .rightblockprofile{
+    float: right;
+    text-align: right;
+    margin-top: 50px;
+  }
+  .leftblockprofile{
+    float: left;
+  }
+  .profileContent{
+    margin-top: 15px;
+  }
+  .toptableprofile{
+      border-bottom: 1px dotted #fff;
+      border-right: 1px dotted #fff; 
+  }
+  .lefttableprofile{
+      border:none;
+      border-bottom: 1px dotted #fff;      
+  }
+  .righttableprofile{
+      border-right: 1px dotted #fff;
+  }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: block;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -35,13 +141,39 @@
   #propcol2{
     padding: 20px;
   }
+  .rightblockprofile{
+    float: right;
+    text-align: right;    
+    margin-top: 50px;
+  }
+  .leftblockprofile{
+    float: left;
+  }
   /*button[data-test-id="button-skip"]{
     position: absolute !important;
     top: -185% !important;
     left: 288% !important;
     background-color: red !important;
   }*/
-
+  .profileContent{
+    margin-top: 15px;
+  }
+  .toptableprofile{
+      border-bottom: 1px dotted #fff;
+      border-right: 1px dotted #fff; 
+  }
+  .lefttableprofile{
+      border: none;
+      border-bottom: 1px dotted #fff;
+  }
+  .righttableprofile{
+      border-right: 1px dotted #fff;
+  }
+  .toptableprofile h2 span,
+  .lefttableprofile h2 span,
+  .righttableprofile h2 span{
+      display: block;
+  }
 }
 
 .ant-popover > .ant-popover-content > .ant-popover-arrow{
@@ -402,4 +534,28 @@ button[data-test-id="button-primary"]{
     font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 14px !important;
     line-height: 1.42857143 !important;
+}
+.profileContent h3{
+    color: white;
+    font-size: 18px;
+}
+.profileContent p{
+    color: #7e7e7e;
+    font-size: 11px;
+    font-weight: bold;
+}
+.blockprofilecheckbox .form-check .ant-checkbox-wrapper .ant-checkbox-inner{
+    background-color: #000000 !important;
+    border-color: #fff !important;
+
+}
+.blockprofilecheckbox .form-check .ant-checkbox-checked .ant-checkbox-inner{
+    background-color: #000000 !important;
+    border-color: #fff !important;
+}
+.blockprofilecheckbox .form-check .ant-checkbox-checked::after{
+    border: 1px solid #fff !important;
+}
+.blockprofilecheckbox .form-check .ant-checkbox-checked .ant-checkbox-inner::after{
+    border-color: #f576a9 !important;
 }
