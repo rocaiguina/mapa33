@@ -2,7 +2,6 @@ import React from 'react';
 import { Popover, Radio, Col, Row } from 'antd';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
-import Menu from '../intro/Menu';
 
 class MapToolBar extends React.Component {
     
@@ -71,7 +70,6 @@ class MapToolBar extends React.Component {
                     <Icon type="close" />
                 </Button>
             </div>
-            <Menu/>
             <div className={"menubottom"}>
                 <div>
                 <Button type="simplebtn2">Visitar página <Icon type="arrow-right" /></Button>
