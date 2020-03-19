@@ -73,7 +73,7 @@ module.exports = {
       },
       {
         id: 9,
-        first_name: 'Dueños, publicos y privados, siguiendo el Plan y Reglamento del APE del Carso',
+        first_name: 'Dueños, públicos y privados, siguiendo el Plan y Reglamento del APE del Carso',
         last_name: '',
         email: 'user8@domain.com',
         password: encryptor.encrypt('admin123'),
