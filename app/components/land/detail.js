@@ -151,7 +151,7 @@ class LandDetail extends React.Component {
                 <Badge
                   title="Extensión"
                   description={
-                    Numeral(this.props.area_size).format('0,0') + ' cuerdas'
+                    Numeral(this.props.area_size).format('0,0') + ' acres'
                   }
                   color="white"
                   shape="round"
@@ -160,7 +160,7 @@ class LandDetail extends React.Component {
               <Col xs={24} md={12}>
                 <Badge
                   title="Estado actual del terreno"
-                  description={this.props.status}
+                  description={this.props.level == 'conserved' ? 'Conservado' : this.props.level == 'pledge' ? 'Comprometido' : 'Básico'}
                   color="white"
                   shape="round"
                 />
