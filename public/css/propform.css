@@ -574,3 +574,36 @@ button[data-test-id="button-primary"]{
   border-color: #BBBBBB !important;
   color: #999999 !important;
 }
+.blackstyleinput{
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+.blackstyleinput::placeholder,
+.blackstyleinput:-ms-input-placeholder,
+.blackstyleinput::-ms-input-placeholder{
+    color: #ffffff !important;
+}
+input[name="username"].blackstyleinput{
+    width: 100%;
+    height: 55px;
+    font-weight: 500;
+    font-size: 2em;
+    border-radius: 50px !important;
+}
+
+.blackstyleinput .ant-select-selection,
+.blackstyleinput input{
+    background: transparent !important;
+    color: white !important;
+}
+.blackstyleinput .ant-select-selection div div {
+    color: white !important;
+    font-weight: 500 !important;
+}
+.blackstyleinput i {
+    color: #dc6396 !important;
+}
+.rightblockprofile div{
+    display: inline-flex !important;
+}
