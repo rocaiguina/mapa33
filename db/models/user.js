@@ -90,6 +90,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     // associations can be defined here
     User.hasOne(models.Survey, { as: 'Survey', foreignKey: 'user_id' });
+    User.hasMany(models.Land, { as: 'lands', foreignKey: 'user_id' })
   };
   sequelizePaginate.paginate(User);
   return User;

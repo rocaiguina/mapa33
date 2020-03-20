@@ -305,17 +305,17 @@ class ProfileForm extends React.Component {
                   <Row>
                     <Col md={12} sm={24} xs={24} className="toptableprofile">
                       <h2 style={{ color: '#fff', padding: '5px 10px' }}>
-                        21 <span>Áreas propuestas</span>
+                        {values.proposed_areas} <span>Áreas propuestas</span>
                       </h2>
                     </Col>
                     <Col md={12} sm={12} xs={12} className="lefttableprofile">
                       <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
-                        8 <span>Áreas aceptadas</span>
+                        {values.approved_areas} <span>Áreas aceptadas</span>
                       </h2>
                     </Col>
                     <Col md={12} sm={12} xs={12} className="righttableprofile">
                       <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
-                        120 <span>Áreas apoyadas</span>
+                        {values.supported_areas} <span>Áreas apoyadas</span>
                       </h2>
                     </Col>
                     <Col md={12} sm={12}></Col>

@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const Models = require('../../db/models');
 const User = Models.User;
+const Land = Models.Land;
+const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
 class UserController {
@@ -161,11 +163,22 @@ class UserController {
       });
   }
 
-  get(req, res, next) {
+  get(req, res) {
     delete req.user['dataValues']['password'];
     var user = req.user;
-    res.json(user.get({ plain: true }));
-    next();
+
+    /* Count proposed, conserved, supported areas by user */
+    Promise.all([
+      Land.count({ where: { user_id: user.id, status: 'new' } }),
+      Land.count({ where: { user_id: user.id, status: 'approved' } }),
+      LandLikes.count({ where: { user_id: user.id } }),
+    ]).then(values => {
+      var data = user.get({ plain: true });
+      data.proposed_areas = values[0];
+      data.approved_areas = values[1];
+      data.supported_areas = values[2];
+      res.json(data);
+    });
   }
 
   remove(req, res, next) {
