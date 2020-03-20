@@ -20,6 +20,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    attributes: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    current_situation: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    proposed_uses: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     coordinates: {
       type: DataTypes.GEOMETRY,
       allowNull: true,

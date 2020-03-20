@@ -24,6 +24,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      attributes: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      current_situation: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      proposed_uses: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       coordinates: {
         type: Sequelize.GEOMETRY,
         allowNull: true,
