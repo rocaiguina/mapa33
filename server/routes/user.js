@@ -6,12 +6,28 @@ const router = express.Router();
 const UserController = require('../controllers/user');
 const UserSurveyController = require('../controllers/user-survey');
 const SurveyMiddleware = require('../middlewares/survey');
+const JWTMiddleware = require('../middlewares/jwt');
 
-router.get('/', UserController.findAll);
-router.get('/:id', UserController.lookup, UserController.get);
-router.post('/', UserController.store);
-router.put('/:id', UserController.lookup, UserController.update);
-router.delete('/:id', UserController.lookup, UserController.remove);
+router.get('/', JWTMiddleware.requireJWT, UserController.findAll);
+router.get(
+  '/:id',
+  JWTMiddleware.requireJWT,
+  UserController.lookup,
+  UserController.get
+);
+router.post('/', JWTMiddleware.requireJWT, UserController.store);
+router.put(
+  '/:id',
+  JWTMiddleware.requireJWT,
+  UserController.lookup,
+  UserController.update
+);
+router.delete(
+  '/:id',
+  JWTMiddleware.requireJWT,
+  UserController.lookup,
+  UserController.remove
+);
 
 // User's surveys
 router.post('/:userId/survey', UserSurveyController.store);

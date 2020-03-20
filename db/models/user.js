@@ -5,6 +5,22 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
+    full_name: {
+      type: DataTypes.VIRTUAL,
+      set: function(value) {
+        const names = value.split(' ');
+        this.setDataValue('first_name', names.slice(0, -1).join(' '));
+        this.setDataValue('last_name', names.slice(-1).join(' '));
+      },
+      get: function() {
+        let full_name = this.getDataValue('first_name');
+        let last_name = this.getDataValue('last_name');
+        if (last_name) {
+          full_name += ' ' + last_name;
+        }
+        return full_name;
+      }
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,

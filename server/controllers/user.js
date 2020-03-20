@@ -23,7 +23,11 @@ class UserController {
   }
 
   lookup(req, res, next) {
-    User.findOne({ where: { id: req.params.id } })
+    let uid = req.params.id;
+    if (req.params.id == 'me') {
+      uid = req.user.id;
+    }
+    User.findOne({ where: { id: uid } })
       .then(function(user) {
         if (!user) {
           return res.status(404).send('');
@@ -55,6 +59,9 @@ class UserController {
         .allow(null, ''),
       country: Joi.string().required(),
       zip_code: Joi.string().required(),
+      advs_by_email: Joi.boolean(),
+      advs_by_zip: Joi.boolean(),
+      interested_volunteer: Joi.boolean(),
     };
 
     const result = Joi.validate(req.body, validationSchema, {
@@ -83,6 +90,9 @@ class UserController {
       estate: cleaned_data.estate,
       country: cleaned_data.country,
       zip_code: cleaned_data.zip_code,
+      advs_by_email: cleaned_data.advs_by_email,
+      advs_by_zip: cleaned_data.advs_by_zip,
+      interested_volunteer: cleaned_data.interested_volunteer,
     })
       .then(function(user) {
         res.json(user.get({ plain: true }));
@@ -93,32 +103,50 @@ class UserController {
   }
 
   update(req, res, next) {
-    if (Object.keys(req.body).length == 0) {
-      return res.status(400).send('Your data is empty');
-    }
-    req.body.password = encryptor.encrypt(req.body.password);
-    var data = req.body;
     const validationSchema = {
-      first_name: Joi.string().required(),
-      last_name: Joi.string().required(),
-      password: Joi.string().required(),
+      full_name: Joi.string().required(),
+      birthday: Joi.string().required(),
+      phone: Joi.string().required(),
+      gender: Joi.string().allow(''),
+      company: Joi.string()
+        .optional()
+        .allow(null, ''),
+      address: Joi.string().required(),
+      city: Joi.string().required(),
+      estate: Joi.string()
+        .optional()
+        .allow(null, ''),
+      country: Joi.string().required(),
+      zip_code: Joi.string().required(),
+      advs_by_email: Joi.boolean(),
+      advs_by_zip: Joi.boolean(),
     };
 
-    // Validata data.
-    const result = Joi.validate(data, validationSchema);
+    const result = Joi.validate(req.body, validationSchema, {
+      abortEarly: false,
+      allowUnknown: true,
+    });
 
     if (result.error) {
-      res.status(400).send(result.error);
-      return next();
+      return res.status(400).send(result.error);
     }
 
     const cleaned_data = result.value;
 
     var user = req.user;
 
-    user.first_name = cleaned_data.first_name;
-    user.last_name = cleaned_data.last_name;
-    user.password = cleaned_data.password;
+    user.full_name = cleaned_data.full_name;
+    user.birthday = cleaned_data.birthday;
+    user.phone = cleaned_data.phone;
+    user.gender = cleaned_data.gender;
+    user.company = cleaned_data.company;
+    user.address = cleaned_data.address;
+    user.city = cleaned_data.city;
+    user.estate = cleaned_data.estate;
+    user.country = cleaned_data.country;
+    user.zip_code = cleaned_data.zip_code;
+    user.advs_by_email = cleaned_data.advs_by_email;
+    user.advs_by_zip = cleaned_data.advs_by_zip;
 
     user
       .save()

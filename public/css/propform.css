@@ -66,7 +66,7 @@
     padding: 20px;
   }
   .profiletitle{
-    margin-top: 50px;  
+    margin-top: 30px;  
   }
   .rightblockprofile{
     float: right;
@@ -239,7 +239,14 @@
   top: 0px !important;
 }
 
-
+.dateinput .ant-calendar-picker-input {
+  border: 2px #000 solid;
+  border-radius: 20px !important;
+}
+.dateinput .ant-calendar-picker-input:hover,
+.dateinput .ant-calendar-picker-input:focus {
+  border-right-width: 2px !important;
+}
 .inputprop{
   border: 2px black solid !important;
   border-radius: 20px !important;
@@ -573,6 +580,13 @@ button[data-test-id="button-primary"]{
   background-color: #BBBBBB !important;
   border-color: #BBBBBB !important;
   color: #999999 !important;
+}
+.ant-calendar-picker.blackstyleinput .ant-calendar-picker-input {
+    border-color: #fff;
+}
+.ant-calendar-picker.blackstyleinput:hover .ant-calendar-picker-input:not(.ant-input-disabled),
+.ant-calendar-picker.blackstyleinput:focus .ant-calendar-picker-input:not(.ant-input-disabled) {
+    border-color: #fff;
 }
 .blackstyleinput{
     border-color: #ffffff !important;

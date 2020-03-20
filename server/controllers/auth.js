@@ -36,7 +36,7 @@ function login(req, res) {
             httpOnly: true,
             secure: false, // set to true if your using https
           });
-          res.send(payload);
+          return res.send(payload);
         }
       }
       res.status(400).send('Authentication failed.');

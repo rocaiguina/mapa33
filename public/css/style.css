@@ -157,6 +157,10 @@ body {
 .form-group {
   margin-bottom: 15px;
 }
+.form-group label {
+  display: block;
+  margin-top: 5px;
+}
 .form-group input,
 .form-group .inputprop {
   margin-bottom: 0px !important;
@@ -197,6 +201,10 @@ body {
 .form-check .ant-typography {
   display: block;
   margin-top: .25rem; 
+}
+.form-check.form-check-dark .ant-checkbox-wrapper,
+.form-check.form-check-dark .ant-checkbox-disabled + span {
+  color: #fff;
 }
 
 .pager {
@@ -322,6 +330,9 @@ body {
 .text-gray {
   color: #dddddd;
 }
+.text-darkgray {
+  color: #7e7e7e;
+}
 
 /* Layout */
 #root {
@@ -335,6 +346,12 @@ body {
 .main.main-dark {
   background-color: #000;
   color: #fff;
+}
+
+.main.main-dark h1,
+.main.main-dark h2,
+.main.main-dark h3 {
+  color: inherit !important;
 }
 
 /* Header */
