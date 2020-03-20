@@ -22,7 +22,7 @@ class LandDetailContainer extends React.Component {
       area_size: 0,
       status: '',
       plots_count: 1,
-      coordinates: '',
+      coordinates: null,
       attributes: '',
       disabledLike: true,
     };
@@ -124,6 +124,8 @@ class LandDetailContainer extends React.Component {
       attributes,
       photograph,
       disabledLike,
+      current_situation,
+      proposed_uses,
     } = this.state;
     return (
       <BaseLayout
@@ -154,9 +156,11 @@ class LandDetailContainer extends React.Component {
             status={status}
             uses={uses}
             plots_count={plots_count}
-            coordinates={coordinates}
+            coordinates={coordinates && coordinates.coordinates}
             attributes={attributes}
             photograph={photograph}
+            current_situation={current_situation}
+            proposed_uses={proposed_uses}
             disabledLike={disabledLike}
             onClickLike={this.handleOnClickLike}
           />

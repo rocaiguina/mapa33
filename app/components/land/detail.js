@@ -5,6 +5,7 @@ import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
 import Badge from '../ui/Badge';
+import Coordinates from '../ui/Coordinates';
 
 class LandDetail extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class LandDetail extends React.Component {
     const landLikesClass = ClassNames('land-likes', {
       hidden: this.props.level == 'conserved',
     });
+
     return (
       <div className="land-detail">
         <div className="m-b-20">
@@ -112,8 +114,7 @@ class LandDetail extends React.Component {
                 particular?
               </p>
               <p style={{ flex: '1 0 auto' }}>
-                Es un lugar con rasgos naturales especiales (p.e. arboledas,
-                mogotes, lagunas, cuevas).
+                {this.props.reason_conservation || 'No definido'}
               </p>
               <div className="land-support hidden-xs">
                 <Button
@@ -142,7 +143,7 @@ class LandDetail extends React.Component {
               <Col xs={12} md={6}>
                 <Badge
                   title="Localizado"
-                  description={this.props.location}
+                  description={this.props.location || 'No definido'}
                   color="white"
                   shape="round"
                 />
@@ -160,7 +161,7 @@ class LandDetail extends React.Component {
               <Col xs={24} md={12}>
                 <Badge
                   title="Estado actual del terreno"
-                  description={this.props.level == 'conserved' ? 'Conservado' : this.props.level == 'pledge' ? 'Comprometido' : 'Básico'}
+                  description={this.props.current_situation || 'No definido'}
                   color="white"
                   shape="round"
                 />
@@ -178,7 +179,7 @@ class LandDetail extends React.Component {
               <Col xs={12} md={6}>
                 <Badge
                   title="Coordenadas"
-                  description="102N 94S 45e 70o"
+                  description={<Coordinates point={this.props.coordinates}/>}
                   color="white"
                   shape="round"
                 />
@@ -186,7 +187,7 @@ class LandDetail extends React.Component {
               <Col xs={24} md={12}>
                 <Badge
                   title="Atributos principales del lugar"
-                  description="Naturales"
+                  description={this.props.main_attributes || 'No definido'}
                   color="white"
                   shape="round"
                 />
@@ -218,10 +219,13 @@ LandDetail.propTypes = {
   likes: PropTypes.number,
   reason_conservation: PropTypes.string,
   location: PropTypes.string,
+  main_attributes: PropTypes.string,
+  current_situation: PropTypes.string,
+  proposed_uses: PropTypes.string,
   area_size: PropTypes.number,
   status: PropTypes.string,
   plots_count: PropTypes.number,
-  coordinates: PropTypes.string,
+  coordinates: PropTypes.object,
   attributes: PropTypes.string,
   onClickLike: PropTypes.func,
   disabledLike: PropTypes.bool,
