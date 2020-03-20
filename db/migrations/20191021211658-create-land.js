@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      attributes: {
+      main_attributes: {
         type: Sequelize.STRING,
         allowNull: true,
       },

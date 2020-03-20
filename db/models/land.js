@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    attributes: {
+    main_attributes: {
       type: DataTypes.STRING,
       allowNull: true,
     },
