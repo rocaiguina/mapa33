@@ -5,6 +5,7 @@ import BaseLayout from '../../components/layout/base';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/ui/Icon';
 import { Col, Input, Row, DatePicker, Select, Checkbox } from 'antd';
+import ProfileEdit from '../../components/user/profileEdit';
 
 class ProfileUser extends React.Component {
   handleOnClose = () => {

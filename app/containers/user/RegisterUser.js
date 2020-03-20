@@ -13,20 +13,13 @@ class RegisterUser extends React.Component {
         history.push('/register/user/successful');
       })
       .catch(() => {
+        setSubmitting(false);
         notification.error({
           message: 'Error',
           description:
             'No se logró registar tu cuenta. Por favor intenta nuevamente.',
         });
-      })
-      .finally(() => {
-        setSubmitting(false);
       });
-  };
-
-  handleOnClose = () => {
-    const { history } = this.props;
-    history.push('/');
   };
 
   render() {

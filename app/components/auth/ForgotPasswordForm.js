@@ -7,12 +7,30 @@ import PropTypes from 'prop-types';
 
 const { Text } = Typography;
 
-class RecoveryPasswordForm extends React.Component {
+const forgotValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required('Campo requerido.'),
+});
+
+class ForgotPasswordForm extends React.Component {
+  handleOnCancel = () => {
+    window.history.back();
+  };
+
   render() {
     return (
-        <form >
+      <Formik
+        onSubmit={this.props.onSubmit}
+        validationSchema={forgotValidationSchema}
+        validateOnBlur={false}
+        validateOnChange={false}
+      >
+        {({ errors, handleChange, handleSubmit, isSubmitting }) => (
+          <form onSubmit={handleSubmit}>
             <p className="text-center m-b-30">
-              Por favor, escriba el correo electrónico con el cuál esta registrado:
+              Por favor, escriba el correo electrónico con el cuál esta
+              registrado:
             </p>
             <Row>
               <Col md={8}></Col>
@@ -24,23 +42,29 @@ class RecoveryPasswordForm extends React.Component {
                     size="large"
                     type="text"
                     placeholder="Correo electrónico"
+                    onChange={handleChange}
                   />
+                  <Text type="danger">{errors.email}</Text>
                 </div>
                 <Row>
                   <Col md={18}>
                     <Link
-                      to="/forgot-password"
+                      to="/register/user"
                       style={{ color: '#f576a9', fontWeight: 'bold' }}
                     >
                       ¿No tiene cuenta? Regístrese
                     </Link>
                   </Col>
-                  <Col md={24} style={{textAlign: "center", marginTop: "25px"}}>
+                  <Col
+                    md={24}
+                    style={{ textAlign: 'center', marginTop: '25px' }}
+                  >
                     <Button
                       size="large"
                       shape="round"
                       className="ant-btn-grey"
                       htmlType="submit"
+                      onClick={this.handleOnCancel}
                     >
                       Cancelar
                     </Button>
@@ -49,7 +73,8 @@ class RecoveryPasswordForm extends React.Component {
                       shape="round"
                       className="ant-btn-purple"
                       htmlType="submit"
-                      style={{marginLeft: "10px"}}
+                      style={{ marginLeft: '10px' }}
+                      loading={isSubmitting}
                     >
                       Enviar
                     </Button>
@@ -57,8 +82,15 @@ class RecoveryPasswordForm extends React.Component {
                 </Row>
               </Col>
             </Row>
-      </form>
-    )
+          </form>
+        )}
+      </Formik>
+    );
   }
 }
-export default RecoveryPasswordForm;
+
+ForgotPasswordForm.propTypes = {
+  onSubmit: PropTypes.func,
+};
+
+export default ForgotPasswordForm;

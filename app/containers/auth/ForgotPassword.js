@@ -2,23 +2,22 @@ import React from 'react';
 import { notification } from 'antd';
 import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
-import ResetPasswordForm from '../../components/auth/ResetPasswordForm';
+import ForgotPasswordForm from '../../components/auth/ForgotPasswordForm';
 import AuthApi from '../../api/auth';
 
-class ResetPassword extends React.Component {
+class ForgotPassword extends React.Component {
   handleOnSubmit = (values, { setSubmitting }) => {
     const { history } = this.props;
-    const { token } = this.props.match.params;
-    AuthApi.resetPassword(token, values)
+    AuthApi.forgotPassword(values)
       .then(() => {
-        history.push('/reset-password/successful');
+        history.push('/forgot-password/successful');
       })
       .catch(err => {
         setSubmitting(false);
-        if (err.status == 403) {
+        if (err.status == 404) {
           notification.error({
             message: 'Error',
-            description: 'Solicitud expirada. Por favor realiza una nueva.',
+            description: 'Por favor verifica tu dirección de correo electrónico.',
           });
         } else {
           notification.error({
@@ -33,21 +32,20 @@ class ResetPassword extends React.Component {
   render() {
     return (
       <BaseLayout
-        title="RESTAURAR CONTRASEÑA"
+        title="RECUPERAR CONTRASEÑA"
         showCloseBtn={true}
         enableMenu={false}
       >
         <div className="main-content m-t-20">
-          <ResetPasswordForm onSubmit={this.handleOnSubmit} />
+          <ForgotPasswordForm onSubmit={this.handleOnSubmit} />
         </div>
       </BaseLayout>
     );
   }
 }
 
-ResetPassword.propTypes = {
+ForgotPassword.propTypes = {
   history: PropTypes.object,
-  match: PropTypes.object,
 };
 
-export default ResetPassword;
+export default ForgotPassword;
