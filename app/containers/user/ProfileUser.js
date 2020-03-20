@@ -1,7 +1,9 @@
 import React from 'react';
 import { notification } from 'antd';
+import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import Profile from '../../components/user/profile';
+import AuthApi from '../../api/auth';
 import UserApi from '../../api/user';
 
 class ProfileUser extends React.Component {
@@ -35,7 +37,10 @@ class ProfileUser extends React.Component {
           initialValues: Object.assign({}, profile),
         });
       })
-      .catch(() => {
+      .catch(err => {
+        if (err.status == 401) {
+          return self.props.history.push('/login');
+        }
         notification.error({
           message: 'Error',
           description:
@@ -44,15 +49,37 @@ class ProfileUser extends React.Component {
       });
   }
 
+  handleOnLogout = event => {
+    event.preventDefault();
+    AuthApi.logout()
+      .then(() => {
+        this.props.history.push('/');
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró cerrar tu sesión. Por favor intenta nuevamente.',
+        });
+      });
+  };
+
   render() {
     return (
       <BaseLayout dark title="MI PERFÍL">
         <div className="main-content m-t-10">
-          <Profile initialValues={this.state.initialValues}/>
+          <Profile
+            initialValues={this.state.initialValues}
+            onClickLogout={this.handleOnLogout}
+          />
         </div>
       </BaseLayout>
     );
   }
 }
+
+ProfileUser.propTypes = {
+  history: PropTypes.object,
+};
 
 export default ProfileUser;

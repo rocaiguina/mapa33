@@ -46,6 +46,11 @@ function login(req, res) {
     });
 }
 
+function logout(req, res) {
+  res.clearCookie('access_token');
+  res.send('');
+}
+
 function forgotPassword(req, res) {
   User.findOne({
     where: { email: req.body.email },
@@ -153,6 +158,7 @@ function resetPassword(req, res) {
 
 module.exports = {
   login,
+  logout,
   forgotPassword,
   resetPassword,
 };

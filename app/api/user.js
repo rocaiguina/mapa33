@@ -10,7 +10,7 @@ export const register = function(data) {
         reject(response.data);
       })
       .catch(err => {
-        reject(err);
+        reject(err.response);
       });
   });
 };
@@ -25,7 +25,7 @@ export const getProfile = function() {
         reject(response.data);
       })
       .catch(err => {
-        reject(err);
+        reject(err.response);
       });
   });
 };
@@ -40,7 +40,7 @@ export const updateProfile = function(data) {
         reject(response.data);
       })
       .catch(err => {
-        reject(err);
+        reject(err.response);
       });
   });
 };

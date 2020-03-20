@@ -1,10 +1,11 @@
 import React from 'react';
 import { notification } from 'antd';
+import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import ProfileForm from '../../components/user/ProfileForm';
 import UserApi from '../../api/user';
 
-class ProfileUser extends React.Component {
+class ProfileUserEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +36,10 @@ class ProfileUser extends React.Component {
           initialValues: Object.assign({}, profile),
         });
       })
-      .catch(() => {
+      .catch(err => {
+        if (err.status == 401) {
+          return self.props.history.push('/login');
+        }
         notification.error({
           message: 'Error',
           description:
@@ -77,4 +81,8 @@ class ProfileUser extends React.Component {
   }
 }
 
-export default ProfileUser;
+ProfileUserEdit.propTypes = {
+  history: PropTypes.object,
+};
+
+export default ProfileUserEdit;

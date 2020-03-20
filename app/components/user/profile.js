@@ -29,7 +29,11 @@ class Profile extends React.Component {
               )}
             </Col>
             <Col span={12} className="text-right">
-              <Link to="/" style={{ color: '#f576a9', fontWeight: 'bold' }}>
+              <Link
+                to="/"
+                style={{ color: '#f576a9', fontWeight: 'bold' }}
+                onClick={this.props.onClickLogout}
+              >
                 Log Out
               </Link>
             </Col>
@@ -134,6 +138,7 @@ Profile.defaultProps = {
 
 Profile.propTypes = {
   initialValues: PropTypes.object,
+  onClickLogout: PropTypes.func,
 };
 
 export default Profile;
