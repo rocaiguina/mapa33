@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
+import { Col, Row, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import Numeral from 'numeral';
@@ -18,31 +18,39 @@ class Item extends React.Component {
     }
 
     return (
-      <tr>
-        <td className="cell-fit">
-          <span className={badgeLevelClass}></span>
-        </td>
-        <td>
-          <h4>{this.props.name}</h4>
-          {owner}
-        </td>
-        <td>
-          {this.props.location}
-          <br />
-          {Numeral(this.props.area_size).format('0,0')} cuerdas de extensión
-        </td>
-        <td>
-          <span className="like-counter">
-            <Icon type="heart" theme="filled" />
-            {Numeral(this.props.likes).format('0,0')}
-          </span>
-        </td>
-        <td className="align-middle text-center">
-          <Link className="text-purple" to={`/land/${this.props.id}`}>
-            <strong>Ver ficha</strong>
-          </Link>
-        </td>
-      </tr>
+      <div className="land-list-row">
+        <div className="media">
+          <div className="media-left">
+            <span className={badgeLevelClass}></span>
+          </div>
+          <div className="media-body">
+            <Row>
+              <Col xs={24} md={12}>
+                <h4>{this.props.name}</h4>
+                <span className="hidden-xs">{owner}</span>
+              </Col>
+              <Col xs={24} md={6}>
+                <span className="hidden-xs">
+                  {this.props.location || 'No definido'}
+                  <br />
+                </span>
+                <span>{Numeral(this.props.area_size).format('0,0')} cuerdas de extensión</span>
+              </Col>
+              <Col xs={12} md={3}>
+                <span className="like-counter">
+                  <Icon type="heart" theme="filled" />
+                  {Numeral(this.props.likes).format('0,0')}
+                </span>
+              </Col>
+              <Col xs={12} md={3} className="text-right">
+                <Link className="ant-btn-link ant-btn-lg ant-btn-purple" to={`/land/${this.props.id}`}>
+                  <strong>Ver ficha</strong>
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
     );
   }
 }

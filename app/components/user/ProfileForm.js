@@ -74,7 +74,7 @@ class ProfileForm extends React.Component {
               style={{ borderBottomColor: '#fff' }}
             >
               <Row>
-                <Col span={12}>
+                <Col xs={24} md={12}>
                   <Input
                     name="full_name"
                     className="inputprop blackstyleinput"
@@ -95,10 +95,10 @@ class ProfileForm extends React.Component {
               </Row>
             </div>
             <Row>
-              <Col span={12}>
+              <Col xs={24} md={12}>
                 <h3 style={{ fontWeight: 900, color: '#fff' }}>Datos</h3>
               </Col>
-              <Col span={12}>
+              <Col xs={24} md={12} className="hidden-xs">
                 <div className="form-group text-right">
                   <Link
                     to="/profile"
@@ -294,6 +294,24 @@ class ProfileForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
+                <div className="form-group text-center visible-xs m-t-10">
+                  <Link
+                    to="/profile"
+                    className="ant-btn ant-btn-background-ghost ant-btn-round ant-btn-lg"
+                  >
+                    Cancelar
+                  </Link>
+                  <Button
+                    size="large"
+                    shape="round"
+                    className="ant-btn-purple"
+                    htmlType="submit"
+                    style={{ marginLeft: '5px' }}
+                    loading={isSubmitting}
+                  >
+                    Guardar Cambios
+                  </Button>
+                </div>
                 <Divider
                   dashed
                   style={{ borderStyle: 'dotted', marginBottom: '12px' }}

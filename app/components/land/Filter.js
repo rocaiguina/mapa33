@@ -9,7 +9,7 @@ class Filter extends React.Component {
     return (
       <div className="land-filter">
         <Row gutter={16}>
-          <Col span={8}>
+          <Col xs={10} md={8}>
             <Row>
               <Col xs={24} md={6}>
                 <label>Región</label>
@@ -105,7 +105,7 @@ class Filter extends React.Component {
               </Col>
             </Row>
           </Col>
-          <Col xs={8} md={7} lg={5}>
+          <Col xs={7} md={7} lg={5}>
             <Row>
               <Col xs={24} md={8}>
                 <label>Vista</label>
@@ -124,7 +124,7 @@ class Filter extends React.Component {
               </Col>
             </Row>
           </Col>
-          <Col xs={8} md={7} lg={5}>
+          <Col xs={7} md={7} lg={5}>
             <Row>
               <Col xs={24} md={8}>
                 <label>Estatus</label>

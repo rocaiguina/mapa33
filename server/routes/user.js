@@ -15,7 +15,7 @@ router.get(
   UserController.lookup,
   UserController.get
 );
-router.post('/', JWTMiddleware.requireJWT, UserController.store);
+router.post('/', UserController.store);
 router.put(
   '/:id',
   JWTMiddleware.requireJWT,

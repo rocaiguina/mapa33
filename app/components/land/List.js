@@ -13,22 +13,20 @@ class List extends React.Component {
 
     return (
       <div className="table-responsive">
-        <table className="table table-land-dark">
-          <tbody>
-            {lands &&
-              lands.map(land => (
-                <Item
-                  key={land.id}
-                  id={land.id}
-                  name={land.name}
-                  level={land.level}
-                  owner={land.user}
-                  location={land.location}
-                  area_size={land.area_size}
-                />
-              ))}
-          </tbody>
-        </table>
+        <div className="land-list land-list-dark">
+          {lands &&
+            lands.map(land => (
+              <Item
+                key={land.id}
+                id={land.id}
+                name={land.name}
+                level={land.level}
+                owner={land.user}
+                location={land.location}
+                area_size={land.area_size}
+              />
+            ))}
+        </div>
       </div>
     );
   }

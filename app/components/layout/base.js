@@ -29,11 +29,11 @@ class BaseLayout extends Component {
     const layoutClass = ClassNames('main', {
       'main-dark': this.props.dark,
     });
-    let paddingTop = this.props.title != null ? 54 : 0;
-    if (this.props.subtitle != null) {
-      paddingTop += 40;
-    }
-    paddingTop = paddingTop + 'px';
+    const wrapContentClass = ClassNames('wrap-content', {
+      'with-title': this.props.title != null,
+      'with-subtitle': this.props.subtitle != null,
+      'with-actions': this.props.enableMenu,
+    });
 
     return (
       <div className={layoutClass}>
@@ -46,7 +46,7 @@ class BaseLayout extends Component {
           showProfileBtn={this.props.enableMenu}
           onMenuClick={this.handleOnMenuClick}
         />
-        <div style={{ paddingTop: paddingTop }}>
+        <div className={wrapContentClass}>
           <div className="container">{this.props.children}</div>
         </div>
         <Footer

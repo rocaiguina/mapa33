@@ -207,6 +207,17 @@ body {
   color: #fff;
 }
 
+.media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.media-body {
+  -ms-flex: 1;
+  flex: 1;
+}
+
 .pager {
   padding-left: 0;
   margin: 20px 0;
@@ -350,7 +361,8 @@ body {
 
 .main.main-dark h1,
 .main.main-dark h2,
-.main.main-dark h3 {
+.main.main-dark h3,
+.main.main-dark h4 {
   color: inherit !important;
 }
 
@@ -372,6 +384,18 @@ body {
 .header-wrap {
   padding-top: 15px;
   position: relative;
+}
+
+.wrap-content.with-title {
+  padding-top: 54px;
+}
+
+.wrap-content.with-subtitle {
+  padding-top: 94px;
+}
+
+.wrap-content.with-actions {
+  padding-top: 94px;
 }
 
 .main-content {
@@ -455,6 +479,9 @@ body {
   }
   .header.has-actions .top-actions {
     float: left;
+  }
+  .wrap-content.with-title.with-subtitle.with-actions {
+    padding-top: 120px;
   }
 }
 
@@ -959,6 +986,9 @@ ul.actions {
   border-color: transparent !important;
 }
 /* Custom buttons */
+.ant-btn-link.ant-btn-purple {
+  color: #F073A8;
+}
 .ant-btn.ant-btn-purple {
   background-color: #F073A8;
   border-color: #F073A8;
@@ -1162,11 +1192,32 @@ ul.actions {
   font-weight: bold;
 }
 
-/* Custom tables */
-.table-land-dark td h4 {
-  color: #fff;
+/* Land list */
+.land-list .land-list-row {
+  border-top: 1px dotted #000;
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 0;
+}
+
+.land-list .land-list-row .media-left {
+  padding: 0.4rem 1rem 0.75rem 0.75rem;
+}
+
+.land-list-dark .land-list-row {
+  border-color: #fff;
+}
+
+.land-list .land-list-row h4 {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .land-list .land-list-row .like-counter {
+    display: block;
+    margin-top: 10px;
+  }
 }
 
 /* Like counter */
@@ -1176,6 +1227,7 @@ ul.actions {
 }
 
 .like-counter .anticon {
+  color: #f073a8;
   font-size: 22px;
   margin-right: 20px;
   vertical-align: middle;
