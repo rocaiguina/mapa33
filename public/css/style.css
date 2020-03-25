@@ -854,6 +854,16 @@ ul.actions {
   color: #181a19;
 }
 
+.toolbar-mapeditor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  z-index: 99;
+  text-align: center;
+  margin-bottom: 0;
+}
+
 .toolbar-mapeditor .ant-btn.m33-btn {
   background-color: #181a19;
   border-color: #fff;
@@ -866,6 +876,15 @@ ul.actions {
   background-color: #fff;
   border-color: #fff;
   color: #181a19;
+}
+
+@media (max-width: 767px) {
+  .toolbar-mapeditor {
+    bottom: 30px;
+  }
+  .toolbar-mapeditor ul > li {
+    margin: 0 3px;
+  }
 }
 
 /* Slick map slider */
@@ -1219,7 +1238,14 @@ ul.actions {
   color: #181a19;
 }
 
-.box-map-preview {
+.mapbox-editor {
+  background-color: #000;
+  position: relative;
+  height: 70vh;
+  width: 100%;
+}
+
+.boxmap-preview {
   background-color: #fff;
   box-shadow: 0 0px 10px -6px #222;
   margin: 10px;
@@ -1229,10 +1255,38 @@ ul.actions {
   width: 320px;
 }
 
-.box-map-info {
+.boxmap-info {
   color: #181a19;
-  font-size: 12px;
-  font-weight: bold;
+  font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 12px; 
+}
+
+.boxmap-searchinput {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  margin-left: -120px;
+  top: 10px;
+  width: 240px;
+}
+
+@media (max-width: 320px) {
+  .mapbox-editor {
+    height: 66vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .mapboxgl-ctrl-geocoder--icon-search {
+    top: 8px !important;
+  }
+  .mapboxgl-ctrl-geocoder--input {
+    height: 40px !important;
+    font-size: .84em !important;
+  }
+  .boxmap-preview {
+    display: none;
+  }
 }
 
 /* Land list */
@@ -1438,10 +1492,6 @@ ul.actions {
 
   .footer .third-column {
     padding: 16px 30px 0px 30px;
-  }
-
-  .toolbar {
-    margin: 0 -5px 15px -5px;
   }
 
   .toolbar-menu {
