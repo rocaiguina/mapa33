@@ -17,6 +17,7 @@ class ImportanceOfKnowingStep extends React.Component {
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
+        footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
           <Progress onNext={this.handleOnNext} step={18} steps={21} />

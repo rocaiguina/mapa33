@@ -16,6 +16,7 @@ class SubmitStep extends React.Component {
     return (
       <BaseLayout
         title="PREVISUALIZACIÓN DE TARJETA DE PROPUESTA"
+        footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
           <Progress
@@ -32,7 +33,7 @@ class SubmitStep extends React.Component {
           <Row gutter={30}>
             <Col md={6}>
               <h2>El terreno del futuro</h2>
-              <h5>Junior caño</h5>
+              <h3>Junior caño</h3>
             </Col>
             <Col md={10}>
               <MiniMap data={this.props.summary.geojson} />

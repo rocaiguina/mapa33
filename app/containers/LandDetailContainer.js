@@ -131,7 +131,6 @@ class LandDetailContainer extends React.Component {
       <BaseLayout
         dark
         title="TARJETA DE PROPUESTA"
-        enableMenu={false}
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"

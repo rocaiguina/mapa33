@@ -32,10 +32,6 @@ const landValidationSchema = Yup.object().shape({
 });
 
 class RegisterWizard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleOnNext = ({ step, push }, values) => {
     switch (step.id) {
       case 'are-you-owner':

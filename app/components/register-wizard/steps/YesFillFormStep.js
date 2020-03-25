@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Button, Col, Row, Input } from 'antd';
 
 import BaseLayout from '../../layout/base';
-import Icon from '../../ui/Icon';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class YesFillFormStep extends React.Component {
   handleOnNext = () => {
@@ -15,23 +17,14 @@ class YesFillFormStep extends React.Component {
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
+        footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Button onClick={this.handleOnNext}>Continuar</Button>
+          <Progress onNext={this.handleOnNext} step={13} steps={21} />
         }
       >
         <div className="main-content m-t-20">
-          <Row gutter={30}>
-            <Col span={12}>
-              <Button onClick={this.props.previous}>Back</Button>
-            </Col>
-            <Col span={12}>
-              <p className="text-right">
-                <strong>Paso:</strong>
-                <br />13 de 21
-              </p>
-            </Col>
-          </Row>
+          <TopNavigator previous={this.props.previous} step={13} steps={21} />
           <Row gutter={30}>
             <Col md={8} />
             <Col md={8}>
@@ -68,6 +61,10 @@ class YesFillFormStep extends React.Component {
               </div>
             </Col>
           </Row>
+          <BottomNavigator
+            onPrevious={this.props.previous}
+            onNext={this.handleOnNext}
+          />
         </div>
       </BaseLayout>
     );

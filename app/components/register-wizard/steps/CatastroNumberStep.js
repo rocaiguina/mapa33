@@ -17,6 +17,7 @@ class CatastroNumberStep extends React.Component {
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
+        footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
           <Progress onNext={this.handleOnNext} step={5} steps={21} />
@@ -34,7 +35,7 @@ class CatastroNumberStep extends React.Component {
                   className="inputprop"
                   size="large"
                   style={{ textAlign: 'center' }}
-                  placeholder="     /     /     /     /     "
+                  placeholder="   /   /   /   /   "
                   value={this.props.catastro_number}
                   onChange={this.props.handleChange}
                 />

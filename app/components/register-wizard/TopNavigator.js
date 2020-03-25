@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'antd';
+import Icon from '../ui/Icon';
 
 class TopNavigator extends React.Component {
   render() {
@@ -8,7 +9,11 @@ class TopNavigator extends React.Component {
     return (
       <Row gutter={30} className="visible-xs">
         <Col span={12}>
-          {!disabledPrevious && <Button onClick={previous}>Back</Button>}
+          {!disabledPrevious && (
+            <Button className="ant-btn-white" onClick={previous} shape="round">
+              <Icon type="arrow-left-2" />
+            </Button>
+          )}
         </Col>
         <Col span={12}>
           <p className="text-right">

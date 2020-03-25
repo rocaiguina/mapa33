@@ -3,6 +3,39 @@ import Axios from 'axios';
 import RegisterWizard from '../components/register-wizard';
 
 class WizardContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      are_u_owner: null,
+      catastro_number: '',
+      owner_phone: '',
+      owner_name: '',
+      inheritance_land: null,
+      inheritance_agree: null,
+      lands_problem: [],
+      lands_other_problem: null,
+      has_mortgage: null,
+      has_surveying: null,
+      lands_main_uses: [],
+      lands_other_main_uses: null,
+      lands_structures: [],
+      lands_other_structures: null,
+      lands_attributes: [],
+      lands_other_attributes: null,
+      has_contamination: null,
+      wich_use: null,
+      importance_of_knowing: '',
+      want_propose: null,
+      know_owner: null,
+      owner_email: '',
+      geojson: null,
+      plots_count: 0,
+      area_size: 0,
+      base64Img: '',
+      land_name: '',
+    };
+  }
+
   handleOnSubmit = data => {
     const { history } = this.props;
 

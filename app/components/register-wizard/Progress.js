@@ -6,17 +6,20 @@ class Progress extends React.Component {
   render() {
     const { nextBtnHtmlType, nextText, step, steps, onNext } = this.props;
     return (
-      <div>
-        <Button
-          htmlType={nextBtnHtmlType}
-          className="ant-btn-purple visible-xs"
-          shape="round"
-          onClick={onNext}
-        >
-          {nextText || 'Continuar'}
-        </Button>
+      <div className="wizard-progress">
+        <div className="text-right visible-xs">
+          <Button
+            htmlType={nextBtnHtmlType}
+            className="ant-btn-purple"
+            shape="round"
+            size="large"
+            onClick={onNext}
+          >
+            {nextText || 'Continuar'}
+          </Button>
+        </div>
         <div className="hidden-xs">
-          Progreso de propuesta:
+          <span>Progreso de propuesta:</span>
           <h1>
             {step}/{steps}
           </h1>

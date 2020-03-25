@@ -13,10 +13,10 @@ class BottomNavigator extends React.Component {
       previousText,
     } = this.props;
     return (
-      <div className="form-group hidden-xs text-center">
+      <div className="wizard-navigator hidden-xs">
         {!disabledPrevious && (
           <Button
-            className="ant-btn-default"
+            className="ant-btn-default m-r-20"
             shape="round"
             size="large"
             onClick={onPrevious}

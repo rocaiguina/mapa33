@@ -344,6 +344,9 @@ body {
 }
 
 /* Colors */
+.text-black {
+  color: #000;
+}
 .text-purple {
   color: #f073a8;
 }
@@ -364,6 +367,7 @@ body {
 
 .main {
   min-height: 100%;
+  color: #000;
 }
 
 .main.main-dark {
@@ -437,7 +441,7 @@ body {
 
 .header .top-actions,
 .header .bottom-actions {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   position: absolute;
   right: 0;
   z-index: 10;
@@ -475,6 +479,7 @@ body {
 
 .top-actions .ant-btn {
   color: #181a19;
+  padding: 0 5px;
 }
 
 .main-dark .top-actions .ant-btn {
@@ -493,7 +498,7 @@ body {
     float: left;
   }
   .wrap-content.with-title.with-subtitle.with-actions {
-    padding-top: 120px;
+    padding-top: 140px;
   }
 }
 
@@ -570,7 +575,7 @@ body {
 }
 
 .footer .third-column {
-  padding: 16px 0px 16px 15px;
+  padding: 16px 0px;
   text-align: center;
 }
 
@@ -617,6 +622,7 @@ body {
   font-size: 16px;
   line-height: 1.2em;
   font-weight: bold;
+  margin-right: 38px;
 }
 
 ul.actions {
@@ -1040,6 +1046,31 @@ ul.actions {
   color: #181a19 !important;
 }
 
+.ant-btn.ant-btn-white {
+  background-color: #fff;
+  border-color: #000;
+  color: #000;
+}
+
+.ant-btn.ant-btn-white:hover,
+.ant-btn.ant-btn-white:focus {
+  background-color: #f4f4f4 !important;
+  border-color: #000 !important;
+  color: #222 !important;
+}
+
+.ant-btn.ant-btn-default {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.ant-btn.ant-btn-default:hover,
+.ant-btn.ant-btn-default:focus {
+  background-color: #c5c5c5 !important;
+  border-color: #c5c5c5 !important;
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
 .ant-btn.m33-btn>small {
   font-size: 13px;
 }
@@ -1309,6 +1340,22 @@ ul.actions {
   margin-left: 50px;
 }
 
+.m-r-5 {
+  margin-right: 5px;
+}
+
+.m-r-10 {
+  margin-right: 10px;
+}
+
+.m-r-15 {
+  margin-right: 15px;
+}
+
+.m-r-20 {
+  margin-right: 20px;
+}
+
 .m-t-0 {
   margin-top: 0px;
 }
@@ -1354,6 +1401,29 @@ ul.actions {
   right: 0;
 }
 
+.wizard-navigator {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.wizard-navigator .ant-btn {
+  min-width: 132px;
+}
+
+.wizard-progress {
+  text-align: left;
+}
+.wizard-progress div span {
+  line-height: 1em;
+  display: block;
+}
+.wizard-progress h1 {
+  font-weight: bold;
+  font-size: 1.4em;
+  line-height: 2em;
+  margin-bottom: 0;
+}
+
 /* Responsive */
 @media (min-width: 992px) {
   .m33-wizard {
@@ -1367,7 +1437,7 @@ ul.actions {
   }
 
   .footer .third-column {
-    padding: 16px 30px;
+    padding: 16px 30px 0px 30px;
   }
 
   .toolbar {
