@@ -27,7 +27,7 @@ class Map extends Component {
     componentDidMount() {
         map = new mapboxgl.Map({
             container: this.mapContainer,
-            style: 'mapbox://styles/mapbox/dark-v9',
+            style: 'mapbox://styles/rocaiguina/ck81mam531w901ippbvie6wrv',
             center: [this.state.lng, this.state.lat],
             zoom: this.state.zoom
         });

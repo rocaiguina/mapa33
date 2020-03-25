@@ -23,7 +23,7 @@ class Login extends React.Component {
                 <h2>&nbsp;<br/>LOGIN</h2>
                 <ul className="actions">
                   <li>
-                    <Button size="large" type="link" style={{color:"#000000"}} onClick={this.backPage}><Icon type="close"/></Button>
+                    <Button size="large" type="link" style={{color:"#181a19"}} onClick={this.backPage}><Icon type="close"/></Button>
                   </li>
                 </ul>
               </div>

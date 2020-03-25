@@ -76,7 +76,7 @@ html {
     width: 60px;
     border: 2px solid #ffffff;
     color: #ffffff;
-    background: rgba(0,0,0,0.5);
+    background: rgba(24, 26, 25, 0.5);
     font-size: 30px;
     -webkit-transition: background-color .125s;
     -moz-transition: background-color .125s;
@@ -121,19 +121,19 @@ html {
 
 /*Borders*/
 .border-top {
-    border-top: 1px solid #000000
+    border-top: 1px solid #181a19
 }
 
 .border-bottom {
-    border-bottom: 1px solid #000000
+    border-bottom: 1px solid #181a19
 }
 
 .border-left {
-    border-left: 1px solid #000000
+    border-left: 1px solid #181a19
 }
 
 .border-right {
-    border-right: 1px solid #000000
+    border-right: 1px solid #181a19
 }
 
 /*Padding*/

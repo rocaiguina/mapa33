@@ -291,7 +291,7 @@ body {
 
 .badge {
   display: block;
-  color: #000;
+  color: #181a19;
   font-size: 14px;
   margin-bottom: 15px;
   padding: 8px 10px;
@@ -367,7 +367,7 @@ body {
 }
 
 .main.main-dark {
-  background-color: #000;
+  background-color: #181a19;
   color: #fff;
 }
 
@@ -390,7 +390,7 @@ body {
 
 .header {
   background-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 .header-wrap {
@@ -423,7 +423,7 @@ body {
 }
 
 .header-dark {
-  background-color: #000;
+  background-color: #181a19;
   color: #fff;
 }
 
@@ -474,7 +474,7 @@ body {
 }
 
 .top-actions .ant-btn {
-  color: #000;
+  color: #181a19;
 }
 
 .main-dark .top-actions .ant-btn {
@@ -510,7 +510,7 @@ body {
 .ant-drawer-purple .ant-drawer-close {
   background-color: #fff;
   border-radius: 24px;
-  color: #000;
+  color: #181a19;
   height: 36px;
   line-height: 36px;
   right: 24px;
@@ -582,17 +582,17 @@ body {
 
 .footer {
   background-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 .footer .first-column,
 .footer .second-column,
 .footer .third-column {
-  border-color: #000;
+  border-color: #181a19;
 }
 
 .footer-dark {
-  background-color: #000;
+  background-color: #181a19;
   color: #fff;
 }
 
@@ -608,7 +608,7 @@ body {
 
 /* Pages */
 .page-title {
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px dotted #181a19;
   position: relative;
   margin-bottom: 10px;
 }
@@ -845,11 +845,11 @@ ul.actions {
 .toolbar .ant-btn-background-ghost.m33-btn:focus {
   background-color: #fff !important;
   border-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 .toolbar-mapeditor .ant-btn.m33-btn {
-  background-color: #000;
+  background-color: #181a19;
   border-color: #fff;
   color: #fff;
   font-size: 18px;
@@ -859,7 +859,7 @@ ul.actions {
 .toolbar-mapeditor .ant-btn.m33-btn:focus {
   background-color: #fff;
   border-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 /* Slick map slider */
@@ -923,7 +923,7 @@ ul.actions {
 .land-card .ant-card-meta-title,
 .land-card .ant-card-meta-description,
 .land-card .ant-card-actions>li>span {
-  color: #000000;
+  color: #181a19000;
 }
 
 .land-card .ant-card-actions {
@@ -967,7 +967,7 @@ ul.actions {
 }
 
 .ant-select-black .ant-select-selection {
-  background-color: #000;
+  background-color: #181a19;
   border-color: #fff;
   color: #fff;
 }
@@ -1017,27 +1017,27 @@ ul.actions {
 .ant-btn.ant-btn-orange {
   background-color: #f48767;
   border-color: #f48767;
-  color: #000;
+  color: #181a19;
 }
 
 .ant-btn.ant-btn-orange:hover,
 .ant-btn.ant-btn-orange:focus {
   background-color: #f3967a !important;
   border-color: #f3967a !important;
-  color: #000 !important;
+  color: #181a19 !important;
 }
 
 .ant-btn.ant-btn-blue {
   background-color: #2e84c6;
   border-color: #2e84c6;
-  color: #000;
+  color: #181a19;
 }
 
 .ant-btn.ant-btn-blue:hover,
 .ant-btn.ant-btn-blue:focus {
   background-color: #4b9ede !important;
   border-color: #4b9ede !important;
-  color: #000 !important;
+  color: #181a19 !important;
 }
 
 .ant-btn.m33-btn>small {
@@ -1083,8 +1083,8 @@ ul.actions {
 }
 
 .m33-btn.ant-btn-primary {
-  background-color: #000;
-  border-color: #000;
+  background-color: #181a19;
+  border-color: #181a19;
   color: #fff;
 }
 
@@ -1097,19 +1097,19 @@ ul.actions {
 .m33-btn.m33-btn-blue {
   background-color: #2e84c6;
   border-color: #2e84c6;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.m33-btn-orange {
   background-color: #f48767;
   border-color: #f48767;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.m33-btn-white {
   background-color: #fff;
   border-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.ant-btn-primary:hover,
@@ -1130,21 +1130,21 @@ ul.actions {
 .m33-btn.m33-btn-blue:focus {
   background-color: #2e84c6;
   border-color: #2e84c6;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.m33-btn-white:hover,
 .m33-btn.m33-btn-white:focus {
   background-color: #fff;
   border-color: #fff;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.m33-btn-orange:hover,
 .m33-btn.m33-btn-orange:focus {
   background-color: #f48767;
   border-color: #f48767;
-  color: #000;
+  color: #181a19;
 }
 
 .m33-btn.ant-btn-background-ghost.ant-btn-primary {
@@ -1156,7 +1156,7 @@ ul.actions {
 .m33-btn.ant-btn-background-ghost.ant-btn-primary:focus {
   background: #fff !important;
   border-color: #fff !important;
-  color: #000 !important;
+  color: #181a19 !important;
 }
 
 .m33-btn.ant-btn-link {
@@ -1185,7 +1185,7 @@ ul.actions {
 
 /* Mapbox */
 .mapboxgl-popup {
-  color: #000;
+  color: #181a19;
 }
 
 .box-map-preview {
@@ -1199,14 +1199,14 @@ ul.actions {
 }
 
 .box-map-info {
-  color: #000;
+  color: #181a19;
   font-size: 12px;
   font-weight: bold;
 }
 
 /* Land list */
 .land-list .land-list-row {
-  border-top: 1px dotted #000;
+  border-top: 1px dotted #181a19;
   list-style: none;
   margin: 0;
   padding: 0.75rem 0;
