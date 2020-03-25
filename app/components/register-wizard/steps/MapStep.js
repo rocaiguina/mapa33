@@ -60,22 +60,22 @@ class MapStep extends React.Component {
       lands: data.lands,
       area: data.area
     });
-    const { setFieldValue } = this.props.formik;
+    const { setFieldValue } = this.props;
     setFieldValue('geojson', data.geojson);
     setFieldValue('plots_count', data.lands.length);
     setFieldValue('area_size', data.area);
   }
 
   handleOnRenderMiniMap = (base64Img) => {
-    const { setFieldValue } = this.props.formik;
+    const { setFieldValue } = this.props;
     setFieldValue('base64Img', base64Img);
   }
 
   handleOnSubmit = (e) => {
-    const { basename, history, formik } = this.props;
-    if (formik.values.geojson) {
-      history.push(`${basename}/owner`);
-    }
+    // if (this.state.lands.length > 0) {
+    //   this.props.next();
+    // }
+    this.props.next();
   }
 
   handleOnCloseTutorial = (e) => {
@@ -115,16 +115,7 @@ class MapStep extends React.Component {
 
     return (
       <BaseLayout
-        header={
-          <div className="page-title">
-            <h2>ESCOGE TU<br/>TERRENO/PROPUESTA</h2>
-            <ul className="actions">
-              <li>
-                <Button size="large" type="link" onClick={this.handleOnClose}><Icon type="close"/></Button>
-              </li>
-            </ul>
-          </div>
-        }
+        title="ESCOGE TU TERRENO/PROPUESTA"
         footerXs={footerXs}
         footerRightComponent={
           <Button

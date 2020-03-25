@@ -46,6 +46,15 @@ function Routes() {
           component={ResetPassword}
         />
 
+        <Route exact={true} path="/register/user" component={RegisterUser} />
+        <Route
+          exact={true}
+          path="/register/user/successful"
+          component={RegisterUserSuccessful}
+        />
+        <Route exact={true} path="/profile" component={ProfileUser} />
+        <Route exact={true} path="/profile/edit" component={ProfileUserEdit} />
+
         <Route exact={true} path="/map" component={LandMapViewContainer} />
         <Route
           exact={true}
@@ -58,7 +67,6 @@ function Routes() {
           component={RegisterSuccessContainer}
         />
         <Route
-          exact={true}
           path="/register"
           component={RegisterWizardContainer}
         />
@@ -67,15 +75,6 @@ function Routes() {
           path="/land/:landId"
           component={LandDetailContainer}
         />
-
-        <Route exact={true} path="/register/user" component={RegisterUser} />
-        <Route
-          exact={true}
-          path="/register/user/successful"
-          component={RegisterUserSuccessful}
-        />
-        <Route exact={true} path="/profile" component={ProfileUser} />
-        <Route exact={true} path="/profile/edit" component={ProfileUserEdit} />
 
         <Route exact={true} path="/info" component={InfoContainer} />
         <Route path="/" component={IntroContainer} />

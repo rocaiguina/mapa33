@@ -1,90 +1,127 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Row, Checkbox, Input } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class HowManyStructuresStep extends React.Component {
-  constructor (props) {
-      super(props);
-      this.mostrarinput = this.mostrarinput.bind(this);
-      this.state = {
-          inputotro2: false,
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputotro: false,
+    };
   }
 
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-    if(formik.values.lands_structures != formik.initialValues.lands_structures){
-      history.push(`${basename}/mainattributes`);
-    }
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/mainuses`);
-  }
-
-  mostrarinput(e){
-    this.setState({
-      inputotro2: e.target.checked
-    });
-  }
-
-  handleOnChange = (checkedValue) => {
-    const { setFieldValue } = this.props.formik;
+  handleOnChange = checkedValue => {
+    const { setFieldValue } = this.props;
     setFieldValue('lands_structures', checkedValue);
-  }
+
+    if (checkedValue.indexOf('others') != -1) {
+      this.setState({ inputotro: true });
+    } else {
+      this.setState({ inputotro: false });
+    }
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div className="m-t-20">
-        <Row>
-          <Col md={4}/>
-          <Col md={8}>
-            <h1>¿Qué tipo de estructuras hay en el terreno?</h1>
-          </Col>
-          <Col md={8}>
-            <Checkbox.Group
-              style={{ width: '100%' }}
-              value={formik.values.lands_structures}
-              onChange={this.handleOnChange}
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={15} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator previous={this.props.previous} step={15} steps={21} />
+          <Row gutter={30}>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
             >
-              <Row>
-                <Col span={24}>
-                  <Checkbox value="residential"  className="inputprop radiobutton">Residencial</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="commercial"  className="inputprop radiobutton">Comercial / Oficina</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="agricultural" className="inputprop radiobutton">Agrícola</Checkbox>
-                </Col>
-                <Col span={24}>
-                  <Checkbox value="others" id="inputotro2" className="inputprop radiobutton" onChange={this.mostrarinput}>Otras</Checkbox>
-                </Col>
-              </Row>
-            </Checkbox.Group>
-              {
-                this.state.inputotro2 &&
+              <h2>¿Qué tipo de estructuras hay en el terreno?</h2>
+            </Col>
+            <Col md={12}>
+              <Checkbox.Group
+                style={{ width: '100%' }}
+                value={this.props.lands_structures}
+                onChange={this.handleOnChange}
+              >
+                <Row>
+                  <Col span={24}>
+                    <Checkbox
+                      value="residential"
+                      className="inputprop radiobutton"
+                    >
+                      Residencial
+                    </Checkbox>
+                  </Col>
+                  <Col span={24}>
+                    <Checkbox
+                      value="commercial"
+                      className="inputprop radiobutton"
+                    >
+                      Comercial / Oficina
+                    </Checkbox>
+                  </Col>
+                  <Col span={24}>
+                    <Checkbox
+                      value="agricultural"
+                      className="inputprop radiobutton"
+                    >
+                      Agrícola
+                    </Checkbox>
+                  </Col>
+                  <Col span={24}>
+                    <Checkbox
+                      value="others"
+                      id="inputotro2"
+                      className="inputprop radiobutton"
+                    >
+                      Otras
+                    </Checkbox>
+                  </Col>
+                </Row>
+              </Checkbox.Group>
+              {this.state.inputotro && (
                 <Input
                   name="lands_other_structures"
                   className="inputprop"
                   id="otro2"
                   size="large"
-                  value={formik.values.lands_other_structures}
-                  onChange={formik.handleChange}
+                  value={this.props.lands_other_structures}
+                  onChange={this.props.handleChange}
                 />
-              }
-          </Col>
-          <Col md={4} />
-        </Row>
-        <Pager
-          onPrevious={this.handleOnPrevious}
-          onNext={this.handleOnNext}
-        />
-      </div>
+              )}
+            </Col>
+          </Row>
+          <BottomNavigator
+            onPrevious={this.props.previous}
+            onNext={this.handleOnNext}
+          />
+        </div>
+      </BaseLayout>
     );
   }
 }
+
+HowManyStructuresStep.propTypes = {
+  lands_structures: PropTypes.array,
+  lands_other_structures: PropTypes.string,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+  setFieldValue: PropTypes.func,
+};
 
 export default HowManyStructuresStep;

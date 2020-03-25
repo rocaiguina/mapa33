@@ -77,6 +77,7 @@
     "prop-types": "15.7.2",
     "random-token": "0.0.8",
     "react": "^16.12.0",
+    "react-albus": "^2.0.0",
     "react-dom": "16.3.2",
     "react-full-page": "^0.1.7",
     "react-joyride": "^2.1.1",

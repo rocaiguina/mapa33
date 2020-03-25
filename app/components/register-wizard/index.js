@@ -1,14 +1,10 @@
 import React from 'react';
-import Button from '../ui/Button';
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
 import { withRouter } from 'react-router';
-import {
-  Switch,
-  Route
-} from 'react-router-dom';
-import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Step from './Step';
-import RegisterStep from './steps/RegisterStep';
+import { Wizard, Steps, Step } from 'react-albus';
+
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
 import ProposeLandStep from './steps/ProposeLandStep';
 import PhoneOwnerStep from './steps/PhoneOwnerStep';
@@ -28,482 +24,329 @@ import SubmitStep from './steps/SubmitStep';
 import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
 import MapStep from './steps/MapStep';
-import PruebaTour from './steps/PruebaTour';
+import ReviewLandStep from './steps/ReviewLandStep';
 import NameLandStep from './steps/NameLand';
+
+const landValidationSchema = Yup.object().shape({
+  land_name: Yup.string().required('Nombre del terreno requerido'),
+});
 
 class RegisterWizard extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  handleOnSubmit = (values) => {
-    this.props.onSubmit(values);
-  }
+  handleOnNext = ({ step, push }, values) => {
+    switch (step.id) {
+      case 'are-you-owner':
+        if (values.are_u_owner) {
+          push('catastro-number');
+        } else {
+          push('know-owner');
+        }
+        break;
+      case 'survey':
+        push('main-uses');
+        break;
+      case 'know-owner':
+        if (values.know_owner) {
+          push();
+        } else {
+          push('main-uses');
+        }
+        break;
+      default:
+        push();
+        break;
+    }
+    console.log(step, values);
+  };
 
-  handleOnClose = (e) => {
-    this.props.history.push('/map');
-  }
-
-  render () {
-    const { match, history, step } = this.props;
-    console.log('match')
-    console.log(match)
+  render() {
+    const { match, history } = this.props;
     return (
       <Formik
-        initialValues={{
-          u_name: '',
-          u_lastname: '',
-          u_username: '',
-          u_password: '',
-          u_email: '',
-          u_zip: '',
-          are_u_owner: null,
-          catastro_number: '',
-          owner_phone: '',
-          owner_name: '',
-          inheritance_land: null,
-          inheritance_agree: null,
-          lands_problem: [],
-          lands_other_problem: null,
-          has_mortgage: null,
-          has_surveying: null,
-          lands_main_uses: [],
-          lands_other_main_uses: null,
-          lands_structures: [],
-          lands_other_structures: null,
-          lands_attributes: [],
-          lands_other_attributes: null,
-          has_contamination: null,
-          wich_use: null,
-          importance_of_knowing: '',
-          want_propose: null,
-          know_owner: null,
-          owner_email: '',
-          geojson: null,
-          plots_count: 0,
-          area_size: 0,
-          base64Img: '',
-          land_name: '',
-        }}
-        validationSchema={Yup.object().shape({
-            u_name: Yup.string()
-                .required('Nombre(s) requerido(s)'),
-            u_lastname: Yup.string()
-                .required('Apellido(s) requerido(s)'),
-            u_username: Yup.string()
-                .required('Nombre de usuario requerido'),
-            u_email: Yup.string()
-                .email('Correo inválido')
-                .required('Correo requerido'),
-            u_password: Yup.string()
-                .min(6, 'Debe tener más de 6 carácteres')
-                .required('Contraseña requerida'),
-            u_zip:  Yup.string()
-                .required('CodeZip requerido'),
-            land_name: Yup.string()
-                .required('Nombre del terreno requerido'),
-        })}
-        onSubmit={this.handleOnSubmit}
+        initialValues={this.props.initialValues}
+        enableReinitialize
+        onSubmit={this.props.onSubmit}
+        validationSchema={landValidationSchema}
+        validateOnBlur={false}
+        validateOnChange={false}
       >
-        {
-          (formik) => (
-            <form onSubmit={formik.handleSubmit}>
-              <Switch>
-                <Route exact path={match.path}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                        size="large"
-                        className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                        style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                        type="secondary"
-                        bordered>
-                        1/18
-                      </Button>
-                      </div>}
-                    component={<RegisterStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/propose`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                        size="large"
-                        className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                        style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                        type="secondary"
-                        bordered>
-                        2/18
-                      </Button>
-                      </div>}
-                    component={<ProposeLandStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/map`}>
-                  <MapStep basename={match.path} history={history} formik={formik} />
-                </Route>
-                <Route path={`${match.path}/owner`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          4/18
-                        </Button>
-                      </div>
-                    }
-                    component={<AreYouOwnerStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-
+        {({
+          values,
+          errors,
+          handleChange,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Wizard
+              onNext={wizard => {
+                this.handleOnNext(wizard, values);
+              }}
+              history={history}
+              basename={match.path}
+            >
+              <Steps>
+                <Step
+                  id="propose-land"
+                  render={({ next, previous }) => (
+                    <ProposeLandStep
+                      want_propose={values.want_propose}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="map"
+                  render={({ next, previous }) => (
+                    <MapStep
+                      next={next}
+                      previous={previous}
+                      setFieldValue={setFieldValue}
+                    />
+                  )}
+                />
+                <Step
+                  id="review"
+                  render={({ next, previous }) => (
+                    <ReviewLandStep next={next} previous={previous} />
+                  )}
+                />
+                <Step
+                  id="are-you-owner"
+                  render={({ next, previous }) => (
+                    <AreYouOwnerStep
+                      are_u_owner={values.are_u_owner}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
 
                 {/* Owner Flow */}
-                <Route path={`${match.path}/catastro-number`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>5/18</span> : <span>5/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<CatastroNumberStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/owner-phone`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder"><Button
-                        size="large"
-                        className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                        style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                        type="secondary"
-                        bordered>
-                        {formik.values.are_u_owner ? <span>6/18</span> : <span>6/12</span>}
-                      </Button>
-                      </div>
-                    }
-                    component={<PhoneOwnerStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/inheritance`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>7/18</span> : <span>7/12</span>}
-                        </Button></div>
-                    }
-                    component={<InheritanceLandStep basename={match.path} history={history} formik={formik} />}
-                  />
-                </Route>
-                <Route path={`${match.path}/inheritance-agree`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>8/18</span> : <span>8/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<InheritanceAgreeStep basename={match.path} history={history} formik={formik} />}
-                  />
-                </Route>
-                <Route path={`${match.path}/problem`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>9/18</span> : <span>9/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<ProblemLandStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/mortgage`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>10/18</span> : <span>10/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<MortgageStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/surveying`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>11/18</span> : <span>12/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<SurveyingStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                {/* End Owner Flow */}
-
+                <Step
+                  id="catastro-number"
+                  render={({ next, previous }) => (
+                    <CatastroNumberStep
+                      catastro_number={values.catastro_number}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="owner-phone-number"
+                  render={({ next, previous }) => (
+                    <PhoneOwnerStep
+                      owner_name={values.owner_name}
+                      owner_phone={values.owner_phone}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="inheritance"
+                  render={({ next, previous }) => (
+                    <InheritanceLandStep
+                      inheritance_land={values.inheritance_land}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="inheritance-agreement"
+                  render={({ next, previous }) => (
+                    <InheritanceAgreeStep
+                      inheritance_agree={values.inheritance_agree}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="problem"
+                  render={({ next, previous }) => (
+                    <ProblemLandStep
+                      lands_problem={values.lands_problem}
+                      lands_other_problem={values.lands_other_problem}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      setFieldValue={setFieldValue}
+                    />
+                  )}
+                />
+                <Step
+                  id="mortgage"
+                  render={({ next, previous }) => (
+                    <MortgageStep
+                      has_mortgage={values.has_mortgage}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="survey"
+                  render={({ next, previous }) => (
+                    <SurveyingStep
+                      has_surveying={values.has_surveying}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
 
                 {/* NO Owner Flow */}
-                <Route path={`${match.path}/knowowner`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner ? <span>5/18</span> : <span>5/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<KnowOwnerStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/yesfillform`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.know_owner ? <span>6/13</span> : <span>5/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<YesFillFormStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                {/* End NO Owner Flow */}
+                <Step
+                  id="know-owner"
+                  render={({ next, previous }) => (
+                    <KnowOwnerStep
+                      know_owner={values.know_owner}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="owner-data"
+                  render={({ next, previous }) => (
+                    <YesFillFormStep
+                      owner_email={values.owner_email}
+                      owner_phone={values.owner_phone}
+                      owner_name={values.owner_name}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
 
                 {/* Common Steps */}
-                <Route path={`${match.path}/mainuses`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner  ? <span>12/18</span>: formik.values.know_owner ? <span>7/13</span> : <span>6/12</span> }
-                        </Button>
-                      </div>
-                    }
-                    component={<MainUsesStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/howmanystructures`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner  ? <span>13/18</span> : formik.values.know_owner ? <span>8/13</span> : <span>7/12</span> }
-                        </Button>
-                      </div>
-                    }
-                    component={<HowManyStructuresStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/mainattributes`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner  ? <span>14/18</span> : formik.values.know_owner ? <span>9/13</span> : <span>8/12</span> }
-                        </Button>
-                      </div>
-                    }
-                    component={<MainAttributesStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/contamination`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner  ? <span>15/18</span> : formik.values.know_owner ? <span>10/13</span> : <span>9/12</span> }
-                        </Button>
-                      </div>
-                    }
-                    component={<ContaminationStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/importanceofknowing`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                         {formik.values.are_u_owner  ? <span>16/18</span> : formik.values.know_owner ? <span>11/13</span> : <span>10/12</span>}
-                        </Button>
-                      </div>
-                    }
-                    component={<ImportanceOfKnowingStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/wichuse`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                          {formik.values.are_u_owner  ? <span>17/18</span> : formik.values.know_owner ? <span>12/13</span> : <span>11/12</span> }
-                        </Button>
-                      </div>
-                    }
-                    component={<WichUseStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/nameland`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn m33-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                        </Button>
-                        {formik.values.are_u_owner  ? <span>18/18</span> : formik.values.know_owner ? <span>13/13</span> : <span>12/12</span> }
-
-                      </div>
-                    }
-                    component={<NameLandStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-                <Route path={`${match.path}/submit`}>
-                  <Step
-                    title={<h2>Formulario de<br/>Propuesta</h2>}
-                    footerRightComponent={
-                      <div className="stepguideborder">
-                        <Button
-                          size="large"
-                          className="stepguide ant-btn m33-btn ant-btn-lg ant-btn-background-blackstep"
-                          style={{ fontSize: '16px',borderRadius:"15px !important" }}
-                          type="secondary"
-                          bordered>
-                        </Button>
-                      </div>
-                    }
-                    component={<SubmitStep basename={match.path} history={history} formik={formik} />}
-                    onClose={this.handleOnClose}
-                  />
-                </Route>
-              {/* End Common Steps */}
-              </Switch>
-            </form>
-          )
-        }
+                <Step
+                  id="main-uses"
+                  render={({ next, previous }) => (
+                    <MainUsesStep
+                      lands_main_uses={values.lands_main_uses}
+                      lands_other_main_uses={values.lands_other_main_uses}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      setFieldValue={setFieldValue}
+                    />
+                  )}
+                />
+                <Step
+                  id="how-many-structures"
+                  render={({ next, previous }) => (
+                    <HowManyStructuresStep
+                      lands_structures={values.lands_structures}
+                      lands_other_structures={values.lands_other_structures}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      setFieldValue={setFieldValue}
+                    />
+                  )}
+                />
+                <Step
+                  id="main-attributes"
+                  render={({ next, previous }) => (
+                    <MainAttributesStep
+                      lands_attributes={values.lands_attributes}
+                      lands_other_attributes={values.lands_other_attributes}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      setFieldValue={setFieldValue}
+                    />
+                  )}
+                />
+                <Step
+                  id="contaminations"
+                  render={({ next, previous }) => (
+                    <ContaminationStep
+                      has_contamination={values.has_contamination}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="importance"
+                  render={({ next, previous }) => (
+                    <ImportanceOfKnowingStep
+                      importance_of_knowing={values.importance_of_knowing}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="wich-uses"
+                  render={({ next, previous }) => (
+                    <WichUseStep
+                      wich_use={values.wich_use}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="land"
+                  render={({ next, previous }) => (
+                    <NameLandStep
+                      land_name={values.land_name}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                    />
+                  )}
+                />
+                <Step
+                  id="summary"
+                  render={({ next, previous }) => (
+                    <SubmitStep
+                      summary={values}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      isSubmitting={isSubmitting}
+                    />
+                  )}
+                />
+              </Steps>
+            </Wizard>
+          </form>
+        )}
       </Formik>
-    )
+    );
   }
 }
+
+RegisterWizard.propTypes = {
+  initialValues: PropTypes.object,
+  history: PropTypes.object,
+  match: PropTypes.object,
+  onSubmit: PropTypes.func,
+};
 
 export default withRouter(RegisterWizard);

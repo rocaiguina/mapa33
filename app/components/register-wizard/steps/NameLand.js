@@ -1,54 +1,61 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Input, Row } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class NameLand extends React.Component {
-
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-    if(formik.values.land_name != formik.initialValues.land_name) {
-      if (!formik.errors.land_name){
-        history.push(`${basename}/submit`);
-      }
-    }
-  }
-
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/wichuse`);
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div>
-          <Row>
-              <Col md={8}/>
-              <Col md={8} style={{paddingLeft:"20px"}}>
-                  <h1>¿Qué nombre se debe utilizar para identificar este terreno?</h1>
-              </Col>
-          </Row>
-          <Row>
-            <Col md={8}/>
-            <Col id="propcol1" md={8} >
-                {formik.errors.land_name ? <label class="mensajerror">{formik.errors.land_name}</label> : null}
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={20} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator previous={this.props.previous} step={20} steps={21} />
+          <Row gutter={30}>
+            <Col md={8} />
+            <Col md={8}>
+              <h2>
+                ¿Qué nombre se debe utilizar para identificar este terreno?
+              </h2>
+              <div className="form-group">
                 <Input
                   name="land_name"
                   className="inputprop"
                   size="large"
-                  style={{textAlign:"center"}}                  
-                  value={formik.values.land_name}
-                  onChange={formik.handleChange}
+                  value={this.props.land_name}
+                  onChange={this.props.handleChange}
                 />
+              </div>
             </Col>
           </Row>
-          <Pager
-            onPrevious={this.handleOnPrevious}
+          <BottomNavigator
+            onPrevious={this.props.previous}
             onNext={this.handleOnNext}
-          />;
-      </div>
+          />
+        </div>
+      </BaseLayout>
     );
   }
 }
+
+NameLand.propTypes = {
+  land_name: PropTypes.string,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+};
 
 export default NameLand;

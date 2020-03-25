@@ -1,58 +1,88 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Radio, Row } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class MortgageStep extends React.Component {
+  handleOnChange = e => {
+    const self = this;
+    this.props.handleChange(e);
+    setTimeout(function() {
+      self.props.next();
+    }, 400);
+  };
 
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-    if(formik.values.has_mortgage != null){
-      history.push(`${basename}/surveying`);
-    }
-  }
-
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/problem`);
-  }
-
-  handleOnChange = (event) => {
-    const { basename, formik, history } = this.props;
-    formik.setFieldValue('has_mortgage', event.target.value);
-    history.push(`${basename}/surveying`);
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div className="m-t-20">
-        <Row>
-          <Col md={4}/>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
-              <h1>
-                ¿Existe una hipoteca sobre el terreno?
-              </h1>
-          </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={10} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator previous={this.props.previous} step={10} steps={21} />
+          <Row gutter={30}>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              <h2>¿Existe una hipoteca sobre el terreno?</h2>
+            </Col>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
+            >
               <Radio.Group
                 name="has_mortgage"
                 buttonStyle="solid"
-                value={formik.values.has_mortgage}
+                value={this.props.has_mortgage}
                 onChange={this.handleOnChange}
               >
-                <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiosi form1"
+                  value={true}
+                >
+                  Si
+                </Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiono form1"
+                  value={false}
+                >
+                  No
+                </Radio.Button>
               </Radio.Group>
-          </Col>
-          <Col md={4}/>
-        </Row>
-        <Pager
-          onPrevious={this.handleOnPrevious}
-          onNext={this.handleOnNext}
-        />
-      </div>
+            </Col>
+          </Row>
+          <BottomNavigator
+            onPrevious={this.props.previous}
+            onNext={this.handleOnNext}
+          />
+        </div>
+      </BaseLayout>
     );
   }
 }
+
+MortgageStep.propTypes = {
+  has_mortgage: PropTypes.bool,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+};
 
 export default MortgageStep;

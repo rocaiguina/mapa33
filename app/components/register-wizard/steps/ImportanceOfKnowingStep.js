@@ -1,71 +1,105 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Radio, Row } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class ImportanceOfKnowingStep extends React.Component {
-
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-    if(formik.values.importance_of_knowing != null){
-      history.push(`${basename}/wichuse`);
-    }
-  }
-
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/contamination`);
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div className="m-t-20">
-        <Row>
-          <Col md={8}>
-            <h1>
-              ¿Por qué es importante la protección de este terreno en particular?
-            </h1>
-          </Col>
-          <Col md={16} style={{textAlign:"left"}}>
-            <Radio.Group
-              name="importance_of_knowing"
-              value={formik.values.importance_of_knowing}
-              onChange={formik.handleChange}
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={18} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator previous={this.props.previous} step={18} steps={21} />
+          <Row gutter={30}>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
             >
-              <div style={{display:"flex"}}>
-                <Radio value="nature" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano.</h3></div>
-              </div>
-              <div style={{display:"flex", marginTop:"15px"}}>
-                <Radio value="nature_low_human" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un lugar natural con bajo impacto humano y quiero evitar mayores perturbaciones.</h3></div>
-              </div>
-              <div style={{display:"flex", marginTop:"15px"}}>
-                <Radio value="nature_special" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un lugar con rasgos naturales especiales(p.e. arboledas, mogotes, lagunas, cuevas)</h3></div>
-              </div>
-              <div style={{display:"flex", marginTop:"15px"}}>
-                <Radio value="species_protection" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un lugar donde habitan especies que deber ser protegidas</h3></div>
-              </div>
-              <div style={{display:"flex", marginTop:"15px"}}>
-                <Radio value="historic" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un lugar con historia natural y cultural que debe ser protegida</h3></div>
-              </div>
-              <div style={{display:"flex", marginTop:"15px"}}>
-                <Radio value="conservation" className="blockstyleradio" ></Radio>
-                <div><h3 style={{lineHeight: '32px'}}>Es un lugar óptimo donde la conservación y el desarrollo sustentable pueden ocurrir a la vez.</h3></div>
-              </div>
-            </Radio.Group>
-          </Col>
-        </Row>
-        <Pager
-          onPrevious={this.handleOnPrevious}
-          onNext={this.handleOnNext}
-        />
-      </div>
+              <h2>
+                ¿Por qué es importante la protección de este terreno en
+                particular?
+              </h2>
+            </Col>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'left',
+              }}
+            >
+              <Radio.Group
+                name="importance_of_knowing"
+                value={this.props.importance_of_knowing}
+                onChange={this.props.handleChange}
+              >
+                <div className="form-radio">
+                  <Radio value="nature" className="blockstyleradio">
+                    Es un espacio 100% natural y quiero evitar cualquier
+                    perturbación e impacto humano.
+                  </Radio>
+                </div>
+                <div className="form-radio">
+                  <Radio value="nature_low_human" className="blockstyleradio">
+                    Es un lugar natural con bajo impacto humano y quiero evitar
+                    mayores perturbaciones.
+                  </Radio>
+                </div>
+                <div className="form-radio">
+                  <Radio value="nature_special" className="blockstyleradio">
+                    Es un lugar con rasgos naturales especiales(p.e. arboledas,
+                    mogotes, lagunas, cuevas)
+                  </Radio>
+                </div>
+                <div className="form-radio">
+                  <Radio value="species_protection" className="blockstyleradio">
+                    Es un lugar donde habitan especies que deber ser protegidas
+                  </Radio>
+                </div>
+                <div className="form-radio">
+                  <Radio value="historic" className="blockstyleradio">
+                    Es un lugar con historia natural y cultural que debe ser
+                    protegida
+                  </Radio>
+                </div>
+                <div className="form-radio">
+                  <Radio value="conservation" className="blockstyleradio">
+                    Es un lugar óptimo donde la conservación y el desarrollo
+                    sustentable pueden ocurrir a la vez.
+                  </Radio>
+                </div>
+              </Radio.Group>
+            </Col>
+          </Row>
+          <BottomNavigator
+            onPrevious={this.props.previous}
+            onNext={this.handleOnNext}
+          />
+        </div>
+      </BaseLayout>
     );
   }
 }
+
+ImportanceOfKnowingStep.propTypes = {
+  importance_of_knowing: PropTypes.bool,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+};
 
 export default ImportanceOfKnowingStep;

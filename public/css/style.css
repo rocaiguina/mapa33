@@ -206,6 +206,14 @@ body {
 .form-check.form-check-dark .ant-checkbox-disabled + span {
   color: #fff;
 }
+.form-radio {
+  margin-bottom: 15px;
+}
+.form-radio .ant-radio-wrapper {
+  color: #000;
+  display: flex;
+  align-items: center;
+}
 
 .media {
   display: -ms-flexbox;
@@ -293,6 +301,10 @@ body {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+.badge-default {
+  background-color: #e7e8e8;
 }
 
 .badge-white {

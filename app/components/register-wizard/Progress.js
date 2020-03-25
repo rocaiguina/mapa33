@@ -1,0 +1,37 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button } from 'antd';
+
+class Progress extends React.Component {
+  render() {
+    const { nextBtnHtmlType, nextText, step, steps, onNext } = this.props;
+    return (
+      <div>
+        <Button
+          htmlType={nextBtnHtmlType}
+          className="ant-btn-purple visible-xs"
+          shape="round"
+          onClick={onNext}
+        >
+          {nextText || 'Continuar'}
+        </Button>
+        <div className="hidden-xs">
+          Progreso de propuesta:
+          <h1>
+            {step}/{steps}
+          </h1>
+        </div>
+      </div>
+    );
+  }
+}
+
+Progress.propTypes = {
+  nextBtnHtmlType: PropTypes.string,
+  nextText: PropTypes.string,
+  onNext: PropTypes.func,
+  step: PropTypes.number,
+  steps: PropTypes.number,
+};
+
+export default Progress;
