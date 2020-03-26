@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class Badge extends React.Component {
   render() {
     const badgeClass = ClassNames('badge', {
+      'badge-default': this.props.color == 'default',
       'badge-white': this.props.color == 'white',
       'badge-round': this.props.shape == 'round',
     });
@@ -17,6 +18,10 @@ class Badge extends React.Component {
     );
   }
 }
+
+Badge.defaultProps = {
+  color: 'default',
+};
 
 Badge.propTypes = {
   title: PropTypes.string,

@@ -1,55 +1,62 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col, Input, Row } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class CatastroNumberStep extends React.Component {
-
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
-    if(formik.values.catastro_number != formik.initialValues.catastro_number) {
-      if (!formik.errors.catastro_number){
-        history.push(`${basename}/owner-phone`);
-      }
-    }
-  }
-
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}/owner`);
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div>
-          <Row>
-              <Col md={8}/>
-              <Col md={8} style={{paddingLeft:"20px"}}>
-                  <h1>¿Cuál es el número de catastro?</h1>
-              </Col>
-          </Row>
-          <Row>
-            <Col md={8}/>
-            <Col id="propcol1" md={8} >
-                {formik.errors.catastro_number ? <label class="mensajerror">{formik.errors.catastro_number}</label> : null}
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        footerXs={[14, 0, 10]}
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={5} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator previous={this.props.previous} step={5} steps={21} />
+          <Row gutter={30}>
+            <Col md={8} />
+            <Col md={8}>
+              <h2>¿Cuál es el número de catastro?</h2>
+              <div className="form-group">
                 <Input
                   name="catastro_number"
                   className="inputprop"
                   size="large"
-                  style={{textAlign:"center"}}
-                  placeholder="     /     /     /     /     "
-                  value={formik.values.catastro_number}
-                  onChange={formik.handleChange}
+                  style={{ textAlign: 'center' }}
+                  placeholder="   /   /   /   /   "
+                  value={this.props.catastro_number}
+                  onChange={this.props.handleChange}
                 />
+              </div>
             </Col>
           </Row>
-          <Pager
-            onPrevious={this.handleOnPrevious}
+          <BottomNavigator
+            onPrevious={this.props.previous}
             onNext={this.handleOnNext}
-          />;
-      </div>
+          />
+        </div>
+      </BaseLayout>
     );
   }
 }
+
+CatastroNumberStep.propTypes = {
+  catastro_number: PropTypes.string,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+};
 
 export default CatastroNumberStep;

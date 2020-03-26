@@ -6,8 +6,8 @@ import './style/App.css';
 import IntroContainer from './containers/IntroContainer';
 import InfoContainer from './containers/InfoContainer';
 import LandMapViewContainer from './containers/LandMapViewContainer';
-import RegisterSuccessContainer from './containers/RegisterSuccessContainer';
-import RegisterWizardContainer from './containers/RegisterWizardContainer';
+import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
+import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
 import RegisterUser from './containers/user/RegisterUser';
@@ -46,6 +46,15 @@ function Routes() {
           component={ResetPassword}
         />
 
+        <Route exact={true} path="/register/user" component={RegisterUser} />
+        <Route
+          exact={true}
+          path="/register/user/successful"
+          component={RegisterUserSuccessful}
+        />
+        <Route exact={true} path="/profile" component={ProfileUser} />
+        <Route exact={true} path="/profile/edit" component={ProfileUserEdit} />
+
         <Route exact={true} path="/map" component={LandMapViewContainer} />
         <Route
           exact={true}
@@ -55,27 +64,17 @@ function Routes() {
         <Route
           exact={true}
           path="/register/success"
-          component={RegisterSuccessContainer}
+          component={RegisterLandSuccessful}
         />
         <Route
-          exact={true}
           path="/register"
-          component={RegisterWizardContainer}
+          component={RegisterLand}
         />
         <Route
           exact={true}
           path="/land/:landId"
           component={LandDetailContainer}
         />
-
-        <Route exact={true} path="/register/user" component={RegisterUser} />
-        <Route
-          exact={true}
-          path="/register/user/successful"
-          component={RegisterUserSuccessful}
-        />
-        <Route exact={true} path="/profile" component={ProfileUser} />
-        <Route exact={true} path="/profile/edit" component={ProfileUserEdit} />
 
         <Route exact={true} path="/info" component={InfoContainer} />
         <Route path="/" component={IntroContainer} />

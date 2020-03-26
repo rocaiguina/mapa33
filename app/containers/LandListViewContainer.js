@@ -79,6 +79,7 @@ class LandListViewContainer extends React.Component {
       <BaseLayout
         dark
         title="LEYENDA DE ÁREAS NATURALES"
+        enableMenu
         subtitle={<Legend />}
         footerRightComponent={
           <Button

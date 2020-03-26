@@ -163,15 +163,36 @@ class LandController {
   store(req, res, next) {
     var data = req.body;
     const validationSchema = {
-      metadata: Joi.object().required(),
-      geom: Joi.object({
-        type: Joi.string(),
-        coordinates: Joi.array(),
+      are_u_owner: Joi.boolean().allow(null),
+      catastro_number: Joi.string().allow(null, ''),
+      owner_name: Joi.string(),
+      owner_email: Joi.string().allow(null, ''),
+      owner_phone: Joi.string().allow(null, ''),
+      inheritance_land: Joi.boolean().allow(null),
+      inheritance_agree: Joi.boolean().allow(null),
+      lands_problem: Joi.array(),
+      lands_other_problem: Joi.string().allow(null, ''),
+      has_mortgage: Joi.boolean().allow(null),
+      has_surveying: Joi.boolean().allow(null),
+      lands_main_uses: Joi.array(),
+      lands_other_main_uses: Joi.string().allow(null, ''),
+      lands_structures: Joi.array(),
+      lands_other_structures: Joi.string().allow(null, ''),
+      lands_attributes: Joi.array(),
+      lands_other_attributes: Joi.string().allow(null, ''),
+      has_contamination: Joi.boolean().allow(null),
+      wich_use: Joi.string().allow(null, ''),
+      importance_of_knowing: Joi.string().allow(null, ''),
+      know_owner: Joi.boolean().allow(null),
+      geojson: Joi.object({
+        geometry: Joi.object({
+          type: Joi.string(),
+          coordinates: Joi.array(),  
+        }),
       }).required(),
-      level: Joi.string(),
-      status: Joi.string(),
       area_size: Joi.number(),
       plots_count: Joi.number(),
+      land_name: Joi.string().required(),
     };
 
     // Validata data.
@@ -189,29 +210,60 @@ class LandController {
 
     // Save new land.
     Land.create({
-      name: 'Unknow',
-      level: cleaned_data.level,
-      status: cleaned_data.status,
-      geom: cleaned_data.geom,
-      metadata: cleaned_data.metadata,
+      name: cleaned_data.land_name,
+      level: 'basic',
       photograph: req.photograph_filepath,
+      location: '',
+      main_attributes: '',
+      current_situation: '',
+      proposed_uses: '',
+      coordinates: null,
+      geom: cleaned_data.geojson.geometry,
+      metadata: {
+        are_u_owner: cleaned_data.are_u_owner,
+        catastro_number: cleaned_data.catastro_number,
+        owner_name: cleaned_data.owner_name,
+        owner_email: cleaned_data.owner_email,
+        owner_phone: cleaned_data.owner_phone,
+        inheritance_land: cleaned_data.inheritance_land,
+        inheritance_agree: cleaned_data.inheritance_agree,
+        lands_problem: cleaned_data.lands_problem,
+        lands_other_problem: cleaned_data.lands_other_problem,
+        has_mortgage: cleaned_data.has_mortgage,
+        has_surveying: cleaned_data.has_surveying,
+        lands_main_uses: cleaned_data.lands_main_uses,
+        lands_other_main_uses: cleaned_data.lands_other_main_uses,
+        lands_structures: cleaned_data.lands_structures,
+        lands_other_structures: cleaned_data.lands_other_structures,
+        lands_attributes: cleaned_data.lands_attributes,
+        lands_other_attributes: cleaned_data.lands_other_attributes,
+        has_contamination: cleaned_data.has_contamination,
+        wich_use: cleaned_data.wich_use,
+        importance_of_knowing: cleaned_data.importance_of_knowing,
+        know_owner: cleaned_data.know_owner,
+      },
       plots_count: cleaned_data.plots_count,
       area_size: cleaned_data.area_size,
-      location: '',
+      area_type: 'terrestre',
+      likes: 0,
       entity: '',
       use_type: '',
       acquisition_type: '',
+      year_estab: '',
       year_acquisition: '',
       reason_conservation: '',
+      user_id: req.user.id,
+      ownership: '',
+      notes: '',
+      status: 'new',
     })
       .then(function(land) {
-        res.json(land.get({ plain: true }));
+        const result = land.get({ plain: true });
+        delete result.geom;
+        res.json(result);
       })
       .catch(function(err) {
         res.status(400).send(err);
-      })
-      .finally(function() {
-        next();
       });
   }
 

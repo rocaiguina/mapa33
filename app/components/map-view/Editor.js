@@ -398,81 +398,44 @@ class Editor extends Component {
     }    
 
     render() {
-        return (
-            <div ref={el => (this.mapContainer = el)} style={{ position: 'relative', height: '440px', width: '100%' }}>
+      return (
+        <div className="mapbox-editor" ref={el => (this.mapContainer = el)}>
 
-                <div className="searchinput" ref={el => (this.geocoderContainer = el)} style={{ position: 'fixed', zIndex: 2, left: '50%', transform: 'translate(-50%, 0)', WebkitTransform: 'translate(-50%, 0)', marginTop: 10 }} />
+          <div id="mapbox-search" className="boxmap-searchinput" ref={el => (this.geocoderContainer = el)} />
 
-                <div className="toolbar toolbar-mapeditor" style={{position: 'absolute', left: '0', right: '0', bottom: '0', zIndex: '99', textAlign: 'center'}}>
-                  <ul>
-                    <li>
-                      <Button id="zoomInBtn" onClick={this.handleZoomIn}><i className="fas fa-fw fa-search-plus"></i></Button>
-                    </li>
-                    <li>
-                      <Button id="zoomOutBtn" onClick={this.handleZoomOut}><i className="fas fa-fw fa-search-minus"></i></Button>
-                    </li>
-                    <li>
-                      <Button id="mapPointerBtn" onClick={this.setSel}><i className="fas fa-fw fa-hand-pointer"></i></Button>
-                    </li>
-                    <li>
-                      <Button id="trashBtn" onClick={this.trashPolygons}><i className="fas fa-fw fa-trash-alt"></i></Button>
-                    </li>
-                    <li>
-                      <Button id="myLocationBtn" onClick={this.setLoc}><i className="fas fa-fw fa-map-marker-alt"></i></Button>
-                    </li>
-                  </ul>
-                </div>
+          <div className="toolbar toolbar-mapeditor">
+            <ul>
+              <li>
+                <Button id="zoomInBtn" onClick={this.handleZoomIn}><i className="fas fa-fw fa-search-plus"></i></Button>
+              </li>
+              <li>
+                <Button id="zoomOutBtn" onClick={this.handleZoomOut}><i className="fas fa-fw fa-search-minus"></i></Button>
+              </li>
+              <li>
+                <Button id="mapPointerBtn" onClick={this.setSel}><i className="fas fa-fw fa-hand-pointer"></i></Button>
+              </li>
+              <li>
+                <Button id="trashBtn" onClick={this.trashPolygons}><i className="fas fa-fw fa-trash-alt"></i></Button>
+              </li>
+              <li>
+                <Button id="myLocationBtn" onClick={this.setLoc}><i className="fas fa-fw fa-map-marker-alt"></i></Button>
+              </li>
+            </ul>
+          </div>
 
-                <div className="box-map-preview">
-                    <div className="box-map-info">Parcelas Seleccionadas: {this.state.selection.length}</div>
-                    <div className="box-map-info">
-                        Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
-                    </div>
-                  
-                    <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 200 }} />
-                    {this.state.error && this.state.error}
-
-                    {
-                      /*
-
-                    <Button className="trashbtn" type="button" onClick={this.trashPolygons}>
-                        Trash
-                    </Button>
-                    <Button className="MyLocationbtn" type="button" onClick={this.setLoc} style={this.state.activeLoc ? { background: 'orange' } : { background: '#fff' }}>
-                        My Location
-                    </Button>
-                    <Button className="selectbtn" type="button" onClick={this.setSel} style={this.state.activeSel ? { background: 'orange' } : { background: '#fff' }}>
-                        Select
-                    </Button>
-                    <Button className="subirbtn" type="button"  onClick={() => {
-                            const img = miniMap.getCanvas().toDataURL();
-                            console.log(this.state.geojson);
-                            console.log(img);
-                        }}
-                    >
-                        Submit
-                    </Button>
-                    <Button
-                        type="button"
-                        onClick={() => {
-                            map.setZoom(map.getZoom() + 0.5);
-                        }}
-                    >
-                        Zoom In
-                    </Button>
-                    <Button
-                        type="button"
-                        onClick={() => {
-                            map.setZoom(map.getZoom() - 0.5);
-                        }}
-                    >
-                        Zoom Out
-                    </Button>
-                    */
-                    }
-                </div>
+          <div className="boxmap-preview">
+            <div className="boxmap-info">
+              Parcelas Seleccionadas: {this.state.selection.length}
             </div>
-        );
+            <div className="boxmap-info">
+              Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
+            </div>
+            
+            <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 200 }} />
+            {this.state.error && this.state.error}
+          </div>
+        </div>
+      );
     }
 }
 

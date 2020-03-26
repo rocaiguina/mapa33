@@ -1,71 +1,86 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import { Col, Radio, Row } from 'antd';
-import Pager from '../../ui/Pager';
+
+import BaseLayout from '../../layout/base';
+import BottomNavigator from '../BottomNavigator';
+import TopNavigator from '../TopNavigator';
+import Progress from '../Progress';
 
 class ProposeLandStep extends React.Component {
-  
-  handleOnNext = (event) => {
-    const { basename, history, formik } = this.props;
+  handleOnChange = e => {
+    const self = this;
+    this.props.handleChange(e);
+    setTimeout(function() {
+      self.props.next();
+    }, 400);
+  };
 
-    if (formik.values.want_propose === true) {
-      history.push(`${basename}/map`);
-    }
-
-    if (formik.values.want_propose === false) {
-      history.push('/map');
-    }
-  }
-
-  handleOnPrevious = (event) => {
-    const { basename, history } = this.props;
-    history.push(`${basename}`);
-  }
-
-  handleOnChange = (event) => {
-    const { basename, formik, history } = this.props;
-    formik.setFieldValue('want_propose', event.target.value);
-
-    if (event.target.value === true) {
-      history.push(`${basename}/map`);
-    }
-
-    if (event.target.value === false) {
-      history.push('/map');
-    }
-  }
+  handleOnNext = () => {
+    // TODO: validate before continue.
+    this.props.next();
+  };
 
   render() {
-    const { formik } = this.props;
     return (
-      <div className="m-t-20">
-        <Row>
-          <Col md={4}/>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}} >
-              <h1>
-                ¿Quieres proponer un terreno?
-              </h1>
-          </Col>
-          <Col md={8} style={{textAlign:"center", marginLeft:"auto", marginRight:"auto"}}>
+      <BaseLayout
+        title="FORMULARIO DE PROPUESTA"
+        footerXs={[14, 0, 10]}
+        showCloseBtn={true}
+        footerRightComponent={
+          <Progress onNext={this.handleOnNext} step={1} steps={21} />
+        }
+      >
+        <div className="main-content m-t-20">
+          <TopNavigator disabledPrevious step={1} steps={21} />
+          <Row gutter={30}>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              <h2>¿Quieres proponer un terreno?</h2>
+            </Col>
+            <Col
+              md={12}
+              style={{
+                textAlign: 'center',
+              }}
+            >
               <Radio.Group
                 name="want_propose"
                 buttonStyle="solid"
-                value={formik.values.want_propose}
+                value={this.props.want_propose}
                 onChange={this.handleOnChange}
               >
-                <Radio.Button className="inputprop radioprop radiosi form1" value={true}>Si</Radio.Button>
-                <Radio.Button className="inputprop radioprop radiono form1" value={false}>No</Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiosi form1"
+                  value={true}
+                >
+                  Si
+                </Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiono form1"
+                  value={false}
+                >
+                  No
+                </Radio.Button>
               </Radio.Group>
-          </Col>
-          <Col md={4}/>
-        </Row>
-        <Pager
-          onPrevious={this.handleOnPrevious}
-          onNext={this.handleOnNext}
-        />
-      </div>
+            </Col>
+          </Row>
+          <BottomNavigator onNext={this.handleOnNext} disabledPrevious />
+        </div>
+      </BaseLayout>
     );
   }
 }
 
-export default withRouter(ProposeLandStep);
+ProposeLandStep.propTypes = {
+  want_propose: PropTypes.bool,
+  next: PropTypes.func,
+  previous: PropTypes.func,
+  handleChange: PropTypes.func,
+};
+
+export default ProposeLandStep;

@@ -69,7 +69,7 @@ class BaseLayout extends Component {
 }
 
 BaseLayout.defaultProps = {
-  enableMenu: true,
+  enableMenu: false,
 };
 
 BaseLayout.propTypes = {
