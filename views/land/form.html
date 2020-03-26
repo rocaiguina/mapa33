@@ -42,6 +42,143 @@
                     <small class="help-block">{{ field_errors.level.message }}</small>
                     {% endif %}
                 </div>
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Foto</label>
+                        <input type="file" id="input-file-now" class="form-control input-sm" name="photograph"/>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Atributos Principales</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" value="nature" style="opacity: 1;">
+                              Naturaleza
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input  type="checkbox" value="educational" style="opacity: 1;"> Educativos
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input  type="checkbox" value="landscape" style="opacity: 1;"> Paisajistas y escénicos
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="others_main">                        
+                    </div>                    
+                </div>
+                
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Situación Actual</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" value="residential" style="opacity: 1;">
+                              Residencial
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input  type="checkbox" value="commercial" style="opacity: 1;"> 
+                              Comercial
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input  type="checkbox" value="nature_forest" style="opacity: 1;">
+                              Natural / Bosque
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="others_main">                        
+
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Número de parcelas</label>
+                        <input type="number" class="form-control input-sm" name="plots_count">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Tamaño del área</label>
+                        <input type="number" step="0.01" class="form-control input-sm" name="area_size">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Tipo de área</label>
+                        <div class="select">
+                            <select name="are_type" class="form-control ">
+                                <option value="">--------</option>
+                                <option value="Marina">Marina</option>
+                                <option value="Terrestre">Terrestre</option>
+                            </select>
+                        </div>
+                    </div>                    
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Tipo de Uso</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option1" value="scientist_research">
+                              Investigación Científica
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option2" value="environment_monitoring">
+                              Monitoreo Ambiental
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type"  style="opacity: 1;" id="option3" value="spirit_uses" >
+                              Usos espirituales
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option4" value="educational" >
+                              Educación
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option5" value="recreation" >
+                              Recreación
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option6" value="turism" >
+                              Turismo
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option7" value="sustainable_uses" >
+                              Usos sostenibles
+                            </label>
+                        </div>
+                        {% if field_errors.use_type %}
+                        <small class="help-block">{{ field_errors.use_type.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div>
+                               
                 <div class="form-group {{ 'has-error' if field_errors.location else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Ubicación</label>
@@ -60,15 +197,7 @@
                     <small class="help-block">{{ field_errors.entity.message }}</small>
                     {% endif %}
                 </div>
-                <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Tipo de uso*</label>
-                        <input type="text" class="form-control input-sm" name="use_type" value="{{ field_errors.use_type.value if field_errors.use_type else object.use_type }}">
-                    </div>
-                    {% if field_errors.use_type %}
-                    <small class="help-block">{{ field_errors.use_type.message }}</small>
-                    {% endif %}
-                </div>
+                
                 <div class="form-group {{ 'has-error' if field_errors.acquisition_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Tipo de adquisición*</label>
@@ -87,6 +216,24 @@
                     <small class="help-block">{{ field_errors.year_acquisition.message }}</small>
                     {% endif %}
                 </div>
+                
+                <div class="form-group">
+                    <div class="fg-line">
+                        <label class="control-label">Año de establecimiento</label>
+                        <input type="number" step="1" class="form-control input-sm" name="year_estab">
+                    </div>
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.ownership else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Propiedad*</label>
+                        <input type="text" class="form-control input-sm" name="ownership" value="{{ field_errors.ownership.value if field_errors.ownership else object.ownership }}">
+                    </div>
+                    {% if field_errors.ownership %}
+                    <small class="help-block">{{ field_errors.ownership.message }}</small>
+                    {% endif %}
+                </div>
+                
                 <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Estado*</label>
@@ -112,6 +259,17 @@
                     <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.notes else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Notas</label>
+                        <textarea class="form-control" rows="5" name="notes">{{ field_errors.notes.value if field_errors.notes else object.notes }}</textarea>
+                    </div>
+                    {% if field_errors.notes %}
+                    <small class="help-block">{{ field_errors.notes.message }}</small>
+                    {% endif %}
+                </div>
+                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">GUARDAR</button>
                     <a href="/admin/land" class="btn btn-default">CANCELAR</a>
@@ -132,5 +290,10 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    function disableother(){
+        if(document[])
+    }
+</script>
     
 {% endblock %}
