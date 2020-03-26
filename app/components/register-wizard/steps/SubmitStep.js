@@ -117,6 +117,7 @@ class SubmitStep extends React.Component {
           </Row>
 
           <BottomNavigator
+            nextBtnLoading={this.props.isSubmitting}
             nextBtnHtmlType="submit"
             nextText="Proponer"
             onPrevious={this.props.previous}
@@ -128,6 +129,7 @@ class SubmitStep extends React.Component {
 }
 
 SubmitStep.propTypes = {
+  isSubmitting: PropTypes.bool,
   summary: PropTypes.object,
   next: PropTypes.func,
   previous: PropTypes.func,

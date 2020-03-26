@@ -6,6 +6,7 @@ class BottomNavigator extends React.Component {
   render() {
     const {
       nextBtnHtmlType,
+      nextBtnLoading,
       onNext,
       onPrevious,
       disabledPrevious,
@@ -26,6 +27,7 @@ class BottomNavigator extends React.Component {
         )}
         <Button
           htmlType={nextBtnHtmlType}
+          loading={nextBtnLoading}
           className="ant-btn-purple"
           shape="round"
           size="large"
@@ -40,6 +42,7 @@ class BottomNavigator extends React.Component {
 
 BottomNavigator.propTypes = {
   nextBtnHtmlType: PropTypes.string,
+  nextBtnLoading: PropTypes.bool,
   onNext: PropTypes.func,
   onPrevious: PropTypes.func,
   disabledPrevious: PropTypes.bool,

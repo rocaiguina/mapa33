@@ -79,7 +79,7 @@ class MapTourGuide extends React.Component {
           placement: 'top',
         },
         {
-          target: '.submitbtn',
+          target: '#submitMap',
           content: (
             <div>
               <img

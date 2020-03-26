@@ -97,7 +97,7 @@ class ImportanceOfKnowingStep extends React.Component {
 }
 
 ImportanceOfKnowingStep.propTypes = {
-  importance_of_knowing: PropTypes.bool,
+  importance_of_knowing: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

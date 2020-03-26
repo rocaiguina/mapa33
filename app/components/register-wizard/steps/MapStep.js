@@ -71,6 +71,7 @@ class MapStep extends React.Component {
         footerXs={footerXs}
         footerRightComponent={
           <Button
+            id="submitMap"
             className="ant-btn-purple"
             shape="round"
             size="large"

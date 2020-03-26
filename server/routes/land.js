@@ -7,7 +7,12 @@ const LandController = require('../controllers/land');
 const JWTMiddleware = require('../middlewares/jwt');
 
 router.get('/', LandController.findAll);
-router.post('/', LandController.storePhotograph, LandController.store);
+router.post(
+  '/',
+  JWTMiddleware.requireJWT,
+  LandController.storePhotograph,
+  LandController.store
+);
 router.get('/geojson', LandController.findGeoJson);
 router.post('/intersect', LandController.intersect);
 router.post('/select', LandController.select);
