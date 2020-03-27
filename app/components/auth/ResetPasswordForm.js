@@ -27,18 +27,16 @@ class ResetPasswordForm extends React.Component {
             <Row>
               <Col md={6}></Col>
               <Col md={12}>
-                <div style={{ fontWeight: 'bold' }}>
-                  <p>
-                    Por favor, escriba su contraseña nueva, asegurese de no
-                    repetir su contraseña anterior.
-                  </p>
-                  <p>Asegure de que contraseña tenga:</p>
-                  <ul>
-                    <li>Al menos una letra mayúscula</li>
-                    <li>Un mínimo de 8 carácteres</li>
-                    <li>Al menos 1 carácter especial (*,&,@,$, por ejemplo)</li>
-                  </ul>
-                </div>
+                <p>
+                  Por favor, escriba su contraseña nueva, asegurese de no
+                  repetir su contraseña anterior.
+                </p>
+                <p>Asegure de que contraseña tenga:</p>
+                <ul>
+                  <li>Al menos una letra mayúscula</li>
+                  <li>Un mínimo de 8 carácteres</li>
+                  <li>Al menos 1 carácter especial (*,&,@,$, por ejemplo)</li>
+                </ul>
                 <div className="form-group">
                   <Input
                     name="new_password"

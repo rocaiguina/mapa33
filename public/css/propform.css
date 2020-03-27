@@ -240,7 +240,7 @@
 }
 
 .dateinput .ant-calendar-picker-input {
-  border: 2px #181a19 solid;
+  border: 1px #181a19 solid;
   border-radius: 20px !important;
 }
 .dateinput .ant-calendar-picker-input:hover,
@@ -584,7 +584,7 @@ button[data-test-id="button-primary"]{
 }
 .blackstyleinput{
     border-color: #ffffff !important;
-    background-color: #181a19000 !important;
+    background-color: #181a19 !important;
     color: #ffffff !important;
 }
 .blackstyleinput::placeholder,

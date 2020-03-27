@@ -32,7 +32,7 @@ class LandCard extends React.Component {
         ]}
       >
         <Link to={`/land/${this.props.id}`}>
-          <Meta title={this.props.name} description={this.props.location} />
+          <Meta title={this.props.name} description={this.props.location || 'No definido'} />
         </Link>
       </Card>
     );

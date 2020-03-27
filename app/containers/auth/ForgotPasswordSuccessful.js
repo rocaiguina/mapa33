@@ -10,19 +10,17 @@ class ForgotPasswordSuccessful extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <div className="main-content m-t-20">
-          <div className="jumbotron text-center">
-            <p>
-              Gracias, verifique su correo electrónico para recuperar su
-              contraseña
-            </p>
-            <Link
-              to="/login"
-              className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
-            >
-              Volver al inicio
-            </Link>
-          </div>
+        <div className="jumbotron text-center">
+          <p className="lead">
+            Gracias, verifique su correo electrónico para recuperar su
+            contraseña.
+          </p>
+          <Link
+            to="/login"
+            className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
+          >
+            Volver al inicio
+          </Link>
         </div>
       </BaseLayout>
     );

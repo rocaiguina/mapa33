@@ -37,9 +37,7 @@ class ResetPassword extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <div className="main-content m-t-20">
-          <ResetPasswordForm onSubmit={this.handleOnSubmit} />
-        </div>
+        <ResetPasswordForm onSubmit={this.handleOnSubmit} />
       </BaseLayout>
     );
   }

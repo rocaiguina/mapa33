@@ -10,16 +10,14 @@ class ResetPasswordSuccessful extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <div className="main-content m-t-20">
-          <div className="jumbotron text-center">
-            <p>Tu contraseña ha sido restaurada.</p>
-            <Link
-              to="/login"
-              className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
-            >
-              Iniciar Sesión
-            </Link>
-          </div>
+        <div className="jumbotron text-center">
+          <p className="lead">Tu contraseña ha sido restaurada.</p>
+          <Link
+            to="/login"
+            className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
+          >
+            Iniciar Sesión
+          </Link>
         </div>
       </BaseLayout>
     );

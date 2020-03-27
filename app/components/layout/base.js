@@ -33,6 +33,7 @@ class BaseLayout extends Component {
       'with-title': this.props.title != null,
       'with-subtitle': this.props.subtitle != null,
       'with-actions': this.props.enableMenu,
+      'vcenter': this.props.verticalAlign == 'center',
     });
 
     return (
@@ -70,6 +71,7 @@ class BaseLayout extends Component {
 
 BaseLayout.defaultProps = {
   enableMenu: false,
+  verticalAlign: 'center',
 };
 
 BaseLayout.propTypes = {
@@ -82,6 +84,7 @@ BaseLayout.propTypes = {
   afterFooter: PropTypes.node,
   footerRightComponent: PropTypes.node,
   footerXs: PropTypes.node,
+  verticalAlign: PropTypes.string,
 };
 
 export default BaseLayout;
