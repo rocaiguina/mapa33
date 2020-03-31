@@ -75,14 +75,17 @@ class ProfileForm extends React.Component {
             >
               <Row>
                 <Col xs={24} md={12}>
-                  <Input
-                    name="full_name"
-                    className="inputprop blackstyleinput"
-                    size="large"
-                    type="text"
-                    value={values.full_name}
-                    onChange={handleChange}
-                  />
+                  <div className="form-group">
+                    <Input
+                      name="full_name"
+                      className="inputprop blackstyleinput"
+                      size="large"
+                      type="text"
+                      value={values.full_name}
+                      onChange={handleChange}
+                    />
+                    <label className="text-darkgray">Nombre y apellidos</label>
+                  </div>
                   {values.createdAt && (
                     <h4 style={{ color: '#fff' }}>
                       Registrado desde:{' '}

@@ -21,16 +21,27 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     main_attributes: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+    },
+    other_main_attributes: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    current_situation: {
+    main_uses: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+    },
+    other_main_uses: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     proposed_uses: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
+      defaultValue: [],
     },
     coordinates: {
       type: DataTypes.GEOMETRY,

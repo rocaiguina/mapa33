@@ -36,9 +36,7 @@ class ForgotPassword extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <div className="main-content m-t-20">
-          <ForgotPasswordForm onSubmit={this.handleOnSubmit} />
-        </div>
+        <ForgotPasswordForm onSubmit={this.handleOnSubmit} />
       </BaseLayout>
     );
   }

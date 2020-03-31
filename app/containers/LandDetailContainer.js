@@ -143,27 +143,25 @@ class LandDetailContainer extends React.Component {
           </Button>
         }
       >
-        <div className="main-content m-t-15">
-          <LandDetail
-            id={id}
-            name={name}
-            level={level}
-            owner={owner}
-            likes={likes}
-            location={location}
-            area={area}
-            status={status}
-            uses={uses}
-            plots_count={plots_count}
-            coordinates={coordinates && coordinates.coordinates}
-            attributes={attributes}
-            photograph={photograph}
-            current_situation={current_situation}
-            proposed_uses={proposed_uses}
-            disabledLike={disabledLike}
-            onClickLike={this.handleOnClickLike}
-          />
-        </div>
+        <LandDetail
+          id={id}
+          name={name}
+          level={level}
+          owner={owner}
+          likes={likes}
+          location={location}
+          area={area}
+          status={status}
+          uses={uses}
+          plots_count={plots_count}
+          coordinates={coordinates && coordinates.coordinates}
+          attributes={attributes}
+          photograph={photograph}
+          current_situation={current_situation}
+          proposed_uses={proposed_uses}
+          disabledLike={disabledLike}
+          onClickLike={this.handleOnClickLike}
+        />
       </BaseLayout>
     );
   }

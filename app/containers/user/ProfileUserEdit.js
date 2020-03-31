@@ -70,12 +70,10 @@ class ProfileUserEdit extends React.Component {
   render() {
     return (
       <BaseLayout dark title="MI PERFÍL">
-        <div className="main-content m-t-10">
-          <ProfileForm
-            initialValues={this.state.initialValues}
-            onSubmit={this.handleOnSubmit}
-          />
-        </div>
+        <ProfileForm
+          initialValues={this.state.initialValues}
+          onSubmit={this.handleOnSubmit}
+        />
       </BaseLayout>
     );
   }

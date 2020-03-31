@@ -37,9 +37,7 @@ class Login extends React.Component {
         showCloseBtn={true}
         enableMenu={false}
       >
-        <div className="main-content m-t-20">
-          <LoginForm onSubmit={this.handleOnSubmit} />
-        </div>
+        <LoginForm onSubmit={this.handleOnSubmit} />
       </BaseLayout>
     );
   }

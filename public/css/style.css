@@ -170,6 +170,10 @@ body {
   margin-left: 0.8rem;
   margin-top: .25rem;
 }
+.form-group-white input,
+.form-group-white .inputprop {
+  color: #000;
+}
 .form-check {
   margin-bottom: 10px;
 }
@@ -366,8 +370,9 @@ body {
 }
 
 .main {
-  min-height: 100%;
+  height: 100%;
   color: #000;
+  overflow: auto;
 }
 
 .main.main-dark {
@@ -402,28 +407,26 @@ body {
   position: relative;
 }
 
+.wrap-content {
+  padding-bottom: 120px;
+}
 .wrap-content.with-title {
   padding-top: 54px;
 }
 
 .wrap-content.with-subtitle {
-  padding-top: 94px;
+  padding-top: 110px;
 }
 
 .wrap-content.with-actions {
-  padding-top: 94px;
-}
-
-.main-content {
-  padding-bottom: 120px;
-}
-
-.main-content.with-header {
-  padding-top: 90px;
-}
-
-.main-content.with-subheader {
   padding-top: 110px;
+}
+
+.wrap-content.vcenter {
+  align-items: center; 
+  display: flex;
+  flex-direction: row;
+  min-height: 92%;
 }
 
 .header-dark {
@@ -1331,6 +1334,9 @@ ul.actions {
 }
 
 /* Utils */
+.fit {
+  height: 100%;
+}
 .text-left {
   text-align: left;
 }

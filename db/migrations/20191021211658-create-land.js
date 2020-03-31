@@ -25,16 +25,27 @@ module.exports = {
         allowNull: true,
       },
       main_attributes: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: true,
+        defaultValue: [],
+      },
+      other_main_attributes: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      current_situation: {
+      main_uses: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: true,
+        defaultValue: [],
+      },
+      other_main_uses: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       proposed_uses: {
-        type: Sequelize.STRING,
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: true,
+        defaultValue: [],
       },
       coordinates: {
         type: Sequelize.GEOMETRY,

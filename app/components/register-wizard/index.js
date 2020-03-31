@@ -77,7 +77,7 @@ class RegisterWizard extends React.Component {
           isSubmitting,
           setFieldValue,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="fit">
             <Wizard
               onNext={wizard => {
                 this.handleOnNext(wizard, values);

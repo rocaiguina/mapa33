@@ -93,23 +93,21 @@ class LandListViewContainer extends React.Component {
           </Button>
         }
       >
-        <div className="main-content m-t-15">
-          <FilterLand
-            defaultRegion={this.state.region}
-            defaultView={this.state.view}
-            defaultStatus={this.state.status}
-            onChangeRegion={this.handleOnChangeRegion}
-            onChangeView={this.handleOnChangeView}
-            onChangeStatus={this.handleOnChangeStatus}
-          />
-          <Spin spinning={this.state.loading}>
-            {this.state.view == 'list' ? (
-              <LandList lands={this.state.maplist} />
-            ) : (
-              <LandCarousel lands={this.state.maplist} />
-            )}
-          </Spin>
-        </div>
+        <FilterLand
+          defaultRegion={this.state.region}
+          defaultView={this.state.view}
+          defaultStatus={this.state.status}
+          onChangeRegion={this.handleOnChangeRegion}
+          onChangeView={this.handleOnChangeView}
+          onChangeStatus={this.handleOnChangeStatus}
+        />
+        <Spin spinning={this.state.loading}>
+          {this.state.view == 'list' ? (
+            <LandList lands={this.state.maplist} />
+          ) : (
+            <LandCarousel lands={this.state.maplist} />
+          )}
+        </Spin>
       </BaseLayout>
     );
   }
