@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row } from 'antd';
+import { Col, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class ProposeLandStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnChange = e => {
     const self = this;
     this.props.handleChange(e);
@@ -17,22 +26,28 @@ class ProposeLandStep extends React.Component {
   };
 
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.want_propose !== null) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { want_propose: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={1} steps={21} />
+          <Progress onNext={this.handleOnNext} step={1} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator disabledPrevious step={1} steps={21} />
+          <TopNavigator disabledPrevious step={1} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -41,6 +56,9 @@ class ProposeLandStep extends React.Component {
               }}
             >
               <h2>¿Quieres proponer un terreno?</h2>
+              {errors.want_propose && (
+                <Text type="danger">{errors.want_propose}</Text>
+              )}
             </Col>
             <Col
               md={12}

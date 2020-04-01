@@ -7,7 +7,6 @@ import { Wizard, Steps, Step } from 'react-albus';
 
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
 import ProposeLandStep from './steps/ProposeLandStep';
-import PhoneOwnerStep from './steps/PhoneOwnerStep';
 import InheritanceLandStep from './steps/InheritanceLandStep';
 import InheritanceAgreeStep from './steps/InheritanceAgreeStep';
 import ProblemLandStep from './steps/ProblemLandStep';
@@ -131,18 +130,6 @@ class RegisterWizard extends React.Component {
                   render={({ next, previous }) => (
                     <CatastroNumberStep
                       catastro_number={values.catastro_number}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                    />
-                  )}
-                />
-                <Step
-                  id="owner-phone-number"
-                  render={({ next, previous }) => (
-                    <PhoneOwnerStep
-                      owner_name={values.owner_name}
-                      owner_phone={values.owner_phone}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}

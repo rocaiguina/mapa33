@@ -23,13 +23,13 @@ class SubmitStep extends React.Component {
             nextBtnHtmlType="submit"
             nextText="Proponer"
             onNext={this.handleOnNext}
-            step={21}
-            steps={21}
+            step={20}
+            steps={20}
           />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={21} steps={21} />
+          <TopNavigator previous={this.props.previous} step={20} steps={20} />
           <Row gutter={30}>
             <Col md={6}>
               <h2>El terreno del futuro</h2>

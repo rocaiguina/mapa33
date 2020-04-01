@@ -1,30 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row, Input } from 'antd';
+import { Button, Col, Row, Input, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class YesFillFormStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.owner_name) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { owner_name: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={13} steps={21} />
+          <Progress onNext={this.handleOnNext} step={12} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={13} steps={21} />
+          <TopNavigator previous={this.props.previous} step={12} steps={20} />
           <Row gutter={30}>
             <Col md={8} />
             <Col md={8}>
@@ -38,13 +53,16 @@ class YesFillFormStep extends React.Component {
                   value={this.props.owner_name}
                   onChange={this.props.handleChange}
                 />
+                {errors.owner_name && (
+                  <Text type="danger">{errors.owner_name}</Text>
+                )}
               </div>
               <div className="form-group">
                 <Input
                   name="owner_phone"
                   className="inputprop"
                   size="large"
-                  placeholder="Tel:"
+                  placeholder="Teléfono:"
                   value={this.props.owner_phone}
                   onChange={this.props.handleChange}
                 />
@@ -54,7 +72,7 @@ class YesFillFormStep extends React.Component {
                   name="owner_email"
                   className="inputprop"
                   size="large"
-                  placeholder="@:"
+                  placeholder="Email:"
                   value={this.props.owner_email}
                   onChange={this.props.handleChange}
                 />

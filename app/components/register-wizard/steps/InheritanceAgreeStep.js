@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row } from 'antd';
+import { Col, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class InheritanceAgreeStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnChange = e => {
     const self = this;
     this.props.handleChange(e);
@@ -17,22 +26,28 @@ class InheritanceAgreeStep extends React.Component {
   };
 
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.inheritance_agree !== null) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { inheritance_agree: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={8} steps={21} />
+          <Progress onNext={this.handleOnNext} step={7} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={8} steps={21} />
+          <TopNavigator previous={this.props.previous} step={7} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -41,6 +56,9 @@ class InheritanceAgreeStep extends React.Component {
               }}
             >
               <h2>¿Todos los herederos están de acuerdo?</h2>
+              {errors.inheritance_agree && (
+                <Text type="danger">{errors.inheritance_agree}</Text>
+              )}
             </Col>
             <Col
               md={12}

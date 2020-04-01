@@ -1,30 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row } from 'antd';
+import { Col, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class WichUseStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.wich_use) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { wich_use: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={19} steps={21} />
+          <Progress onNext={this.handleOnNext} step={18} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={19} steps={21} />
+          <TopNavigator previous={this.props.previous} step={18} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -33,6 +48,9 @@ class WichUseStep extends React.Component {
               }}
             >
               <h2>¿Cuál uso le darías al terreno?</h2>
+              {errors.wich_use && (
+                <Text type="danger">{errors.wich_use}</Text>
+              )}
             </Col>
             <Col
               md={12}

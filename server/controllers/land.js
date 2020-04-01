@@ -187,7 +187,7 @@ class LandController {
       geojson: Joi.object({
         geometry: Joi.object({
           type: Joi.string(),
-          coordinates: Joi.array(),  
+          coordinates: Joi.array(),
         }),
       }).required(),
       area_size: Joi.number(),
@@ -214,9 +214,11 @@ class LandController {
       level: 'basic',
       photograph: req.photograph_filepath,
       location: '',
-      main_attributes: '',
-      current_situation: '',
-      proposed_uses: '',
+      main_attributes: cleaned_data.lands_attributes,
+      other_main_attributes: cleaned_data.lands_other_attributes,
+      main_uses: cleaned_data.lands_main_uses,
+      other_main_uses: cleaned_data.lands_other_main_uses,
+      proposed_uses: [cleaned_data.wich_use],
       coordinates: null,
       geom: cleaned_data.geojson.geometry,
       metadata: {
@@ -231,15 +233,9 @@ class LandController {
         lands_other_problem: cleaned_data.lands_other_problem,
         has_mortgage: cleaned_data.has_mortgage,
         has_surveying: cleaned_data.has_surveying,
-        lands_main_uses: cleaned_data.lands_main_uses,
-        lands_other_main_uses: cleaned_data.lands_other_main_uses,
         lands_structures: cleaned_data.lands_structures,
         lands_other_structures: cleaned_data.lands_other_structures,
-        lands_attributes: cleaned_data.lands_attributes,
-        lands_other_attributes: cleaned_data.lands_other_attributes,
         has_contamination: cleaned_data.has_contamination,
-        wich_use: cleaned_data.wich_use,
-        importance_of_knowing: cleaned_data.importance_of_knowing,
         know_owner: cleaned_data.know_owner,
       },
       plots_count: cleaned_data.plots_count,
@@ -251,16 +247,30 @@ class LandController {
       acquisition_type: '',
       year_estab: '',
       year_acquisition: '',
-      reason_conservation: '',
+      reason_conservation: cleaned_data.importance_of_knowing,
       user_id: req.user.id,
       ownership: '',
       notes: '',
       status: 'new',
     })
       .then(function(land) {
-        const result = land.get({ plain: true });
-        delete result.geom;
-        res.json(result);
+        // Calculate coordinate.
+        Models.sequelize
+          .query(
+            'UPDATE lands SET coordinates=ST_MakePoint(ST_X(ST_Centroid(geom)), ST_Y(ST_Centroid(geom))) WHERE id=?',
+            { replacements: [land.id] }
+          )
+          .then(function() {
+            return land.reload();
+          })
+          .then(function() {
+            const result = land.get({ plain: true });
+            delete result.geom;
+            res.json(result);
+          })
+          .catch(function(err) {
+            res.status(400).send(err);
+          });
       })
       .catch(function(err) {
         res.status(400).send(err);
@@ -378,7 +388,7 @@ class LandController {
     })
       .then(function(landlike) {
         if (landlike != null) {
-          return res.json(landlike.get({ plain: true }));  
+          return res.json(landlike.get({ plain: true }));
         }
         res.json(null);
       })

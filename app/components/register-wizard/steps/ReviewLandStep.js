@@ -20,14 +20,14 @@ class ReviewLandStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={3} steps={21} />
+          <Progress onNext={this.handleOnNext} step={3} steps={20} />
         }
       >
         <div className="main-content m-t-20">
           <TopNavigator
             previous={this.props.previous}
             step={3}
-            steps={21}
+            steps={20}
           />
           <Row gutter={30}>
             <Col md={10}>
