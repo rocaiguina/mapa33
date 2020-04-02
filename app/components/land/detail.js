@@ -118,7 +118,7 @@ class LandDetail extends React.Component {
                 particular?
               </p>
               <p style={{ flex: '1 0 auto' }}>
-                {this.props.reason_conservation || 'No definido'}
+                {this.props.reason_conservation || 'No definido.'}
               </p>
               <div className="land-support hidden-xs">
                 <Button
@@ -149,7 +149,7 @@ class LandDetail extends React.Component {
                   <Col xs={12} md={12}>
                     <Badge
                       title="Localizado"
-                      description={this.props.location || 'No definido'}
+                      description={this.props.location || 'No definido.'}
                       color="white"
                       shape="round"
                     />
