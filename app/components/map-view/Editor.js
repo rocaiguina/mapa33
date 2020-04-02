@@ -223,6 +223,10 @@ class Editor extends Component {
                 const { id } = e.features[0].properties;
                 const exist = this.state.selection.indexOf(id) > -1;
                 if (!exist) {
+                    if (this.state.selection.length >= 3) {
+                        alert('No puede elegir mas de 3');
+                        return;
+                    }
                     this.setState(state => {
                         return {
                             selection: _.concat(state.selection, id)
@@ -296,6 +300,7 @@ class Editor extends Component {
         })
             .then(response => response.json())
             .then(data => {
+              console.log(data);
                 const features = this.merge(data[0].geojson);
                 this.area(features);
                 this.getAddress(features);
@@ -340,17 +345,25 @@ class Editor extends Component {
     };
 
     trashPolygons = () => {
-        miniMap.getSource('geojson').setData({
-            type: 'FeatureCollection',
-            features: []
-        });
-        map.getSource('geojson').setData({
-            type: 'FeatureCollection',
-            features: []
-        });
-        miniMap.flyTo({
-            center: [-66.45, 18.2],
-            zoom: 6.5
+        this.setState({
+          selection: [],
+          geojson: {
+              type: 'FeatureCollection',
+              features: []
+          },
+        }, () => {
+          miniMap.getSource('geojson').setData({
+              type: 'FeatureCollection',
+              features: []
+          });
+          map.getSource('geojson').setData({
+              type: 'FeatureCollection',
+              features: []
+          });
+          miniMap.flyTo({
+              center: [-66.45, 18.2],
+              zoom: 6.5
+          });
         });
     };
 

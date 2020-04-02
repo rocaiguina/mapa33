@@ -19,11 +19,15 @@ class LandDetailContainer extends React.Component {
       likes: 0,
       reason_conservation: '',
       location: '',
+      main_attributes: [],
+      other_main_attributes: '',
+      main_uses: [],
+      other_main_uses: '',
+      proposed_uses: [],
       area_size: 0,
       status: '',
       plots_count: 1,
       coordinates: null,
-      attributes: '',
       disabledLike: true,
     };
   }
@@ -38,20 +42,24 @@ class LandDetailContainer extends React.Component {
     const self = this;
     LandApi.get(landId)
       .then(land => {
-        const metadata = land.metadata || {};
         self.setState({
           name: land.name,
           level: land.level,
           photograph: land.photograph,
-          owner: land.user,
+          owner: land.owner,
           likes: land.likes,
           reason_conservation: land.reason_conservation,
           location: land.location,
+          main_attributes: land.main_attributes,
+          other_main_attributes: land.other_main_attributes,
+          main_uses: land.main_uses,
+          other_main_uses: land.other_main_uses,
+          proposed_uses: land.proposed_uses,
           area_size: land.area_size,
           status: land.status,
           plots_count: land.plots_count,
           coordinates: land.coordinates,
-          attributes: metadata.attributes,
+          disabledLike: land.disabledLike,
         });
       })
       .catch(() => {
