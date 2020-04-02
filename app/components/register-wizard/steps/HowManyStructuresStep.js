@@ -76,7 +76,7 @@ class HowManyStructuresStep extends React.Component {
                 <Row>
                   <Col span={24}>
                     <Checkbox
-                      value="residential"
+                      value="Residencial"
                       className="inputprop radiobutton"
                     >
                       Residencial
@@ -84,7 +84,7 @@ class HowManyStructuresStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="commercial"
+                      value="Comercial / Oficina"
                       className="inputprop radiobutton"
                     >
                       Comercial / Oficina
@@ -92,7 +92,7 @@ class HowManyStructuresStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="agricultural"
+                      value="Agrícola"
                       className="inputprop radiobutton"
                     >
                       Agrícola
@@ -100,11 +100,11 @@ class HowManyStructuresStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="others"
                       id="inputotro2"
                       className="inputprop radiobutton"
+                      value="Otros"
                     >
-                      Otras
+                      Otros
                     </Checkbox>
                   </Col>
                 </Row>

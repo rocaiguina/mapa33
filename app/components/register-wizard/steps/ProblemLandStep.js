@@ -77,7 +77,7 @@ class ProblemLandStep extends React.Component {
                 <Row>
                   <Col span={24}>
                     <Checkbox
-                      value="crim_owed"
+                      value="Deuda en el CRIM"
                       className="inputprop radiobutton"
                     >
                       Deuda en el CRIM
@@ -85,7 +85,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="legality_problems"
+                      value="Problemas legales"
                       className="inputprop radiobutton"
                     >
                       Problemas legales
@@ -93,7 +93,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="ownership_problems"
+                      value="Problemas de titularidad"
                       className="inputprop radiobutton"
                     >
                       Problemas de titularidad
@@ -101,7 +101,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="others"
+                      value="Otros"
                       className="inputprop radiobutton"
                       onChange={this.mostrarinput}
                     >

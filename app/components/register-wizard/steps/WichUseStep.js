@@ -64,40 +64,58 @@ class WichUseStep extends React.Component {
                 onChange={this.props.handleChange}
               >
                 <div className="form-radio">
-                  <Radio value="scientist_research" className="blockstyleradio">
+                  <Radio
+                    value="Investigación Científica"
+                    className="blockstyleradio"
+                  >
                     Investigación Científica
                   </Radio>
                 </div>
                 <div className="form-radio">
                   <Radio
-                    value="environment_monitoring"
+                    value="Monitoreo Ambiental"
                     className="blockstyleradio"
                   >
                     Monitoreo Ambiental
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="spirit_uses" className="blockstyleradio">
+                  <Radio
+                    value="Usos espirituales"
+                    className="blockstyleradio"
+                  >
                     Usos espirituales
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="educational" className="blockstyleradio">
+                  <Radio
+                    value="Educación"
+                    className="blockstyleradio"
+                  >
                     Educación
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="recreation" className="blockstyleradio">
+                  <Radio
+                    value="Recreación"
+                    className="blockstyleradio"
+                  >
                     Recreación
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="turism" className="blockstyleradio">
+                  <Radio
+                    value="Turismo"
+                    className="blockstyleradio"
+                  >
                     Turismo
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="sustainable_uses" className="blockstyleradio">
+                  <Radio
+                    value="Usos sostenibles"
+                    className="blockstyleradio"
+                  >
                     Usos sostenibles
                   </Radio>
                 </div>
@@ -115,7 +133,7 @@ class WichUseStep extends React.Component {
 }
 
 WichUseStep.propTypes = {
-  wich_use: PropTypes.bool,
+  wich_use: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

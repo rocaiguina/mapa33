@@ -25,7 +25,6 @@ class LandDetailContainer extends React.Component {
       other_main_uses: '',
       proposed_uses: [],
       area_size: 0,
-      status: '',
       plots_count: 1,
       coordinates: null,
       disabledLike: true,
@@ -56,10 +55,8 @@ class LandDetailContainer extends React.Component {
           other_main_uses: land.other_main_uses,
           proposed_uses: land.proposed_uses,
           area_size: land.area_size,
-          status: land.status,
           plots_count: land.plots_count,
           coordinates: land.coordinates,
-          disabledLike: land.disabledLike,
         });
       })
       .catch(() => {
@@ -121,19 +118,20 @@ class LandDetailContainer extends React.Component {
     const {
       name,
       level,
+      photograph,
       owner,
       likes,
+      reason_conservation,
       location,
-      area,
-      status,
-      uses,
+      main_attributes,
+      other_main_attributes,
+      main_uses,
+      other_main_uses,
+      proposed_uses,
+      area_size,
       plots_count,
       coordinates,
-      attributes,
-      photograph,
       disabledLike,
-      current_situation,
-      proposed_uses,
     } = this.state;
     return (
       <BaseLayout
@@ -155,18 +153,19 @@ class LandDetailContainer extends React.Component {
           id={id}
           name={name}
           level={level}
+          photograph={photograph}
           owner={owner}
           likes={likes}
+          reason_conservation={reason_conservation}
           location={location}
-          area={area}
-          status={status}
-          uses={uses}
-          plots_count={plots_count}
-          coordinates={coordinates && coordinates.coordinates}
-          attributes={attributes}
-          photograph={photograph}
-          current_situation={current_situation}
+          main_attributes={main_attributes}
+          other_main_attributes={other_main_attributes}
+          main_uses={main_uses}
+          other_main_uses={other_main_uses}
           proposed_uses={proposed_uses}
+          area_size={area_size}
+          plots_count={plots_count}
+          coordinates={coordinates}
           disabledLike={disabledLike}
           onClickLike={this.handleOnClickLike}
         />

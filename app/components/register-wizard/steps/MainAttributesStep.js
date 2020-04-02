@@ -78,13 +78,16 @@ class MainAttributesStep extends React.Component {
               >
                 <Row>
                   <Col span={24}>
-                    <Checkbox value="nature" className="inputprop radiobutton">
+                    <Checkbox
+                      value="Naturaleza"
+                      className="inputprop radiobutton"
+                    >
                       Naturaleza
                     </Checkbox>
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="educational"
+                      value="Educativos"
                       className="inputprop radiobutton"
                     >
                       Educativos
@@ -92,7 +95,7 @@ class MainAttributesStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="landscape"
+                      value="Paisajistas y escénicos"
                       className="inputprop radiobutton"
                     >
                       Paisajistas y escénicos
@@ -100,9 +103,9 @@ class MainAttributesStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="others"
                       id="inputotro3"
                       className="inputprop radiobutton"
+                      value="Otros"
                     >
                       Otros
                     </Checkbox>

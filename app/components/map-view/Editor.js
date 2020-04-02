@@ -31,6 +31,17 @@ const marker = new mapboxgl.Marker({
     color: '#4668F2'
 });
 
+function resizeImage(base64Str, width, height) {
+  var img = new Image();
+  img.src = base64Str;
+  var canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, width, height);
+  return canvas.toDataURL();
+}
+
 class Editor extends Component {
     constructor(props) {
         super(props);
@@ -186,7 +197,9 @@ class Editor extends Component {
 
         miniMap.on('render', () => {
           if (this.props.onRenderMinimap) {
-            this.props.onRenderMinimap(miniMap.getCanvas().toDataURL());
+            var base64Img = miniMap.getCanvas().toDataURL();
+            var image = resizeImage(base64Img, 480, 360);
+            this.props.onRenderMinimap(image);
           }
         });
 
@@ -300,11 +313,12 @@ class Editor extends Component {
         })
             .then(response => response.json())
             .then(data => {
-              console.log(data);
-                const features = this.merge(data[0].geojson);
+                const geojson = data[0].geojson; 
+                const features = this.merge(geojson);
                 this.area(features);
                 this.getAddress(features);
                 const bounds = bbox(features);
+                const coordinates = centroid(features);
                 // Fields for database
                 features.properties.area = this.state.area;
                 features.properties.lots = this.state.selection.length;
@@ -318,13 +332,17 @@ class Editor extends Component {
                 });
 
                 if (this.props.onSelect) {
-                  var data = {
-                    lands: this.state.selection,
-                    area: this.state.area,
+                  var lands = geojson.features.map(item => {
+                    return item.properties;
+                  });
+
+                  var sdata = {
+                    lands: lands,
+                    coordinates: coordinates,
                     address: this.state.address,
                     geojson: features
                   };
-                  this.props.onSelect(data);
+                  this.props.onSelect(sdata);
                 }
             })
             .catch(error => {
@@ -444,7 +462,7 @@ class Editor extends Component {
               Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
             </div>
             
-            <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 200 }} />
+            <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 240 }} />
             {this.state.error && this.state.error}
           </div>
         </div>

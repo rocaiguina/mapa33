@@ -67,36 +67,54 @@ class ImportanceOfKnowingStep extends React.Component {
                 onChange={this.props.handleChange}
               >
                 <div className="form-radio">
-                  <Radio value="nature" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano."
+                  >
                     Es un espacio 100% natural y quiero evitar cualquier
                     perturbación e impacto humano.
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="nature_low_human" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un lugar natural con bajo impacto humano y quiero evitar mayores perturbaciones."
+                  >
                     Es un lugar natural con bajo impacto humano y quiero evitar
                     mayores perturbaciones.
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="nature_special" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un lugar con rasgos naturales especiales(p.e. arboledas, mogotes, lagunas, cuevas)"
+                  >
                     Es un lugar con rasgos naturales especiales(p.e. arboledas,
                     mogotes, lagunas, cuevas)
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="species_protection" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un lugar donde habitan especies que deber ser protegidas"
+                  >
                     Es un lugar donde habitan especies que deber ser protegidas
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="historic" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un lugar con historia natural y cultural que debe ser protegida"
+                  >
                     Es un lugar con historia natural y cultural que debe ser
                     protegida
                   </Radio>
                 </div>
                 <div className="form-radio">
-                  <Radio value="conservation" className="blockstyleradio">
+                  <Radio
+                    className="blockstyleradio"
+                    value="Es un lugar óptimo donde la conservación y el desarrollo sustentable pueden ocurrir a la vez."
+                  >
                     Es un lugar óptimo donde la conservación y el desarrollo
                     sustentable pueden ocurrir a la vez.
                   </Radio>

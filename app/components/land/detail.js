@@ -189,9 +189,13 @@ class LandDetail extends React.Component {
               <Col xs={24} md={12}>
                 <Badge
                   title="Atributos principales del lugar"
-                  description={main_attributes.length > 0 ? main_attributes.map((item, index) => (
-                    <div key={index}>{item}</div>
-                  )) : 'No definido.'}
+                  description={
+                    main_attributes.length > 0
+                      ? main_attributes.map((item, index) => (
+                          <div key={index}>{item}</div>
+                        ))
+                      : 'No definido.'
+                  }
                   color="white"
                   shape="round"
                   style={{ minHeight: '140px' }}
@@ -250,7 +254,6 @@ LandDetail.propTypes = {
   other_main_uses: PropTypes.string,
   proposed_uses: PropTypes.array,
   area_size: PropTypes.number,
-  status: PropTypes.string,
   plots_count: PropTypes.number,
   coordinates: PropTypes.object,
   onClickLike: PropTypes.func,

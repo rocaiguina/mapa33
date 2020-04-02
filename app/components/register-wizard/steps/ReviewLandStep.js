@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
+import Numeral from 'numeral';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
@@ -14,6 +15,7 @@ class ReviewLandStep extends React.Component {
   };
 
   render() {
+    const photograph = this.props.photograph || '//dummyimage.com/600x400/dddddd/ffffff';
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
@@ -34,7 +36,7 @@ class ReviewLandStep extends React.Component {
               <div className="form-group">
                 <img
                   className="img-responsive"
-                  src="https://dummyimage.com/600x400/dddddd/ffffff"
+                  src={photograph}
                 />
               </div>
             </Col>
@@ -43,35 +45,27 @@ class ReviewLandStep extends React.Component {
                 <Col xs={12}>
                   <p>
                     <strong>Parcelas seleccionadas</strong>
-                    <br />3
+                    <br />{this.props.lands.length}
                   </p>
                   <p>
                     <strong>Área</strong>
                     <br />
-                    1,136,480.54 M<sup>2</sup>
+                    {Numeral(this.props.area).format('0,0')} acres
                   </p>
                   <p>
                     <strong>Municipio</strong>
                     <br />
-                    Orocovis
+                    {this.props.location}
                   </p>
                 </Col>
                 <Col xs={12}>
-                  <p>
-                    <strong>Catástro 1</strong>
-                    <br />
-                    No hay número
-                  </p>
-                  <p>
-                    <strong>Catástro 2</strong>
-                    <br />
-                    000-000-000-00-000
-                  </p>
-                  <p>
-                    <strong>Catástro 1</strong>
-                    <br />
-                    No hay número
-                  </p>
+                  {this.props.lands.map((item, index) => (
+                    <p key={index}>
+                      <strong>Catástro {index + 1}</strong>
+                      <br />
+                      { item.catastro || 'No hay número' }
+                    </p>
+                  ))}
                 </Col>
               </Row>
             </Col>
@@ -86,7 +80,17 @@ class ReviewLandStep extends React.Component {
   }
 }
 
+ReviewLandStep.defaultProps = {
+  lands: [],
+  area: 0,
+  location: '',
+};
+
 ReviewLandStep.propTypes = {
+  photograph: PropTypes.string,
+  lands: PropTypes.array,
+  area: PropTypes.number,
+  location: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

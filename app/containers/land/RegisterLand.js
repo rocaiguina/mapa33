@@ -36,6 +36,9 @@ class RegisterLand extends React.Component {
       area_size: 0,
       base64Img: '',
       land_name: '',
+      lands: [],
+      coordinates: {},
+      location: '',
     };
   }
 
