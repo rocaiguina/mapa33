@@ -12,6 +12,18 @@ const LandMiddleware = require('../middlewares/land');
 const UserMiddleware = require('../middlewares/user');
 const AdminMiddleware = require('../middlewares/admin');
 
+var multer  = require('multer');
+var path = require('path')
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/lands/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+var upload = multer({ storage: storage});
+
 router.get('/', function(req, res) {
   res.redirect('/admin/land');
 });
@@ -36,13 +48,11 @@ router.get(
 );
 router.get(
   '/land/:id',
-  AuthMiddleware.login_required,
-  AdminMiddleware.admin_access,
   LandMiddleware.lookup,
   LandAdminController.get
 );
 router.post(
-  '/land/:id',
+  '/land/:id',upload.single('photograph'),
   AuthMiddleware.login_required,
   AdminMiddleware.admin_access,
   LandMiddleware.lookup,

@@ -14,7 +14,7 @@
             </h2>
         </div>
         <div class="card-body card-padding">
-            <form id="user-form" method="POST" autocomplete="off">
+            <form id="user-form" method="POST" autocomplete="off" enctype="multipart/form-data">
                 <input type="hidden" name="crumb" value="{{crumb}}"/>
 
                 <div class="form-group {{ 'has-error' if field_errors.name else '' }}">
@@ -26,6 +26,7 @@
                     <small class="help-block">{{ field_errors.name.message }}</small>
                     {% endif %}
                 </div>
+                
                 <div class="form-group {{ 'has-error' if field_errors.level else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Nivel*</label>
@@ -43,89 +44,51 @@
                     {% endif %}
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group {{ 'has-error' if field_errors.photograph else '' }}" >
                     <div class="fg-line">
                         <label class="control-label">Foto</label>
                         <input type="file" id="input-file-now" class="form-control input-sm" name="photograph"/>
-                    </div>                    
+                    </div>
+                    {% if field_errors.photograph %}
+                    <small class="help-block">{{ field_errors.photograph.message }}</small>
+                    {% endif %}                    
                 </div>
                 
-                <div class="form-group">
-                    <div class="fg-line">
-                        <label class="control-label">Atributos Principales</label>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value="nature" style="opacity: 1;">
-                              Naturaleza
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input  type="checkbox" value="educational" style="opacity: 1;"> Educativos
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input  type="checkbox" value="landscape" style="opacity: 1;"> Paisajistas y escénicos
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="others_main">                        
-                    </div>                    
-                </div>
-                
-                
-                <div class="form-group">
-                    <div class="fg-line">
-                        <label class="control-label">Situación Actual</label>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" value="residential" style="opacity: 1;">
-                              Residencial
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input  type="checkbox" value="commercial" style="opacity: 1;"> 
-                              Comercial
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input  type="checkbox" value="nature_forest" style="opacity: 1;">
-                              Natural / Bosque
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="others_main">                        
-
-                    </div>                    
-                </div>
-                
-                <div class="form-group">
+                                
+                <div class="form-group {{ 'has-error' if field_errors.plots_count else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Número de parcelas</label>
-                        <input type="number" class="form-control input-sm" name="plots_count">
+                        <input type="number" class="form-control input-sm" name="plots_count" value="{{ field_errors.plots_count.value if field_errors.plots_count else object.plots_count }}">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="fg-line">
-                        <label class="control-label">Tamaño del área</label>
-                        <input type="number" step="0.01" class="form-control input-sm" name="area_size">
-                    </div>
+                    {% if field_errors.plots_count %}
+                    <small class="help-block">{{ field_errors.plots_count.message }}</small>
+                    {% endif %}
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group {{ 'has-error' if field_errors.area_size else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Tamaño del área</label>
+                        <input type="number" step="0.01" class="form-control input-sm" name="area_size" value="{{ field_errors.area_size.value if field_errors.area_size else object.area_size }}">
+                    </div>
+                    {% if field_errors.area_size %}
+                    <small class="help-block">{{ field_errors.area_size.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.area_type else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Tipo de área</label>
                         <div class="select">
-                            <select name="are_type" class="form-control ">
+                            <select name="area_type" class="form-control ">
                                 <option value="">--------</option>
-                                <option value="Marina">Marina</option>
-                                <option value="Terrestre">Terrestre</option>
+                                <option {% if object.area_type == 'Marina' %}selected{% endif %} value="Marina">Marina</option>
+                                <option {% if object.area_type == 'Terrestre' %}selected{% endif %} value="Terrestre">Terrestre</option>
                             </select>
                         </div>
-                    </div>                    
+                    </div>
+                    {% if field_errors.area_type %}
+                    <small class="help-block">{{ field_errors.area_type.message }}</small>
+                    {% endif %}
                 </div>
                 
                 <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
@@ -133,43 +96,43 @@
                         <label class="control-label">Tipo de Uso</label>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option1" value="scientist_research">
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option1" value="scientist_research" {% if object.use_type == 'scientist_research' %}checked{% endif %} >
                               Investigación Científica
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option2" value="environment_monitoring">
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option2" value="environment_monitoring" {% if object.use_type == 'environment_monitoring' %}checked{% endif %}>
                               Monitoreo Ambiental
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type"  style="opacity: 1;" id="option3" value="spirit_uses" >
+                              <input type="radio" name="use_type"  style="opacity: 1;" id="option3" value="spirit_uses" {% if object.use_type == 'spirit_uses' %}checked{% endif %}>
                               Usos espirituales
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option4" value="educational" >
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option4" value="educational" {% if object.use_type == 'educational' %}checked{% endif %}>
                               Educación
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option5" value="recreation" >
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option5" value="recreation" {% if object.use_type == 'recreation' %}checked{% endif %}>
                               Recreación
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option6" value="turism" >
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option6" value="turism" {% if object.use_type == 'turism' %}checked{% endif %}>
                               Turismo
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option7" value="sustainable_uses" >
+                              <input type="radio" name="use_type" style="opacity: 1;" id="option7" value="sustainable_uses" {% if object.use_type == 'sustainable_uses' %}checked{% endif %}>
                               Usos sostenibles
                             </label>
                         </div>
@@ -188,6 +151,7 @@
                     <small class="help-block">{{ field_errors.location.message }}</small>
                     {% endif %}
                 </div>
+                
                 <div class="form-group {{ 'has-error' if field_errors.entity else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Entidad*</label>
@@ -207,6 +171,7 @@
                     <small class="help-block">{{ field_errors.acquisition_type.message }}</small>
                     {% endif %}
                 </div>
+                
                 <div class="form-group {{ 'has-error' if field_errors.year_acquisition else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Año de adquisición*</label>
@@ -217,17 +182,21 @@
                     {% endif %}
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group {{ 'has-error' if field_errors.year_estab else '' }}" >
                     <div class="fg-line">
                         <label class="control-label">Año de establecimiento</label>
-                        <input type="number" step="1" class="form-control input-sm" name="year_estab">
+                        <input type="number" step="1" class="form-control input-sm" name="year_estab" value="{{ field_errors.year_estab.value if field_errors.year_estab else object.year_estab }}">
                     </div>
+                    {% if field_errors.year_estab %}
+                    <small class="help-block">{{ field_errors.year_estab.message }}</small>
+                    {% endif %}
                 </div>
                 
                 <div class="form-group {{ 'has-error' if field_errors.ownership else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Propiedad*</label>
-                        <input type="text" class="form-control input-sm" name="ownership" value="{{ field_errors.ownership.value if field_errors.ownership else object.ownership }}">
+                        
+                        <input type="text" class="form-control input-sm" name="ownership" value="{{ field_errors.ownership if field_errors.ownership else object.ownership }}">
                     </div>
                     {% if field_errors.ownership %}
                     <small class="help-block">{{ field_errors.ownership.message }}</small>
@@ -250,6 +219,7 @@
                     <small class="help-block">{{ field_errors.status.message }}</small>
                     {% endif %}
                 </div>
+                                
                 <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Motivo de conservación*</label>
@@ -259,7 +229,7 @@
                     <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
-                
+                               
                 <div class="form-group {{ 'has-error' if field_errors.notes else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Notas</label>
@@ -270,10 +240,420 @@
                     {% endif %}
                 </div>
                 
+                <div class="form-group {{ 'has-error' if field_errors.know_owner else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Conoce al dueño</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="know_owner" style="opacity: 1;" value="true" {% if object.metadata.know_owner == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="know_owner" style="opacity: 1;" value="false" {% if object.metadata.know_owner == false %}checked{% endif %} >
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.know_owner %}
+                        <small class="help-block">{{ field_errors.know_owner.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div> 
+                
+                <div class="form-group {{ 'has-error' if field_errors.are_u_owner else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Es Dueño?</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="true" {% if object.metadata.are_u_owner == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="false" {% if object.metadata.are_u_owner == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.are_u_owner %}
+                        <small class="help-block">{{ field_errors.are_u_owner.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div>            
+                                
+                <div class="form-group {{ 'has-error' if field_errors.catastro_number else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Número de Catastro</label>
+                        <input type="number" class="form-control input-sm" name="catastro_number" value="{{ field_errors.metadata.catastro_number.value if field_errors.metadata.catastro_number else object.metadata.catastro_number }}">
+                    </div>
+                    {% if field_errors.catastro_number %}
+                    <small class="help-block">{{ field_errors.catastro_number.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.owner_name else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Nombre de Propietario</label>
+                        <input type="text" class="form-control input-sm" name="owner_name" value="{{ field_errors.metadata.owner_name if field_errors.metadata.owner_name else object.metadata.owner_name }}">
+                    </div>
+                    {% if field_errors.owner_name %}
+                    <small class="help-block">{{ field_errors.owner_name.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.owner_email else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Correo Electrónico de dueño</label>
+                        <input type="email" class="form-control input-sm" name="owner_email" value="{{ field_errors.metadata.owner_email.value if field_errors.metadata.owner_email else object.metadata.owner_email }}">
+                    </div>
+                    {% if field_errors.owner_email %}
+                    <small class="help-block">{{ field_errors.owner_email.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.owner_phone else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Telefono de dueño</label>
+                        <input type="text" class="form-control input-sm" name="owner_phone" value="{{ field_errors.metadata.owner_phone.value if field_errors.metadata.owner_phone else object.metadata.owner_phone }}">
+                    </div>
+                    {% if field_errors.owner_phone %}
+                    <small class="help-block">{{ field_errors.owner_phone.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.inheritance_land else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Terreno heredado</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="inheritance_land" style="opacity: 1;" id="option1" value="true" {% if object.metadata.inheritance_land == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="inheritance_land" style="opacity: 1;" id="option2" value="false" {% if object.metadata.inheritance_land == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.inheritance_land %}
+                        <small class="help-block">{{ field_errors.inheritance_land.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div>   
+                
+                <div class="form-group {{ 'has-error' if field_errors.inheritance_agree else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Herederos de acuerdo</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="inheritance_agree" style="opacity: 1;" id="option1" value="true" {% if object.metadata.inheritance_agree == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="inheritance_agree" style="opacity: 1;" id="option2" value="false" {% if object.metadata.inheritance_agree == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.inheritance_agree %}
+                        <small class="help-block">{{ field_errors.inheritance_agree.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div>   
+                
+                <div class="form-group {{ 'has-error' if field_errors.lands_problem else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Problemas del terreno</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox"  name="lands_problem" value="crim_owed" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='crim_owed' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='crim_owed' %}checked{% endif %}> Deuda en el CRIM
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_problem" value="legality_problems" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='legality_problems' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='legality_problems' %}checked{% endif %}> Problemas legales
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_problem" value="ownership_problems" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='ownership_problems' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='ownership_problems' %}checked{% endif %}> Problemas de titularidad
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="lands_other_problem" value="{{ field_errors.lands_other_problem.value if field_errors.lands_other_problem else object.metadata.lands_other_problem.value }}">                        
+                    </div>    
+                    {% if field_errors.lands_other_problem %}
+                    <small class="help-block">{{ field_errors.lands_other_problem.message }}</small>
+                    {% endif %}
+                    {% if field_errors.lands_problem %}
+                    <small class="help-block">{{ field_errors.lands_problem.message }}</small>
+                    {% endif %}
+                </div>
+                
+                
+                <div class="form-group {{ 'has-error' if field_errors.has_mortgage else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Hipoteca</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_mortgage" style="opacity: 1;" value="true" {% if object.metadata.has_mortgage == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_mortgage" style="opacity: 1;" value="false" {% if object.metadata.has_mortgage == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.has_mortgage %}
+                        <small class="help-block">{{ field_errors.has_mortgage.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div>  
+                
+                <div class="form-group {{ 'has-error' if field_errors.has_surveying else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Agrimensura</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_surveying" style="opacity: 1;" value="true" {% if object.metadata.has_surveying == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_surveying" style="opacity: 1;" value="false" {% if object.metadata.has_surveying == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.has_surveying %}
+                        <small class="help-block">{{ field_errors.has_surveying.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div> 
+                
+                <div class="form-group {{ 'has-error' if field_errors.lands_main_uses else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Usos principales</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_main_uses" value="residential" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='residential' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='residential' %}checked{% endif %}> Residencial
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_main_uses" value="commercial" style="opacity: 1;"  {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='commercial' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='commercial' %}checked{% endif %}> Comercial
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_main_uses" value="nature_forest" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='nature_forest' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='nature_forest' %}checked{% endif %}> Natural / Bosque
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="lands_other_main_uses" value="{{ field_errors.lands_other_main_uses.value if field_errors.lands_other_main_uses else object.metadata.lands_other_main_uses }}">                        
+                    </div>    
+                    {% if field_errors.lands_other_main_uses %}
+                    <small class="help-block">{{ field_errors.lands_other_main_uses.message }}</small>
+                    {% endif %}
+                    {% if field_errors.lands_main_uses %}
+                    <small class="help-block">{{ field_errors.lands_main_uses.message }}</small>
+                    {% endif %}
+                </div>
+                
+                
+                <div class="form-group {{ 'has-error' if field_errors.lands_structures else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Estructuras en el terreno</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_structures" value="residential" style="opacity: 1;" {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='residential' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='residential' %}checked{% endif %}> Residencial
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_structures" value="commercial" style="opacity: 1;"  {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='commercial' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='commercial' %}checked{% endif %}> Comercial / Oficina
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_structures" value="agricultural" style="opacity: 1;" {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='agricultural' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='agricultural' %}checked{% endif %}> Agrícola
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="lands_other_structures" value="{{ field_errors.metadata.lands_other_structures.value if field_errors.metadata.lands_other_structures else object.metadata.lands_other_structures }}">                        
+                    </div>    
+                    {% if field_errors.lands_other_structures %}
+                    <small class="help-block">{{ field_errors.lands_other_structures.message }}</small>
+                    {% endif %}
+                    {% if field_errors.lands_structures %}
+                    <small class="help-block">{{ field_errors.lands_structures.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.lands_attributes else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Atributos Principales</label>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox"  name="lands_attributes" value="nature" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='nature' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='nature' %}checked{% endif %}> Naturaleza
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_attributes" value="educational" style="opacity: 1;"  {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='educational' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='educational' %}checked{% endif %}> Educativos
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" name="lands_attributes" value="landscape" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='landscape' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='landscape' %}checked{% endif %}> Paisajistas y escénicos
+                            </label>
+                        </div>
+                            <label class="control-label">Otro</label>
+                            <input type="text" class="form-control input-sm" name="lands_other_attributes" value="{{ field_errors.metadata.lands_other_attributes.value if field_errors.metadata.lands_other_attributes else object.metadata.lands_other_attributes }}">                        
+                    </div>    
+                    {% if field_errors.lands_other_attributes %}
+                    <small class="help-block">{{ field_errors.lands_other_attributes.message }}</small>
+                    {% endif %}
+                    {% if field_errors.lands_attributes %}
+                    <small class="help-block">{{ field_errors.lands_attributes.message }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if field_errors.has_contamination else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Contaminada</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_contamination" style="opacity: 1;" value="true" {% if object.metadata.has_contamination == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_contamination" style="opacity: 1;" value="false" {% if object.metadata.has_contamination == false %}checked{% endif %} >
+                              NO
+                            </label>
+                        </div>                        
+                        {% if field_errors.has_contamination %}
+                        <small class="help-block">{{ field_errors.has_contamination.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div> 
+                
+                <div class="form-group {{ 'has-error' if field_errors.wich_use else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Uso</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="scientist_research" {% if object.metadata.wich_use == 'scientist_research' %}checked{% endif %} >
+                              Investigación Científica
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="environment_monitoring" {% if object.metadata.wich_use == 'environment_monitoring' %}checked{% endif %}>
+                              Monitoreo Ambiental
+                            </label>
+                        </div>    
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="spirit_uses" {% if object.metadata.wich_use == 'spirit_uses' %}checked{% endif %}>
+                              Usos espirituales
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="educational" {% if object.metadata.wich_use == 'educational' %}checked{% endif %}>
+                              Educación
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="recreation" {% if object.metadata.wich_use == 'recreation' %}checked{% endif %}>
+                              Recreación
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="turism" {% if object.metadata.wich_use == 'turism' %}checked{% endif %}>
+                              Turismo
+                            </label>
+                        </div>         
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="sustainable_uses" {% if object.metadata.wich_use == 'sustainable_uses' %}checked{% endif %}>
+                              Usos sostenibles
+                            </label>
+                        </div>                 
+                        {% if field_errors.wich_use %}
+                        <small class="help-block">{{ field_errors.wich_use.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div> 
+                
+                <div class="form-group {{ 'has-error' if field_errors.importance_of_knowing else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Importancia de saber</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature" {% if object.metadata.importance_of_knowing == 'nature' %}checked{% endif %} >
+                              Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano.
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature_low_human" {% if object.metadata.importance_of_knowing == 'nature_low_human' %}checked{% endif %}>
+                              Es un lugar natural con bajo impacto humano y quiero evitar
+                    mayores perturbaciones.
+                            </label>
+                        </div>    
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature_special" {% if object.metadata.importance_of_knowing == 'nature_special'%}checked{% endif %}>
+                              Es un lugar con rasgos naturales especiales(p.e. arboledas,
+                    mogotes, lagunas, cuevas)
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="species_protection" {% if object.metadata.importance_of_knowing == 'species_protection' %}checked{% endif %}>
+                              Es un lugar donde habitan especies que deber ser protegidas
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="historic" {% if object.metadata.importance_of_knowing == 'historic' %}checked{% endif %}>
+                              Es un lugar con historia natural y cultural que debe ser
+                    protegida
+                            </label>
+                        </div>  
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="conservation" {% if object.metadata.importance_of_knowing == 'conservation' %}checked{% endif %}>
+                              Es un lugar óptimo donde la conservación y el desarrollo
+                    sustentable pueden ocurrir a la vez.
+                            </label>
+                        </div>                
+                        {% if field_errors.importance_of_knowing %}
+                        <small class="help-block">{{ field_errors.importance_of_knowing.message }}</small>
+                        {% endif %}
+                    </div>                    
+                </div> 
+                
+
+                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">GUARDAR</button>
                     <a href="/admin/land" class="btn btn-default">CANCELAR</a>
                 </div>
+                
+                
+                
             </form>
         </div>
     </div>    
@@ -282,7 +662,7 @@
     <div class="card">
       <div class="card-body card-padding">
         <div class="form-group">
-          <img src="https://dummyimage.com/600x400/cccccc/000000" class="img-responsive" />
+            <img src={%if object.photograph%}{{object.photograph}} {% else %} "https://dummyimage.com/600x400/cccccc/000000" {% endif %} class="img-responsive" />
         </div>
         <div class="text-center"><a href="https://dummyimage.com/600x400/cccccc/000000" target="_blank">View Map</a></div>
       </div>
