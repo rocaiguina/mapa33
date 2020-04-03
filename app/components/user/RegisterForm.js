@@ -199,6 +199,10 @@ class RegisterForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col md={16}>
                 <Row>
                   <Col md={24}>
                     <div className="form-group">
@@ -276,50 +280,52 @@ class RegisterForm extends React.Component {
                 </Row>
               </Col>
               <Col md={8}>
-                <div className="form-check">
-                  <Checkbox
-                    name="advs_by_email"
-                    defaultChecked={false}
-                    onChange={handleChange}
-                  >
-                    Deseo recibir promociones de Para la Naturaleza en mi correo
-                    electrónico
-                  </Checkbox>
-                </div>
-                <div className="form-check">
-                  <Checkbox
-                    name="advs_by_zip"
-                    defaultChecked={false}
-                    onChange={handleChange}
-                  >
-                    Deseo recibir promociones de Para la Naturalesa en mi
-                    dirección postal
-                  </Checkbox>
-                </div>
-                <div className="form-check">
-                  <Checkbox
-                    name="interested_volunteer"
-                    defaultChecked={false}
-                    onChange={handleChange}
-                  >
-                    Intereso ser voluntario / voluntaria
-                  </Checkbox>
-                </div>
-                <div className="form-check">
-                  <Checkbox
-                    name="terms_and_conditions"
-                    defaultChecked={false}
-                    onChange={handleChange}
-                  >
-                    He leído y acepto la{' '}
-                    <Link
-                      to="/page/terms-and-conditions"
-                      style={{ color: '#222' }}
+                <div className="m-b-20">
+                  <div className="form-check">
+                    <Checkbox
+                      name="advs_by_email"
+                      defaultChecked={false}
+                      onChange={handleChange}
                     >
-                      POLÍTICA DE PRIVACIDAD
-                    </Link>
-                  </Checkbox>
-                  <Text type="danger">{errors.terms_and_conditions}</Text>
+                      Deseo recibir promociones de Para la Naturaleza en mi correo
+                      electrónico
+                    </Checkbox>
+                  </div>
+                  <div className="form-check">
+                    <Checkbox
+                      name="advs_by_zip"
+                      defaultChecked={false}
+                      onChange={handleChange}
+                    >
+                      Deseo recibir promociones de Para la Naturalesa en mi
+                      dirección postal
+                    </Checkbox>
+                  </div>
+                  <div className="form-check">
+                    <Checkbox
+                      name="interested_volunteer"
+                      defaultChecked={false}
+                      onChange={handleChange}
+                    >
+                      Intereso ser voluntario / voluntaria
+                    </Checkbox>
+                  </div>
+                  <div className="form-check">
+                    <Checkbox
+                      name="terms_and_conditions"
+                      defaultChecked={false}
+                      onChange={handleChange}
+                    >
+                      He leído y acepto la{' '}
+                      <Link
+                        to="/page/terms-and-conditions"
+                        style={{ color: '#222' }}
+                      >
+                        POLÍTICA DE PRIVACIDAD
+                      </Link>
+                    </Checkbox>
+                    <Text type="danger">{errors.terms_and_conditions}</Text>
+                  </div>
                 </div>
               </Col>
             </Row>

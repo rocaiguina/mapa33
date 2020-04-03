@@ -41,7 +41,7 @@ class SubmitStep extends React.Component {
           <Row gutter={30}>
             <Col md={6}>
               <h2>{this.props.name}</h2>
-              <h3>{owner}</h3>
+              <h3>{owner || 'No definido.'}</h3>
             </Col>
             <Col md={10}>
               <div className="form-group">
@@ -49,7 +49,7 @@ class SubmitStep extends React.Component {
               </div>
             </Col>
             <Col md={8}>
-              <p>
+              <p className="lead">
                 ¿Por qué es importante la protección de este terreno en
                 particular?
               </p>
@@ -74,7 +74,7 @@ class SubmitStep extends React.Component {
                       <Badge
                         title="Localizado"
                         description={this.props.location || 'No definido.'}
-                        color="white"
+                        color="default"
                         shape="round"
                       />
                     </Col>
@@ -84,7 +84,7 @@ class SubmitStep extends React.Component {
                         description={
                           Numeral(this.props.area_size).format('0,0') + ' acres'
                         }
-                        color="white"
+                        color="default"
                         shape="round"
                       />
                     </Col>
@@ -94,7 +94,7 @@ class SubmitStep extends React.Component {
                       <Badge
                         title="Compuesto"
                         description={this.props.plots_count + ' parcelas'}
-                        color="white"
+                        color="default"
                         shape="round"
                       />
                     </Col>
@@ -104,7 +104,7 @@ class SubmitStep extends React.Component {
                         description={
                           <Coordinates point={this.props.coordinates.coordinates} />
                         }
-                        color="white"
+                        color="default"
                         shape="round"
                       />
                     </Col>
@@ -120,7 +120,7 @@ class SubmitStep extends React.Component {
                           ))
                         : 'No definido.'
                     }
-                    color="white"
+                    color="default"
                     shape="round"
                     style={{ minHeight: '140px' }}
                   />
