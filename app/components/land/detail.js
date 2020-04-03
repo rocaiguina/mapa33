@@ -39,6 +39,10 @@ class LandDetail extends React.Component {
       hidden: this.props.level == 'conserved',
     });
 
+    const proposed_uses = this.props.proposed_uses || [];
+    const main_attributes = this.props.main_attributes || [];
+    const main_uses = this.props.main_uses || [];
+
     return (
       <div className="land-detail">
         <div className="m-b-20">
@@ -114,7 +118,7 @@ class LandDetail extends React.Component {
                 particular?
               </p>
               <p style={{ flex: '1 0 auto' }}>
-                {this.props.reason_conservation || 'No definido'}
+                {this.props.reason_conservation || 'No definido.'}
               </p>
               <div className="land-support hidden-xs">
                 <Button
@@ -140,67 +144,86 @@ class LandDetail extends React.Component {
         <Row gutter={16}>
           <Col md={16}>
             <Row gutter={16}>
-              <Col xs={12} md={6}>
-                <Badge
-                  title="Localizado"
-                  description={this.props.location || 'No definido'}
-                  color="white"
-                  shape="round"
-                />
-              </Col>
-              <Col xs={12} md={6}>
-                <Badge
-                  title="Extensión"
-                  description={
-                    Numeral(this.props.area_size).format('0,0') + ' acres'
-                  }
-                  color="white"
-                  shape="round"
-                />
-              </Col>
               <Col xs={24} md={12}>
-                <Badge
-                  title="Estado actual del terreno"
-                  description={this.props.current_situation || 'No definido'}
-                  color="white"
-                  shape="round"
-                />
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col xs={12} md={6}>
-                <Badge
-                  title="Compuesto"
-                  description={this.props.plots_count + ' parcelas'}
-                  color="white"
-                  shape="round"
-                />
-              </Col>
-              <Col xs={12} md={6}>
-                <Badge
-                  title="Coordenadas"
-                  description={<Coordinates point={this.props.coordinates} />}
-                  color="white"
-                  shape="round"
-                />
+                <Row gutter={16}>
+                  <Col xs={12} md={12}>
+                    <Badge
+                      title="Localizado"
+                      description={this.props.location || 'No definido.'}
+                      color="white"
+                      shape="round"
+                    />
+                  </Col>
+                  <Col xs={12} md={12}>
+                    <Badge
+                      title="Extensión"
+                      description={
+                        Numeral(this.props.area_size).format('0,0') + ' acres'
+                      }
+                      color="white"
+                      shape="round"
+                    />
+                  </Col>
+                </Row>
+                <Row gutter={16}>
+                  <Col xs={12} md={12}>
+                    <Badge
+                      title="Compuesto"
+                      description={this.props.plots_count + ' parcelas'}
+                      color="white"
+                      shape="round"
+                    />
+                  </Col>
+                  <Col xs={12} md={12}>
+                    <Badge
+                      title="Coordenadas"
+                      description={
+                        <Coordinates point={this.props.coordinates} />
+                      }
+                      color="white"
+                      shape="round"
+                    />
+                  </Col>
+                </Row>
               </Col>
               <Col xs={24} md={12}>
                 <Badge
                   title="Atributos principales del lugar"
-                  description={this.props.main_attributes || 'No definido'}
+                  description={
+                    main_attributes.length > 0
+                      ? main_attributes.map((item, index) => (
+                          <div key={index}>{item}</div>
+                        ))
+                      : 'No definido.'
+                  }
                   color="white"
                   shape="round"
+                  style={{ minHeight: '140px' }}
                 />
               </Col>
             </Row>
           </Col>
           <Col md={8}>
             <div className="land-features">
+              <p>Usos principales actuales:</p>
+              <ul>
+                {main_uses.length == 0 && <li>No definido.</li>}
+                {main_uses.map((item, index) => (
+                  <li key={index} className="text-orange">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="land-features">
               <p>Usos principales propuestos:</p>
               <ul>
-                <li className="text-orange">Educacion</li>
-                <li className="text-purple">Recreacion</li>
-                <li className="text-gray">Usos Sostenibles</li>
+                {proposed_uses.length == 0 && <li>No definido.</li>}
+                {proposed_uses.map((item, index) => (
+                  <li key={index} className="text-orange">
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </Col>
@@ -209,6 +232,12 @@ class LandDetail extends React.Component {
     );
   }
 }
+
+LandDetail.defaultProps = {
+  main_attributes: [],
+  main_uses: [],
+  proposed_uses: [],
+};
 
 LandDetail.propTypes = {
   id: PropTypes.number,
@@ -219,14 +248,14 @@ LandDetail.propTypes = {
   likes: PropTypes.number,
   reason_conservation: PropTypes.string,
   location: PropTypes.string,
-  main_attributes: PropTypes.string,
-  current_situation: PropTypes.string,
-  proposed_uses: PropTypes.string,
+  main_attributes: PropTypes.array,
+  other_main_attributes: PropTypes.string,
+  main_uses: PropTypes.array,
+  other_main_uses: PropTypes.string,
+  proposed_uses: PropTypes.array,
   area_size: PropTypes.number,
-  status: PropTypes.string,
   plots_count: PropTypes.number,
   coordinates: PropTypes.object,
-  attributes: PropTypes.string,
   onClickLike: PropTypes.func,
   disabledLike: PropTypes.bool,
 };

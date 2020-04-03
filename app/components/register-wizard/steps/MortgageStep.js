@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row } from 'antd';
+import { Col, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class MortgageStep extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnChange = e => {
     const self = this;
     this.props.handleChange(e);
@@ -17,22 +26,28 @@ class MortgageStep extends React.Component {
   };
 
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.has_mortgage !== null) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { has_mortgage: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={10} steps={21} />
+          <Progress onNext={this.handleOnNext} step={9} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={10} steps={21} />
+          <TopNavigator previous={this.props.previous} step={9} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -41,6 +56,9 @@ class MortgageStep extends React.Component {
               }}
             >
               <h2>¿Existe una hipoteca sobre el terreno?</h2>
+              {errors.has_mortgage && (
+                <Text type="danger">{errors.has_mortgage}</Text>
+              )}
             </Col>
             <Col
               md={12}

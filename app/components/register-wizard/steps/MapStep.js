@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import BaseLayout from '../../layout/base';
 import MapEditor from '../../map-view/Editor';
 import MapTourGuide from '../MapTourGuide';
@@ -12,19 +12,24 @@ class MapStep extends React.Component {
       run: true,
       hasRunned: false,
       lands: [],
-      area: 0,
     };
   }
 
   handleOnSelect = data => {
     this.setState({
       lands: data.lands,
-      area: data.area,
     });
+    let location = '';
+    if (data.lands.length > 0) {
+      location = data.lands[0]['municipality'];
+    }
     const { setFieldValue } = this.props;
+    setFieldValue('lands', data.lands);
+    setFieldValue('location', location);
+    setFieldValue('coordinates', data.coordinates.geometry);
     setFieldValue('geojson', data.geojson);
-    setFieldValue('plots_count', data.lands.length);
-    setFieldValue('area_size', data.area);
+    setFieldValue('plots_count', data.geojson.properties.lots);
+    setFieldValue('area_size', data.geojson.properties.area);
   };
 
   handleOnRenderMiniMap = base64Img => {
@@ -33,10 +38,14 @@ class MapStep extends React.Component {
   };
 
   handleOnSubmit = () => {
-    // if (this.state.lands.length > 0) {
-    //   this.props.next();
-    // }
-    this.props.next();
+    if (this.state.lands.length > 0) {
+      this.props.next();
+    } else {
+      notification.error({
+        message: 'Error',
+        description: 'No se ha seleccionado ninguna parcela.',
+      });
+    }
   };
 
   handleOnZoom = map => {

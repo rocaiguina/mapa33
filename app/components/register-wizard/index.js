@@ -7,7 +7,6 @@ import { Wizard, Steps, Step } from 'react-albus';
 
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
 import ProposeLandStep from './steps/ProposeLandStep';
-import PhoneOwnerStep from './steps/PhoneOwnerStep';
 import InheritanceLandStep from './steps/InheritanceLandStep';
 import InheritanceAgreeStep from './steps/InheritanceAgreeStep';
 import ProblemLandStep from './steps/ProblemLandStep';
@@ -71,7 +70,6 @@ class RegisterWizard extends React.Component {
       >
         {({
           values,
-          errors,
           handleChange,
           handleSubmit,
           isSubmitting,
@@ -110,7 +108,14 @@ class RegisterWizard extends React.Component {
                 <Step
                   id="review"
                   render={({ next, previous }) => (
-                    <ReviewLandStep next={next} previous={previous} />
+                    <ReviewLandStep
+                      lands={values.lands}
+                      area={values.area_size}
+                      location={values.location}
+                      photograph={values.base64Img}
+                      next={next}
+                      previous={previous}
+                    />
                   )}
                 />
                 <Step
@@ -131,18 +136,6 @@ class RegisterWizard extends React.Component {
                   render={({ next, previous }) => (
                     <CatastroNumberStep
                       catastro_number={values.catastro_number}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                    />
-                  )}
-                />
-                <Step
-                  id="owner-phone-number"
-                  render={({ next, previous }) => (
-                    <PhoneOwnerStep
-                      owner_name={values.owner_name}
-                      owner_phone={values.owner_phone}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
@@ -321,7 +314,19 @@ class RegisterWizard extends React.Component {
                   id="summary"
                   render={({ next, previous }) => (
                     <SubmitStep
-                      summary={values}
+                      name={values.land_name}
+                      photograph={values.base64Img}
+                      owner={{ first_name: values.owner_name }}
+                      reason_conservation={values.importance_of_knowing}
+                      location={values.location}
+                      main_attributes={values.lands_attributes}
+                      other_main_attributes={values.lands_other_attributes}
+                      main_uses={values.lands_main_uses}
+                      other_main_uses={values.lands_other_main_uses}
+                      proposed_uses={[values.wich_use]}
+                      area_size={values.area_size}
+                      plots_count={values.plots_count}
+                      coordinates={values.coordinates}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}

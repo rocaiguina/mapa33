@@ -1,30 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Input, Row } from 'antd';
+import { Col, Input, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class NameLand extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+    };
+  }
+
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (this.props.land_name) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { land_name: 'Campo requerido' },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={20} steps={21} />
+          <Progress onNext={this.handleOnNext} step={19} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={20} steps={21} />
+          <TopNavigator previous={this.props.previous} step={19} steps={20} />
           <Row gutter={30}>
             <Col md={8} />
             <Col md={8}>
@@ -39,6 +54,9 @@ class NameLand extends React.Component {
                   value={this.props.land_name}
                   onChange={this.props.handleChange}
                 />
+                {errors.land_name && (
+                  <Text type="danger">{errors.land_name}</Text>
+                )}
               </div>
             </Col>
           </Row>

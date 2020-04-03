@@ -1,23 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Checkbox, Input } from 'antd';
+import { Col, Row, Checkbox, Input, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class ProblemLandStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       inputotro: false,
+      errors: {},
     };
   }
 
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (
+      Array.isArray(this.props.lands_problem) &&
+      this.props.lands_problem.length > 0
+    ) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { lands_problem: 'Campo requerido' },
+      });
+    }
   };
 
   handleOnChange = checkedValue => {
@@ -32,17 +43,18 @@ class ProblemLandStep extends React.Component {
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={9} steps={21} />
+          <Progress onNext={this.handleOnNext} step={8} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={9} steps={21} />
+          <TopNavigator previous={this.props.previous} step={8} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -51,6 +63,9 @@ class ProblemLandStep extends React.Component {
               }}
             >
               <h2>¿El terreno tiene algún problema?</h2>
+              {errors.lands_problem && (
+                <Text type="danger">{errors.lands_problem}</Text>
+              )}
             </Col>
             <Col md={12}>
               <Checkbox.Group
@@ -62,7 +77,7 @@ class ProblemLandStep extends React.Component {
                 <Row>
                   <Col span={24}>
                     <Checkbox
-                      value="crim_owed"
+                      value="Deuda en el CRIM"
                       className="inputprop radiobutton"
                     >
                       Deuda en el CRIM
@@ -70,7 +85,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="legality_problems"
+                      value="Problemas legales"
                       className="inputprop radiobutton"
                     >
                       Problemas legales
@@ -78,7 +93,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="ownership_problems"
+                      value="Problemas de titularidad"
                       className="inputprop radiobutton"
                     >
                       Problemas de titularidad
@@ -86,7 +101,7 @@ class ProblemLandStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="others"
+                      value="Otros"
                       className="inputprop radiobutton"
                       onChange={this.mostrarinput}
                     >

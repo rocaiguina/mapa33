@@ -4,7 +4,10 @@ import Numeral from 'numeral';
 
 class Coordinates extends React.Component {
   render() {
-    const point = this.props.point || [0, 0];
+    let point = this.props.point || [];
+    if (point.length < 2) {
+      point = [0, 0];
+    }
     return (
       <span>
         {Numeral(point[0]).format('0,0.00')}

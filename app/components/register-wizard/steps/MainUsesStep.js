@@ -1,23 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Checkbox, Input } from 'antd';
+import { Col, Row, Checkbox, Input, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { Text } = Typography;
+
 class MainUsesStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       inputotro: false,
+      errors: {},
     };
   }
 
   handleOnNext = () => {
-    // TODO: validate before continue.
-    this.props.next();
+    if (
+      Array.isArray(this.props.lands_main_uses) &&
+      this.props.lands_main_uses.length > 0
+    ) {
+      this.props.next();
+    } else {
+      this.setState({
+        errors: { lands_main_uses: 'Campo requerido' },
+      });
+    }
   };
 
   handleOnChange = checkedValue => {
@@ -32,17 +43,18 @@ class MainUsesStep extends React.Component {
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={14} steps={21} />
+          <Progress onNext={this.handleOnNext} step={13} steps={20} />
         }
       >
         <div className="main-content m-t-20">
-          <TopNavigator previous={this.props.previous} step={14} steps={21} />
+          <TopNavigator previous={this.props.previous} step={13} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -53,6 +65,9 @@ class MainUsesStep extends React.Component {
               <h2>
                 ¿Cuáles son los usos principales actuales de la propiedad?
               </h2>
+              {errors.lands_main_uses && (
+                <Text type="danger">{errors.lands_main_uses}</Text>
+              )}
             </Col>
             <Col md={12}>
               <Checkbox.Group
@@ -63,7 +78,7 @@ class MainUsesStep extends React.Component {
                 <Row>
                   <Col span={24}>
                     <Checkbox
-                      value="residential"
+                      value="Residencial"
                       className="inputprop radiobutton"
                     >
                       Residencial
@@ -71,7 +86,7 @@ class MainUsesStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="commercial"
+                      value="Comercial"
                       className="inputprop radiobutton"
                     >
                       Comercial
@@ -79,7 +94,7 @@ class MainUsesStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="nature_forest"
+                      value="Natural / Bosque"
                       className="inputprop radiobutton"
                     >
                       Natural / Bosque
@@ -87,9 +102,9 @@ class MainUsesStep extends React.Component {
                   </Col>
                   <Col span={24}>
                     <Checkbox
-                      value="others"
                       id="inputotro1"
                       className="inputprop radiobutton"
+                      value="Otros"
                     >
                       Otros
                     </Checkbox>
