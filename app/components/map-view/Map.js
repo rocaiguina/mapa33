@@ -38,7 +38,7 @@ class Map extends Component {
     map.on('load', () => {
       map.addSource('protected_areas', {
         type: 'vector',
-        url: 'mapbox://rocaiguina.5e4ohel1',
+        url: 'mapbox://rocaiguina.bzaytugl',
       });
 
       map.addSource('lots', {
@@ -51,7 +51,7 @@ class Map extends Component {
           id: 'protected_areas',
           type: 'fill',
           source: 'protected_areas',
-          'source-layer': 'protected_areas-2os65p',
+          'source-layer': 'lands',
           layout: {
             visibility: 'visible',
           },
@@ -59,22 +59,22 @@ class Map extends Component {
             'fill-color': {
               property: 'user_id',
               stops: [
-                [2, '#369ac1'],
-                [3, '#084e7a'],
-                [4, '#2e84c6'],
-                [5, '#3cabef'],
-                [6, '#ff5e43'],
-                [7, '#b72200'],
-                [8, '#f9ad9b'],
-                [9, '#f48767'],
-                [10, '#e8512e'],
-                [11, '#00c3ff'],
-                [12, '#02c6a1'],
+                [2, '#3e9687'],
+                [3, '#85e0d0'],
+                [4, '#02c6a1'],
+                [5, '#3e9687'],
+                [6, '#02c6a1'],
+                [7, '#85e0d0'],
+                [8, '#5bbcae'],
+                [9, '#02c6a1'],
+                [10, '#3e9687'],
+                [11, '#85e0d0'],
+                [12, '#5bbcae'],
                 [13, '#85e0d0'],
-                [14, '#3e9687'],
-                [15, '#00c3ff'],
-                [16, '#369ac1'],
-                [17, '#084e7a'],
+                [14, '#02c6a1'],
+                [15, '#5bbcae'],
+                [16, '#5bbcae'],
+                [17, '#3e9687'],
               ],
             },
           },
