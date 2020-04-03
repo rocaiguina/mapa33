@@ -355,6 +355,7 @@ class LandController {
 
   get(req, res, next) {
     var land = req.land;
+    console.log("ESto es land2: " + req.land );
     res.json(land.get({ plain: true }));
     next();
   }
