@@ -13,7 +13,7 @@ class Profile extends React.Component {
     return (
       <div>
         <div
-          className="page-title profiletitle"
+          className="page-title"
           style={{ borderBottomColor: '#fff' }}
         >
           <h1 style={{ color: '#fff' }}>{profile.full_name}</h1>

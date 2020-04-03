@@ -190,9 +190,14 @@ class LandController {
           coordinates: Joi.array(),
         }),
       }).required(),
+      coordinates: Joi.object({
+        type: Joi.string(),
+        coordinates: Joi.array(),
+      }).required(),
       area_size: Joi.number(),
       plots_count: Joi.number(),
       land_name: Joi.string().required(),
+      location: Joi.string().allow(null, ''),
     };
 
     // Validata data.
@@ -213,13 +218,13 @@ class LandController {
       name: cleaned_data.land_name,
       level: 'basic',
       photograph: req.photograph_filepath,
-      location: '',
+      location: cleaned_data.location,
       main_attributes: cleaned_data.lands_attributes,
       other_main_attributes: cleaned_data.lands_other_attributes,
       main_uses: cleaned_data.lands_main_uses,
       other_main_uses: cleaned_data.lands_other_main_uses,
       proposed_uses: [cleaned_data.wich_use],
-      coordinates: null,
+      coordinates: cleaned_data.coordinates,
       geom: cleaned_data.geojson.geometry,
       metadata: {
         are_u_owner: cleaned_data.are_u_owner,
@@ -248,29 +253,16 @@ class LandController {
       year_estab: '',
       year_acquisition: '',
       reason_conservation: cleaned_data.importance_of_knowing,
-      user_id: req.user.id,
+      user_id: cleaned_data.are_u_owner ? req.user.id : null,
       ownership: '',
       notes: '',
       status: 'new',
     })
       .then(function(land) {
         // Calculate coordinate.
-        Models.sequelize
-          .query(
-            'UPDATE lands SET coordinates=ST_MakePoint(ST_X(ST_Centroid(geom)), ST_Y(ST_Centroid(geom))) WHERE id=?',
-            { replacements: [land.id] }
-          )
-          .then(function() {
-            return land.reload();
-          })
-          .then(function() {
-            const result = land.get({ plain: true });
-            delete result.geom;
-            res.json(result);
-          })
-          .catch(function(err) {
-            res.status(400).send(err);
-          });
+        const result = land.get({ plain: true });
+        delete result.geom;
+        res.json(result);
       })
       .catch(function(err) {
         res.status(400).send(err);

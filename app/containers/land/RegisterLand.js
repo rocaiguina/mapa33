@@ -39,6 +39,7 @@ class RegisterLand extends React.Component {
       lands: [],
       coordinates: {},
       location: '',
+      user: null,
     };
   }
 
@@ -46,6 +47,9 @@ class RegisterLand extends React.Component {
     const self = this;
     UserApi.getProfile()
       .then(profile => {
+        this.setState({
+          user: profile
+        });
       })
       .catch(err => {
         return self.props.history.push('/login');

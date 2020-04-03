@@ -12,11 +12,6 @@ import Progress from '../Progress';
 
 class SubmitStep extends React.Component {
   render() {
-    let owner = '';
-    if (this.props.owner != null) {
-      owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
-    }
-
     const proposed_uses = this.props.proposed_uses || [];
     const main_attributes = this.props.main_attributes || [];
     const main_uses = this.props.main_uses || [];
@@ -41,7 +36,7 @@ class SubmitStep extends React.Component {
           <Row gutter={30}>
             <Col md={6}>
               <h2>{this.props.name}</h2>
-              <h3>{owner || 'No definido.'}</h3>
+              <h3>{this.props.owner || 'No definido.'}</h3>
             </Col>
             <Col md={10}>
               <div className="form-group">
@@ -174,7 +169,7 @@ SubmitStep.defaultProps = {
 SubmitStep.propTypes = {
   name: PropTypes.string,
   photograph: PropTypes.string,
-  owner: PropTypes.object,
+  owner: PropTypes.string,
   reason_conservation: PropTypes.string,
   location: PropTypes.string,
   main_attributes: PropTypes.array,

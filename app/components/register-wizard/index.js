@@ -31,10 +31,11 @@ const landValidationSchema = Yup.object().shape({
 });
 
 class RegisterWizard extends React.Component {
-  handleOnNext = ({ step, push }, values) => {
+  handleOnNext = ({ step, push }, values, setFieldValue) => {
     switch (step.id) {
       case 'are-you-owner':
         if (values.are_u_owner) {
+          setFieldValue('owner_name', values.user.full_name);
           push('catastro-number');
         } else {
           push('know-owner');
@@ -78,7 +79,7 @@ class RegisterWizard extends React.Component {
           <form onSubmit={handleSubmit} className="fit">
             <Wizard
               onNext={wizard => {
-                this.handleOnNext(wizard, values);
+                this.handleOnNext(wizard, values, setFieldValue);
               }}
               history={history}
               basename={match.path}
@@ -126,6 +127,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      setFieldValue={setFieldValue}
                     />
                   )}
                 />
@@ -316,7 +318,7 @@ class RegisterWizard extends React.Component {
                     <SubmitStep
                       name={values.land_name}
                       photograph={values.base64Img}
-                      owner={{ first_name: values.owner_name }}
+                      owner={values.owner_name}
                       reason_conservation={values.importance_of_knowing}
                       location={values.location}
                       main_attributes={values.lands_attributes}

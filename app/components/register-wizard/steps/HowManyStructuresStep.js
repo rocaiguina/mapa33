@@ -35,7 +35,7 @@ class HowManyStructuresStep extends React.Component {
     const { setFieldValue } = this.props;
     setFieldValue('lands_structures', checkedValue);
 
-    if (checkedValue.indexOf('others') != -1) {
+    if (checkedValue.indexOf('Otros') != -1) {
       this.setState({ inputotro: true });
     } else {
       this.setState({ inputotro: false });
