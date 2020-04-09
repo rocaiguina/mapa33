@@ -615,3 +615,22 @@ input[name="username"].blackstyleinput{
 .rightblockprofile div{
     display: inline-flex !important;
 }
+.contactstyle h3{
+    font-size: 23px;
+}
+.contactstyle h4{
+    font-size: 18px;
+    font-weight: bold;
+}
+.contactstyle h2{
+    display: -webkit-inline-box;
+    margin: 0;
+    font-size: 29px;
+    vertical-align: bottom;
+}
+.contactstyle p{
+    margin-bottom: 2px;
+}
+.frequentstyle h3{
+    font-size: 23px;
+}

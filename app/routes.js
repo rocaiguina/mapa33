@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './style/App.css';
 
 import HomeContainer from './containers/HomeContainer';
-import InfoContainer from './containers/InfoContainer';
+import ContactContainer from './containers/info/ContactInfo';
+import FrequentQuestionsContainer from './containers/info/FQAsInfo';
+import AboutUsContainer from './containers/info/AboutUsInfo';
 import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
 import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
@@ -73,9 +75,21 @@ function Routes() {
           path="/land/:landId"
           component={LandDetailContainer}
         />
-
-        <Route exact={true} path="/info" component={InfoContainer} />
-
+        <Route 
+          exact={true}
+          path="/contact" 
+          component={ContactContainer}
+        />
+        <Route 
+          exact={true}
+          path="/frequentquestions" 
+          component={FrequentQuestionsContainer}
+        />
+        <Route 
+          exact={true}
+          path="/aboutus" 
+          component={AboutUsContainer}
+        />
         <Route path="/" component={HomeContainer} />
       </Switch>
     </Router>
