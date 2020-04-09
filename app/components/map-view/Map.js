@@ -4,7 +4,6 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
-import Intructions from '../intro/instructions';
 
 mapboxgl.accessToken =
   'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
@@ -194,14 +193,6 @@ class Map extends Component {
   render() {
     return (
       <div>
-        {this.state.mostrar ? (
-          <div className={'overlay'}>
-            <Intructions
-              onClose={this.closeOverlay}
-              onExploreMap={this.closeOverlay}
-            />
-          </div>
-        ) : null}
         <div
           ref={el => (this.mapContainer = el)}
           style={{ height: '50vh', width: '100%', marginBottom: '20px' }}

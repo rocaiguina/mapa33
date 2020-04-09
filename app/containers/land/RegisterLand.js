@@ -52,7 +52,7 @@ class RegisterLand extends React.Component {
         });
       })
       .catch(err => {
-        return self.props.history.push('/login');
+        return self.props.history.replace('/register/user?next=/register/propose-land');
       });
   }
 
@@ -78,7 +78,7 @@ class RegisterLand extends React.Component {
   };
 
   render() {
-    return (
+    return (this.state.user &&
       <RegisterWizard
         initialValues={this.state}
         onSubmit={this.handleOnSubmit}

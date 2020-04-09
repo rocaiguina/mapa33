@@ -49,6 +49,8 @@ class RegisterForm extends React.Component {
   };
 
   render() {
+    const { next } = this.props;
+
     return (
       <Formik
         onSubmit={this.props.onSubmit}
@@ -71,7 +73,7 @@ class RegisterForm extends React.Component {
               <Col md={8}>
                 <h2 className="text-right">
                   <Link
-                    to="/login"
+                    to={next ? '/login?next=' + next : '/login'}
                     style={{ color: '#f576a9', fontWeight: 'bold' }}
                   >
                     Ya estoy registrado/a
@@ -287,8 +289,8 @@ class RegisterForm extends React.Component {
                       defaultChecked={false}
                       onChange={handleChange}
                     >
-                      Deseo recibir promociones de Para la Naturaleza en mi correo
-                      electrónico
+                      Deseo recibir promociones de Para la Naturaleza en mi
+                      correo electrónico
                     </Checkbox>
                   </div>
                   <div className="form-check">
@@ -356,6 +358,7 @@ class RegisterForm extends React.Component {
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
+  next: PropTypes.string,
 };
 
 export default RegisterForm;

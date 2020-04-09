@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import LoginForm from '../../components/auth/LoginForm';
 import Auth from '../../services/auth';
-import Button from '../../components/ui/Button';
-import Icon from '../../components/ui/Icon';
 
 class Login extends React.Component {
   handleOnSubmit = (values, { setSubmitting }) => {
-    const { history } = this.props;
+    const { history, location } = this.props;
+    const queryParams = new URLSearchParams(location.search);
     Auth.login(values)
       .then(() => {
-        history.push('/profile');
+        const next = queryParams.get('next') || '/profile';
+        history.push(next);
       })
       .catch(() => {
         notification.error({
@@ -32,11 +32,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <BaseLayout
-        title="LOGIN"
-        showCloseBtn={true}
-        enableMenu={false}
-      >
+      <BaseLayout title="LOGIN" showCloseBtn={true} enableMenu={false}>
         <LoginForm onSubmit={this.handleOnSubmit} />
       </BaseLayout>
     );
@@ -45,6 +41,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.object,
+  location: PropTypes.object,
 };
 
 export default Login;

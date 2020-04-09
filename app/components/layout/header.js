@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import { withRouter } from 'react-router';
 
 import Icon from '../ui/Icon';
 
 class Header extends Component {
   handleOnClose = () => {
-    window.history.back();
+    const { closeLink } = this.props;
+    if (closeLink) {
+      const { history } = this.props;
+      history.push(closeLink);
+    } else {
+      window.history.back();
+    }
   };
 
   render() {
@@ -72,9 +79,11 @@ Header.propTypes = {
   dark: PropTypes.bool,
   subtitle: PropTypes.node,
   onMenuClick: PropTypes.func,
+  closeLink: PropTypes.string,
   showCloseBtn: PropTypes.bool,
   showMenuBtn: PropTypes.bool,
   showProfileBtn: PropTypes.bool,
+  history: PropTypes.object,
 };
 
-export default Header;
+export default withRouter(Header);

@@ -39,7 +39,7 @@ class ProfileUser extends React.Component {
       })
       .catch(err => {
         if (err.status == 401) {
-          return self.props.history.push('/login');
+          return self.props.history.replace('/login');
         }
         notification.error({
           message: 'Error',

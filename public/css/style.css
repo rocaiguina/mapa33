@@ -985,6 +985,18 @@ ul.actions {
   background-color: #999;
 }
 
+/* Custom drawer */
+.ant-drawer-mask {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Custom modal */
+.ant-modal.ant-modal-green .ant-modal-content {
+  background: #5bbcae;
+  border-radius: 40px;
+  color: #231f20;
+}
+
 /* Custom select */
 .ant-select {
   margin-bottom: 15px !important;
@@ -1122,6 +1134,7 @@ ul.actions {
 
 .m33-btn.ant-btn-xlg {
   height: 56px;
+  line-height: 54px;
   padding: 0 22px;
   font-size: 30px;
   border-radius: 30px;
@@ -1224,16 +1237,6 @@ ul.actions {
 .ant-card.ant-card-intro {
   font-size: 16px;
   line-height: 1.2;
-}
-
-/* Custom cards theme */
-.ant-card.ant-card-green {
-  background: #5bbcae;
-  color: #231f20;
-}
-
-.ant-card.ant-card-green.ant-card-bordered {
-  border-color: #5bbcae;
 }
 
 /* Mapbox */

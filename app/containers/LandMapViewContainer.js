@@ -33,6 +33,7 @@ class LandMapViewContainer extends React.Component {
     return (
       <BaseLayout
         dark
+        showCloseBtn={false}
         footerRightComponent={
           <Button
             className="m33-btn ant-btn-xlg"

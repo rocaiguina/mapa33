@@ -30,10 +30,10 @@ class BaseLayout extends Component {
       'main-dark': this.props.dark,
     });
     const wrapContentClass = ClassNames('wrap-content', {
-      'with-title': this.props.title != null,
-      'with-subtitle': this.props.subtitle != null,
+      'with-title': this.props.title,
+      'with-subtitle': this.props.subtitle,
       'with-actions': this.props.enableMenu,
-      'vcenter': this.props.verticalAlign == 'center',
+      vcenter: this.props.verticalAlign == 'center',
     });
 
     return (
@@ -42,6 +42,7 @@ class BaseLayout extends Component {
           dark={this.props.dark}
           title={this.props.title}
           subtitle={this.props.subtitle}
+          closeLink={this.props.closeLink}
           showCloseBtn={this.props.showCloseBtn}
           showMenuBtn={this.props.enableMenu}
           showProfileBtn={this.props.enableMenu}
@@ -79,6 +80,7 @@ BaseLayout.propTypes = {
   subtitle: PropTypes.node,
   dark: PropTypes.bool,
   children: PropTypes.node,
+  closeLink: PropTypes.string,
   showCloseBtn: PropTypes.bool,
   enableMenu: PropTypes.bool,
   afterFooter: PropTypes.node,

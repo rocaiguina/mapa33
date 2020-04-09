@@ -42,6 +42,7 @@ class ProposeLandStep extends React.Component {
         title="FORMULARIO DE PROPUESTA"
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
+        closeLink="/"
         footerRightComponent={
           <Progress onNext={this.handleOnNext} step={1} steps={20} />
         }

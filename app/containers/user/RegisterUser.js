@@ -7,10 +7,12 @@ import UserApi from '../../api/user';
 
 class RegisterUser extends React.Component {
   handleOnSubmit = (values, { setSubmitting }) => {
-    const { history } = this.props;
+    const { history, location } = this.props;
+    const queryParams = new URLSearchParams(location.search);
     UserApi.register(values)
       .then(() => {
-        history.push('/register/user/successful');
+        const next = queryParams.get('next');
+        history.push('/register/user/successful', { next });
       })
       .catch(() => {
         setSubmitting(false);
@@ -23,13 +25,18 @@ class RegisterUser extends React.Component {
   };
 
   render() {
+    const { location } = this.props;
+    const queryParams = new URLSearchParams(location.search);
     return (
       <BaseLayout
         title="BIENVENIDO A MAPA33"
         showCloseBtn={true}
         enableMenu={false}
       >
-        <RegisterForm onSubmit={this.handleOnSubmit} />
+        <RegisterForm
+          onSubmit={this.handleOnSubmit}
+          next={queryParams.get('next')}
+        />
       </BaseLayout>
     );
   }
@@ -37,6 +44,7 @@ class RegisterUser extends React.Component {
 
 RegisterUser.propTypes = {
   history: PropTypes.object,
+  location: PropTypes.object,
 };
 
 export default RegisterUser;

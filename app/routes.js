@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './style/App.css';
 
-import IntroContainer from './containers/IntroContainer';
+import HomeContainer from './containers/HomeContainer';
 import InfoContainer from './containers/InfoContainer';
-import LandMapViewContainer from './containers/LandMapViewContainer';
 import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
 import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
@@ -55,7 +54,6 @@ function Routes() {
         <Route exact={true} path="/profile" component={ProfileUser} />
         <Route exact={true} path="/profile/edit" component={ProfileUserEdit} />
 
-        <Route exact={true} path="/map" component={LandMapViewContainer} />
         <Route
           exact={true}
           path="/map/list"
@@ -77,7 +75,8 @@ function Routes() {
         />
 
         <Route exact={true} path="/info" component={InfoContainer} />
-        <Route path="/" component={IntroContainer} />
+
+        <Route path="/" component={HomeContainer} />
       </Switch>
     </Router>
   );
