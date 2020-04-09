@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { notification, Spin } from 'antd';
 
 import BaseLayout from '../components/layout/base';
-import Button from '../components/ui/Button';
-import Icon from '../components/ui/Icon';
 import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
 import LandList from '../components/land/List';
 import LandCarousel from '../components/land/Carousel';
+import ProposeButton from '../components/map-view/ProposeButton';
 import LandApi from '../api/land';
 
 class LandListViewContainer extends React.Component {
@@ -82,18 +81,7 @@ class LandListViewContainer extends React.Component {
         enableMenu
         subtitle={<Legend />}
         footerRightComponent={
-        <div>
-            <Button
-                className="m33-btn ant-btn-xlg"
-                size="large"
-                type="secondary"
-                onClick={this.handleOnAddProposal}
-                bordered
-            >
-                <Icon type="plus" />
-            </Button>
-            <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>    
-        </div>          
+          <ProposeButton title="Proponer área" icon="plus" />
         }
       >
         <FilterLand

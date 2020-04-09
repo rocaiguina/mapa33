@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Modal } from 'antd';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
+import ToolBar from './Toolbar';
 
 mapboxgl.accessToken =
   'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
@@ -192,28 +194,41 @@ class Map extends Component {
 
   render() {
     return (
-      <div>
+      <div className="mapbox-wrapper">
         <div
           ref={el => (this.mapContainer = el)}
-          style={{ height: '50vh', width: '100%', marginBottom: '20px' }}
+          className="mapbox-view"
         />
         <div className="toolbar hidden-sm hidden-xs">
           <ul>
             <li>
-              <Button size="large" ghost onClick={this.handleOnZoomIn}>
+              <Button size="large" shape="round" className="ant-btn-dark" onClick={this.handleOnZoomIn}>
                 <Icon type="plus" />
               </Button>
             </li>
             <li>
-              <Button size="large" ghost onClick={this.handleOnZoomOut}>
+              <Button size="large" shape="round" className="ant-btn-dark" onClick={this.handleOnZoomOut}>
                 <Icon type="less" />
               </Button>
             </li>
           </ul>
         </div>
+        <ToolBar
+          area={this.props.areaView}
+          mode={this.props.modeView}
+          onChangeMode={this.props.onChangeMode}
+          onChangeArea={this.props.onChangeArea}
+        />
       </div>
     );
   }
 }
+
+Map.propTypes = {
+  areaView: PropTypes.string,
+  modeView: PropTypes.string,
+  onChangeMode: PropTypes.func,
+  onChangeArea: PropTypes.func,
+};
 
 export default Map;

@@ -1,41 +1,24 @@
 import React from 'react';
-import { Popover, Radio, Col, Row } from 'antd';
-import Button from '../ui/Button';
+import PropTypes from 'prop-types';
+import { Button, Popover, Radio, Row } from 'antd';
 import Icon from '../ui/Icon';
 
 class MapToolBar extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            mostrar: false
-        };
-    }
-    
-    closeOverlay = (event) => {
-        this.setState(
-            {
-                mostrar: false
-            }
-        )
-    }    
-    openOverlay = (event) => {
-        this.setState(
-            {
-                mostrar: true
-            }
-        )
-    }    
-    
-    userLogin = (event) => {
-        window.location.href = '/user/login'; 
-    }
-    
-  render () {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     const RadioMapView = (
-      <Radio.Group onChange={this.props.onChangeModeView} value={this.props.mapView}
+      <Radio.Group
+        onChange={this.props.onChangeMode}
+        value={this.props.mode}
         size="large"
-        className="popeditblack">
+        className="popeditblack"
+      >
+        <Row>
+          <Radio value="card">Ver Tarjetas</Radio>
+        </Row>
         <Row>
           <Radio value="list">Ver Lista</Radio>
         </Row>
@@ -46,52 +29,47 @@ class MapToolBar extends React.Component {
     );
 
     const RadioAreaView = (
-      <Radio.Group onChange={this.props.onChangeAreaView} value={this.props.areaView}
+      <Radio.Group
+        onChange={this.props.onChangeArea}
+        value={this.props.area}
         className="popeditblack"
-        size="large">
+        size="large"
+      >
         <Row>
-          <Radio value="proposed">Areas Naturales<br/>Propuestas</Radio>
+          <Radio value="">Todas</Radio>
         </Row>
         <Row>
-          <Radio value="conserved">Areas Naturales<br/>Protegidas</Radio>
+          <Radio value="proposed">
+            Áreas Naturales
+            <br />
+            Propuestas
+          </Radio>
+        </Row>
+        <Row>
+          <Radio value="conserved">
+            Áreas Naturales
+            <br />
+            Protegidas
+          </Radio>
         </Row>
       </Radio.Group>
     );
 
     return (
-      <div className="toolbar toolbar-menu">
-          {this.state.mostrar ? ( 
-          <div className={"overlaymenu"}>
-            <div className={"buttonmenu"}>
-                <Button type="primary" ghost size="large" onClick={this.userLogin} >
-                    <Icon type="user" />
-                </Button>
-                <Button style={{marginLeft:"10px"}} type="primary" ghost size="large" onClick={this.closeOverlay}>
-                    <Icon type="close" />
-                </Button>
-            </div>
-            <div className={"menubottom"}>
-                <div>
-                <Button type="simplebtn2">Visitar página <Icon type="arrow-right" /></Button>
-                <img src="/images/naturaleza.png" className="img-responsive" />
-              </div>
-            </div>
-        </div>): null}
+      <div className="toolbar toolbar-menu toolbar-right">
         <ul>
           <li>
-            <Button ghost onClick={this.openOverlay} ><Icon type="menu" /></Button>
-          </li>
-          <li>
-            <Button ghost><Icon type="user" /></Button>
-          </li>
-          <li>
-            <Popover content={RadioMapView} trigger="click" className="m33-btn">
-              <Button ghost><Icon type="eye" /></Button>
+            <Popover content={RadioMapView} trigger="click">
+              <Button size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
+                <Icon type="eye" style={{ fontSize: '32px', lineHeight: '44px' }}/>
+              </Button>
             </Popover>
           </li>
           <li>
-            <Popover content={RadioAreaView} trigger="click" className="m33-btn">
-              <Button ghost><Icon type="layers" /></Button>
+            <Popover content={RadioAreaView} trigger="click">
+              <Button size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
+                <Icon type="layers" style={{ fontSize: '32px', lineHeight: '44px' }}/>
+              </Button>
             </Popover>
           </li>
         </ul>
@@ -99,5 +77,12 @@ class MapToolBar extends React.Component {
     );
   }
 }
+
+MapToolBar.propTypes = {
+  mode: PropTypes.string,
+  area: PropTypes.string,
+  onChangeMode: PropTypes.func,
+  onChangeArea: PropTypes.func,
+};
 
 export default MapToolBar;
