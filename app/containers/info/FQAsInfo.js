@@ -13,6 +13,7 @@ class FQAsInfo extends React.Component {
     return (
       <BaseLayout 
         dark title="PREGUNTAS FRECUENTES"
+        enableMenu
         footerRightComponent={
         <div>
             <Button

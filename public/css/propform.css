@@ -616,7 +616,7 @@ input[name="username"].blackstyleinput{
     display: inline-flex !important;
 }
 .contactstyle h3{
-    font-size: 20px;
+    font-size: 23px;
 }
 .contactstyle h4{
     font-size: 18px;
@@ -629,5 +629,8 @@ input[name="username"].blackstyleinput{
     vertical-align: bottom;
 }
 .contactstyle p{
-    text-align: justify;
+    margin-bottom: 2px;
+}
+.frequentstyle h3{
+    font-size: 23px;
 }

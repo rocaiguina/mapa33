@@ -16,16 +16,14 @@ class Contact extends React.Component {
   render () {
     return (
         <div className="contactstyle" >
-            <Row>
-                <Col md={4}></Col>
-                <Col md={20}>
-                    <div>
+            <Row>                
+                <Col md={16}>
+                    <div style={{marginBottom: "30px"}}>
                         <h3>Para la Naturaleza</h3>
                     </div>
                 </Col>
             </Row>
-            <Row>
-                <Col md={4}></Col>
+            <Row>                
                 <Col md={8}>
                     
                     <div>
@@ -51,7 +49,9 @@ class Contact extends React.Component {
                         <h4>AMIGOS Para la Naturaleza</h4>
                         <p>(787) 722-5844</p>
                         <p>Lunes – Viernes 9:00am a 5:30pm</p>
-                        <p>Membresías en línea amigos@paralanaturaleza.org</p>
+                        <br/>
+                        <p>Membresías en línea</p>
+                        <p>amigos@paralanaturaleza.org</p>
                     </div>
                 </Col>
             </Row>

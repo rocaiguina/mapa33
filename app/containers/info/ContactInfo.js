@@ -13,6 +13,7 @@ class ContactInfo extends React.Component {
     return (
       <BaseLayout 
         dark title="CONTACTO"
+        enableMenu
         footerRightComponent={
         <div>
             <Button

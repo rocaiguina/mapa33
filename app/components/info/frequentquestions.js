@@ -15,9 +15,8 @@ class FrequentQuestions extends React.Component {
 
   render () {
     return (
-        <div className="contactstyle" >
+        <div className="frequentstyle" >
             <Row>
-                <Col md={4}></Col>
                 <Col md={16}>
                     <h3>¿Quién es Para La Naturaleza?</h3>
                     <p>Para la Naturaleza es una organización que agrupa a todas las personas que buscamos un futuro sustentable para Puerto Rico, donde nuestros hijos puedan crecer en ciudades habitables, nadar en ríos de agua cristalina y alimentarse de los frutos de nuestra tierra.<br/>Facilitamos experiencias transformativas en la naturaleza, además de conservar terrenos de alto valor ecológico. Fomentamos la toma de responsabilidad por nuestros recursos naturales e impulsamos política pública para su protección.<br/>Con más de cuarenta años trabajando junto a otras organizaciones por la protección de la naturaleza en nuestras islas, hemos identificado una meta común a todos los puertorriqueños comprometidos con la conservación. <br/>Para más información, visita <a style={{color:"#ffffff",textDecoration: "none"}}href="https://www.paralanaturaleza.org">paralanaturaleza.org</a>                        
