@@ -18,14 +18,15 @@ function buildPopup(land) {
   const photograph =
     land.photograph || 'https://dummyimage.com/300x200/dddddd/ffffff';
   const date = Moment(land.createdAt, 'YYYY-MM-DD').format('MM.DD.YYYY');
+  const url = '/land/' + land.id;
   let html =
     '<div class="mapbox-land-popup">' +
       '<div class="land-photo">' +
-        '<a href="#" style="background-image:url(' + photograph + ')"></a>' +
+        '<a href="' + url + '" style="background-image:url(' + photograph + ')"></a>' +
       '</div>' +
       '<div class="land-details">' +
         '<h4 class="land-title">' +
-          '<a href="#">' + land.name + '</a>' +
+          '<a href="' + url + '">' + land.name + '</a>' +
         '</h4>' +
         '<div class="separator"></div>' +
         '<p class="land-date">Propuesto: ' + date + '</p>' +
