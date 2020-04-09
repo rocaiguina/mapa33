@@ -198,7 +198,7 @@ class Editor extends Component {
         miniMap.on('render', () => {
           if (this.props.onRenderMinimap) {
             var base64Img = miniMap.getCanvas().toDataURL();
-            var image = resizeImage(base64Img, 480, 360);
+            var image = resizeImage(base64Img, 480, 320);
             this.props.onRenderMinimap(image);
           }
         });
@@ -462,7 +462,7 @@ class Editor extends Component {
               Área: {this.state.area.toLocaleString(navigator.language, { maximumFractionDigits: 2 })} m<sup>2</sup>
             </div>
             
-            <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 240 }} />
+            <div className="m-t-5" ref={el => (this.miniMapContainer = el)} style={{ height: 200 }} />
             {this.state.error && this.state.error}
           </div>
         </div>
