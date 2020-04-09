@@ -138,6 +138,7 @@ class LandDetailContainer extends React.Component {
         dark
         title="TARJETA DE PROPUESTA"
         footerRightComponent={
+        <div>
           <Button
             className="m33-btn ant-btn-xlg"
             size="large"
@@ -147,6 +148,8 @@ class LandDetailContainer extends React.Component {
           >
             <Icon type="plus" />
           </Button>
+          <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>
+         </div>
         }
       >
         <LandDetail
