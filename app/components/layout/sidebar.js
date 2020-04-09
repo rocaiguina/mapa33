@@ -15,22 +15,22 @@ class Sidebar extends React.Component {
       >
         <ul>
           <li>
-            <Link to="/">Sobre Mapa 33</Link>
+            <Link to="/about-us">Sobre Mapa 33</Link>
           </li>
           <li>
             <Link to="/">Mapa Inicial</Link>
           </li>
           <li>
-            <Link to="/">Listado de Áreas</Link>
+            <Link to="/map/list">Listado de Áreas</Link>
           </li>
           <li>
-            <Link to="/">Proponer Área</Link>
+            <Link to="/register/propose-land">Proponer Área</Link>
           </li>
           <li>
-            <Link to="/">FAQ</Link>
+            <Link to="/faq">FAQ</Link>
           </li>
           <li>
-            <Link to="/">Contacto</Link>
+            <Link to="/contact-us">Contacto</Link>
           </li>
           <li>
             <Link to="/profile">Mi perfíl</Link>

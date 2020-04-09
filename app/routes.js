@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './style/App.css';
 
 import HomeContainer from './containers/HomeContainer';
-import ContactContainer from './containers/info/ContactInfo';
-import FrequentQuestionsContainer from './containers/info/FQAsInfo';
-import AboutUsContainer from './containers/info/AboutUsInfo';
+import ContactUsPage from './containers/info/ContactInfo';
+import FaqPage from './containers/info/FQAsInfo';
+import AboutUsPage from './containers/info/AboutUsInfo';
 import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
 import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
@@ -66,30 +66,15 @@ function Routes() {
           path="/register/success"
           component={RegisterLandSuccessful}
         />
-        <Route
-          path="/register"
-          component={RegisterLand}
-        />
+        <Route path="/register" component={RegisterLand} />
         <Route
           exact={true}
           path="/land/:landId"
           component={LandDetailContainer}
         />
-        <Route 
-          exact={true}
-          path="/contact" 
-          component={ContactContainer}
-        />
-        <Route 
-          exact={true}
-          path="/frequentquestions" 
-          component={FrequentQuestionsContainer}
-        />
-        <Route 
-          exact={true}
-          path="/aboutus" 
-          component={AboutUsContainer}
-        />
+        <Route exact={true} path="/contact-us" component={ContactUsPage} />
+        <Route exact={true} path="/faq" component={FaqPage} />
+        <Route exact={true} path="/about-us" component={AboutUsPage} />
         <Route path="/" component={HomeContainer} />
       </Switch>
     </Router>
