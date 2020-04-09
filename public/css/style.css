@@ -1411,6 +1411,68 @@ ul.actions {
   }
 }
 
+/* Mapbox popup */
+.mapboxgl-popup {
+  max-width: 280px !important;
+}
+.mapboxgl-popup-content {
+  padding: 0 !important;
+}
+.mapboxgl-popup-tip {
+  display: none;
+}
+.mapbox-land-popup {
+  display: flex;
+  flex-direction: row;
+  font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.mapbox-land-popup .land-photo {
+  background-color: #000;
+  position: relative;
+  width: 120px;
+}
+.mapbox-land-popup .land-photo a {
+  background-position: center;
+  background-size: cover;
+  border-radius: 12px;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  margin: 5px;
+  right: 0;
+  top: 0;
+}
+.mapbox-land-popup .land-details {
+  padding: 5px;
+  width: 160px;
+}
+.mapbox-land-popup .land-details .land-title {
+  padding-right: 15px;  
+}
+.mapbox-land-popup .land-details .land-title,
+.mapbox-land-popup .land-details .land-title a {
+  color: #000 !important;
+  font-weight: 500;
+}
+.mapbox-land-popup .land-details .land-date {
+  font-size: 11px;
+  line-height: 14px;
+}
+.mapbox-land-popup .land-details .land-likes {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.mapbox-land-popup .land-details .land-likes .anticon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.separator {
+  background-color: #ccc;
+  height: 1px;
+  margin: 10px 0;
+}
+
 /* Land list */
 .land-list .land-list-row {
   border-top: 1px dotted #181a19;
