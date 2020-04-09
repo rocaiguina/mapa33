@@ -408,7 +408,7 @@ body {
 }
 
 .wrap-content {
-  padding-bottom: 136px;
+  padding-bottom: 120px;
 }
 .wrap-content.with-title {
   padding-top: 54px;
@@ -419,7 +419,7 @@ body {
 }
 
 .wrap-content.with-actions {
-  padding-top: 110px;
+  padding-top: 102px;
 }
 
 .wrap-content.vcenter {
@@ -541,6 +541,21 @@ body {
   font-size: 16px;
   font-weight: bold;
   padding: 10px 0;
+}
+
+.ant-drawer-purple .naturaleza {
+  bottom: 24px;
+  left: 24px;
+  position: absolute;
+}
+
+.ant-drawer-purple .naturaleza a {
+  color: #fff;
+  font-size: 16px;
+}
+
+.ant-drawer-purple .naturaleza img {
+  margin-top: 10px;
 }
 
 @media (max-width: 767px) {
@@ -840,7 +855,7 @@ ul.actions {
 }
 
 .toolbar-menu {
-  text-align: center;
+  text-align: right;
 }
 
 .toolbar .ant-btn.m33-btn {
@@ -883,7 +898,7 @@ ul.actions {
 
 @media (max-width: 767px) {
   .toolbar-mapeditor {
-    bottom: 30px;
+    bottom: 15px;
   }
   .toolbar-mapeditor ul > li {
     margin: 0 3px;
@@ -996,6 +1011,25 @@ ul.actions {
   border-radius: 40px;
   color: #231f20;
 }
+@media (max-width: 767px) {
+  .ant-modal.ant-modal-full {
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    right: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100% !important;
+  }
+  .ant-modal.ant-modal-full.ant-modal-green {
+    background: #5bbcae;
+  }
+  .ant-modal.ant-modal-full .ant-modal-content {
+    box-shadow: none;
+  }
+}
+
 
 /* Custom select */
 .ant-select {
@@ -1027,6 +1061,39 @@ ul.actions {
   border-radius: 40px;
 }
 
+.ant-btn-propose-border {
+  border: 2px dotted #fff !important;
+  border-radius: 30px !important;
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 4px;
+}
+
+.ant-btn-propose {
+  border-radius: 30px !important;
+  color: #fff !important;
+  background-color: #f073a8 !important;
+  border-color: #f073a8 !important;
+  padding: 0 18px !important;
+}
+
+.ant-btn-propose:hover,
+.ant-btn-propose:focus {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: #f073a8 !important;
+}
+
+.ant-btn-propose .anticon {
+  font-size: 20px;
+}
+
+.ant-btn-desc {
+  color: #f073a8;
+  font-weight: bold;
+}
+
+/* Custom buttons */
 .ant-btn:hover,
 .ant-btn:focus {
   color: #F073A8 !important;
@@ -1093,6 +1160,19 @@ ul.actions {
   color: #222 !important;
 }
 
+.ant-btn.ant-btn-dark {
+  background-color: #181a19;
+  border-color: #fff;
+  color: #fff;
+}
+
+.ant-btn.ant-btn-dark:hover,
+.ant-btn.ant-btn-dark:focus {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  color: #f073a8 !important;
+}
+
 .ant-btn.ant-btn-default {
   background-color: #ccc;
   border-color: #ccc;
@@ -1133,9 +1213,9 @@ ul.actions {
 }
 
 .m33-btn.ant-btn-xlg {
-  height: 56px;
-  line-height: 54px;
-  padding: 0 22px;
+  height: 48px;
+  line-height: 46px;
+  padding: 0 18px;
   font-size: 30px;
   border-radius: 30px;
 }
@@ -1244,11 +1324,32 @@ ul.actions {
   color: #181a19;
 }
 
-.mapbox-editor {
-  background-color: #000;
+.mapbox-wrapper {
+  position: relative;
+}
+
+.mapbox-wrapper .toolbar {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 999;
+}
+
+.mapbox-wrapper .toolbar-right {
+  left: auto;
+  right: 0;
+}
+
+.mapbox-editor,
+.mapbox-view {
+  background-color: #181a19;
   position: relative;
   height: 70vh;
   width: 100%;
+}
+
+.mapbox-view {
+  height: 66vh;
 }
 
 .boxmap-preview {
@@ -1276,9 +1377,24 @@ ul.actions {
   width: 240px;
 }
 
+@media (min-width: 361px) and (max-width: 420px) {
+  .mapbox-view {
+    height: 62vh;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 360px) {
+  .mapbox-view {
+    height: 58vh;
+  }
+}
+
 @media (max-width: 320px) {
   .mapbox-editor {
     height: 66vh;
+  }
+  .mapbox-view {
+    height: 54vh;
   }
 }
 
@@ -1293,6 +1409,68 @@ ul.actions {
   .boxmap-preview {
     display: none;
   }
+}
+
+/* Mapbox popup */
+.mapboxgl-popup {
+  max-width: 280px !important;
+}
+.mapboxgl-popup-content {
+  padding: 0 !important;
+}
+.mapboxgl-popup-tip {
+  display: none;
+}
+.mapbox-land-popup {
+  display: flex;
+  flex-direction: row;
+  font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.mapbox-land-popup .land-photo {
+  background-color: #000;
+  position: relative;
+  width: 120px;
+}
+.mapbox-land-popup .land-photo a {
+  background-position: center;
+  background-size: cover;
+  border-radius: 12px;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  margin: 5px;
+  right: 0;
+  top: 0;
+}
+.mapbox-land-popup .land-details {
+  padding: 5px;
+  width: 160px;
+}
+.mapbox-land-popup .land-details .land-title {
+  padding-right: 15px;  
+}
+.mapbox-land-popup .land-details .land-title,
+.mapbox-land-popup .land-details .land-title a {
+  color: #000 !important;
+  font-weight: 500;
+}
+.mapbox-land-popup .land-details .land-date {
+  font-size: 11px;
+  line-height: 14px;
+}
+.mapbox-land-popup .land-details .land-likes {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.mapbox-land-popup .land-details .land-likes .anticon {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.separator {
+  background-color: #ccc;
+  height: 1px;
+  margin: 10px 0;
 }
 
 /* Land list */
@@ -1339,6 +1517,9 @@ ul.actions {
 /* Utils */
 .fit {
   height: 100%;
+}
+.text-bold {
+  font-weight: bold;
 }
 .text-left {
   text-align: left;
@@ -1508,7 +1689,7 @@ ul.actions {
   }
 
   .footer .third-column {
-    padding: 16px 30px 0px 30px;
+    padding: 14px 30px 0px 30px;
   }
 
   .toolbar-menu {

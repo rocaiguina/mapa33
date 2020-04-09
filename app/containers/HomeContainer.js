@@ -1,34 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import BaseLayout from '../components/layout/base';
 import Intro from '../components/intro';
 import Legend from '../components/map-view/Legend';
 import Map from '../components/map-view/Map';
 import Instructions from '../components/intro/instructions';
+import ProposeButton from '../components/map-view/ProposeButton';
 import LocalStorage from '../services/LocalStorage';
-import Button from '../components/ui/Button';
-import Icon from '../components/ui/Icon';
 
 class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showIntro: true,
-      showInstructions: true,
-      areaView: '',
+      showIntro: false,
+      showInstructions: false,
+      areaView: 'conserved',
+      modeView: 'map',
     };
   }
 
   componentDidMount() {
     var showIntro = LocalStorage.getItem('showIntro', '1');
+    var showInstructions = LocalStorage.getItem('showInstructions', '1');
     this.setState({
       showIntro: showIntro == '1',
-    })
+      showInstructions: showIntro == '0' && showInstructions == '1',
+    });
   }
 
   handleOnEndIntro = () => {
     this.setState({
       showIntro: false,
+      showInstructions: true,
     });
     LocalStorage.setItem('showIntro', '0');
   };
@@ -36,6 +38,20 @@ class HomeContainer extends React.Component {
   handleOnCloseInstructions = () => {
     this.setState({
       showInstructions: false,
+    });
+    LocalStorage.setItem('showInstructions', '0');
+  };
+
+  handleOnChangeMode = (event) => {
+    const mode = event.target.value;
+    this.setState({
+      modeView: mode,
+    });
+  }
+
+  handleOnChangeArea = (event) => {
+    this.setState({
+      areaView: event.target.value,
     });
   }
 
@@ -51,18 +67,18 @@ class HomeContainer extends React.Component {
         showCloseBtn={false}
         enableMenu={!showIntro}
         footerRightComponent={
-        !showIntro && <div>
-            <div className="m33-btn-bordered m33-btn-bordered-lg">
-                <Link to="/register/propose-land" className="ant-btn m33-btn ant-btn-xlg ant-btn-secondary ant-btn-lg">
-                    <Icon type="plus" />
-                </Link>
-            </div>
-                <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>
-          </div>
+          !showIntro && <ProposeButton title="Proponer área" icon="plus" />
         }
       >
         {showIntro && <Intro onEnd={this.handleOnEndIntro} />}
-        {!showIntro && <Map areaView={this.state.areaView} />}
+        {!showIntro && (
+          <Map
+            areaView={this.state.areaView}
+            modeView={this.state.modeView}
+            onChangeMode={this.handleOnChangeMode}
+            onChangeArea={this.handleOnChangeArea}
+          />
+        )}
         <Instructions
           visible={this.state.showInstructions}
           onClose={this.handleOnCloseInstructions}

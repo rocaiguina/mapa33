@@ -30,6 +30,6 @@ const Icons = {
 export default (props) => {
   const icon = Icons[props.type];
   return (
-    <Icon component={icon} className={props.className} />
+    <Icon component={icon} className={props.className} style={props.style}/>
   )
 }

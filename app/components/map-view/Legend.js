@@ -11,7 +11,7 @@ function Legend() {
               <span className="legend-protected"></span>
             </dt>
             <dd>
-              <div className="hidden-xs">Areas Naturales</div>
+              <div className="hidden-xs">Áreas Naturales</div>
               Protegidas
             </dd>
           </dl>
@@ -22,7 +22,7 @@ function Legend() {
               <span className="legend-proposed"></span>
             </dt>
             <dd>
-              <div className="hidden-xs">Areas Naturales</div>
+              <div className="hidden-xs">Áreas Naturales</div>
               Propuestas
             </dd>
           </dl>

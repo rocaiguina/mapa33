@@ -36,6 +36,11 @@ class Sidebar extends React.Component {
             <Link to="/profile">Mi perfíl</Link>
           </li>
         </ul>
+        <div className="naturaleza">
+          <a href="#">Visitar Página</a>
+          <br />
+          <img src="/images/naturaleza.png" alt="naturaleza" />
+        </div>
       </Drawer>
     );
   }

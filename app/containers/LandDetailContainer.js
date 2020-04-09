@@ -1,9 +1,8 @@
 import React from 'react';
-import { notification } from 'antd';
 import PropTypes from 'prop-types';
-import Button from '../components/ui/Button';
+import { notification } from 'antd';
 import BaseLayout from '../components/layout/base';
-import Icon from '../components/ui/Icon';
+import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
 
 import LandApi from '../api/land';
@@ -138,18 +137,7 @@ class LandDetailContainer extends React.Component {
         dark
         title="TARJETA DE PROPUESTA"
         footerRightComponent={
-        <div>
-          <Button
-            className="m33-btn ant-btn-xlg"
-            size="large"
-            type="secondary"
-            onClick={this.handleOnAddProposal}
-            bordered
-          >
-            <Icon type="plus" />
-          </Button>
-          <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>
-         </div>
+          <ProposeButton title="Proponer área" icon="plus" />
         }
       >
         <LandDetail
