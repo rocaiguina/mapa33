@@ -51,10 +51,13 @@ class HomeContainer extends React.Component {
         showCloseBtn={false}
         enableMenu={!showIntro}
         footerRightComponent={
-          !showIntro && <div className="m33-btn-bordered m33-btn-bordered-lg">
-            <Link to="/register/propose-land" className="ant-btn m33-btn ant-btn-xlg ant-btn-secondary ant-btn-lg">
-              <Icon type="plus" />
-            </Link>
+        !showIntro && <div>
+            <div className="m33-btn-bordered m33-btn-bordered-lg">
+                <Link to="/register/propose-land" className="ant-btn m33-btn ant-btn-xlg ant-btn-secondary ant-btn-lg">
+                    <Icon type="plus" />
+                </Link>
+            </div>
+                <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>
           </div>
         }
       >

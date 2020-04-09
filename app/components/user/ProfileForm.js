@@ -19,7 +19,7 @@ import moment from 'moment';
 
 const dateFormat = 'YYYY-MM-DD';
 const dateHumanFormat = 'MMMM YYYY';
-
+import { readRemoteFile } from 'react-papaparse'
 const { Option } = Select;
 const { Text } = Typography;
 
@@ -49,6 +49,20 @@ class ProfileForm extends React.Component {
   handleOnChangeBirthday = (value, setFieldValue) => {
     setFieldValue('birthday', value.toDate());
   };
+    
+  renderContries(){
+      var países = [];
+      readRemoteFile('https://gist.githubusercontent.com/ideaalab/7caf20bc8fd6c625163927e2d478e05f/raw/b49e20c16ed35e3295c0442d4b85a13eea645cee/paises.csv', {
+      complete: (results) => {
+        for (var i in results.data) {
+            if(results.data[i][0] !== "ESPAÑOL"){
+                países.push(<Option value={results.data[i][0]}>{results.data[i][0]}</Option>)      
+            }            
+        }     
+      }
+    })
+    return países;
+  }
 
   render() {
     return (
@@ -248,9 +262,7 @@ class ProfileForm extends React.Component {
                           this.handleOnChangeCountry(value, setFieldValue);
                         }}
                       >
-                        <Option value="">-------</Option>
-                        <Option value="Bolivia">Bolivia</Option>
-                        <Option value="Puerto Rico">Puerto Rico</Option>
+                        {this.renderContries()}
                       </Select>
                       <label className="text-darkgray">País</label>
                       <Text type="danger">{errors.gender}</Text>
