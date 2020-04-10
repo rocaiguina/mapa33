@@ -4,7 +4,8 @@ import ClassNames from 'classnames';
 
 class Footer extends Component {
   render () {
-    const logo = this.props.dark ? 'logo-white.png' : 'logo-black.png';
+    const logo = this.props.dark ? 'M33-FondoNegro.svg' : 'M33-FondoBlanco.svg';    
+    const pln = this.props.dark ? 'PLN-FondoNegro.svg' : 'PLN-FondoBlanco.svg';
 
     const footerClass = ClassNames('footer', {
       'footer-dark': this.props.dark
@@ -18,7 +19,7 @@ class Footer extends Component {
           <Row gutter={0}>
             <Col md={8} xs={xs[0]}>
               <div className="first-column">
-                <img src={'/images/' + logo} className="img-responsive" />
+                <img src={'/images/' + logo} className="img-responsive" style={{width: '73%'}}/>
               </div>
             </Col>
             <Col md={12} xs={xs[1]}>
@@ -30,7 +31,7 @@ class Footer extends Component {
               <div className="third-column" >
                 { this.props.rightComponent ?
                   this.props.rightComponent :
-                  <img src="/images/naturaleza.png" className="img-responsive" />
+                  <img src={'/images/'+ pln } className="img-responsive" style={{width: '90%'}}/>
                 }
               </div>
             </Col>

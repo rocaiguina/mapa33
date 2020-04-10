@@ -13,6 +13,7 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
+import { readRemoteFile } from 'react-papaparse'
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -48,9 +49,22 @@ class RegisterForm extends React.Component {
     setFieldValue('birthday', value.toDate());
   };
 
+  renderContries(){
+      var países = [];
+      readRemoteFile('https://gist.githubusercontent.com/ideaalab/7caf20bc8fd6c625163927e2d478e05f/raw/b49e20c16ed35e3295c0442d4b85a13eea645cee/paises.csv', {
+      complete: (results) => {
+        for (var i in results.data) {
+            if(results.data[i][0] !== "ESPAÑOL"){
+                países.push(<Option value={results.data[i][0]}>{results.data[i][0]}</Option>)      
+            }            
+        }     
+      }
+    })
+    return países;
+  }
+  
   render() {
     const { next } = this.props;
-
     return (
       <Formik
         onSubmit={this.props.onSubmit}
@@ -258,10 +272,9 @@ class RegisterForm extends React.Component {
                         style={{ width: '100%' }}
                         onChange={value => {
                           this.handleOnChangeCountry(value, setFieldValue);
-                        }}
+                        }}                        
                       >
-                        <Option value="Bolivia">Bolivia</Option>
-                        <Option value="Puerto Rico">Puerto Rico</Option>
+                        {this.renderContries()}
                       </Select>
                       <Text type="danger">{errors.country}</Text>
                     </div>
