@@ -23,9 +23,14 @@ class MapStep extends React.Component {
     if (data.lands.length > 0) {
       location = data.lands[0]['municipality'];
     }
+    let catastro_numbers = [];
+    data.lands.forEach(item => {
+      catastro_numbers.push(item.catastro);
+    });
     const { setFieldValue } = this.props;
     setFieldValue('lands', data.lands);
     setFieldValue('location', location);
+    setFieldValue('catastro_numbers', catastro_numbers);
     setFieldValue('coordinates', data.coordinates.geometry);
     setFieldValue('geojson', data.geojson);
     setFieldValue('plots_count', data.geojson.properties.lots);

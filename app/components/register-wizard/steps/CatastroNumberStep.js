@@ -18,16 +18,22 @@ class CatastroNumberStep extends React.Component {
   }
 
   handleOnNext = () => {
-    if (this.props.catastro_number) {
-      this.props.next();
+    var errors = {};
+    this.props.catastro_numbers.forEach((item, index) => {
+      if (!item) {
+        errors['catastro_numbers_' + index] = 'Campo requerido.';
+      }
+    });
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
     } else {
-      this.setState({
-        errors: { catastro_number: 'Campo requerido' },
-      });
+      this.props.next();
     }
   };
 
   render() {
+    const catastro_numbers = this.props.catastro_numbers || [];
     const { errors } = this.state;
     return (
       <BaseLayout
@@ -44,20 +50,22 @@ class CatastroNumberStep extends React.Component {
             <Col md={8} />
             <Col md={8}>
               <h2>¿Cuál es el número de catastro?</h2>
-              <div className="form-group">
-                <Input
-                  name="catastro_number"
-                  className="inputprop"
-                  size="large"
-                  style={{ textAlign: 'center' }}
-                  placeholder="   /   /   /   /   "
-                  value={this.props.catastro_number}
-                  onChange={this.props.handleChange}
-                />
-                {errors.catastro_number && (
-                  <Text type="danger">{errors.catastro_number}</Text>
-                )}
-              </div>
+              {catastro_numbers.map((item, index)=>
+                <div key={index} className="form-group">
+                  <Input
+                    name={'catastro_numbers[' + index + ']'}
+                    className="inputprop"
+                    size="large"
+                    style={{ textAlign: 'center' }}
+                    placeholder="   /   /   /   /   "
+                    value={item}
+                    onChange={this.props.handleChange}
+                  />
+                  {errors['catastro_numbers_' + index] && (
+                    <Text type="danger">{errors['catastro_numbers_' + index]}</Text>
+                  )}
+                </div>
+              )}
             </Col>
           </Row>
           <BottomNavigator
@@ -70,8 +78,12 @@ class CatastroNumberStep extends React.Component {
   }
 }
 
+CatastroNumberStep.defaultProps = {
+  catastro_numbers: [],
+};
+
 CatastroNumberStep.propTypes = {
-  catastro_number: PropTypes.string,
+  catastro_numbers: PropTypes.array,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

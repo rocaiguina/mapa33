@@ -1418,6 +1418,15 @@ ul.actions {
   }
 }
 
+/* Mapbox editor popup */
+.mapbox-editor-popup {
+  font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  padding: 5px 10px;
+}
+.mapbox-editor-popup p {
+  margin-bottom: 0;
+}
+
 /* Mapbox popup */
 .mapboxgl-popup {
   max-width: 280px !important;
