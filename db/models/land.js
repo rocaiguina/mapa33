@@ -116,7 +116,10 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     getterMethods: {
       photographURL() {
-        return process.env.SERVER_URL + this.photograph;
+        if (this.photograph) {
+          return process.env.SERVER_URL + this.photograph;  
+        }
+        return 'https://dummyimage.com/480x320/dddddd/ffffff';
       }
     }
   });

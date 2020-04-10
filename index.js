@@ -14,6 +14,7 @@ const nunjucks = require('nunjucks');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('./server/middlewares/flash');
+const land = require('./server/public/land');
 
 // configure template engine
 nunjucks.configure('views', {
@@ -59,8 +60,13 @@ app.use('/admin', require('./server/admin'));
 // serve static files from public
 app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
+// Add og:tags for land page
+app.get('/land/:id', land.get);
+
 // request any page and receive index.html
-app.get('/*', (req, res) => res.sendFile(resolve(__dirname, 'public/index.html')));
+app.get('/*', function (req, res) {
+  res.render('public/index');
+});
 
 if (process.env.NODE_ENV != 'test') {
   // server listening!
