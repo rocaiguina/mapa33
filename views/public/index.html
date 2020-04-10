@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="icon" href="/favicon.ico" />
+    <title>Mapa 33</title>
+
+    {% if og_title %}
+    <meta property="og:title" content="{{ og_title }}" />
+    {% endif %}
+    {% if og_description %}
+    <meta property="og:description" content="{{ og_description }}" />
+    {% endif %}
+    {% if og_image %}
+    <meta property="og:image" content="{{ og_image }}" />
+    {% endif %}
+
+    <link
+        rel="stylesheet"
+        href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
+        type="text/css"
+    />
+    <link
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap"
+        rel="stylesheet"
+    />
+    <link
+        href="/css/fontawesome.css"
+        rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="/vendor/slick/slick.css"
+        type="text/css"
+    />
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+        type="text/css"
+    />
+    <link
+        rel="stylesheet"
+        href="/css/propform.css"
+        type="text/css"
+    />
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/dist/bundle.js" async defer></script>
+  </body>
+</html>
