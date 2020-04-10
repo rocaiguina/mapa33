@@ -11,6 +11,7 @@ import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
 import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
+import LandCardsViewContainer from './containers/LandCardsViewContainer';
 import RegisterUser from './containers/user/RegisterUser';
 import ProfileUser from './containers/user/ProfileUser';
 import ProfileUserEdit from './containers/user/ProfileUserEdit';
@@ -60,6 +61,11 @@ function Routes() {
           exact={true}
           path="/map/list"
           component={LandListViewContainer}
+        />
+        <Route
+          exact={true}
+          path="/map/cards"
+          component={LandCardsViewContainer}
         />
         <Route
           exact={true}

@@ -5,11 +5,11 @@ import { notification, Spin } from 'antd';
 import BaseLayout from '../components/layout/base';
 import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
-import LandList from '../components/land/List';
+import LandCarousel from '../components/land/Carousel';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandApi from '../api/land';
 
-class LandListViewContainer extends React.Component {
+class LandCardsViewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,23 +95,23 @@ class LandListViewContainer extends React.Component {
       >
         <FilterLand
           region={this.state.region}
-          view="list"
+          view="cards"
           status={this.state.status}
           onChangeRegion={this.handleOnChangeRegion}
           onChangeView={this.handleOnChangeView}
           onChangeStatus={this.handleOnChangeStatus}
         />
         <Spin spinning={this.state.loading}>
-          <LandList lands={this.state.maplist} />
+          <LandCarousel lands={this.state.maplist} />
         </Spin>
       </BaseLayout>
     );
   }
 }
 
-LandListViewContainer.propTypes = {
+LandCardsViewContainer.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
 };
 
-export default LandListViewContainer;
+export default LandCardsViewContainer;

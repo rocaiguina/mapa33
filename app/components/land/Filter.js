@@ -18,7 +18,7 @@ class Filter extends React.Component {
                 <Select
                   size="large"
                   className="ant-select-black ant-select-round"
-                  defaultValue={this.props.defaultRegion}
+                  value={this.props.region}
                   onChange={this.props.onChangeRegion}
                   style={{ width: '100%' }}
                 >
@@ -114,13 +114,13 @@ class Filter extends React.Component {
                 <Select
                   size="large"
                   className="ant-select-black ant-select-round"
-                  defaultValue={this.props.defaultView}
+                  value={this.props.view}
                   onChange={this.props.onChangeView}
                   style={{ width: '100%' }}
                 >
                   <Option value="map">Mapa</Option>
                   <Option value="list">Lista</Option>
-                  <Option value="card">Tarjetas</Option>
+                  <Option value="cards">Tarjetas</Option>
                 </Select>
               </Col>
             </Row>
@@ -134,7 +134,7 @@ class Filter extends React.Component {
                 <Select
                   size="large"
                   className="ant-select-black ant-select-round"
-                  defaultValue={this.props.defaultStatus}
+                  value={this.props.status}
                   onChange={this.props.onChangeStatus}
                   style={{ width: '100%' }}
                 >
@@ -152,9 +152,9 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-  defaultRegion: PropTypes.string,
-  defaultView: PropTypes.string,
-  defaultStatus: PropTypes.string,
+  region: PropTypes.string,
+  view: PropTypes.string,
+  status: PropTypes.string,
   onChangeRegion: PropTypes.func,
   onChangeView: PropTypes.func,
   onChangeStatus: PropTypes.func,

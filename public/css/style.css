@@ -1320,6 +1320,9 @@ ul.actions {
 }
 
 /* Mapbox */
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
 .mapboxgl-popup {
   color: #181a19;
 }

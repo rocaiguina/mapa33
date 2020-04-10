@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BaseLayout from '../components/layout/base';
 import Intro from '../components/intro';
 import Legend from '../components/map-view/Legend';
@@ -13,7 +14,7 @@ class HomeContainer extends React.Component {
     this.state = {
       showIntro: false,
       showInstructions: false,
-      areaView: 'conserved',
+      areaView: '',
       modeView: 'map',
     };
   }
@@ -42,18 +43,17 @@ class HomeContainer extends React.Component {
     LocalStorage.setItem('showInstructions', '0');
   };
 
-  handleOnChangeMode = (event) => {
+  handleOnChangeMode = event => {
     const mode = event.target.value;
-    this.setState({
-      modeView: mode,
-    });
-  }
+    const { history } = this.props;
+    history.push('/map/' + mode + '?status=' + this.state.areaView);
+  };
 
-  handleOnChangeArea = (event) => {
+  handleOnChangeArea = event => {
     this.setState({
       areaView: event.target.value,
     });
-  }
+  };
 
   render() {
     const { showIntro } = this.state;
@@ -87,5 +87,9 @@ class HomeContainer extends React.Component {
     );
   }
 }
+
+HomeContainer.propTypes = {
+  history: PropTypes.object,
+};
 
 export default HomeContainer;

@@ -17,7 +17,7 @@ class MapToolBar extends React.Component {
         className="popeditblack"
       >
         <Row>
-          <Radio value="card">Ver Tarjetas</Radio>
+          <Radio value="cards">Ver Tarjetas</Radio>
         </Row>
         <Row>
           <Radio value="list">Ver Lista</Radio>
