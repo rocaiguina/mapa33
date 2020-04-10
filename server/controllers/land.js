@@ -10,7 +10,7 @@ const User = Models.User;
 const LandLikes = Models.LandLikes;
 const Op = Sequelize.Op;
 
-const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
+const PROPOSED_LAND_LEVELS = ['basic', 'pledge', 'approved'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
