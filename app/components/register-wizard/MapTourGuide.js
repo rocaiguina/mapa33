@@ -13,12 +13,6 @@ class MapTourGuide extends React.Component {
           target: '#mapbox-search',
           content: (
             <div>
-              <img
-                height="140"
-                width="190"
-                src="https://dummyimage.com/190x140/474747/fff"
-                alt="imagen proporsicion"
-              />
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
                 Busca un municipio o dirección
               </h5>
@@ -31,12 +25,6 @@ class MapTourGuide extends React.Component {
           target: '#myLocationBtn',
           content: (
             <div>
-              <img
-                height="140"
-                width="190"
-                src="https://dummyimage.com/190x140/474747/fff"
-                alt="imagen proporsicion"
-              />
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
                 Encuentra tu posición exacta en el mapa
               </h5>
@@ -48,12 +36,6 @@ class MapTourGuide extends React.Component {
           target: '#mapPointerBtn',
           content: (
             <div>
-              <img
-                height="140"
-                width="190"
-                src="https://dummyimage.com/190x140/474747/fff"
-                alt="imagen proporsicion"
-              />
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
                 Selecciona la parcela haciendo tap o click
               </h5>
@@ -65,12 +47,6 @@ class MapTourGuide extends React.Component {
           target: '#trashBtn',
           content: (
             <div>
-              <img
-                height="140"
-                width="190"
-                src="https://dummyimage.com/190x140/474747/fff"
-                alt="imagen proporsicion"
-              />
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
                 Borra puntos o parcelas de tu selección
               </h5>
@@ -82,12 +58,6 @@ class MapTourGuide extends React.Component {
           target: '#submitMap',
           content: (
             <div>
-              <img
-                height="140"
-                width="190"
-                src="https://dummyimage.com/190x140/474747/fff"
-                alt="imagen proporsicion"
-              />
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
                 Cuando tengas tu terreno seleccionado pulsa aquí para someter
               </h5>
@@ -149,6 +119,17 @@ class MapTourGuide extends React.Component {
           disableOverlayClose={true}
           hideBackButton={true}
           spotlightPadding={0}
+          styles={{
+            options: {
+              arrowColor: '#f073a8',
+              backgroundColor: '#f073a8',
+              overlayColor: 'rgba(0, 0, 0, 0.65)',
+              primaryColor: '#f073a8',
+              textColor: '#000',
+              width: 900,
+              zIndex: 99,
+            },
+          }}
         />
         {run && (
           <Button
