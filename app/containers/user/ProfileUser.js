@@ -66,7 +66,7 @@ class ProfileUser extends React.Component {
 
   render() {
     return (
-      <BaseLayout dark title="MI PERFÍL" enableMenu>
+      <BaseLayout dark title="MI PERFÍL" enableMenu closeLink="/">
         <Profile
           initialValues={this.state.initialValues}
           onClickLogout={this.handleOnLogout}

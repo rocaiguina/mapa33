@@ -807,6 +807,10 @@ ul.actions {
   text-align: center;
 }
 
+.land-detail .land-picture {
+  margin-top: 5px;
+}
+
 .land-features p {
   font-size: 16px;
 }

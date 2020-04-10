@@ -30,7 +30,7 @@ class LandDetail extends React.Component {
 
   render() {
     const photograph =
-      this.props.photograph || 'https://dummyimage.com/600x400/dddddd/ffffff';
+      this.props.photograph || 'https://dummyimage.com/480x320/dddddd/ffffff';
     let owner = '';
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
@@ -114,8 +114,9 @@ class LandDetail extends React.Component {
                 </div>
               </div>
               <p className="land-reason-conservation">
-                ¿Por qué es importante la protección de este terreno en
-                particular?
+                ¿Por qué es importante la protección de
+                {this.props.plots_count > 1 ? 'estos terrenos' : 'este terreno'}
+                en particular?
               </p>
               <p style={{ flex: '1 0 auto' }}>
                 {this.props.reason_conservation || 'No definido.'}
