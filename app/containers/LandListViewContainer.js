@@ -60,9 +60,14 @@ class LandListViewContainer extends React.Component {
   };
 
   handleOnChangeView = value => {
-    this.setState({
-      view: value,
-    });
+    if (value == 'map') {
+      const { history } = this.props;
+      history.push('/');
+    } else {
+      this.setState({
+        view: value,
+      });
+    }
   };
 
   handleOnChangeStatus = value => {
@@ -79,6 +84,7 @@ class LandListViewContainer extends React.Component {
         dark
         title="LEYENDA DE ÁREAS NATURALES"
         enableMenu
+        verticalAlign="top"
         subtitle={<Legend />}
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />

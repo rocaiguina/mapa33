@@ -43,7 +43,7 @@ class Filter extends React.Component {
                   <Option value="cayey">cayey</Option>
                   <Option value="ceiba">Ceiba</Option>
                   <Option value="ciales">Ciales</Option>
-                  <Option value="cidra">c\Cidra</Option>
+                  <Option value="cidra">Cidra</Option>
                   <Option value="coamo">Coamo</Option>
                   <Option value="comerio">Comerío</Option>
                   <Option value="corozal">Corozal</Option>
@@ -118,6 +118,7 @@ class Filter extends React.Component {
                   onChange={this.props.onChangeView}
                   style={{ width: '100%' }}
                 >
+                  <Option value="map">Mapa</Option>
                   <Option value="list">Lista</Option>
                   <Option value="card">Tarjetas</Option>
                 </Select>

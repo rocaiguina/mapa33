@@ -7,7 +7,7 @@ function Empty() {
     <div className="empty-result">
       <h2>No hay áreas propuestas activas en esta región.</h2>
       <Link
-        to="/land"
+        to="/register/propose-land"
         className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
       >
         Proponer área <Icon type="plus" className="m-l-50" />

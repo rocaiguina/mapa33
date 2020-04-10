@@ -1494,6 +1494,10 @@ ul.actions {
   font-size: 16px;
 }
 
+.land-list .land-list-row .land-name a {
+  color: #fff;
+}
+
 @media (max-width: 767px) {
   .land-list .land-list-row .like-counter {
     display: block;

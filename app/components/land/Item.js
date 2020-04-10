@@ -11,7 +11,7 @@ class Item extends React.Component {
       'land-level-protected': this.props.level == 'conserved',
       'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
     });
-    
+
     let owner = '';
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
@@ -26,7 +26,9 @@ class Item extends React.Component {
           <div className="media-body">
             <Row>
               <Col xs={24} md={12}>
-                <h4>{this.props.name}</h4>
+                <h4 className="land-name">
+                  <Link to={`/land/${this.props.id}`}>{this.props.name}</Link>
+                </h4>
                 <span className="hidden-xs">{owner}</span>
               </Col>
               <Col xs={24} md={6}>
@@ -34,7 +36,10 @@ class Item extends React.Component {
                   {this.props.location || 'No definido'}
                   <br />
                 </span>
-                <span>{Numeral(this.props.area_size).format('0,0')} cuerdas de extensión</span>
+                <span>
+                  {Numeral(this.props.area_size).format('0,0')} cuerdas de
+                  extensión
+                </span>
               </Col>
               <Col xs={12} md={3}>
                 <span className="like-counter">
@@ -43,7 +48,10 @@ class Item extends React.Component {
                 </span>
               </Col>
               <Col xs={12} md={3} className="text-right">
-                <Link className="ant-btn-link ant-btn-lg ant-btn-purple" to={`/land/${this.props.id}`}>
+                <Link
+                  className="ant-btn-link ant-btn-lg ant-btn-purple"
+                  to={`/land/${this.props.id}`}
+                >
                   <strong>Ver ficha</strong>
                 </Link>
               </Col>
