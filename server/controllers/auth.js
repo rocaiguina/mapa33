@@ -13,6 +13,7 @@ const User = Models.User;
 const ResetPassword = Models.ResetPassword;
 
 function login(req, res) {
+  
   User.findOne({
     where: {
       email: req.body.email,
@@ -78,9 +79,10 @@ function forgotPassword(req, res) {
           var transporter = nodemailer.createTransport(MailGun(auth));
           // variables para email
           const sitio = process.env.SERVER_URL + '/reset-password/';
+          const contacto = process.env.SERVER_URL +'/contact-us'
           const html = TemplateEngine.render(
-            'template_email/reset_password.html',
-            { site: sitio, token: token }
+            'template_email/recovery_password_email.html',
+            { site: sitio, token: token,contact: contacto }
           );
 
           const mailOptions = {

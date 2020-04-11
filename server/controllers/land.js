@@ -10,6 +10,11 @@ const User = Models.User;
 const LandLikes = Models.LandLikes;
 const Op = Sequelize.Op;
 
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const MailGun = require('nodemailer-mailgun-transport');
+const TemplateEngine = require('../utils/template-engine');
+
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge', 'approved'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
@@ -262,6 +267,30 @@ class LandController {
         // Calculate coordinate.
         const result = land.get({ plain: true });
         delete result.geom;
+        const auth = {
+            auth: {
+              api_key: process.env.MAILGUN_API_KEY,
+              domain: process.env.MAILGUN_DOMAIN,
+            },
+          };
+          var transporter = nodemailer.createTransport(MailGun(auth));
+          // variables para email
+          const contacto = process.env.SERVER_URL +'/contact-us'
+          const html = TemplateEngine.render(
+            'template_email/create_land_email.html',
+            {contact: contacto }
+          );
+          const mailOptions = {
+            from: process.env.DEFAULT_EMAIL_FROM, // sender address
+            to: req.user.email, // list of receivers
+            subject: '¡Gracias por llenar el formulario para el Mapa 33!', // Subject line
+            html: html,
+          };
+          transporter.sendMail(mailOptions, function(err, info) {
+            console.log(err, info);
+          });
+          res.send('');
+          
         res.json(result);
       })
       .catch(function(err) {
@@ -334,7 +363,7 @@ class LandController {
 
     land
       .save()
-      .then(function() {
+      .then(function() {          
         res.send('');
       })
       .catch(function(err) {

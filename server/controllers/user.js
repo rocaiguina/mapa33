@@ -7,6 +7,12 @@ const Land = Models.Land;
 const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const MailGun = require('nodemailer-mailgun-transport');
+const randomToken = require('random-token');
+const TemplateEngine = require('../utils/template-engine');
+
 class UserController {
   findAll(req, res, next) {
     User.findAll({ raw: true })
@@ -43,6 +49,7 @@ class UserController {
   }
 
   store(req, res) {
+      
     const validationSchema = {
       first_name: Joi.string().required(),
       last_name: Joi.string().required(),
@@ -97,6 +104,29 @@ class UserController {
       interested_volunteer: cleaned_data.interested_volunteer,
     })
       .then(function(user) {
+          console.log("SE CREO USUARIO: "+cleaned_data.email);
+        const auth = {
+            auth: {
+              api_key: process.env.MAILGUN_API_KEY,
+              domain: process.env.MAILGUN_DOMAIN,
+            },
+        };
+        var transporter = nodemailer.createTransport(MailGun(auth));
+        // variables para email
+        const html = TemplateEngine.render(
+            'template_email/user_register_email.html'
+        );
+        const mailOptions = {
+            from: process.env.DEFAULT_EMAIL_FROM, // sender address
+            to: req.body.email, // list of receivers
+            subject: 'Mapa33 te la bienvenida', // Subject line
+            html: html,
+        };
+        transporter.sendMail(mailOptions, function(err, info) {
+            console.log(err, info);
+        });
+        res.send('');
+        
         res.json(user.get({ plain: true }));
       })
       .catch(function(err) {

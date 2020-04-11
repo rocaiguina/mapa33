@@ -14,10 +14,8 @@ module.exports = {
       .then(function(land) {
         if (!land) {
           return res.status(404).send('');
-        }
-        
+        }        
         req.land = land;
-        console.log("ESto es land:" + land.use_type );
         next();
         return land;
       })

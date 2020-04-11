@@ -2,9 +2,11 @@
 
 const Joi = require('joi');
 const Paginator = require('paginator');
+const { QueryTypes } = require('sequelize');
 
 const Models = require('../../db/models');
 const Land = Models.Land;
+const User = Models.User;
 const Validator = require('../utils/validator');
 
 
@@ -203,6 +205,76 @@ class LandAdminController {
     land
       .save()
       .then(function() {
+        if(req.land.id){            
+            console.log("ESTE ES EL USUARIO: "+req.land.user_id.email);
+            User.findOne({
+                where: {
+                  id: req.land.user_id
+                }
+            }).then(function(USER_LAND) {
+                console.log("EXISTE: "+USER_LAND.first_name)
+                if( cleaned_data.status == 'approved' ){
+                    const auth = {
+                      auth: {
+                        api_key: process.env.MAILGUN_API_KEY,
+                        domain: process.env.MAILGUN_DOMAIN,
+                      },
+                    };
+                    var transporter = nodemailer.createTransport(MailGun(auth));
+                    // variables para email
+                    const sitio = process.env.SERVER_URL + '/land/'+land.id;
+                    const contacto = process.env.SERVER_URL +'/contact-us'
+                    const html = TemplateEngine.render(
+                      'template_email/land_approved_email.html',
+                      { site: sitio,contact: contacto }
+                    );
+
+                    const mailOptions = {
+                      from: process.env.DEFAULT_EMAIL_FROM, // sender address
+                      to: USER_LAND.email, // list of receivers
+                      subject: '¡Felicidades! Tu propuesta está lista. ¡Riega la voz!', // Subject line
+                      html: html,
+                    };
+                    transporter.sendMail(mailOptions, function(err, info) {
+                      console.log(err, info);
+                    });
+                    res.send('');
+            
+                }else if( cleaned_data.status == 'denied' ){
+                      const auth = {
+                        auth: {
+                          api_key: process.env.MAILGUN_API_KEY,
+                          domain: process.env.MAILGUN_DOMAIN,
+                        },
+                      };
+                      var transporter = nodemailer.createTransport(MailGun(auth));
+                      // variables para email
+                      const sitio = process.env.SERVER_URL + '/reset-password/';
+                      const contacto = process.env.SERVER_URL +'/contact-us'
+                      const html = TemplateEngine.render(
+                        'template_email/recovery_password_email.html',
+                        { site: sitio, notes: req.land.notes, contact: contacto }
+                      );
+
+                      const mailOptions = {
+                        from: process.env.DEFAULT_EMAIL_FROM, // sender address
+                        to: USER_LAND.email, // list of receivers
+                        subject: 'Tenemos buenas y malas noticias', // Subject line
+                        html: html,
+                      };
+                      transporter.sendMail(mailOptions, function(err, info) {
+                        console.log(err, info);
+                      });
+                      res.send('');
+                }
+                
+              })
+              .catch(function(err) {
+                console.log("ERROR: "+JSON.stringify(err))
+                
+              });
+        }        
+          
         req.flash('success', 'Your data has been saved.');
       })
       .catch(function(err) {
@@ -212,6 +284,7 @@ class LandAdminController {
       .finally(function() {
         res.redirect('/admin/land/' + land.id);
       });
+        
   }
 
   get(req, res) {
