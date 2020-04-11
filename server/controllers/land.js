@@ -169,7 +169,7 @@ class LandController {
     var data = req.body;
     const validationSchema = {
       are_u_owner: Joi.boolean().allow(null),
-      catastro_number: Joi.string().allow(null, ''),
+      catastro_numbers: Joi.array(),
       owner_name: Joi.string(),
       owner_email: Joi.string().allow(null, ''),
       owner_phone: Joi.string().allow(null, ''),
@@ -233,7 +233,7 @@ class LandController {
       geom: cleaned_data.geojson.geometry,
       metadata: {
         are_u_owner: cleaned_data.are_u_owner,
-        catastro_number: cleaned_data.catastro_number,
+        catastro_numbers: cleaned_data.catastro_numbers,
         owner_name: cleaned_data.owner_name,
         owner_email: cleaned_data.owner_email,
         owner_phone: cleaned_data.owner_phone,

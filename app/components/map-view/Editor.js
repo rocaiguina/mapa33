@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { notification } from 'antd';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -215,12 +216,19 @@ class Editor extends Component {
     map.on('mousemove', 'lots', e => {
       map.getCanvas().style.cursor = 'pointer';
 
-      let html = `<span><b>Catastro:</b> ${e.features[0].properties.catastro ||
-        'No hay número'}</span><br>`;
-      html += `<span><b>Municipio:</b> ${e.features[0].properties.muni_norml}</span><br>`;
-      html += `<span>${this.toProperCase(
-        e.features[0].properties.dir_fisica
-      )}</span>`;
+      let html = `
+        <div class="mapbox-editor-popup">
+          <p class="catastro">
+            <b>Catastro:</b> ${e.features[0].properties.catastro || 'No disponible'}
+          </p>
+          <p class="municipio">
+            <b>Municipio:</b> ${e.features[0].properties.muni_norml || 'No disponible'}
+          </p>
+          <p class="address">
+            <b>Dirrección:</b> ${this.toProperCase(e.features[0].properties.dir_fisica)}
+          </p>
+        </div>
+      `;
 
       popup
         .setLngLat(e.lngLat)
@@ -228,16 +236,10 @@ class Editor extends Component {
         .addTo(map);
 
       if (hoveredStateId) {
-        map.setFeatureState(
-          { source: 'source', id: hoveredStateId, sourceLayer: 'lots' },
-          { hover: false }
-        );
+        map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: false });
       }
       hoveredStateId = e.features[0].id;
-      map.setFeatureState(
-        { source: 'source', id: hoveredStateId, sourceLayer: 'lots' },
-        { hover: true }
-      );
+      map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: true });
     });
 
     map.on('mouseleave', 'lots', () => {
@@ -258,15 +260,19 @@ class Editor extends Component {
         const exist = this.state.selection.indexOf(id) > -1;
         if (!exist) {
           if (this.state.selection.length >= 3) {
-            alert('No puede elegir mas de 3');
+            notification.error({
+              message: 'Error',
+              description: 'No puede elegir más de 3 parcelas.',
+            });
             return;
           }
+
           this.setState(state => {
             return {
               selection: _.concat(state.selection, id),
             };
           });
-
+          
           this.getPolygons();
         } else {
           this.setState(state => {
@@ -300,7 +306,7 @@ class Editor extends Component {
         return $1.toUpperCase();
       });
     }
-    return 'No hay dirección física disponible.';
+    return 'No disponible';
   };
 
   area = polygon => {
@@ -317,7 +323,6 @@ class Editor extends Component {
       const poly = features[i];
       if (poly.geometry) merged = union(merged, poly);
     }
-
     return merged;
   };
 

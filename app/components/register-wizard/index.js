@@ -137,7 +137,7 @@ class RegisterWizard extends React.Component {
                   id="catastro-number"
                   render={({ next, previous }) => (
                     <CatastroNumberStep
-                      catastro_number={values.catastro_number}
+                      catastro_numbers={values.catastro_numbers}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
@@ -294,7 +294,7 @@ class RegisterWizard extends React.Component {
                   id="wich-uses"
                   render={({ next, previous }) => (
                     <WichUseStep
-                      wich_use={values.wich_use}
+                      wich_uses={values.wich_uses}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
@@ -325,7 +325,7 @@ class RegisterWizard extends React.Component {
                       other_main_attributes={values.lands_other_attributes}
                       main_uses={values.lands_main_uses}
                       other_main_uses={values.lands_other_main_uses}
-                      proposed_uses={[values.wich_use]}
+                      proposed_uses={values.wich_uses}
                       area_size={values.area_size}
                       plots_count={values.plots_count}
                       coordinates={values.coordinates}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row, Typography } from 'antd';
+import { Col, Checkbox, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
@@ -18,13 +18,21 @@ class WichUseStep extends React.Component {
   }
 
   handleOnNext = () => {
-    if (this.props.wich_use) {
+    if (
+      Array.isArray(this.props.wich_uses) &&
+      this.props.wich_uses.length > 0
+    ) {
       this.props.next();
     } else {
       this.setState({
-        errors: { wich_use: 'Campo requerido' },
+        errors: { wich_uses: 'Campo requerido' },
       });
     }
+  };
+
+  handleOnChange = checkedValue => {
+    const { setFieldValue } = this.props;
+    setFieldValue('wich_uses', checkedValue);
   };
 
   render() {
@@ -48,8 +56,8 @@ class WichUseStep extends React.Component {
               }}
             >
               <h2>¿Cuál uso le darías al terreno?</h2>
-              {errors.wich_use && (
-                <Text type="danger">{errors.wich_use}</Text>
+              {errors.wich_uses && (
+                <Text type="danger">{errors.wich_uses}</Text>
               )}
             </Col>
             <Col
@@ -58,68 +66,67 @@ class WichUseStep extends React.Component {
                 textAlign: 'left',
               }}
             >
-              <Radio.Group
-                name="wich_use"
-                value={this.props.wich_use}
-                onChange={this.props.handleChange}
+              <Checkbox.Group
+                value={this.props.wich_uses}
+                onChange={this.handleOnChange}
               >
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Investigación Científica"
                     className="blockstyleradio"
                   >
                     Investigación Científica
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Monitoreo Ambiental"
                     className="blockstyleradio"
                   >
                     Monitoreo Ambiental
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Usos espirituales"
                     className="blockstyleradio"
                   >
                     Usos espirituales
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Educación"
                     className="blockstyleradio"
                   >
                     Educación
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Recreación"
                     className="blockstyleradio"
                   >
                     Recreación
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Turismo"
                     className="blockstyleradio"
                   >
                     Turismo
-                  </Radio>
+                  </Checkbox>
                 </div>
                 <div className="form-radio">
-                  <Radio
+                  <Checkbox
                     value="Usos sostenibles"
                     className="blockstyleradio"
                   >
                     Usos sostenibles
-                  </Radio>
+                  </Checkbox>
                 </div>
-              </Radio.Group>
+              </Checkbox.Group>
             </Col>
           </Row>
           <BottomNavigator
@@ -133,7 +140,7 @@ class WichUseStep extends React.Component {
 }
 
 WichUseStep.propTypes = {
-  wich_use: PropTypes.string,
+  wich_uses: PropTypes.array,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,
