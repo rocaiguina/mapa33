@@ -6,12 +6,11 @@ const Models = require('../../db/models');
 const encryptor = require('../../server/utils/encryptor');
 const User = Models.User;
 const ResetPassword = Models.ResetPassword;
-const NodeMailer = require('nodemailer-mailgun-transport');
 const Joi = require('joi');
 const Validator = require('../utils/validator');
 var randomToken = require('random-token');
 const TemplateEngine = require('../../server/utils/template-engine');
-
+const sgMail = require('@sendgrid/mail');
 const LOGIN_URL = '/admin/login';
 
 class AuthAdminController {
@@ -118,37 +117,27 @@ class AuthAdminController {
           expired: date,
         })
           .then(function() {
-            const auth = {
-              auth: {
-                api_key: process.env.MAILGUN_API_KEY,
-                domain: process.env.MAILGUN_DOMAIN,
-              },
-            };
-            var transporter = nodemailer.createTransport(NodeMailer(auth));
+            
             // variables para emqil
             const sitio = process.env.SERVER_URL + '/admin/reset-password/';
             const html = TemplateEngine.render(
               'template_email/reset_password.html',
               { site: sitio, token: token }
             );
-
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
             const mailOptions = {
-              from: process.env.DEFAULT_EMAIL_FROM, // sender address
-              to: req.body.email, // list of receivers
+              to: req.body.email,
+              from: process.env.DEFAULT_EMAIL_FROM,
               subject: 'Password Reset Request', // Subject line
               html: html,
             };
-            transporter.sendMail(mailOptions, function(err, info) {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log(info);
-              }
-            });
-            req.flash(
-              'success',
-              'Please check your email. We have sent you the instructions to revover your password.'
-            );
+            sgMail.send(mailOptions).
+            then(() => {}, error => {
+                console.error(error);
+                if (error.response) {
+                  console.error(error.response.body)
+                }
+            }); 
             return res.redirect('/admin/login');
           })
           .catch(function(err) {

@@ -8,11 +8,10 @@ const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const MailGun = require('nodemailer-mailgun-transport');
 const randomToken = require('random-token');
 const TemplateEngine = require('../utils/template-engine');
 
+const sgMail = require('@sendgrid/mail');
 class UserController {
   findAll(req, res, next) {
     User.findAll({ raw: true })
@@ -103,30 +102,25 @@ class UserController {
       advs_by_zip: cleaned_data.advs_by_zip,
       interested_volunteer: cleaned_data.interested_volunteer,
     })
-      .then(function(user) {
-          console.log("SE CREO USUARIO: "+cleaned_data.email);
-        const auth = {
-            auth: {
-              api_key: process.env.MAILGUN_API_KEY,
-              domain: process.env.MAILGUN_DOMAIN,
-            },
-        };
-        var transporter = nodemailer.createTransport(MailGun(auth));
+      .then(function(user) {       
         // variables para email
         const html = TemplateEngine.render(
             'template_email/user_register_email.html'
         );
-        const mailOptions = {
-            from: process.env.DEFAULT_EMAIL_FROM, // sender address
-            to: req.body.email, // list of receivers
-            subject: 'Mapa33 te la bienvenida', // Subject line
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const msg = {
+            to: req.body.email,
+            from: process.env.DEFAULT_EMAIL_FROM,
+            subject: '¡BIENVENIDO A MAPA33!',
             html: html,
-        };
-        transporter.sendMail(mailOptions, function(err, info) {
-            console.log(err, info);
-        });
-        res.send('');
-        
+        }
+        sgMail.send(msg).
+        then(() => {}, error => {
+            console.error(error);
+            if (error.response) {
+              console.error(error.response.body)
+            }
+        });        
         res.json(user.get({ plain: true }));
       })
       .catch(function(err) {

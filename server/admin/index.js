@@ -48,6 +48,8 @@ router.get(
 );
 router.get(
   '/land/:id',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
   LandMiddleware.lookup,
   LandAdminController.get
 );

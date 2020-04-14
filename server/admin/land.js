@@ -9,6 +9,8 @@ const Land = Models.Land;
 const User = Models.User;
 const Validator = require('../utils/validator');
 
+const sgMail = require('@sendgrid/mail');
+const TemplateEngine = require('../utils/template-engine');
 
 class LandAdminController {
   findAll(req, res, next) {
@@ -43,49 +45,46 @@ class LandAdminController {
         name: Joi.string().required(),
         level: Joi.string().required(),
         plots_count: Joi.number()
-            .integer()
-            .required(),
-        area_size: Joi.number()
-            .required(),
-        area_type: Joi.string().required(),
-        use_type: Joi.string().required(),
-        location: Joi.string().required(),
-        entity: Joi.string().required(),
-        acquisition_type: Joi.string().required(),
+            .integer() ,
+        area_size: Joi.number(),
+        area_type: Joi.string(),
+        use_type: Joi.string(),
+        location: Joi.string(),
+        entity: Joi.string(),
+        acquisition_type: Joi.string(),
         year_acquisition: Joi.number()
             .integer()
-            .required(),
+            ,
         year_estab: Joi.number()
             .integer()
-            .required(),
-        ownership: Joi.string().required(),
+            ,
+        ownership: Joi.string(),
         status: Joi.string().required(),
-        reason_conservation: Joi.string().required(),
-        notes:Joi.string().required(),
-        know_owner: Joi.boolean().required(),
-        are_u_owner: Joi.boolean().required(),
+        reason_conservation: Joi.string(),
+        notes:Joi.string(),
+        know_owner: Joi.boolean(),
+        are_u_owner: Joi.boolean(),
         catastro_number:Joi.number()
-            .integer()
-            .required(),
-        owner_name: Joi.string().required(),
+            .integer(),
+        owner_name: Joi.string(),
         owner_email: Joi.string()
             .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-        owner_phone: Joi.string().required(),
-        inheritance_land: Joi.boolean().required(),
-        inheritance_agree: Joi.boolean().required(),
+        owner_phone: Joi.string(),
+        inheritance_land: Joi.boolean(),
+        inheritance_agree: Joi.boolean(),
         lands_problem: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.string()),
         lands_other_problem: Joi.string().allow(null, ''),
-        has_mortgage: Joi.boolean().required(),
-        has_surveying: Joi.boolean().required(),
+        has_mortgage: Joi.boolean(),
+        has_surveying: Joi.boolean(),
         lands_main_uses: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.string()),
         lands_other_main_uses: Joi.string().allow(null, ''),
         lands_structures: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.string()),
         lands_other_structures: Joi.string().allow(null, ''),
         lands_attributes: Joi.alternatives().try(Joi.array().items(Joi.string()), Joi.string()),
         lands_other_attributes: Joi.string().allow(null, ''),
-        has_contamination: Joi.boolean().required(),
-        wich_use:Joi.string().required(),
-        importance_of_knowing:Joi.string().required(),
+        has_contamination: Joi.boolean(),
+        wich_use:Joi.string(),
+        importance_of_knowing:Joi.string(),
     };
 
     // Validata data.
@@ -206,75 +205,53 @@ class LandAdminController {
       .save()
       .then(function() {
         if(req.land.id){            
-            console.log("ESTE ES EL USUARIO: "+req.land.user_id.email);
-            User.findOne({
-                where: {
-                  id: req.land.user_id
-                }
-            }).then(function(USER_LAND) {
-                console.log("EXISTE: "+USER_LAND.first_name)
-                if( cleaned_data.status == 'approved' ){
-                    const auth = {
-                      auth: {
-                        api_key: process.env.MAILGUN_API_KEY,
-                        domain: process.env.MAILGUN_DOMAIN,
-                      },
-                    };
-                    var transporter = nodemailer.createTransport(MailGun(auth));
-                    // variables para email
-                    const sitio = process.env.SERVER_URL + '/land/'+land.id;
-                    const contacto = process.env.SERVER_URL +'/contact-us'
-                    const html = TemplateEngine.render(
-                      'template_email/land_approved_email.html',
-                      { site: sitio,contact: contacto }
-                    );
-
-                    const mailOptions = {
-                      from: process.env.DEFAULT_EMAIL_FROM, // sender address
-                      to: USER_LAND.email, // list of receivers
-                      subject: '¡Felicidades! Tu propuesta está lista. ¡Riega la voz!', // Subject line
-                      html: html,
-                    };
-                    transporter.sendMail(mailOptions, function(err, info) {
-                      console.log(err, info);
-                    });
-                    res.send('');
             
-                }else if( cleaned_data.status == 'denied' ){
-                      const auth = {
-                        auth: {
-                          api_key: process.env.MAILGUN_API_KEY,
-                          domain: process.env.MAILGUN_DOMAIN,
-                        },
-                      };
-                      var transporter = nodemailer.createTransport(MailGun(auth));
-                      // variables para email
-                      const sitio = process.env.SERVER_URL + '/reset-password/';
-                      const contacto = process.env.SERVER_URL +'/contact-us'
-                      const html = TemplateEngine.render(
-                        'template_email/recovery_password_email.html',
-                        { site: sitio, notes: req.land.notes, contact: contacto }
-                      );
+            if( cleaned_data.status == 'approved' ){
+                // variables para email
+                const sitio = process.env.SERVER_URL + '/land/'+land.id;
+                const contacto = process.env.SERVER_URL +'/contact-us'
+                const html = TemplateEngine.render(
+                  'template_email/land_approved_email.html',
+                  { site: sitio,contact: contacto }
+                );
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const mailOptions = {
+                  to: land.user.email,
+                  from: process.env.DEFAULT_EMAIL_FROM,// list of receivers
+                  subject: '¡Felicidades! Tu propuesta está lista. ¡Riega la voz!', // Subject line
+                  html: html,
+                };
+                sgMail.send(mailOptions).
+                then(() => {}, error => {
+                    console.error(error);
+                    if (error.response) {
+                      console.error(error.response.body)
+                    }
+                });    
 
-                      const mailOptions = {
-                        from: process.env.DEFAULT_EMAIL_FROM, // sender address
-                        to: USER_LAND.email, // list of receivers
-                        subject: 'Tenemos buenas y malas noticias', // Subject line
-                        html: html,
-                      };
-                      transporter.sendMail(mailOptions, function(err, info) {
-                        console.log(err, info);
-                      });
-                      res.send('');
-                }
-                
-              })
-              .catch(function(err) {
-                console.log("ERROR: "+JSON.stringify(err))
-                
-              });
-        }        
-          
+            }else if( cleaned_data.status == 'denied' ){
+                const sitio = process.env.SERVER_URL + '/reset-password/';
+                const contacto = process.env.SERVER_URL +'/contact-us'
+                const html = TemplateEngine.render(
+                    'template_email/land_denied_email.html',
+                    { site: sitio, notes: req.land.notes, contact: contacto }
+                );
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const mailOptions = {
+                    to: land.user.email,
+                    from: process.env.DEFAULT_EMAIL_FROM,
+                    subject: 'Tenemos buenas y malas noticias', // Subject line
+                    html: html,
+                };
+                sgMail.send(mailOptions).
+                then(() => {}, error => {
+                    console.error(error);
+                    if (error.response) {
+                      console.error(error.response.body)
+                    }
+                });  
+            } 
+        }            
         req.flash('success', 'Your data has been saved.');
       })
       .catch(function(err) {

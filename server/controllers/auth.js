@@ -1,13 +1,13 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
-const MailGun = require('nodemailer-mailgun-transport');
 const Joi = require('joi');
 const randomToken = require('random-token');
 const encryptor = require('../utils/encryptor');
 const TemplateEngine = require('../utils/template-engine');
 const Models = require('../../db/models');
+
+const sgMail = require('@sendgrid/mail');
 
 const User = Models.User;
 const ResetPassword = Models.ResetPassword;
@@ -70,31 +70,27 @@ function forgotPassword(req, res) {
         expired: date,
       })
         .then(function() {
-          const auth = {
-            auth: {
-              api_key: process.env.MAILGUN_API_KEY,
-              domain: process.env.MAILGUN_DOMAIN,
-            },
-          };
-          var transporter = nodemailer.createTransport(MailGun(auth));
           // variables para email
-          const sitio = process.env.SERVER_URL + '/reset-password/';
-          const contacto = process.env.SERVER_URL +'/contact-us'
-          const html = TemplateEngine.render(
-            'template_email/recovery_password_email.html',
-            { site: sitio, token: token,contact: contacto }
-          );
-
-          const mailOptions = {
-            from: process.env.DEFAULT_EMAIL_FROM, // sender address
-            to: req.body.email, // list of receivers
-            subject: 'Password Reset Request', // Subject line
-            html: html,
-          };
-          transporter.sendMail(mailOptions, function(err, info) {
-            console.log(err, info);
-          });
-          res.send('');
+            const sitio = process.env.SERVER_URL + '/reset-password/';
+            const contacto = process.env.SERVER_URL +'/contact-us'
+            const html = TemplateEngine.render(
+              'template_email/recovery_password_email.html',
+              { site: sitio, token: token,contact: contacto }
+            );
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+            const msg = {
+              to: req.body.email,
+              from: process.env.DEFAULT_EMAIL_FROM,
+              subject: 'Recupera tu contraseña',
+              html: html,
+            };
+            sgMail.send(msg).
+                then(() => {}, error => {
+                    console.error(error);
+                if (error.response) {
+                  console.error(error.response.body)
+                }
+            });    
         })
         .catch(function() {
           res.status(500).send();

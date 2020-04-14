@@ -2,6 +2,7 @@
 
 const Models = require('../../db/models');
 const Land = Models.Land;
+const User = Models.User;
 
 module.exports = {
   lookup: function(req, res, next) {
@@ -10,7 +11,16 @@ module.exports = {
       return next();
     }
 
-    Land.findOne({ where: { id: req.params.id } })
+    Land.findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['first_name', 'last_name','email'],
+        },
+      ],
+    })
       .then(function(land) {
         if (!land) {
           return res.status(404).send('');
