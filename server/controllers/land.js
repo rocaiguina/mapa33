@@ -14,7 +14,7 @@ const jwt = require('jsonwebtoken');
 const TemplateEngine = require('../utils/template-engine');
 const sgMail = require('@sendgrid/mail');
 
-const PROPOSED_LAND_LEVELS = ['basic', 'pledge', 'approved'];
+const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
@@ -26,9 +26,14 @@ class LandController {
 
     switch (level) {
       case 'proposed':
-        conditions.level = {
-          [Op.in]: PROPOSED_LAND_LEVELS,
-        };
+        conditions[Op.or] = [
+          {
+            level: { [Op.in]: PROPOSED_LAND_LEVELS },
+          },
+          {
+            status: 'approved',
+          },
+        ];
         break;
       case 'conserved':
         conditions.level = {
