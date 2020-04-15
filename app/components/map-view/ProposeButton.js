@@ -7,7 +7,7 @@ class ProposeButton extends React.Component {
   render() {
     const { icon, title } = this.props;
     return (
-      <div className="ant-btn-propose-wrapper">
+      <div id="propose_guide" className="ant-btn-propose-wrapper">
         <div className="ant-btn-propose-border">
           <Link
             to="/register/propose-land"

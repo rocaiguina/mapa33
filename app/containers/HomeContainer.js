@@ -7,24 +7,30 @@ import Map from '../components/map-view/Map';
 import Instructions from '../components/intro/instructions';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LocalStorage from '../services/LocalStorage';
+import HomeGuideTour from './HomeGuideTour';
 
 class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showIntro: false,
-      showInstructions: false,
+      showInstructions: false,      
+      showGuide: false,
       areaView: '',
       modeView: 'map',
+      run: true,
+      hasRunned: false,
     };
   }
 
   componentDidMount() {
     var showIntro = LocalStorage.getItem('showIntro', '1');
-    var showInstructions = LocalStorage.getItem('showInstructions', '1');
+    var showInstructions = LocalStorage.getItem('showInstructions', '1');    
+    var showGuide = LocalStorage.getItem('showInstructions', '1');
     this.setState({
       showIntro: showIntro == '1',
       showInstructions: showIntro == '0' && showInstructions == '1',
+      showGuide: showIntro == '0' && showInstructions == '0' && showGuide == '1',
     });
   }
 
@@ -39,6 +45,7 @@ class HomeContainer extends React.Component {
   handleOnCloseInstructions = () => {
     this.setState({
       showInstructions: false,
+      showGuide: true,
     });
     LocalStorage.setItem('showInstructions', '0');
   };
@@ -54,9 +61,27 @@ class HomeContainer extends React.Component {
       areaView: event.target.value,
     });
   };
+  
+  handleOnCloseTour = () => {
+    this.setState({
+      run: false,
+      hasRunned: true,
+      showGuide: false,
+    });
+    LocalStorage.setItem('showGuide', '0');
+  };
+
+  handleOnNextTour = (index) => {
+    if (index == 5) {
+      this.setState({
+        run: false,
+      });
+      LocalStorage.setItem('showGuide', '0');
+    }
+  };
 
   render() {
-    const { showIntro } = this.state;
+    const { showIntro, showGuide,showInstructions } = this.state;
     const title = showIntro ? null : 'LEYENDA DE ÁREAS NATURALES';
     const subtitle = showIntro ? null : <Legend />;
     return (
@@ -72,13 +97,23 @@ class HomeContainer extends React.Component {
       >
         {showIntro && <Intro onEnd={this.handleOnEndIntro} />}
         {!showIntro && (
+        <div>
           <Map
             areaView={this.state.areaView}
             modeView={this.state.modeView}
             onChangeMode={this.handleOnChangeMode}
             onChangeArea={this.handleOnChangeArea}
           />
+          {showGuide && <HomeGuideTour
+            run={this.state.run}
+            onNext={this.handleOnNextTour}
+            onFinish={this.handleOnCloseTour}
+            onClose={this.handleOnCloseTour}
+          />
+          }
+          </div>
         )}
+        
         <Instructions
           visible={this.state.showInstructions}
           onClose={this.handleOnCloseInstructions}

@@ -56,18 +56,18 @@ class MapToolBar extends React.Component {
     );
 
     return (
-      <div className="toolbar toolbar-menu toolbar-right">
+      <div className="toolbar toolbar-menu toolbar-right" >
         <ul>
           <li>
             <Popover content={RadioMapView} trigger="click">
-              <Button size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
+              <Button id="visualizar_guide" size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
                 <Icon type="eye" style={{ fontSize: '32px', lineHeight: '44px' }}/>
               </Button>
             </Popover>
           </li>
           <li>
             <Popover content={RadioAreaView} trigger="click">
-              <Button size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
+              <Button id="capas_guide" size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
                 <Icon type="layers" style={{ fontSize: '32px', lineHeight: '44px' }}/>
               </Button>
             </Popover>
