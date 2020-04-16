@@ -100,7 +100,7 @@ class LandDetailContainer extends React.Component {
       })
       .catch(err => {
         if (err.status == 401) {
-          self.props.history.push('/login');
+          self.props.history.push('/register/user?next=/land/' + land.id);
         } else {
           setSubmitting(false);
           notification.error({
