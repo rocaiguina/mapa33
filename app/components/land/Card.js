@@ -24,7 +24,12 @@ class LandCard extends React.Component {
         }
         actions={[
           <div key="1" className="text-left">
-            <Icon type="heart" key="heart" /> {Numeral(this.props.likes).format('0,0')}
+            {this.props.level != 'conserved' && (
+              <span>
+                <Icon type="heart" key="heart" />{' '}
+                {Numeral(this.props.likes).format('0,0')}
+              </span>
+            )}
           </div>,
           <div key="2" className="text-right">
             <Icon type="share-alt" key="share-alt" />
@@ -32,7 +37,10 @@ class LandCard extends React.Component {
         ]}
       >
         <Link to={`/land/${this.props.id}`}>
-          <Meta title={this.props.name} description={this.props.location || 'No definido'} />
+          <Meta
+            title={this.props.name}
+            description={this.props.location || 'No definido'}
+          />
         </Link>
       </Card>
     );
