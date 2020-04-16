@@ -26,14 +26,10 @@ class LandController {
 
     switch (level) {
       case 'proposed':
-        conditions[Op.or] = [
-          {
-            level: { [Op.in]: PROPOSED_LAND_LEVELS },
-          },
-          {
-            status: 'approved',
-          },
-        ];
+        conditions.level = {
+          [Op.in]: PROPOSED_LAND_LEVELS,
+        };
+        conditions.status = 'approved';
         break;
       case 'conserved':
         conditions.level = {
@@ -70,10 +66,12 @@ class LandController {
   findGeoJson(req, res) {
     let area = req.query.area;
     let paramLevels = [];
+    let extraConditions = '';
 
     switch (area) {
       case 'proposed':
         paramLevels = PROPOSED_LAND_LEVELS;
+        extraConditions = 'AND status=\'approved\'';
         break;
       case 'conserved':
         paramLevels = CONSERVED_LAND_LEVELS;
@@ -92,7 +90,7 @@ class LandController {
               'Feature' AS TYPE,
               ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry,
               row_to_json (( SELECT l FROM ( SELECT ID, name, entity, status, location, year_acquisition ) AS l )) AS properties
-            FROM lands AS lg WHERE level IN (:levels)
+            FROM lands AS lg WHERE level IN (:levels) ${extraConditions}
           ) AS f
         ) AS fc
     `;
