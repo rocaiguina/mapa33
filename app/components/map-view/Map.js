@@ -226,8 +226,8 @@ class Map extends Component {
   render() {
     return (
       <div className="mapbox-wrapper">
-        <div ref={el => (this.mapContainer = el)} className="mapbox-view" />
-        <div className="toolbar hidden-sm hidden-xs">
+        <div id="map_guide" ref={el => (this.mapContainer = el)} className="mapbox-view" />
+        <div className="toolbar hidden-sm hidden-xs"  style={{zIndex: 99}}>
           <ul>
             <li>
               <Button

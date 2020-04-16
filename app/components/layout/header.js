@@ -38,6 +38,7 @@ class Header extends Component {
             <div className="bottom-actions">
               {this.props.showProfileBtn && (
                 <Link
+                  id="user_guide"
                   to="/profile"
                   className="ant-btn ant-btn-lg ant-btn-round ant-btn-background-ghost"
                 >
@@ -45,7 +46,7 @@ class Header extends Component {
                 </Link>
               )}
               {this.props.showMenuBtn && (
-                <Button
+                <Button                  
                   size="large"
                   ghost
                   shape="round"

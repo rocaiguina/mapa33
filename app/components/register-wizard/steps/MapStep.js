@@ -41,8 +41,8 @@ class MapStep extends React.Component {
     });
   };
 
-  handleOnNextTour = index => {
-    if (index == 2) {
+  handleOnNextTour = (index) => {
+    if (index == 5) {
       this.setState({
         run: false,
       });
