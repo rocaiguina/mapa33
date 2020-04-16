@@ -583,7 +583,8 @@ body {
 }
 
 .footer .first-column {
-  padding: 20px 20px 20px 0;
+  /*padding: 20px 20px 20px 0;*/
+  padding-top: 10px;
 }
 
 .footer .second-column {
@@ -758,6 +759,7 @@ ul.actions {
 .land-detail .land-title {
   font-size: 24px;
   font-weight: bold;
+  line-height: 28px;
   margin-bottom: 5px;
 }
 
@@ -1069,7 +1071,6 @@ ul.actions {
   border: 2px dotted #fff !important;
   border-radius: 30px !important;
   display: inline-block;
-  margin-bottom: 5px;
   padding: 4px;
 }
 
@@ -1095,6 +1096,7 @@ ul.actions {
 .ant-btn-desc {
   color: #f073a8;
   font-weight: bold;
+  margin-top: 5px;
 }
 
 /* Custom buttons */

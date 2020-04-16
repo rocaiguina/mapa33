@@ -109,13 +109,19 @@ class LandDetail extends React.Component {
                     loading={this.state.loading}
                     onClick={this.handleOnClickLike}
                   >
-                    {this.props.level == 'conserved' ? 'Conservado' : 'Apoyar'}
+                    {this.props.level == 'conserved'
+                      ? 'Conservado'
+                      : this.props.disabledLike
+                      ? 'Apoyado'
+                      : 'Apoyar'}
                   </Button>
                 </div>
               </div>
               <p className="land-reason-conservation">
                 ¿Por qué es importante la protección de
-                {this.props.plots_count > 1 ? 'estos terrenos' : 'este terreno'}
+                {this.props.plots_count > 1
+                  ? ' estos terrenos '
+                  : ' este terreno '}
                 en particular?
               </p>
               <p style={{ flex: '1 0 auto' }}>
@@ -133,7 +139,11 @@ class LandDetail extends React.Component {
                   loading={this.state.loading}
                   onClick={this.handleOnClickLike}
                 >
-                  {this.props.level == 'conserved' ? 'Conservado' : 'Apoyar'}
+                  {this.props.level == 'conserved'
+                    ? 'Conservado'
+                    : this.props.disabledLike
+                    ? 'Apoyado'
+                    : 'Apoyar'}
                 </Button>
               </div>
             </Col>

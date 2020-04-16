@@ -18,7 +18,7 @@ import SurveyingStep from './steps/SurveyingStep';
 import ContaminationStep from './steps/ContaminationStep';
 import KnowOwnerStep from './steps/KnowOwnerStep';
 import YesFillFormStep from './steps/YesFillFormStep';
-import WichUseStep from './steps/WichUseStep';
+import WhichUseStep from './steps/WhichUseStep';
 import SubmitStep from './steps/SubmitStep';
 import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
@@ -65,6 +65,14 @@ class RegisterWizard extends React.Component {
 
   handleOnNext = ({ step, push }, values, setFieldValue) => {
     switch (step.id) {
+      case 'propose-land':
+        if (values.want_propose !== null && !values.want_propose) {
+          const { history } = this.props;
+          history.replace('/');
+        } else {
+          push();
+        }
+        break;
       case 'are-you-owner':
         if (values.are_u_owner) {
           setFieldValue('owner_name', values.user.full_name);
@@ -329,13 +337,14 @@ class RegisterWizard extends React.Component {
                   )}
                 />
                 <Step
-                  id="wich-uses"
+                  id="which-uses"
                   render={({ next, previous }) => (
-                    <WichUseStep
-                      wich_uses={values.wich_uses}
+                    <WhichUseStep
+                      which_uses={values.which_uses}
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      setFieldValue={setFieldValue}
                     />
                   )}
                 />
@@ -363,7 +372,7 @@ class RegisterWizard extends React.Component {
                       other_main_attributes={values.lands_other_attributes}
                       main_uses={values.lands_main_uses}
                       other_main_uses={values.lands_other_main_uses}
-                      proposed_uses={values.wich_uses}
+                      proposed_uses={values.which_uses}
                       area_size={values.area_size}
                       plots_count={values.plots_count}
                       coordinates={values.coordinates}

@@ -39,7 +39,7 @@ class ProfileUser extends React.Component {
       })
       .catch(err => {
         if (err.status == 401) {
-          return self.props.history.replace('/login');
+          return self.props.history.replace('/register/user?next=/profile');
         }
         notification.error({
           message: 'Error',

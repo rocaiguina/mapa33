@@ -6,7 +6,8 @@ import BaseLayout from '../../components/layout/base';
 class RegisterUserSuccessful extends React.Component {
   render() {
     const { location } = this.props;
-    const next = location.state && location.state.next;
+    const queryParams = new URLSearchParams(location.search);
+    const next = queryParams.get('next') || '/';
     return (
       <BaseLayout
         title="BIENVENIDO A MAPA33"
@@ -20,7 +21,7 @@ class RegisterUserSuccessful extends React.Component {
             debitis.
           </p>
           <Link
-            to={next ? next : '/login'}
+            to={next}
             className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
           >
             Continuar

@@ -94,13 +94,13 @@ class LandDetailContainer extends React.Component {
           disabledLike: true,
         }));
         notification.success({
-          message: 'Registros satisfactorio',
-          description: 'Gracias por darnos tu apoyo.',
+          message: 'Registro satisfactorio',
+          description: 'Gracias por su apoyo.',
         });
       })
       .catch(err => {
         if (err.status == 401) {
-          self.props.history.push('/login');
+          self.props.history.push('/register/user?next=/land/' + land.id);
         } else {
           setSubmitting(false);
           notification.error({

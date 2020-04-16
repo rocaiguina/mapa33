@@ -11,8 +11,8 @@ class RegisterUser extends React.Component {
     const queryParams = new URLSearchParams(location.search);
     UserApi.register(values)
       .then(() => {
-        const next = queryParams.get('next');
-        history.push('/register/user/successful', { next });
+        const next = queryParams.get('next') || '/';
+        history.push('/register/user/successful?next=' + next);
       })
       .catch(() => {
         setSubmitting(false);
