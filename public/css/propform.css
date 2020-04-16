@@ -337,7 +337,7 @@
 }
 .radiobutton{
   width: 100% !important;
-  font-weight: bolder !important;
+  font-weight: 500 !important;
   text-align: center !important;
 }
 .buttonok{

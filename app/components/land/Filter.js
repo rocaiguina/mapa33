@@ -12,7 +12,7 @@ class Filter extends React.Component {
           <Col xs={10} md={8}>
             <Row>
               <Col xs={24} md={6}>
-                <label>Región</label>
+                <label>Pueblo</label>
               </Col>
               <Col xs={24} md={18}>
                 <Select

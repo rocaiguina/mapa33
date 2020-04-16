@@ -25,9 +25,6 @@ body {
   line-height: 1.42857143 !important;
   color: #333333;
   background-color: #fff;
-  font-variant: normal !important;
-  -webkit-font-feature-settings: normal !important;
-  font-feature-settings: normal !important;
 }
 
 .container {
@@ -1023,10 +1020,11 @@ ul.actions {
   .ant-modal.ant-modal-full {
     bottom: 0;
     left: 0;
+    height: 100%;
     margin: 0;
     right: 0;
     padding: 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100% !important;
   }
@@ -1035,6 +1033,7 @@ ul.actions {
   }
   .ant-modal.ant-modal-full .ant-modal-content {
     box-shadow: none;
+    border-radius: 0;
   }
 }
 

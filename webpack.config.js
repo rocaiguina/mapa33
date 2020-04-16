@@ -43,6 +43,24 @@ module.exports = {
       }, {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+      }, {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          }, {
+            loader: 'css-loader'
+          }, {
+            loader: 'less-loader',
+            options: {
+              modifyVars: {
+                'font-variant-base': 'normal',
+                'font-feature-settings-base': 'normal'
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
       }
     ]
   }
