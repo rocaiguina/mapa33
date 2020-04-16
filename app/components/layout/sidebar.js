@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
       >
         <ul>
           <li>
-            <Link to="/about-us">Sobre Mapa 33</Link>
+            <Link to="/about-us">Sobre Mapa-33</Link>
           </li>
           <li>
             <Link to="/">Mapa Inicial</Link>

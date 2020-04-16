@@ -287,7 +287,7 @@ class LandController {
         const msg = {
             to: req.user.email,
             from: process.env.DEFAULT_EMAIL_FROM,
-            subject: '¡Gracias por llenar el formulario para el Mapa 33!',
+            subject: '¡Gracias por llenar el formulario para el Mapa-33!',
             html: html,
         }
         sgMail.send(msg).
