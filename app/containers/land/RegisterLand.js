@@ -27,7 +27,7 @@ class RegisterLand extends React.Component {
       lands_attributes: [],
       lands_other_attributes: null,
       has_contamination: null,
-      wich_uses: [],
+      which_uses: [],
       importance_of_knowing: '',
       want_propose: null,
       know_owner: null,
