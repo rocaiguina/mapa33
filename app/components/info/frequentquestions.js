@@ -33,7 +33,7 @@ class FrequentQuestions extends React.Component {
               </a>
             </p>
             <br />
-            <h3>¿Por qué el Mapa 33?</h3>
+            <h3>¿Por qué el Mapa-33?</h3>
             <p>
               Creemos en el poder transformador de la naturaleza, en su
               generosidad, su nobleza y esplendor. Creemos que nuestro progreso
@@ -42,7 +42,7 @@ class FrequentQuestions extends React.Component {
               naturales de Puerto Rico estén protegidos para el año 2033.
             </p>
             <br />
-            <h3>¿Quién puede participar en Mapa 33?</h3>
+            <h3>¿Quién puede participar en Mapa-33?</h3>
             <p>
               Cualquier ciudadano de Puerto Rico que haya pasado por el proceso
               de registro de la herramienta puede participar del esfuerzo de
