@@ -31,6 +31,38 @@ const landValidationSchema = Yup.object().shape({
 });
 
 class RegisterWizard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lots: [],
+    };
+  }
+
+  handleOnChangeLand = (data, setFieldValue) => {
+    let location = '';
+    if (data.lands.length > 0) {
+      location = data.lands[0]['municipality'];
+    }
+    let catastro_numbers = [];
+    data.lands.forEach(item => {
+      catastro_numbers.push(item.catastro);
+    });
+    setFieldValue('lands', data.lands);
+    setFieldValue('location', location);
+    setFieldValue('catastro_numbers', catastro_numbers);
+    setFieldValue('coordinates', data.coordinates.geometry);
+    setFieldValue('geojson', data.geojson);
+    setFieldValue('plots_count', data.lots.length);
+    setFieldValue('area_size', data.geojson.properties.area);
+    this.setState({
+      lots: data.lots,
+    });
+  };
+
+  handleOnRenderMap = (data, setFieldValue) => {
+    setFieldValue('base64Img', data);
+  };
+
   handleOnNext = ({ step, push }, values, setFieldValue) => {
     switch (step.id) {
       case 'are-you-owner':
@@ -100,9 +132,15 @@ class RegisterWizard extends React.Component {
                   id="map"
                   render={({ next, previous }) => (
                     <MapStep
+                      lots={this.state.lots}
                       next={next}
                       previous={previous}
-                      setFieldValue={setFieldValue}
+                      onChange={data => {
+                        this.handleOnChangeLand(data, setFieldValue);
+                      }}
+                      onRenderMinimap={base64 => {
+                        this.handleOnRenderMap(base64, setFieldValue);
+                      }}
                     />
                   )}
                 />

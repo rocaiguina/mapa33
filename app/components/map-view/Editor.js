@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { notification } from 'antd';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -11,6 +12,7 @@ import clone from '@turf/clone';
 import area from '@turf/area';
 import centroid from '@turf/centroid';
 import { Icon } from 'antd';
+import Numeral from 'numeral';
 import Button from '../ui/Button';
 
 mapboxgl.accessToken =
@@ -53,34 +55,31 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selection: [],
-      geojson: {
+      geojson: {  // Geojson data source for map.
         type: 'FeatureCollection',
         features: [],
       },
-      area: 0.0,
+      area: 0.0,  // Geojson area.
       address: '',
-      error: '',
       activeLoc: false,
-      activeSel: true,
-      latitude: 0.0,
-      longitude: 0.0,
     };
   }
 
   componentDidMount() {
+    const { center, lots, zoom } = this.props;
+
     map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
-      center: [-66.45, 18.2],
-      zoom: 14,
+      center: center,
+      zoom: zoom,
       attributionControl: false,
     });
 
     miniMap = new mapboxgl.Map({
       container: this.miniMapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
-      center: [-66.45, 18.2],
+      center: center,
       zoom: 6.5,
       attributionControl: false,
       interactive: false,
@@ -164,6 +163,17 @@ class Editor extends Component {
         },
         'waterway-label'
       );
+
+      // Load polygons
+      this.buildPolygons(lots)
+        .then(({geojson}) => {
+          if (this.props.lots.length > 0) {
+            const bounds = bbox(geojson);
+            map.fitBounds(bounds, {
+              animate: false,
+            });
+          }
+        });
     });
 
     miniMap.on('load', () => {
@@ -255,38 +265,34 @@ class Editor extends Component {
     });
 
     map.on('click', 'lots', e => {
-      if (this.state.activeSel) {
-        const { id } = e.features[0].properties;
-        const exist = this.state.selection.indexOf(id) > -1;
-        if (!exist) {
-          if (this.state.selection.length >= 3) {
-            notification.error({
-              message: 'Error',
-              description: 'No puede elegir más de 3 parcelas.',
-            });
-            return;
-          }
+      const { id } = e.features[0].properties;
+      const { lots } = this.props;
+      const exist = lots.indexOf(id) > -1;
+      if (!exist) {
+        if (lots.length >= 3) {
+          notification.error({
+            message: 'Error',
+            description: 'No puede elegir más de 3 parcelas.',
+          });
+          return;
+        }
+        const newLots = _.concat(lots, id);
 
-          this.setState(state => {
-            return {
-              selection: _.concat(state.selection, id),
-            };
+        this.buildPolygons(newLots)
+          .then(({geojson, area}) => {
+            this.handleOnChange(geojson, area, newLots);
           });
-          
-          this.getPolygons();
+      } else {
+        const newLots = _.remove(lots, n => {
+          return n !== id;
+        });
+        if (newLots.length > 0) {
+          this.buildPolygons(newLots)
+            .then(({geojson, area}) => {
+              this.handleOnChange(geojson, area, newLots);
+            });
         } else {
-          this.setState(state => {
-            return {
-              selection: _.remove(state.selection, n => {
-                return n !== id;
-              }),
-            };
-          });
-          if (this.state.selection.length > 0) {
-            this.getPolygons();
-          } else {
-            this.trashPolygons();
-          }
+          this.trashPolygons();
         }
       }
     });
@@ -316,6 +322,10 @@ class Editor extends Component {
     });
   };
 
+  getArea = polygon => {
+    return area(polygon);
+  }
+
   merge = polygons => {
     let merged = clone(polygons.features[0]);
     const { features } = polygons;
@@ -326,60 +336,138 @@ class Editor extends Component {
     return merged;
   };
 
-  getPolygons = () => {
-    fetch(`/api/land/select`, {
-      method: 'post',
-      body: JSON.stringify({
-        id: this.state.selection,
-      }),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        const geojson = data[0].geojson;
-        const features = this.merge(geojson);
-        this.area(features);
-        this.getAddress(features);
-        const bounds = bbox(features);
-        const coordinates = centroid(features);
-        // Fields for database
-        features.properties.area = this.state.area;
-        features.properties.lots = this.state.selection.length;
-
-        miniMap.fitBounds(bounds, {
-          animate: false,
-          padding: 30,
-        });
-        miniMap.getSource('geojson').setData(features);
-        map.getSource('geojson').setData(features);
-
-        this.setState({
-          geojson: features,
-        });
-
-        if (this.props.onSelect) {
-          var lands = geojson.features.map(item => {
-            return item.properties;
+  buildPolygons = (lots) => {
+    return new Promise((resolve, reject) => {
+      if (lots.length > 0) {
+        fetch(`/api/land/select`, {
+          method: 'post',
+          body: JSON.stringify({
+            id: lots,
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            const geojson = this.merge(data[0].geojson);
+            const area = this.getArea(geojson);
+            const bounds = bbox(geojson);
+            miniMap.fitBounds(bounds, {
+              animate: false,
+              padding: 30,
+            });
+            miniMap.getSource('geojson').setData(geojson);
+            map.getSource('geojson').setData(geojson);
+            geojson.features = data[0].geojson.features;
+            geojson.properties.area = area;
+            this.setState({
+              area,
+            });
+            resolve({
+              geojson,
+              area,
+            });
+          })
+          .catch(err => {
+            reject(err);
           });
-
-          var sdata = {
-            lands: lands,
-            coordinates: coordinates,
-            address: this.state.address,
-            geojson: features,
-          };
-          this.props.onSelect(sdata);
+        } else {
+          resolve({
+            geojson: this.getEmptyGeoJson(),
+            area: 0
+          });
         }
-      })
-      .catch(error => {
-        this.setState({
-          error: error.message,
-        });
+    });
+  }
+
+  getEmptyGeoJson() {
+    return {
+      type: 'FeatureCollection',
+      features: [],
+      properties: {
+        area: 0,
+      },
+    };
+  }
+
+  handleOnChange = (geojson, area, lots) => {
+    if (this.props.onChange) {
+      const lands = geojson.features.map(item => {
+        return item.properties;
       });
-  };
+      const coordinates = centroid(geojson);
+
+      var data = {
+        lots,
+        lands,
+        coordinates,
+        geojson,
+      };
+      this.props.onChange(data);
+    }
+  }
+
+  // getPolygons = (newLots) => {
+  //   const { lots } = this.props;
+  //   if (lots !== newLots) {
+  //     fetch(`/api/land/select`, {
+  //       method: 'post',
+  //       body: JSON.stringify({
+  //         id: newLots,
+  //       }),
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         const geojson = data[0].geojson;
+  //         const features = this.merge(geojson);
+  //         this.area(features);
+  //         this.getAddress(features);
+  //         const bounds = bbox(features);
+  //         const coordinates = centroid(features);
+  //         // Fields for database
+  //         features.properties.area = this.state.area;
+  //         features.properties.lots = this.state.selection.length;
+
+  //         miniMap.fitBounds(bounds, {
+  //           animate: false,
+  //           padding: 30,
+  //         });
+  //         miniMap.getSource('geojson').setData(features);
+  //         map.getSource('geojson').setData(features);
+
+  //         this.setState({
+  //           geojson: features,
+  //         });
+
+  //         if (this.props.onChange) {
+  //           var lands = geojson.features.map(item => {
+  //             return item.properties;
+  //           });
+
+  //           var sdata = {
+  //             lots: newLots,
+  //             lands: lands,
+  //             coordinates: coordinates,
+  //             address: this.state.address,
+  //             geojson: features,
+  //           };
+  //           this.props.onChange(sdata);
+  //         }
+  //       })
+  //       .catch(error => {
+  //         notification.error({
+  //           message: 'Error',
+  //           description: 'No se encuentra información disponible. Intenta nuevamente.',
+  //         });
+  //       });
+  //   } 
+  // };
 
   getAddress = polygon => {
     const center = centroid(polygon);
@@ -393,34 +481,24 @@ class Editor extends Component {
             data.features[0].place_name || 'No hay dirección disponible.',
         })
       )
-      .catch(error => this.setState({ address: error.message }));
+      .catch(error => {
+        notification.error({
+          message: 'Error',
+          description: 'No se encuentra información disponible. Intenta nuevamente.',
+        });
+      });
   };
 
   trashPolygons = () => {
-    this.setState(
-      {
-        selection: [],
-        geojson: {
-          type: 'FeatureCollection',
-          features: [],
-        },
-      },
-      () => {
-        miniMap.getSource('geojson').setData({
-          type: 'FeatureCollection',
-          features: [],
-        });
-        map.getSource('geojson').setData({
-          type: 'FeatureCollection',
-          features: [],
-        });
-        miniMap.flyTo({
-          center: [-66.45, 18.2],
-          zoom: 6.5,
-          speed: 1.2,
-        });
-      }
-    );
+    const emptyGeoJson = this.getEmptyGeoJson();
+    miniMap.getSource('geojson').setData(emptyGeoJson);
+    map.getSource('geojson').setData(emptyGeoJson);
+    miniMap.flyTo({
+      center: [-66.45, 18.2],
+      zoom: 6.5,
+      speed: 1.2,
+    });
+    this.handleOnChange(emptyGeoJson, 0, []);
   };
 
   setLoc = () => {
@@ -430,13 +508,10 @@ class Editor extends Component {
       });
       navigator.geolocation.getCurrentPosition(position => {
         if (position) {
-          this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          const { longitude, latitude } = position.coords;
 
           map.flyTo({
-            center: [this.state.longitude, this.state.latitude],
+            center: [longitude, latitude],
             zoom: 17,
             speed: 1.2,
             curve: 1,
@@ -446,7 +521,7 @@ class Editor extends Component {
           });
 
           marker
-            .setLngLat([this.state.longitude, this.state.latitude])
+            .setLngLat([longitude, latitude])
             .addTo(map);
         }
       });
@@ -509,13 +584,11 @@ class Editor extends Component {
 
         <div className="boxmap-preview">
           <div className="boxmap-info">
-            Parcelas Seleccionadas: {this.state.selection.length}
+            Parcelas Seleccionadas: {this.props.lots.length}
           </div>
           <div className="boxmap-info">
             Área:{' '}
-            {this.state.area.toLocaleString(navigator.language, {
-              maximumFractionDigits: 2,
-            })}{' '}
+            {Numeral(this.state.area).format('0,0.00')}{' '}
             m<sup>2</sup>
           </div>
 
@@ -524,11 +597,25 @@ class Editor extends Component {
             ref={el => (this.miniMapContainer = el)}
             style={{ height: 200 }}
           />
-          {this.state.error && this.state.error}
         </div>
       </div>
     );
   }
 }
+
+Editor.defaultProps = {
+  lots: [],
+  center: [-66.45, 18.2],
+  zoom: 14,
+}
+
+Editor.propTypes = {
+  lots: PropTypes.array,  // Selected lots ID,
+  center: PropTypes.array,  // Center location,
+  zoom: PropTypes.number,  // Zoom
+  onRenderMinimap: PropTypes.func,
+  onZoom: PropTypes.func,
+  onChange: PropTypes.func,
+};
 
 export default Editor;

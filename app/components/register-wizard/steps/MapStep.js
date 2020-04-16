@@ -11,39 +11,11 @@ class MapStep extends React.Component {
     this.state = {
       run: true,
       hasRunned: false,
-      lands: [],
     };
   }
 
-  handleOnSelect = data => {
-    this.setState({
-      lands: data.lands,
-    });
-    let location = '';
-    if (data.lands.length > 0) {
-      location = data.lands[0]['municipality'];
-    }
-    let catastro_numbers = [];
-    data.lands.forEach(item => {
-      catastro_numbers.push(item.catastro);
-    });
-    const { setFieldValue } = this.props;
-    setFieldValue('lands', data.lands);
-    setFieldValue('location', location);
-    setFieldValue('catastro_numbers', catastro_numbers);
-    setFieldValue('coordinates', data.coordinates.geometry);
-    setFieldValue('geojson', data.geojson);
-    setFieldValue('plots_count', data.geojson.properties.lots);
-    setFieldValue('area_size', data.geojson.properties.area);
-  };
-
-  handleOnRenderMiniMap = base64Img => {
-    const { setFieldValue } = this.props;
-    setFieldValue('base64Img', base64Img);
-  };
-
   handleOnSubmit = () => {
-    if (this.state.lands.length > 0) {
+    if (this.props.lots.length > 0) {
       this.props.next();
     } else {
       notification.error({
@@ -69,7 +41,7 @@ class MapStep extends React.Component {
     });
   };
 
-  handleOnNextTour = (index) => {
+  handleOnNextTour = index => {
     if (index == 2) {
       this.setState({
         run: false,
@@ -106,8 +78,9 @@ class MapStep extends React.Component {
       >
         <div className="main-content m-t-20">
           <MapEditor
-            onRenderMinimap={this.handleOnRenderMiniMap}
-            onSelect={this.handleOnSelect}
+            lots={this.props.lots}
+            onRenderMinimap={this.props.onRenderMinimap}
+            onChange={this.props.onChange}
             onZoom={this.handleOnZoom}
           />
         </div>
@@ -117,9 +90,11 @@ class MapStep extends React.Component {
 }
 
 MapStep.propTypes = {
+  lots: PropTypes.array,
+  onChange: PropTypes.func,
+  onRenderMinimap: PropTypes.func,
   history: PropTypes.object,
   next: PropTypes.func,
-  setFieldValue: PropTypes.func,
 };
 
 export default MapStep;
