@@ -42,10 +42,12 @@ class Item extends React.Component {
                 </span>
               </Col>
               <Col xs={12} md={3}>
-                <span className="like-counter">
-                  <Icon type="heart" theme="filled" />
-                  {Numeral(this.props.likes).format('0,0')}
-                </span>
+                {this.props.level != 'conserved' && (
+                  <span className="like-counter">
+                    <Icon type="heart" theme="filled" />
+                    {Numeral(this.props.likes).format('0,0')}
+                  </span>
+                )}
               </Col>
               <Col xs={12} md={3} className="text-right">
                 <Link
