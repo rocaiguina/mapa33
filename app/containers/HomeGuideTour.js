@@ -89,9 +89,6 @@ class HomeGuideTour extends React.Component {
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
       // Update state to advance the tour
       const newIndex = index + (action === ACTIONS.PREV ? -1 : 1);
-      console.error("NUMBER: "+ index);
-      console.error("NUMBER STEP: "+ newIndex);
-      console.error("DATA: "+JSON.stringify(data))
       this.setState({ stepIndex: newIndex });
 //      if (index < 4) {
 //        this.setState({

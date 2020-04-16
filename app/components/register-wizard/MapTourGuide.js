@@ -7,8 +7,52 @@ class MapTourGuide extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stepIndex: 0,
+      stepIndex: 6,
+      stepGuide:0,
       steps: [
+        {
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },{
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },{
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },{
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },{
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },{
+            target: '#mapbox-search',
+            content: (
+                    <h1>auxiliar</h1>
+            ),
+            disableBeacon: true,
+            placement: 'bottom',
+        },
         {
           target: '#mapbox-search',
           content: (
@@ -68,7 +112,7 @@ class MapTourGuide extends React.Component {
       ],
     };
   }
-
+  
   handleOnCloseTutorial = () => {
     const { onClose } = this.props;
     if (onClose) {
@@ -82,12 +126,7 @@ class MapTourGuide extends React.Component {
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
       // Update state to advance the tour
       const newIndex = index + (action === ACTIONS.PREV ? -1 : 1);
-      this.setState({ stepIndex: newIndex });
-      // if (index < 4) {
-      //   this.setState({
-      //     stepIndex: index + 1 + (action === ACTIONS.PREV ? -1 : 1),
-      //   });
-      // }
+      this.setState({ stepIndex: newIndex, stepGuide:  newIndex-6});
       const { onNext } = this.props;
       if (onNext) {
         onNext(newIndex);
@@ -103,9 +142,9 @@ class MapTourGuide extends React.Component {
 
   render() {
     const { run } = this.props;
-    const { stepIndex, steps } = this.state;
+    const { stepIndex, steps, stepGuide } = this.state;
     return (
-      <div>
+      <div style={{width: '100%'}}>
         <Joyride
           callback={this.handleJoyrideCallback}
           steps={steps}
@@ -128,29 +167,31 @@ class MapTourGuide extends React.Component {
               textColor: '#000',
               width: 900,
               zIndex: 99,
-            },
+            }
           }}
         />
         {run && (
+        <div className="maptour_guide" >
+            <h1
+                style={{ color: 'white', fontWeight: 'bold'}}
+                className="guide_up"
+              >
+              <span>Explicación&nbsp;</span>&nbsp; {stepGuide + 1}/5
+            </h1>
           <Button
-            style={{ right: '0' }}
-            className="ant-btn m33-btn ant-btn-secondary ant-btn-lg tourup"
+            className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
+            style={{borderRadius: "15px", fontWeight: 'bold'}}
             onClick={this.handleOnCloseTutorial}
           >
-            Cerrar Tutorial
+            Cerrar explicación
           </Button>
-        )}
-        {run && (
-          <h1
-            style={{ left: '0', color: 'white', fontWeight: 'bold' }}
-            className="tourup"
-          >
-            {stepIndex + 1}/5
-          </h1>
+        </div>
         )}
       </div>
     );
+
   }
+  
 }
 
 MapTourGuide.propTypes = {

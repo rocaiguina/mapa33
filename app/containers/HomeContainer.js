@@ -75,6 +75,7 @@ class HomeContainer extends React.Component {
     if (index == 5) {
       this.setState({
         run: false,
+        showGuide: false,
       });
       LocalStorage.setItem('showGuide', '0');
     }

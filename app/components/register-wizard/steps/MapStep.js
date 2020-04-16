@@ -4,6 +4,7 @@ import { Button, notification } from 'antd';
 import BaseLayout from '../../layout/base';
 import MapEditor from '../../map-view/Editor';
 import MapTourGuide from '../MapTourGuide';
+import LocalStorage from '../../../services/LocalStorage';
 
 class MapStep extends React.Component {
   constructor(props) {
@@ -12,9 +13,17 @@ class MapStep extends React.Component {
       run: true,
       hasRunned: false,
       lands: [],
+      showMapGuide: false,
     };
   }
 
+  componentDidMount() {
+    var showMapGuide = LocalStorage.getItem('showMapGuide', '1');
+    this.setState({
+      showMapGuide: showMapGuide == '1',
+    });
+  }
+  
   handleOnSelect = data => {
     this.setState({
       lands: data.lands,
@@ -66,19 +75,24 @@ class MapStep extends React.Component {
     this.setState({
       run: false,
       hasRunned: true,
+      showMapGuide: false,
     });
+      LocalStorage.setItem('showMapGuide', '0');
   };
 
   handleOnNextTour = (index) => {
-    if (index == 5) {
+    if (index == 11) {
       this.setState({
         run: false,
+        showMapGuide: false,
       });
+      LocalStorage.setItem('showMapGuide', '0');
     }
   };
 
   render() {
     const footerXs = [14, 0, 10];
+    const {showMapGuide} = this.state;
     return (
       <BaseLayout
         title="ESCOGE TU TERRENO/PROPUESTA"
@@ -96,12 +110,7 @@ class MapStep extends React.Component {
           </Button>
         }
         afterFooter={
-          <MapTourGuide
-            run={this.state.run}
-            onNext={this.handleOnNextTour}
-            onFinish={this.handleOnCloseTour}
-            onClose={this.handleOnCloseTour}
-          />
+          showMapGuide && <MapTourGuide run={this.state.run} onNext={this.handleOnNextTour} onFinish={this.handleOnCloseTour} onClose={this.handleOnCloseTour}/>
         }
       >
         <div className="main-content m-t-20">
