@@ -10,7 +10,6 @@ const User = Models.User;
 const LandLikes = Models.LandLikes;
 const Op = Sequelize.Op;
 
-const jwt = require('jsonwebtoken');
 const TemplateEngine = require('../utils/template-engine');
 const sgMail = require('@sendgrid/mail');
 
@@ -64,50 +63,59 @@ class LandController {
   }
 
   findGeoJson(req, res) {
-    let area = req.query.area;
-    let paramLevels = [];
-    let extraConditions = '';
+    let level = req.query.area;
 
-    switch (area) {
+    let conditions = {};
+
+    switch (level) {
       case 'proposed':
-        paramLevels = PROPOSED_LAND_LEVELS;
-        extraConditions = 'AND status=\'approved\'';
+        conditions.level = {
+          [Op.in]: PROPOSED_LAND_LEVELS,
+        };
+        conditions.status = 'approved';
         break;
       case 'conserved':
-        paramLevels = CONSERVED_LAND_LEVELS;
+        conditions.level = {
+          [Op.in]: CONSERVED_LAND_LEVELS,
+        };
         break;
     }
 
-    let query = `
-      SELECT
-        row_to_json ( fc ) AS geojson
-        FROM (
-          SELECT 
-            'FeatureCollection' AS TYPE,
-            array_to_json ( ARRAY_AGG ( f ) ) AS features
-          FROM (
-            SELECT 
-              'Feature' AS TYPE,
-              ST_AsGeoJSON ( ( lg.geom ), 15, 0 ) :: json AS geometry,
-              row_to_json (( SELECT l FROM ( SELECT ID, name, entity, status, location, year_acquisition ) AS l )) AS properties
-            FROM lands AS lg WHERE level IN (:levels) ${extraConditions}
-          ) AS f
-        ) AS fc
-    `;
+    Land.findAll({
+      attributes: [
+        'id',
+        'name',
+        'likes',
+        'level',
+        'status',
+        'geom',
+        'photograph',
+        'createdAt',
+      ],
+      where: conditions,
+    })
+      .then(function(lands) {
+        let response = {
+          geojson: {
+            type: 'FeatureCollection',
+            features: [],
+          },
+        };
+        lands.forEach(function(item) {
+          const properties = item.get({ plain: true });
+          delete properties.geom;
+          var row = {
+            type: 'Feature',
+            geometry: item.geom,
+            properties: properties,
+          };
+          response.geojson.features.push(row);
+        });
 
-    Models.sequelize
-      .query(query, {
-        replacements: { levels: paramLevels },
-        type: Models.sequelize.QueryTypes.SELECT,
-      })
-      .then(function(result) {
-        if (result.length > 0 && result[0].geojson.features == null) {
-          result[0].geojson.features = [];
-        }
-        res.send(result);
+        res.send([response]);
       })
       .catch(function(err) {
-        res.send(err);
+        res.status(400).send(err);
       });
   }
 
@@ -150,7 +158,7 @@ class LandController {
         {
           model: User,
           as: 'user',
-          attributes: ['first_name', 'last_name','email'],
+          attributes: ['first_name', 'last_name', 'email'],
         },
       ],
     })
@@ -361,7 +369,7 @@ class LandController {
 
     land
       .save()
-      .then(function() {          
+      .then(function() {
         res.send('');
       })
       .catch(function(err) {

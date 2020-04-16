@@ -1465,7 +1465,8 @@ ul.actions {
   width: 160px;
 }
 .mapbox-land-popup .land-details .land-title {
-  padding-right: 15px;  
+  line-height: 16px;
+  padding-right: 15px;
 }
 .mapbox-land-popup .land-details .land-title,
 .mapbox-land-popup .land-details .land-title a {
