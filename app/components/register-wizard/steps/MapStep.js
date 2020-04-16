@@ -11,6 +11,7 @@ class MapStep extends React.Component {
     this.state = {
       run: true,
       hasRunned: false,
+      loading: false,
     };
   }
 
@@ -49,6 +50,18 @@ class MapStep extends React.Component {
     }
   };
 
+  handleOnLoad = () => {
+    this.setState({
+      loading: true,
+    });
+  }
+
+  handleOnLoaded = () => {
+    this.setState({
+      loading: false,
+    });
+  }
+
   render() {
     const footerXs = [14, 0, 10];
     return (
@@ -63,6 +76,7 @@ class MapStep extends React.Component {
             size="large"
             block
             onClick={this.handleOnSubmit}
+            loading={this.state.loading}
           >
             Continuar
           </Button>
@@ -82,6 +96,8 @@ class MapStep extends React.Component {
             onRenderMinimap={this.props.onRenderMinimap}
             onChange={this.props.onChange}
             onZoom={this.handleOnZoom}
+            onLoad={this.handleOnLoad}
+            onLoaded={this.handleOnLoaded}
           />
         </div>
       </BaseLayout>

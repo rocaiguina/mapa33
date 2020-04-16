@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { notification } from 'antd';
+import { notification, Spin } from 'antd';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -62,6 +62,7 @@ class Editor extends Component {
       area: 0.0,  // Geojson area.
       address: '',
       activeLoc: false,
+      loading: false,
     };
   }
 
@@ -165,15 +166,15 @@ class Editor extends Component {
       );
 
       // Load polygons
-      this.buildPolygons(lots)
-        .then(({geojson}) => {
-          if (this.props.lots.length > 0) {
+      if (this.props.lots.length > 0) {
+        this.buildPolygons(lots)
+          .then(({geojson}) => {
             const bounds = bbox(geojson);
             map.fitBounds(bounds, {
               animate: false,
             });
-          }
-        });
+          });
+      }
     });
 
     miniMap.on('load', () => {
@@ -336,7 +337,26 @@ class Editor extends Component {
     return merged;
   };
 
+  handleOnLoad() {
+    this.setState({
+      loading: true,
+    });
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
+  }
+
+  handleOnLoaded() {
+    this.setState({
+      loading: false,
+    });
+    if (this.props.onLoaded) {
+      this.props.onLoaded();
+    }
+  }
+
   buildPolygons = (lots) => {
+    this.handleOnLoad();
     return new Promise((resolve, reject) => {
       if (lots.length > 0) {
         fetch(`/api/land/select`, {
@@ -372,8 +392,12 @@ class Editor extends Component {
           })
           .catch(err => {
             reject(err);
+          })
+          .finally(() => {
+            this.handleOnLoaded();
           });
         } else {
+          this.handleOnLoaded();
           resolve({
             geojson: this.getEmptyGeoJson(),
             area: 0
@@ -545,60 +569,62 @@ class Editor extends Component {
 
   render() {
     return (
-      <div className="mapbox-editor" ref={el => (this.mapContainer = el)}>
-        <div
-          id="mapbox-search"
-          className="boxmap-searchinput"
-          ref={el => (this.geocoderContainer = el)}
-        />
-
-        <div className="toolbar toolbar-mapeditor">
-          <ul>
-            <li>
-              <Button id="zoomInBtn" onClick={this.handleZoomIn}>
-                <i className="fas fa-fw fa-search-plus"></i>
-              </Button>
-            </li>
-            <li>
-              <Button id="zoomOutBtn" onClick={this.handleZoomOut}>
-                <i className="fas fa-fw fa-search-minus"></i>
-              </Button>
-            </li>
-            <li>
-              <Button id="mapPointerBtn" onClick={this.setSel}>
-                <i className="fas fa-fw fa-hand-pointer"></i>
-              </Button>
-            </li>
-            <li>
-              <Button id="trashBtn" onClick={this.trashPolygons}>
-                <i className="fas fa-fw fa-trash-alt"></i>
-              </Button>
-            </li>
-            <li>
-              <Button id="myLocationBtn" onClick={this.setLoc}>
-                <i className="fas fa-fw fa-map-marker-alt"></i>
-              </Button>
-            </li>
-          </ul>
-        </div>
-
-        <div className="boxmap-preview">
-          <div className="boxmap-info">
-            Parcelas Seleccionadas: {this.props.lots.length}
-          </div>
-          <div className="boxmap-info">
-            Área:{' '}
-            {Numeral(this.state.area).format('0,0.00')}{' '}
-            m<sup>2</sup>
-          </div>
-
+      <Spin spinning={this.state.loading}>
+        <div className="mapbox-editor" ref={el => (this.mapContainer = el)}>
           <div
-            className="m-t-5"
-            ref={el => (this.miniMapContainer = el)}
-            style={{ height: 200 }}
+            id="mapbox-search"
+            className="boxmap-searchinput"
+            ref={el => (this.geocoderContainer = el)}
           />
+
+          <div className="toolbar toolbar-mapeditor">
+            <ul>
+              <li>
+                <Button id="zoomInBtn" onClick={this.handleZoomIn}>
+                  <i className="fas fa-fw fa-search-plus"></i>
+                </Button>
+              </li>
+              <li>
+                <Button id="zoomOutBtn" onClick={this.handleZoomOut}>
+                  <i className="fas fa-fw fa-search-minus"></i>
+                </Button>
+              </li>
+              <li>
+                <Button id="mapPointerBtn" onClick={this.setSel}>
+                  <i className="fas fa-fw fa-hand-pointer"></i>
+                </Button>
+              </li>
+              <li>
+                <Button id="trashBtn" onClick={this.trashPolygons}>
+                  <i className="fas fa-fw fa-trash-alt"></i>
+                </Button>
+              </li>
+              <li>
+                <Button id="myLocationBtn" onClick={this.setLoc}>
+                  <i className="fas fa-fw fa-map-marker-alt"></i>
+                </Button>
+              </li>
+            </ul>
+          </div>
+
+          <div className="boxmap-preview">
+            <div className="boxmap-info">
+              Parcelas Seleccionadas: {this.props.lots.length}
+            </div>
+            <div className="boxmap-info">
+              Área:{' '}
+              {Numeral(this.state.area).format('0,0.00')}{' '}
+              m<sup>2</sup>
+            </div>
+
+            <div
+              className="m-t-5"
+              ref={el => (this.miniMapContainer = el)}
+              style={{ height: 200 }}
+            />
+          </div>
         </div>
-      </div>
+      </Spin>
     );
   }
 }
@@ -616,6 +642,8 @@ Editor.propTypes = {
   onRenderMinimap: PropTypes.func,
   onZoom: PropTypes.func,
   onChange: PropTypes.func,
+  onLoad: PropTypes.func,
+  onLoaded:PropTypes.func,
 };
 
 export default Editor;
