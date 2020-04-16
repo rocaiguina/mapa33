@@ -25,7 +25,9 @@ body {
   line-height: 1.42857143 !important;
   color: #333333;
   background-color: #fff;
-  word-spacing: -5px;
+  font-variant: normal !important;
+  -webkit-font-feature-settings: normal !important;
+  font-feature-settings: normal !important;
 }
 
 .container {
