@@ -40,6 +40,7 @@ class MortgageStep extends React.Component {
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
+        onClose={this.props.onClose}
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
@@ -102,6 +103,7 @@ MortgageStep.propTypes = {
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default MortgageStep;

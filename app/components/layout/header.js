@@ -9,7 +9,11 @@ import Icon from '../ui/Icon';
 
 class Header extends Component {
   handleOnClose = () => {
-    const { closeLink } = this.props;
+    const { closeLink, onClose } = this.props;
+    if (onClose) {
+      return onClose();
+    }
+    
     if (closeLink) {
       const { history } = this.props;
       history.push(closeLink);
@@ -84,6 +88,7 @@ Header.propTypes = {
   showCloseBtn: PropTypes.bool,
   showMenuBtn: PropTypes.bool,
   showProfileBtn: PropTypes.bool,
+  onClose: PropTypes.func,
   history: PropTypes.object,
 };
 

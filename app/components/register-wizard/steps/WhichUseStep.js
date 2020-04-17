@@ -40,6 +40,7 @@ class WhichUseStep extends React.Component {
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
+        onClose={this.props.onClose}
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
@@ -148,6 +149,7 @@ WhichUseStep.propTypes = {
   previous: PropTypes.func,
   handleChange: PropTypes.func,
   setFieldValue: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default WhichUseStep;

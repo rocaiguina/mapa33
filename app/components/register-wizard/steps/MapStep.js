@@ -74,6 +74,7 @@ class MapStep extends React.Component {
     return (
       <BaseLayout
         title="ESCOGE TU TERRENO/PROPUESTA"
+        onClose={this.props.onClose}
         footerXs={footerXs}
         footerRightComponent={
           <Button
@@ -113,6 +114,7 @@ MapStep.propTypes = {
   onRenderMinimap: PropTypes.func,
   history: PropTypes.object,
   next: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default MapStep;

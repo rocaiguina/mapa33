@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { withRouter } from 'react-router';
 import * as Yup from 'yup';
+import { Modal } from 'antd';
 import { Wizard, Steps, Step } from 'react-albus';
 
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
@@ -35,6 +36,7 @@ class RegisterWizard extends React.Component {
     super(props);
     this.state = {
       lots: [],
+      visibleCloseModal: false,
     };
   }
 
@@ -98,6 +100,24 @@ class RegisterWizard extends React.Component {
     console.log(step, values);
   };
 
+  handleOnClose = () => {
+    this.setState({
+      visibleCloseModal: true,
+    });
+  }
+
+  handleConfirmClose = () => {
+    // Redirect to map.
+    const { history } = this.props;
+    history.push('/');
+  }
+
+  handleCancelClose = () => {
+    this.setState({
+      visibleCloseModal: false,
+    });
+  }
+
   render() {
     const { match, history } = this.props;
     return (
@@ -149,6 +169,7 @@ class RegisterWizard extends React.Component {
                       onRenderMinimap={base64 => {
                         this.handleOnRenderMap(base64, setFieldValue);
                       }}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -162,6 +183,7 @@ class RegisterWizard extends React.Component {
                       photograph={values.base64Img}
                       next={next}
                       previous={previous}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -174,6 +196,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -187,6 +210,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -198,6 +222,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -209,6 +234,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -222,6 +248,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -233,6 +260,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -244,6 +272,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -257,6 +286,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -270,6 +300,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -285,6 +316,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -298,6 +330,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -311,6 +344,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -322,6 +356,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -333,6 +368,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -345,6 +381,7 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -356,6 +393,7 @@ class RegisterWizard extends React.Component {
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
@@ -380,11 +418,25 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       isSubmitting={isSubmitting}
+                      onClose={this.handleOnClose}
                     />
                   )}
                 />
               </Steps>
             </Wizard>
+            <Modal
+              title="Propuesta"
+              closable={false}
+              onOk={this.handleConfirmClose}
+              onCancel={this.handleCancelClose}
+              okText="Si"
+              cancelText="No"
+              visible={this.state.visibleCloseModal}
+              okButtonProps={{ shape: 'round', className: 'ant-btn-purple' }}
+              cancelButtonProps={{ shape: 'round' }}
+            >
+              <p>¿Estas seguro que quieres cerrar el formulario?</p>
+            </Modal>
           </form>
         )}
       </Formik>

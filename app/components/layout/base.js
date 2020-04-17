@@ -42,6 +42,7 @@ class BaseLayout extends Component {
           dark={this.props.dark}
           title={this.props.title}
           subtitle={this.props.subtitle}
+          onClose={this.props.onClose}
           closeLink={this.props.closeLink}
           showCloseBtn={this.props.showCloseBtn}
           showMenuBtn={this.props.enableMenu}
@@ -81,6 +82,7 @@ BaseLayout.propTypes = {
   dark: PropTypes.bool,
   children: PropTypes.node,
   closeLink: PropTypes.string,
+  onClose: PropTypes.func,
   showCloseBtn: PropTypes.bool,
   enableMenu: PropTypes.bool,
   afterFooter: PropTypes.node,

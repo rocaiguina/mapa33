@@ -19,6 +19,7 @@ class SubmitStep extends React.Component {
     return (
       <BaseLayout
         title="PREVISUALIZACIÓN DE TARJETA DE PROPUESTA"
+        onClose={this.props.onClose}
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
@@ -184,6 +185,7 @@ SubmitStep.propTypes = {
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default SubmitStep;
