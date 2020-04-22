@@ -48,6 +48,7 @@ class BaseLayout extends Component {
           showMenuBtn={this.props.enableMenu}
           showProfileBtn={this.props.enableMenu}
           onMenuClick={this.handleOnMenuClick}
+          closeLinkClassname={this.props.closeLinkClassname}
         />
         <div className={wrapContentClass}>
           <div className="container">{this.props.children}</div>
@@ -89,6 +90,7 @@ BaseLayout.propTypes = {
   footerRightComponent: PropTypes.node,
   footerXs: PropTypes.node,
   verticalAlign: PropTypes.string,
+  closeLinkClassname: PropTypes.string,
 };
 
 export default BaseLayout;

@@ -34,7 +34,12 @@ class Header extends Component {
           <div className="header-wrap">
             {this.props.showCloseBtn && (
               <div className="top-actions">
-                <Button size="large" type="link" onClick={this.handleOnClose}>
+                <Button
+                  size="large"
+                  type="link"
+                  onClick={this.handleOnClose}
+                  className={this.props.closeLinkClassname}
+                >
                   <Icon type="close" />
                 </Button>
               </div>
@@ -80,7 +85,7 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   dark: PropTypes.bool,
   subtitle: PropTypes.node,
   onMenuClick: PropTypes.func,
@@ -90,6 +95,7 @@ Header.propTypes = {
   showProfileBtn: PropTypes.bool,
   onClose: PropTypes.func,
   history: PropTypes.object,
+  closeLinkClassname: PropTypes.string,
 };
 
 export default withRouter(Header);

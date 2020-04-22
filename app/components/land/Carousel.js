@@ -53,7 +53,14 @@ class Carousel extends React.Component {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            centerPadding: '20px',
+            centerPadding: '30px',
+          },
+        },
+        {
+          breakpoint: 320,
+          settings: {
+            slidesToShow: 1,
+            centerPadding: '60px',
           },
         },
       ],

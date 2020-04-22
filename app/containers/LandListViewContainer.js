@@ -85,7 +85,8 @@ class LandListViewContainer extends React.Component {
     return (
       <BaseLayout
         dark
-        title="LEYENDA DE ÁREAS NATURALES"
+        title={<span>LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span></span>}
+        closeLinkClassname="ant-btn-white ant-btn-round"
         enableMenu
         verticalAlign="top"
         subtitle={<Legend />}

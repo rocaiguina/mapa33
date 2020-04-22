@@ -402,7 +402,7 @@ body {
 }
 
 .header-wrap {
-  padding-top: 15px;
+  padding-top: 20px;
   position: relative;
 }
 
@@ -418,7 +418,7 @@ body {
 }
 
 .wrap-content.with-actions {
-  padding-top: 102px;
+  padding-top: 108px;
 }
 
 .wrap-content.vcenter {
@@ -487,6 +487,10 @@ body {
 .main-dark .top-actions .ant-btn {
   color: #fff;
 }
+.main-dark .top-actions .ant-btn-white {
+  color: #000;
+  padding: 0 16px;
+}
 
 @media (max-width: 767px) {
   .header.has-actions .top-actions,
@@ -500,7 +504,13 @@ body {
     float: left;
   }
   .wrap-content.with-title.with-subtitle.with-actions {
-    padding-top: 140px;
+    padding-top: 136px;
+  }
+  .header-wrap {
+    padding-top: 15px;
+  }
+  .wrap-content {
+    padding-bottom: 90px;
   }
 }
 
@@ -948,10 +958,41 @@ ul.actions {
   transform: scaleY(1.06);
 }
 
-.slick-slider-paginator {
-  margin-top: 10px;
+.slick-slider-maplist .slick-slider {
   margin-bottom: 10px;
-  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .slick-slider-maplist .ant-card .ant-card-meta-title {
+    font-size: 16px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-meta-description,
+  .slick-slider-maplist .ant-card .ant-card-actions > li > span {
+    font-size: 13px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-body {
+    padding: 12px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-actions > li {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .slick-slider-maplist .ant-card .ant-card-meta-title {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-meta-description,
+  .slick-slider-maplist .ant-card .ant-card-actions > li > span {
+    font-size: 12px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-body {
+    padding: 10px;
+  }
+  .slick-slider-maplist .ant-card .ant-card-actions > li {
+    margin-bottom: 5px;
+  }
 }
 
 /* Land filter */
@@ -959,6 +1000,25 @@ ul.actions {
   display: block;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .land-filter .ant-select-lg .ant-select-selection--single {
+    height: 34px;
+  }
+
+  .land-filter .ant-select-lg .ant-select-selection__rendered {
+    line-height: 32px;
+  }
+
+  .land-filter label,
+  .land-filter .ant-select-lg {
+    font-size: 13px;
+  }
+
+  .ant-select-dropdown {
+    font-size: 13px !important;
+  }
 }
 
 /* Land cards */
