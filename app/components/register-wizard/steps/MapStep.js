@@ -77,17 +77,18 @@ class MapStep extends React.Component {
         onClose={this.props.onClose}
         footerXs={footerXs}
         footerRightComponent={
-          <Button
-            id="submitMap"
-            className="ant-btn-purple"
-            shape="round"
-            size="large"
-            block
-            onClick={this.handleOnSubmit}
-            loading={this.state.loading}
-          >
-            Continuar
-          </Button>
+          <div className="wizard-progress">
+            <Button
+              id="submitMap"
+              className="ant-btn-purple"
+              shape="round"
+              size="large"
+              onClick={this.handleOnSubmit}
+              loading={this.state.loading}
+            >
+              Continuar
+            </Button>
+          </div>
         }
         afterFooter={
           showMapGuide && <MapTourGuide run={this.state.run} onNext={this.handleOnNextTour} onFinish={this.handleOnCloseTour} onClose={this.handleOnCloseTour}/>

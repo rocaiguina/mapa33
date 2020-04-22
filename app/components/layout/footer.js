@@ -19,7 +19,7 @@ class Footer extends Component {
           <Row gutter={0}>
             <Col md={8} xs={xs[0]}>
               <div className="first-column">
-                <img src={'/images/' + logo} className="img-responsive" style={{width: '73%'}}/>
+                <img src={'/images/' + logo} className="img-responsive logo" />
               </div>
             </Col>
             <Col md={12} xs={xs[1]}>
@@ -31,7 +31,7 @@ class Footer extends Component {
               <div className="third-column" >
                 { this.props.rightComponent ?
                   this.props.rightComponent :
-                  <img src={'/images/'+ pln } className="img-responsive" style={{width: '90%'}}/>
+                  <img src={'/images/'+ pln } className="img-responsive logo-pln"/>
                 }
               </div>
             </Col>
