@@ -1427,15 +1427,26 @@ ul.actions {
 }
 
 .mapbox-wrapper .toolbar {
-  bottom: 0;
-  left: 0;
+  bottom: 0px;
   position: absolute;
   z-index: 999;
 }
 
+.mapbox-wrapper .toolbar-left {
+  left: 0px;
+}
+
 .mapbox-wrapper .toolbar-right {
-  left: auto;
-  right: 0;
+  right: 0px;
+}
+
+.mapbox-wrapper .toolbar .ant-btn-round.ant-btn-lg {
+  padding: 0 10px;
+}
+
+.mapbox-wrapper .toolbar .ant-btn-round.ant-btn-lg .anticon {
+  font-size: 32px;
+  line-height: 44px;
 }
 
 .mapbox-editor,
@@ -1475,27 +1486,6 @@ ul.actions {
   width: 240px;
 }
 
-@media (min-width: 361px) and (max-width: 420px) {
-  .mapbox-view {
-    height: 62vh;
-  }
-}
-
-@media (min-width: 321px) and (max-width: 360px) {
-  .mapbox-view {
-    height: 58vh;
-  }
-}
-
-@media (max-width: 320px) {
-  .mapbox-editor {
-    height: 66vh;
-  }
-  .mapbox-view {
-    height: 54vh;
-  }
-}
-
 @media (max-width: 767px) {
   .mapboxgl-ctrl-geocoder--icon-search {
     top: 8px !important;
@@ -1506,6 +1496,32 @@ ul.actions {
   }
   .boxmap-preview {
     display: none;
+  }
+  .mapbox-wrapper .toolbar {
+    position: fixed;
+    bottom: 88px;
+  }
+  .mapbox-wrapper .toolbar-left {
+    left: 15px;
+  }
+  .mapbox-wrapper .toolbar-right {
+    right: 15px;
+  }
+  .mapbox-wrapper .toolbar .ant-btn-round.ant-btn-lg {
+    height: 36px;
+  }
+  .mapbox-wrapper .toolbar .ant-btn-round.ant-btn-lg .anticon {
+    font-size: 24px;
+    line-height: 40px;
+  } 
+}
+
+@media (max-width: 320px) {
+  .mapbox-editor {
+    height: 66vh;
+  }
+  .mapbox-view {
+    height: 60vh;
   }
 }
 
@@ -2087,4 +2103,16 @@ ul.actions {
 /*MAPBOX HACKS*/
 a.mapboxgl-ctrl-logo {
   display: none !important;
+}
+
+/* Joyride */
+.joyride-body {
+  text-align: left;
+}
+.joyride-body h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.joyride-body p {
+  font-size: 13px;
 }

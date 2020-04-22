@@ -60,15 +60,15 @@ class MapToolBar extends React.Component {
         <ul>
           <li>
             <Popover content={RadioMapView} trigger="click">
-              <Button id="visualizar_guide" size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
-                <Icon type="eye" style={{ fontSize: '32px', lineHeight: '44px' }}/>
+              <Button id="visualizar_guide" size="large" shape="round" className="ant-btn-dark">
+                <Icon type="eye" />
               </Button>
             </Popover>
           </li>
           <li>
             <Popover content={RadioAreaView} trigger="click">
-              <Button id="capas_guide" size="large" shape="round" className="ant-btn-dark" style={{ padding: '0 10px' }}>
-                <Icon type="layers" style={{ fontSize: '32px', lineHeight: '44px' }}/>
+              <Button id="capas_guide" size="large" shape="round" className="ant-btn-dark">
+                <Icon type="layers" />
               </Button>
             </Popover>
           </li>

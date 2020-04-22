@@ -13,11 +13,11 @@ class HomeGuideTour extends React.Component {
          {
           target: '#visualizar_guide',
           content: (
-            <div>
-              <h4 style={{fontWeight: "bolder",textAlign: "left", marginBottom: "0"}}>Visualizar</h4>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+            <div className="joyride-body">
+              <h4>Visualizar</h4>
+              <p>
                 Escoge cómo quieres ver las áreas/los terrenos del mapa: Lista, Tarjetas o Mapa.
-              </h5>
+              </p>
             </div>
           ),
           disableBeacon: true,
@@ -26,11 +26,11 @@ class HomeGuideTour extends React.Component {
         {
           target: '#capas_guide',
           content: (
-            <div>
-              <h4 style={{fontWeight: "bolder",textAlign: "left", marginBottom: "0"}}>Capas</h4>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+            <div className="joyride-body">
+              <h4>Capas</h4>
+              <p>
                 Ajusta el mapa para que muestre capas de información por colores. Estos corresponden a las siguientes categorías: Áreas Propuestas, Áreas Protegidas o Ambas.
-              </h5>
+              </p>
             </div>
           ),
           placement: 'top',
@@ -38,11 +38,11 @@ class HomeGuideTour extends React.Component {
         {
           target: '#propose_guide',
           content: (
-            <div>
-              <h4 style={{fontWeight: "bolder",textAlign: "left", marginBottom: "0"}}>Proponer</h4>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+            <div className="joyride-body">
+              <h4>Proponer</h4>
+              <p>
                 Envía tu propuesta para áreas o terrenos que deseas sean conservados.
-              </h5>
+              </p>
             </div>
           ),
           placement: 'top',
@@ -50,11 +50,11 @@ class HomeGuideTour extends React.Component {
         {
           target: '#map_guide',
           content: (
-            <div>
-              <h4 style={{fontWeight: "bolder",textAlign: "left", marginBottom: "0"}}>El Mapa</h4>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+            <div className="joyride-body">
+              <h4>El Mapa</h4>
+              <p>
                 El mapa muestra los distintos tipos de áreas (o terrenos) que componen el archipiélago de Puerto Rico. Puedes interactuar con las regiones marcadas para ver sus propuestas/tarjetas.
-              </h5>
+              </p>
             </div>
           ),
           placement: 'bottom',
@@ -62,11 +62,11 @@ class HomeGuideTour extends React.Component {
         {
           target: '#user_guide',
           content: (
-            <div>
-              <h4 style={{fontWeight: "bolder",textAlign: "left", marginBottom: "0"}}>Perfil</h4>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+            <div className="joyride-body">
+              <h4>Perfil</h4>
+              <p>
                 Regístrate para proponer áreas (o terrenos) y mostrar tu apoyo.
-              </h5>
+              </p>
             </div>
           ),
           placement: 'top',
@@ -126,6 +126,9 @@ class HomeGuideTour extends React.Component {
           disableOverlayClose={true}
           hideBackButton={true}
           spotlightPadding={0}
+          floaterProps={{
+            className: 'home-tour-guide'
+          }}
           styles={{
             options: {
               arrowColor: '#f073a8',

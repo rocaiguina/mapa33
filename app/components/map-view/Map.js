@@ -166,17 +166,6 @@ class Map extends Component {
       map.on('click', 'lots', e => {
         const land = e.features[0].properties;
         const html = buildPopup(land);
-
-        // const img = `https://api.mapbox.com/v4/mapbox.satellite/${e.lngLat.lng},${e.lngLat.lat},16/250x150@2x.png?access_token=${mapboxgl.accessToken}`;
-        // let html = '<div>';
-        // html += `<div style="text-align: center"><a href="/land/${e.features[0].properties.id}"><strong>${e.features[0].properties.name}</strong></a></div>`;
-        // html += `<a href="/land/${e.features[0].properties.id}"><img src='${img}' alt='Imágen de Satélite' style='width: 100%'/></a>`;
-        // html += `<div><strong>Municipio: </strong>${e.features[0].properties.location}</div>`;
-        // html += `<div><strong>Entidad: </strong>${e.features[0].properties.entity}</div>`;
-        // html += `<div><strong>Establecido: </strong>${e.features[0].properties.year_acquisition}</div>`;
-        // html += `<div><strong>Estado: </strong>${e.features[0].properties.status}</div>`;
-        // html += '</div>';
-
         this.popup
           .setLngLat(e.lngLat)
           .setHTML(html)
@@ -217,9 +206,7 @@ class Map extends Component {
   }
 
   handleOnZoomIn = () => {
-    //if(map.getZoom()<= 8){
     map.setZoom(map.getZoom() + 0.5);
-    //}
   };
 
   handleOnZoomOut = () => {
@@ -238,7 +225,7 @@ class Map extends Component {
     return (
       <div className="mapbox-wrapper">
         <div id="map_guide" ref={el => (this.mapContainer = el)} className="mapbox-view" />
-        <div className="toolbar hidden-sm hidden-xs"  style={{zIndex: 99}}>
+        <div className="toolbar toolbar-left hidden-sm hidden-xs"  style={{zIndex: 99}}>
           <ul>
             <li>
               <Button

@@ -82,8 +82,8 @@ class HomeContainer extends React.Component {
   };
 
   render() {
-    const { showIntro, showGuide,showInstructions } = this.state;
-    const title = showIntro ? null : 'LEYENDA DE ÁREAS NATURALES';
+    const { showIntro, showGuide, showInstructions } = this.state;
+    const title = showIntro ? null : <span>LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span></span>;
     const subtitle = showIntro ? null : <Legend />;
     return (
       <BaseLayout
