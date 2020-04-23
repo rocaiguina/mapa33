@@ -512,6 +512,12 @@ body {
   .wrap-content {
     padding-bottom: 90px;
   }
+  .main-relative-xs .footer {
+    position: relative;
+  }
+  .main-relative-xs .wrap-content {
+    padding-bottom: 0px;
+  }
 }
 
 /* Sidebar */

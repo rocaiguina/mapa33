@@ -26,7 +26,7 @@ class BaseLayout extends Component {
   };
 
   render() {
-    const layoutClass = ClassNames('main', {
+    const layoutClass = ClassNames('main', this.props.className, {
       'main-dark': this.props.dark,
     });
     const wrapContentClass = ClassNames('wrap-content', {
@@ -91,6 +91,7 @@ BaseLayout.propTypes = {
   footerXs: PropTypes.node,
   verticalAlign: PropTypes.string,
   closeLinkClassname: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default BaseLayout;

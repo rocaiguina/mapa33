@@ -32,6 +32,7 @@ class RegisterUser extends React.Component {
         title="BIENVENIDO A MAPA33"
         showCloseBtn={true}
         enableMenu={false}
+        className="main-relative-xs"
       >
         <RegisterForm
           onSubmit={this.handleOnSubmit}
