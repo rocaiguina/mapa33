@@ -88,7 +88,6 @@ class ProfileForm extends React.Component {
                     <Input
                       name="full_name"
                       className="inputprop blackstyleinput"
-                      size="large"
                       type="text"
                       value={values.full_name}
                       onChange={handleChange}
@@ -114,12 +113,11 @@ class ProfileForm extends React.Component {
                 <div className="form-group text-right">
                   <Link
                     to="/profile"
-                    className="ant-btn ant-btn-background-ghost ant-btn-round ant-btn-lg"
+                    className="ant-btn ant-btn-background-ghost ant-btn-round"
                   >
                     Cancelar
                   </Link>
                   <Button
-                    size="large"
                     shape="round"
                     className="ant-btn-purple"
                     htmlType="submit"
@@ -139,7 +137,6 @@ class ProfileForm extends React.Component {
                       <DatePicker
                         name="birthday"
                         className="dateinput blackstyleinput"
-                        size="large"
                         type="text"
                         style={{ width: '100%' }}
                         value={moment(values.birthday, dateFormat)}
@@ -155,7 +152,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="email"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.email}
                         readonly
@@ -169,7 +165,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="phone"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.phone}
                         onChange={handleChange}
@@ -181,7 +176,6 @@ class ProfileForm extends React.Component {
                       <Select
                         name="gender"
                         className="inputprop blackstyleinput"
-                        size="large"
                         style={{ width: '100%' }}
                         value={values.gender}
                         onChange={value => {
@@ -198,7 +192,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="company"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.company}
                         onChange={handleChange}
@@ -214,7 +207,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="address"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.address}
                         onChange={handleChange}
@@ -226,7 +218,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="city"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.city}
                         onChange={handleChange}
@@ -238,7 +229,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="estate"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.estate}
                         onChange={handleChange}
@@ -250,7 +240,6 @@ class ProfileForm extends React.Component {
                       <Select
                         name="country"
                         className="inputprop blackstyleinput"
-                        size="large"
                         style={{ width: '100%' }}
                         value={values.country}
                         onChange={value => {
@@ -266,7 +255,6 @@ class ProfileForm extends React.Component {
                       <Input
                         name="zip_code"
                         className="inputprop blackstyleinput"
-                        size="large"
                         type="text"
                         value={values.zip_code}
                         onChange={handleChange}
@@ -307,12 +295,11 @@ class ProfileForm extends React.Component {
                 <div className="form-group text-center visible-xs m-t-10">
                   <Link
                     to="/profile"
-                    className="ant-btn ant-btn-background-ghost ant-btn-round ant-btn-lg"
+                    className="ant-btn ant-btn-background-ghost ant-btn-round"
                   >
                     Cancelar
                   </Link>
                   <Button
-                    size="large"
                     shape="round"
                     className="ant-btn-purple"
                     htmlType="submit"
@@ -326,25 +313,25 @@ class ProfileForm extends React.Component {
                   dashed
                   style={{ borderStyle: 'dotted', marginBottom: '12px' }}
                 />
-                <Row>
+                <Row className="m-b-15">
                   <h3 style={{ fontWeight: 900, color: '#fff' }}>
                     Áreas Propuestas
                   </h3>
                   <Row>
                     <Col md={12} sm={24} xs={24} className="toptableprofile">
-                      <h2 style={{ color: '#fff', padding: '5px 10px' }}>
+                      <h3 style={{ color: '#fff', padding: '5px 10px' }}>
                         {values.proposed_areas} <span>Áreas propuestas</span>
-                      </h2>
+                      </h3>
                     </Col>
                     <Col md={12} sm={12} xs={12} className="lefttableprofile">
-                      <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
+                      <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
                         {values.approved_areas} <span>Áreas aceptadas</span>
-                      </h2>
+                      </h3>
                     </Col>
                     <Col md={12} sm={12} xs={12} className="righttableprofile">
-                      <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
+                      <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
                         {values.supported_areas} <span>Áreas apoyadas</span>
-                      </h2>
+                      </h3>
                     </Col>
                     <Col md={12} sm={12}></Col>
                   </Row>

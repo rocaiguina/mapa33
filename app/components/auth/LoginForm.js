@@ -36,7 +36,6 @@ class LoginForm extends React.Component {
                   <Input
                     name="email"
                     className="inputprop"
-                    size="large"
                     type="text"
                     placeholder="Correo electrónico"
                     onChange={handleChange}
@@ -47,7 +46,6 @@ class LoginForm extends React.Component {
                   <Input
                     name="password"
                     className="inputprop"
-                    size="large"
                     type="password"
                     placeholder="Contraseña"
                     onChange={handleChange}

@@ -75,21 +75,23 @@ class RegisterForm extends React.Component {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
-            <Row gutter={16}>
-              <Col md={16}>
-                <h1 style={{ marginBottom: '20px' }}>Regístrate:</h1>
-              </Col>
-              <Col md={8}>
-                <h2 className="text-right">
-                  <Link
-                    to={next ? '/login?next=' + next : '/login'}
-                    style={{ color: '#f576a9', fontWeight: 'bold' }}
-                  >
-                    Ya estoy registrado/a
-                  </Link>
-                </h2>
-              </Col>
-            </Row>
+            <div className="m-b-15">
+              <Row gutter={16}>
+                <Col md={16}>
+                  <h2>Regístrate</h2>
+                </Col>
+                <Col md={8}>
+                  <h3 className="text-right text-left-xs">
+                    <Link
+                      to={next ? '/login?next=' + next : '/login'}
+                      style={{ color: '#f576a9', fontWeight: 'bold' }}
+                    >
+                      Ya estoy registrado/a
+                    </Link>
+                  </h3>
+                </Col>
+              </Row>
+            </div>
             <Row gutter={16}>
               <Col md={16}>
                 <Row gutter={16}>
@@ -98,7 +100,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="first_name"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Nombre:"
                         onChange={handleChange}
@@ -111,7 +112,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="last_name"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Apellidos:"
                         onChange={handleChange}
@@ -126,7 +126,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="email"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Email:"
                         onChange={handleChange}
@@ -139,7 +138,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="password"
                         className="inputprop"
-                        size="large"
                         type="password"
                         placeholder="*Contraseña:"
                         onChange={handleChange}
@@ -154,7 +152,6 @@ class RegisterForm extends React.Component {
                       <DatePicker
                         name="birthday"
                         className="inputprop"
-                        size="large"
                         type="text"
                         style={{ width: '100%' }}
                         placeholder="*Fecha Nacimiento:"
@@ -170,7 +167,6 @@ class RegisterForm extends React.Component {
                       <Select
                         name="gender"
                         className="inputprop"
-                        size="large"
                         placeholder="Sexo:"
                         style={{ width: '100%' }}
                         onChange={value => {
@@ -183,13 +179,16 @@ class RegisterForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col md={16}>
                 <Row gutter={16}>
                   <Col md={12}>
                     <div className="form-group">
                       <Input
                         name="phone"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Teléfono:"
                         onChange={handleChange}
@@ -202,7 +201,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="company"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="Compañia:"
                         onChange={handleChange}
@@ -210,17 +208,12 @@ class RegisterForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col md={16}>
                 <Row>
                   <Col md={24}>
                     <div className="form-group">
                       <Input
                         name="address"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Dirección:"
                         onChange={handleChange}
@@ -235,7 +228,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="city"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Ciudad:"
                         onChange={handleChange}
@@ -248,7 +240,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="estate"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="Estado/Territorio:"
                         onChange={handleChange}
@@ -262,7 +253,6 @@ class RegisterForm extends React.Component {
                       <Select
                         name="country"
                         className="inputprop"
-                        size="large"
                         placeholder="*País:"
                         style={{ width: '100%' }}
                         onChange={value => {
@@ -279,7 +269,6 @@ class RegisterForm extends React.Component {
                       <Input
                         name="zip_code"
                         className="inputprop"
-                        size="large"
                         type="text"
                         placeholder="*Código postal:"
                         onChange={handleChange}
@@ -290,7 +279,7 @@ class RegisterForm extends React.Component {
                 </Row>
               </Col>
               <Col md={8}>
-                <div className="m-b-20">
+                <div className="m-b-20 m-t-20">
                   <div className="form-check">
                     <Checkbox
                       name="advs_by_email"
@@ -341,10 +330,12 @@ class RegisterForm extends React.Component {
             </Row>
             <Row gutter={16}>
               <Col md={16}>
-                <span>* Campos requeridos.</span>
+                <div className="form-group">
+                  <span>* Campos requeridos.</span>
+                </div>
               </Col>
               <Col md={8}>
-                <div className="form-group text-right">
+                <div className="form-group text-right text-center-xs">
                   <Button
                     size="large"
                     shape="round"

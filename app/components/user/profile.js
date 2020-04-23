@@ -12,11 +12,8 @@ class Profile extends React.Component {
     const profile = this.props.initialValues;
     return (
       <div>
-        <div
-          className="page-title"
-          style={{ borderBottomColor: '#fff' }}
-        >
-          <h1 style={{ color: '#fff' }}>{profile.full_name}</h1>
+        <div className="page-title">
+          <h2 style={{ color: '#fff' }}>{profile.full_name}</h2>
           <Row>
             <Col span={12}>
               {profile.createdAt && (
@@ -28,7 +25,7 @@ class Profile extends React.Component {
                 </h4>
               )}
             </Col>
-            <Col span={12} className="text-right">
+            <Col span={12} className="text-right m-b-5">
               <Link
                 to="/"
                 style={{ color: '#f576a9', fontWeight: 'bold' }}
@@ -102,25 +99,25 @@ class Profile extends React.Component {
               dashed
               style={{ borderStyle: 'dotted', marginBottom: '12px' }}
             />
-            <Row>
+            <Row className="m-b-15">
               <h3 style={{ fontWeight: 900, color: '#fff' }}>
                 Áreas Propuestas
               </h3>
               <Row>
                 <Col md={12} sm={24} xs={24} className="toptableprofile">
-                  <h2 style={{ color: '#fff', padding: '5px 10px' }}>
+                  <h3 style={{ color: '#fff', padding: '5px 10px' }}>
                     {profile.proposed_areas} <span>Áreas propuestas</span>
-                  </h2>
+                  </h3>
                 </Col>
                 <Col md={12} sm={12} xs={12} className="lefttableprofile">
-                  <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
+                  <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
                     {profile.approved_areas} <span>Áreas aceptadas</span>
-                  </h2>
+                  </h3>
                 </Col>
                 <Col md={12} sm={12} xs={12} className="righttableprofile">
-                  <h2 style={{ color: '#f576a9', padding: '5px 10px' }}>
+                  <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
                     {profile.supported_areas} <span>Áreas apoyadas</span>
-                  </h2>
+                  </h3>
                 </Col>
                 <Col md={12} sm={12}></Col>
               </Row>

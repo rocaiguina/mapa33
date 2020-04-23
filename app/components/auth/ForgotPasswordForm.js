@@ -39,7 +39,6 @@ class ForgotPasswordForm extends React.Component {
                   <Input
                     name="email"
                     className="inputprop"
-                    size="large"
                     type="text"
                     placeholder="Correo electrónico"
                     onChange={handleChange}

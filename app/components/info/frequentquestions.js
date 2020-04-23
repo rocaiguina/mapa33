@@ -4,7 +4,7 @@ import { Col, Row } from 'antd';
 class FrequentQuestions extends React.Component {
   render() {
     return (
-      <div className="frequentstyle">
+      <div className="frequentstyle m-b-15">
         <Row>
           <Col md={16}>
             <h3>¿Quién es Para La Naturaleza?</h3>
@@ -14,12 +14,14 @@ class FrequentQuestions extends React.Component {
               donde nuestros hijos puedan crecer en ciudades habitables, nadar
               en ríos de agua cristalina y alimentarse de los frutos de nuestra
               tierra.
-              <br />
+            </p>
+            <p>
               Facilitamos experiencias transformativas en la naturaleza, además
               de conservar terrenos de alto valor ecológico. Fomentamos la toma
               de responsabilidad por nuestros recursos naturales e impulsamos
               política pública para su protección.
-              <br />
+            </p>
+            <p>
               Con más de cuarenta años trabajando junto a otras organizaciones
               por la protección de la naturaleza en nuestras islas, hemos
               identificado una meta común a todos los puertorriqueños

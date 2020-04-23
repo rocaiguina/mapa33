@@ -681,6 +681,16 @@ body {
   margin-right: 38px;
 }
 
+.wrap-content .page-title h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.main-dark .page-title {
+  border-bottom-color: #fff;
+}
+
+
 ul.actions {
   list-style: none;
   padding: 0;
@@ -1766,6 +1776,15 @@ ul.actions {
 
 .m-t-50 {
   margin-top: 50px;
+}
+
+@media (max-width: 767px) {
+  .text-center-xs {
+    text-align: center;
+  }
+  .text-left-xs {
+    text-align: left;
+  }
 }
 
 /* Wizard */

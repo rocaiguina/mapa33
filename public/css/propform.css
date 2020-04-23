@@ -66,7 +66,7 @@
     padding: 20px;
   }
   .profiletitle{
-    margin-top: 30px;  
+    margin-top: 20px;  
   }
   .rightblockprofile{
     float: right;
@@ -213,7 +213,7 @@
 
 .popeditblack .ant-row .ant-radio-wrapper.ant-radio-wrapper-checked{
   background-color: white !important;
-  color: black !important;
+  color: #000 !important;
   font-weight: bold !important;
   text-align: center !important;
 }
@@ -248,18 +248,17 @@
   border-right-width: 2px !important;
 }
 .inputprop{
-  border: 1px black solid !important;
-  border-radius: 20px !important;
+  border: 1px solid #000 !important;
+  border-radius: 14px !important;
   margin-bottom: 15px !important;
-  color: black !important;
+  color: #000 !important;
 }
 .inputprop::placeholder{
-  color: black !important;
-  font-weight: bold;
+  color: #000 !important;
 }
 .btnprimary{
   background-color: #f576a9 !important;
-  color: Black !important;
+  color: #000 !important;
   border-radius: 15px !important;
   height: 50px !important;
   font-weight: bolder !important;
@@ -268,8 +267,8 @@
 .radioprop{
   height: 90px !important;
   width: 120px !important;
-  border-color: black !important;
-  color: black !important;
+  border-color: #000 !important;
+  color: #000 !important;
 }
 .radiosi{
   border-radius: 50px !important;
@@ -292,7 +291,7 @@
 }
 .inputCalendar input{
   background-color: transparent !important;
-  color: black !important;
+  color: #000 !important;
   font-size: 20px;
 }
 .form1.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
@@ -378,7 +377,7 @@
 }
 
 .blockstyleradio span span{
-  border-color: black !important;
+  border-color: #000 !important;
   height: 36px !important;
   width: 48px !important;
   border-radius: 25px !important;
@@ -421,7 +420,7 @@ button[data-test-id="button-primary"]{
 }
 
 .ant-btn-background-blackstep{
-  background-color: black !important;
+  background-color: #000 !important;
   color: white !important;
   border-radius: 15px !important;
   border: 1px white solid !important;
@@ -508,6 +507,14 @@ button[data-test-id="button-primary"]{
   width: 80px !important;
   border-radius: 50px !important;
 }
+.ant-calendar-picker-icon,
+.ant-select-arrow {
+  color: #000 !important;
+}
+.ant-select-black .ant-calendar-picker-icon,
+.ant-select-black .ant-select-arrow {
+  color: #fff !important;
+}
 .inputprop .ant-calendar-picker-input,
 .inputprop .ant-select-selection
 {
@@ -516,13 +523,7 @@ button[data-test-id="button-primary"]{
 }
 .inputprop .ant-calendar-picker-input::placeholder,
 .inputprop .ant-select-selection div div{
-    color: black;    
-    font-weight: bold;
-    opacity: 1 !important;
-}
-.inputprop .ant-calendar-picker-input:-ms-input-placeholder{ 
-    color: black;
-    font-weight: bold;
+    color: #000;
     opacity: 1 !important;
 }
 .checkboxregisuni a{

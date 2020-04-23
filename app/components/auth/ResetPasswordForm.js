@@ -41,7 +41,6 @@ class ResetPasswordForm extends React.Component {
                   <Input
                     name="new_password"
                     className="inputprop"
-                    size="large"
                     type="password"
                     placeholder="Contraseña nueva"
                     onChange={handleChange}
@@ -52,7 +51,6 @@ class ResetPasswordForm extends React.Component {
                   <Input
                     name="confirm_password"
                     className="inputprop"
-                    size="large"
                     type="password"
                     placeholder="Repetir contraseña nueva"
                     onChange={handleChange}

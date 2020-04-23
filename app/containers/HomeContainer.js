@@ -14,7 +14,7 @@ class HomeContainer extends React.Component {
     super(props);
     this.state = {
       showIntro: false,
-      showInstructions: false,      
+      showInstructions: false,
       showGuide: false,
       areaView: '',
       modeView: 'map',

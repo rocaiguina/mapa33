@@ -4,7 +4,7 @@ import { Col, Row } from 'antd';
 class AboutUs extends React.Component {
   render() {
     return (
-      <div className="contactstyle">
+      <div className="contactstyle m-b-15">
         <Row>
           <Col md={16}>
             <div className="m-b-30">
