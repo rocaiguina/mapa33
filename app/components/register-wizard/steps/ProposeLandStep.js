@@ -48,7 +48,7 @@ class ProposeLandStep extends React.Component {
           <Progress onNext={this.handleOnNext} step={1} steps={20} />
         }
       >
-        <div className="main-content m-t-20">
+        <div className="main-content">
           <TopNavigator disabledPrevious step={1} steps={20} />
           <Row gutter={30}>
             <Col

@@ -26,7 +26,7 @@ class ReviewLandStep extends React.Component {
           <Progress onNext={this.handleOnNext} step={3} steps={20} />
         }
       >
-        <div className="main-content m-t-20">
+        <div className="main-content">
           <TopNavigator
             previous={this.props.previous}
             step={3}

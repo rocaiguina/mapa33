@@ -935,10 +935,10 @@ ul.actions {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 0;
   z-index: 99;
   text-align: center;
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 
 .toolbar-mapeditor .ant-btn.m33-btn {
@@ -957,7 +957,8 @@ ul.actions {
 
 @media (max-width: 767px) {
   .toolbar-mapeditor {
-    bottom: 15px;
+    bottom: 88px;
+    position: fixed;
   }
   .toolbar-mapeditor ul > li {
     margin: 0 3px;
@@ -1504,10 +1505,10 @@ ul.actions {
 
 @media (max-width: 767px) {
   .mapboxgl-ctrl-geocoder--icon-search {
-    top: 8px !important;
+    top: 6px !important;
   }
   .mapboxgl-ctrl-geocoder--input {
-    height: 40px !important;
+    height: 34px !important;
     font-size: .84em !important;
   }
   .boxmap-preview {
@@ -1534,7 +1535,7 @@ ul.actions {
 
 @media (max-width: 320px) {
   .mapbox-editor {
-    height: 66vh;
+    height: 70vh;
   }
   .mapbox-view {
     height: 60vh;

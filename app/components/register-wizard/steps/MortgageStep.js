@@ -47,7 +47,7 @@ class MortgageStep extends React.Component {
           <Progress onNext={this.handleOnNext} step={9} steps={20} />
         }
       >
-        <div className="main-content m-t-20">
+        <div className="main-content">
           <TopNavigator previous={this.props.previous} step={9} steps={20} />
           <Row gutter={30}>
             <Col
