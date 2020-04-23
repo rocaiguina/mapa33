@@ -1535,10 +1535,28 @@ ul.actions {
 
 @media (max-width: 320px) {
   .mapbox-editor {
-    height: 70vh;
+    height: 75vh;
   }
   .mapbox-view {
     height: 60vh;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+  .mapbox-editor {
+    height: 79vh;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 420px) {
+  .mapbox-editor {
+    height: 81vh;
+  }
+}
+
+@media (min-width: 375px) and (min-height: 812px) {
+  .mapbox-editor {
+    height: 83vh;
   }
 }
 

@@ -41,6 +41,9 @@ class RegisterWizard extends React.Component {
   }
 
   handleOnChangeLand = (data, setFieldValue) => {
+    this.setState({
+      lots: data.lots,
+    });
     let location = '';
     if (data.lands.length > 0) {
       location = data.lands[0]['municipality'];
@@ -56,9 +59,6 @@ class RegisterWizard extends React.Component {
     setFieldValue('geojson', data.geojson);
     setFieldValue('plots_count', data.lots.length);
     setFieldValue('area_size', data.geojson.properties.area);
-    this.setState({
-      lots: data.lots,
-    });
   };
 
   handleOnRenderMap = (data, setFieldValue) => {

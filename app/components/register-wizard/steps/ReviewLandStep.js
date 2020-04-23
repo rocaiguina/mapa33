@@ -38,6 +38,7 @@ class ReviewLandStep extends React.Component {
                 <img
                   className="img-responsive"
                   src={photograph}
+                  width="480"
                 />
               </div>
             </Col>

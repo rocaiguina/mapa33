@@ -19,7 +19,12 @@ class MapStep extends React.Component {
 
   handleOnSubmit = () => {
     if (this.props.lots.length > 0) {
-      this.props.next();
+      this.setState({
+        loading: true,
+      });
+      setTimeout(() => {
+        this.props.next();  
+      }, 600);
     } else {
       notification.error({
         message: 'Error',
@@ -73,8 +78,9 @@ class MapStep extends React.Component {
     const {showMapGuide} = this.state;
     return (
       <BaseLayout
-        title="ESCOGE TU TERRENO/PROPUESTA"
+        title={<span>ESCOGE TU TERRENO<span className="hidden-xs">/PROPUESTA</span></span>}
         onClose={this.props.onClose}
+        verticalAlign="top"
         footerXs={footerXs}
         footerRightComponent={
           <div className="wizard-progress">
@@ -94,7 +100,7 @@ class MapStep extends React.Component {
           showMapGuide && <MapTourGuide run={this.state.run} onNext={this.handleOnNextTour} onFinish={this.handleOnCloseTour} onClose={this.handleOnCloseTour}/>
         }
       >
-        <div className="main-content m-t-20">
+        <div className="main-content">
           <MapEditor
             lots={this.props.lots}
             onRenderMinimap={this.props.onRenderMinimap}

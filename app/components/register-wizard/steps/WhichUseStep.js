@@ -47,7 +47,7 @@ class WhichUseStep extends React.Component {
           <Progress onNext={this.handleOnNext} step={18} steps={20} />
         }
       >
-        <div className="main-content">
+        <div className="main-content m-t-20">
           <TopNavigator previous={this.props.previous} step={18} steps={20} />
           <Row gutter={30}>
             <Col

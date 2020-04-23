@@ -41,7 +41,11 @@ class SubmitStep extends React.Component {
             </Col>
             <Col md={10}>
               <div className="form-group">
-                <img src={this.props.photograph} className="img-responsive" />
+                <img
+                  src={this.props.photograph}
+                  className="img-responsive"
+                  width="480"
+                />
               </div>
             </Col>
             <Col md={8}>

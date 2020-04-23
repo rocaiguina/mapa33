@@ -41,7 +41,7 @@ const marker = new mapboxgl.Marker({
 });
 
 function resizeImage(base64Str, width, height) {
-  var img = new Image();
+  var img = document.createElement('img');
   img.src = base64Str;
   var canvas = document.createElement('canvas');
   canvas.width = width;
@@ -164,16 +164,20 @@ class Editor extends Component {
         },
         'waterway-label'
       );
+    });
 
+    map.once('idle', () => {
       // Load polygons
       if (this.props.lots.length > 0) {
-        this.buildPolygons(lots)
-          .then(({geojson}) => {
-            const bounds = bbox(geojson);
-            map.fitBounds(bounds, {
-              animate: false,
+        setTimeout(() => {
+          this.buildPolygons(lots)
+            .then(({geojson}) => {
+              const bounds = bbox(geojson);
+              map.fitBounds(bounds, {
+                animate: false,
+              });
             });
-          });
+        }, 400);
       }
     });
 
@@ -216,10 +220,12 @@ class Editor extends Component {
       );
     });
 
-    miniMap.on('render', () => {
+    miniMap.on('idle', () => {
       if (this.props.onRenderMinimap) {
         var base64Img = miniMap.getCanvas().toDataURL();
-        var image = resizeImage(base64Img, 480, 320);
+        // RESIZE IMAGE
+        //var image = resizeImage(base64Img, 480, 320);
+        var image = base64Img;
         this.props.onRenderMinimap(image);
       }
     });
@@ -315,6 +321,11 @@ class Editor extends Component {
     }
     return 'No disponible';
   };
+
+  componentWillUnmount() {
+    map.remove();
+    miniMap.remove();
+  }
 
   area = polygon => {
     const meters = area(polygon);
@@ -517,10 +528,9 @@ class Editor extends Component {
     const emptyGeoJson = this.getEmptyGeoJson();
     miniMap.getSource('geojson').setData(emptyGeoJson);
     map.getSource('geojson').setData(emptyGeoJson);
-    miniMap.flyTo({
+    miniMap.jumpTo({
       center: [-66.45, 18.2],
       zoom: 6.5,
-      speed: 1.2,
     });
     this.handleOnChange(emptyGeoJson, 0, []);
   };
