@@ -1013,6 +1013,13 @@ ul.actions {
 }
 
 /* Land filter */
+.land-filter {
+  background-color: #181a19;
+  top: 98px;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 10;
+}
 .land-filter label {
   display: block;
   font-weight: bold;
@@ -1020,6 +1027,9 @@ ul.actions {
 }
 
 @media (max-width: 767px) {
+  .land-filter {
+    top: 126px;
+  }
   .land-filter .ant-select-lg .ant-select-selection--single {
     height: 34px;
   }
@@ -1027,12 +1037,10 @@ ul.actions {
   .land-filter .ant-select-lg .ant-select-selection__rendered {
     line-height: 32px;
   }
-
   .land-filter label,
   .land-filter .ant-select-lg {
     font-size: 13px;
   }
-
   .ant-select-dropdown {
     font-size: 13px !important;
   }

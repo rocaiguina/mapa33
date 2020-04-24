@@ -25,7 +25,7 @@ class LandDetailContainer extends React.Component {
       proposed_uses: [],
       area_size: 0,
       plots_count: 1,
-      coordinates: null,
+      coordinates: {},
       disabledLike: true,
     };
   }
@@ -55,7 +55,7 @@ class LandDetailContainer extends React.Component {
           proposed_uses: land.proposed_uses,
           area_size: land.area_size,
           plots_count: land.plots_count,
-          coordinates: land.coordinates,
+          coordinates: land.coordinates || {coordinates: []},
         });
       })
       .catch(() => {

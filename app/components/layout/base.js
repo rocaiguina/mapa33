@@ -78,7 +78,7 @@ BaseLayout.defaultProps = {
 };
 
 BaseLayout.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   subtitle: PropTypes.node,
   dark: PropTypes.bool,
   children: PropTypes.node,

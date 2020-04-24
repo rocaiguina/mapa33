@@ -189,7 +189,7 @@ class LandDetail extends React.Component {
                     <Badge
                       title="Coordenadas"
                       description={
-                        <Coordinates point={this.props.coordinates} />
+                        <Coordinates point={this.props.coordinates.coordinates} />
                       }
                       color="white"
                       shape="round"
