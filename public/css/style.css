@@ -1139,6 +1139,7 @@ ul.actions {
     padding: 0;
     position: absolute;
     top: 0;
+    max-width: none !important;
     width: 100% !important;
   }
   .ant-modal.ant-modal-full.ant-modal-green {
@@ -1889,6 +1890,16 @@ ul.actions {
 @media (max-width: 767px) {
   .land-picture {
     margin-bottom: 20px;
+  }
+  .wizard-progress .ant-btn-round.ant-btn-lg,
+  .wizard-progress .ant-btn-round.ant-btn-lg.ant-btn-loading {
+    padding: 0 16px !important;
+  }
+  .wizard-progress .ant-btn-round.ant-btn-lg .anticon-loading {
+    display: none;
+  }
+  .wizard-progress .ant-btn-round.ant-btn-lg .anticon + span {
+    margin-left: 0px !important;
   }
 }
 

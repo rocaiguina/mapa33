@@ -539,25 +539,24 @@ class Editor extends Component {
     if (!this.state.activeLoc) {
       this.setState({
         activeLoc: true,
+        loading: true,
       });
       navigator.geolocation.getCurrentPosition(position => {
         if (position) {
           const { longitude, latitude } = position.coords;
 
-          map.flyTo({
+          map.jumpTo({
             center: [longitude, latitude],
             zoom: 17,
-            speed: 1.2,
-            curve: 1,
-            easing: t => {
-              return t;
-            },
           });
 
           marker
             .setLngLat([longitude, latitude])
             .addTo(map);
         }
+        this.setState({
+          loading: false,
+        });
       });
     } else {
       this.setState({

@@ -283,9 +283,6 @@
 .radiono.ant-radio-button-wrapper:not(:first-child)::before {
   background-color: #181a19;
 }
-.ant-modal{
-  max-width: 1140px !important;
-}
 .inputCalendar{
   line-height: 90px !important;
 }
