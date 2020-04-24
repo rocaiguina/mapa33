@@ -78,6 +78,7 @@ class Carousel extends React.Component {
                 key={land.id}
                 id={land.id}
                 name={land.name}
+                photograph={land.photographURL}
                 level={land.level}
                 owner={land.owner}
                 location={land.location}

@@ -1,6 +1,7 @@
 'use strict';
 
 const sequelizePaginate = require('sequelize-paginate');
+const FileStorage = require('../../server/utils/file-storage');
 
 module.exports = (sequelize, DataTypes) => {
   const Land = sequelize.define('Land', {
@@ -117,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
     getterMethods: {
       photographURL() {
         if (this.photograph) {
-          return process.env.SERVER_URL + this.photograph;  
+          return FileStorage.getUrl(this.photograph);
         }
         return 'https://dummyimage.com/480x320/dddddd/ffffff';
       }

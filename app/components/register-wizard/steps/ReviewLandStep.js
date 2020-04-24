@@ -15,7 +15,7 @@ class ReviewLandStep extends React.Component {
   };
 
   render() {
-    const photograph = this.props.photograph || '//dummyimage.com/600x400/dddddd/ffffff';
+    const photograph = this.props.photograph || '//dummyimage.com/480x320/dddddd/ffffff';
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"

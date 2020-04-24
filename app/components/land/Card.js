@@ -9,6 +9,8 @@ const { Meta } = Card;
 
 class LandCard extends React.Component {
   render() {
+    const photograph =
+      this.props.photograph || 'https://dummyimage.com/480x320/dddddd/ffffff';
     const landCardClassName = ClassNames('land-card', {
       'land-protected': this.props.level == 'conserved',
       'land-proposed': ['basic', 'pledge'].includes(this.props.level),
@@ -19,7 +21,7 @@ class LandCard extends React.Component {
         bordered={false}
         cover={
           <Link to={`/land/${this.props.id}`}>
-            <img src="https://dummyimage.com/300x200/dddddd/ffffff" />
+            <img src={photograph} />
           </Link>
         }
         actions={[
@@ -49,6 +51,7 @@ class LandCard extends React.Component {
 
 LandCard.propTypes = {
   id: PropTypes.number,
+  photograph: PropTypes.string,
   name: PropTypes.string,
   level: PropTypes.string,
   owner: PropTypes.string,

@@ -10,6 +10,7 @@ router.get('/', LandController.findAll);
 router.post(
   '/',
   JWTMiddleware.requireJWT,
+  LandController.validateStoreRequest,
   LandController.storePhotograph,
   LandController.store
 );

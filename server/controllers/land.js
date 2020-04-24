@@ -1,20 +1,26 @@
 'use strict';
 
-const Base64Img = require('base64-img');
+const Path = require('path');
 const Joi = require('joi');
-const Sequelize = require('sequelize');
-const Models = require('../../db/models');
 const RandomToken = require('random-token');
+const Sequelize = require('sequelize');
+const sgMail = require('@sendgrid/mail');
+const sharp = require('sharp');
+const Base64Img = require('../utils/base64-img');
+const Models = require('../../db/models');
+const TemplateEngine = require('../utils/template-engine');
+const FileStorage = require('../utils/file-storage');
+
 const Land = Models.Land;
 const User = Models.User;
 const LandLikes = Models.LandLikes;
 const Op = Sequelize.Op;
 
-const TemplateEngine = require('../utils/template-engine');
-const sgMail = require('@sendgrid/mail');
-
+const ALL_LAND_LEVELS = ['basic', 'pledge', 'conserved'];
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
+
+const LANDS_DIR = 'lands';
 
 class LandController {
   findAll(req, res) {
@@ -34,6 +40,12 @@ class LandController {
         conditions.level = {
           [Op.in]: CONSERVED_LAND_LEVELS,
         };
+        break;
+      default:
+        conditions.level = {
+          [Op.in]: ALL_LAND_LEVELS,
+        }
+        conditions.status = 'approved';
         break;
     }
 
@@ -175,12 +187,12 @@ class LandController {
       });
   }
 
-  store(req, res, next) {
+  validateStoreRequest(req, res, next) {
     var data = req.body;
     const validationSchema = {
       are_u_owner: Joi.boolean().allow(null),
       catastro_numbers: Joi.array(),
-      owner_name: Joi.string(),
+      owner_name: Joi.string().allow(null, ''),
       owner_email: Joi.string().allow(null, ''),
       owner_phone: Joi.string().allow(null, ''),
       inheritance_land: Joi.boolean().allow(null),
@@ -222,11 +234,15 @@ class LandController {
     });
 
     if (result.error) {
-      res.status(400).send(result.error);
-      return next();
+      return res.status(400).send(result.error);
     }
 
-    const cleaned_data = result.value;
+    req.cleaned_data = result.value;
+    return next();
+  }
+
+  store(req, res, next) {
+    const cleaned_data = req.cleaned_data;
 
     // Save new land.
     Land.create({
@@ -306,20 +322,29 @@ class LandController {
 
   storePhotograph(req, res, next) {
     if (req.body.base64Img) {
-      let filename = RandomToken(10);
-      Base64Img.img(
-        req.body.base64Img,
-        'public/uploads/lands',
-        filename,
-        function(err, filepath) {
-          if (err) {
-            return next(err);
-          }
-
-          req.photograph_filepath = filepath.replace('public', '');
-          next();
-        }
-      );
+      const image = Base64Img.img(req.body.base64Img);
+      const filename = RandomToken(10) + '.jpg';
+      const filepath =  Path.join('lands', filename);
+      // Resize image
+      const input = Buffer.from(image.base64, 'base64');
+      sharp(input)
+        .resize(480, 320)
+        .toFormat('jpg')
+        .toBuffer()
+        .then(newImage => {
+          // Store image
+          FileStorage.put(filepath, newImage)
+            .then(function(response) {
+              req.photograph_filepath = response;
+              next();
+            })
+            .catch(function(err) {
+              next(err);
+            });
+        })
+        .catch(function(err) {
+          next(err);
+        });
     } else {
       next();
     }

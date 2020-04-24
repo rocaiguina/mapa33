@@ -43,7 +43,7 @@ class LandDetailContainer extends React.Component {
         self.setState({
           name: land.name,
           level: land.level,
-          photograph: land.photograph,
+          photograph: land.photographURL,
           owner: land.owner,
           likes: land.likes,
           reason_conservation: land.reason_conservation,
