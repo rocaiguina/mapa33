@@ -102,9 +102,11 @@ class LandCardsViewContainer extends React.Component {
           onChangeView={this.handleOnChangeView}
           onChangeStatus={this.handleOnChangeStatus}
         />
-        <Spin spinning={this.state.loading}>
-          <LandCarousel lands={this.state.maplist} />
-        </Spin>
+        <div className="land-list-wrapper">
+          <Spin spinning={this.state.loading}>
+            <LandCarousel lands={this.state.maplist} />
+          </Spin>
+        </div>
       </BaseLayout>
     );
   }

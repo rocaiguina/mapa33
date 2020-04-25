@@ -1016,6 +1016,8 @@ ul.actions {
 .land-filter {
   background-color: #181a19;
   top: 98px;
+  margin-top: -10px;
+  padding-top: 10px;
   position: sticky;
   position: -webkit-sticky;
   z-index: 10;
@@ -1028,7 +1030,13 @@ ul.actions {
 
 @media (max-width: 767px) {
   .land-filter {
-    top: 126px;
+    position: fixed;
+    top: 136px;
+    left: 0;
+    padding: 0 15px;
+  }
+  .land-list-wrapper {
+    padding-top: 67px;
   }
   .land-filter .ant-select-lg .ant-select-selection--single {
     height: 34px;
