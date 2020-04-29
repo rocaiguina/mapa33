@@ -22,7 +22,7 @@ class LandCard extends React.Component {
         bordered={false}
         cover={
           <Link to={`/land/${this.props.id}`}>
-            <img src="https://dummyimage.com/480x320/dddddd/ffffff"/>
+            <img src="/images/no-land-image.jpg"/>
           </Link>
         }
         actions={[

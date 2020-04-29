@@ -30,7 +30,7 @@ class LandDetail extends React.Component {
 
   render() {
     const photograph =
-      this.props.photograph || 'https://dummyimage.com/480x320/dddddd/ffffff';
+      this.props.photograph || '/images/no-land-image.jpg';
     let owner = '';
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;

@@ -120,7 +120,7 @@ module.exports = (sequelize, DataTypes) => {
         if (this.photograph) {
           return FileStorage.getUrl(this.photograph);
         }
-        return 'https://dummyimage.com/480x320/dddddd/ffffff';
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
       }
     }
   });

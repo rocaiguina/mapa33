@@ -983,7 +983,7 @@ ul.actions {
 }
 
 .slick-slider-maplist .slick-center .ant-card {
-  transform: scaleY(1.06);
+  transform: scaleY(1.07);
 }
 
 .slick-slider-maplist .slick-slider {
@@ -1066,7 +1066,11 @@ ul.actions {
 }
 
 /* Land cards */
+.land-card {
+  border-radius: 0px;
+}
 .land-card .ant-card-cover img {
+  border-radius: 0px;
   width: 100%;
 }
 

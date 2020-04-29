@@ -16,7 +16,7 @@ let map = null;
 
 function buildPopup(land) {
   const photograph =
-    land.photographURL || 'https://dummyimage.com/480x320/dddddd/ffffff';
+    land.photographURL || '/images/no-land-image.jpg';
   const date = Moment(land.createdAt, 'YYYY-MM-DD').format('MM.DD.YYYY');
   const url = '/land/' + land.id;
 
