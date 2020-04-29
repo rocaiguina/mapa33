@@ -15,10 +15,10 @@ class RegisterUserSuccessful extends React.Component {
         enableMenu={false}
       >
         <div className="jumbotron text-center">
-          <h1>Registro Satisfactorio</h1>
+          <h1>¡Gracias!</h1>
           <p className="lead">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit voluptatem
-            debitis.
+            Ahora puedes hacer una propuesta de terreno o apoyar una propuesta
+            existente de conservación.
           </p>
           <Link
             to={next}

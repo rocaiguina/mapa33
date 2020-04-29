@@ -55,7 +55,7 @@ class LandDetailContainer extends React.Component {
           proposed_uses: land.proposed_uses,
           area_size: land.area_size,
           plots_count: land.plots_count,
-          coordinates: land.coordinates || {coordinates: []},
+          coordinates: land.coordinates || { coordinates: [] },
         });
       })
       .catch(() => {
@@ -94,8 +94,9 @@ class LandDetailContainer extends React.Component {
           disabledLike: true,
         }));
         notification.success({
-          message: 'Registro satisfactorio',
-          description: 'Gracias por su apoyo.',
+          message: '¡Gracias por unirte a la meta común!',
+          description:
+            'Ahora pendiente a tu correo electrónico para que sigas y conozcas la actualización del proceso de esta propuesta.',
         });
       })
       .catch(err => {

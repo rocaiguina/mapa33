@@ -5,26 +5,20 @@ import BaseLayout from '../../components/layout/base';
 class RegisterLandSuccessful extends React.Component {
   render() {
     return (
-      <BaseLayout
-        title="REGISTRO SATISFACTORIO"
-        showCloseBtn={true}
-      >
+      <BaseLayout title="REGISTRO SATISFACTORIO" showCloseBtn={true}>
         <div className="jumbotron text-center">
+          <p className="lead">¡Gracias por unirte a la meta común.!</p>
           <p className="lead">
-            Gracias, estaremos evaluando tu propuesta.
-          </p>
-          <p className="lead">
-            Recibiras confirmación por correo electrónico cuando este
-            aprobada tu selección.
+            Ahora nuestro equipo evaluará tu propuesta.
             <br />
-            De tener alguna duda con su selección para la Naturaleza se
-            comunicará con usted.
+            Verifica tu correo electrónico para nuestras notificaciones sobre el
+            proceso de evaluación y aprobación de propuesta.
           </p>
           <Link
             to="/map"
             className="ant-btn ant-btn-lg ant-btn-round ant-btn-purple"
           >
-            VOLVER AL MAPA
+            Volver al Mapa
           </Link>
         </div>
       </BaseLayout>
