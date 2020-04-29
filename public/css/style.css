@@ -530,15 +530,26 @@ body {
   height: 55px;
 }
 
-.ant-drawer-purple .ant-drawer-close {
+.ant-drawer-purple .ant-drawer-closable {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.ant-drawer-purple .ant-drawer-closable .ant-btn {
   background-color: #fff;
-  border-radius: 24px;
+  border-color: #fff;
   color: #181a19;
-  height: 36px;
-  line-height: 36px;
-  right: 24px;
-  top: 20px;
-  width: 48px;
+  
+  padding: 0 16px;
+}
+
+.ant-drawer-purple .ant-drawer-closable .ant-btn:hover,
+.ant-drawer-purple .ant-drawer-closable .ant-btn:focus {
+  border-color: #fff !important;
+}
+
+.ant-drawer-purple .ant-drawer-closable .ant-btn .anticon {
+  font-size: 20px;
 }
 
 .ant-drawer-purple ul {

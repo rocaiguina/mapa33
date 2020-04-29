@@ -62,7 +62,6 @@ class BaseLayout extends Component {
         {this.props.enableMenu && (
           <Sidebar
             placement="right"
-            closable={true}
             visible={this.state.isSidebarVisible}
             onClose={this.handleOnCloseSidebar}
           />

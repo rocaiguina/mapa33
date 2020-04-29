@@ -1,18 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Drawer } from 'antd';
+import { Button, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
+
+import Icon from '../ui/Icon';
 
 class Sidebar extends React.Component {
   render() {
     return (
       <Drawer
         placement={this.props.placement}
-        closable={this.props.closable}
+        closable={false}
         visible={this.props.visible}
         onClose={this.props.onClose}
         className="ant-drawer-purple"
       >
+        <div className="ant-drawer-closable">
+          <Button
+            shape="round"
+            size="large"
+            type="link"
+            className="ant-btn-white"
+            onClick={this.props.onClose}
+          >
+            <Icon type="close" />
+          </Button>
+        </div>
         <ul>
           <li>
             <Link to="/about-us">Sobre Mapa-33</Link>
