@@ -19,6 +19,9 @@
         <div class="login-content">
             <!-- Login -->
             <div class="lc-block toggled" id="l-login">
+                <div class="form-group">
+                  <img src="/images/logo-white.png"/>
+                </div>
                 <form action="/admin/login" class="sign-box" method="POST" autocomplete="off">
                     <input type="hidden" name="crumb" value="{{crumb}}"/>
                     <div class="lcb-form">
@@ -41,7 +44,7 @@
                         {% if errors.password %}
                         <small class="help-block">{{ errors.password }}</small>
                         {% endif %}
-                        <button type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+                        <button type="submit" class="btn btn-login btn-primary btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
                     </div>
 
                     <div class="lcb-navigation">
