@@ -37,7 +37,16 @@ class LandAdminController {
     let options = {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
+      where: {},
     };
+
+    if (req.query.status) {
+      options.where.status = req.query.status;
+    }
+
+    if (req.query.level) {
+      options.where.level = req.query.level;
+    }
 
     Land.paginate(options)
       .then(function(data) {
@@ -50,7 +59,7 @@ class LandAdminController {
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
-        res.render('land/index', { paginator: data });
+        res.render('land/index', { paginator: data, filters: options.where });
       })
       .catch(function(err) {
         next(err);

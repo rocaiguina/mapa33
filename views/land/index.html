@@ -7,9 +7,44 @@
 
 <div class="card">
     <div class="card-header">
-        <h2>Lorem Ipsum
-            <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
-        </h2>
+        <div class="form-inline text-right">
+            <label>Estado</label>
+            <div class="dropdown form-group m-l-5 m-r-5">
+                <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.status if filters.status else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
+                <ul class="dropdown-menu pull-left">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=">All</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=new">New</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=approved">Approved</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=rejected">Rejected</a>
+                    </li>
+                </ul>
+            </div>
+            <label>Nivel</label>
+            <div class="dropdown form-group m-l-5">
+                <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.level if filters.level else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=">All</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=basic">Basic</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=pledge">Pledge</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=conserved">Conserved</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="table-responsive">
@@ -20,42 +55,24 @@
                 <th>Nombre</th>
                 <th>Nivel</th>
                 <th>Ubicación</th>
-                <th>Entidad</th>
-                <th>Estado</th>
-                <th>N° de<br>parcelas</th>
-                <th>Tamaño<br>del área</th>
-                <th>Tipo de<br>área</th>
+                <th>Parcelas</th>
+                <th>Área</th>
                 <th>Likes</th>
-                <th>Tipo<br>de uso</th>
-                <th>Tipo de<br>adquisición</th>
-                <th>Año de<br>adquisición</th>
-                <th>Año de<br>establecimiento</th>
-                <th>Propiedad</th>
-                <th>Dueño</th>
-                <th>Conoce al dueño</th>
-                <th>Número<br>catástro</th>
-                <th>Nombre<br>del dueño</th>
-                <th>Email<br>del dueño</th>
-                <th>Teléfono<br>del dueño</th>
-                <th>Heredada</th>
-                <th>Aprobación<br>herederos</th>
-                <th>Problemas<br>de terreno</th>
-                <th>Hipotecado</th>
-                <th>Agrimensura</th>
-                <th>Uso principal</th>
-                <th>Estructuras <br>del terreno</th>
-                <th>Atributos<br>del terreno</th>
-                <th>Contaminado</th>
-                <th>Usos</th>
-                <th>Encuesta</th>
+                <th>Estado</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             {% for item in paginator.docs %}
             <tr>
-                <td><a href="/admin/land/{{ item.id }}"><img src= {%if item.photograph %}{{item.photograph}} {% else %} "https://dummyimage.com/600x400/cccccc/000000" {% endif %} class="img-responsive" /></a></td>
-                <td><a href="/admin/land/{{ item.id }}">{{ item.name }}</a></td>
+                <td>
+                  <a href="/admin/land/{{ item.id }}">
+                    <img src="{{item.photographURL}}" class="img-responsive" />
+                  </a>
+                </td>
+                <td>
+                  <a href="/admin/land/{{ item.id }}">{{ item.name }}</a>
+                </td>
                 <td>
                   {% if item.level == 'basic' %}
                     <span class="label label-info text-uppercase">{{ item.level }}</span>
@@ -68,7 +85,15 @@
                   {% endif %}
                 </td>
                 <td>{{ item.location }}</td>
-                <td>{{ item.entity }}</td>
+                <td>
+                    <p>{{item.plots_count}}</p>
+                </td>
+                <td>
+                    <p>{{item.area_type}}</p>
+                </td>
+                <td>
+                    <p>{{item.likes}}</p>
+                </td>
                 <td>
                   {% if item.status == 'new' %}
                     <span class="label label-warning text-uppercase">{{ item.status }}</span>
@@ -79,148 +104,6 @@
                   {% else %}
                     <span class="label label-default text-uppercase">{{ item.status }}</span>
                   {% endif %}
-                </td>               
-                <td>
-                    <p>{{item.plots_count}}</p>
-                </td>
-                <td>
-                    <p>{{item.area_size}}</p>
-                </td>
-                <td>
-                    <p>{{item.area_type}}</p>
-                </td>
-                <td>
-                    <p>{{item.likes}}</p>
-                </td>
-                <td>
-                    <p>{{item.use_type}}</p>
-                </td>                
-                <td>
-                    <p>{{item.acquisition_type}}</p>
-                </td>
-                <td>
-                    <p>{{item.year_acquisition}}</p>
-                </td>
-                <td>
-                    <p>{{item.year_estab}}</p>
-                </td>                
-                <td>
-                    <p>{{item.ownership}}</p>
-                </td>                
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.are_u_owner=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.are_u_owner=== false %}<p>NO</p>{% endif %}                
-                </td>
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.know_owner=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.know_owner=== false %}<p>NO</p>{% endif %}                
-                </td> 
-                <td>
-                    <p>{{item.metadata.catastro_number}}</p>
-                </td>                
-                <td>
-                    <p>{{item.metadata.owner_name}}</p>
-                </td>
-                <td>
-                    <p>{{item.metadata.owner_email}}</p>
-                </td>                
-                <td>
-                    <p>{{item.metadata.owner_phone}}</p>
-                </td>
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.inheritance_land=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.inheritance_land=== false %}<p>NO</p>{% endif %}                
-                </td> 
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.inheritance_agree=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.inheritance_agree=== false %}<p>NO</p>{% endif %}                
-                </td>                 
-                <td style="white-space: nowrap; width: 1%;">
-                    {% for lands_problem in item.metadata.lands_problem %}
-                        {% if lands_problem==='crim_owed' %}<p>Deuda en el CRIM </p>{% endif %}
-                        {% if lands_problem==='legality_problems' %}<p>Problemas legales </p>{% endif %}
-                        {% if lands_problem==='ownership_problems' %}<p>Problemas de titularidad</p>{% endif %}                        
-                    {% endfor %}
-                    {% if item.metadata.lands_problem==='crim_owed' %}<p>Deuda en el CRIM</p>{% endif %}
-                    {% if item.metadata.lands_problem==='legality_problems' %}<p>Problemas legales</p>{% endif %}
-                    {% if item.metadata.lands_problem==='ownership_problems' %}<p>Problemas de titularidad</p>{% endif %}
-                    {% if item.metadata.lands_other_problem %}<p>{{item.metadata.lands_other_problem}}</p>{% endif %}                    
-                </td>
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.has_mortgage=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.has_mortgage=== false %}<p>NO</p>{% endif %}                
-                </td> 
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.has_surveying=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.has_surveying=== false %}<p>NO</p>{% endif %}                
-                </td>
-                <td style="white-space: nowrap; width: 1%;">
-                    {% for lands_main_uses in item.metadata.lands_main_uses %}
-                        {% if lands_main_uses==='residential' %}<p>Residencial </p>{% endif %}
-                        {% if lands_main_uses==='commercial' %}<p>Comercial</p>{% endif %}
-                        {% if lands_main_uses==='nature_forest' %}<p>Natural / Bosque</p>{% endif %}                        
-                    {% endfor %}
-                    {% if item.metadata.lands_main_uses==='residential' %}<p>Residencial</p>{% endif %}
-                    {% if item.metadata.lands_main_uses==='commercial' %}<p>Comercial</p>{% endif %}
-                    {% if item.metadata.lands_main_uses==='nature_forest' %}<p>Natural / Bosque</p>{% endif %}
-                    {% if item.metadata.lands_other_main_uses %}<p>{{item.metadata.lands_other_main_uses}}</p>{% endif %}                    
-                </td>             
-                <td style="white-space: nowrap; width: 1%;">
-                    {% for lands_structures in item.metadata.lands_structures %}
-                        {% if lands_structures==='residential' %}<p>Residencial </p>{% endif %}
-                        {% if lands_structures==='commercial' %}<p>Comercial / Oficina </p>{% endif %}
-                        {% if lands_structures==='agricultural' %}<p>Agrícola</p>{% endif %}                        
-                    {% endfor %}
-                    {% if item.metadata.lands_structures==='residential' %}<p>Residencial</p>{% endif %}
-                    {% if item.metadata.lands_structures==='commercial' %}<p>Comercial / Oficina</p>{% endif %}
-                    {% if item.metadata.lands_structures==='agricultural' %}<p>Agrícola</p>{% endif %}
-                    {% if item.metadata.lands_other_structures %}<p>{{item.metadata.lands_other_structures}}</p>{% endif %}                    
-                </td>                
-                <td style="white-space: nowrap; width: 1%;">
-                    {% for lands_attributes in item.metadata.lands_attributes %}
-                        {% if lands_attributes==='nature' %}<p>Naturaleza</p>{% endif %}
-                        {% if lands_attributes==='educational' %}<p>Educativos</p>{% endif %}
-                        {% if lands_attributes==='landscape' %}<p>Paisajistas y escénicos</p>{% endif %}                        
-                    {% endfor %}
-                    {% if item.metadata.lands_attributes==='nature' %}<p>Naturaleza</p>{% endif %}
-                    {% if item.metadata.lands_attributes==='educational' %}<p>Educativos</p>{% endif %}
-                    {% if item.metadata.lands_attributes==='landscape' %}<p>Paisajistas y escénicos</p>{% endif %}
-                    {% if item.metadata.lands_other_attributes %}<p>{{item.metadata.lands_other_attributes}}</p>{% endif %}                    
-                </td>                
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.has_contamination=== true %}<p>SI</p>{% endif %}
-                    {% if item.metadata.has_contamination=== false %}<p>NO</p>{% endif %}                
-                </td>                 
-                <td style="white-space: nowrap; width: 1%;"> 
-                    {% if item.metadata.wich_use=== 'scientist_research' %}<p>Investigación Científica</p>{% endif %}
-                    {% if item.metadata.wich_use=== 'environment_monitoring' %}<p>Monitoreo Ambiental</p>{% endif %} 
-                    {% if item.metadata.wich_use=== 'spirit_uses' %}<p>Usos espirituales</p>{% endif %} 
-                    {% if item.metadata.wich_use=== 'educational' %}<p>Educación</p>{% endif %} 
-                    {% if item.metadata.wich_use=== 'recreation' %}<p>Recreación</p>{% endif %} 
-                    {% if item.metadata.wich_use=== 'turism' %}<p>Turismo</p>{% endif %}     
-                    {% if item.metadata.wich_use=== 'sustainable_uses' %}<p>Usos sostenibles</p>{% endif %}        
-                </td> 
-                <td style="white-space: wrap; width: 1%;"> 
-                    {% if item.metadata.importance_of_knowing=== 'nature' %}<p>Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano.</p>{% endif %}
-                    {% if item.metadata.importance_of_knowing=== 'nature_low_human' %}<p>Es un lugar natural con bajo impacto humano y quiero evitar
-                    mayores perturbaciones.</p>{% endif %} 
-                    {% if item.metadata.importance_of_knowing=== 'nature_special' %}<p>Es un lugar con rasgos naturales especiales(p.e. arboledas,
-                    mogotes, lagunas, cuevas)</p>{% endif %} 
-                    {% if item.metadata.importance_of_knowing=== 'species_protection' %}<p>Es un lugar donde habitan especies que deber ser protegidas</p>{% endif %} 
-                    {% if item.metadata.importance_of_knowing=== 'historic' %}<p>Es un lugar con historia natural y cultural que debe ser
-                    protegida</p>{% endif %} 
-                    {% if item.metadata.importance_of_knowing=== 'conservation' %}<p>Es un lugar óptimo donde la conservación y el desarrollo
-                    sustentable pueden ocurrir a la vez.</p>{% endif %}         
-                </td>             
-                                
-                <td>
-                    <p>{{item.reason_conservation}}</p>
-                </td>                
-                <td>
-                    <p>{{item.notes}}</p>
-                </td>
-                <td>
-                    <p>{{item.user_id}}</p>
                 </td>
                 <td style="white-space: nowrap; width: 1%;">
                   <a href="/admin/land/{{ item.id }}" class="btn btn-default btn-icon waves-effect waves-circle"><span class="zmdi zmdi-edit"></span></a>
@@ -228,7 +111,7 @@
                 </td>
             </tr>
             {% else %}
-            <tr><td colspan="7"><p class="text-center">Datos vacíos.</p></td></tr>
+            <tr><td colspan="9"><p class="text-center">No se encontraron terrenos.</p></td></tr>
             {% endfor %}
             </tbody>
         </table>
@@ -237,10 +120,10 @@
     <div class="text-center">
         <ul class="pagination">
             <li {% if not paginator.has_previous_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/land?page={{ paginator.previous_page }}{% endif %}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
+              <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/land?page={{ paginator.previous_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
             </li>
             <li {% if not paginator.has_next_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_next_page %}#{% else %}/admin/land?page={{ paginator.next_page }}{% endif %}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
+              <a href="{% if not paginator.has_next_page %}#{% else %}/admin/land?page={{ paginator.next_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
             </li>
         </ul>
     </div>
