@@ -78,6 +78,14 @@ class ProblemLandStep extends React.Component {
                 <Row>
                   <Col span={24}>
                     <Checkbox
+                      value="No"
+                      className="inputprop radiobutton"
+                    >
+                      No
+                    </Checkbox>
+                  </Col>
+                  <Col span={24}>
+                    <Checkbox
                       value="Deuda en el CRIM"
                       className="inputprop radiobutton"
                     >

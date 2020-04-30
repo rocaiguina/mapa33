@@ -83,6 +83,13 @@ class RegisterWizard extends React.Component {
           push('know-owner');
         }
         break;
+      case 'inheritance':
+        if (values.inheritance_land === true) {
+          push('problem');
+        } else {
+          push();
+        }
+        break;
       case 'survey':
         push('main-uses');
         break;
