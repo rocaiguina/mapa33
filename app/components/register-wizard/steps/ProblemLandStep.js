@@ -6,6 +6,7 @@ import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
+import { LAND_ISSUES } from '../../../constants';
 
 const { Text } = Typography;
 
@@ -35,7 +36,7 @@ class ProblemLandStep extends React.Component {
     const { setFieldValue } = this.props;
     setFieldValue('lands_problem', checkedValue);
 
-    if (checkedValue.indexOf('Otros') != -1) {
+    if (checkedValue.indexOf('others') != -1) {
       this.setState({ inputotro: true });
     } else {
       this.setState({ inputotro: false });
@@ -76,47 +77,16 @@ class ProblemLandStep extends React.Component {
                 onChange={this.handleOnChange}
               >
                 <Row>
-                  <Col span={24}>
-                    <Checkbox
-                      value="No"
-                      className="inputprop radiobutton"
-                    >
-                      No
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Deuda en el CRIM"
-                      className="inputprop radiobutton"
-                    >
-                      Deuda en el CRIM
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Problemas legales"
-                      className="inputprop radiobutton"
-                    >
-                      Problemas legales
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Problemas de titularidad"
-                      className="inputprop radiobutton"
-                    >
-                      Problemas de titularidad
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Otros"
-                      className="inputprop radiobutton"
-                      onChange={this.mostrarinput}
-                    >
-                      Otros
-                    </Checkbox>
-                  </Col>
+                  {LAND_ISSUES.map(item => 
+                    <Col key={item.value} span={24}>
+                      <Checkbox
+                        value={item.value}
+                        className="inputprop radiobutton"
+                      >
+                        {item.label}
+                      </Checkbox>
+                    </Col>  
+                  )}
                 </Row>
               </Checkbox.Group>
               {this.state.inputotro && (

@@ -14,6 +14,7 @@ const Validator = require('../utils/validator');
 const sgMail = require('@sendgrid/mail');
 const TemplateEngine = require('../utils/template-engine');
 const FileStorage = require('../utils/file-storage');
+const Constants = require('../../config/constants');
 
 function uploadPhotograph(req) {
   return new Promise(function(resolve, reject) {
@@ -306,7 +307,27 @@ class LandAdminController {
 
   get(req, res) {
     let land = req.land.get({ plain: true });
-    res.render('land/form', { object: land });
+    const levels = Constants.LAND_LEVELS;
+    const types = Constants.LAND_TYPES;
+    const status = Constants.LAND_STATUS;
+    const issues = Constants.LAND_ISSUES;
+    const main_uses = Constants.LAND_MAIN_USES;
+    const structures = Constants.LAND_STRUCTURES;
+    const attributes = Constants.LAND_ATTRIBUTES;
+    const proposed_uses = Constants.LAND_PROPOSED_USES;
+    const protection_reasons = Constants.LAND_PROTECTION_REASONS;
+    res.render('land/form', {
+      object: land,
+      levels,
+      types,
+      status,
+      issues,
+      main_uses,
+      structures,
+      attributes,
+      proposed_uses,
+      protection_reasons
+    });
   }
 
   remove(req, res, next) {

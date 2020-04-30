@@ -6,6 +6,7 @@ import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
+import { LAND_MAIN_USES } from '../../../constants';
 
 const { Text } = Typography;
 
@@ -35,7 +36,7 @@ class MainUsesStep extends React.Component {
     const { setFieldValue } = this.props;
     setFieldValue('lands_main_uses', checkedValue);
 
-    if (checkedValue.indexOf('Otros') != -1) {
+    if (checkedValue.indexOf('others') != -1) {
       this.setState({ inputotro: true });
     } else {
       this.setState({ inputotro: false });
@@ -77,39 +78,16 @@ class MainUsesStep extends React.Component {
                 onChange={this.handleOnChange}
               >
                 <Row>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Residencial"
-                      className="inputprop radiobutton"
-                    >
-                      Residencial
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Comercial"
-                      className="inputprop radiobutton"
-                    >
-                      Comercial
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Natural / Bosque"
-                      className="inputprop radiobutton"
-                    >
-                      Natural / Bosque
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      id="inputotro1"
-                      className="inputprop radiobutton"
-                      value="Otros"
-                    >
-                      Otros
-                    </Checkbox>
-                  </Col>
+                  {LAND_MAIN_USES.map(item => 
+                    <Col key={item.value} span={24}>
+                      <Checkbox
+                        value={item.value}
+                        className="inputprop radiobutton"
+                      >
+                        {item.label}
+                      </Checkbox>
+                    </Col>  
+                  )}
                 </Row>
               </Checkbox.Group>
               {this.state.inputotro && (

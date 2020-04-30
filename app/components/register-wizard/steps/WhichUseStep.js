@@ -6,6 +6,7 @@ import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
+import { LAND_PROPOSED_USES } from '../../../constants';
 
 const { Text } = Typography;
 
@@ -73,62 +74,16 @@ class WhichUseStep extends React.Component {
                 onChange={this.handleOnChange}
               >
                 <Row>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Investigación Científica"
-                      className="inputprop radiobutton"
-                    >
-                      Investigación Científica
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Monitoreo Ambiental"
-                      className="inputprop radiobutton"
-                    >
-                      Monitoreo Ambiental
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Usos espirituales"
-                      className="inputprop radiobutton"
-                    >
-                      Usos espirituales
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Educación"
-                      className="inputprop radiobutton"
-                    >
-                      Educación
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Recreación"
-                      className="inputprop radiobutton"
-                    >
-                      Recreación
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Turismo"
-                      className="inputprop radiobutton"
-                    >
-                      Turismo
-                    </Checkbox>
-                  </Col>
-                  <Col span={24}>
-                    <Checkbox
-                      value="Usos sostenibles"
-                      className="inputprop radiobutton"
-                    >
-                      Usos sostenibles
-                    </Checkbox>
-                  </Col>
+                  {LAND_PROPOSED_USES.map(item => 
+                    <Col key={item.value} span={24}>
+                      <Checkbox
+                        value={item.value}
+                        className="inputprop radiobutton"
+                      >
+                        {item.label}
+                      </Checkbox>
+                    </Col>  
+                  )}
                 </Row>
               </Checkbox.Group>
             </Col>

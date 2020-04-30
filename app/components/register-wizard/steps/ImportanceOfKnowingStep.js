@@ -6,6 +6,7 @@ import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
+import { LAND_PROTECTION_REASONS } from '../../../constants';
 
 const { Text } = Typography;
 
@@ -67,59 +68,16 @@ class ImportanceOfKnowingStep extends React.Component {
                 value={this.props.importance_of_knowing}
                 onChange={this.props.handleChange}
               >
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano."
-                  >
-                    Es un espacio 100% natural y quiero evitar cualquier
-                    perturbación e impacto humano.
-                  </Radio>
-                </div>
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un lugar natural con bajo impacto humano y quiero evitar mayores perturbaciones."
-                  >
-                    Es un lugar natural con bajo impacto humano y quiero evitar
-                    mayores perturbaciones.
-                  </Radio>
-                </div>
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un lugar con rasgos naturales especiales(p.e. arboledas, mogotes, lagunas, cuevas)"
-                  >
-                    Es un lugar con rasgos naturales especiales(p.e. arboledas,
-                    mogotes, lagunas, cuevas)
-                  </Radio>
-                </div>
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un lugar donde habitan especies que deber ser protegidas"
-                  >
-                    Es un lugar donde habitan especies que deber ser protegidas
-                  </Radio>
-                </div>
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un lugar con historia natural y cultural que debe ser protegida"
-                  >
-                    Es un lugar con historia natural y cultural que debe ser
-                    protegida
-                  </Radio>
-                </div>
-                <div className="form-radio">
-                  <Radio
-                    className="blockstyleradio"
-                    value="Es un lugar óptimo donde la conservación y el desarrollo sustentable pueden ocurrir a la vez."
-                  >
-                    Es un lugar óptimo donde la conservación y el desarrollo
-                    sustentable pueden ocurrir a la vez.
-                  </Radio>
-                </div>
+                {LAND_PROTECTION_REASONS.map(item => 
+                  <div key={item.value} className="form-radio">
+                    <Radio
+                      className="blockstyleradio"
+                      value={item.value}
+                    >
+                      {item.label}
+                    </Radio>
+                  </div>
+                )}
               </Radio.Group>
             </Col>
           </Row>

@@ -33,9 +33,9 @@
                         <div class="select">
                             <select name="level" class="form-control">
                                 <option value="">--------</option>
-                                <option {% if object.level == 'basic' %}selected{% endif %} value="basic">Basic</option>
-                                <option {% if object.level == 'pledge' %}selected{% endif %} value="pledge">Pledge</option>
-                                <option {% if object.level == 'conserved' %}selected{% endif %} value="conserved">Conserved</option>
+                                {% for item in levels %}
+                                <option {% if object.level == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -81,65 +81,15 @@
                         <div class="select">
                             <select name="area_type" class="form-control ">
                                 <option value="">--------</option>
-                                <option {% if object.area_type == 'Marina' %}selected{% endif %} value="Marina">Marina</option>
-                                <option {% if object.area_type == 'Terrestre' %}selected{% endif %} value="Terrestre">Terrestre</option>
+                                {% for item in types %}
+                                <option {% if object.area_type == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
                     {% if field_errors.area_type %}
                     <small class="help-block">{{ field_errors.area_type.message }}</small>
                     {% endif %}
-                </div>
-                
-                <div class="form-group {{ 'has-error' if field_errors.use_type else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Tipo de Uso</label>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option1" value="scientist_research" {% if object.use_type == 'scientist_research' %}checked{% endif %} >
-                              Investigación Científica
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option2" value="environment_monitoring" {% if object.use_type == 'environment_monitoring' %}checked{% endif %}>
-                              Monitoreo Ambiental
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type"  style="opacity: 1;" id="option3" value="spirit_uses" {% if object.use_type == 'spirit_uses' %}checked{% endif %}>
-                              Usos espirituales
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option4" value="educational" {% if object.use_type == 'educational' %}checked{% endif %}>
-                              Educación
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option5" value="recreation" {% if object.use_type == 'recreation' %}checked{% endif %}>
-                              Recreación
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option6" value="turism" {% if object.use_type == 'turism' %}checked{% endif %}>
-                              Turismo
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="use_type" style="opacity: 1;" id="option7" value="sustainable_uses" {% if object.use_type == 'sustainable_uses' %}checked{% endif %}>
-                              Usos sostenibles
-                            </label>
-                        </div>
-                        {% if field_errors.use_type %}
-                        <small class="help-block">{{ field_errors.use_type.message }}</small>
-                        {% endif %}
-                    </div>                    
                 </div>
                                
                 <div class="form-group {{ 'has-error' if field_errors.location else '' }}">
@@ -209,9 +159,9 @@
                         <div class="select">
                             <select name="status" class="form-control ">
                                 <option value="">--------</option>
-                                <option {% if object.status == 'new' %}selected{% endif %} value="new">New</option>
-                                <option {% if object.status == 'denied' %}selected{% endif %} value="denied">Denied</option>
-                                <option {% if object.status == 'approved' %}selected{% endif %} value="approved">Approved</option>
+                                {% for item in status %}
+                                <option {% if object.status == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -367,23 +317,14 @@
                 <div class="form-group {{ 'has-error' if field_errors.lands_problem else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Problemas del terreno</label>
+                        {% for item in issues %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox"  name="lands_problem" value="crim_owed" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='crim_owed' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='crim_owed' %}checked{% endif %}> Deuda en el CRIM
+                              <input type="checkbox"  name="lands_problem" value="{{ item.value }}" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_problem" value="legality_problems" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='legality_problems' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='legality_problems' %}checked{% endif %}> Problemas legales
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_problem" value="ownership_problems" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem==='ownership_problems' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_problem==='ownership_problems' %}checked{% endif %}> Problemas de titularidad
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="lands_other_problem" value="{{ field_errors.lands_other_problem.value if field_errors.lands_other_problem else object.metadata.lands_other_problem.value }}">                        
+                        {% endfor %}
+                        <input type="text" class="form-control input-sm" name="lands_other_problem" value="{{ field_errors.lands_other_problem.value if field_errors.lands_other_problem else object.metadata.lands_other_problem.value }}">                        
                     </div>    
                     {% if field_errors.lands_other_problem %}
                     <small class="help-block">{{ field_errors.lands_other_problem.message }}</small>
@@ -392,7 +333,6 @@
                     <small class="help-block">{{ field_errors.lands_problem.message }}</small>
                     {% endif %}
                 </div>
-                
                 
                 <div class="form-group {{ 'has-error' if field_errors.has_mortgage else '' }}">
                     <div class="fg-line">
@@ -439,23 +379,14 @@
                 <div class="form-group {{ 'has-error' if field_errors.lands_main_uses else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Usos principales</label>
+                        {% for item in main_uses %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="lands_main_uses" value="residential" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='residential' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='residential' %}checked{% endif %}> Residencial
+                              <input type="checkbox" name="lands_main_uses" value="{{ item.value }}" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses== item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_main_uses" value="commercial" style="opacity: 1;"  {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='commercial' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='commercial' %}checked{% endif %}> Comercial
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_main_uses" value="nature_forest" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses==='nature_forest' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_main_uses==='nature_forest' %}checked{% endif %}> Natural / Bosque
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="lands_other_main_uses" value="{{ field_errors.lands_other_main_uses.value if field_errors.lands_other_main_uses else object.metadata.lands_other_main_uses }}">                        
+                        {% endfor %}
+                        <input type="text" class="form-control input-sm" name="lands_other_main_uses" value="{{ field_errors.lands_other_main_uses.value if field_errors.lands_other_main_uses else object.metadata.lands_other_main_uses }}">                        
                     </div>    
                     {% if field_errors.lands_other_main_uses %}
                     <small class="help-block">{{ field_errors.lands_other_main_uses.message }}</small>
@@ -465,27 +396,17 @@
                     {% endif %}
                 </div>
                 
-                
                 <div class="form-group {{ 'has-error' if field_errors.lands_structures else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Estructuras en el terreno</label>
+                        {% for item in structures %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="lands_structures" value="residential" style="opacity: 1;" {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='residential' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='residential' %}checked{% endif %}> Residencial
+                              <input type="checkbox" name="lands_structures" value="{{ item.value }}" style="opacity: 1;" {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_structures" value="commercial" style="opacity: 1;"  {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='commercial' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='commercial' %}checked{% endif %}> Comercial / Oficina
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_structures" value="agricultural" style="opacity: 1;" {% for lands_structures in object.metadata.lands_structures %}{% if lands_structures==='agricultural' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_structures==='agricultural' %}checked{% endif %}> Agrícola
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="lands_other_structures" value="{{ field_errors.metadata.lands_other_structures.value if field_errors.metadata.lands_other_structures else object.metadata.lands_other_structures }}">                        
+                        {% endfor %}
+                        <input type="text" class="form-control input-sm" name="lands_other_structures" value="{{ field_errors.metadata.lands_other_structures.value if field_errors.metadata.lands_other_structures else object.metadata.lands_other_structures }}">                        
                     </div>    
                     {% if field_errors.lands_other_structures %}
                     <small class="help-block">{{ field_errors.lands_other_structures.message }}</small>
@@ -498,23 +419,14 @@
                 <div class="form-group {{ 'has-error' if field_errors.lands_attributes else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Atributos Principales</label>
+                        {% for item in attributes %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox"  name="lands_attributes" value="nature" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='nature' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='nature' %}checked{% endif %}> Naturaleza
+                              <input type="checkbox"  name="lands_attributes" value="{{ item.value }}" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_attributes" value="educational" style="opacity: 1;"  {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='educational' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='educational' %}checked{% endif %}> Educativos
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="lands_attributes" value="landscape" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes==='landscape' %}checked{% endif %}{% endfor %} {% if object.metadata.lands_attributes==='landscape' %}checked{% endif %}> Paisajistas y escénicos
-                            </label>
-                        </div>
-                            <label class="control-label">Otro</label>
-                            <input type="text" class="form-control input-sm" name="lands_other_attributes" value="{{ field_errors.metadata.lands_other_attributes.value if field_errors.metadata.lands_other_attributes else object.metadata.lands_other_attributes }}">                        
+                        {% endfor %}
+                        <input type="text" class="form-control input-sm" name="lands_other_attributes" value="{{ field_errors.metadata.lands_other_attributes.value if field_errors.metadata.lands_other_attributes else object.metadata.lands_other_attributes }}">                        
                     </div>    
                     {% if field_errors.lands_other_attributes %}
                     <small class="help-block">{{ field_errors.lands_other_attributes.message }}</small>
@@ -548,48 +460,14 @@
                 <div class="form-group {{ 'has-error' if field_errors.wich_use else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Uso</label>
+                        {% for item in proposed_uses %}
                         <div class="radio">
                             <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="scientist_research" {% if object.metadata.wich_use == 'scientist_research' %}checked{% endif %} >
-                              Investigación Científica
+                              <input type="radio" name="wich_use" style="opacity: 1;" value="{{ item.value }}" {% if object.metadata.wich_use == item.value %}checked{% endif %}>
+                              {{ item.label }}
                             </label>
                         </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="environment_monitoring" {% if object.metadata.wich_use == 'environment_monitoring' %}checked{% endif %}>
-                              Monitoreo Ambiental
-                            </label>
-                        </div>    
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="spirit_uses" {% if object.metadata.wich_use == 'spirit_uses' %}checked{% endif %}>
-                              Usos espirituales
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="educational" {% if object.metadata.wich_use == 'educational' %}checked{% endif %}>
-                              Educación
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="recreation" {% if object.metadata.wich_use == 'recreation' %}checked{% endif %}>
-                              Recreación
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="turism" {% if object.metadata.wich_use == 'turism' %}checked{% endif %}>
-                              Turismo
-                            </label>
-                        </div>         
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="sustainable_uses" {% if object.metadata.wich_use == 'sustainable_uses' %}checked{% endif %}>
-                              Usos sostenibles
-                            </label>
-                        </div>                 
+                        {% endfor %}
                         {% if field_errors.wich_use %}
                         <small class="help-block">{{ field_errors.wich_use.message }}</small>
                         {% endif %}
@@ -599,61 +477,23 @@
                 <div class="form-group {{ 'has-error' if field_errors.importance_of_knowing else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Importancia de saber</label>
+                        {% for item in protection_reasons %}
                         <div class="radio">
                             <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature" {% if object.metadata.importance_of_knowing == 'nature' %}checked{% endif %} >
-                              Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano.
+                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="{{ item.value }}" {% if object.metadata.importance_of_knowing == item.value %}checked{% endif %}>
+                              {{ item.label }}
                             </label>
                         </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature_low_human" {% if object.metadata.importance_of_knowing == 'nature_low_human' %}checked{% endif %}>
-                              Es un lugar natural con bajo impacto humano y quiero evitar
-                    mayores perturbaciones.
-                            </label>
-                        </div>    
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="nature_special" {% if object.metadata.importance_of_knowing == 'nature_special'%}checked{% endif %}>
-                              Es un lugar con rasgos naturales especiales(p.e. arboledas,
-                    mogotes, lagunas, cuevas)
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="species_protection" {% if object.metadata.importance_of_knowing == 'species_protection' %}checked{% endif %}>
-                              Es un lugar donde habitan especies que deber ser protegidas
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="historic" {% if object.metadata.importance_of_knowing == 'historic' %}checked{% endif %}>
-                              Es un lugar con historia natural y cultural que debe ser
-                    protegida
-                            </label>
-                        </div>  
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="conservation" {% if object.metadata.importance_of_knowing == 'conservation' %}checked{% endif %}>
-                              Es un lugar óptimo donde la conservación y el desarrollo
-                    sustentable pueden ocurrir a la vez.
-                            </label>
-                        </div>                
+                        {% endfor %}
                         {% if field_errors.importance_of_knowing %}
                         <small class="help-block">{{ field_errors.importance_of_knowing.message }}</small>
                         {% endif %}
                     </div>                    
                 </div> 
-                
-
-                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">GUARDAR</button>
                     <a href="/admin/land" class="btn btn-default">CANCELAR</a>
                 </div>
-                
-                
-                
             </form>
         </div>
     </div>    
@@ -668,12 +508,5 @@
       </div>
     </div>
   </div>
-</div>
-
-<script type="text/javascript">
-    function disableother(){
-        if(document[])
-    }
-</script>
-    
+</div>    
 {% endblock %}

@@ -9,6 +9,12 @@ import Coordinates from '../../ui/Coordinates';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
+import {
+  LAND_ATTRIBUTE,
+  LAND_MAIN_USE,
+  LAND_PROPOSED_USE,
+  LAND_PROTECTION_REASON,
+} from '../../../constants';
 
 class SubmitStep extends React.Component {
   render() {
@@ -53,7 +59,7 @@ class SubmitStep extends React.Component {
                 ¿Por qué es importante la protección de este terreno en
                 particular?
               </p>
-              <p>{this.props.reason_conservation || 'No definido.'}</p>
+              <p>{LAND_PROTECTION_REASON[this.props.reason_conservation] || 'No definido.'}</p>
             </Col>
           </Row>
 
@@ -116,7 +122,7 @@ class SubmitStep extends React.Component {
                     description={
                       main_attributes.length > 0
                         ? main_attributes.map((item, index) => (
-                            <div key={index}>{item}</div>
+                            <div key={index}>{LAND_ATTRIBUTE[item] || 'No definido'}</div>
                           ))
                         : 'No definido.'
                     }
@@ -134,7 +140,7 @@ class SubmitStep extends React.Component {
                   {main_uses.length == 0 && <li>No definido.</li>}
                   {main_uses.map((item, index) => (
                     <li key={index}>
-                      {item}
+                      {LAND_MAIN_USE[item] || 'No definido'}
                     </li>
                   ))}
                 </ul>
@@ -145,7 +151,7 @@ class SubmitStep extends React.Component {
                   {proposed_uses.length == 0 && <li>No definido.</li>}
                   {proposed_uses.map((item, index) => (
                     <li key={index}>
-                      {item}
+                      {LAND_PROPOSED_USE[item] || 'No definido'}
                     </li>
                   ))}
                 </ul>
