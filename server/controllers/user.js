@@ -207,7 +207,7 @@ class UserController {
 
     /* Count proposed, conserved, supported areas by user */
     Promise.all([
-      Land.count({ where: { user_id: user.id, status: 'new' } }),
+      Land.count({ where: { user_id: user.id } }),
       Land.count({ where: { user_id: user.id, status: 'approved' } }),
       LandLikes.count({ where: { user_id: user.id } }),
     ]).then(values => {
