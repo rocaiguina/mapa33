@@ -13,7 +13,6 @@ const User = Models.User;
 const ResetPassword = Models.ResetPassword;
 
 function login(req, res) {
-  
   User.findOne({
     where: {
       email: req.body.email,
@@ -71,26 +70,28 @@ function forgotPassword(req, res) {
       })
         .then(function() {
           // variables para email
-            const sitio = process.env.SERVER_URL + '/reset-password/';
-            const contacto = process.env.SERVER_URL +'/contact-us'
-            const html = TemplateEngine.render(
-              'template_email/recovery_password_email.html',
-              { site: sitio, token: token,contact: contacto }
-            );
-            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-            const msg = {
-              to: req.body.email,
-              from: process.env.DEFAULT_EMAIL_FROM,
-              subject: 'Recupera tu contraseña',
-              html: html,
-            };
-            sgMail.send(msg).
-                then(() => {}, error => {
-                    console.error(error);
-                if (error.response) {
-                  console.error(error.response.body)
-                }
-            });    
+          const sitio = process.env.SERVER_URL + '/reset-password/';
+          const contacto = process.env.SERVER_URL + '/contact-us';
+          const html = TemplateEngine.render(
+            'template_email/recovery_password_email.html',
+            { site: sitio, token: token, contact: contacto }
+          );
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+          const msg = {
+            to: req.body.email,
+            from: process.env.DEFAULT_EMAIL_FROM,
+            subject: 'Recupera tu contraseña',
+            html: html,
+          };
+          sgMail.send(msg).then(
+            () => {},
+            error => {
+              console.error(error);
+              if (error.response) {
+                console.error(error.response.body);
+              }
+            }
+          );
         })
         .catch(function() {
           res.status(500).send();

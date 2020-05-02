@@ -1,24 +1,20 @@
 'use strict';
 
 module.exports = {
-  img: function (data) {
+  img: function(data) {
     var reg = /^data:image\/([\w+]+);base64,([\s\S]+)/;
     var match = data.match(reg);
     var baseType = {
-      jpeg: 'jpg'
+      jpeg: 'jpg',
     };
-
-    baseType['svg+xml'] = 'svg'
-
+    baseType['svg+xml'] = 'svg';
     if (!match) {
       throw new Error('image base64 data error');
     }
-
     var extname = baseType[match[1]] ? baseType[match[1]] : match[1];
-
     return {
       extname: '.' + extname,
-      base64: match[2]
+      base64: match[2],
     };
-  }
-}
+  },
+};

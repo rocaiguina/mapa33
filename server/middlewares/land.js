@@ -17,14 +17,14 @@ module.exports = {
         {
           model: User,
           as: 'user',
-          attributes: ['first_name', 'last_name','email'],
+          attributes: ['first_name', 'last_name', 'email'],
         },
       ],
     })
       .then(function(land) {
         if (!land) {
           return res.status(404).send('');
-        }        
+        }
         req.land = land;
         next();
         return land;

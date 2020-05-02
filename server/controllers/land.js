@@ -20,8 +20,6 @@ const ALL_LAND_LEVELS = ['basic', 'pledge', 'conserved'];
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
-const LANDS_DIR = 'lands';
-
 class LandController {
   findAll(req, res) {
     let level = req.query.level;
@@ -44,7 +42,7 @@ class LandController {
       default:
         conditions.level = {
           [Op.in]: ALL_LAND_LEVELS,
-        }
+        };
         conditions.status = 'approved';
         break;
     }
@@ -241,7 +239,7 @@ class LandController {
     return next();
   }
 
-  store(req, res, next) {
+  store(req, res) {
     const cleaned_data = req.cleaned_data;
 
     // Save new land.
@@ -293,26 +291,28 @@ class LandController {
         // Calculate coordinate.
         const result = land.get({ plain: true });
         delete result.geom;
-          // variables para email
-        const contacto = process.env.SERVER_URL +'/contact-us'
+        // variables para email
+        const contacto = process.env.SERVER_URL + '/contact-us';
         const html = TemplateEngine.render(
           'template_email/create_land_email.html',
-          {contact: contacto }
+          { contact: contacto }
         );
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
-            to: req.user.email,
-            from: process.env.DEFAULT_EMAIL_FROM,
-            subject: '¡Gracias por llenar el formulario para el Mapa-33!',
-            html: html,
-        }
-        sgMail.send(msg).
-        then(() => {}, error => {
+          to: req.user.email,
+          from: process.env.DEFAULT_EMAIL_FROM,
+          subject: '¡Gracias por llenar el formulario para el Mapa-33!',
+          html: html,
+        };
+        sgMail.send(msg).then(
+          () => {},
+          error => {
             console.error(error);
             if (error.response) {
-              console.error(error.response.body)
+              console.error(error.response.body);
             }
-        }); 
+          }
+        );
         res.json(result);
       })
       .catch(function(err) {
@@ -324,7 +324,7 @@ class LandController {
     if (req.body.base64Img) {
       const image = Base64Img.img(req.body.base64Img);
       const filename = RandomToken(10) + '.jpg';
-      const filepath =  Path.join('lands', filename);
+      const filepath = Path.join('lands', filename);
       // Resize image
       const input = Buffer.from(image.base64, 'base64');
       sharp(input)
@@ -407,7 +407,6 @@ class LandController {
 
   get(req, res, next) {
     var land = req.land;
-    console.log("ESto es land2: " + req.land );
     res.json(land.get({ plain: true }));
     next();
   }
@@ -461,42 +460,41 @@ class LandController {
         if (landlike) {
           return res.json(landlike.get({ plain: true }));
         }
-        Land.increment('likes', { 
-            where: { id: req.params.id }
-        }).then(function(land) {
+        Land.increment('likes', {
+          where: { id: req.params.id },
+        })
+          .then(function(land) {
             var land1 = land[0];
             var land2 = land1[0];
             var land3 = land2[0];
-             
-            if(land3.likes % 100 == 0  ){
-                
-                User.findOne({
-                    where: {
-                       id: land3.user_id
+
+            if (land3.likes % 100 == 0) {
+              User.findOne({
+                where: { id: land3.user_id },
+              }).then(function(user) {
+                const sitio = process.env.SERVER_URL + '/land/' + req.params.id;
+                const name = user.first_name + ' ' + user.last_name;
+                const html = TemplateEngine.render(
+                  'template_email/follow_up_email.html',
+                  { name: name, site: sitio }
+                );
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const msg = {
+                  to: user.email,
+                  from: process.env.DEFAULT_EMAIL_FROM,
+                  subject: '¡Celebramos tus logros!',
+                  html: html,
+                };
+                sgMail.send(msg).then(
+                  () => {},
+                  error => {
+                    if (error.response) {
+                      console.error(error.response.body);
                     }
-                 }).then(function(user) {
-                    console.log("USER: "+JSON.stringify(user))
-                    const sitio = process.env.SERVER_URL + '/land/'+req.params.id;
-                    const name = user.first_name+" "+ user.last_name;
-                    const html = TemplateEngine.render(
-                        'template_email/follow_up_email.html',
-                        {name: name, site: sitio}
-                    );
-                    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-                    const msg = {
-                        to: user.email,
-                        from: process.env.DEFAULT_EMAIL_FROM,
-                        subject: '¡Celebramos tus logros!',
-                        html: html,
-                    }
-                    sgMail.send(msg).
-                    then(() => {}, error => {
-                        if (error.response) {
-                            console.error(error.response.body)
-                        }
-                    }); 
-                })
-            }  
+                  }
+                );
+              });
+            }
             return LandLikes.create({
               land_id: req.params.id,
               user_id: req.user.id,

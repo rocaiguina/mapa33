@@ -24,6 +24,9 @@ nunjucks.configure('views', {
 });
 app.set('view engine', 'html');
 
+// serve static files from public
+app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
+
 // cors
 app.use(cors());
 
@@ -56,9 +59,6 @@ app.use(bodyParser.json({ limit: '5mb' }));
 // prepend '/' to URIs
 app.use('/api', server);
 app.use('/admin', require('./server/admin'));
-
-// serve static files from public
-app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
 // Add og:tags for land page
 app.get('/land/:id', land.get);

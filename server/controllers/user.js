@@ -8,7 +8,6 @@ const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
 const jwt = require('jsonwebtoken');
-const randomToken = require('random-token');
 const TemplateEngine = require('../utils/template-engine');
 
 const sgMail = require('@sendgrid/mail');
@@ -48,7 +47,6 @@ class UserController {
   }
 
   store(req, res) {
-      
     const validationSchema = {
       first_name: Joi.string().required(),
       last_name: Joi.string().required(),
@@ -102,25 +100,27 @@ class UserController {
       advs_by_zip: cleaned_data.advs_by_zip,
       interested_volunteer: cleaned_data.interested_volunteer,
     })
-      .then(function(user) {       
+      .then(function(user) {
         // variables para email
         const html = TemplateEngine.render(
-            'template_email/user_register_email.html'
+          'template_email/user_register_email.html'
         );
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
-            to: req.body.email,
-            from: process.env.DEFAULT_EMAIL_FROM,
-            subject: '¡BIENVENIDO A MAPA33!',
-            html: html,
-        }
-        sgMail.send(msg).
-        then(() => {}, error => {
+          to: req.body.email,
+          from: process.env.DEFAULT_EMAIL_FROM,
+          subject: '¡BIENVENIDO A MAPA33!',
+          html: html,
+        };
+        sgMail.send(msg).then(
+          () => {},
+          error => {
             console.error(error);
             if (error.response) {
-              console.error(error.response.body)
+              console.error(error.response.body);
             }
-        });
+          }
+        );
 
         // Authenticate user on regiser.
         const payload = {

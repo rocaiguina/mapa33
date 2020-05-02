@@ -1,7 +1,6 @@
 'use strict';
 
 const passport = require('passport');
-const nodemailer = require('nodemailer');
 const Models = require('../../db/models');
 const encryptor = require('../../server/utils/encryptor');
 const User = Models.User;
@@ -117,8 +116,7 @@ class AuthAdminController {
           expired: date,
         })
           .then(function() {
-            
-            // variables para emqil
+            // variables para email
             const sitio = process.env.SERVER_URL + '/admin/reset-password/';
             const html = TemplateEngine.render(
               'template_email/reset_password.html',
@@ -131,13 +129,15 @@ class AuthAdminController {
               subject: 'Password Reset Request', // Subject line
               html: html,
             };
-            sgMail.send(mailOptions).
-            then(() => {}, error => {
+            sgMail.send(mailOptions).then(
+              () => {},
+              error => {
                 console.error(error);
                 if (error.response) {
-                  console.error(error.response.body)
+                  console.error(error.response.body);
                 }
-            }); 
+              }
+            );
             return res.redirect('/admin/login');
           })
           .catch(function(err) {

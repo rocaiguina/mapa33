@@ -12,7 +12,8 @@
     "dev-client": "node index.js",
     "dev-start": "nodemon index.js",
     "start": "export NODE_ENV=production && webpack && node index.js",
-    "lint": "eslint --color server/**",
+    "lint": "eslint --color app/**",
+    "lint-server": "eslint --color server/**",
     "test": "export NODE_ENV=test && mocha --colors --timeout 5000 --exit",
     "heroku-postbuild": "webpack -p"
   },

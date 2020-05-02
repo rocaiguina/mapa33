@@ -29,7 +29,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.level else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Nivel*</label>
+                        <label class="control-label">Nivel</label>
                         <div class="select">
                             <select name="level" class="form-control">
                                 <option value="">--------</option>
@@ -68,7 +68,7 @@
                 <div class="form-group {{ 'has-error' if field_errors.area_size else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Tamaño del área</label>
-                        <input type="number" step="0.01" class="form-control input-sm" name="area_size" value="{{ field_errors.area_size.value if field_errors.area_size else object.area_size }}">
+                        <input type="number" step="0.01" class="form-control input-sm" name="area_size" value="{{ object.area_size }}">
                     </div>
                     {% if field_errors.area_size %}
                     <small class="help-block">{{ field_errors.area_size.message }}</small>
@@ -104,7 +104,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.entity else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Entidad*</label>
+                        <label class="control-label">Entidad</label>
                         <input type="text" class="form-control input-sm" name="entity" value="{{ field_errors.entity.value if field_errors.entity else object.entity }}">
                     </div>
                     {% if field_errors.entity %}
@@ -114,7 +114,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.acquisition_type else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Tipo de adquisición*</label>
+                        <label class="control-label">Tipo de adquisición</label>
                         <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ field_errors.acquisition_type.value if field_errors.acquisition_type else object.acquisition_type }}">
                     </div>
                     {% if field_errors.acquisition_type %}
@@ -124,7 +124,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.year_acquisition else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Año de adquisición*</label>
+                        <label class="control-label">Año de adquisición</label>
                         <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ field_errors.year_acquisition.value if field_errors.year_acquisition else object.year_acquisition }}">
                     </div>
                     {% if field_errors.year_acquisition %}
@@ -144,7 +144,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.ownership else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Propiedad*</label>
+                        <label class="control-label">Propiedad</label>
                         
                         <input type="text" class="form-control input-sm" name="ownership" value="{{ field_errors.ownership if field_errors.ownership else object.ownership }}">
                     </div>
@@ -155,7 +155,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Estado*</label>
+                        <label class="control-label">Estado</label>
                         <div class="select">
                             <select name="status" class="form-control ">
                                 <option value="">--------</option>
@@ -167,16 +167,6 @@
                     </div>
                     {% if field_errors.status %}
                     <small class="help-block">{{ field_errors.status.message }}</small>
-                    {% endif %}
-                </div>
-                                
-                <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Motivo de conservación*</label>
-                        <textarea class="form-control" rows="5" name="reason_conservation">{{ field_errors.reason_conservation.value if field_errors.reason_conservation else object.reason_conservation }}</textarea>
-                    </div>
-                    {% if field_errors.reason_conservation %}
-                    <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
                                
@@ -232,13 +222,13 @@
                     </div>                    
                 </div>            
                                 
-                <div class="form-group {{ 'has-error' if field_errors.catastro_number else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.catastro_numbers else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Número de Catastro</label>
-                        <input type="number" class="form-control input-sm" name="catastro_number" value="{{ field_errors.metadata.catastro_number.value if field_errors.metadata.catastro_number else object.metadata.catastro_number }}">
+                        <label class="control-label">Números de Catastro</label>
+                        <textarea class="form-control" rows="5" name="catastro_numbers">{% for item in object.metadata.catastro_numbers %}{{ item }}{% endfor %}</textarea>
                     </div>
-                    {% if field_errors.catastro_number %}
-                    <small class="help-block">{{ field_errors.catastro_number.message }}</small>
+                    {% if field_errors.catastro_numbers %}
+                    <small class="help-block">{{ field_errors.catastro_numbers.message }}</small>
                     {% endif %}
                 </div>
                 
@@ -376,23 +366,23 @@
                     </div>                    
                 </div> 
                 
-                <div class="form-group {{ 'has-error' if field_errors.lands_main_uses else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.main_uses else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Usos principales</label>
+                        <label class="control-label">¿Cuáles son los usos principales actuales de la propiedad?</label>
                         {% for item in main_uses %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="lands_main_uses" value="{{ item.value }}" style="opacity: 1;" {% for lands_main_uses in object.metadata.lands_main_uses %}{% if lands_main_uses== item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
+                              <input type="checkbox" name="main_uses" value="{{ item.value }}" style="opacity: 1;" {% for main_uses in object.main_uses %}{% if main_uses == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="lands_other_main_uses" value="{{ field_errors.lands_other_main_uses.value if field_errors.lands_other_main_uses else object.metadata.lands_other_main_uses }}">                        
+                        <input type="text" class="form-control input-sm" name="other_main_uses" value="{{ field_errors.other_main_uses.value if field_errors.other_main_uses else object.metadata.other_main_uses }}">                        
                     </div>    
-                    {% if field_errors.lands_other_main_uses %}
-                    <small class="help-block">{{ field_errors.lands_other_main_uses.message }}</small>
+                    {% if field_errors.other_main_uses %}
+                    <small class="help-block">{{ field_errors.other_main_uses.message }}</small>
                     {% endif %}
-                    {% if field_errors.lands_main_uses %}
-                    <small class="help-block">{{ field_errors.lands_main_uses.message }}</small>
+                    {% if field_errors.main_uses %}
+                    <small class="help-block">{{ field_errors.main_uses.message }}</small>
                     {% endif %}
                 </div>
                 
@@ -416,23 +406,23 @@
                     {% endif %}
                 </div>
                 
-                <div class="form-group {{ 'has-error' if field_errors.lands_attributes else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.main_attributes else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Atributos Principales</label>
                         {% for item in attributes %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox"  name="lands_attributes" value="{{ item.value }}" style="opacity: 1;" {% for lands_attributes in object.metadata.lands_attributes %}{% if lands_attributes == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
+                              <input type="checkbox"  name="main_attributes" value="{{ item.value }}" style="opacity: 1;" {% for main_attributes in object.main_attributes %}{% if main_attributes == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="lands_other_attributes" value="{{ field_errors.metadata.lands_other_attributes.value if field_errors.metadata.lands_other_attributes else object.metadata.lands_other_attributes }}">                        
+                        <input type="text" class="form-control input-sm" name="other_main_attributes" value="{{ object.other_main_attributes }}">
                     </div>    
-                    {% if field_errors.lands_other_attributes %}
-                    <small class="help-block">{{ field_errors.lands_other_attributes.message }}</small>
+                    {% if field_errors.other_main_attributes %}
+                    <small class="help-block">{{ field_errors.other_main_attributes.message }}</small>
                     {% endif %}
-                    {% if field_errors.lands_attributes %}
-                    <small class="help-block">{{ field_errors.lands_attributes.message }}</small>
+                    {% if field_errors.main_attributes %}
+                    <small class="help-block">{{ field_errors.main_attributes.message }}</small>
                     {% endif %}
                 </div>
                 
@@ -457,36 +447,35 @@
                     </div>                    
                 </div> 
                 
-                <div class="form-group {{ 'has-error' if field_errors.wich_use else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.proposed_uses else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Uso</label>
+                        <label class="control-label">¿Cuál uso le darías al terreno?</label>
                         {% for item in proposed_uses %}
-                        <div class="radio">
+                        <div class="checkbox">
                             <label>
-                              <input type="radio" name="wich_use" style="opacity: 1;" value="{{ item.value }}" {% if object.metadata.wich_use == item.value %}checked{% endif %}>
-                              {{ item.label }}
+                              <input type="checkbox"  name="proposed_uses" value="{{ item.value }}" style="opacity: 1;" {% for proposed_uses in object.proposed_uses %}{% if proposed_uses == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
                         {% endfor %}
-                        {% if field_errors.wich_use %}
-                        <small class="help-block">{{ field_errors.wich_use.message }}</small>
+                        {% if field_errors.proposed_uses %}
+                        <small class="help-block">{{ field_errors.proposed_uses.message }}</small>
                         {% endif %}
                     </div>                    
                 </div> 
                 
-                <div class="form-group {{ 'has-error' if field_errors.importance_of_knowing else '' }}">
+                <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Importancia de saber</label>
+                        <label class="control-label">¿Por qué es importante la protección de este terreno en particular?</label>
                         {% for item in protection_reasons %}
                         <div class="radio">
                             <label>
-                              <input type="radio" name="importance_of_knowing" style="opacity: 1;" value="{{ item.value }}" {% if object.metadata.importance_of_knowing == item.value %}checked{% endif %}>
+                              <input type="radio" name="reason_conservation" style="opacity: 1;" value="{{ item.value }}" {% if object.reason_conservation == item.value %}checked{% endif %}>
                               {{ item.label }}
                             </label>
                         </div>
                         {% endfor %}
-                        {% if field_errors.importance_of_knowing %}
-                        <small class="help-block">{{ field_errors.importance_of_knowing.message }}</small>
+                        {% if field_errors.reason_conservation %}
+                        <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                         {% endif %}
                     </div>                    
                 </div> 
