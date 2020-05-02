@@ -12,9 +12,10 @@ function get(req, res) {
       if (!land) {
         return res.status(404).send('');
       }
+      const description = land.reason_conservation;
       const metatags = {
         og_title: land.name,
-        og_description: 'Some description will go here',
+        og_description: description,
         og_image: land.photographURL,
       };
       res.render('public/index', metatags);

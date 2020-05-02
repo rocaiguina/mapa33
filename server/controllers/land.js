@@ -10,6 +10,7 @@ const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const TemplateEngine = require('../utils/template-engine');
 const FileStorage = require('../utils/file-storage');
+const { LAND_PROTECTION_REASONS } = require('../../config/constants');
 
 const Land = Models.Land;
 const User = Models.User;
@@ -281,7 +282,8 @@ class LandController {
       acquisition_type: '',
       year_estab: '',
       year_acquisition: '',
-      reason_conservation: cleaned_data.importance_of_knowing,
+      reason_conservation:
+        LAND_PROTECTION_REASONS[cleaned_data.importance_of_knowing] || '',
       user_id: cleaned_data.are_u_owner ? req.user.id : null,
       ownership: '',
       notes: '',
