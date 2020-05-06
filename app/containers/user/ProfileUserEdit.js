@@ -24,6 +24,9 @@ class ProfileUserEdit extends React.Component {
         advs_by_email: false,
         advs_by_zip: false,
         createdAt: null,
+        proposed_areas: 0,
+        approved_areas: 0,
+        supported_areas: 0,
       },
     };
   }
