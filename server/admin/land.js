@@ -67,6 +67,7 @@ class LandAdminController {
   save(req, res) {
     var land = req.land;
     var data = req.body;
+
     const validationSchema = {
       name: Joi.string(),
       level: Joi.string().allow(null, ''),
@@ -174,7 +175,6 @@ class LandAdminController {
         land.ownership = cleaned_data.ownership;
         land.notes = cleaned_data.notes;
         land.status = cleaned_data.status;
-        land.user_id = req.user.id;
         land.metadata = {
           are_u_owner: cleaned_data.are_u_owner,
           catastro_numbers: cleaned_data.catastro_numbers.trim().split('\n'),
