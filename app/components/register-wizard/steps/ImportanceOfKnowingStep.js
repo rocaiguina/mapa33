@@ -37,11 +37,11 @@ class ImportanceOfKnowingStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={19} steps={20} />
+          <Progress onNext={this.handleOnNext} step={17} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={19} steps={20} />
+          <TopNavigator previous={this.props.previous} step={17} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}

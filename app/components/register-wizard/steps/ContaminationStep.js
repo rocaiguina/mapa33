@@ -77,15 +77,21 @@ class ContaminationStep extends React.Component {
               >
                 <Radio.Button
                   className="inputprop radioprop radiosi form1"
-                  value={true}
+                  value="yes"
                 >
                   Si
                 </Radio.Button>
                 <Radio.Button
                   className="inputprop radioprop radiono form1"
-                  value={false}
+                  value="no"
                 >
                   No
+                </Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiono form1"
+                  value="unknown"
+                >
+                  No sé
                 </Radio.Button>
               </Radio.Group>
             </Col>
@@ -101,7 +107,7 @@ class ContaminationStep extends React.Component {
 }
 
 ContaminationStep.propTypes = {
-  has_contamination: PropTypes.bool,
+  has_contamination: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

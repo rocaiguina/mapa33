@@ -128,7 +128,7 @@ class LandAdminController {
         .default([])
         .single(),
       other_main_attributes: Joi.string().allow(null, ''),
-      has_contamination: Joi.boolean(),
+      has_contamination: Joi.string().allow(null, ''),
       proposed_uses: Joi.array()
         .empty('')
         .default([])

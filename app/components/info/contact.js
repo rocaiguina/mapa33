@@ -17,7 +17,14 @@ class Contact extends React.Component {
             <div className="m-b-20">
               <h4>Oficina Central</h4>
               <p>(787) 722-5834</p>
-              <p>info@paralanaturaleza.org</p>
+              <p>
+                <a
+                  style={{ color: '#fff' }}
+                  href="mailto:info@paralanaturaleza.org"
+                >
+                  info@paralanaturaleza.org
+                </a>
+              </p>
               <p>Lunes – Viernes 9:00am a 5:30pm</p>
             </div>
             <div className="m-b-20">
@@ -26,7 +33,14 @@ class Contact extends React.Component {
               <p>Lunes – Viernes 9:00am a 5:30pm</p>
               <p>Sábado: (787) 722-5834 x242</p>
               <p>Reservaciones en línea</p>
-              <p>reservaciones@paralanaturaleza.org</p>
+              <p>
+                <a
+                  style={{ color: '#fff' }}
+                  href="mailto:reservaciones@paralanaturaleza.org"
+                >
+                  reservaciones@paralanaturaleza.org
+                </a>
+              </p>
             </div>
           </Col>
           <Col md={8}>
@@ -35,7 +49,14 @@ class Contact extends React.Component {
               <p>(787) 722-5844</p>
               <p>Lunes – Viernes 9:00am a 5:30pm</p>
               <p>Membresías en línea</p>
-              <p>amigos@paralanaturaleza.org</p>
+              <p>
+                <a
+                  style={{ color: '#fff' }}
+                  href="mailto:amigos@paralanaturaleza.org"
+                >
+                  amigos@paralanaturaleza.org
+                </a>
+              </p>
             </div>
           </Col>
         </Row>

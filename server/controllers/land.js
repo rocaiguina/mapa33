@@ -206,7 +206,7 @@ class LandController {
       lands_other_structures: Joi.string().allow(null, ''),
       lands_attributes: Joi.array(),
       lands_other_attributes: Joi.string().allow(null, ''),
-      has_contamination: Joi.boolean().allow(null),
+      has_contamination: Joi.string().allow(null, ''),
       wich_use: Joi.string().allow(null, ''),
       importance_of_knowing: Joi.string().allow(null, ''),
       know_owner: Joi.boolean().allow(null),

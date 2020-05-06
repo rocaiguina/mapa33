@@ -429,16 +429,22 @@
                         <label class="control-label">Contaminada</label>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="has_contamination" style="opacity: 1;" value="true" {% if object.metadata.has_contamination == true %}checked{% endif %} >
+                              <input type="radio" name="has_contamination" style="opacity: 1;" value="yes" {% if object.metadata.has_contamination == "yes" %}checked{% endif %} >
                               SI
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                              <input type="radio" name="has_contamination" style="opacity: 1;" value="false" {% if object.metadata.has_contamination == false %}checked{% endif %} >
+                              <input type="radio" name="has_contamination" style="opacity: 1;" value="no" {% if object.metadata.has_contamination == "no" %}checked{% endif %} >
                               NO
                             </label>
-                        </div>                        
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_contamination" style="opacity: 1;" value="unknown" {% if object.metadata.has_contamination == "unknown" %}checked{% endif %} >
+                              NO SÉ
+                            </label>
+                        </div>
                         {% if field_errors.has_contamination %}
                         <small class="help-block">{{ field_errors.has_contamination.message }}</small>
                         {% endif %}
