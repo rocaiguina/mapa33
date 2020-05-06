@@ -1,5 +1,10 @@
 import AuthApi from '../api/auth';
 
+export const isUserLogged = function() {
+  let user = localStorage.getItem('user');
+  return user !== null;
+}
+
 export const getLoggedUser = function() {
   let user = false;
   try {
@@ -31,4 +36,5 @@ export default {
   getLoggedUser,
   login,
   logout,
+  isUserLogged,
 };

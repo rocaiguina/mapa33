@@ -5,6 +5,7 @@ import BaseLayout from '../../components/layout/base';
 import Profile from '../../components/user/profile';
 import AuthApi from '../../api/auth';
 import UserApi from '../../api/user';
+import AuthService from '../../services/auth';
 
 class ProfileUser extends React.Component {
   constructor(props) {
@@ -34,22 +35,27 @@ class ProfileUser extends React.Component {
 
   componentDidMount() {
     const self = this;
-    UserApi.getProfile()
-      .then(profile => {
-        self.setState({
-          initialValues: Object.assign({}, profile),
+    if (AuthService.isUserLogged()) {
+      UserApi.getProfile()
+        .then(profile => {
+          self.setState({
+            initialValues: Object.assign({}, profile),
+          });
+        })
+        .catch(err => {
+          if (err.status == 401) {
+            AuthService.logout();
+            return self.props.history.replace('/register/user?next=/profile');
+          }
+          notification.error({
+            message: 'Error',
+            description:
+              'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
+          });
         });
-      })
-      .catch(err => {
-        if (err.status == 401) {
-          return self.props.history.replace('/register/user?next=/profile');
-        }
-        notification.error({
-          message: 'Error',
-          description:
-            'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
-        });
-      });
+      } else {
+        return self.props.history.replace('/register/user?next=/profile');
+      }
   }
 
   handleOnLogout = event => {

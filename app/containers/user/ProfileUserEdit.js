@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import ProfileForm from '../../components/user/ProfileForm';
 import UserApi from '../../api/user';
+import AuthService from '../../services/auth';
 
 class ProfileUserEdit extends React.Component {
   constructor(props) {
@@ -33,22 +34,27 @@ class ProfileUserEdit extends React.Component {
 
   componentDidMount() {
     const self = this;
-    UserApi.getProfile()
-      .then(profile => {
-        self.setState({
-          initialValues: Object.assign({}, profile),
+    if (AuthService.isUserLogged()) {
+      UserApi.getProfile()
+        .then(profile => {
+          self.setState({
+            initialValues: Object.assign({}, profile),
+          });
+        })
+        .catch(err => {
+          if (err.status == 401) {
+            AuthService.logout();
+            return self.props.history.push('/login');
+          }
+          notification.error({
+            message: 'Error',
+            description:
+              'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
+          });
         });
-      })
-      .catch(err => {
-        if (err.status == 401) {
-          return self.props.history.push('/login');
-        }
-        notification.error({
-          message: 'Error',
-          description:
-            'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
-        });
-      });
+    } else {
+      return self.props.history.replace('/register/user?next=/profile');
+    }
   }
 
   handleOnSubmit = (values, { setSubmitting }) => {
