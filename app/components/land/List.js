@@ -24,6 +24,7 @@ class List extends React.Component {
                 owner={land.user}
                 location={land.location}
                 area_size={land.area_size}
+                likes={land.likes}
               />
             ))}
         </div>
