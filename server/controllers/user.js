@@ -4,6 +4,7 @@ const Joi = require('joi');
 const Models = require('../../db/models');
 const User = Models.User;
 const Land = Models.Land;
+const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
 const jwt = require('jsonwebtoken');
@@ -208,7 +209,7 @@ class UserController {
     Promise.all([
       Land.count({ where: { user_id: user.id } }),
       Land.count({ where: { user_id: user.id, status: 'approved' } }),
-      Land.sum('likes', { where: { user_id: user.id } }),
+      LandLikes.count({ where: { user_id: user.id } }),
     ]).then(values => {
       var data = user.get({ plain: true });
       data.proposed_areas = values[0];
