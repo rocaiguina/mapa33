@@ -98,8 +98,9 @@ class AuthAdminController {
   }
 
   forgotpassword(req, res) {
+    const email = req.body.email || '';
     User.findOne({
-      where: { email: req.body.email },
+      where: { email: email.toLowerCase() },
     })
       .then(function(user) {
         if (!user) {

@@ -13,9 +13,10 @@ const User = Models.User;
 const ResetPassword = Models.ResetPassword;
 
 function login(req, res) {
+  const email = req.body.email || '';
   User.findOne({
     where: {
-      email: req.body.email,
+      email: email.toLowerCase(),
     },
   })
     .then(function(user) {
@@ -52,8 +53,9 @@ function logout(req, res) {
 }
 
 function forgotPassword(req, res) {
+  const email = req.body.email || '';
   User.findOne({
-    where: { email: req.body.email },
+    where: { email: email.toLowerCase() },
   })
     .then(function(user) {
       if (!user) {

@@ -85,7 +85,7 @@ class UserController {
     User.create({
       first_name: cleaned_data.first_name,
       last_name: cleaned_data.last_name,
-      email: cleaned_data.email,
+      email: cleaned_data.email.toLowerCase(),
       password: encryptor.encrypt(cleaned_data.password),
       phone: cleaned_data.phone,
       birthday: cleaned_data.birthday,

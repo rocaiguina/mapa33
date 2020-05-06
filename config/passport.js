@@ -12,7 +12,7 @@ const local = new LocalStrategy({
   passwordField: 'password'
 }, function (email, password, done) {
   User
-    .findOne({ where: { email: email }})
+    .findOne({ where: { email: email.toLowerCase() }})
     .then(function (user) {
       if (!user) { return done(null, false, { message: 'Authentication failed.' }) }
 
