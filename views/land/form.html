@@ -308,7 +308,7 @@
                         {% for item in issues %}
                         <div class="checkbox">
                             <label>
-                              <input type="checkbox"  name="lands_problem" value="{{ item.value }}" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
+                              <input type="checkbox" name="lands_problem" value="{{ item.value }}" style="opacity: 1;" {% for lands_problem in object.metadata.lands_problem %}{% if lands_problem == item.value %}checked{% endif %}{% endfor %}> {{ item.label }}
                             </label>
                         </div>
                         {% endfor %}
@@ -510,4 +510,56 @@
       </div>
     </div>
 </form>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    var landsProblem = $('input[name=lands_problem][value=others]');
+    var landsOtherProblem = $('input[name=lands_other_problem]');
+    var mainUses = $('input[name=main_uses][value=others]');
+    var otherMainUses = $('input[name=other_main_uses]');
+    var landsStructures = $('input[name=lands_structures][value=others]');
+    var otherLandsStructures = $('input[name=lands_other_structures]');
+    var mainAttributes = $('input[name=main_attributes][value=others]');
+    var otherMainAttributes = $('input[name=other_main_attributes]');
+
+    function toggleLandsOtherProblem() {
+      if (landsProblem.prop('checked')) {
+        landsOtherProblem.show();
+      } else {
+        landsOtherProblem.hide();
+      }
+    }
+
+    function toggleOtherMainUses() {
+      if (mainUses.prop('checked')) {
+        otherMainUses.show();
+      } else {
+        otherMainUses.hide();
+      }
+    }
+
+    function toggleOtherLandsStructures() {
+      if (landsStructures.prop('checked')) {
+        otherLandsStructures.show();
+      } else {
+        otherLandsStructures.hide();
+      }
+    }
+
+    function toggleOtherMainAttributes() {
+      if (mainAttributes.prop('checked')) {
+        otherMainAttributes.show();
+      } else {
+        otherMainAttributes.hide();
+      }
+    }
+
+    landsProblem.change(toggleLandsOtherProblem).ready(toggleLandsOtherProblem);
+    mainUses.change(toggleOtherMainUses).ready(toggleOtherMainUses);
+    landsStructures.change(toggleOtherLandsStructures).ready(toggleOtherLandsStructures);
+    mainAttributes.change(toggleOtherMainAttributes).ready(toggleOtherMainAttributes);
+  });
+</script>
 {% endblock %}
