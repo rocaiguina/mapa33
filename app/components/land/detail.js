@@ -7,6 +7,12 @@ import Numeral from 'numeral';
 import Badge from '../ui/Badge';
 import Coordinates from '../ui/Coordinates';
 
+import {
+  LAND_ATTRIBUTE,
+  LAND_MAIN_USE,
+  LAND_PROPOSED_USE,
+} from '../../constants';
+
 class LandDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -29,8 +35,7 @@ class LandDetail extends React.Component {
   };
 
   render() {
-    const photograph =
-      this.props.photograph || '/images/no-land-image.jpg';
+    const photograph = this.props.photograph || '/images/no-land-image.jpg';
     let owner = '';
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
@@ -189,7 +194,9 @@ class LandDetail extends React.Component {
                     <Badge
                       title="Coordenadas"
                       description={
-                        <Coordinates point={this.props.coordinates.coordinates} />
+                        <Coordinates
+                          point={this.props.coordinates.coordinates}
+                        />
                       }
                       color="white"
                       shape="round"
@@ -203,7 +210,11 @@ class LandDetail extends React.Component {
                   description={
                     main_attributes.length > 0
                       ? main_attributes.map((item, index) => (
-                          <div key={index}>{item}</div>
+                          <div key={index}>
+                            {item == 'others'
+                              ? this.props.other_main_attributes
+                              : LAND_ATTRIBUTE[item] || 'No definido'}
+                          </div>
                         ))
                       : 'No definido.'
                   }
@@ -221,7 +232,9 @@ class LandDetail extends React.Component {
                 {main_uses.length == 0 && <li>No definido.</li>}
                 {main_uses.map((item, index) => (
                   <li key={index} className="text-orange">
-                    {item}
+                    {item == 'others'
+                      ? this.props.other_main_uses
+                      : LAND_MAIN_USE[item] || 'No definido'}
                   </li>
                 ))}
               </ul>
@@ -232,7 +245,7 @@ class LandDetail extends React.Component {
                 {proposed_uses.length == 0 && <li>No definido.</li>}
                 {proposed_uses.map((item, index) => (
                   <li key={index} className="text-orange">
-                    {item}
+                    {LAND_PROPOSED_USE[item] || 'No definido'}
                   </li>
                 ))}
               </ul>

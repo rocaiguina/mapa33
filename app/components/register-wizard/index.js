@@ -84,7 +84,7 @@ class RegisterWizard extends React.Component {
         }
         break;
       case 'inheritance':
-        if (values.inheritance_land === true) {
+        if (values.inheritance_land === false) {
           push('problem');
         } else {
           push();

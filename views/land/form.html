@@ -1,21 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="block-header">
-    <h2>Terrenos<small>{{ object.name }}</small></h2>
-</div>
-
 <div class="row">
   <div class="col-md-8">
-    <div class="card">
-        <div class="card-header">
-            <h2>Detalles
-                <small>(*) Datos requeridos.</small>
-            </h2>
-        </div>
-        <div class="card-body card-padding">
-            <form id="user-form" method="POST" autocomplete="off" enctype="multipart/form-data">
-                <input type="hidden" name="crumb" value="{{crumb}}"/>
+    <div class="block-header">
+      <h2>Terrenos<small>{{ object.name }}</small></h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group text-right">
+        <a href="/admin/land" class="btn btn-default">VOLVER ATRÁS</a>
+    </div>
+  </div>
+</div>
+
+<form id="user-form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <input type="hidden" name="crumb" value="{{crumb}}"/>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Detalles
+                    <small>(*) Datos requeridos.</small>
+                </h2>
+            </div>
+            <div class="card-body card-padding">
 
                 <div class="form-group {{ 'has-error' if field_errors.name else '' }}">
                     <div class="fg-line">
@@ -43,17 +52,23 @@
                     <small class="help-block">{{ field_errors.level.message }}</small>
                     {% endif %}
                 </div>
-                
-                <div class="form-group {{ 'has-error' if field_errors.photograph else '' }}" >
+
+                <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Foto</label>
-                        <input type="file" id="input-file-now" class="form-control input-sm" name="photograph"/>
+                        <label class="control-label">Estado</label>
+                        <div class="select">
+                            <select name="status" class="form-control ">
+                                <option value="">--------</option>
+                                {% for item in status %}
+                                <option {% if object.status == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-                    {% if field_errors.photograph %}
-                    <small class="help-block">{{ field_errors.photograph.message }}</small>
-                    {% endif %}                    
+                    {% if field_errors.status %}
+                    <small class="help-block">{{ field_errors.status.message }}</small>
+                    {% endif %}
                 </div>
-                
                                 
                 <div class="form-group {{ 'has-error' if field_errors.plots_count else '' }}">
                     <div class="fg-line">
@@ -150,23 +165,6 @@
                     </div>
                     {% if field_errors.ownership %}
                     <small class="help-block">{{ field_errors.ownership.message }}</small>
-                    {% endif %}
-                </div>
-                
-                <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Estado</label>
-                        <div class="select">
-                            <select name="status" class="form-control ">
-                                <option value="">--------</option>
-                                {% for item in status %}
-                                <option {% if object.status == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    {% if field_errors.status %}
-                    <small class="help-block">{{ field_errors.status.message }}</small>
                     {% endif %}
                 </div>
                                
@@ -314,7 +312,7 @@
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="lands_other_problem" value="{{ field_errors.lands_other_problem.value if field_errors.lands_other_problem else object.metadata.lands_other_problem.value }}">                        
+                        <input type="text" class="form-control input-sm" name="lands_other_problem" value="{{ field_errors.lands_other_problem.value if field_errors.lands_other_problem else object.metadata.lands_other_problem }}">                        
                     </div>    
                     {% if field_errors.lands_other_problem %}
                     <small class="help-block">{{ field_errors.lands_other_problem.message }}</small>
@@ -376,7 +374,7 @@
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="other_main_uses" value="{{ field_errors.other_main_uses.value if field_errors.other_main_uses else object.metadata.other_main_uses }}">                        
+                        <input type="text" class="form-control input-sm" name="other_main_uses" value="{{ field_errors.other_main_uses.value if field_errors.other_main_uses else object.other_main_uses }}">                        
                     </div>    
                     {% if field_errors.other_main_uses %}
                     <small class="help-block">{{ field_errors.other_main_uses.message }}</small>
@@ -472,24 +470,41 @@
                     <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
                     {% endif %}
                 </div>
-                
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">GUARDAR</button>
-                    <a href="/admin/land" class="btn btn-default">CANCELAR</a>
+
+                <button type="submit" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Guardar">
+                  <i class="zmdi zmdi-save"></i>
+                </button>
+            </div>
+        </div>    
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body card-padding">
+            <div class="form-group">
+                <img src={%if object.photographURL%}{{object.photographURL}} {% else %} "https://dummyimage.com/600x400/cccccc/000000" {% endif %} class="img-responsive" />
+            </div>
+            <div class="form-group {{ 'has-error' if field_errors.photograph else '' }}" >
+                <div class="fg-line">
+                    <label class="control-label">Foto</label>
+                    <input type="file" id="input-file-now" class="form-control input-sm" name="photograph"/>
                 </div>
-            </form>
+                {% if field_errors.photograph %}
+                <small class="help-block">{{ field_errors.photograph.message }}</small>
+                {% endif %}                    
+            </div>
+            <div class="pmo-contact">
+                <ul>
+                  <li>
+                    <i class="zmdi zmdi-account"></i> {{ object.user.full_name }}
+                  </li>
+                  <li>
+                    <i class="zmdi zmdi-email"></i> <a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a>
+                  </li>
+                </ul>
+            </div>
+          </div>
         </div>
-    </div>    
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body card-padding">
-        <div class="form-group">
-            <img src={%if object.photographURL%}{{object.photographURL}} {% else %} "https://dummyimage.com/600x400/cccccc/000000" {% endif %} class="img-responsive" />
-        </div>
-        <div class="text-center"><a href="https://dummyimage.com/600x400/cccccc/000000" target="_blank">View Map</a></div>
       </div>
     </div>
-  </div>
-</div>    
+</form>
 {% endblock %}

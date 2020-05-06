@@ -108,26 +108,31 @@ class LandAdminController {
       inheritance_agree: Joi.boolean(),
       lands_problem: Joi.array()
         .empty('')
-        .default([]),
+        .default([])
+        .single(),
       lands_other_problem: Joi.string().allow(null, ''),
       has_mortgage: Joi.boolean(),
       has_surveying: Joi.boolean(),
       main_uses: Joi.array()
         .empty('')
-        .default([]),
+        .default([])
+        .single(),
       other_main_uses: Joi.string().allow(null, ''),
       lands_structures: Joi.array()
         .empty('')
-        .default([]),
+        .default([])
+        .single(),
       lands_other_structures: Joi.string().allow(null, ''),
       main_attributes: Joi.array()
         .empty('')
-        .default([]),
+        .default([])
+        .single(),
       other_main_attributes: Joi.string().allow(null, ''),
       has_contamination: Joi.boolean(),
       proposed_uses: Joi.array()
         .empty('')
-        .default([]),
+        .default([])
+        .single(),
     };
 
     // Validata data.
@@ -138,6 +143,7 @@ class LandAdminController {
 
     if (result.error) {
       // Add error flash messages.
+      req.flash('error', 'Datos inválidos. Por favor verifica los datos.');
       req.flash('field_errors', Validator.getErrors(result.error.details));
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }

@@ -122,7 +122,11 @@ class SubmitStep extends React.Component {
                     description={
                       main_attributes.length > 0
                         ? main_attributes.map((item, index) => (
-                            <div key={index}>{LAND_ATTRIBUTE[item] || 'No definido'}</div>
+                            <div key={index}>
+                              {item == 'others'
+                              ? this.props.other_main_attributes
+                              : LAND_ATTRIBUTE[item] || 'No definido'}
+                            </div>
                           ))
                         : 'No definido.'
                     }
@@ -140,7 +144,9 @@ class SubmitStep extends React.Component {
                   {main_uses.length == 0 && <li>No definido.</li>}
                   {main_uses.map((item, index) => (
                     <li key={index}>
-                      {LAND_MAIN_USE[item] || 'No definido'}
+                      {item == 'others'
+                      ? this.props.other_main_uses
+                      : LAND_MAIN_USE[item] || 'No definido'}
                     </li>
                   ))}
                 </ul>
