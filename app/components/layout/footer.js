@@ -19,7 +19,9 @@ class Footer extends Component {
           <Row gutter={0}>
             <Col md={8} xs={xs[0]}>
               <div className="first-column">
-                <img src={'/images/' + logo} className="img-responsive logo" />
+                <a href="/">
+                  <img src={'/images/' + logo} className="img-responsive logo" />
+                </a>
               </div>
             </Col>
             <Col md={12} xs={xs[1]}>
