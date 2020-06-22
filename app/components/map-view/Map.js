@@ -182,6 +182,9 @@ class Map extends Component {
           map.getCanvas().style.cursor = '';
         }
       });
+
+      // Fix: We need to resize map because the container offsetHeight.
+      map.resize();
     });
   }
 
