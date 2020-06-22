@@ -53,6 +53,7 @@ class NameLand extends React.Component {
                   className="inputprop"
                   size="large"
                   value={this.props.land_name}
+                  maxLength={50}
                   onChange={this.props.handleChange}
                 />
                 {errors.land_name && (
