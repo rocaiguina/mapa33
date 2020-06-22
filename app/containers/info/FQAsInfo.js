@@ -1,9 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import FrequentQuestions from '../../components/info/frequentquestions.js';
 import ProposeButton from '../../components/map-view/ProposeButton';
-import Button from '../../components/ui/Button';
-import Icon from '../../components/ui/Icon';
 
 class FQAsInfo extends React.Component {
   handleOnAddProposal = () => {
@@ -24,5 +23,9 @@ class FQAsInfo extends React.Component {
     );
   }
 }
+
+FQAsInfo.propTypes = {
+  history: PropTypes.object,
+};
 
 export default FQAsInfo;

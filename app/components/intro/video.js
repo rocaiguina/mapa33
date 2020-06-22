@@ -1,35 +1,43 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
 
 class Video extends React.Component {
-  handleOnReady = (event) => {
+  handleOnReady = event => {
     this.player = event.target;
-  }
+  };
 
-  handleOnSkip = (event) => {
+  handleOnSkip = event => {
     this.player.pauseVideo();
     if (this.props.onSkip) {
       this.props.onSkip(event);
     }
-  }
+  };
 
-  render () {
+  render() {
     const opts = {
       playerVars: {
-        autoplay: 0
-      }
+        autoplay: 0,
+      },
     };
 
     return (
       <div className="intro">
         <div className="intro-video">
           <div className="embed-responsive embed-responsive-21by9">
-            <YouTube videoId={this.props.videoId} opts={opts} onReady={this.handleOnReady} onEnd={this.props.onEnd}/>
+            <YouTube
+              videoId={this.props.videoId}
+              opts={opts}
+              onReady={this.handleOnReady}
+              onEnd={this.props.onEnd}
+            />
           </div>
           <div className="m-t-15 text-right">
-            <Button type="primary" ghost onClick={this.handleOnSkip}>OMITIR <Icon type="arrow-right"/></Button>
+            <Button type="primary" ghost onClick={this.handleOnSkip}>
+              OMITIR <Icon type="arrow-right" />
+            </Button>
           </div>
         </div>
       </div>
@@ -37,4 +45,10 @@ class Video extends React.Component {
   }
 }
 
-export default Video
+Video.propTypes = {
+  videoId: PropTypes.string,
+  onEnd: PropTypes.func,
+  onSkip: PropTypes.func,
+};
+
+export default Video;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row, Input, Typography } from 'antd';
+import { Col, Row, Input, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
@@ -99,6 +99,5 @@ YesFillFormStep.propTypes = {
   handleChange: PropTypes.func,
   onClose: PropTypes.func,
 };
-
 
 export default YesFillFormStep;

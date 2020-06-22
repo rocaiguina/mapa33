@@ -25,12 +25,13 @@ class HomeContainer extends React.Component {
 
   componentDidMount() {
     var showIntro = LocalStorage.getItem('showIntro', '1');
-    var showInstructions = LocalStorage.getItem('showInstructions', '1');    
+    var showInstructions = LocalStorage.getItem('showInstructions', '1');
     var showGuide = LocalStorage.getItem('showInstructions', '1');
     this.setState({
       showIntro: showIntro == '1',
       showInstructions: showIntro == '0' && showInstructions == '1',
-      showGuide: showIntro == '0' && showInstructions == '0' && showGuide == '1',
+      showGuide:
+        showIntro == '0' && showInstructions == '0' && showGuide == '1',
     });
   }
 
@@ -61,7 +62,7 @@ class HomeContainer extends React.Component {
       areaView: event.target.value,
     });
   };
-  
+
   handleOnCloseTour = () => {
     this.setState({
       run: false,
@@ -71,7 +72,7 @@ class HomeContainer extends React.Component {
     LocalStorage.setItem('showGuide', '0');
   };
 
-  handleOnNextTour = (index) => {
+  handleOnNextTour = index => {
     if (index == 5) {
       this.setState({
         run: false,
@@ -83,7 +84,11 @@ class HomeContainer extends React.Component {
 
   render() {
     const { showIntro, showGuide, showInstructions } = this.state;
-    const title = showIntro ? null : <span>LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span></span>;
+    const title = showIntro ? null : (
+      <span>
+        LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span>
+      </span>
+    );
     const subtitle = showIntro ? null : <Legend />;
     return (
       <BaseLayout
@@ -98,25 +103,25 @@ class HomeContainer extends React.Component {
       >
         {showIntro && <Intro onEnd={this.handleOnEndIntro} />}
         {!showIntro && (
-        <div>
-          <Map
-            areaView={this.state.areaView}
-            modeView={this.state.modeView}
-            onChangeMode={this.handleOnChangeMode}
-            onChangeArea={this.handleOnChangeArea}
-          />
-          {showGuide && <HomeGuideTour
-            run={this.state.run}
-            onNext={this.handleOnNextTour}
-            onFinish={this.handleOnCloseTour}
-            onClose={this.handleOnCloseTour}
-          />
-          }
+          <div>
+            <Map
+              areaView={this.state.areaView}
+              modeView={this.state.modeView}
+              onChangeMode={this.handleOnChangeMode}
+              onChangeArea={this.handleOnChangeArea}
+            />
+            {showGuide && (
+              <HomeGuideTour
+                run={this.state.run}
+                onNext={this.handleOnNextTour}
+                onFinish={this.handleOnCloseTour}
+                onClose={this.handleOnCloseTour}
+              />
+            )}
           </div>
         )}
-        
         <Instructions
-          visible={this.state.showInstructions}
+          visible={showInstructions}
           onClose={this.handleOnCloseInstructions}
         />
       </BaseLayout>

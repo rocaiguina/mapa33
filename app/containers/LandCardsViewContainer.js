@@ -85,7 +85,11 @@ class LandCardsViewContainer extends React.Component {
     return (
       <BaseLayout
         dark
-        title={<span>LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span></span>}
+        title={
+          <span>
+            LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span>
+          </span>
+        }
         closeLinkClassname="ant-btn-white ant-btn-round"
         enableMenu
         verticalAlign="top"

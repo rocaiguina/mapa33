@@ -87,10 +87,7 @@ class Carousel extends React.Component {
               />
             ))}
         </Slider>
-        <ul
-          style={{ marginTop: '0' }}
-          className="pager pager-justified"
-        >
+        <ul style={{ marginTop: '0' }} className="pager pager-justified">
           <li className="previous">
             <Button shape="round" ghost onClick={this.handleOnPrev}>
               <Icon type="arrow-left-2" />

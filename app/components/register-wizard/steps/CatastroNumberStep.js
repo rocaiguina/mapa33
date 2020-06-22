@@ -51,7 +51,7 @@ class CatastroNumberStep extends React.Component {
             <Col md={8} />
             <Col md={8}>
               <h2>¿Cuál es el número de catastro?</h2>
-              {catastro_numbers.map((item, index)=>
+              {catastro_numbers.map((item, index) => (
                 <div key={index} className="form-group">
                   <Input
                     name={'catastro_numbers[' + index + ']'}
@@ -63,10 +63,12 @@ class CatastroNumberStep extends React.Component {
                     onChange={this.props.handleChange}
                   />
                   {errors['catastro_numbers_' + index] && (
-                    <Text type="danger">{errors['catastro_numbers_' + index]}</Text>
+                    <Text type="danger">
+                      {errors['catastro_numbers_' + index]}
+                    </Text>
                   )}
                 </div>
-              )}
+              ))}
             </Col>
           </Row>
           <BottomNavigator

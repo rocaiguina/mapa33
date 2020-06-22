@@ -74,7 +74,7 @@ class WhichUseStep extends React.Component {
                 onChange={this.handleOnChange}
               >
                 <Row>
-                  {LAND_PROPOSED_USES.map(item => 
+                  {LAND_PROPOSED_USES.map(item => (
                     <Col key={item.value} span={24}>
                       <Checkbox
                         value={item.value}
@@ -82,8 +82,8 @@ class WhichUseStep extends React.Component {
                       >
                         {item.label}
                       </Checkbox>
-                    </Col>  
-                  )}
+                    </Col>
+                  ))}
                 </Row>
               </Checkbox.Group>
             </Col>

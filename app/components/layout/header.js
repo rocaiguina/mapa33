@@ -13,7 +13,7 @@ class Header extends Component {
     if (onClose) {
       return onClose();
     }
-    
+
     if (closeLink) {
       const { history } = this.props;
       history.push(closeLink);
@@ -55,7 +55,7 @@ class Header extends Component {
                 </Link>
               )}
               {this.props.showMenuBtn && (
-                <Button                  
+                <Button
                   size="large"
                   ghost
                   shape="round"

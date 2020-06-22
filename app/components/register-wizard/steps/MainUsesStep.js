@@ -78,7 +78,7 @@ class MainUsesStep extends React.Component {
                 onChange={this.handleOnChange}
               >
                 <Row>
-                  {LAND_MAIN_USES.map(item => 
+                  {LAND_MAIN_USES.map(item => (
                     <Col key={item.value} span={24}>
                       <Checkbox
                         value={item.value}
@@ -86,8 +86,8 @@ class MainUsesStep extends React.Component {
                       >
                         {item.label}
                       </Checkbox>
-                    </Col>  
-                  )}
+                    </Col>
+                  ))}
                 </Row>
               </Checkbox.Group>
               {this.state.inputotro && (

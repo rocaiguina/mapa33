@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import Video from './video';
 import Welcome from './welcome';
@@ -41,5 +42,9 @@ class Intro extends React.Component {
     );
   }
 }
+
+Intro.propTypes = {
+  onEnd: PropTypes.func,
+};
 
 export default Intro;

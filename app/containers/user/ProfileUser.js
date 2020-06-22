@@ -35,7 +35,7 @@ class ProfileUser extends React.Component {
 
   componentDidMount() {
     const self = this;
-    if (AuthService.isUserLogged()) {
+    if (AuthService.isUserLogged()) {
       UserApi.getProfile()
         .then(profile => {
           self.setState({

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import BaseLayout from '../components/layout/base';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
@@ -35,18 +35,29 @@ class LandMapViewContainer extends React.Component {
         dark
         showCloseBtn={false}
         footerRightComponent={
-        <div>
+          <div>
             <Button
-                className="m33-btn ant-btn-xlg"
-                size="large"
-                type="secondary"
-                onClick={this.handleOnAddProposal}
-                bordered
+              className="m33-btn ant-btn-xlg"
+              size="large"
+              type="secondary"
+              onClick={this.handleOnAddProposal}
+              bordered
             >
-                <Icon type="plus" />
-            </Button>          
-            <h5 style={{width: "100%", fontWeight: "bolder",marginLeft: "auto", marginRight: "auto", paddingTop: "2px", color: "rgb(240,115,168)"}} >Proponer área</h5>
-        </div>
+              <Icon type="plus" />
+            </Button>
+            <h5
+              style={{
+                width: '100%',
+                fontWeight: 'bolder',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                paddingTop: '2px',
+                color: 'rgb(240,115,168)',
+              }}
+            >
+              Proponer área
+            </h5>
+          </div>
         }
       >
         <div className="map-view">
@@ -63,5 +74,9 @@ class LandMapViewContainer extends React.Component {
     );
   }
 }
+
+LandMapViewContainer.propTypes = {
+  history: PropTypes.object,
+};
 
 export default LandMapViewContainer;

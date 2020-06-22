@@ -3,7 +3,7 @@ import AuthApi from '../api/auth';
 export const isUserLogged = function() {
   let user = localStorage.getItem('user');
   return user !== null;
-}
+};
 
 export const getLoggedUser = function() {
   let user = false;
@@ -21,7 +21,7 @@ export const logout = function() {
 
 export const authenticate = function(user) {
   localStorage.setItem('user', JSON.stringify(user));
-}
+};
 
 export const login = function(credentials) {
   return new Promise((resolve, reject) => {

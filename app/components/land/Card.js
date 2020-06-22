@@ -9,8 +9,7 @@ const { Meta } = Card;
 
 class LandCard extends React.Component {
   render() {
-    const photograph =
-      this.props.photograph || '/images/no-land-image.jpg';
+    const photograph = this.props.photograph || '/images/no-land-image.jpg';
     const landCardClassName = ClassNames('land-card', {
       'land-protected': this.props.level == 'conserved',
       'land-proposed': ['basic', 'pledge'].includes(this.props.level),

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (props) => {
+const Welcome = () => {
   return (
     <div className="intro">
       <div className="intro-text">
@@ -8,4 +8,6 @@ export default (props) => {
       </div>
     </div>
   );
-}
+};
+
+export default Welcome;

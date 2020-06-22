@@ -14,8 +14,8 @@ class RegisterLandSuccessful extends React.Component {
               <p className="lead">
                 Ahora nuestro equipo evaluará tu propuesta.
                 <br />
-                Verifica tu correo electrónico para nuestras notificaciones sobre el
-                proceso de evaluación y aprobación de propuesta.
+                Verifica tu correo electrónico para nuestras notificaciones
+                sobre el proceso de evaluación y aprobación de propuesta.
               </p>
             </Col>
           </Row>

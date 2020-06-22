@@ -133,7 +133,10 @@ class LandDetailContainer extends React.Component {
       coordinates,
       disabledLike,
     } = this.state;
-    const title = level == 'conserved' ? 'TARJETA DE ÁREA PROTEGIDA' : 'TARJETA DE PROPUESTA';
+    const title =
+      level == 'conserved'
+        ? 'TARJETA DE ÁREA PROTEGIDA'
+        : 'TARJETA DE PROPUESTA';
     return (
       <BaseLayout
         dark

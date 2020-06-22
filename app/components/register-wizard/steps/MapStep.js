@@ -23,7 +23,7 @@ class MapStep extends React.Component {
         loading: true,
       });
       setTimeout(() => {
-        this.props.next();  
+        this.props.next();
       }, 600);
     } else {
       notification.error({
@@ -48,10 +48,10 @@ class MapStep extends React.Component {
       hasRunned: true,
       showMapGuide: false,
     });
-      LocalStorage.setItem('showMapGuide', '0');
+    LocalStorage.setItem('showMapGuide', '0');
   };
 
-  handleOnNextTour = (index) => {
+  handleOnNextTour = index => {
     if (index == 11) {
       this.setState({
         run: false,
@@ -65,20 +65,24 @@ class MapStep extends React.Component {
     this.setState({
       loading: true,
     });
-  }
+  };
 
   handleOnLoaded = () => {
     this.setState({
       loading: false,
     });
-  }
+  };
 
   render() {
     const footerXs = [14, 0, 10];
-    const {showMapGuide} = this.state;
+    const { showMapGuide } = this.state;
     return (
       <BaseLayout
-        title={<span>ESCOGE TU TERRENO<span className="hidden-xs">/PROPUESTA</span></span>}
+        title={
+          <span>
+            ESCOGE TU TERRENO<span className="hidden-xs">/PROPUESTA</span>
+          </span>
+        }
         onClose={this.props.onClose}
         verticalAlign="top"
         footerXs={footerXs}
@@ -97,7 +101,14 @@ class MapStep extends React.Component {
           </div>
         }
         afterFooter={
-          showMapGuide && <MapTourGuide run={this.state.run} onNext={this.handleOnNextTour} onFinish={this.handleOnCloseTour} onClose={this.handleOnCloseTour}/>
+          showMapGuide && (
+            <MapTourGuide
+              run={this.state.run}
+              onNext={this.handleOnNextTour}
+              onFinish={this.handleOnCloseTour}
+              onClose={this.handleOnCloseTour}
+            />
+          )
         }
       >
         <div className="main-content">

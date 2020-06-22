@@ -59,7 +59,10 @@ class SubmitStep extends React.Component {
                 ¿Por qué es importante la protección de este terreno en
                 particular?
               </p>
-              <p>{LAND_PROTECTION_REASON[this.props.reason_conservation] || 'No definido.'}</p>
+              <p>
+                {LAND_PROTECTION_REASON[this.props.reason_conservation] ||
+                  'No definido.'}
+              </p>
             </Col>
           </Row>
 
@@ -108,7 +111,9 @@ class SubmitStep extends React.Component {
                       <Badge
                         title="Coordenadas"
                         description={
-                          <Coordinates point={this.props.coordinates.coordinates} />
+                          <Coordinates
+                            point={this.props.coordinates.coordinates}
+                          />
                         }
                         color="default"
                         shape="round"
@@ -124,8 +129,8 @@ class SubmitStep extends React.Component {
                         ? main_attributes.map((item, index) => (
                             <div key={index}>
                               {item == 'others'
-                              ? this.props.other_main_attributes
-                              : LAND_ATTRIBUTE[item] || 'No definido'}
+                                ? this.props.other_main_attributes
+                                : LAND_ATTRIBUTE[item] || 'No definido'}
                             </div>
                           ))
                         : 'No definido.'
@@ -145,8 +150,8 @@ class SubmitStep extends React.Component {
                   {main_uses.map((item, index) => (
                     <li key={index}>
                       {item == 'others'
-                      ? this.props.other_main_uses
-                      : LAND_MAIN_USE[item] || 'No definido'}
+                        ? this.props.other_main_uses
+                        : LAND_MAIN_USE[item] || 'No definido'}
                     </li>
                   ))}
                 </ul>

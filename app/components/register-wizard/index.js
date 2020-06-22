@@ -111,19 +111,19 @@ class RegisterWizard extends React.Component {
     this.setState({
       visibleCloseModal: true,
     });
-  }
+  };
 
   handleConfirmClose = () => {
     // Redirect to map.
     const { history } = this.props;
     history.push('/');
-  }
+  };
 
   handleCancelClose = () => {
     this.setState({
       visibleCloseModal: false,
     });
-  }
+  };
 
   render() {
     const { match, history } = this.props;

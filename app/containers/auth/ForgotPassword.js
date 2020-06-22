@@ -17,7 +17,8 @@ class ForgotPassword extends React.Component {
         if (err.status == 404) {
           notification.error({
             message: 'Error',
-            description: 'Por favor verifica tu dirección de correo electrónico.',
+            description:
+              'Por favor verifica tu dirección de correo electrónico.',
           });
         } else {
           notification.error({

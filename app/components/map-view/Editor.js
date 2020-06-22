@@ -11,7 +11,6 @@ import union from '@turf/union';
 import clone from '@turf/clone';
 import area from '@turf/area';
 import centroid from '@turf/centroid';
-import { Icon } from 'antd';
 import Numeral from 'numeral';
 import Button from '../ui/Button';
 
@@ -41,26 +40,16 @@ const marker = new mapboxgl.Marker({
   color: '#4668F2',
 });
 
-function resizeImage(base64Str, width, height) {
-  var img = document.createElement('img');
-  img.src = base64Str;
-  var canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, width, height);
-  return canvas.toDataURL();
-}
-
 class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      geojson: {  // Geojson data source for map.
+      geojson: {
+        // Geojson data source for map.
         type: 'FeatureCollection',
         features: [],
       },
-      area: 0.0,  // Geojson area.
+      area: 0.0, // Geojson area.
       address: '',
       activeLoc: false,
       loading: false,
@@ -181,13 +170,12 @@ class Editor extends Component {
       // Load polygons
       if (this.props.lots.length > 0) {
         setTimeout(() => {
-          this.buildPolygons(lots)
-            .then(({geojson}) => {
-              const bounds = bbox(geojson);
-              map.fitBounds(bounds, {
-                animate: false,
-              });
+          this.buildPolygons(lots).then(({ geojson }) => {
+            const bounds = bbox(geojson);
+            map.fitBounds(bounds, {
+              animate: false,
             });
+          });
         }, 400);
       }
     });
@@ -280,9 +268,6 @@ class Editor extends Component {
       }
     });
 
-    // miniMap.on('idle', () => {      
-    // });
-
     map.on('mousemove', 'lots', e => {
       map.getCanvas().style.cursor = 'pointer';
 
@@ -306,10 +291,28 @@ class Editor extends Component {
         .addTo(map);
 
       if (hoveredStateId) {
-        map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: false });
+        map.setFeatureState(
+          {
+            source: 'source',
+            id: hoveredStateId,
+            sourceLayer: 'lots',
+          },
+          {
+            hover: false,
+          }
+        );
       }
       hoveredStateId = e.features[0].id;
-      map.setFeatureState({ source: 'source', id: hoveredStateId, sourceLayer: 'lots' }, { hover: true });
+      map.setFeatureState(
+        {
+          source: 'source',
+          id: hoveredStateId,
+          sourceLayer: 'lots',
+        },
+        {
+          hover: true,
+        }
+      );
     });
 
     map.on('mouseleave', 'lots', () => {
@@ -338,19 +341,17 @@ class Editor extends Component {
         }
         const newLots = _.concat(lots, id);
 
-        this.buildPolygons(newLots)
-          .then(({geojson, area}) => {
-            this.handleOnChange(geojson, area, newLots);
-          });
+        this.buildPolygons(newLots).then(({ geojson, area }) => {
+          this.handleOnChange(geojson, area, newLots);
+        });
       } else {
         const newLots = _.remove(lots, n => {
           return n !== id;
         });
         if (newLots.length > 0) {
-          this.buildPolygons(newLots)
-            .then(({geojson, area}) => {
-              this.handleOnChange(geojson, area, newLots);
-            });
+          this.buildPolygons(newLots).then(({ geojson, area }) => {
+            this.handleOnChange(geojson, area, newLots);
+          });
         } else {
           this.trashPolygons();
         }
@@ -390,7 +391,7 @@ class Editor extends Component {
 
   getArea = polygon => {
     return area(polygon);
-  }
+  };
 
   merge = polygons => {
     let merged = clone(polygons.features[0]);
@@ -420,7 +421,7 @@ class Editor extends Component {
     }
   }
 
-  buildPolygons = (lots) => {
+  buildPolygons = lots => {
     this.handleOnLoad();
     return new Promise((resolve, reject) => {
       if (lots.length > 0) {
@@ -466,15 +467,15 @@ class Editor extends Component {
           .finally(() => {
             this.handleOnLoaded();
           });
-        } else {
-          this.handleOnLoaded();
-          resolve({
-            geojson: this.getEmptyGeoJson(),
-            area: 0
-          });
-        }
+      } else {
+        this.handleOnLoaded();
+        resolve({
+          geojson: this.getEmptyGeoJson(),
+          area: 0,
+        });
+      }
     });
-  }
+  };
 
   getEmptyGeoJson() {
     return {
@@ -501,7 +502,7 @@ class Editor extends Component {
       };
       this.props.onChange(data);
     }
-  }
+  };
 
   // getPolygons = (newLots) => {
   //   const { lots } = this.props;
@@ -560,7 +561,7 @@ class Editor extends Component {
   //           description: 'No se encuentra información disponible. Intenta nuevamente.',
   //         });
   //       });
-  //   } 
+  //   }
   // };
 
   getAddress = polygon => {
@@ -575,10 +576,11 @@ class Editor extends Component {
             data.features[0].place_name || 'No hay dirección disponible.',
         })
       )
-      .catch(error => {
+      .catch(() => {
         notification.error({
           message: 'Error',
-          description: 'No se encuentra información disponible. Intenta nuevamente.',
+          description:
+            'No se encuentra información disponible. Intenta nuevamente.',
         });
       });
   };
@@ -614,9 +616,7 @@ class Editor extends Component {
             zoom: 17,
           });
 
-          marker
-            .setLngLat([longitude, latitude])
-            .addTo(map);
+          marker.setLngLat([longitude, latitude]).addTo(map);
         }
         this.setState({
           loading: false,
@@ -685,9 +685,7 @@ class Editor extends Component {
               Parcelas Seleccionadas: {this.props.lots.length}
             </div>
             <div className="boxmap-info">
-              Área:{' '}
-              {Numeral(this.state.area).format('0,0.00')}{' '}
-              m<sup>2</sup>
+              Área: {Numeral(this.state.area).format('0,0.00')} m<sup>2</sup>
             </div>
 
             <div
@@ -711,17 +709,17 @@ Editor.defaultProps = {
   lots: [],
   center: [-66.45, 18.2],
   zoom: 14,
-}
+};
 
 Editor.propTypes = {
-  lots: PropTypes.array,  // Selected lots ID,
-  center: PropTypes.array,  // Center location,
-  zoom: PropTypes.number,  // Zoom
+  lots: PropTypes.array, // Selected lots ID,
+  center: PropTypes.array, // Center location,
+  zoom: PropTypes.number, // Zoom
   onRenderMinimap: PropTypes.func,
   onZoom: PropTypes.func,
   onChange: PropTypes.func,
   onLoad: PropTypes.func,
-  onLoaded:PropTypes.func,
+  onLoaded: PropTypes.func,
 };
 
 export default Editor;

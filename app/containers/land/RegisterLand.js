@@ -46,17 +46,19 @@ class RegisterLand extends React.Component {
 
   componentDidMount() {
     const self = this;
-    if (AuthService.isUserLogged()) {
+    if (AuthService.isUserLogged()) {
       UserApi.getProfile()
         .then(profile => {
           this.setState({
-            user: profile
+            user: profile,
           });
         })
         .catch(err => {
           if (err.status == 401) {
             AuthService.logout();
-            return self.props.history.replace('/register/user?next=/register/propose-land');
+            return self.props.history.replace(
+              '/register/user?next=/register/propose-land'
+            );
           }
           notification.error({
             message: 'Error',
@@ -65,7 +67,9 @@ class RegisterLand extends React.Component {
           });
         });
     } else {
-      return self.props.history.replace('/register/user?next=/register/propose-land');
+      return self.props.history.replace(
+        '/register/user?next=/register/propose-land'
+      );
     }
   }
 
@@ -75,7 +79,7 @@ class RegisterLand extends React.Component {
       .then(() => {
         history.push('/register/success');
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.status == 401) {
           // TODO: Display a login popup.
           history.push('/login');
@@ -91,11 +95,13 @@ class RegisterLand extends React.Component {
   };
 
   render() {
-    return (this.state.user &&
-      <RegisterWizard
-        initialValues={this.state}
-        onSubmit={this.handleOnSubmit}
-      />
+    return (
+      this.state.user && (
+        <RegisterWizard
+          initialValues={this.state}
+          onSubmit={this.handleOnSubmit}
+        />
+      )
     );
   }
 }

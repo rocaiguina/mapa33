@@ -8,50 +8,43 @@ class MapTourGuide extends React.Component {
     super(props);
     this.state = {
       stepIndex: 6,
-      stepGuide:0,
+      stepGuide: 0,
       steps: [
         {
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
-        },{
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
-        },{
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
-        },{
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
-        },{
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
-        },{
-            target: '#mapbox-search',
-            content: (
-                    <h1>auxiliar</h1>
-            ),
-            disableBeacon: true,
-            placement: 'bottom',
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
+        },
+        {
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
+        },
+        {
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
+        },
+        {
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
+        },
+        {
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
+        },
+        {
+          target: '#mapbox-search',
+          content: <h1>auxiliar</h1>,
+          disableBeacon: true,
+          placement: 'bottom',
         },
         {
           target: '#mapbox-search',
@@ -112,7 +105,7 @@ class MapTourGuide extends React.Component {
       ],
     };
   }
-  
+
   handleOnCloseTutorial = () => {
     const { onClose } = this.props;
     if (onClose) {
@@ -126,7 +119,7 @@ class MapTourGuide extends React.Component {
     if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
       // Update state to advance the tour
       const newIndex = index + (action === ACTIONS.PREV ? -1 : 1);
-      this.setState({ stepIndex: newIndex, stepGuide:  newIndex-6});
+      this.setState({ stepIndex: newIndex, stepGuide: newIndex - 6 });
       const { onNext } = this.props;
       if (onNext) {
         onNext(newIndex);
@@ -144,7 +137,7 @@ class MapTourGuide extends React.Component {
     const { run } = this.props;
     const { stepIndex, steps, stepGuide } = this.state;
     return (
-      <div style={{width: '100%'}}>
+      <div style={{ width: '100%' }}>
         <Joyride
           callback={this.handleJoyrideCallback}
           steps={steps}
@@ -167,31 +160,29 @@ class MapTourGuide extends React.Component {
               textColor: '#000',
               width: 900,
               zIndex: 99,
-            }
+            },
           }}
         />
         {run && (
-        <div className="maptour_guide" >
+          <div className="maptour_guide">
             <h1
-                style={{ color: 'white', fontWeight: 'bold'}}
-                className="guide_up"
-              >
+              style={{ color: 'white', fontWeight: 'bold' }}
+              className="guide_up"
+            >
               <span>Explicación&nbsp;</span>&nbsp; {stepGuide + 1}/5
             </h1>
-          <Button
-            className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
-            style={{borderRadius: "15px", fontWeight: 'bold'}}
-            onClick={this.handleOnCloseTutorial}
-          >
-            Cerrar explicación
-          </Button>
-        </div>
+            <Button
+              className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
+              style={{ borderRadius: '15px', fontWeight: 'bold' }}
+              onClick={this.handleOnCloseTutorial}
+            >
+              Cerrar explicación
+            </Button>
+          </div>
         )}
       </div>
     );
-
   }
-  
 }
 
 MapTourGuide.propTypes = {

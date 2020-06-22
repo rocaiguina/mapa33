@@ -15,8 +15,7 @@ mapboxgl.accessToken =
 let map = null;
 
 function buildPopup(land) {
-  const photograph =
-    land.photographURL || '/images/no-land-image.jpg';
+  const photograph = land.photographURL || '/images/no-land-image.jpg';
   const date = Moment(land.createdAt, 'YYYY-MM-DD').format('MM.DD.YYYY');
   const url = '/land/' + land.id;
 
@@ -150,11 +149,11 @@ class Map extends Component {
           .then(response => {
             const html = buildPopup(response);
             this.popup
-            .setLngLat(e.lngLat)
-            .setHTML(html)
-            .addTo(map);
+              .setLngLat(e.lngLat)
+              .setHTML(html)
+              .addTo(map);
           })
-          .catch(err => {
+          .catch(() => {
             notification.error({
               message: 'Error',
               description:
@@ -227,8 +226,15 @@ class Map extends Component {
   render() {
     return (
       <div className="mapbox-wrapper">
-        <div id="map_guide" ref={el => (this.mapContainer = el)} className="mapbox-view" />
-        <div className="toolbar toolbar-left hidden-sm hidden-xs"  style={{zIndex: 99}}>
+        <div
+          id="map_guide"
+          ref={el => (this.mapContainer = el)}
+          className="mapbox-view"
+        />
+        <div
+          className="toolbar toolbar-left hidden-sm hidden-xs"
+          style={{ zIndex: 99 }}
+        >
           <ul>
             <li>
               <Button

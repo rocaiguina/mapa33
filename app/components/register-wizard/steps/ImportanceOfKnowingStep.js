@@ -68,16 +68,13 @@ class ImportanceOfKnowingStep extends React.Component {
                 value={this.props.importance_of_knowing}
                 onChange={this.props.handleChange}
               >
-                {LAND_PROTECTION_REASONS.map(item => 
+                {LAND_PROTECTION_REASONS.map(item => (
                   <div key={item.value} className="form-radio">
-                    <Radio
-                      className="blockstyleradio"
-                      value={item.value}
-                    >
+                    <Radio className="blockstyleradio" value={item.value}>
                       {item.label}
                     </Radio>
                   </div>
-                )}
+                ))}
               </Radio.Group>
             </Col>
           </Row>

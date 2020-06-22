@@ -15,7 +15,7 @@ class ReviewLandStep extends React.Component {
   };
 
   render() {
-    const photograph = this.props.photograph || '/images/no-land-image.jpg';
+    const photograph = this.props.photograph || '/images/no-land-image.jpg';
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
@@ -27,19 +27,11 @@ class ReviewLandStep extends React.Component {
         }
       >
         <div className="main-content">
-          <TopNavigator
-            previous={this.props.previous}
-            step={3}
-            steps={20}
-          />
+          <TopNavigator previous={this.props.previous} step={3} steps={20} />
           <Row gutter={30}>
             <Col md={10}>
               <div className="form-group">
-                <img
-                  className="img-responsive"
-                  src={photograph}
-                  width="480"
-                />
+                <img className="img-responsive" src={photograph} width="480" />
               </div>
             </Col>
             <Col md={14}>
@@ -47,7 +39,8 @@ class ReviewLandStep extends React.Component {
                 <Col xs={12}>
                   <p>
                     <strong>Parcelas seleccionadas</strong>
-                    <br />{this.props.lands.length}
+                    <br />
+                    {this.props.lands.length}
                   </p>
                   <p>
                     <strong>Área</strong>
@@ -65,7 +58,7 @@ class ReviewLandStep extends React.Component {
                     <p key={index}>
                       <strong>Catástro {index + 1}</strong>
                       <br />
-                      { item.catastro || 'No hay número' }
+                      {item.catastro || 'No hay número'}
                     </p>
                   ))}
                 </Col>

@@ -28,7 +28,7 @@ export const logout = function() {
         reject(err.response);
       });
   });
-}
+};
 
 export const forgotPassword = function(data) {
   return new Promise((resolve, reject) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 
 import { ReactComponent as ArrowLeft2Svg } from '../../assets/icons/arrow-left-2.svg';
@@ -18,18 +19,26 @@ const Icons = {
   'arrow-right': ArrowRightSvg,
   'arrow-left-2': ArrowLeft2Svg,
   'arrow-right-2': ArrowRight2Svg,
-  'close': CloseSvg,
-  'eye': EyeSvg,
-  'layers': LayersSvg,
-  'less': LessSvg,
-  'menu': MenuSvg,
-  'plus': PlusSvg,
-  'user': UserSvg,
-}
+  close: CloseSvg,
+  eye: EyeSvg,
+  layers: LayersSvg,
+  less: LessSvg,
+  menu: MenuSvg,
+  plus: PlusSvg,
+  user: UserSvg,
+};
 
-export default (props) => {
-  const icon = Icons[props.type];
+const CustomIcon = props => {
+  const type = Icons[props.type];
   return (
-    <Icon component={icon} className={props.className} style={props.style}/>
-  )
-}
+    <Icon component={type} className={props.className} style={props.style} />
+  );
+};
+
+CustomIcon.propTypes = {
+  className: PropTypes.string,
+  type: PropTypes.string,
+  style: PropTypes.object,
+};
+
+export default CustomIcon;

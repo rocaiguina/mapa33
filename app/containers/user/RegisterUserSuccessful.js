@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import BaseLayout from '../../components/layout/base';
@@ -31,5 +32,9 @@ class RegisterUserSuccessful extends React.Component {
     );
   }
 }
+
+RegisterUserSuccessful.propTypes = {
+  location: PropTypes.object,
+};
 
 export default RegisterUserSuccessful;
