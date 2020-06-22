@@ -135,7 +135,7 @@ class UserController {
           secure: false, // set to true if your using https
         });
 
-        res.json(user.get({ plain: true }));
+        res.json(payload);
       })
       .catch(function(err) {
         res.status(400).send(err);

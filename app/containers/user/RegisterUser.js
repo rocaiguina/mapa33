@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import PropTypes from 'prop-types';
 import BaseLayout from '../../components/layout/base';
 import RegisterForm from '../../components/user/RegisterForm';
+import Auth from '../../services/auth';
 import UserApi from '../../api/user';
 
 class RegisterUser extends React.Component {
@@ -10,8 +11,9 @@ class RegisterUser extends React.Component {
     const { history, location } = this.props;
     const queryParams = new URLSearchParams(location.search);
     UserApi.register(values)
-      .then(() => {
+      .then((user) => {
         const next = queryParams.get('next') || '/';
+        Auth.authenticate(user);
         history.push('/register/user/successful?next=' + next);
       })
       .catch(() => {

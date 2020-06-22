@@ -19,6 +19,10 @@ export const logout = function() {
   localStorage.removeItem('user');
 };
 
+export const authenticate = function(user) {
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
 export const login = function(credentials) {
   return new Promise((resolve, reject) => {
     AuthApi.login(credentials)
@@ -33,6 +37,7 @@ export const login = function(credentials) {
 };
 
 export default {
+  authenticate,
   getLoggedUser,
   login,
   logout,

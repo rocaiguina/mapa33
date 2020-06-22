@@ -53,15 +53,16 @@ class ProfileUser extends React.Component {
               'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
           });
         });
-      } else {
-        return self.props.history.replace('/register/user?next=/profile');
-      }
+    } else {
+      return self.props.history.replace('/register/user?next=/profile');
+    }
   }
 
   handleOnLogout = event => {
     event.preventDefault();
     AuthApi.logout()
       .then(() => {
+        AuthService.logout();
         this.props.history.push('/');
       })
       .catch(() => {
