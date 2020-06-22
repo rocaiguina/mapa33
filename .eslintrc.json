@@ -28,6 +28,11 @@
       }
     ]
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "plugins": [
     "react",
     "prettier",
