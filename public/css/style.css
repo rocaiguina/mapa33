@@ -1510,6 +1510,14 @@ ul.actions {
   height: 66vh;
 }
 
+.boxmap-tmp-preview {
+  position: fixed !important;
+  height: 400px;
+  left: 0;
+  top: -999px;
+  width: 600px;
+}
+
 .boxmap-preview {
   background-color: #fff;
   box-shadow: 0 0px 10px -6px #222;

@@ -19,6 +19,7 @@ mapboxgl.accessToken =
   'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
 let map = null;
 let miniMap = null;
+let tmpMap = null;
 let hoveredStateId = null;
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
@@ -79,6 +80,16 @@ class Editor extends Component {
 
     miniMap = new mapboxgl.Map({
       container: this.miniMapContainer,
+      style: 'mapbox://styles/mapbox/satellite-streets-v10',
+      center: center,
+      zoom: 6.5,
+      attributionControl: false,
+      interactive: false,
+      preserveDrawingBuffer: true,
+    });
+
+    tmpMap = new mapboxgl.Map({
+      container: this.tmpMapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
       center: center,
       zoom: 6.5,
@@ -220,15 +231,57 @@ class Editor extends Component {
       );
     });
 
-    miniMap.on('idle', () => {
+    tmpMap.on('load', () => {
+      tmpMap.addSource('geojson', {
+        type: 'geojson',
+        data: this.state.geojson,
+      });
+
+      tmpMap.addLayer(
+        {
+          id: 'selection',
+          type: 'fill',
+          source: 'geojson',
+          paint: {
+            'fill-color': '#E36D9D',
+            'fill-opacity': 0.75,
+          },
+        },
+        'waterway-label'
+      );
+
+      tmpMap.addLayer(
+        {
+          id: 'selection-border',
+          type: 'line',
+          source: 'geojson',
+          layout: {
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#E36D9D',
+            'line-opacity': 1,
+            'line-width': 2,
+            'line-offset': -4,
+            'line-dasharray': [0.5, 2],
+          },
+        },
+        'waterway-label'
+      );
+    });
+
+    tmpMap.on('idle', () => {
       if (this.props.onRenderMinimap) {
-        var base64Img = miniMap.getCanvas().toDataURL();
+        var base64Img = tmpMap.getCanvas().toDataURL();
         // RESIZE IMAGE
         //var image = resizeImage(base64Img, 480, 320);
         var image = base64Img;
         this.props.onRenderMinimap(image);
       }
     });
+
+    // miniMap.on('idle', () => {      
+    // });
 
     map.on('mousemove', 'lots', e => {
       map.getCanvas().style.cursor = 'pointer';
@@ -325,6 +378,7 @@ class Editor extends Component {
   componentWillUnmount() {
     map.remove();
     miniMap.remove();
+    tmpMap.remove();
   }
 
   area = polygon => {
@@ -390,6 +444,11 @@ class Editor extends Component {
               padding: 30,
             });
             miniMap.getSource('geojson').setData(geojson);
+            tmpMap.fitBounds(bounds, {
+              animate: false,
+              padding: 30,
+            });
+            tmpMap.getSource('geojson').setData(geojson);
             map.getSource('geojson').setData(geojson);
             geojson.features = data[0].geojson.features;
             geojson.properties.area = area;
@@ -527,8 +586,13 @@ class Editor extends Component {
   trashPolygons = () => {
     const emptyGeoJson = this.getEmptyGeoJson();
     miniMap.getSource('geojson').setData(emptyGeoJson);
+    tmpMap.getSource('geojson').setData(emptyGeoJson);
     map.getSource('geojson').setData(emptyGeoJson);
     miniMap.jumpTo({
+      center: [-66.45, 18.2],
+      zoom: 6.5,
+    });
+    tmpMap.jumpTo({
       center: [-66.45, 18.2],
       zoom: 6.5,
     });
@@ -632,6 +696,11 @@ class Editor extends Component {
               style={{ height: 200 }}
             />
           </div>
+
+          <div
+            className="boxmap-tmp-preview"
+            ref={el => (this.tmpMapContainer = el)}
+          />
         </div>
       </Spin>
     );
