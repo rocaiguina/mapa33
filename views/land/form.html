@@ -470,7 +470,14 @@
                 <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
                     <div class="fg-line">
                         <label class="control-label">¿Por qué es importante la protección de este terreno en particular?</label>
-                        <input type="text" class="form-control input-sm" name="reason_conservation" value="{{ field_errors.reason_conservation if field_errors.reason_conservation else object.reason_conservation }}">
+                        {% for item in protection_reasons %}
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="reason_conservation" style="opacity: 1;" value="{{ item.value }}" {% if object.reason_conservation == item.value %}checked{% endif %} >
+                              {{ item.label }}
+                            </label>
+                        </div>
+                        {% endfor %}
                     </div>
                     {% if field_errors.reason_conservation %}
                     <small class="help-block">{{ field_errors.reason_conservation.message }}</small>

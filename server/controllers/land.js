@@ -207,7 +207,7 @@ class LandController {
       lands_attributes: Joi.array(),
       lands_other_attributes: Joi.string().allow(null, ''),
       has_contamination: Joi.string().allow(null, ''),
-      wich_use: Joi.string().allow(null, ''),
+      which_uses: Joi.array(),
       importance_of_knowing: Joi.string().allow(null, ''),
       know_owner: Joi.boolean().allow(null),
       geojson: Joi.object({
@@ -253,7 +253,7 @@ class LandController {
       other_main_attributes: cleaned_data.lands_other_attributes,
       main_uses: cleaned_data.lands_main_uses,
       other_main_uses: cleaned_data.lands_other_main_uses,
-      proposed_uses: [cleaned_data.wich_use],
+      proposed_uses: cleaned_data.which_uses,
       coordinates: cleaned_data.coordinates,
       geom: cleaned_data.geojson.geometry,
       metadata: {

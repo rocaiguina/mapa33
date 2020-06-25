@@ -153,6 +153,7 @@ class LandAdminController {
     uploadPhotograph(req)
       .then(function(fileUrl) {
         const cleaned_data = result.value;
+        const notifyStatusChanged = cleaned_data.status != land.status;
 
         land.name = cleaned_data.name;
         land.level = cleaned_data.level;
@@ -200,7 +201,7 @@ class LandAdminController {
         land
           .save()
           .then(function() {
-            if (req.land.id) {
+            if (req.land.id && notifyStatusChanged) {
               if (cleaned_data.status == 'approved') {
                 // variables para email
                 const sitio = process.env.SERVER_URL + '/land/' + land.id;
