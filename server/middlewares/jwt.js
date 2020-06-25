@@ -12,6 +12,7 @@ module.exports = {
           id: decrypt.id,
           first_name: decrypt.first_name,
           last_name: decrypt.last_name,
+          email: decrypt.email,
         };
       } catch (err) {
         return next();
@@ -29,6 +30,7 @@ module.exports = {
           id: decrypt.id,
           first_name: decrypt.first_name,
           last_name: decrypt.last_name,
+          email: decrypt.email,
         };
         return next();
       } catch (err) {

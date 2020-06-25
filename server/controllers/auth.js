@@ -30,6 +30,7 @@ function login(req, res) {
             id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
+            email: user.email,
           };
           const token = jwt.sign(payload, process.env.JWT_SECRET);
           res.cookie('access_token', token, {
