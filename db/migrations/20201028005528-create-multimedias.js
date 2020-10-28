@@ -29,7 +29,7 @@ module.exports = {
         allowNull: true,
       },
       multimediable: {
-        type: Sequelize.STRING,   // land, etc.
+        type: Sequelize.STRING,   // memory, etc.
         allowNull: true,
       },
       multimediable_id: {

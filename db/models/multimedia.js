@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, // image, video, youtube, sound, spotify
       allowNull: true,
     },
-    utl: {
+    url: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
     multimediable: {
-      type: DataTypes.STRING, // land, etc
+      type: DataTypes.STRING, // memory, etc
       allowNull: true,
     },
     multimediable_id: {
