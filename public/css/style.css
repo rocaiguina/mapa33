@@ -2210,3 +2210,8 @@ a.mapboxgl-ctrl-logo {
 .joyride-body p {
   font-size: 13px;
 }
+
+/* Custom uploader */
+.ant-upload-block .ant-upload.ant-upload-select {
+  display: block;
+}

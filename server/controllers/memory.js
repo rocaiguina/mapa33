@@ -12,7 +12,6 @@ const store = (req, res) => {
   const validationSchema = {
     title: Joi.string(),
     description: Joi.string().allow(null, ''),
-    land_id: Joi.number().optional(),
     multimedias: Joi.array().items(
       Joi.object({
         name: Joi.string()
@@ -35,7 +34,7 @@ const store = (req, res) => {
     return res.status(400).send(error);
   }
 
-  const { title, description, land_id, multimedias } = value;
+  const { title, description, multimedias } = value;
   let createdMemory = undefined;
 
   Memory.create({
@@ -43,7 +42,7 @@ const store = (req, res) => {
     description,
     status: MEMORY_STATUS.NEW,
     user_id: req && req.user && req.user.id,
-    land_id,
+    land_id: req.params.landId,
   })
     .then(memory => {
       createdMemory = memory;

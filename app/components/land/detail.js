@@ -250,6 +250,15 @@ class LandDetail extends React.Component {
                 ))}
               </ul>
             </div>
+            <Button
+              block
+              shape="round"
+              className="ant-btn-blue"
+              size="large"
+              onClick={this.props.onShareMemories}
+            >
+              Comparte tus memorias
+            </Button>
           </Col>
         </Row>
       </div>
@@ -282,6 +291,7 @@ LandDetail.propTypes = {
   coordinates: PropTypes.object,
   onClickLike: PropTypes.func,
   disabledLike: PropTypes.bool,
+  onShareMemories: PropTypes.func,
 };
 
 export default LandDetail;

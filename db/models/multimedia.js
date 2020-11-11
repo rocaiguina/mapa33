@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     type: {
-      type: DataTypes.STRING, // image, video, youtube, sound, spotify
+      type: DataTypes.STRING, // image, video, youtube, audio, spotify
       allowNull: true,
     },
     url: {

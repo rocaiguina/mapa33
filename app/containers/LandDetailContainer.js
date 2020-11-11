@@ -5,6 +5,8 @@ import BaseLayout from '../components/layout/base';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
 
+import MemoryModalViewContainer from './MemoryModalViewContainer';
+
 import LandApi from '../api/land';
 
 class LandDetailContainer extends React.Component {
@@ -27,6 +29,7 @@ class LandDetailContainer extends React.Component {
       plots_count: 1,
       coordinates: {},
       disabledLike: true,
+      shareMemories: false,
     };
   }
 
@@ -113,6 +116,18 @@ class LandDetailContainer extends React.Component {
       });
   };
 
+  handleOnShareMemories = () => {
+    this.setState({
+      shareMemories: true,
+    });
+  };
+
+  handleOnCloseMemoriesModal = () => {
+    this.setState({
+      shareMemories: false,
+    });
+  };
+
   render() {
     const id = parseInt(this.props.match.params.landId);
     const {
@@ -132,6 +147,7 @@ class LandDetailContainer extends React.Component {
       plots_count,
       coordinates,
       disabledLike,
+      shareMemories,
     } = this.state;
     const title =
       level == 'conserved'
@@ -164,6 +180,12 @@ class LandDetailContainer extends React.Component {
           coordinates={coordinates}
           disabledLike={disabledLike}
           onClickLike={this.handleOnClickLike}
+          onShareMemories={this.handleOnShareMemories}
+        />
+        <MemoryModalViewContainer
+          landId={id}
+          visible={shareMemories}
+          onClose={this.handleOnCloseMemoriesModal}
         />
       </BaseLayout>
     );
