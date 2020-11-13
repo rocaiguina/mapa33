@@ -30,7 +30,12 @@ const VideoUploader = props => {
   const file = files.length > 0 ? files[0] : false;
   return (
     <div>
-      {file && <PreviewVideo src={file.src} title={file.name} />}
+      {file && (
+        <PreviewVideo
+          src={file && file.response && file.response.url}
+          title={file.name}
+        />
+      )}
       {embedURL && <PreviewYoutube src={embedURL} title="" />}
       {(file || embedURL) && (
         <a href="#" onClick={() => onRemove(file)}>

@@ -34,7 +34,6 @@ class MemoryModalViewContainer extends React.Component {
   };
 
   handleOnSubmit = () => {
-    const self = this;
     const { landId } = this.props;
     const { title, description } = this.state;
     const multimedias = this.getMultimediaData();
@@ -44,7 +43,7 @@ class MemoryModalViewContainer extends React.Component {
       multimedias,
     };
     LandAPI.registerMemory(landId, data)
-      .then((response) => {
+      .then(() => {
         this.setState({
           step: 'done',
         });

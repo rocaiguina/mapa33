@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PreviewVideo = props => {
   const { src, title } = props;
   return (
-    <div>
+    <div className="embed-responsive embed-responsive-16by9">
       <video controls>
         <source src={src} />
       </video>

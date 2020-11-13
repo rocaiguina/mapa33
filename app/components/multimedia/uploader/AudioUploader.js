@@ -30,7 +30,12 @@ const AudioUploader = props => {
   const file = files.length > 0 ? files[0] : false;
   return (
     <div>
-      {file && <PreviewAudio src={file.src} title={file.name} />}
+      {file && (
+        <PreviewAudio
+          src={file && file.response && file.response.url}
+          title={file.name}
+        />
+      )}
       {embedURL && <PreviewSpotify src={embedURL} title="" />}
       {(file || embedURL) && (
         <a href="#" onClick={onRemove}>

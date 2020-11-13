@@ -1,10 +1,11 @@
 'use strict';
 
+const Path = require('path');
+const RandomToken = require('random-token');
 const FileStorage = require('../utils/file-storage');
 
 const put = (req, res) => {
   if (req.file) {
-    //console.log(req.files);
     /*
     File {
       "fieldname": "files",
@@ -18,15 +19,25 @@ const put = (req, res) => {
       "size": 999
     }
     */
-    console.log(req.file);
-    res.send({
-      fieldname: 'file',
-      originalname: 'cuadrado.png',
-      mimetype: 'image/png',
-      url: 'https://dummyimage.com/600x400/000/fff',
-    });
+    const fileExtension = Path.extname(req.file.originalname);
+    const fileName = RandomToken(10) + fileExtension ;
+    const filePath = Path.join('multimedia', fileName);
+    const fileContent = req.file.buffer;
+
+    FileStorage.put(filePath, fileContent)
+      .then(function(response) {
+        res.send({
+          fieldname: req.file.fieldname,
+          originalname: req.file.originalname,
+          mimetype: req.file.mimetype,
+          url: FileStorage.getUrl(filePath),
+        });
+      })
+      .catch(function(err) {
+        res.status(400).send(err);
+      });
   } else {
-    res.send('');
+    res.status(400).send();
   }
 };
 
