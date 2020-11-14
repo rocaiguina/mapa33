@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 const PreviewVideo = props => {
   const { src, title } = props;
   return (
-    <div className="embed-responsive embed-responsive-16by9">
-      <video controls>
-        <source src={src} />
-      </video>
+    <div className="memory-preview memory-preview-video">
+      <div className="embed-responsive embed-responsive-16by9">
+        <video controls>
+          <source src={src} />
+        </video>
+      </div>
       <h6>{title}</h6>
     </div>
   );

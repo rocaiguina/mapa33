@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 const PreviewImage = props => {
   const { src, title } = props;
-  return <img src={src} alt={title} className="img-responsive" />;
+  return (
+    <div className="memory-preview memory-preview-image">
+      <img src={src} alt={title} className="img-responsive" />
+    </div>
+  );
 };
 
 PreviewImage.defaultProps = {

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 const PreviewYoutube = props => {
   const { src, title } = props;
   return (
-    <div>
-      <iframe src={src} />
+    <div className="memory-preview memory-preview-youtube">
+      <div className="embed-responsive embed-responsive-16by9">
+        <iframe src={src} />
+      </div>
       <h6>{title}</h6>
     </div>
   );

@@ -19,8 +19,10 @@ const ImageUploader = props => {
 
   return (
     <div>
-      <h6>Imágenes escogidas ({files.length})</h6>
-      <div>
+      <div className="form-group">
+        <label>Imágenes escogidas ({files.length})</label>
+      </div>
+      <div className="form-group">
         <Upload
           accept="image/*"
           className="ant-upload-block"
@@ -28,7 +30,7 @@ const ImageUploader = props => {
           onChange={handleOnChange}
           defaultFileList={files}
         >
-          <Button block shape="round">
+          <Button block shape="round" size="large" className="ant-btn-gray">
             <Icon type="plus" />
           </Button>
         </Upload>

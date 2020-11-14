@@ -11,7 +11,7 @@ const PREVIEW_COMPONENTS = {
   image: PreviewImage,
   video: PreviewVideo,
   youtube: PreviewYoutube,
-  sound: PreviewAudio,
+  audio: PreviewAudio,
   spotify: PreviewSpotify,
 };
 
@@ -24,17 +24,14 @@ const MultimediaPreview = props => {
     swipe: true,
     swipeToSlide: true,
     touchMove: true,
+    className: 'slick-slide-memory',
   };
 
   return (
     <Slider {...sliderOptions}>
       {multimedia.map((item, index) => {
         const Component = PREVIEW_COMPONENTS[item.type];
-        return (
-          <div key={index}>
-            <Component src={item.url} title={item.name} />
-          </div>
-        );
+        return <Component key={index} src={item.url} title={item.name} />;
       })}
     </Slider>
   );

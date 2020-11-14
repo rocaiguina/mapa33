@@ -128,6 +128,44 @@ class MemoryModalViewContainer extends React.Component {
     }
 
     return multimediaPreview;
+    // return [
+    //   {
+    //     id: 'rc-1029',
+    //     name: "cuadrado.png",
+    //     type: "youtube",
+    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
+    //   },
+    //   {
+    //     id: 'rc-1029',
+    //     name: "cuadrado.png",
+    //     type: "spotify",
+    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
+    //   },
+    //   {
+    //     id: 'rc-1029',
+    //     name: "cuadrado.png",
+    //     type: "audio",
+    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
+    //   },
+    //   {
+    //     id: 'rc-1029',
+    //     name: "cuadrado.png",
+    //     type: "video",
+    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
+    //   },
+    //   {
+    //     id: 'rc-1030',
+    //     name: "cuadrado.png",
+    //     type: "image",
+    //     url: "https://dummyimage.com/600x400/000/fff",
+    //   },
+    //   {
+    //     id: 'rc-1032',
+    //     name: "cuadrado.png",
+    //     type: "image",
+    //     url: "https://dummyimage.com/600x400/000/fff",
+    //   },
+    // ];
   }
 
   render() {
@@ -148,6 +186,7 @@ class MemoryModalViewContainer extends React.Component {
         footer={null}
         onCancel={this.handleOnClose}
         destroyOnClose
+        wrapClassName="ant-modal-style2"
       >
         {step === 'form' && (
           <MemoryForm

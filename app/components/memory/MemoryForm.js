@@ -80,9 +80,11 @@ const MemoryForm = props => {
   );
 
   return (
-    <Row>
+    <Row gutter={30}>
       <Col md={12}>
-        <h3>COMPARTE TUS MEMORIAS DE EL TERRENO DEL FUTURO</h3>
+        <h2 className="memory-title">
+          COMPARTE TUS MEMORIAS DE EL TERRENO DEL FUTURO
+        </h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -98,33 +100,37 @@ const MemoryForm = props => {
         >
           {({ errors, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              <div>
-                <div>
+              <div className="form-style2">
+                <div className="form-group">
                   <label>Título de tu memoria (requerido)</label>
                   <Input
                     defaultValue={title}
                     name="title"
                     onChange={handleChange}
+                    className="form-control"
                   />
                   <Text type="danger">{errors.title}</Text>
                 </div>
-                <div>
+                <div className="form-group">
                   <label>Descripción (requerido)</label>
                   <TextArea
                     defaultValue={description}
                     name="description"
                     rows={4}
                     onChange={handleChange}
+                    className="form-control"
                   />
-                  <span>Límite de 300 caracteres</span>
+                  <span className="form-text">Límite de 300 caracteres</span>
                   <Text type="danger">{errors.description}</Text>
                 </div>
+                <div className="form-group">
+                  <label>Añade fotos, video o audio</label>
+                  <span className="form-text">
+                    Solo escoge un tipo de medio por entrada
+                  </span>
+                </div>
               </div>
-              <div>
-                <label>Añade fotos, video o audio</label>
-                <span>Solo escoge un tipo de medio por entrada</span>
-              </div>
-              <div>
+              <div className="m-b-15">
                 <Radio.Group
                   defaultValue={mediaType}
                   value={mediaTypeSelected}
@@ -167,7 +173,13 @@ const MemoryForm = props => {
                 />
               )}
               <div>
-                <Button block shape="round" htmlType="submit">
+                <Button
+                  block
+                  shape="round"
+                  htmlType="submit"
+                  className="ant-btn-purple"
+                  size="large"
+                >
                   Continuar
                 </Button>
               </div>

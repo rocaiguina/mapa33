@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PreviewSound = props => {
   const { src, title } = props;
   return (
-    <div>
+    <div className="memory-preview memory-preview-video">
       <audio controls>
         <source src={src} />
       </audio>

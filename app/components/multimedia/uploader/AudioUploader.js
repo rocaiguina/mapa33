@@ -38,14 +38,22 @@ const AudioUploader = props => {
       )}
       {embedURL && <PreviewSpotify src={embedURL} title="" />}
       {(file || embedURL) && (
-        <a href="#" onClick={onRemove}>
+        <Button
+          block
+          type="link"
+          onClick={() => onRemove(file)}
+          size="large"
+          className="ant-btn-gray"
+        >
           Eliminar Audio
-        </a>
+        </Button>
       )}
       {!(file || embedURL) && (
-        <div>
-          <div>
+        <div className="form-style2">
+          <div className="form-group">
             <label>Buscar audio en tu dispositivo</label>
+          </div>
+          <div>
             <Upload
               accept="audio/*"
               className="ant-upload-block"
@@ -53,18 +61,24 @@ const AudioUploader = props => {
               onChange={handleOnChange}
               defaultFileList={files}
             >
-              <Button block shape="round">
+              <Button block shape="round" size="large" className="ant-btn-gray">
                 <Icon type="plus" />
               </Button>
             </Upload>
           </div>
-          <div>
+          <div className="form-group text-center">
             <label>ó</label>
           </div>
-          <div>
+          <div className="form-group">
             <label>Añade enlace URL</label>
-            <Input defaultValue={embedURL} onChange={handleOnChangeEmbedURL} />
-            <span>Inserta URL de Soundcloud o Spotify</span>
+            <Input
+              defaultValue={embedURL}
+              onChange={handleOnChangeEmbedURL}
+              className="form-control"
+            />
+            <span className="form-text">
+              Inserta URL de Soundcloud o Spotify
+            </span>
           </div>
         </div>
       )}

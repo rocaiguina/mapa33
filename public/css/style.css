@@ -977,6 +977,38 @@ ul.actions {
 }
 
 /* Slick map slider */
+.slick-dots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.slick-dots li {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 0;
+  position: relative;
+}
+.slick-dots li, .slick-dots li button {
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+}
+.slick-dots li button {
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #707070;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  padding: 5px;
+  outline: none;
+}
+.slick-dots li.slick-active button {
+  background: #f172a7;
+  border: 1px solid #f172a7;
+}
 .slick-slider-maplist .slick-slide .ant-card {
   margin: 10px;
   transition: all .3s ease;
@@ -1173,7 +1205,20 @@ ul.actions {
     border-radius: 0;
   }
 }
-
+.ant-modal-wrap.ant-modal-style2 .ant-modal-content {
+  border-radius: 24px;
+}
+.ant-modal-wrap.ant-modal-style2 .ant-modal-close {
+  left: 0;
+  top: -44px;
+}
+.ant-modal-wrap.ant-modal-style2 .ant-modal-close .ant-modal-close-x {
+  background-color: #fff;
+  border-radius: 24px;
+  color: #000;
+  height: 38px;
+  line-height: 38px;
+}
 
 /* Custom select */
 .ant-select {
@@ -1327,6 +1372,17 @@ ul.actions {
   background-color: #c5c5c5 !important;
   border-color: #c5c5c5 !important;
   color: rgba(0, 0, 0, 0.65) !important;
+}
+
+.ant-btn.ant-btn-gray {
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+}
+
+.ant-btn.ant-btn-link.ant-btn-gray {
+  background-color: transparent;
+  border-color: transparent;
+  color: #959595;
 }
 
 .ant-btn.m33-btn>small {
@@ -2214,4 +2270,58 @@ a.mapboxgl-ctrl-logo {
 /* Custom uploader */
 .ant-upload-block .ant-upload.ant-upload-select {
   display: block;
+}
+
+/* Style Forms */
+.form-style2 .form-group {
+  margin-bottom: 0.5rem;
+}
+.form-style2 .form-group label {
+  color: #000;
+  font-weight: 700;
+}
+.form-style2 .form-group .form-control {
+  background-color: #e5e5e5;
+  border-radius: 0;
+  color: #000;
+  margin-top: 0.4rem;
+}
+.form-style2 .form-group .form-text {
+  color: #959595;
+  display: block;
+}
+.form-style2 .form-group .ant-typography {
+  margin-left: 0;
+}
+
+/* Memory previews */
+.memory-title,
+.memory-preview-title,
+.memory-preview-description,
+.memory-preview-author,
+.memory-preview-createdAt {
+  color: #000;
+}
+.memory-title,
+.memory-preview-title,
+.memory-preview-author,
+.memory-preview-createdAt {
+  font-weight: bold;
+}
+.slick-slide-memory {
+  margin-bottom: 1rem;
+}
+.memory-preview-video {
+  background-color: #fff;
+}
+.memory-preview-video h6,
+.memory-preview-youtube h6,
+.memory-preview-spotify h6 {
+  display: none;
+}
+.memory-preview-image img,
+.memory-preview-youtube .embed-responsive,
+.memory-preview-spotify .embed-responsive,
+.memory-preview-video .embed-responsive video {
+  border-radius: 16px;
 }

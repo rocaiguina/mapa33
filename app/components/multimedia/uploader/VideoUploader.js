@@ -38,14 +38,22 @@ const VideoUploader = props => {
       )}
       {embedURL && <PreviewYoutube src={embedURL} title="" />}
       {(file || embedURL) && (
-        <a href="#" onClick={() => onRemove(file)}>
+        <Button
+          block
+          type="link"
+          onClick={() => onRemove(file)}
+          size="large"
+          className="ant-btn-gray"
+        >
           Eliminar Video
-        </a>
+        </Button>
       )}
       {!(file || embedURL) && (
-        <div>
-          <div>
+        <div className="form-style2">
+          <div className="form-group">
             <label>Buscar video en tu dispositivo</label>
+          </div>
+          <div>
             <Upload
               accept="video/*"
               className="ant-upload-block"
@@ -53,18 +61,22 @@ const VideoUploader = props => {
               onChange={handleOnChange}
               defaultFileList={files}
             >
-              <Button block shape="round">
+              <Button block shape="round" size="large" className="ant-btn-gray">
                 <Icon type="plus" />
               </Button>
             </Upload>
           </div>
-          <div>
+          <div className="form-group text-center">
             <label>ó</label>
           </div>
-          <div>
+          <div className="form-group">
             <label>Añade video de Youtube</label>
-            <Input defaultValue={embedURL} onChange={handleOnChangeEmbedURL} />
-            <span>Inserta URL de Youtube Aquí</span>
+            <Input
+              defaultValue={embedURL}
+              onChange={handleOnChangeEmbedURL}
+              className="form-control"
+            />
+            <span className="form-text">Inserta URL de Youtube Aquí</span>
           </div>
         </div>
       )}
