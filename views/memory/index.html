@@ -55,11 +55,11 @@
                     {{ item.user.full_name }}
                 </td>
                 <td>
-                  {% if item.status == 'new' %}
+                  {% if item.status == 'NEW' %}
                     <span class="label label-warning text-uppercase">{{ item.status }}</span>
-                  {% elif item.status == 'rejected' %}
+                  {% elif item.status == 'REJECTED' %}
                     <span class="label label-danger text-uppercase">{{ item.status }}</span>
-                  {% elif item.status == 'approved' %}
+                  {% elif item.status == 'APPROVED' %}
                     <span class="label label-success text-uppercase">{{ item.status }}</span>
                   {% else %}
                     <span class="label label-default text-uppercase">{{ item.status }}</span>
