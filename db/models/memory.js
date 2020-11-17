@@ -29,12 +29,14 @@ module.exports = (sequelize, DataTypes) => {
   });
   Memory.associate = function(models) {
     // associations can be defined here
+    Memory.belongsTo(models.Land, { as: 'land', foreignKey: 'land_id' });
     Memory.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
     Memory.hasMany(models.Multimedia, {
       foreignKey: 'multimediable_id',
+      as: 'multimedias',
       constraints: false,
       scope: {
-        multimediable: 'land',
+        multimediable: 'MEMORY',
       },
     });
   };

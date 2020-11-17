@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="block-header">
+      <h2>Memoria<small>{{ object.land.name }}</small></h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group text-right">
+        <a href="/admin/memory" class="btn btn-default">VOLVER ATRÁS</a>
+    </div>
+  </div>
+</div>
+
+<form id="user-form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <input type="hidden" name="crumb" value="{{crumb}}"/>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2>Detalles
+                    <small>(*) Datos requeridos.</small>
+                </h2>
+            </div>
+            <div class="card-body card-padding">
+                <div class="form-group {{ 'has-error' if field_errors.title else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Título*</label>
+                        <input type="text" class="form-control input-sm" value="{{ object.title }}" disabled="disabled">
+                    </div>
+                    {% if field_errors.title %}
+                    <small class="help-block">{{ field_errors.title.message }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.description else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Descripción</label>
+                        <textarea class="form-control" rows="4" name="description" disabled="disabled">{{ object.description }}</textarea>
+                    </div>
+                    {% if field_errors.description %}
+                    <small class="help-block">{{ field_errors.description.message }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.status else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Estado</label>
+                        <div class="select">
+                            <select name="status" class="form-control ">
+                                <option value="">--------</option>
+                                {% for item in status %}
+                                <option {% if object.status == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    {% if field_errors.status %}
+                    <small class="help-block">{{ field_errors.status.message }}</small>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Guardar">
+                  <i class="zmdi zmdi-save"></i>
+                </button>
+            </div>
+            <div class="card-header">
+                <h2>Multimedia</h2>
+            </div>
+            <div class="card-body card-padding">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  {% for item in object.multimedias %}
+                  <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %}class="active"{% endif %}></li>
+                  {% endfor %}
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  {% for item in object.multimedias %}
+                  <div class="item {{ 'active' if loop.index0 == 0 else '' }}">
+                    {% if item.type == 'image' %}
+                    <img src="{{ item.url }}" alt="{{ item.name }}">
+                    {% elif item.type == 'video' %}
+                    <div className="embed-responsive embed-responsive-16by9">
+                      <video controls>
+                        <source src={{ item.url }} />
+                      </video>
+                    </div>
+                    {% elif item.type == 'youtube' %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="{{ item.url }}"></iframe>
+                    </div>
+                    {% elif item.type == 'audio' %}
+                    <div className="embed-responsive embed-responsive-16by9">
+                      <audio controls>
+                        <source src={{ item.url }} />
+                      </audio>
+                    </div>
+                    {% elif item.type == 'spotify' %}
+                    <div>
+                      <iframe src="{{ item.url }}"></iframe>
+                    </div>
+                    {% endif %}
+                    <div class="carousel-caption">
+                      {{ item.name }}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+              <br />
+            </div>
+        </div>    
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+              <h2>Contacto</h2>
+          </div>
+          <div class="card-body card-padding">
+            <div class="pmo-contact">
+                <ul>
+                  <li>
+                    <i class="zmdi zmdi-account"></i> {{ object.user.full_name }}
+                  </li>
+                  <li>
+                    <i class="zmdi zmdi-email"></i> <a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a>
+                  </li>
+                </ul>
+                <br />
+                <p class="text-center">
+                  <a href="/land/{{ object.id }}">Ver Tarjeta Pública <i class="zmdi zmdi-open-in-new"></i></a>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+  $(document).ready(function () {
+  });
+</script>
+{% endblock %}

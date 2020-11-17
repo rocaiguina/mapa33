@@ -182,3 +182,28 @@ module.exports.LAND_PROTECTION_REASONS = [
       'Es un lugar óptimo donde la conservación y el desarrollo sustentable pueden ocurrir a la vez.',
   },
 ];
+
+module.exports.MEMORY_STATUS = {
+  NEW: 'NEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+};
+
+module.exports.MULTIMEDIABLES = {
+  MEMORY: 'MEMORY',
+};
+
+module.exports.MEMORY_STATUS_LIST = [
+  {
+    value: 'NEW',
+    label: 'New',
+  },
+  {
+    value: 'REJECTED',
+    label: 'Rejected',
+  },
+  {
+    value: 'APPROVED',
+    label: 'Approved',
+  },
+];

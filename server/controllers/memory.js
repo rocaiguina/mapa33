@@ -6,7 +6,7 @@ const Models = require('../../db/models');
 const Memory = Models.Memory;
 const Multimedia = Models.Multimedia;
 
-const { MEMORY_STATUS, MULTIMEDIABLES } = require('../constants');
+const { MEMORY_STATUS, MULTIMEDIABLES } = require('../../config/constants');
 
 const store = (req, res) => {
   const validationSchema = {

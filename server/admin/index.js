@@ -8,9 +8,11 @@ const AuthAdminController = require('./auth');
 const LandAdminController = require('./land');
 const UserAdminController = require('./user');
 const AccountAdminController = require('./account');
+const MemoryAdminController = require('./memory');
 const AuthMiddleware = require('../middlewares/auth');
 const LandMiddleware = require('../middlewares/land');
 const UserMiddleware = require('../middlewares/user');
+const MemoryMiddleware = require('../middlewares/memory');
 const AdminMiddleware = require('../middlewares/admin');
 const fileUploader = multer();
 
@@ -57,6 +59,26 @@ router.post(
   AdminMiddleware.admin_access,
   LandMiddleware.lookup,
   LandAdminController.remove
+);
+router.get(
+  '/memory',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
+  MemoryAdminController.findAll
+);
+router.get(
+  '/memory/:id',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
+  MemoryMiddleware.lookup,
+  MemoryAdminController.get
+);
+router.post(
+  '/memory/:id',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
+  MemoryMiddleware.lookup,
+  MemoryAdminController.save
 );
 //TODO: Routes User
 router.get(
