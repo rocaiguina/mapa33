@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import BaseLayout from '../components/layout/base';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
+import MemoryList from '../components/memory/MemoryList';
 
 import MemoryModalViewContainer from './MemoryModalViewContainer';
 
@@ -181,6 +182,36 @@ class LandDetailContainer extends React.Component {
           disabledLike={disabledLike}
           onClickLike={this.handleOnClickLike}
           onShareMemories={this.handleOnShareMemories}
+        />
+        <MemoryList data={[
+            {
+              id: 1,
+              title: 'My title',
+              description: 'Lorem ipsum',
+              date: '2020-10-10 10:00:00',
+              author: 'Jorge Moreira',
+              multimediaType: 'image',
+              multimedia: [],
+            },
+            {
+              id: 2,
+              title: 'My title',
+              description: 'Lorem ipsum',
+              date: '2020-10-10 10:00:00',
+              author: 'Jorge Moreira',
+              multimediaType: 'youtube',
+              multimedia: [],
+            },
+            {
+              id: 3,
+              title: 'My title',
+              description: 'Lorem ipsum',
+              date: '2020-10-10 10:00:00',
+              author: 'Jorge Moreira',
+              multimediaType: '',
+              multimedia: [],
+            },
+          ]}
         />
         <MemoryModalViewContainer
           landId={id}

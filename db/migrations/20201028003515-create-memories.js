@@ -24,6 +24,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      media_type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       status: {
         type: Sequelize.STRING,   // new, approved, rejected
         allowNull: true,
