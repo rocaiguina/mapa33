@@ -16,7 +16,7 @@ const PREVIEW_COMPONENTS = {
 };
 
 const MultimediaPreview = props => {
-  const { multimedia } = props;
+  const { multimedia, round } = props;
   const sliderOptions = {
     infinite: false,
     dots: true,
@@ -31,7 +31,14 @@ const MultimediaPreview = props => {
     <Slider {...sliderOptions}>
       {multimedia.map((item, index) => {
         const Component = PREVIEW_COMPONENTS[item.type];
-        return <Component key={index} src={item.url} title={item.name} />;
+        return (
+          <Component
+            key={index}
+            src={item.url}
+            title={item.name}
+            round={round}
+          />
+        );
       })}
     </Slider>
   );
@@ -39,6 +46,7 @@ const MultimediaPreview = props => {
 
 MultimediaPreview.defaultProps = {
   multimedia: [],
+  round: false,
 };
 
 MultimediaPreview.propTypes = {
@@ -49,6 +57,7 @@ MultimediaPreview.propTypes = {
       url: PropTypes.string,
     })
   ),
+  round: PropTypes.bool,
 };
 
 export default MultimediaPreview;

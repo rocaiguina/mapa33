@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 
 const PreviewSound = props => {
-  const { src, title } = props;
+  const { src, title, round } = props;
+
   return (
-    <div className="memory-preview memory-preview-video">
+    <div
+      className={ClassNames({
+        'memory-preview': true,
+        'memory-preview-video': true,
+        'memory-preview-round': round,
+      })}
+    >
       <audio controls>
         <source src={src} />
       </audio>
@@ -16,11 +24,13 @@ const PreviewSound = props => {
 PreviewSound.defaultProps = {
   src: '',
   title: '',
+  round: false,
 };
 
 PreviewSound.propTypes = {
   src: PropTypes.string,
   title: PropTypes.string,
+  round: PropTypes.bool,
 };
 
 export default PreviewSound;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notification } from 'antd';
+import { Button, Col, notification, Row } from 'antd';
 import BaseLayout from '../components/layout/base';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
@@ -181,8 +181,26 @@ class LandDetailContainer extends React.Component {
           coordinates={coordinates}
           disabledLike={disabledLike}
           onClickLike={this.handleOnClickLike}
-          onShareMemories={this.handleOnShareMemories}
         />
+        <Row>
+          <Col md={18}>
+            <h2>
+              MEMORIAS DE <br />
+              {name}
+            </h2>
+          </Col>
+          <Col md={6}>
+            <Button
+              block
+              shape="round"
+              className="ant-btn-purple"
+              size="large"
+              onClick={this.handleOnShareMemories}
+            >
+              Comparte tus memorias
+            </Button>
+          </Col>
+        </Row>
         <MemoryListContainer landId={id} />
         <MemoryModalViewContainer
           landId={id}

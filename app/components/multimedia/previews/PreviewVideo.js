@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 
 const PreviewVideo = props => {
-  const { src, title } = props;
+  const { src, title, round } = props;
   return (
-    <div className="memory-preview memory-preview-video">
+    <div
+      className={ClassNames({
+        'memory-preview': true,
+        'memory-preview-video': true,
+        'memory-preview-round': round,
+      })}
+    >
       <div className="embed-responsive embed-responsive-16by9">
         <video controls>
           <source src={src} />
@@ -18,11 +25,13 @@ const PreviewVideo = props => {
 PreviewVideo.defaultProps = {
   src: '',
   title: '',
+  round: false,
 };
 
 PreviewVideo.propTypes = {
   src: PropTypes.string,
   title: PropTypes.string,
+  round: PropTypes.bool,
 };
 
 export default PreviewVideo;

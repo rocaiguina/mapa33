@@ -7,7 +7,7 @@ import MemoryCard from './MemoryCard';
 const MemoryList = props => {
   const { data, onMemoryClick } = props;
   return (
-    <XMasonry>
+    <XMasonry center={false}>
       {data.map(item => (
         <XBlock
           key={item.id}

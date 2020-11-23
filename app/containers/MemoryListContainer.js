@@ -57,13 +57,17 @@ class MemoryListContainer extends React.Component {
   render() {
     const { loading, memories, preview, memory } = this.state;
     if (loading) {
-      return <Spin />;
+      return (
+        <div className="memory-list-spin">
+          <Spin />
+        </div>
+      );
     }
 
     if (!loading && memories.length == 0) {
       return (
-        <div className="text-center">
-          <h2>Aún no hay memorias publicadas</h2>
+        <div className="memory-empty-list">
+          Aún no hay memorias publicadas
         </div>
       );
     }

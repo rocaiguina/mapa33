@@ -37,7 +37,7 @@ const MemoryCard = props => {
     if (multimedias && multimedias.length > 0) {
       let item = multimedias[0];
       let Component = PREVIEW_COMPONENTS[item.type];
-      return <Component src={item.url} title={item.name} />;
+      return <Component src={item.url} title={item.name} round />;
     }
     return null;
   }, [multimedias]);
@@ -50,18 +50,20 @@ const MemoryCard = props => {
       className="memory-card"
     >
       {renderMedia}
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <Row>
-        <Col xs={12}>
-          <span className="memory-preview-author">{author}</span>
-        </Col>
-        <Col xs={12} className="text-right">
-          <span className="memory-preview-createdAt">
-            {Moment(createdAt).format('DD/MM/YYYY')}
-          </span>
-        </Col>
-      </Row>
+      <div className="memory-card-meta">
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <Row>
+          <Col xs={12}>
+            <span className="memory-preview-author">{author}</span>
+          </Col>
+          <Col xs={12} className="text-right">
+            <span className="memory-preview-createdAt">
+              {Moment(createdAt).format('DD/MM/YYYY')}
+            </span>
+          </Col>
+        </Row>
+      </div>
     </Card>
   );
 };

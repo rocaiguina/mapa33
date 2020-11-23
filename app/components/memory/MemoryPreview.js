@@ -24,7 +24,7 @@ const MemoryPreview = props => {
           </h2>
         </Col>
         <Col md={12}>
-          <MultimediaPreview multimedia={multimedia} />
+          <MultimediaPreview multimedia={multimedia} round />
           <h2 className="memory-preview-title">{title}</h2>
           <p className="memory-preview-description">{description}</p>
           <Row>

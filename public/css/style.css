@@ -2319,16 +2319,33 @@ a.mapboxgl-ctrl-logo {
 .memory-preview-spotify h6 {
   display: none;
 }
-.memory-preview-image img,
-.memory-preview-youtube .embed-responsive,
-.memory-preview-spotify .embed-responsive,
-.memory-preview-video .embed-responsive video {
+.memory-preview-round img,
+.memory-preview-round .embed-responsive,
+.memory-preview-round .embed-responsive video {
   border-radius: 16px;
 }
 
 /* Memory cards */
+.ant-card.memory-card,
 .memory-card {
+  border-radius: 0;
   cursor: pointer;
+}
+.memory-card .ant-card-body {
+  padding: 12px;
+}
+.memory-card .memory-preview {
+  margin-bottom: 12px;
+}
+.memory-card-meta {
+  color: #000;
+  padding: 0 6px;
+}
+.memory-card-meta p {
+  color: #000;
+}
+.memory-card-meta h2 {
+  font-weight: bold;
 }
 
 /* Memory modal preview */
@@ -2357,3 +2374,13 @@ a.mapboxgl-ctrl-logo {
   line-height: 38px;
 }
 
+/* Memory list */
+.memory-list-spin {
+  text-align: center;
+}
+.memory-empty-list {
+  color: #999;
+  font-size: 1.5em;
+  margin: 60px 0;
+  text-align: center;
+}

@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 
 const PreviewSpotify = props => {
-  const { src, title } = props;
+  const { src, title, round } = props;
   return (
-    <div className="memory-preview memory-preview-spotify">
+    <div
+      className={ClassNames({
+        'memory-preview': true,
+        'memory-preview-spotify': true,
+        'memory-preview-round': round,
+      })}
+    >
       <div className="embed-responsive embed-responsive-16by9">
         <iframe src={src} />
       </div>
@@ -16,11 +23,13 @@ const PreviewSpotify = props => {
 PreviewSpotify.defaultProps = {
   src: '',
   title: '',
+  round: false,
 };
 
 PreviewSpotify.propTypes = {
   src: PropTypes.string,
   title: PropTypes.string,
+  round: PropTypes.bool,
 };
 
 export default PreviewSpotify;
