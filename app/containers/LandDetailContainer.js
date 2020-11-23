@@ -6,7 +6,7 @@ import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
 import MemoryListContainer from './MemoryListContainer';
 
-import MemoryModalViewContainer from './MemoryModalViewContainer';
+import MemoryModalRegisterContainer from './MemoryModalRegisterContainer';
 
 import LandApi from '../api/land';
 
@@ -202,7 +202,7 @@ class LandDetailContainer extends React.Component {
           </Col>
         </Row>
         <MemoryListContainer landId={id} />
-        <MemoryModalViewContainer
+        <MemoryModalRegisterContainer
           landId={id}
           visible={shareMemories}
           onClose={this.handleOnCloseMemoriesModal}

@@ -66,9 +66,7 @@ class MemoryListContainer extends React.Component {
 
     if (!loading && memories.length == 0) {
       return (
-        <div className="memory-empty-list">
-          Aún no hay memorias publicadas
-        </div>
+        <div className="memory-empty-list">Aún no hay memorias publicadas</div>
       );
     }
 

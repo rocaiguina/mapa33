@@ -8,7 +8,7 @@ import MemorySuccessfulView from '../components/memory/MemorySuccessfulView';
 
 import LandAPI from '../api/land';
 
-class MemoryModalViewContainer extends React.Component {
+class MemoryModalRegisterContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +35,12 @@ class MemoryModalViewContainer extends React.Component {
 
   handleOnSubmit = () => {
     const { landId } = this.props;
-    const { title, description } = this.state;
+    const { title, description, mediaType } = this.state;
     const multimedias = this.getMultimediaData();
     const data = {
       title,
       description,
+      media_type: mediaType,
       multimedias,
     };
     LandAPI.registerMemory(landId, data)
@@ -215,16 +216,16 @@ class MemoryModalViewContainer extends React.Component {
   }
 }
 
-MemoryModalViewContainer.defaultValues = {
+MemoryModalRegisterContainer.defaultValues = {
   landId: 0,
   visible: false,
   onClose: () => {},
 };
 
-MemoryModalViewContainer.propTypes = {
+MemoryModalRegisterContainer.propTypes = {
   landId: PropTypes.number,
   visible: PropTypes.bool,
   onClose: PropTypes.func,
 };
 
-export default MemoryModalViewContainer;
+export default MemoryModalRegisterContainer;
