@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Moment from 'moment';
 import { Col, Divider, Modal, Row } from 'antd';
 
+import MultimediaPreview from '../multimedia/MultimediaPreview';
+
 const MemoryModalPreview = props => {
   const {
     title,
@@ -15,7 +17,18 @@ const MemoryModalPreview = props => {
   } = props;
 
   return (
-    <Modal footer={null} visible={visible} onCancel={onClose} destroyOnClose>
+    <Modal
+      footer={null}
+      visible={visible}
+      width={640}
+      onCancel={onClose}
+      destroyOnClose
+      className="memory-modal-preview"
+      maskStyle={{
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      }}
+    >
+      <MultimediaPreview multimedia={multimedias} />
       <h2>{title}</h2>
       <p>{description}</p>
       <Row>

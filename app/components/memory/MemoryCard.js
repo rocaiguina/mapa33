@@ -1,7 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
 import { Card, Col, Row } from 'antd';
+import PreviewImage from '../multimedia/previews/PreviewImage';
+import PreviewVideo from '../multimedia/previews/PreviewVideo';
+import PreviewYoutube from '../multimedia/previews/PreviewYoutube';
+import PreviewAudio from '../multimedia/previews/PreviewAudio';
+import PreviewSpotify from '../multimedia/previews/PreviewSpotify';
+
+const PREVIEW_COMPONENTS = {
+  image: PreviewImage,
+  video: PreviewVideo,
+  youtube: PreviewYoutube,
+  audio: PreviewAudio,
+  spotify: PreviewSpotify,
+};
 
 const MemoryCard = props => {
   const {
@@ -20,8 +33,23 @@ const MemoryCard = props => {
     }
   }, [onClick]);
 
+  const renderMedia = useMemo(() => {
+    if (multimedias && multimedias.length > 0) {
+      let item = multimedias[0];
+      let Component = PREVIEW_COMPONENTS[item.type];
+      return <Component src={item.url} title={item.name} />;
+    }
+    return null;
+  }, [multimedias]);
+
   return (
-    <Card bordered={false} style={{ margin: '10px' }} onClick={handleOnClick}>
+    <Card
+      bordered={false}
+      style={{ margin: '10px' }}
+      onClick={handleOnClick}
+      className="memory-card"
+    >
+      {renderMedia}
       <h2>{title}</h2>
       <p>{description}</p>
       <Row>

@@ -21,6 +21,7 @@ const MemoryList = props => {
             description={item.description}
             createdAt={item.createdAt}
             author={item.user && item.user.full_name}
+            multimedias={item.multimedias}
             onClick={onMemoryClick}
           />
         </XBlock>

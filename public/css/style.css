@@ -2325,3 +2325,35 @@ a.mapboxgl-ctrl-logo {
 .memory-preview-video .embed-responsive video {
   border-radius: 16px;
 }
+
+/* Memory cards */
+.memory-card {
+  cursor: pointer;
+}
+
+/* Memory modal preview */
+.memory-modal-preview .ant-modal-content {
+  background-color: transparent;
+  box-shadow: none;
+  color: #fff;
+}
+.memory-modal-preview .ant-modal-content .ant-modal-body {
+  padding: 24px 6px;
+}
+.memory-modal-preview .ant-modal-content h2,
+.memory-modal-preview .ant-modal-content .memory-preview-author,
+.memory-modal-preview .ant-modal-content .memory-preview-createdAt {
+  color: #fff;
+}
+.memory-modal-preview .ant-modal-close {
+  left: 0;
+  top: -44px;
+}
+.memory-modal-preview .ant-modal-close .ant-modal-close-x {
+  background-color: #fff;
+  border-radius: 24px;
+  color: #000;
+  height: 38px;
+  line-height: 38px;
+}
+
