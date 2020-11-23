@@ -10,8 +10,7 @@ import Icon from '../ui/Icon';
 import ToolBar from './Toolbar';
 import LandApi from '../../api/land';
 
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
+mapboxgl.accessToken = MAPBOX_TOKEN
 let map = null;
 
 function buildPopup(land) {

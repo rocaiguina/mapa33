@@ -14,8 +14,7 @@ import centroid from '@turf/centroid';
 import Numeral from 'numeral';
 import Button from '../ui/Button';
 
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
+mapboxgl.accessToken = MAPBOX_TOKEN
 let map = null;
 let miniMap = null;
 let tmpMap = null;
