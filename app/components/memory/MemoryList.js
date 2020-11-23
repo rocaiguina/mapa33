@@ -5,22 +5,25 @@ import { XMasonry, XBlock } from 'react-xmasonry';
 import MemoryCard from './MemoryCard';
 
 const MemoryList = props => {
-  const { data } = props;
+  const { data, onMemoryClick } = props;
   return (
     <XMasonry>
-      {data.map((item) => (
+      {data.map(item => (
         <XBlock
           key={item.id}
-          width={item.multimediaType == 'video' || item.multimediaType == 'youtube' ? 2 : 1}
+          width={
+            item.media_type == 'video' || item.media_type == 'youtube' ? 2 : 1
+          }
         >
           <MemoryCard
             id={item.id}
             title={item.title}
             description={item.description}
-            date={item.date}
-            author={item.author}
+            createdAt={item.createdAt}
+            author={item.user && item.user.full_name}
+            onClick={onMemoryClick}
           />
-        </XBlock>  
+        </XBlock>
       ))}
     </XMasonry>
   );
@@ -28,24 +31,30 @@ const MemoryList = props => {
 
 MemoryList.defaultProps = {
   data: [],
+  onMemoryClick: () => {},
 };
 
 MemoryList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    date: PropTypes.string,
-    author: PropTypes.string,
-    multimediaType: PropTypes.string,
-    multimedia: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-        url: PropTypes.string,
-      })
-    ),
-  })),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      createdAt: PropTypes.string,
+      user: PropTypes.shape({
+        full_name: PropTypes.string,
+      }),
+      media_type: PropTypes.string,
+      multimedias: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          type: PropTypes.string,
+          url: PropTypes.string,
+        })
+      ),
+    })
+  ),
+  onMemoryClick: PropTypes.func,
 };
 
 export default MemoryList;

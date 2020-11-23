@@ -1,12 +1,57 @@
 'use strict';
 
 const Joi = require('joi');
+const Paginator = require('paginator');
 
 const Models = require('../../db/models');
 const Memory = Models.Memory;
 const Multimedia = Models.Multimedia;
+const User = Models.User;
 
 const { MEMORY_STATUS, MULTIMEDIABLES } = require('../../config/constants');
+
+const findByLand = (req, res) => {
+  let options = {
+    page: req.query.page || 1,
+    paginate: req.query.limit || 10,
+    where: {
+      land_id: req.params.landId,
+      status: MEMORY_STATUS.APPROVED,
+    },
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['first_name', 'last_name'],
+      },
+      {
+        model: Multimedia,
+        as: 'multimedias',
+        constraints: false,
+        scope: {
+          multimediable: 'MEMORY',
+        },
+      },
+    ],
+  };
+
+  Memory.paginate(options)
+    .then(function(data) {
+      let paginator = new Paginator(options.paginate, 5).build(
+        data.total,
+        options.page
+      );
+      data.current_page = paginator.current_page;
+      data.next_page = paginator.next_page;
+      data.previous_page = paginator.previous_page;
+      data.has_previous_page = paginator.has_previous_page;
+      data.has_next_page = paginator.has_next_page;
+      res.json(data);
+    })
+    .catch(function(err) {
+      res.status(400).send(err);
+    });
+};
 
 const store = (req, res) => {
   const validationSchema = {
@@ -64,4 +109,5 @@ const store = (req, res) => {
 
 module.exports = {
   store,
+  findByLand,
 };

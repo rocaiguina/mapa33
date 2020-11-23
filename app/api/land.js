@@ -90,6 +90,21 @@ export const registerMemory = function(landId, data) {
   });
 };
 
+export const getMemories = function(landId) {
+  return new Promise((resolve, reject) => {
+    Axios.get(`/api/land/${landId}/memory`)
+      .then(response => {
+        if (response.status == 200) {
+          return resolve(response.data);
+        }
+        reject(response.data);
+      })
+      .catch(err => {
+        reject(err.response);
+      });
+  });
+};
+
 export default {
   register,
   get,
@@ -97,4 +112,5 @@ export default {
   isLikedByUser,
   like,
   registerMemory,
+  getMemories,
 };

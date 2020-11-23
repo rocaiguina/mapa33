@@ -25,6 +25,7 @@ router.post('/:id/like', JWTMiddleware.requireJWT, LandController.like);
 router.get('/:id/like', JWTMiddleware.verifyJWT, LandController.checkUserLike);
 
 //router.post('/:landId/memory', JWTMiddleware.requireJWT, MemoryController.store)
+router.get('/:landId/memory', MemoryController.findByLand);
 router.post('/:landId/memory', MemoryController.store);
 
 module.exports = router;

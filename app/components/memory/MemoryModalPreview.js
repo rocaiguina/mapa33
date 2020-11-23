@@ -1,27 +1,21 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import { Card, Col, Row } from 'antd';
+import { Col, Divider, Modal, Row } from 'antd';
 
-const MemoryCard = props => {
+const MemoryModalPreview = props => {
   const {
-    id,
     title,
     description,
     createdAt,
     author,
     multimedias,
-    onClick,
+    visible,
+    onClose,
   } = props;
 
-  const handleOnClick = useCallback(() => {
-    if (onClick) {
-      onClick({ id, title, description, createdAt, author, multimedias });
-    }
-  }, [onClick]);
-
   return (
-    <Card bordered={false} style={{ margin: '10px' }} onClick={handleOnClick}>
+    <Modal footer={null} visible={visible} onCancel={onClose} destroyOnClose>
       <h2>{title}</h2>
       <p>{description}</p>
       <Row>
@@ -34,22 +28,22 @@ const MemoryCard = props => {
           </span>
         </Col>
       </Row>
-    </Card>
+      <Divider />
+    </Modal>
   );
 };
 
-MemoryCard.defaultProps = {
-  id: 0,
+MemoryModalPreview.defaultProps = {
   title: '',
   description: '',
   createdAt: '',
   author: '',
   multimedias: [],
-  onClick: () => {},
+  visible: false,
+  onClose: () => {},
 };
 
-MemoryCard.propTypes = {
-  id: PropTypes.number,
+MemoryModalPreview.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   createdAt: PropTypes.string,
@@ -61,7 +55,8 @@ MemoryCard.propTypes = {
       url: PropTypes.string,
     })
   ),
-  onClick: PropTypes.func,
+  visible: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
-export default MemoryCard;
+export default MemoryModalPreview;
