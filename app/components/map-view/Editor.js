@@ -401,10 +401,34 @@ class Editor extends Component {
       popup.remove();
     });
 
+    let layerClicked = {id: '', coords: {}};
+
+    map.on('click', 'proposed-lots', e => {
+      layerClicked.coords = e.point;
+      layerClicked.id = 'proposed-lots';
+    });
+    map.on('click', 'protected_areas', e => {
+      layerClicked.coords = e.point;
+      layerClicked.id = 'protected_areas';
+    });
+
     map.on('click', 'lots', e => {
       const { id } = e.features[0].properties;
       const { lots } = this.props;
       const exist = lots.indexOf(id) > -1;
+         
+      if (layerClicked.coords.x === e.point.x && layerClicked.coords.y === e.point.y) {
+        let errDescription = 
+        layerClicked.id === 'proposed-lots' ? 'Este terreno ya esta propuesto.' : 
+        layerClicked.id === 'protected_areas' ? 'Este terreno ya esta protegido.' : "";
+        
+        notification.error({
+          message: 'Error',
+          description: errDescription,
+        });
+        return;
+      }
+
       if (!exist) {
         if (lots.length >= 3) {
           notification.error({
@@ -414,7 +438,6 @@ class Editor extends Component {
           return;
         }
         const newLots = _.concat(lots, id);
-
         this.buildPolygons(newLots).then(({ geojson, area }) => {
           this.handleOnChange(geojson, area, newLots);
         });
