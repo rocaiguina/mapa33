@@ -8,7 +8,6 @@ const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 
 const jwt = require('jsonwebtoken');
-const TemplateEngine = require('../utils/template-engine');
 
 const sgMail = require('@sendgrid/mail');
 class UserController {
@@ -101,16 +100,17 @@ class UserController {
       interested_volunteer: cleaned_data.interested_volunteer,
     })
       .then(function(user) {
-        // variables para email
-        const html = TemplateEngine.render(
-          'template_email/user_register_email.html'
-        );
+        const userRegisterTemplateId = "d-e6641e63796d4c63b5e03cf5a25b78cf";
+        const site= process.env.SERVER_URL + '/profile';
+
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: req.body.email,
           from: process.env.DEFAULT_EMAIL_FROM,
-          subject: '¡BIENVENIDO A MAPA33!',
-          html: html,
+          templateId: userRegisterTemplateId,
+          dynamic_template_data: {
+            site: site,
+          }
         };
         sgMail.send(msg).then(
           () => {},

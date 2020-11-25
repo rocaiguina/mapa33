@@ -9,7 +9,6 @@ const Land = Models.Land;
 const Validator = require('../utils/validator');
 
 const sgMail = require('@sendgrid/mail');
-const TemplateEngine = require('../utils/template-engine');
 const FileStorage = require('../utils/file-storage');
 const Constants = require('../../config/constants');
 
@@ -206,17 +205,19 @@ class LandAdminController {
                 // variables para email
                 const sitio = process.env.SERVER_URL + '/land/' + land.id;
                 const contacto = process.env.SERVER_URL + '/contact-us';
-                const html = TemplateEngine.render(
-                  'template_email/land_approved_email.html',
-                  { site: sitio, contact: contacto }
-                );
+                const terrainName = land.name;
+                const landApprovedTemplateId = "d-864a041ce69345a28d3a5c1dd530700a";
+
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
                   to: land.user.email,
                   from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
-                  subject:
-                    '¡Felicidades! Tu propuesta está lista. ¡Riega la voz!', // Subject line
-                  html: html,
+                  templateId: landApprovedTemplateId,
+                  dynamic_template_data: {
+                    terrain_name: terrainName, 
+                    site: sitio, 
+                    contact: contacto,
+                  }
                 };
                 sgMail.send(mailOptions).then(
                   () => {},
@@ -225,18 +226,19 @@ class LandAdminController {
                   }
                 );
               } else if (cleaned_data.status == 'denied') {
-                const sitio = process.env.SERVER_URL + '/reset-password/';
                 const contacto = process.env.SERVER_URL + '/contact-us';
-                const html = TemplateEngine.render(
-                  'template_email/land_denied_email.html',
-                  { site: sitio, notes: req.land.notes, contact: contacto }
-                );
+                const notes = req.land.notes;
+                const landDeniedTemplateId = "d-3ff254035db74cec8eb0ce4e24d993d1";
+                
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
                   to: land.user.email,
                   from: process.env.DEFAULT_EMAIL_FROM,
-                  subject: 'Tenemos buenas y malas noticias', // Subject line
-                  html: html,
+                  templateId: landDeniedTemplateId,
+                  dynamic_template_data: {
+                    notes: notes, 
+                    contact: contacto,
+                  }
                 };
                 sgMail.send(mailOptions).then(
                   () => {},
