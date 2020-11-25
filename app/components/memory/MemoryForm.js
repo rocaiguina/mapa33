@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { Button, Col, Icon, Input, Modal, Radio, Row, Typography } from 'antd';
+import { Button, Col, Input, Modal, Radio, Row, Typography } from 'antd';
 import * as Yup from 'yup';
 
 import ImageUploader from '../multimedia/uploader/ImageUploader';
@@ -135,15 +135,34 @@ const MemoryForm = props => {
                   defaultValue={mediaType}
                   value={mediaTypeSelected}
                   onChange={handleOnChangeMediaType}
+                  className="media-radio-group"
                 >
                   <Radio.Button value="image">
-                    <Icon type="file-image" />
+                    <img
+                      src={
+                        mediaTypeSelected === 'image'
+                          ? '/images/memory/icons-image-active.svg'
+                          : '/images/memory/icons-image.svg'
+                      }
+                    />
                   </Radio.Button>
                   <Radio.Button value="video">
-                    <Icon type="video-camera" />
+                    <img
+                      src={
+                        mediaTypeSelected === 'video'
+                          ? '/images/memory/icons-video-active.svg'
+                          : '/images/memory/icons-video.svg'
+                      }
+                    />
                   </Radio.Button>
                   <Radio.Button value="audio">
-                    <Icon type="sound" />
+                    <img
+                      src={
+                        mediaTypeSelected === 'audio'
+                          ? '/images/memory/icons-audio-active.svg'
+                          : '/images/memory/icons-audio.svg'
+                      }
+                    />
                   </Radio.Button>
                 </Radio.Group>
               </div>

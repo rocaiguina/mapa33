@@ -6,21 +6,28 @@ const ImageUploader = props => {
   const { files, onRemove, onUpload } = props;
 
   const handleOnChange = useCallback(
-    ({ file }) => {
+    ({ file, fileList, event }) => {
       if (file.status === 'done') {
         onUpload(file);
       }
       if (file.status === 'removed') {
         onRemove(file);
       }
+
+      console.log(file);
+      console.log(file.thumbUrl);
+      console.log(fileList);
+      console.log(event);
     },
     [onUpload, onRemove]
   );
 
   return (
     <div>
-      <div className="form-group">
-        <label>Imágenes escogidas ({files.length})</label>
+      <div className="form-style2">
+        <div className="form-group">
+          <label>Imágenes escogidas ({files.length})</label>
+        </div>
       </div>
       <div className="form-group">
         <Upload
@@ -29,6 +36,12 @@ const ImageUploader = props => {
           action="http://localhost:3000/api/file"
           onChange={handleOnChange}
           defaultFileList={files}
+          showUploadList={{
+            showDownloadIcon: false,
+            showPreviewIcon: false,
+            showRemoveIcon: true,
+          }}
+          listType="picture-card"
         >
           <Button block shape="round" size="large" className="ant-btn-gray">
             <Icon type="plus" />
