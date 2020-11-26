@@ -4,7 +4,6 @@ import {
   Col,
   Input,
   Row,
-  DatePicker,
   Select,
   Checkbox,
   Typography,
@@ -25,7 +24,9 @@ const registerValidationSchema = Yup.object().shape({
     .email()
     .required('Campo requerido.'),
   password: Yup.string().required('Campo requerido.'),
-  birthday: Yup.date().required('Campo requerido.'),
+  birthday_day: Yup.number().required('Campo requerido.'),
+  birthday_month: Yup.number().required('Campo requerido.'),
+  birthday_year: Yup.number().required('Campo requerido.'),
   phone: Yup.string().required('Campo requerido.'),
   address: Yup.string().required('Campo requerido.'),
   city: Yup.string().required('Campo requerido.'),
@@ -41,12 +42,20 @@ class RegisterForm extends React.Component {
     setFieldValue('gender', value);
   };
 
-  handleOnChangeCountry = (value, setFieldValue) => {
-    setFieldValue('country', value);
+  handleOnChangeBirthdayDay = (value, setFieldValue) => {
+    setFieldValue('birthday_day', value);
   };
 
-  handleOnChangeBirthday = (value, setFieldValue) => {
-    setFieldValue('birthday', value.toDate());
+  handleOnChangeBirthdayMonth = (value, setFieldValue) => {
+    setFieldValue('birthday_month', value);
+  };
+
+  handleOnChangeBirthdayYear = (value, setFieldValue) => {
+    setFieldValue('birthday_year', value);
+  };
+
+  handleOnChangeCountry = (value, setFieldValue) => {
+    setFieldValue('country', value);
   };
 
   renderContries() {
@@ -153,16 +162,54 @@ class RegisterForm extends React.Component {
                 <Row gutter={16}>
                   <Col md={12}>
                     <div className="form-group">
-                      <DatePicker
-                        name="birthday"
+                      <Select
+                        name="birthday_day"
                         className="inputprop"
-                        type="text"
-                        style={{ width: '100%' }}
-                        placeholder="*Fecha Nacimiento:"
+                        placeholder="*Día:"
+                        style={{ width: 'calc(33% - 5.3px)', marginRight: 8 }}
                         onChange={value => {
-                          this.handleOnChangeBirthday(value, setFieldValue);
+                          this.handleOnChangeBirthdayDay(value, setFieldValue);
                         }}
-                      />
+                      >
+                        {Array.from({length: 31}, (_, i) => i + 1).map(option => 
+                          <Option key={option} value={option}>{option}</Option>
+                        )}
+                      </Select>
+                      <Select
+                        name="birthday_month"
+                        className="inputprop"
+                        placeholder="*Mes:"
+                        style={{ width: 'calc(33% - 5.3px)', marginRight: 8 }}
+                        onChange={value => {
+                          this.handleOnChangeBirthdayMonth(value, setFieldValue);
+                        }}
+                      >
+                        <Option value={0}>Enero</Option>
+                        <Option value={1}>Febrero</Option>
+                        <Option value={2}>Marzo</Option>
+                        <Option value={3}>Abril</Option>
+                        <Option value={4}>Mayo</Option>
+                        <Option value={5}>Junio</Option>
+                        <Option value={6}>Julio</Option>
+                        <Option value={7}>Agosto</Option>
+                        <Option value={8}>Septiembre</Option>
+                        <Option value={9}>Octubre</Option>
+                        <Option value={10}>Noviembre</Option>
+                        <Option value={11}>Diciembre</Option>
+                      </Select>
+                      <Select
+                        name="birthday_year"
+                        className="inputprop"
+                        placeholder="*Año:"
+                        style={{ width: 'calc(33% - 5.3px)' }}
+                        onChange={value => {
+                          this.handleOnChangeBirthdayYear(value, setFieldValue);
+                        }}
+                      >
+                        {[...Array(100)].map((year, i) => new Date().getFullYear() - i)
+                          .map(option => <Option key={option} value={option}>{option}</Option>)
+                        }
+                      </Select>
                       <Text type="danger">{errors.birthday}</Text>
                     </div>
                   </Col>
