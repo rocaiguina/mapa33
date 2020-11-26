@@ -18,7 +18,8 @@
     <input type="hidden" name="crumb" value="{{crumb}}"/>
     <div class="row">
       <div class="col-md-8">
-        <div class="card">
+        <div id="map" class="form-group" style="height: 300px;"></div>
+          <div class="card">
             <div class="card-header">
                 <h2>Detalles
                     <small>(*) Datos requeridos.</small>
@@ -574,5 +575,135 @@
     landsStructures.change(toggleOtherLandsStructures).ready(toggleOtherLandsStructures);
     mainAttributes.change(toggleOtherMainAttributes).ready(toggleOtherMainAttributes);
   });
+
+  //Map
+  mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/satellite-streets-v10',
+    center: JSON.parse('{{ object.coordinates.coordinates | dump | safe }}'),
+    zoom: 12,
+    attributionControl: false,
+  });
+
+  map.on('load', () => {
+    map.addSource('protected_areas', {
+      type: 'vector',
+      url: 'mapbox://rocaiguina.bzaytugl',
+    });
+
+    map.addSource('proposed-lots', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+
+    map.addSource('lot', {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'geometry': {
+        'type': 'Polygon',
+        'coordinates': JSON.parse('{{ object.geom.coordinates | dump | safe }}')
+        }
+      }
+    });
+
+    map.addLayer(
+      {
+        id: 'protected_areas',
+        type: 'fill',
+        source: 'protected_areas',
+        'source-layer': 'lands',
+        layout: {
+          visibility: 'visible',
+        },
+        paint: {
+          'fill-color': {
+            property: 'user_id',
+            stops: [
+              [2, '#3e9687'],
+              [3, '#85e0d0'],
+              [4, '#02c6a1'],
+              [5, '#3e9687'],
+              [6, '#02c6a1'],
+              [7, '#85e0d0'],
+              [8, '#5bbcae'],
+              [9, '#02c6a1'],
+              [10, '#3e9687'],
+              [11, '#85e0d0'],
+              [12, '#5bbcae'],
+              [13, '#85e0d0'],
+              [14, '#02c6a1'],
+              [15, '#5bbcae'],
+              [16, '#5bbcae'],
+              [17, '#3e9687'],
+            ],
+          },
+        },
+      },
+      'waterway-label'
+    );
+    
+    map.addLayer(
+      {
+        id: 'lot',
+        type: 'fill',
+        source: 'lot',
+        paint: {
+          'fill-color': '#F9DF00',
+          'fill-opacity': 0.75,
+        },
+      },
+      'waterway-label'
+    );
+
+    map.addLayer(
+      {
+        id: 'lot-border',
+        type: 'line',
+        source: 'lot',
+        layout: {
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#F9DF00',
+          'line-opacity': 1,
+          'line-width': 2,
+          'line-offset': -4,
+          'line-dasharray': [0.5, 2],
+        },
+      },
+      'waterway-label'
+    );
+
+    map.addLayer(
+      {
+        id: 'proposed-lots',
+        type: 'fill',
+        source: 'proposed-lots',
+        layout: {
+          visibility: 'visible',
+        },
+        paint: {
+          'fill-color': '#E36D9D',
+        },
+      },
+      'lot'
+    );
+
+
+    fetch(`/api/land/geojson?area=proposed`)
+    .then(response => response.json())
+    .then(data => {
+      map.getSource('proposed-lots').setData(data[0].geojson);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  })
 </script>
 {% endblock %}
