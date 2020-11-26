@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notification, Spin } from 'antd';
+import { Button, notification, Spin } from 'antd';
 import MemoryList from '../components/memory/MemoryList';
 import MemoryModalPreview from '../components/memory/MemoryModalPreview';
 
@@ -10,6 +10,9 @@ class MemoryListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      hasMore: false,
+      loadingMore: false,
       loading: true,
       preview: false,
       memories: [],
@@ -19,16 +22,20 @@ class MemoryListContainer extends React.Component {
 
   componentDidMount() {
     const { landId } = this.props;
-    this.fetchMemories(landId);
+    const { page } = this.state;
+    this.fetchMemories(landId, page);
   }
 
-  fetchMemories(landId) {
+  fetchMemories(landId, page) {
     const self = this;
-    LandApi.getMemories(landId)
+    LandApi.getMemories(landId, page)
       .then(response => {
         self.setState({
-          memories: response.docs,
+          memories: [...self.state.memories, ...response.docs],
           loading: false,
+          loadingMore: false,
+          hasMore: response.has_next_page,
+          page: response.next_page,
         });
       })
       .catch(() => {
@@ -54,8 +61,25 @@ class MemoryListContainer extends React.Component {
     });
   };
 
+  handleLoadMore = () => {
+    const { landId } = this.props;
+    const { page } = this.state;
+    this.setState({
+      loadingMore: true,
+    });
+    this.fetchMemories(landId, page);
+  };
+
   render() {
-    const { loading, memories, preview, memory } = this.state;
+    const {
+      hasMore,
+      loading,
+      loadingMore,
+      memories,
+      preview,
+      memory,
+    } = this.state;
+
     if (loading) {
       return (
         <div className="memory-list-spin">
@@ -73,6 +97,24 @@ class MemoryListContainer extends React.Component {
     return (
       <div>
         <MemoryList data={memories} onMemoryClick={this.handleOnMemoryClick} />
+        {loadingMore && (
+          <div className="memory-list-spin">
+            <Spin />
+          </div>
+        )}
+        {memories.length > 0 && (
+          <div className="form-group text-center">
+            <Button
+              className="ant-btn-dark"
+              shape="round"
+              size="large"
+              disabled={!hasMore}
+              onClick={this.handleLoadMore}
+            >
+              LOAD MORE
+            </Button>
+          </div>
+        )}
         <MemoryModalPreview
           title={memory.title}
           description={memory.description}

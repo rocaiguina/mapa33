@@ -90,9 +90,9 @@ export const registerMemory = function(landId, data) {
   });
 };
 
-export const getMemories = function(landId) {
+export const getMemories = function(landId, page) {
   return new Promise((resolve, reject) => {
-    Axios.get(`/api/land/${landId}/memory`)
+    Axios.get(`/api/land/${landId}/memory?page=${page || 1}`)
       .then(response => {
         if (response.status == 200) {
           return resolve(response.data);

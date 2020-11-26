@@ -2268,6 +2268,9 @@ a.mapboxgl-ctrl-logo {
 }
 
 /* Custom uploader */
+.ant-upload-block .ant-upload.ant-upload-select {
+  display: block;
+}
 .ant-upload-block .ant-upload.ant-upload-select-picture-card {
   border: none;
   display: block;
