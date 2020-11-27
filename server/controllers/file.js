@@ -39,6 +39,14 @@ const put = (req, res) => {
   } else {
     res.status(400).send();
   }
+  // setTimeout(function() {
+  //   res.send({
+  //     fieldname: 'cuadrado.png',
+  //     originalname: 'cuadrado.png',
+  //     mimetype: 'image',
+  //     url: 'https://dummyimage.com/600x400/000/fff',
+  //   });
+  // }, 2000);
 };
 
 module.exports = {
