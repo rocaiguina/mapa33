@@ -34,9 +34,10 @@ module.exports.getUrl = function(location) {
 module.exports.put = function(location, content, options) {
   return new Promise(function(resolve, reject) {
     storage
-      .put(path.join(PREFIX, location), content, options)
+      .put(PREFIX + "/" + location, content, options)
       .then(function() {
-        resolve(path.join(PREFIX, location));
+        const prefix = process.env.NODE_ENV == 'production' ? PREFIX : '';
+        resolve(prefix + location);
       })
       .catch(function(err) {
         reject(err);

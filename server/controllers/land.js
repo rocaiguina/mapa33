@@ -324,7 +324,7 @@ class LandController {
     if (req.body.base64Img) {
       const image = Base64Img.img(req.body.base64Img);
       const filename = RandomToken(10) + '.jpg';
-      const filepath = Path.join('lands', filename);
+      const filepath = `lands/${filename}`;
       // Resize image
       const input = Buffer.from(image.base64, 'base64');
       sharp(input)

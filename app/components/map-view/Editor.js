@@ -48,6 +48,10 @@ class Editor extends Component {
         type: 'FeatureCollection',
         features: [],
       },
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
       area: 0.0, // Geojson area.
       address: '',
       activeLoc: false,
@@ -57,7 +61,7 @@ class Editor extends Component {
 
   componentDidMount() {
     const { center, lots, zoom } = this.props;
-
+    
     map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
@@ -95,6 +99,16 @@ class Editor extends Component {
       map.addSource('geojson', {
         type: 'geojson',
         data: this.state.geojson,
+      });
+
+      map.addSource('proposed-lots', {
+        type: 'geojson',
+        data: this.state.data,
+      });
+
+      map.addSource('protected_areas', {
+        type: 'vector',
+        url: 'mapbox://rocaiguina.bzaytugl',
       });
 
       map.addLayer(
@@ -159,6 +173,66 @@ class Editor extends Component {
             'line-width': 2,
             'line-offset': -4,
             'line-dasharray': [0.5, 2],
+          },
+        },
+        'waterway-label'
+      );
+
+      map.addLayer(
+        {
+          id: 'proposed-lots',
+          type: 'fill',
+          source: 'proposed-lots',
+          layout: {
+            visibility: 'visible',
+          },
+          paint: {
+            'fill-color': '#E36D9D',
+          },
+        },
+        'waterway-label'
+      );
+
+      fetch(`/api/land/geojson?area=proposed`)
+        .then(response => response.json())
+        .then(data => {
+          map.getSource('proposed-lots').setData(data[0].geojson);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  
+      map.addLayer(
+        {
+          id: 'protected_areas',
+          type: 'fill',
+          source: 'protected_areas',
+          'source-layer': 'lands',
+          layout: {
+            visibility: 'visible',
+          },
+          paint: {
+            'fill-color': {
+              property: 'user_id',
+              stops: [
+                [2, '#3e9687'],
+                [3, '#85e0d0'],
+                [4, '#02c6a1'],
+                [5, '#3e9687'],
+                [6, '#02c6a1'],
+                [7, '#85e0d0'],
+                [8, '#5bbcae'],
+                [9, '#02c6a1'],
+                [10, '#3e9687'],
+                [11, '#85e0d0'],
+                [12, '#5bbcae'],
+                [13, '#85e0d0'],
+                [14, '#02c6a1'],
+                [15, '#5bbcae'],
+                [16, '#5bbcae'],
+                [17, '#3e9687'],
+              ],
+            },
           },
         },
         'waterway-label'
@@ -326,10 +400,34 @@ class Editor extends Component {
       popup.remove();
     });
 
+    let layerClicked = {id: '', coords: {}};
+
+    map.on('click', 'proposed-lots', e => {
+      layerClicked.coords = e.point;
+      layerClicked.id = 'proposed-lots';
+    });
+    map.on('click', 'protected_areas', e => {
+      layerClicked.coords = e.point;
+      layerClicked.id = 'protected_areas';
+    });
+
     map.on('click', 'lots', e => {
       const { id } = e.features[0].properties;
       const { lots } = this.props;
       const exist = lots.indexOf(id) > -1;
+         
+      if (layerClicked.coords.x === e.point.x && layerClicked.coords.y === e.point.y) {
+        let errDescription = 
+        layerClicked.id === 'proposed-lots' ? 'Este terreno ya esta propuesto.' : 
+        layerClicked.id === 'protected_areas' ? 'Este terreno ya esta protegido.' : "";
+        
+        notification.error({
+          message: 'Error',
+          description: errDescription,
+        });
+        return;
+      }
+
       if (!exist) {
         if (lots.length >= 3) {
           notification.error({
@@ -339,7 +437,6 @@ class Editor extends Component {
           return;
         }
         const newLots = _.concat(lots, id);
-
         this.buildPolygons(newLots).then(({ geojson, area }) => {
           this.handleOnChange(geojson, area, newLots);
         });
