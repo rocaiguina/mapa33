@@ -17,11 +17,14 @@ const flash = require('./server/middlewares/flash');
 const land = require('./server/public/land');
 
 // configure template engine
-nunjucks.configure('views', {
+const nunjucksEnv = nunjucks.configure('views', {
   autoescape: true,
   express: app,
   noCache: process.env.NODE_ENV == 'development'
 });
+
+nunjucksEnv.addGlobal("MAPBOX_TOKEN", process.env.MAPBOX_TOKEN);
+
 app.set('view engine', 'html');
 
 // serve static files from public

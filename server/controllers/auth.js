@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const randomToken = require('random-token');
 const encryptor = require('../utils/encryptor');
-const TemplateEngine = require('../utils/template-engine');
 const Models = require('../../db/models');
 
 const sgMail = require('@sendgrid/mail');
@@ -72,19 +71,19 @@ function forgotPassword(req, res) {
         expired: date,
       })
         .then(function() {
+          const recoveryPasswordTemplateId = "d-024b5f22e90e4533961996256953aea6";
           // variables para email
           const sitio = process.env.SERVER_URL + '/reset-password/';
           const contacto = process.env.SERVER_URL + '/contact-us';
-          const html = TemplateEngine.render(
-            'template_email/recovery_password_email.html',
-            { site: sitio, token: token, contact: contacto }
-          );
+          
           sgMail.setApiKey(process.env.SENDGRID_API_KEY);
           const msg = {
             to: req.body.email,
             from: process.env.DEFAULT_EMAIL_FROM,
-            subject: 'Recupera tu contraseña',
-            html: html,
+            templateId: recoveryPasswordTemplateId,
+            dynamic_template_data: {
+              site: sitio, token: token, contact: contacto
+            }
           };
           sgMail.send(msg).then(
             () => {},
