@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, notification, Row } from 'antd';
+import { Button, Col, Divider, notification, Row } from 'antd';
+import { DiscussionEmbed } from 'disqus-react';
+
 import BaseLayout from '../components/layout/base';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandDetail from '../components/land/detail';
@@ -182,26 +184,57 @@ class LandDetailContainer extends React.Component {
           disabledLike={disabledLike}
           onClickLike={this.handleOnClickLike}
         />
-        <Row>
+        <Divider dashed style={{ borderStyle: 'dotted' }} />
+        <Row gutter={16}>
           <Col md={18}>
-            <h2>
+            <h3 className="text-bold text-uppercase m-b-15">
               MEMORIAS DE <br />
               {name}
-            </h2>
+            </h3>
           </Col>
           <Col md={6}>
-            <Button
-              block
-              shape="round"
-              className="ant-btn-purple"
-              size="large"
-              onClick={this.handleOnShareMemories}
-            >
-              Comparte tus memorias
-            </Button>
+            <div className="form-group">
+              <Button
+                block
+                shape="round"
+                className="ant-btn-purple"
+                size="large"
+                onClick={this.handleOnShareMemories}
+                style={{
+                  height: '54px',
+                  lineHeight: '52px',
+                }}
+              >
+                Comparte tus memorias
+              </Button>
+            </div>
           </Col>
         </Row>
         <MemoryListContainer landId={id} />
+        <Divider dashed style={{ borderStyle: 'dotted' }} />
+        <Row gutter={16}>
+          <Col md={8}>
+            <h3 className="text-bold m-b-20">
+              CONECTA CON LA COMUNIDAD DEL TERRENO DEL FUTURO
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation.
+            </p>
+          </Col>
+          <Col md={16}>
+            <div className="land-disqus">
+              <DiscussionEmbed
+                shortname='mapa33'
+                config={{
+                  identifier: id,
+                  title: name,
+                }}
+              />
+            </div>
+          </Col>
+        </Row>
         <MemoryModalRegisterContainer
           landId={id}
           visible={shareMemories}

@@ -103,7 +103,7 @@ class MemoryListContainer extends React.Component {
           </div>
         )}
         {memories.length > 0 && (
-          <div className="form-group text-center">
+          <div className="text-center">
             <Button
               className="ant-btn-dark"
               shape="round"

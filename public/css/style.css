@@ -359,6 +359,9 @@ body {
 .text-gray {
   color: #dddddd;
 }
+.text-black {
+  color: #000;
+}
 .text-darkgray {
   color: #7e7e7e;
 }
@@ -410,7 +413,7 @@ body {
   padding-bottom: 120px;
 }
 .wrap-content.with-title {
-  padding-top: 54px;
+  padding-top: 60px;
 }
 
 .wrap-content.with-subtitle {
@@ -864,9 +867,15 @@ ul.actions {
 }
 
 .land-reason-conservation {
-  font-size: 16px;
-  font-weight: bold;
+  background-color: #fff;
+  border-radius: 18px;
+  color: #000;
+  flex: 1 0 auto;
   margin-bottom: 20px;
+  padding: 12px;
+}
+.land-reason-conservation h3 {
+  font-weight: bold;
 }
 
 .land-picture {
@@ -874,7 +883,9 @@ ul.actions {
 }
 
 .land-detail .land-picture {
+  border-radius: 24px;
   margin-top: 5px;
+  overflow: auto;
 }
 
 .land-features p {
@@ -1777,6 +1788,9 @@ ul.actions {
 .fit {
   height: 100%;
 }
+.text-18 {
+  font-size: 18px;
+}
 .text-bold {
   font-weight: bold;
 }
@@ -1788,6 +1802,9 @@ ul.actions {
 }
 .text-right {
   text-align: right;
+}
+.text-uppercase {
+  text-transform: uppercase;
 }
 .img-responsive {
   display: inline-block;
@@ -2458,7 +2475,7 @@ a.mapboxgl-ctrl-logo {
   outline: none;
 }
 
-/* Memory data sheet */
+/* Land data sheet */
 .land-data-sheet h4 {
   color: inherit;
   font-weight: 700;
@@ -2473,6 +2490,12 @@ a.mapboxgl-ctrl-logo {
 .land-proposal-use p {
   line-height: 1.2;
   text-align: center;
+}
+.land-disqus {
+  background-color: #e5e5e5;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  padding: 20px 30px;
 }
 
 @media (min-width: 992px) {

@@ -50,7 +50,7 @@ class LandDetail extends React.Component {
               <h2 className="land-title">{this.props.name}</h2>
               <h5 className="land-owner">{owner}</h5>
               <div className={landLikesClass + ' hidden-xs'}>
-                <Icon type="heart" theme="filled" />
+                <Icon type="heart" theme="filled" style={{ color: '#fff' }} />
                 {Numeral(this.props.likes).format('0,0')}
               </div>
               <div style={{ flex: '1 0 auto' }}></div>
@@ -63,7 +63,7 @@ class LandDetail extends React.Component {
                   )}`}
                   className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg"
                 >
-                  Compartir
+                  <span className="text-bold text-18">Compartir</span>
                 </a>
               </div>
             </Col>
@@ -91,7 +91,7 @@ class LandDetail extends React.Component {
                         )}`}
                         className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg ant-btn-block"
                       >
-                        Compartir
+                        <span className="text-bold text-18">Compartir</span>
                       </a>
                     </div>
                   </Col>
@@ -100,7 +100,7 @@ class LandDetail extends React.Component {
                   <Button
                     block
                     shape="round"
-                    className="ant-btn-blue"
+                    className="ant-btn-purple"
                     size="large"
                     disabled={
                       this.props.disabledLike || this.props.level == 'conserved'
@@ -108,29 +108,43 @@ class LandDetail extends React.Component {
                     loading={this.state.loading}
                     onClick={this.handleOnClickLike}
                   >
-                    {this.props.level == 'conserved'
-                      ? 'Conservado'
-                      : this.props.disabledLike
-                      ? 'Apoyado'
-                      : 'Apoyar'}
+                    <span className="text-bold text-18 text-black">
+                      {this.props.level == 'conserved'
+                        ? 'Conservado'
+                        : this.props.disabledLike
+                        ? 'Apoyado'
+                        : 'Apoyar'}
+                    </span>
+                    {this.props.level != 'conserved' &&
+                      !this.props.disabledLike && (
+                        <Icon
+                          type="heart"
+                          theme="filled"
+                          style={{
+                            fontSize: '24px',
+                            verticalAlign: 'middle',
+                            marginLeft: '24px',
+                          }}
+                        />
+                      )}
                   </Button>
                 </div>
               </div>
-              <p className="land-reason-conservation">
-                ¿Por qué es importante la protección de
-                {this.props.plots_count > 1
-                  ? ' estos terrenos '
-                  : ' este terreno '}
-                en particular?
-              </p>
-              <p style={{ flex: '1 0 auto' }}>
-                {this.props.reason_conservation || 'No definido.'}
-              </p>
+              <div className="land-reason-conservation">
+                <h3>
+                  ¿Por qué es importante la protección de
+                  {this.props.plots_count > 1
+                    ? ' estos terrenos '
+                    : ' este terreno '}
+                  en particular?
+                </h3>
+                <p>{this.props.reason_conservation || 'No definido.'}</p>
+              </div>
               <div className="land-support hidden-xs">
                 <Button
                   block
                   shape="round"
-                  className="ant-btn-blue"
+                  className="ant-btn-purple"
                   size="large"
                   disabled={
                     this.props.disabledLike || this.props.level == 'conserved'
@@ -138,11 +152,24 @@ class LandDetail extends React.Component {
                   loading={this.state.loading}
                   onClick={this.handleOnClickLike}
                 >
-                  {this.props.level == 'conserved'
-                    ? 'Conservado'
-                    : this.props.disabledLike
-                    ? 'Apoyado'
-                    : 'Apoyar'}
+                  <span className="text-bold text-18 text-black">
+                    {this.props.level == 'conserved'
+                      ? 'Conservado'
+                      : this.props.disabledLike
+                      ? 'Apoyado'
+                      : 'Apoyar'}
+                  </span>
+                  {this.props.level != 'conserved' && !this.props.disabledLike && (
+                    <Icon
+                      type="heart"
+                      theme="filled"
+                      style={{
+                        fontSize: '24px',
+                        verticalAlign: 'middle',
+                        marginLeft: '24px',
+                      }}
+                    />
+                  )}
                 </Button>
               </div>
             </Col>
@@ -204,7 +231,11 @@ class LandDetail extends React.Component {
                     : '/images/memory/icons-education-disabled.svg'
                 }
               />
-              <p>Educación</p>
+              <p>
+                Educación
+                <br />
+                &nbsp;
+              </p>
             </div>
           </Col>
           <Col md={12} sm={12} xs={12}>
@@ -251,13 +282,13 @@ class LandDetail extends React.Component {
         <Divider dashed style={{ borderStyle: 'dotted' }} />
         <h3 className="text-bold">FICHA TÉCNICA</h3>
         <Row gutter={16}>
-          <Col md={3}>
+          <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Localizado:</h4>
               <p>{this.props.location || 'No definido.'}</p>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Extensión:</h4>
               <p>{Numeral(this.props.area_size).format('0,0') + ' cuerdas'}</p>
@@ -269,13 +300,13 @@ class LandDetail extends React.Component {
               <p>Abandonado</p>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Compuesto:</h4>
               <p>{this.props.plots_count + ' parcelas'}</p>
             </div>
           </Col>
-          <Col md={3}>
+          <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Coordenadas</h4>
               <p>
@@ -300,7 +331,6 @@ class LandDetail extends React.Component {
             </div>
           </Col>
         </Row>
-        <Divider dashed style={{ borderStyle: 'dotted' }} />
       </div>
     );
   }
