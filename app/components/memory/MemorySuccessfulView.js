@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Icon, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 
 const MemorySuccessfulView = props => {
   const { onOk } = props;

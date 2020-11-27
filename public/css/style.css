@@ -1783,15 +1783,12 @@ ul.actions {
 .text-left {
   text-align: left;
 }
-
 .text-center {
   text-align: center;
 }
-
 .text-right {
   text-align: right;
 }
-
 .img-responsive {
   display: inline-block;
   height: auto;
@@ -2459,4 +2456,36 @@ a.mapboxgl-ctrl-logo {
 }
 .media-radio-group .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus-within {
   outline: none;
+}
+
+/* Memory data sheet */
+.land-data-sheet h4 {
+  color: inherit;
+  font-weight: 700;
+  margin-bottom: 0.3em;
+}
+.land-data-sheet p {
+  line-height: 1.2;
+}
+.land-proposal-use img {
+  margin-bottom: 0.5em;
+}
+.land-proposal-use p {
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .seven-cols .ant-col-md-12 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}
+
+/* Land seven cols */
+@media (min-width: 1200px) {
+  .seven-cols .ant-col-md-12 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
 }

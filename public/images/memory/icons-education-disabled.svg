@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 76.15 76.15" style="enable-background:new 0 0 76.15 76.15;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#5FB9AC;}
+	.st1{fill:#F0856B;}
+	.st2{fill:#474747;}
+	.st3{fill:#3383C2;}
+	.st4{fill:#969696;}
+	.st5{fill:#EC75A6;}
+	.st6{fill-rule:evenodd;clip-rule:evenodd;fill:#353535;}
+	.st7{fill:#353535;}
+	.st8{fill-rule:evenodd;clip-rule:evenodd;}
+	.st9{opacity:0.5;}
+	.st10{fill:none;stroke:#FC29E3;stroke-width:0.9497;stroke-miterlimit:10;}
+	.st11{fill:#0C69EF;}
+	.st12{fill:none;stroke:#0C69EF;stroke-width:8;stroke-miterlimit:10;}
+	.st13{fill:none;stroke:#0C69EF;stroke-width:3;stroke-miterlimit:10;}
+	.st14{fill:none;stroke:#0C69EF;stroke-width:4;stroke-miterlimit:10;}
+	.st15{fill:#231F20;}
+	.st16{fill:none;stroke:#0C69EF;stroke-miterlimit:10;}
+	.st17{fill:none;}
+	.st18{fill:#434343;}
+	.st19{opacity:0.28;}
+	.st20{fill:none;stroke:#000000;stroke-width:16;stroke-miterlimit:10;}
+	.st21{fill:#606060;}
+	.st22{fill:#FC29E3;}
+	.st23{fill:none;stroke:#FC29E3;stroke-width:20;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st24{fill:#FFFFFF;}
+	.st25{fill:#959595;}
+	.st26{fill:#3384C3;}
+	.st27{fill:#63B8AB;}
+	.st28{fill:#F1866B;}
+	.st29{fill:#F072A6;}
+	.st30{fill:#5EBAA8;}
+	.st31{fill:#191A1A;}
+</style>
+<g>
+	<path class="st2" d="M65.1,76.15H11.05C4.95,76.15,0,71.21,0,65.1V11.05C0,4.95,4.95,0,11.05,0H65.1c6.11,0,11.05,4.95,11.05,11.05
+		V65.1C76.15,71.21,71.21,76.15,65.1,76.15z"/>
+	<g>
+		<polygon class="st31" points="58.29,40.25 58.29,18.33 46.39,18.33 46.39,16.11 44.97,16.11 44.97,18.33 33.07,18.33 33.07,31.86 
+			34.49,30.83 34.49,19.75 56.87,19.75 56.87,38.83 34.49,38.83 34.49,37.11 33.07,38.14 33.07,40.25 44.97,40.25 44.97,52.47 
+			38.91,60.04 40.74,60.04 45.68,53.86 50.63,60.04 52.45,60.04 46.39,52.47 46.39,40.25 		"/>
+		<path class="st31" d="M41.42,22.77c-1.18,0-2.13,0.95-2.13,2.13c0,1.18,0.95,2.13,2.13,2.13c0.03,0,0.07,0,0.1-0.01l0.67,3.84
+			c-1.23,0.35-2.14,1.47-2.14,2.82c0,1.62,1.31,2.93,2.93,2.93c1.53,0,2.78-1.17,2.92-2.66h4.78v-2.29
+			c1.82-0.33,3.19-1.92,3.19-3.83c0-2.15-1.74-3.9-3.9-3.9c-1.59,0-2.95,0.95-3.56,2.31l-2.9-0.94c0.02-0.13,0.04-0.26,0.04-0.4
+			C43.55,23.72,42.6,22.77,41.42,22.77z M46.23,26.75c-0.1,0.34-0.15,0.71-0.15,1.08c0,2.15,1.74,3.9,3.9,3.9c0.06,0,0.11,0,0.17,0
+			v1.7H45.9c-0.14-1.49-1.39-2.66-2.92-2.66c-0.09,0-0.18,0.01-0.26,0.01l-0.67-3.83c0.58-0.18,1.04-0.59,1.3-1.13L46.23,26.75z"/>
+		
+			<ellipse transform="matrix(0.9871 -0.1602 0.1602 0.9871 -3.441 4.1842)" class="st31" cx="24.23" cy="23.44" rx="3.88" ry="3.88"/>
+		<path class="st31" d="M28.55,34.83L28.55,34.83l2.49,3.25l6.88-4.99l-1.58-2.07l-4.75,3.47l-3.13-4.26C27.9,29.46,27,29,26.05,29
+			H22.6c-1.85,0-3.4,1.42-3.57,3.26L17.86,45.4h1.01l1.16-9.82h0.72l-1.68,14.26l0,0l-1.2,10.21h2.93l3.66-14.64l3.66,14.64h2.93
+			l-2.49-16.11V36l-2.57-3.35l0.57-0.43L28.55,34.83z"/>
+	</g>
+</g>
+</svg>

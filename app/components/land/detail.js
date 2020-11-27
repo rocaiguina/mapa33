@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
-import Badge from '../ui/Badge';
 import Coordinates from '../ui/Coordinates';
 
-import {
-  LAND_ATTRIBUTE,
-  LAND_MAIN_USE,
-  LAND_PROPOSED_USE,
-} from '../../constants';
+import { LAND_ATTRIBUTE } from '../../constants';
 
 class LandDetail extends React.Component {
   constructor(props) {
@@ -44,7 +39,6 @@ class LandDetail extends React.Component {
       hidden: this.props.level == 'conserved',
     });
 
-    const proposed_uses = this.props.proposed_uses || [];
     const main_attributes = this.props.main_attributes || [];
     const main_uses = this.props.main_uses || [];
 
@@ -154,104 +148,159 @@ class LandDetail extends React.Component {
             </Col>
           </Row>
         </div>
-
         <Divider dashed style={{ borderStyle: 'dotted' }} />
-
-        <Row gutter={16}>
-          <Col md={16}>
-            <Row gutter={16}>
-              <Col xs={24} md={12}>
-                <Row gutter={16}>
-                  <Col xs={12} md={12}>
-                    <Badge
-                      title="Localizado"
-                      description={this.props.location || 'No definido.'}
-                      color="white"
-                      shape="round"
-                    />
-                  </Col>
-                  <Col xs={12} md={12}>
-                    <Badge
-                      title="Extensión"
-                      description={
-                        Numeral(this.props.area_size).format('0,0') + ' acres'
-                      }
-                      color="white"
-                      shape="round"
-                    />
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col xs={12} md={12}>
-                    <Badge
-                      title="Compuesto"
-                      description={this.props.plots_count + ' parcelas'}
-                      color="white"
-                      shape="round"
-                    />
-                  </Col>
-                  <Col xs={12} md={12}>
-                    <Badge
-                      title="Coordenadas"
-                      description={
-                        <Coordinates
-                          point={this.props.coordinates.coordinates}
-                        />
-                      }
-                      color="white"
-                      shape="round"
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={24} md={12}>
-                <Badge
-                  title="Atributos principales del lugar"
-                  description={
-                    main_attributes.length > 0
-                      ? main_attributes.map((item, index) => (
-                          <div key={index}>
-                            {item == 'others'
-                              ? this.props.other_main_attributes
-                              : LAND_ATTRIBUTE[item] || 'No definido'}
-                          </div>
-                        ))
-                      : 'No definido.'
-                  }
-                  color="white"
-                  shape="round"
-                  style={{ minHeight: '140px' }}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col md={8}>
-            <div className="land-features">
-              <p>Usos principales actuales:</p>
-              <ul>
-                {main_uses.length == 0 && <li>No definido.</li>}
-                {main_uses.map((item, index) => (
-                  <li key={index} className="text-orange">
-                    {item == 'others'
-                      ? this.props.other_main_uses
-                      : LAND_MAIN_USE[item] || 'No definido'}
-                  </li>
-                ))}
-              </ul>
+        <h3 className="text-bold m-b-20">USOS PRINCIPALES PROPUESTOS</h3>
+        <Row gutter={48} className="seven-cols">
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-scientist-research.svg'
+                    : '/images/memory/icons-scientist-research-disabled.svg'
+                }
+              />
+              <p>Investigación científica</p>
             </div>
-            <div className="land-features">
-              <p>Usos principales propuestos:</p>
-              <ul>
-                {proposed_uses.length == 0 && <li>No definido.</li>}
-                {proposed_uses.map((item, index) => (
-                  <li key={index} className="text-orange">
-                    {LAND_PROPOSED_USE[item] || 'No definido'}
-                  </li>
-                ))}
-              </ul>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-environment-monitoring.svg'
+                    : '/images/memory/icons-environment-monitoring-disabled.svg'
+                }
+              />
+              <p>
+                Monitoreo
+                <br />
+                ambiental
+              </p>
+            </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-spiritual-uses.svg'
+                    : '/images/memory/icons-spiritual-uses-disabled.svg'
+                }
+              />
+              <p>
+                Usos
+                <br />
+                espirituales
+              </p>
+            </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-education.svg'
+                    : '/images/memory/icons-education-disabled.svg'
+                }
+              />
+              <p>Educación</p>
+            </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-recreation.svg'
+                    : '/images/memory/icons-recreation-disabled.svg'
+                }
+              />
+              <p>Recreación</p>
+            </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-tourism.svg'
+                    : '/images/memory/icons-tourism-disabled.svg'
+                }
+              />
+              <p>Turismo</p>
+            </div>
+          </Col>
+          <Col md={12} sm={12} xs={12}>
+            <div className="land-proposal-use">
+              <img
+                src={
+                  main_uses.includes('scientist_research')
+                    ? '/images/memory/icons-sustainable-uses.svg'
+                    : '/images/memory/icons-sustainable-uses-disabled.svg'
+                }
+              />
+              <p>
+                Usos
+                <br />
+                sostenibles
+              </p>
             </div>
           </Col>
         </Row>
+        <Divider dashed style={{ borderStyle: 'dotted' }} />
+        <h3 className="text-bold">FICHA TÉCNICA</h3>
+        <Row gutter={16}>
+          <Col md={3}>
+            <div className="land-data-sheet">
+              <h4>Localizado:</h4>
+              <p>{this.props.location || 'No definido.'}</p>
+            </div>
+          </Col>
+          <Col md={3}>
+            <div className="land-data-sheet">
+              <h4>Extensión:</h4>
+              <p>{Numeral(this.props.area_size).format('0,0') + ' cuerdas'}</p>
+            </div>
+          </Col>
+          <Col md={6}>
+            <div className="land-data-sheet">
+              <h4>Estado actual del terreno:</h4>
+              <p>Abandonado</p>
+            </div>
+          </Col>
+          <Col md={3}>
+            <div className="land-data-sheet">
+              <h4>Compuesto:</h4>
+              <p>{this.props.plots_count + ' parcelas'}</p>
+            </div>
+          </Col>
+          <Col md={3}>
+            <div className="land-data-sheet">
+              <h4>Coordenadas</h4>
+              <p>
+                <Coordinates point={this.props.coordinates.coordinates} />
+              </p>
+            </div>
+          </Col>
+          <Col md={6}>
+            <div className="land-data-sheet">
+              <h4>Atributos principales del lugar:</h4>
+              <p>
+                {main_attributes.length > 0
+                  ? main_attributes.map((item, index) => (
+                      <span key={index}>
+                        {item == 'others'
+                          ? this.props.other_main_attributes
+                          : LAND_ATTRIBUTE[item] || 'No definido'}
+                      </span>
+                    ))
+                  : 'No definido.'}
+              </p>
+            </div>
+          </Col>
+        </Row>
+        <Divider dashed style={{ borderStyle: 'dotted' }} />
       </div>
     );
   }
