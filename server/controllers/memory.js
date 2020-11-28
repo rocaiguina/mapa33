@@ -13,7 +13,7 @@ const { MEMORY_STATUS, MULTIMEDIABLES } = require('../../config/constants');
 const findByLand = (req, res) => {
   let options = {
     page: req.query.page || 1,
-    paginate: req.query.limit || 2,
+    paginate: req.query.limit || 10,
     where: {
       land_id: req.params.landId,
       status: MEMORY_STATUS.APPROVED,

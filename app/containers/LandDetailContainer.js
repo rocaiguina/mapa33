@@ -11,6 +11,7 @@ import MemoryListContainer from './MemoryListContainer';
 import MemoryModalRegisterContainer from './MemoryModalRegisterContainer';
 
 import LandApi from '../api/land';
+import AuthService from '../services/auth';
 
 class LandDetailContainer extends React.Component {
   constructor(props) {
@@ -120,9 +121,16 @@ class LandDetailContainer extends React.Component {
   };
 
   handleOnShareMemories = () => {
-    this.setState({
-      shareMemories: true,
-    });
+    if (AuthService.isUserLogged()) {
+      this.setState({
+        shareMemories: true,
+      });
+    } else {
+      const { landId } = this.props.match.params;
+      return this.props.history.replace(
+        `/register/user?next=/land/${landId}`
+      );
+    }
   };
 
   handleOnCloseMemoriesModal = () => {
