@@ -481,64 +481,80 @@ class LandController {
   }
 
   like(req, res) {
-    LandLikes.findOne({
-      where: {
-        land_id: req.params.id,
-        user_id: req.user.id,
-      },
+    const landId = req.params.id;
+    Land.findOne({
+      where: { id: landId },
+      attributes: { exclude: ['geom'] },
     })
-      .then(function(landlike) {
-        if (landlike) {
-          return res.json(landlike.get({ plain: true }));
+      .then(function (land) {
+        if (!land) {
+          return res.status(404).send();
         }
-        Land.increment('likes', {
-          where: { id: req.params.id },
+
+        LandLikes.findOne({
+          where: {
+            land_id: landId,
+            user_id: req.user.id,
+          },
         })
-          .then(function(land) {
-            var land1 = land[0];
-            var land2 = land1[0];
-            var land3 = land2[0];
-
-            if (land3.likes % 100 == 0) {
-              User.findOne({
-                where: { id: land3.user_id },
-              }).then(function(user) {
-                const followUpTemplateId = "d-48aaa5ef91144316b0212d9bce04eeea";
-                const site = process.env.SERVER_URL + '/land/' + req.params.id;
-                const name = user.first_name + ' ' + user.last_name;
-                const proposalName = land3.name;
-                const likes = land3.likes;
-
-                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-                const msg = {
-                  to: user.email,
-                  from: process.env.DEFAULT_EMAIL_FROM,
-                  templateId: followUpTemplateId,
-                  dynamic_template_data: {
-                    name: name, 
-                    site: site,
-                    proposal_name: proposalName,
-                    likes: likes,
-                  }
-                };
-                sgMail.send(msg).then(
-                  () => {},
-                  error => {
-                    if (error.response) {
-                      console.error(error.response.body);
-                    }
-                  }
-                );
+          .then(function(landlike) {
+            if (landlike) {
+              return res.json({
+                ...landlike.get({ plain: true }),
+                totalLikes: land.likes,
               });
             }
-            return LandLikes.create({
-              land_id: req.params.id,
-              user_id: req.user.id,
-              liked_at: new Date(),
-            });
-          })
-          .then(function(created) {
-            res.json(created.get({ plain: true }));
+            Land.increment('likes', {
+              where: { id: req.params.id },
+            })
+              .then(function() {
+                if ((land.likes + 1) % 100 == 0) {
+                  User.findOne({
+                    where: { id: land.user_id },
+                  }).then(function(user) {
+                    const followUpTemplateId = "d-48aaa5ef91144316b0212d9bce04eeea";
+                    const site = process.env.SERVER_URL + '/land/' + req.params.id;
+                    const name = user.first_name + ' ' + user.last_name;
+                    const proposalName = land.name;
+                    const likes = land.likes;
+
+                    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                    const msg = {
+                      to: user.email,
+                      from: process.env.DEFAULT_EMAIL_FROM,
+                      templateId: followUpTemplateId,
+                      dynamic_template_data: {
+                        name: name, 
+                        site: site,
+                        proposal_name: proposalName,
+                        likes: likes,
+                      }
+                    };
+                    sgMail.send(msg).then(
+                      () => {},
+                      error => {
+                        if (error.response) {
+                          console.error(error.response.body);
+                        }
+                      }
+                    );
+                  });
+                }
+                return LandLikes.create({
+                  land_id: req.params.id,
+                  user_id: req.user.id,
+                  liked_at: new Date(),
+                });
+              })
+              .then(function(created) {
+                res.json({
+                  ...created.get({ plain: true }),
+                  totalLikes: land.likes + 1,
+                });
+              })
+              .catch(function(err) {
+                res.status(400).send(err);
+              });
           })
           .catch(function(err) {
             res.status(400).send(err);

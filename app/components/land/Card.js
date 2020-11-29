@@ -8,14 +8,10 @@ import Numeral from 'numeral';
 const { Meta } = Card;
 
 class LandCard extends React.Component {
-  handleOnLike = () => {
+  handleOnLike = (event) => {
+    event.preventDefault();
     const { id, onLike } = this.props;
     onLike(id);
-  };
-
-  handleOnShare = () => {
-    const { id, onShare } = this.props;
-    onShare(id);
   };
 
   render() {
@@ -36,18 +32,25 @@ class LandCard extends React.Component {
         actions={[
           <div key="1" className="text-left">
             {level != 'conserved' && (
-              <span onClick={this.handleOnLike}>
+              <a href="#" onClick={this.handleOnLike}>
                 <Icon type="heart" key="heart" />
                 <span className="m-l-5">{Numeral(likes).format('0,0')}</span>
-              </span>
+              </a>
             )}
           </div>,
           <div key="2" className="text-right">
-            <Icon
-              type="share-alt"
-              key="share-alt"
-              onClick={this.handleOnShare}
-            />
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+                window.location.origin + '/land/' + id
+              )}`}
+            >
+              <Icon
+                type="share-alt"
+                key="share-alt"
+              />
+            </a>
           </div>,
         ]}
       >
@@ -67,7 +70,6 @@ LandCard.defaultProps = {
   location: '',
   likes: 0,
   onLike: () => {},
-  onShare: () => {},
 };
 
 LandCard.propTypes = {
@@ -78,7 +80,6 @@ LandCard.propTypes = {
   location: PropTypes.string,
   likes: PropTypes.number,
   onLike: PropTypes.func,
-  onShare: PropTypes.func,
 };
 
 export default LandCard;

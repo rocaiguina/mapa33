@@ -8,7 +8,9 @@ import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
 import LandCard from '../components/land/Card';
 import ProposeButton from '../components/map-view/ProposeButton';
+
 import LandApi from '../api/land';
+import AuthService from '../services/auth';
 
 class LandCardsViewContainer extends React.Component {
   constructor(props) {
@@ -91,11 +93,37 @@ class LandCardsViewContainer extends React.Component {
   };
 
   handleOnLike = landId => {
-    console.log('LIKE: ', landId);
-  };
-
-  handleOnShare = landId => {
-    console.log('SHARE: ', landId);
+    if (AuthService.isUserLogged()) {
+      const self = this;
+      const { maplist } = this.state;
+      LandApi.like(landId)
+        .then(response => {
+          const umaplist = maplist.map(item => {
+            if (landId === item.id) {
+              item.likes = response.totalLikes;
+              return item;
+            }
+            return item;
+          });
+          self.setState({
+            maplist: umaplist,
+          });
+          notification.success({
+            message: '¡Gracias por unirte a la meta común!',
+            description:
+              'Ahora pendiente a tu correo electrónico para que sigas y conozcas la actualización del proceso de esta propuesta.',
+          });
+        })
+        .catch(err => {
+          notification.error({
+            message: 'Error',
+            description:
+              'No se logró registrar tu apoyo. Por favor intenta nuevamente.',
+          });
+        });
+    } else {
+      this.props.history.push('/register/user?next=/map/cards');
+    }
   };
 
   handleLoadMore = () => {
@@ -147,7 +175,6 @@ class LandCardsViewContainer extends React.Component {
                     location={item.location}
                     likes={item.likes}
                     onLike={this.handleOnLike}
-                    onShare={this.handleOnShare}
                   />
                 </Col>
               ))}
