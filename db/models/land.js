@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    social_photograph: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     location: {
       type: DataTypes.STRING,
       allowNull: true,
