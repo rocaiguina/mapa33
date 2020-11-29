@@ -25,8 +25,11 @@ class LandController {
   find(req, res) {
     let level = req.query.level;
     let location = req.query.location;
+    let area_size = req.query.area_size;
+    let use_type = req.query.use_type;
 
     let conditions = {};
+    const order = [['name', 'ASC']];
 
     switch (level) {
       case 'proposed':
@@ -54,10 +57,19 @@ class LandController {
       };
     }
 
+    if (use_type) {
+      conditions.use_type = use_type;
+    }
+
+    if (area_size) {
+      order[0] = ['area_size', area_size];
+    }
+
     const options = {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
       where: conditions,
+      order,
       attributes: { exclude: ['geom'] },
       include: [
         {

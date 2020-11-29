@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { notification } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import QueryString from 'query-string';
 
 import BaseLayout from '../components/layout/base';
 import Legend from '../components/map-view/Legend';
@@ -18,6 +19,8 @@ class LandListViewContainer extends React.Component {
       hasMore: false,
       loading: false,
       region: '',
+      useType: '',
+      size: '',
       status: '', // conserved, proposed
       maplist: [],
     };
@@ -25,27 +28,27 @@ class LandListViewContainer extends React.Component {
 
   componentDidMount() {
     const { location } = this.props;
-    const { page } = this.state;
-    const queryParams = new URLSearchParams(location.search);
-    const status = queryParams.get('status') || '';
-    const region = queryParams.get('region') || '';
-    this.fetchAreas(status, region, page);
+    const queryParams = QueryString.parse(location.search);
+    const { status, region } = queryParams;
+    const { page, useType, size } = this.state;
+    this.fetchAreas(status, region, useType, size, page);
     this.setState({
       status,
       region,
     });
   }
 
-  fetchAreas(level, location, page) {
+  fetchAreas(level, location, use_type, area_size, page, append) {
     const self = this;
     const { maplist } = this.state;
     const limit = 12;
     this.setState({ loading: true });
-    LandApi.find({ level, location, page, limit })
+    LandApi.find({ level, location, use_type, area_size, page, limit })
       .then(response => {
         const { docs, has_next_page, next_page } = response;
+        const data = append ? [...maplist, ...docs] : docs;
         self.setState({
-          maplist: [...maplist, ...docs],
+          maplist: data,
           hasMore: has_next_page,
           loading: false,
           page: next_page,
@@ -67,36 +70,52 @@ class LandListViewContainer extends React.Component {
   handleOnChangeRegion = value => {
     this.setState({
       region: value,
+      page: 1,
     });
-    const { status, page } = this.state;
-    this.fetchAreas(status, value, page);
+    const { status, useType, size } = this.state;
+    this.fetchAreas(status, value, useType, size, 1);
   };
 
-  handleOnChangeView = value => {
-    const { history } = this.props;
-    if (value == 'map') {
-      history.push('/');
-    } else {
-      const { status, region } = this.state;
-      history.push('/map/' + value + '?status=' + status + '&region=' + region);
-    }
+  handleOnChangeUseType = value => {
+    this.setState({
+      useType: value,
+      page: 1,
+    });
+    const { status, region, size } = this.state;
+    this.fetchAreas(status, region, value, size, 1);
   };
 
-  handleOnChangeStatus = value => {
+  handleOnChangeSize = value => {
+    this.setState({
+      size: value,
+      page: 1,
+    });
+    const { status, region, useType } = this.state;
+    this.fetchAreas(status, region, useType, value, 1);
+  };
+
+  handleOnChangeStatus = () => {
+    const { status, region, useType, size } = this.state;
+    const value = status === 'proposed' ? 'conserved' : 'proposed';
     this.setState({
       status: value,
+      page: 1,
     });
-    const { region, page } = this.state;
-    this.fetchAreas(value, region, page);
+    this.fetchAreas(value, region, useType, size, 1);
+  };
+
+  handleOnChangeView = () => {
+    const { history } = this.props;
+    history.push('/map/cards');
   };
 
   handleLoadMore = () => {
-    const { page, region, status } = this.state;
-    this.fetchAreas(status, region, page);
+    const { page, region, useType, size, status } = this.state;
+    this.fetchAreas(status, region, useType, size, page, true);
   };
 
   render() {
-    const { hasMore, maplist } = this.state;
+    const { region, useType, size, hasMore, maplist } = this.state;
     return (
       <BaseLayout
         dark
@@ -115,12 +134,14 @@ class LandListViewContainer extends React.Component {
         }
       >
         <FilterLand
-          region={this.state.region}
-          view="list"
-          status={this.state.status}
+          region={region}
+          useType={useType}
+          size={size}
           onChangeRegion={this.handleOnChangeRegion}
-          onChangeView={this.handleOnChangeView}
+          onChangeUseType={this.handleOnChangeUseType}
+          onChangeSize={this.handleOnChangeSize}
           onChangeStatus={this.handleOnChangeStatus}
+          onChangeView={this.handleOnChangeView}
         />
         <div className="land-list-wrapper">
           <div className="table-responsive">

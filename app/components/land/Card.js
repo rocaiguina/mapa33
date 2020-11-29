@@ -8,7 +8,7 @@ import Numeral from 'numeral';
 const { Meta } = Card;
 
 class LandCard extends React.Component {
-  handleOnLike = (event) => {
+  handleOnLike = event => {
     event.preventDefault();
     const { id, onLike } = this.props;
     onLike(id);
@@ -46,10 +46,7 @@ class LandCard extends React.Component {
                 window.location.origin + '/land/' + id
               )}`}
             >
-              <Icon
-                type="share-alt"
-                key="share-alt"
-              />
+              <Icon type="share-alt" key="share-alt" />
             </a>
           </div>,
         ]}
