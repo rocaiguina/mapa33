@@ -2,6 +2,7 @@
 
 const Path = require('path');
 const Joi = require('joi');
+const Paginator = require('paginator');
 const RandomToken = require('random-token');
 const Sequelize = require('sequelize');
 const sgMail = require('@sendgrid/mail');
@@ -21,7 +22,7 @@ const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
-  findAll(req, res) {
+  find(req, res) {
     let level = req.query.level;
     let location = req.query.location;
 
@@ -53,7 +54,9 @@ class LandController {
       };
     }
 
-    Land.findAll({
+    const options = {
+      page: req.query.page || 1,
+      paginate: req.query.limit || 10,
       where: conditions,
       attributes: { exclude: ['geom'] },
       include: [
@@ -63,13 +66,41 @@ class LandController {
           attributes: ['first_name', 'last_name'],
         },
       ],
-    })
-      .then(function(lands) {
-        res.send(lands);
+    };
+
+    Land.paginate(options)
+      .then(function(data) {
+        let paginator = new Paginator(options.paginate, 5).build(
+          data.total,
+          options.page
+        );
+        data.current_page = paginator.current_page;
+        data.next_page = paginator.next_page;
+        data.previous_page = paginator.previous_page;
+        data.has_previous_page = paginator.has_previous_page;
+        data.has_next_page = paginator.has_next_page;
+        res.json(data);
       })
       .catch(function(err) {
         res.status(400).send(err);
       });
+    // Land.findAll({
+    //   where: conditions,
+    //   attributes: { exclude: ['geom'] },
+    //   include: [
+    //     {
+    //       model: User,
+    //       as: 'user',
+    //       attributes: ['first_name', 'last_name'],
+    //     },
+    //   ],
+    // })
+    //   .then(function(lands) {
+    //     res.send(lands);
+    //   })
+    //   .catch(function(err) {
+    //     res.status(400).send(err);
+    //   });
   }
 
   findGeoJson(req, res) {

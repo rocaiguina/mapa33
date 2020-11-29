@@ -377,6 +377,10 @@ body {
   overflow: auto;
 }
 
+.main.main-auto-height {
+  height: auto;
+}
+
 .main.main-dark {
   background-color: #181a19;
   color: #fff;
@@ -1069,11 +1073,11 @@ ul.actions {
 /* Land filter */
 .land-filter {
   background-color: #181a19;
+  left: 0;
   top: 98px;
-  margin-top: -10px;
   padding-top: 10px;
-  position: sticky;
-  position: -webkit-sticky;
+  position: fixed;
+  right: 0;
   z-index: 10;
 }
 .land-filter label {
@@ -1085,9 +1089,8 @@ ul.actions {
 @media (max-width: 767px) {
   .land-filter {
     position: fixed;
-    top: 136px;
+    top: 126px;
     left: 0;
-    padding: 0 15px;
   }
   .land-list-wrapper {
     padding-top: 67px;
@@ -1109,8 +1112,8 @@ ul.actions {
 }
 
 /* Land cards */
-.land-card {
-  border-radius: 0px;
+.ant-card.land-card {
+  margin-bottom: 15px;
 }
 .land-card .ant-card-cover img {
   border-radius: 0px;
@@ -1740,6 +1743,9 @@ ul.actions {
 }
 
 /* Land list */
+.land-list-wrapper {
+  margin-top: 55px;
+}
 .land-list .land-list-row {
   border-top: 1px dotted #181a19;
   list-style: none;
@@ -1765,6 +1771,9 @@ ul.actions {
 }
 
 @media (max-width: 767px) {
+  .land-list-wrapper {
+    margin-top: 10px;
+  }
   .land-list .land-list-row .like-counter {
     display: block;
     margin-top: 10px;
@@ -1847,6 +1856,10 @@ ul.actions {
 
 .m-b-50 {
   margin-bottom: 50px;
+}
+
+.m-l-5 {
+  margin-left: 5px;
 }
 
 .m-l-10 {

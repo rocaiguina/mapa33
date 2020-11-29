@@ -127,9 +127,7 @@ class LandDetailContainer extends React.Component {
       });
     } else {
       const { landId } = this.props.match.params;
-      return this.props.history.replace(
-        `/register/user?next=/land/${landId}`
-      );
+      return this.props.history.replace(`/register/user?next=/land/${landId}`);
     }
   };
 
@@ -234,7 +232,7 @@ class LandDetailContainer extends React.Component {
           <Col md={16}>
             <div className="land-disqus">
               <DiscussionEmbed
-                shortname='mapa33'
+                shortname="mapa33"
                 config={{
                   identifier: id,
                   title: name,

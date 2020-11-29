@@ -8,54 +8,77 @@ import Numeral from 'numeral';
 const { Meta } = Card;
 
 class LandCard extends React.Component {
+  handleOnLike = () => {
+    const { id, onLike } = this.props;
+    onLike(id);
+  };
+
+  handleOnShare = () => {
+    const { id, onShare } = this.props;
+    onShare(id);
+  };
+
   render() {
-    const photograph = this.props.photograph || '/images/no-land-image.jpg';
+    const { id, name, level, location, likes, photograph } = this.props;
     const landCardClassName = ClassNames('land-card', {
-      'land-protected': this.props.level == 'conserved',
-      'land-proposed': ['basic', 'pledge'].includes(this.props.level),
+      'land-protected': level == 'conserved',
+      'land-proposed': ['basic', 'pledge'].includes(level),
     });
     return (
       <Card
         className={landCardClassName}
         bordered={false}
         cover={
-          <Link to={`/land/${this.props.id}`}>
-            <img src={photograph} />
+          <Link to={`/land/${id}`}>
+            <img src={photograph || '/images/no-land-image.jpg'} />
           </Link>
         }
         actions={[
           <div key="1" className="text-left">
-            {this.props.level != 'conserved' && (
-              <span>
-                <Icon type="heart" key="heart" />{' '}
-                {Numeral(this.props.likes).format('0,0')}
+            {level != 'conserved' && (
+              <span onClick={this.handleOnLike}>
+                <Icon type="heart" key="heart" />
+                <span className="m-l-5">{Numeral(likes).format('0,0')}</span>
               </span>
             )}
           </div>,
           <div key="2" className="text-right">
-            <Icon type="share-alt" key="share-alt" />
+            <Icon
+              type="share-alt"
+              key="share-alt"
+              onClick={this.handleOnShare}
+            />
           </div>,
         ]}
       >
-        <Link to={`/land/${this.props.id}`}>
-          <Meta
-            title={this.props.name}
-            description={this.props.location || 'No definido'}
-          />
+        <Link to={`/land/${id}`}>
+          <Meta title={name} description={location || 'No definido'} />
         </Link>
       </Card>
     );
   }
 }
 
+LandCard.defaultProps = {
+  id: 0,
+  name: '',
+  photograph: '',
+  level: '',
+  location: '',
+  likes: 0,
+  onLike: () => {},
+  onShare: () => {},
+};
+
 LandCard.propTypes = {
   id: PropTypes.number,
-  photograph: PropTypes.string,
   name: PropTypes.string,
+  photograph: PropTypes.string,
   level: PropTypes.string,
-  owner: PropTypes.string,
   location: PropTypes.string,
   likes: PropTypes.number,
+  onLike: PropTypes.func,
+  onShare: PropTypes.func,
 };
 
 export default LandCard;

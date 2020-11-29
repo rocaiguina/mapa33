@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notification, Spin } from 'antd';
+import { Col, notification, Row } from 'antd';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import BaseLayout from '../components/layout/base';
 import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
-import LandCarousel from '../components/land/Carousel';
+import LandCard from '../components/land/Card';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandApi from '../api/land';
 
@@ -13,6 +14,8 @@ class LandCardsViewContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
+      hasMore: false,
       loading: false,
       region: '',
       status: '', // conserved, proposed
@@ -22,24 +25,30 @@ class LandCardsViewContainer extends React.Component {
 
   componentDidMount() {
     const { location } = this.props;
+    const { page } = this.state;
     const queryParams = new URLSearchParams(location.search);
     const status = queryParams.get('status') || '';
     const region = queryParams.get('region') || '';
-    this.fetchAreas(status, region);
+    this.fetchAreas(status, region, page);
     this.setState({
       status,
       region,
     });
   }
 
-  fetchAreas(level, location) {
+  fetchAreas(level, location, page) {
     const self = this;
+    const { maplist } = this.state;
+    const limit = 12;
     this.setState({ loading: true });
-    LandApi.find({ level, location })
-      .then(lands => {
+    LandApi.find({ level, location, page, limit })
+      .then(response => {
+        const { docs, has_next_page, next_page } = response;
         self.setState({
-          maplist: lands,
+          maplist: [...maplist, ...docs],
+          hasMore: has_next_page,
           loading: false,
+          page: next_page,
         });
       })
       .catch(() => {
@@ -59,8 +68,8 @@ class LandCardsViewContainer extends React.Component {
     this.setState({
       region: value,
     });
-    const level = this.state.status;
-    this.fetchAreas(level, value);
+    const { status, page } = this.state;
+    this.fetchAreas(status, value, page);
   };
 
   handleOnChangeView = value => {
@@ -77,11 +86,25 @@ class LandCardsViewContainer extends React.Component {
     this.setState({
       status: value,
     });
-    const region = this.state.region;
-    this.fetchAreas(value, region);
+    const { region, page } = this.state;
+    this.fetchAreas(value, region, page);
+  };
+
+  handleOnLike = landId => {
+    console.log('LIKE: ', landId);
+  };
+
+  handleOnShare = landId => {
+    console.log('SHARE: ', landId);
+  };
+
+  handleLoadMore = () => {
+    const { page, region, status } = this.state;
+    this.fetchAreas(status, region, page);
   };
 
   render() {
+    const { hasMore, maplist } = this.state;
     return (
       <BaseLayout
         dark
@@ -94,6 +117,7 @@ class LandCardsViewContainer extends React.Component {
         enableMenu
         verticalAlign="top"
         subtitle={<Legend />}
+        className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }
@@ -107,9 +131,28 @@ class LandCardsViewContainer extends React.Component {
           onChangeStatus={this.handleOnChangeStatus}
         />
         <div className="land-list-wrapper">
-          <Spin spinning={this.state.loading}>
-            <LandCarousel lands={this.state.maplist} />
-          </Spin>
+          <Row gutter={16}>
+            <InfiniteScroll
+              dataLength={maplist.length}
+              next={this.handleLoadMore}
+              hasMore={hasMore}
+            >
+              {maplist.map(item => (
+                <Col key={item.id} md={6}>
+                  <LandCard
+                    id={item.id}
+                    name={item.name}
+                    photograph={item.photographURL}
+                    level={item.level}
+                    location={item.location}
+                    likes={item.likes}
+                    onLike={this.handleOnLike}
+                    onShare={this.handleOnShare}
+                  />
+                </Col>
+              ))}
+            </InfiniteScroll>
+          </Row>
         </div>
       </BaseLayout>
     );

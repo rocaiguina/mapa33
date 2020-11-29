@@ -7,7 +7,7 @@ const LandController = require('../controllers/land');
 const MemoryController = require('../controllers/memory');
 const JWTMiddleware = require('../middlewares/jwt');
 
-router.get('/', LandController.findAll);
+router.get('/', LandController.find);
 router.post(
   '/',
   JWTMiddleware.requireJWT,
