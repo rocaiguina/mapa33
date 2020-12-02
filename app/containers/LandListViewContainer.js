@@ -10,7 +10,9 @@ import FilterLand from '../components/land/Filter';
 import Empty from '../components/land/Empty';
 import LandItem from '../components/land/Item';
 import ProposeButton from '../components/map-view/ProposeButton';
+
 import LandApi from '../api/land';
+import AuthService from '../services/auth';
 
 class LandListViewContainer extends React.Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class LandListViewContainer extends React.Component {
       useType: '',
       size: '',
       status: '', // conserved, proposed
+      dataLand: [],
       maplist: [],
       loadedLands: 0,
       totalLands: 0,
@@ -120,6 +123,65 @@ class LandListViewContainer extends React.Component {
     history.push('/map/cards');
   };
 
+  handleOnSearchKeyword = value => {
+    if (value && value.length >= 3) {
+      const self = this;
+      LandApi.findAutoComplete(value)
+        .then(response => {
+          const dataLand = response.map(item => {
+            return {
+              value: item.id,
+              text: item.name,
+            };
+          });
+          self.setState({
+            dataLand,
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
+  handleOnSelectLand = value => {
+    this.props.history.push(`/land/${value}`);
+  };
+
+  handleOnLike = landId => {
+    if (AuthService.isUserLogged()) {
+      const self = this;
+      const { maplist } = this.state;
+      LandApi.like(landId)
+        .then(response => {
+          const umaplist = maplist.map(item => {
+            if (landId === item.id) {
+              item.likes = response.totalLikes;
+              return item;
+            }
+            return item;
+          });
+          self.setState({
+            maplist: umaplist,
+          });
+          notification.success({
+            message: '¡Gracias por unirte a la meta común!',
+            description:
+              'Ahora pendiente a tu correo electrónico para que sigas y conozcas la actualización del proceso de esta propuesta.',
+          });
+        })
+        .catch(() => {
+          notification.error({
+            message: 'Error',
+            description:
+              'No se logró registrar tu apoyo. Por favor intenta nuevamente.',
+          });
+        });
+    } else {
+      this.props.history.push('/register/user?next=/map/list');
+    }
+  };
+
   handleLoadMore = () => {
     const { page, region, useType, size, status } = this.state;
     this.fetchAreas(status, region, useType, size, page, true);
@@ -132,6 +194,7 @@ class LandListViewContainer extends React.Component {
       useType,
       size,
       hasMore,
+      dataLand,
       maplist,
       totalLands,
       loadedLands,
@@ -150,6 +213,7 @@ class LandListViewContainer extends React.Component {
         }
       >
         <FilterLand
+          dataLand={dataLand}
           region={region}
           useType={useType}
           size={size}
@@ -158,6 +222,8 @@ class LandListViewContainer extends React.Component {
           onChangeSize={this.handleOnChangeSize}
           onChangeStatus={this.handleOnChangeStatus}
           onChangeView={this.handleOnChangeView}
+          onSearchKeyword={this.handleOnSearchKeyword}
+          onSelectLand={this.handleOnSelectLand}
         />
         <div className="land-list-wrapper">
           <Divider

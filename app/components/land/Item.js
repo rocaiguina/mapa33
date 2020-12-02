@@ -6,6 +6,12 @@ import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
 class Item extends React.Component {
+  handleOnLike = event => {
+    event.preventDefault();
+    const { id, onLike } = this.props;
+    onLike(id);
+  };
+  
   render() {
     const badgeLevelClass = ClassNames('land-level', {
       'land-level-protected': this.props.level == 'conserved',
@@ -43,10 +49,10 @@ class Item extends React.Component {
               </Col>
               <Col xs={12} md={3}>
                 {this.props.level != 'conserved' && (
-                  <span className="like-counter">
+                  <a href="#" className="like-counter" onClick={this.handleOnLike}>
                     <Icon type="heart" theme="filled" />
                     {Numeral(this.props.likes).format('0,0')}
-                  </span>
+                  </a>
                 )}
               </Col>
               <Col xs={12} md={3} className="text-right">
@@ -72,6 +78,7 @@ Item.defaultProps = {
     first_name: '',
     last_name: '',
   },
+  onLike: () => {},
 };
 
 Item.propTypes = {
@@ -82,6 +89,7 @@ Item.propTypes = {
   location: PropTypes.string,
   area_size: PropTypes.number,
   likes: PropTypes.number,
+  onLike: PropTypes.func,
 };
 
 export default Item;

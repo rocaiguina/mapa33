@@ -1873,6 +1873,11 @@ ul.actions {
   color: #fff;
 }
 
+.land-list .land-list-row .like-counter {
+  color: #fff;
+  line-height: 38px;
+}
+
 @media (max-width: 767px) {
   .land-list-wrapper {
     margin-top: 10px;

@@ -145,7 +145,7 @@ class LandCardsViewContainer extends React.Component {
   };
 
   handleOnSelectLand = value => {
-    console.log(value);
+    this.props.history.push(`/land/${value}`);
   };
 
   handleOnLike = landId => {
