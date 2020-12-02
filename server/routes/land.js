@@ -8,6 +8,7 @@ const MemoryController = require('../controllers/memory');
 const JWTMiddleware = require('../middlewares/jwt');
 
 router.get('/', LandController.find);
+router.get('/autocomplete', LandController.findAutoComplete);
 router.post(
   '/',
   JWTMiddleware.requireJWT,

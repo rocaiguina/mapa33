@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row, Select } from 'antd';
+import { AutoComplete, Button, Col, Icon, Input, Row, Select } from 'antd';
 
-import Icon from '../ui/Icon';
+import CIcon from '../ui/Icon';
 
 const { Option } = Select;
 
 class Filter extends React.Component {
   render() {
     const {
+      dataLand,
       region,
       useType,
       size,
@@ -17,13 +18,30 @@ class Filter extends React.Component {
       onChangeSize,
       onChangeStatus,
       onChangeView,
+      onSearchKeyword,
+      onSelectLand,
     } = this.props;
     return (
       <div className="land-filter">
         <div className="container">
           <Row gutter={16}>
-            <Col md={6}>
-              <label>Pueblo</label>
+            <Col md={11}>
+              <AutoComplete
+                className="ant-select-auto-complete-dark ant-select-auto-complete-round"
+                size="large"
+                style={{ width: '100%' }}
+                dataSource={dataLand}
+                placeholder="Entra keywords"
+                onSearch={onSearchKeyword}
+                onSelect={onSelectLand}
+              >
+                <Input suffix={<Icon type="search" />} />
+              </AutoComplete>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col md={6} xs={12}>
+              <label>Region</label>
               <Select
                 size="large"
                 className="ant-select-black ant-select-round"
@@ -112,7 +130,35 @@ class Filter extends React.Component {
                 <Option value="Yauco">Yauco</Option>
               </Select>
             </Col>
-            <Col md={6}>
+            <Col md={6} xs={12} className="visible-xs">
+              <Row gutter={16}>
+                <Col md={12} xs={12}>
+                  <label>Estatus</label>
+                  <Button
+                    block
+                    shape="round"
+                    size="large"
+                    className="ant-btn-background-ghost ant-btn-land-status"
+                    onClick={onChangeStatus}
+                  >
+                    <CIcon type="layers" />
+                  </Button>
+                </Col>
+                <Col md={12} xs={12}>
+                  <label>Vista</label>
+                  <Button
+                    block
+                    shape="round"
+                    size="large"
+                    className="ant-btn-background-ghost ant-btn-land-view"
+                    onClick={onChangeView}
+                  >
+                    <CIcon type="eye" />
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
+            <Col md={6} xs={12}>
               <label>Tipo de Uso</label>
               <Select
                 size="large"
@@ -125,7 +171,7 @@ class Filter extends React.Component {
                 <Option value="Agricolas">Agricolas</Option>
               </Select>
             </Col>
-            <Col md={6}>
+            <Col md={6} xs={12}>
               <label>Tamaño</label>
               <Select
                 size="large"
@@ -139,7 +185,7 @@ class Filter extends React.Component {
                 <Option value="DESC">Mayor a Menor</Option>
               </Select>
             </Col>
-            <Col md={6}>
+            <Col md={6} className="hidden-xs">
               <Row gutter={16}>
                 <Col md={12}>
                   <label>Estatus</label>
@@ -147,10 +193,10 @@ class Filter extends React.Component {
                     block
                     shape="round"
                     size="large"
-                    className="ant-btn-background-ghost"
+                    className="ant-btn-background-ghost ant-btn-land-status"
                     onClick={onChangeStatus}
                   >
-                    <Icon type="layers" />
+                    <CIcon type="layers" />
                   </Button>
                 </Col>
                 <Col md={12}>
@@ -159,10 +205,10 @@ class Filter extends React.Component {
                     block
                     shape="round"
                     size="large"
-                    className="ant-btn-background-ghost"
+                    className="ant-btn-background-ghost ant-btn-land-view"
                     onClick={onChangeView}
                   >
-                    <Icon type="eye" />
+                    <CIcon type="eye" />
                   </Button>
                 </Col>
               </Row>
@@ -175,6 +221,7 @@ class Filter extends React.Component {
 }
 
 Filter.defaultProps = {
+  dataLand: [],
   region: '',
   useType: '',
   size: '',
@@ -183,9 +230,17 @@ Filter.defaultProps = {
   onChangeSize: () => {},
   onChangeStatus: () => {},
   onChangeView: () => {},
+  onSearchKeyword: () => {},
+  onSelectLand: () => {},
 };
 
 Filter.propTypes = {
+  dataLand: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
   region: PropTypes.string,
   useType: PropTypes.string,
   size: PropTypes.string,
@@ -194,6 +249,8 @@ Filter.propTypes = {
   onChangeSize: PropTypes.func,
   onChangeStatus: PropTypes.func,
   onChangeView: PropTypes.func,
+  onSearchKeyword: PropTypes.func,
+  onSelectLand: PropTypes.func,
 };
 
 export default Filter;

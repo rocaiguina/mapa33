@@ -45,6 +45,21 @@ export const find = function(filters) {
   });
 };
 
+export const findAutoComplete = function(q) {
+  return new Promise((resolve, reject) => {
+    Axios.get('/api/land/autocomplete', { params: { q } })
+      .then(response => {
+        if (response.status == 200) {
+          return resolve(response.data);
+        }
+        reject(response.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const isLikedByUser = function(landId) {
   return new Promise((resolve, reject) => {
     Axios.get(`/api/land/${landId}/like`)
@@ -109,6 +124,7 @@ export default {
   register,
   get,
   find,
+  findAutoComplete,
   isLikedByUser,
   like,
   registerMemory,

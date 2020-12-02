@@ -22,6 +22,28 @@ const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
 class LandController {
+  findAutoComplete(req, res) {
+    let q = req.query.q;
+    let conditions = {};
+    if (q) {
+      conditions.name = {
+        [Op.iLike]: '%' + q + '%',
+      };
+    }
+
+    Land.findAll({
+      where: conditions,
+      attributes: ['id', 'name'],
+      order: [['name', 'ASC']],
+    })
+      .then(function(lands) {
+        res.send(lands);
+      })
+      .catch(function(err) {
+        res.status(400).send(err);
+      });
+  }
+
   find(req, res) {
     let level = req.query.level;
     let location = req.query.location;

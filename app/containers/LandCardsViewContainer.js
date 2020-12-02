@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, notification, Row } from 'antd';
+import { Col, Divider, notification, Row } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import QueryString from 'query-string';
 
 import BaseLayout from '../components/layout/base';
-import Legend from '../components/map-view/Legend';
+import Legend2 from '../components/map-view/Legend2';
 import FilterLand from '../components/land/Filter';
+import Empty from '../components/land/Empty';
 import LandCard from '../components/land/Card';
 import ProposeButton from '../components/map-view/ProposeButton';
 
@@ -19,12 +20,15 @@ class LandCardsViewContainer extends React.Component {
     this.state = {
       page: 1,
       hasMore: false,
-      loading: false,
+      loading: true,
       region: '',
       useType: '',
       size: '',
       status: '', // conserved, proposed
+      dataLand: [],
       maplist: [],
+      loadedLands: 0,
+      totalLands: 0,
     };
   }
 
@@ -47,13 +51,21 @@ class LandCardsViewContainer extends React.Component {
     this.setState({ loading: true });
     LandApi.find({ level, location, use_type, area_size, page, limit })
       .then(response => {
-        const { docs, has_next_page, next_page } = response;
+        const {
+          docs,
+          has_next_page,
+          next_page,
+          current_page,
+          total,
+        } = response;
         const data = append ? [...maplist, ...docs] : docs;
         self.setState({
           maplist: data,
           hasMore: has_next_page,
           loading: false,
           page: next_page,
+          loadedLands: current_page * docs.length,
+          totalLands: total,
         });
       })
       .catch(() => {
@@ -111,6 +123,31 @@ class LandCardsViewContainer extends React.Component {
     history.push('/map/list');
   };
 
+  handleOnSearchKeyword = value => {
+    if (value && value.length >= 3) {
+      const self = this;
+      LandApi.findAutoComplete(value)
+        .then(response => {
+          const dataLand = response.map(item => {
+            return {
+              value: item.id,
+              text: item.name,
+            };
+          });
+          self.setState({
+            dataLand,
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
+  handleOnSelectLand = value => {
+    console.log(value);
+  };
+
   handleOnLike = landId => {
     if (AuthService.isUserLogged()) {
       const self = this;
@@ -151,7 +188,17 @@ class LandCardsViewContainer extends React.Component {
   };
 
   render() {
-    const { region, useType, size, hasMore, maplist } = this.state;
+    const {
+      loading,
+      region,
+      useType,
+      size,
+      hasMore,
+      dataLand,
+      maplist,
+      totalLands,
+      loadedLands,
+    } = this.state;
     return (
       <BaseLayout
         dark
@@ -163,13 +210,14 @@ class LandCardsViewContainer extends React.Component {
         closeLinkClassname="ant-btn-white ant-btn-round"
         enableMenu
         verticalAlign="top"
-        subtitle={<Legend />}
+        subtitle={<Legend2 />}
         className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }
       >
         <FilterLand
+          dataLand={dataLand}
           region={region}
           useType={useType}
           size={size}
@@ -178,8 +226,19 @@ class LandCardsViewContainer extends React.Component {
           onChangeSize={this.handleOnChangeSize}
           onChangeStatus={this.handleOnChangeStatus}
           onChangeView={this.handleOnChangeView}
+          onSearchKeyword={this.handleOnSearchKeyword}
+          onSelectLand={this.handleOnSelectLand}
         />
         <div className="land-list-wrapper">
+          <Divider
+            dashed
+            style={{ borderStyle: 'dotted', margin: '1px 0 15px 0' }}
+          />
+          {maplist.length > 0 && (
+            <h3 className="land-list-pagination-info">
+              Mostrando {loadedLands} de {totalLands}
+            </h3>
+          )}
           <Row gutter={16}>
             <InfiniteScroll
               dataLength={maplist.length}
@@ -201,6 +260,7 @@ class LandCardsViewContainer extends React.Component {
               ))}
             </InfiniteScroll>
           </Row>
+          {maplist.length === 0 && loading === false && <Empty />}
         </div>
       </BaseLayout>
     );

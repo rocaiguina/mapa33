@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notification } from 'antd';
+import { Divider, notification } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import QueryString from 'query-string';
 
 import BaseLayout from '../components/layout/base';
 import Legend from '../components/map-view/Legend';
 import FilterLand from '../components/land/Filter';
+import Empty from '../components/land/Empty';
 import LandItem from '../components/land/Item';
 import ProposeButton from '../components/map-view/ProposeButton';
 import LandApi from '../api/land';
@@ -17,12 +18,14 @@ class LandListViewContainer extends React.Component {
     this.state = {
       page: 1,
       hasMore: false,
-      loading: false,
+      loading: true,
       region: '',
       useType: '',
       size: '',
       status: '', // conserved, proposed
       maplist: [],
+      loadedLands: 0,
+      totalLands: 0,
     };
   }
 
@@ -45,13 +48,21 @@ class LandListViewContainer extends React.Component {
     this.setState({ loading: true });
     LandApi.find({ level, location, use_type, area_size, page, limit })
       .then(response => {
-        const { docs, has_next_page, next_page } = response;
+        const {
+          docs,
+          has_next_page,
+          next_page,
+          current_page,
+          total,
+        } = response;
         const data = append ? [...maplist, ...docs] : docs;
         self.setState({
           maplist: data,
           hasMore: has_next_page,
           loading: false,
           page: next_page,
+          loadedLands: current_page * docs.length,
+          totalLands: total,
         });
       })
       .catch(() => {
@@ -115,7 +126,16 @@ class LandListViewContainer extends React.Component {
   };
 
   render() {
-    const { region, useType, size, hasMore, maplist } = this.state;
+    const {
+      loading,
+      region,
+      useType,
+      size,
+      hasMore,
+      maplist,
+      totalLands,
+      loadedLands,
+    } = this.state;
     return (
       <BaseLayout
         dark
@@ -144,6 +164,15 @@ class LandListViewContainer extends React.Component {
           onChangeView={this.handleOnChangeView}
         />
         <div className="land-list-wrapper">
+          <Divider
+            dashed
+            style={{ borderStyle: 'dotted', margin: '1px 0 15px 0' }}
+          />
+          {maplist.length > 0 && (
+            <h3 className="land-list-pagination-info">
+              Mostrando {loadedLands} de {totalLands}
+            </h3>
+          )}
           <div className="table-responsive">
             <div className="land-list land-list-dark">
               <InfiniteScroll
@@ -166,6 +195,7 @@ class LandListViewContainer extends React.Component {
                 ))}
               </InfiniteScroll>
             </div>
+            {maplist.length === 0 && loading === false && <Empty />}
           </div>
         </div>
       </BaseLayout>
