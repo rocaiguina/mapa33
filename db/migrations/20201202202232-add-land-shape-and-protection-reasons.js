@@ -19,7 +19,7 @@ module.exports = {
     ).then(function() {
       return queryInterface.addColumn(
         'lands',
-        'protection-reasons',
+        'protection_reasons',
         {
           type: Sequelize.ARRAY(Sequelize.STRING),
           allowNull: true,
@@ -39,7 +39,7 @@ module.exports = {
     */
     return queryInterface.removeColumn('lands', 'land_shape')
       .then(function() {
-        return queryInterface.removeColumn('lands', 'protection-reasons');
+        return queryInterface.removeColumn('lands', 'protection_reasons');
       });
   }
 };

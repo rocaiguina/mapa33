@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    land_shape: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     location: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -44,6 +48,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     proposed_uses: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
+    },
+    protection_reasons: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
       defaultValue: [],
