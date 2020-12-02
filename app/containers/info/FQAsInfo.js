@@ -14,6 +14,7 @@ class FQAsInfo extends React.Component {
         dark
         title="PREGUNTAS FRECUENTES"
         enableMenu
+        className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }

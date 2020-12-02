@@ -14,6 +14,7 @@ class ContactInfo extends React.Component {
         dark
         title="CONTACTO"
         enableMenu
+        className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }

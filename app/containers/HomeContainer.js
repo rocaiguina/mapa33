@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BaseLayout from '../components/layout/base';
 import Intro from '../components/intro';
-import Legend from '../components/map-view/Legend';
+import Legend2 from '../components/map-view/Legend2';
 import Map from '../components/map-view/Map';
 import Instructions from '../components/intro/instructions';
 import ProposeButton from '../components/map-view/ProposeButton';
@@ -84,19 +84,13 @@ class HomeContainer extends React.Component {
 
   render() {
     const { showIntro, showGuide, showInstructions } = this.state;
-    const title = showIntro ? null : (
-      <span>
-        LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span>
-      </span>
-    );
-    const subtitle = showIntro ? null : <Legend />;
+    const title = showIntro ? null : <Legend2 />;
     return (
       <BaseLayout
         dark
         title={title}
-        subtitle={subtitle}
-        showCloseBtn={false}
-        enableMenu={!showIntro}
+        showCloseBtn={!showIntro}
+        disableBorder
         footerRightComponent={
           !showIntro && <ProposeButton title="Proponer área" icon="plus" />
         }

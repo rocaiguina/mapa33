@@ -202,15 +202,11 @@ class LandCardsViewContainer extends React.Component {
     return (
       <BaseLayout
         dark
-        title={
-          <span>
-            LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span>
-          </span>
-        }
+        title={<Legend2 />}
         closeLinkClassname="ant-btn-white ant-btn-round"
         enableMenu
+        disableBorder
         verticalAlign="top"
-        subtitle={<Legend2 />}
         className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />

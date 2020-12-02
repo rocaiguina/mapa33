@@ -14,6 +14,7 @@ class AboutUsInfo extends React.Component {
         dark
         title="SOBRE EL MAPA"
         enableMenu
+        className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }

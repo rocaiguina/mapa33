@@ -7,6 +7,9 @@ class AboutUs extends React.Component {
       <div className="contactstyle m-b-15">
         <Row>
           <Col md={16}>
+            <br />
+            <br />
+            <br />
             <div className="m-b-30">
               <h2>Sobre&nbsp;</h2>
               <img src={'/images/logo-white.png'} className="img-responsive" />

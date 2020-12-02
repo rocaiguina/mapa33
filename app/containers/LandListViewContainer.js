@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import QueryString from 'query-string';
 
 import BaseLayout from '../components/layout/base';
-import Legend from '../components/map-view/Legend';
+import Legend2 from '../components/map-view/Legend2';
 import FilterLand from '../components/land/Filter';
 import Empty from '../components/land/Empty';
 import LandItem from '../components/land/Item';
@@ -139,15 +139,11 @@ class LandListViewContainer extends React.Component {
     return (
       <BaseLayout
         dark
-        title={
-          <span>
-            LEYENDA <span className="hidden-xs">DE ÁREAS NATURALES</span>
-          </span>
-        }
+        title={<Legend2 />}
         closeLinkClassname="ant-btn-white ant-btn-round"
         enableMenu
+        disableBorder
         verticalAlign="top"
-        subtitle={<Legend />}
         className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />

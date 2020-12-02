@@ -410,7 +410,6 @@ body {
 }
 
 .header-wrap {
-  padding-top: 20px;
   position: relative;
 }
 
@@ -418,7 +417,7 @@ body {
   padding-bottom: 120px;
 }
 .wrap-content.with-title {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 .wrap-content.with-subtitle {
@@ -441,14 +440,6 @@ body {
   color: #fff;
 }
 
-.header-dark h2 {
-  color: #fff;
-}
-
-.header-dark .page-title {
-  border-bottom-color: #fff;
-}
-
 .header .top-actions,
 .header .bottom-actions {
   margin-bottom: 10px;
@@ -458,7 +449,15 @@ body {
 }
 
 .header .top-actions {
-  top: 3px;
+  top: 15px;
+}
+
+.header .top-actions .ant-btn {
+  padding: 0 16px;
+}
+
+.header .top-actions .ant-btn + .ant-btn {
+  margin-left: 10px;
 }
 
 .header .bottom-actions {
@@ -487,17 +486,21 @@ body {
   margin-left: 10px;
 }
 
-.top-actions .ant-btn {
-  color: #181a19;
-  padding: 0 5px;
-}
-
 .main-dark .top-actions .ant-btn {
   color: #fff;
 }
 .main-dark .top-actions .ant-btn-white {
   color: #000;
   padding: 0 16px;
+}
+
+.header .top-actions .ant-btn {
+  border-color: #000;
+  color: #000;
+}
+.header-dark .top-actions .ant-btn {
+  border-color: #fff;
+  color: #fff;
 }
 
 @media (max-width: 767px) {
@@ -509,13 +512,18 @@ body {
     text-align: right;
   }
   .header.has-actions .top-actions {
-    float: left;
+    position: relative;
+    text-align: right;
+    top: 0;
   }
   .wrap-content.with-title.with-subtitle.with-actions {
     padding-top: 136px;
   }
   .header-wrap {
     padding-top: 15px;
+  }
+  .wrap-content.with-title {
+    padding-top: 110px;
   }
   .wrap-content {
     padding-bottom: 90px;
@@ -694,16 +702,11 @@ body {
 
 /* Pages */
 .page-title {
-  border-bottom: 1px dotted #181a19;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.page-title h2 {
   font-size: 16px;
-  line-height: 1.2em;
+  line-height: 40px;
   font-weight: bold;
-  margin-right: 38px;
+  margin-top: 15px;
+  position: relative;
 }
 
 .wrap-content .page-title h2 {
@@ -713,6 +716,13 @@ body {
 
 .main-dark .page-title {
   border-bottom-color: #fff;
+}
+
+@media (max-width: 767px) {
+  .page-title {
+    margin-top: 0;
+    font-size: 13px;
+  }
 }
 
 
@@ -818,6 +828,7 @@ ul.actions {
 .map-legend2 {
   background-color: #303131;
   border-radius: 32px;
+  line-height: 1;
   padding: 10px 16px;
 }
 .map-legend2 dl,
@@ -1119,7 +1130,7 @@ ul.actions {
 .land-filter {
   background-color: #181a19;
   left: 0;
-  top: 98px;
+  top: 70px;
   padding-top: 10px;
   position: fixed;
   right: 0;
@@ -1172,7 +1183,7 @@ ul.actions {
 @media (max-width: 767px) {
   .land-filter {
     position: fixed;
-    top: 126px;
+    top: 110px;
     left: 0;
   }
   .land-list-wrapper {

@@ -32,7 +32,6 @@ class BaseLayout extends Component {
     const wrapContentClass = ClassNames('wrap-content', {
       'with-title': this.props.title,
       'with-subtitle': this.props.subtitle,
-      'with-actions': this.props.enableMenu,
       vcenter: this.props.verticalAlign == 'center',
     });
 
@@ -42,13 +41,12 @@ class BaseLayout extends Component {
           dark={this.props.dark}
           title={this.props.title}
           subtitle={this.props.subtitle}
-          onClose={this.props.onClose}
           closeLink={this.props.closeLink}
-          showCloseBtn={this.props.showCloseBtn}
-          showMenuBtn={this.props.enableMenu}
-          showProfileBtn={this.props.enableMenu}
+          showMenuBtn={this.props.showCloseBtn}
+          showProfileBtn={this.props.showCloseBtn}
           onMenuClick={this.handleOnMenuClick}
           closeLinkClassname={this.props.closeLinkClassname}
+          disableBorder={this.props.disableBorder}
         />
         <div className={wrapContentClass}>
           <div className="container">{this.props.children}</div>
@@ -59,21 +57,19 @@ class BaseLayout extends Component {
           xs={this.props.footerXs}
         />
         {this.props.afterFooter}
-        {this.props.enableMenu && (
-          <Sidebar
-            placement="right"
-            visible={this.state.isSidebarVisible}
-            onClose={this.handleOnCloseSidebar}
-          />
-        )}
+        <Sidebar
+          placement="right"
+          visible={this.state.isSidebarVisible}
+          onClose={this.handleOnCloseSidebar}
+        />
       </div>
     );
   }
 }
 
 BaseLayout.defaultProps = {
-  enableMenu: false,
   verticalAlign: 'center',
+  disableBorder: false,
 };
 
 BaseLayout.propTypes = {
@@ -82,9 +78,8 @@ BaseLayout.propTypes = {
   dark: PropTypes.bool,
   children: PropTypes.node,
   closeLink: PropTypes.string,
-  onClose: PropTypes.func,
+  disableBorder: PropTypes.bool,
   showCloseBtn: PropTypes.bool,
-  enableMenu: PropTypes.bool,
   afterFooter: PropTypes.node,
   footerRightComponent: PropTypes.node,
   footerXs: PropTypes.node,

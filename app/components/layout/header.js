@@ -2,49 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Col, Divider, Row } from 'antd';
 import { withRouter } from 'react-router';
 
 import Icon from '../ui/Icon';
 
 class Header extends Component {
-  handleOnClose = () => {
-    const { closeLink, onClose } = this.props;
-    if (onClose) {
-      return onClose();
-    }
-
-    if (closeLink) {
-      const { history } = this.props;
-      history.push(closeLink);
-    } else {
-      window.history.back();
-    }
-  };
-
   render() {
     const headerClass = ClassNames('header', {
       'header-dark': this.props.dark,
-      'has-actions': this.props.showProfileBtn || this.props.showMenuBtn,
+      'has-actions': this.props.showProfileBtn,
     });
 
     return (
       <header className={headerClass}>
         <div className="container">
           <div className="header-wrap">
-            {this.props.showCloseBtn && (
-              <div className="top-actions">
-                <Button
-                  size="large"
-                  type="link"
-                  onClick={this.handleOnClose}
-                  className={this.props.closeLinkClassname}
-                >
-                  <Icon type="close" />
-                </Button>
-              </div>
-            )}
-            <div className="bottom-actions">
+            <div className="top-actions">
               {this.props.showProfileBtn && (
                 <Link
                   id="user_guide"
@@ -65,13 +39,25 @@ class Header extends Component {
                 </Button>
               )}
             </div>
-            {this.props.title && (
-              <div className="page-title">
-                <h2>{this.props.title}</h2>
-              </div>
-            )}
-            <div>{this.props.subtitle}</div>
+            <Row>
+              <Col md={20}>
+                {this.props.title && (
+                  <div className="page-title">
+                    {this.props.title}
+                  </div>
+                )}
+                <div>{this.props.subtitle}</div>
+              </Col>
+            </Row>
           </div>
+          <Divider
+            dashed
+            style={{
+              margin: '15px 0 0 0',
+              borderStyle: 'dotted',
+              borderColor: this.props.disableBorder ? 'transparent' : this.props.dark ? '#fff' : '#000',
+            }}
+          />
         </div>
       </header>
     );
@@ -79,9 +65,9 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-  showCloseBtn: true,
-  showProfileBtn: true,
+  disableBorder: false,
   showMenuBtn: true,
+  showProfileBtn: true,
 };
 
 Header.propTypes = {
@@ -89,13 +75,9 @@ Header.propTypes = {
   dark: PropTypes.bool,
   subtitle: PropTypes.node,
   onMenuClick: PropTypes.func,
-  closeLink: PropTypes.string,
-  showCloseBtn: PropTypes.bool,
+  disableBorder: PropTypes.bool,
   showMenuBtn: PropTypes.bool,
   showProfileBtn: PropTypes.bool,
-  onClose: PropTypes.func,
-  history: PropTypes.object,
-  closeLinkClassname: PropTypes.string,
 };
 
 export default withRouter(Header);
