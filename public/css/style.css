@@ -1857,7 +1857,7 @@ ul.actions {
 }
 
 .land-list .land-list-row .media-left {
-  padding: 0.4rem 1rem 0.75rem 0.75rem;
+  padding: 0 1rem 0 0.75rem;
 }
 
 .land-list-dark .land-list-row {
