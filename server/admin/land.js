@@ -62,15 +62,21 @@ function uploadLandShape(req) {
   });
 }
 
-function uploadSocialPhotograph(req) {
+function uploadSocialPhotograph(req) {  
   return new Promise(function(resolve, reject) {
     if (!req.land.social_photograph && req.body.status === "approved") {
+      const photograph = req.land.dataValues.photograph;
+      const name = req.land.dataValues.name;
+      const ownerName = req.land.dataValues.metadata.owner_name;
+      const location = req.land.dataValues.location;
+      const areaSize = req.land.dataValues.area_size;
+
       const filename = RandomToken(10) + '.jpg';
       const filepath = 'lands/social/' + filename;
       req.land.social_photograph = filepath;
 
       nodeHtmlToImage({
-        html: getSocialImageHtml(),
+        html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
         puppeteerArgs: {defaultViewport: {width: 760, height: 376}}
       }).then(function(image) {
         sharp(image)
