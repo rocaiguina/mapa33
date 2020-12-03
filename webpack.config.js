@@ -9,7 +9,7 @@ module.exports = {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js'
   },
-  mode: 'development',
+  mode: 'production',
   context: __dirname,
   devtool: 'source-map',
   externals: {
