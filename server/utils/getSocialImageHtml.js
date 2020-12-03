@@ -1,5 +1,14 @@
+const FileStorage = require('./file-storage');
+const Numeral = require('numeral');
+
 module.exports = {
-  getSocialImageHtml: function() {
+  getSocialImageHtml: function(
+    photograph,
+    name,
+    ownerName,
+    location,
+    areaSize
+  ) {
     return `<!DOCTYPE html>
     <html>
       <head>
@@ -102,21 +111,25 @@ module.exports = {
       </head>
       <body>
         <div class="container">
-          <img src="http://localhost:3000/lands/ag10efm24x.jpg" class="map" />
-          <img src="http://localhost:3000/images/M33-FondoNegro.svg" class="logo" />
-          <img src="http://localhost:3000/images/colorline.png" class="line" />
+          <img src="${FileStorage.getUrl(photograph)}" class="map" />
+          <img src="${FileStorage.getUrl(
+            "images/M33-FondoNegro.svg"
+          )}" class="logo" />
+          <img src="${FileStorage.getUrl(
+            "images/colorline.png"
+          )}" class="line" />
           <div class="right-column">
             <p class="title">
-              El Terreno del Futuro
+              ${name}
             </p>
             <p class="user-name">
-              Nombre de Usuario
+              ${ownerName}
             </p>
             <hr />
             <p class="info">
-              <span>San Lorenzo</span>
+              <span>${location}</span>
               <br />
-              <span>44,541 cuerdas</span>
+              <span>${Numeral(areaSize).format("0,0")} cuerdas</span>
             </p>
           </div>
           <div class="text-box">
