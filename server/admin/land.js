@@ -2,11 +2,13 @@
 
 const Path = require('path');
 const Joi = require('joi');
+const sharp = require('sharp');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
 const Models = require('../../db/models');
 const Land = Models.Land;
 const Validator = require('../utils/validator');
+const { geojsonToSvg } = require('../utils/geojsonToSvg');
 
 const sgMail = require('@sendgrid/mail');
 const FileStorage = require('../utils/file-storage');
@@ -24,6 +26,35 @@ function uploadPhotograph(req) {
         .catch(function(err) {
           reject(err);
         });
+    }
+    return resolve(null);
+  });
+}
+
+function uploadLandShape(req) {
+  return new Promise(function(resolve, reject) {
+    if (!req.land.land_shape && req.body.status === "approved") {
+      const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500)
+      const filename = RandomToken(10) + '.png';
+      const filepath = 'lands/polygon/' + filename;
+      req.land.land_shape = filepath;
+
+      const image = Buffer.from(svg);
+      sharp(image)
+        .toFormat('png')
+        .toBuffer()
+        .then(newImage => {
+          return FileStorage.put(filepath, newImage)
+            .then(function(response) {
+              resolve(response);
+            })
+            .catch(function(err) {
+              reject(err);
+            });
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
     }
     return resolve(null);
   });
@@ -148,7 +179,10 @@ class LandAdminController {
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }
 
-    // Upload image.
+    // Upload land shape.
+    uploadLandShape(req);
+
+    // Upload photograph.
     uploadPhotograph(req)
       .then(function(fileUrl) {
         const cleaned_data = result.value;
