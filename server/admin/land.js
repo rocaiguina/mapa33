@@ -7,7 +7,7 @@ const RandomToken = require('random-token');
 const Models = require('../../db/models');
 const Land = Models.Land;
 const Validator = require('../utils/validator');
-const nodeHtmlToImage = require('node-html-to-image')
+const nodeHtmlToImage = require('node-html-to-image');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
 const { geojsonToSvg } = require('../utils/geojsonToSvg');
 
@@ -34,8 +34,8 @@ function uploadPhotograph(req) {
 
 function uploadLandShape(req) {
   return new Promise(function(resolve, reject) {
-    if (!req.land.land_shape && req.body.status === "approved") {
-      const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500)
+    if (!req.land.land_shape && req.body.status === 'approved') {
+      const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500);
       const filename = RandomToken(10) + '.png';
       const filepath = `lands/polygon/${filename}`;
       req.land.land_shape = filepath;
@@ -61,9 +61,9 @@ function uploadLandShape(req) {
   });
 }
 
-function uploadSocialPhotograph(req) {  
+function uploadSocialPhotograph(req) {
   return new Promise(function(resolve, reject) {
-    if (!req.land.social_photograph && req.body.status === "approved") {
+    if (!req.land.social_photograph && req.body.status === 'approved') {
       const photograph = req.land.dataValues.photograph;
       const name = req.land.dataValues.name;
       const ownerName = req.land.dataValues.metadata.owner_name;
@@ -94,7 +94,7 @@ function uploadSocialPhotograph(req) {
             console.error(err);
           });
       });
-    } 
+    }
     return resolve(null);
   });
 }
@@ -105,6 +105,7 @@ class LandAdminController {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
       where: {},
+      order: [['name', 'ASC']],
     };
 
     if (req.query.status) {
@@ -222,7 +223,7 @@ class LandAdminController {
     uploadLandShape(req);
 
     //Upload social photograph
-    uploadSocialPhotograph(req)
+    uploadSocialPhotograph(req);
 
     // Upload photograph.
     uploadPhotograph(req)
@@ -290,10 +291,10 @@ class LandAdminController {
                   from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
                   templateId: landApprovedTemplateId,
                   dynamic_template_data: {
-                    terrain_name: terrainName, 
-                    site: sitio, 
+                    terrain_name: terrainName,
+                    site: sitio,
                     contact: contacto,
-                  }
+                  },
                 };
                 sgMail.send(mailOptions).then(
                   () => {},
@@ -305,16 +306,16 @@ class LandAdminController {
                 const contacto = process.env.SERVER_URL + '/contact-us';
                 const notes = req.land.notes;
                 const landDeniedTemplateId = "d-3ff254035db74cec8eb0ce4e24d993d1";
-                
+
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
                   to: land.user.email,
                   from: process.env.DEFAULT_EMAIL_FROM,
                   templateId: landDeniedTemplateId,
                   dynamic_template_data: {
-                    notes: notes, 
+                    notes: notes,
                     contact: contacto,
-                  }
+                  },
                 };
                 sgMail.send(mailOptions).then(
                   () => {},

@@ -75,7 +75,7 @@ function forgotPassword(req, res) {
           // variables para email
           const sitio = process.env.SERVER_URL + '/reset-password/';
           const contacto = process.env.SERVER_URL + '/contact-us';
-          
+
           sgMail.setApiKey(process.env.SENDGRID_API_KEY);
           const msg = {
             to: req.body.email,
@@ -83,7 +83,7 @@ function forgotPassword(req, res) {
             templateId: recoveryPasswordTemplateId,
             dynamic_template_data: {
               site: sitio, token: token, contact: contacto
-            }
+            },
           };
           sgMail.send(msg).then(
             () => {},
