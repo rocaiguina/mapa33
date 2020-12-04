@@ -1,5 +1,6 @@
 'use strict';
 
+const { LAND_PROTECTION_REASONS } = require('../../config/constants');
 const Models = require('../../db/models');
 const Land = Models.Land;
 
@@ -12,11 +13,13 @@ function get(req, res) {
       if (!land) {
         return res.status(404).send('');
       }
-      const description = land.reason_conservation;
+      const description = LAND_PROTECTION_REASONS.filter(
+        reason => reason.value === land.reason_conservation
+        )[0].label;
       const metatags = {
         og_title: land.name,
         og_description: description,
-        og_image: land.photographURL,
+        og_image: land.socialPhotographURL,
       };
       res.render('public/index', metatags);
     })

@@ -140,6 +140,12 @@ module.exports = (sequelize, DataTypes) => {
           return FileStorage.getUrl(this.land_shape);
         }
         return '';
+      },
+      socialPhotographURL() {
+        if (this.social_photograph) {
+          return FileStorage.getUrl(this.social_photograph);
+        }
+        return '';
       }
     }
   });
