@@ -365,8 +365,8 @@ class LandController {
           from: process.env.DEFAULT_EMAIL_FROM,
           templateId: createLandTemplateId,
           dynamic_template_data: {
-          contact: contacto,
-         }
+            contact: contacto,
+          },
         };
         sgMail.send(msg).then(
           () => {},
@@ -519,7 +519,7 @@ class LandController {
       where: { id: landId },
       attributes: { exclude: ['geom'] },
     })
-      .then(function (land) {
+      .then(function(land) {
         if (!land) {
           return res.status(404).send();
         }
@@ -557,11 +557,11 @@ class LandController {
                       from: process.env.DEFAULT_EMAIL_FROM,
                       templateId: followUpTemplateId,
                       dynamic_template_data: {
-                        name: name, 
+                        name: name,
                         site: site,
                         proposal_name: proposalName,
                         likes: likes,
-                      }
+                      },
                     };
                     sgMail.send(msg).then(
                       () => {},
