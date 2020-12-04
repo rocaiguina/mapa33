@@ -1,6 +1,5 @@
 'use strict';
 
-const Path = require('path');
 const Joi = require('joi');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');

@@ -21,7 +21,7 @@ const put = (req, res) => {
     */
     const fileExtension = Path.extname(req.file.originalname);
     const fileName = RandomToken(10) + fileExtension;
-    const filePath = Path.join('multimedia', fileName);
+    const filePath = `multimedia/${fileName}`;
     const fileContent = req.file.buffer;
 
     FileStorage.put(filePath, fileContent)

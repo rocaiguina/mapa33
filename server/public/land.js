@@ -12,7 +12,10 @@ function get(req, res) {
       if (!land) {
         return res.status(404).send('');
       }
-      const description = land.reason_conservation;
+      // const description = LAND_PROTECTION_REASONS.filter(
+      //   reason => reason.value === land.reason_conservation
+      //   )[0].label;
+      const description = '';
       const metatags = {
         og_title: land.name,
         og_description: description,

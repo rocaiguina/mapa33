@@ -1,6 +1,5 @@
 'use strict';
 
-const Path = require('path');
 const Joi = require('joi');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
@@ -16,7 +15,7 @@ function uploadPhotograph(req) {
   return new Promise(function(resolve, reject) {
     if (req.file) {
       const filename = RandomToken(10) + '.jpg';
-      const filepath = Path.join('lands', filename);
+      const filepath = `lands/${filename}`;
       return FileStorage.put(filepath, req.file.buffer)
         .then(function(response) {
           resolve(response);

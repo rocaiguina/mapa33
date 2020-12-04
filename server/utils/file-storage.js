@@ -20,13 +20,15 @@ const config = {
 
 // Bucketeer: All files prefixed with 'public/', will be available on the
 // public internet.
-const PREFIX = 'public';
-const driver = process.env.NODE_ENV == 'production' ? 's3' : 'local';
+const MEDIA_ROOT = 'public';
+const MEDIA_URL = process.env.NODE_ENV === 'production' ? '/public/' : '/';
+
+const driver = process.env.NODE_ENV === 'production' ? 's3' : 'local';
 const storage = new StorageManager(config).disk(driver);
 
 module.exports.getUrl = function(location) {
   if (driver == 'local') {
-    return `${process.env.SERVER_URL}/${location}`;
+    return `${process.env.SERVER_URL}${location}`;
   }
   return storage.getUrl(location);
 };
@@ -34,10 +36,9 @@ module.exports.getUrl = function(location) {
 module.exports.put = function(location, content, options) {
   return new Promise(function(resolve, reject) {
     storage
-      .put(PREFIX + "/" + location, content, options)
+      .put(`${MEDIA_ROOT}/${location}`, content, options)
       .then(function() {
-        const prefix = process.env.NODE_ENV == 'production' ? PREFIX : '';
-        resolve(prefix + location);
+        resolve(`${MEDIA_URL}${location}`);
       })
       .catch(function(err) {
         reject(err);
@@ -46,5 +47,5 @@ module.exports.put = function(location, content, options) {
 };
 
 module.exports.delete = function(location) {
-  return storage.delete(path.join(PREFIX, location));
+  return storage.delete(`${MEDIA_ROOT}${location}`);
 };
