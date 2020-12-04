@@ -2,10 +2,12 @@
 
 const Joi = require('joi');
 const Paginator = require('paginator');
+const Sequelize = require('sequelize');
 const Models = require('../../db/models');
 const Land = Models.Land;
 const Memory = Models.Memory;
 const User = Models.User;
+const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
 
 const Constants = require('../../config/constants');
@@ -29,9 +31,18 @@ class MemoryAdminController {
         },
       ],
     };
+    let filters = {};
 
     if (req.query.status) {
       options.where.status = req.query.status;
+      filters.status = req.query.status;
+    }
+
+    if (req.query.q) {
+      options.where.title = {
+        [Op.iLike]: '%' + req.query.q + '%',
+      };
+      filters.q = req.query.q;
     }
 
     Memory.paginate(options)
@@ -45,7 +56,7 @@ class MemoryAdminController {
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
-        res.render('memory/index', { paginator: data, filters: options.where });
+        res.render('memory/index', { paginator: data, filters });
       })
       .catch(function(err) {
         next(err);
