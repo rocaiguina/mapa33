@@ -17,7 +17,7 @@ module.exports = {
         {
           model: User,
           as: 'user',
-          attributes: ['first_name', 'last_name', 'email', "phone"],
+          attributes: ['first_name', 'last_name', 'email', 'phone'],
         },
       ],
     })
