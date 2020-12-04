@@ -134,6 +134,18 @@ module.exports = (sequelize, DataTypes) => {
           return FileStorage.getUrl(this.photograph);
         }
         return process.env.SERVER_URL +  '/images/no-land-image.jpg';
+      },
+      landShapeURL() {
+        if (this.land_shape) {
+          return FileStorage.getUrl(this.land_shape);
+        }
+        return '';
+      },
+      socialPhotographURL() {
+        if (this.social_photograph) {
+          return FileStorage.getUrl(this.social_photograph);
+        }
+        return '';
       }
     }
   });

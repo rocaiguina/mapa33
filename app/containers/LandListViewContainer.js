@@ -246,6 +246,7 @@ class LandListViewContainer extends React.Component {
                   <LandItem
                     key={item.id}
                     id={item.id}
+                    landShape={item.landShapeURL}
                     name={item.name}
                     level={item.level}
                     owner={item.user}

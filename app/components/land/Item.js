@@ -13,10 +13,10 @@ class Item extends React.Component {
   };
   
   render() {
-    const badgeLevelClass = ClassNames('land-level', {
-      'land-level-protected': this.props.level == 'conserved',
-      'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
-    });
+    // const badgeLevelClass = ClassNames('land-level', {
+    //   'land-level-protected': this.props.level == 'conserved',
+    //   'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
+    // });
 
     let owner = '';
     if (this.props.owner != null) {
@@ -27,7 +27,8 @@ class Item extends React.Component {
       <div className="land-list-row">
         <div className="media">
           <div className="media-left">
-            <span className={badgeLevelClass}></span>
+            {/* <span className={badgeLevelClass}></span> */}
+            <img src={this.props.landShape} width="50" height="50"/>
           </div>
           <div className="media-body">
             <Row>

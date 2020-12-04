@@ -78,6 +78,8 @@ class RegisterWizard extends React.Component {
       case 'are-you-owner':
         if (values.are_u_owner) {
           setFieldValue('owner_name', values.user.full_name);
+          setFieldValue('owner_email', values.user.email);
+          setFieldValue('owner_phone', values.user.phone);
           push('catastro-number');
         } else {
           push('know-owner');

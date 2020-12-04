@@ -2,11 +2,15 @@
 
 const Path = require('path');
 const Joi = require('joi');
+const sharp = require('sharp');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
 const Models = require('../../db/models');
 const Land = Models.Land;
 const Validator = require('../utils/validator');
+const nodeHtmlToImage = require('node-html-to-image')
+const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
+const { geojsonToSvg } = require('../utils/geojsonToSvg');
 
 const sgMail = require('@sendgrid/mail');
 const FileStorage = require('../utils/file-storage');
@@ -25,6 +29,73 @@ function uploadPhotograph(req) {
           reject(err);
         });
     }
+    return resolve(null);
+  });
+}
+
+function uploadLandShape(req) {
+  return new Promise(function(resolve, reject) {
+    if (!req.land.land_shape && req.body.status === "approved") {
+      const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500)
+      const filename = RandomToken(10) + '.png';
+      const filepath = 'lands/polygon/' + filename;
+      req.land.land_shape = filepath;
+
+      const image = Buffer.from(svg);
+      sharp(image)
+        .toFormat('png')
+        .toBuffer()
+        .then(newImage => {
+          return FileStorage.put(filepath, newImage)
+            .then(function(response) {
+              resolve(response);
+            })
+            .catch(function(err) {
+              reject(err);
+            });
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+    }
+    return resolve(null);
+  });
+}
+
+function uploadSocialPhotograph(req) {  
+  return new Promise(function(resolve, reject) {
+    if (!req.land.social_photograph && req.body.status === "approved") {
+      const photograph = req.land.dataValues.photograph;
+      const name = req.land.dataValues.name;
+      const ownerName = req.land.dataValues.metadata.owner_name;
+      const location = req.land.dataValues.location;
+      const areaSize = req.land.dataValues.area_size;
+
+      const filename = RandomToken(10) + '.jpg';
+      const filepath = 'lands/social/' + filename;
+      req.land.social_photograph = filepath;
+
+      nodeHtmlToImage({
+        html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
+        puppeteerArgs: {defaultViewport: {width: 760, height: 376}}
+      }).then(function(image) {
+        sharp(image)
+          .toFormat('jpg')
+          .toBuffer()
+          .then(newImage => {
+            return FileStorage.put(filepath, newImage)
+              .then(function(response) {
+                resolve(response);
+              })
+              .catch(function(err) {
+                reject(err);
+              });
+          })
+          .catch(function(err) {
+            console.error(err);
+          });
+      });
+    } 
     return resolve(null);
   });
 }
@@ -148,7 +219,13 @@ class LandAdminController {
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }
 
-    // Upload image.
+    // Upload land shape.
+    uploadLandShape(req);
+
+    //Upload social photograph
+    uploadSocialPhotograph(req)
+
+    // Upload photograph.
     uploadPhotograph(req)
       .then(function(fileUrl) {
         const cleaned_data = result.value;
