@@ -2,9 +2,11 @@
 
 const Joi = require('joi');
 const Paginator = require('paginator');
+const Sequelize = require('sequelize');
 const Models = require('../../db/models');
 const SurveyAnswer = Models.SurveyAnswer;
 const User = Models.User;
+const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
 const encryptor = require('../../server/utils/encryptor');
 const stringify = require('csv-stringify');
@@ -14,7 +16,16 @@ class UserAdminController {
     let options = {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
+      where: {},
     };
+    let filters = {};
+
+    if (req.query.q) {
+      options.where.first_name = {
+        [Op.iLike]: '%' + req.query.q + '%',
+      };
+      filters.q = req.query.q;
+    }
 
     User.paginate(options)
       .then(function(data) {
@@ -27,7 +38,7 @@ class UserAdminController {
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
-        res.render('user/index', { paginator: data });
+        res.render('user/index', { paginator: data, filters });
       })
       .catch(function(err) {
         next(err);

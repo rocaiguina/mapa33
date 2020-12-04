@@ -7,42 +7,60 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="form-inline text-right">
-            <label>Estado</label>
-            <div class="dropdown form-group m-l-5 m-r-5">
-                <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.status if filters.status else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
-                <ul class="dropdown-menu pull-left">
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=">All</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=new">New</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=approved">Approved</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=denied">Denied</a>
-                    </li>
-                </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="input-group">
+                        <div class="fg-line">
+                            <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ filters.q }}">
+                        </div>
+                        <span class="input-group-addon last">
+                            <button type="submit" class="btn btn-link">
+                                <i class="zmdi zmdi-search" style="font-size: 22px;"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
-            <label>Nivel</label>
-            <div class="dropdown form-group m-l-5">
-                <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.level if filters.level else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
-                <ul class="dropdown-menu pull-right">
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=">All</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=basic">Basic</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=pledge">Pledge</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=conserved">Conserved</a>
-                    </li>
-                </ul>
+            <div class="col-md-8">
+                <div class="form-inline text-right">
+                    <label>Estado</label>
+                    <div class="dropdown form-group m-l-5 m-r-5">
+                        <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.status if filters.status else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
+                        <ul class="dropdown-menu pull-left">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=">All</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=new">New</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=approved">Approved</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=denied">Denied</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <label>Nivel</label>
+                    <div class="dropdown form-group m-l-5">
+                        <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.level if filters.level else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=">All</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=basic">Basic</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=pledge">Pledge</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=conserved">Conserved</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

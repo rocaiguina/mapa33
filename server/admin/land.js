@@ -4,8 +4,10 @@ const Joi = require('joi');
 const sharp = require('sharp');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
+const Sequelize = require('sequelize');
 const Models = require('../../db/models');
 const Land = Models.Land;
+const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
 const nodeHtmlToImage = require('node-html-to-image');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
@@ -107,13 +109,23 @@ class LandAdminController {
       where: {},
       order: [['name', 'ASC']],
     };
+    let filters = {};
 
     if (req.query.status) {
       options.where.status = req.query.status;
+      filters.status = req.query.status;
     }
 
     if (req.query.level) {
       options.where.level = req.query.level;
+      filters.status = req.query.level;
+    }
+
+    if (req.query.q) {
+      options.where.name = {
+        [Op.iLike]: '%'+ req.query.q + '%',
+      };
+      filters.q = req.query.q;
     }
 
     Land.paginate(options)
@@ -127,7 +139,7 @@ class LandAdminController {
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
-        res.render('land/index', { paginator: data, filters: options.where });
+        res.render('land/index', { paginator: data, filters });
       })
       .catch(function(err) {
         next(err);
