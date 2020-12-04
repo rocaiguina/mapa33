@@ -1,6 +1,5 @@
 'use strict';
 
-const Path = require('path');
 const Joi = require('joi');
 const sharp = require('sharp');
 const Paginator = require('paginator');
@@ -20,7 +19,7 @@ function uploadPhotograph(req) {
   return new Promise(function(resolve, reject) {
     if (req.file) {
       const filename = RandomToken(10) + '.jpg';
-      const filepath = Path.join('lands', filename);
+      const filepath = `lands/${filename}`;
       return FileStorage.put(filepath, req.file.buffer)
         .then(function(response) {
           resolve(response);
@@ -38,7 +37,7 @@ function uploadLandShape(req) {
     if (!req.land.land_shape && req.body.status === "approved") {
       const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500)
       const filename = RandomToken(10) + '.png';
-      const filepath = 'lands/polygon/' + filename;
+      const filepath = `lands/polygon/${filename}`;
       req.land.land_shape = filepath;
 
       const image = Buffer.from(svg);
@@ -72,7 +71,7 @@ function uploadSocialPhotograph(req) {
       const areaSize = req.land.dataValues.area_size;
 
       const filename = RandomToken(10) + '.jpg';
-      const filepath = 'lands/social/' + filename;
+      const filepath = `lands/social/${filename}`;
       req.land.social_photograph = filepath;
 
       nodeHtmlToImage({
