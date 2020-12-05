@@ -21,7 +21,7 @@ const config = {
 // Bucketeer: All files prefixed with 'public/', will be available on the
 // public internet.
 const MEDIA_ROOT = 'public';
-const MEDIA_URL = process.env.NODE_ENV === 'production' ? '/public/' : '/';
+const MEDIA_URL = process.env.NODE_ENV === 'production' ? 'public/' : '/';
 
 const driver = process.env.NODE_ENV === 'production' ? 's3' : 'local';
 const storage = new StorageManager(config).disk(driver);
