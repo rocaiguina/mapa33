@@ -9,7 +9,6 @@ const Models = require('../../db/models');
 const Land = Models.Land;
 const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
-const nodeHtmlToImage = require('node-html-to-image');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
 const { geojsonToSvg } = require('../utils/geojsonToSvg');
 
@@ -76,26 +75,26 @@ function uploadSocialPhotograph(req) {
       const filepath = `lands/social/${filename}`;
       req.land.social_photograph = filepath;
 
-      nodeHtmlToImage({
-        html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
-        puppeteerArgs: {defaultViewport: {width: 760, height: 376}}
-      }).then(function(image) {
-        sharp(image)
-          .toFormat('jpg')
-          .toBuffer()
-          .then(newImage => {
-            return FileStorage.put(filepath, newImage)
-              .then(function(response) {
-                resolve(response);
-              })
-              .catch(function(err) {
-                reject(err);
-              });
-          })
-          .catch(function(err) {
-            console.error(err);
-          });
-      });
+      // nodeHtmlToImage({
+      //   html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
+      //   puppeteerArgs: {defaultViewport: {width: 760, height: 376}}
+      // }).then(function(image) {
+      //   sharp(image)
+      //     .toFormat('jpg')
+      //     .toBuffer()
+      //     .then(newImage => {
+      //       return FileStorage.put(filepath, newImage)
+      //         .then(function(response) {
+      //           resolve(response);
+      //         })
+      //         .catch(function(err) {
+      //           reject(err);
+      //         });
+      //     })
+      //     .catch(function(err) {
+      //       console.error(err);
+      //     });
+      // });
     }
     return resolve(null);
   });
