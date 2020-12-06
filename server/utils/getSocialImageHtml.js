@@ -62,6 +62,7 @@ module.exports = {
             top: 18px;
             width: 290px;
             color: white;
+            background-color: #181a19;
           }
           .title {
             font-size: 36px;
@@ -112,12 +113,10 @@ module.exports = {
       <body>
         <div class="container">
           <img src="${FileStorage.getUrl(photograph)}" class="map" />
-          <img src="${FileStorage.getUrl(
-            "images/M33-FondoNegro.svg"
-          )}" class="logo" />
-          <img src="${FileStorage.getUrl(
-            "images/colorline.png"
-          )}" class="line" />
+          <img src="${process.env.SERVER_URL +
+            "images/M33-FondoNegro.svg"}" class="logo" />
+          <img src="${process.env.SERVER_URL +
+            "images/colorline.png"}" class="line" />
           <div class="right-column">
             <p class="title">
               ${name}

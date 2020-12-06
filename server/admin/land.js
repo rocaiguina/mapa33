@@ -9,6 +9,7 @@ const Models = require('../../db/models');
 const Land = Models.Land;
 const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
+const axios = require('axios');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
 const { geojsonToSvg } = require('../utils/geojsonToSvg');
 
@@ -62,42 +63,56 @@ function uploadLandShape(req) {
   });
 }
 
-function uploadSocialPhotograph(req) {
-  return new Promise(function(resolve, reject) {
-    if (!req.land.social_photograph && req.body.status === 'approved') {
-      const photograph = req.land.dataValues.photograph;
-      const name = req.land.dataValues.name;
-      const ownerName = req.land.dataValues.metadata.owner_name;
-      const location = req.land.dataValues.location;
-      const areaSize = req.land.dataValues.area_size;
-
-      const filename = RandomToken(10) + '.jpg';
-      const filepath = `lands/social/${filename}`;
-      req.land.social_photograph = filepath;
-
-      // nodeHtmlToImage({
-      //   html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
-      //   puppeteerArgs: {defaultViewport: {width: 760, height: 376}}
-      // }).then(function(image) {
-      //   sharp(image)
-      //     .toFormat('jpg')
-      //     .toBuffer()
-      //     .then(newImage => {
-      //       return FileStorage.put(filepath, newImage)
-      //         .then(function(response) {
-      //           resolve(response);
-      //         })
-      //         .catch(function(err) {
-      //           reject(err);
-      //         });
-      //     })
-      //     .catch(function(err) {
-      //       console.error(err);
-      //     });
-      // });
+async function uploadSocialPhotograph(req) {
+  if (!req.land.social_photograph && req.body.status === 'approved') {
+    const photograph = req.land.dataValues.photograph;
+    const name = req.land.dataValues.name;
+    const ownerName = req.land.dataValues.metadata.owner_name;
+    const location = req.land.dataValues.location;
+    const areaSize = req.land.dataValues.area_size;
+  
+    const payload = { 
+      html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
+      viewport_width: 760,
+      viewport_height: 376 
+    };  
+    const headers = { auth: {
+      username: '0c55bca0-4073-4054-a288-0bc5c72e9cad',
+      password: 'a1774ae8-7c16-4846-bc2e-91c3ad2f4ce0'
+      },
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
-    return resolve(null);
-  });
+
+    const filename = RandomToken(10) + '.jpg';
+    const filepath = `lands/social/${filename}`;
+    req.land.social_photograph = filepath;
+
+    try {
+      const imageUrl = await axios.post(
+        'https://hcti.io/v1/image', 
+        JSON.stringify(payload), 
+        headers
+      );
+      const bufferData = await axios
+      .get(imageUrl.data.url, {
+        responseType: 'arraybuffer'
+      });
+      const image = await Buffer.from(bufferData.data);
+      axios.delete(imageUrl); // Delete image from hcti
+      return FileStorage.put(filepath, image)
+        .then(function(response) {
+          resolve(response);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  return resolve(null);
 }
 
 class LandAdminController {
