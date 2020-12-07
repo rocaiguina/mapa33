@@ -9,6 +9,7 @@ const Memory = Models.Memory;
 const User = Models.User;
 const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
+const sgMail = require('@sendgrid/mail');
 
 const Constants = require('../../config/constants');
 
@@ -87,12 +88,48 @@ class MemoryAdminController {
     }
 
     const cleaned_data = result.value;
+    const statusChanged = memory.dataValues.status !== cleaned_data.status;
 
     memory.status = cleaned_data.status;
     memory
       .save()
       .then(function() {
         req.flash('success', 'Your data has been saved.');
+        //Send email
+        if (statusChanged && (cleaned_data.status === "APPROVED" || 
+          cleaned_data.status === "REJECTED")) {
+
+          const memoryDeniedTemplateId = "d-bf66dd889cdb4972ab07e1000248fae4";
+          const memoryApprovedTemplateId = "d-32417e7dcf784f04871ba55e0ef46b34";
+          const contacto = process.env.SERVER_URL + '/contact-us';
+          const sitio = process.env.SERVER_URL + '/land/' + 
+            memory.dataValues.land.dataValues.id;
+          const memoryName = memory.dataValues.title;
+
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+          let mailOptions = {
+            to: memory.dataValues.user.dataValues.email,
+            from: process.env.DEFAULT_EMAIL_FROM,
+            templateId: memoryDeniedTemplateId,
+            dynamic_template_data: {
+              contact: contacto,
+              site: sitio,
+              memory_name: memoryName
+            },
+          };
+          if (cleaned_data.status === "APPROVED") {
+            mailOptions.templateId = memoryApprovedTemplateId;
+            mailOptions.dynamic_template_data.site = sitio;
+            mailOptions.dynamic_template_data.memory_name = memoryName;
+          }
+
+          sgMail.send(mailOptions).then(
+            () => {},
+            error => {
+              console.error(error);
+            }
+          );
+        }
       })
       .catch(function(err) {
         console.error(err);

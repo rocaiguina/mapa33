@@ -19,7 +19,7 @@ module.exports = {
         {
           model: Land,
           as: 'land',
-          attributes: ['name'],
+          attributes: ['name', 'id'],
         },
         {
           model: User,
