@@ -21,6 +21,7 @@ class LandCardsViewContainer extends React.Component {
       page: 1,
       hasMore: false,
       loading: true,
+      keywords: '',
       region: '',
       useType: '',
       size: '',
@@ -36,20 +37,20 @@ class LandCardsViewContainer extends React.Component {
     const { location } = this.props;
     const queryParams = QueryString.parse(location.search);
     const { status, region } = queryParams;
-    const { page, useType, size } = this.state;
-    this.fetchAreas(status, region, useType, size, page);
+    const { keywords, page, useType, size } = this.state;
+    this.fetchAreas(keywords, status, region, useType, size, page);
     this.setState({
       status,
       region,
     });
   }
 
-  fetchAreas(level, location, use_type, area_size, page, append) {
+  fetchAreas(keywords, level, location, use_type, area_size, page, append) {
     const self = this;
     const { maplist } = this.state;
     const limit = 12;
     this.setState({ loading: true });
-    LandApi.find({ level, location, use_type, area_size, page, limit })
+    LandApi.find({ keywords, level, location, use_type, area_size, page, limit })
       .then(response => {
         const {
           docs,
@@ -86,8 +87,8 @@ class LandCardsViewContainer extends React.Component {
       region: value,
       page: 1,
     });
-    const { status, useType, size } = this.state;
-    this.fetchAreas(status, value, useType, size, 1);
+    const { keywords, status, useType, size } = this.state;
+    this.fetchAreas(keywords, status, value, useType, size, 1);
   };
 
   handleOnChangeUseType = value => {
@@ -95,8 +96,8 @@ class LandCardsViewContainer extends React.Component {
       useType: value,
       page: 1,
     });
-    const { status, region, size } = this.state;
-    this.fetchAreas(status, region, value, size, 1);
+    const { keywords, status, region, size } = this.state;
+    this.fetchAreas(keywords, status, region, value, size, 1);
   };
 
   handleOnChangeSize = value => {
@@ -104,18 +105,18 @@ class LandCardsViewContainer extends React.Component {
       size: value,
       page: 1,
     });
-    const { status, region, useType } = this.state;
-    this.fetchAreas(status, region, useType, value, 1);
+    const { keywords, status, region, useType } = this.state;
+    this.fetchAreas(keywords, status, region, useType, value, 1);
   };
 
   handleOnChangeStatus = () => {
-    const { status, region, useType, size } = this.state;
+    const { keywords, status, region, useType, size } = this.state;
     const value = status === 'proposed' ? 'conserved' : 'proposed';
     this.setState({
       status: value,
       page: 1,
     });
-    this.fetchAreas(value, region, useType, size, 1);
+    this.fetchAreas(keywords, value, region, useType, size, 1);
   };
 
   handleOnChangeView = () => {
@@ -124,6 +125,9 @@ class LandCardsViewContainer extends React.Component {
   };
 
   handleOnSearchKeyword = value => {
+    this.setState({
+      keywords: value,
+    });
     if (value && value.length >= 3) {
       const self = this;
       LandApi.findAutoComplete(value)
@@ -146,6 +150,14 @@ class LandCardsViewContainer extends React.Component {
 
   handleOnSelectLand = value => {
     this.props.history.push(`/land/${value}`);
+  };
+
+  handleOnSearch = value => {
+    this.setState({
+      keywords: value,
+    });
+    const { region, useType, size, status } = this.state;
+    this.fetchAreas(value, status, region, useType, size, 1);
   };
 
   handleOnLike = landId => {
@@ -183,8 +195,8 @@ class LandCardsViewContainer extends React.Component {
   };
 
   handleLoadMore = () => {
-    const { page, region, useType, size, status } = this.state;
-    this.fetchAreas(status, region, useType, size, page, true);
+    const { keywords, page, region, useType, size, status } = this.state;
+    this.fetchAreas(keywords, status, region, useType, size, page, true);
   };
 
   render() {
@@ -224,6 +236,7 @@ class LandCardsViewContainer extends React.Component {
           onChangeView={this.handleOnChangeView}
           onSearchKeyword={this.handleOnSearchKeyword}
           onSelectLand={this.handleOnSelectLand}
+          onSearch={this.handleOnSearch}
         />
         <div className="land-list-wrapper">
           <Divider

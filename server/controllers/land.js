@@ -44,13 +44,16 @@ class LandController {
   }
 
   find(req, res) {
-    let level = req.query.level;
-    let location = req.query.location;
-    let area_size = req.query.area_size;
-    let use_type = req.query.use_type;
+    let { keywords, level, location, area_size, use_type } = req.query;
 
     let conditions = {};
     const order = [['name', 'ASC']];
+
+    if (keywords) {
+      conditions.name = {
+        [Op.iLike]: '%' + keywords + '%',
+      };
+    }
 
     switch (level) {
       case 'proposed':
