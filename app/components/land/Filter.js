@@ -7,6 +7,32 @@ import CIcon from '../ui/Icon';
 const { Option } = Select;
 
 class Filter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+  }
+
+  handleOnSearchKeyword = (value) => {
+    this.setState({
+      text: value,
+    });
+    this.props.onSearchKeyword(value);
+  };
+
+  handleOnSearch = () => {
+    const { text } = this.state;
+    this.props.onSearch(text);
+  };
+
+  handleOnKeyPress = (e) => {
+    if (e.which === 13 || e.keyCode === 13) {
+      const { text } = this.state;
+      this.props.onSearch(text);
+    }
+  };
+
   render() {
     const {
       dataLand,
@@ -20,6 +46,7 @@ class Filter extends React.Component {
       onChangeView,
       onSearchKeyword,
       onSelectLand,
+      onSearch,
     } = this.props;
     return (
       <div className="land-filter">
@@ -32,10 +59,14 @@ class Filter extends React.Component {
                 style={{ width: '100%' }}
                 dataSource={dataLand}
                 placeholder="Entra keywords"
-                onSearch={onSearchKeyword}
+                onSearch={this.handleOnSearchKeyword}
                 onSelect={onSelectLand}
+                defaultActiveFirstOption={false}
               >
-                <Input suffix={<Icon type="search" />} />
+                <Input
+                  suffix={<Icon type="search" onClick={this.handleOnSearch} />}
+                  onKeyPress={this.handleOnKeyPress}
+                />
               </AutoComplete>
             </Col>
           </Row>
@@ -48,6 +79,7 @@ class Filter extends React.Component {
                 value={region}
                 onChange={onChangeRegion}
                 style={{ width: '100%' }}
+                showSearch
               >
                 <Option value="">Todas</Option>
                 <Option value="Adjuntas">Adjuntas</Option>
@@ -232,6 +264,7 @@ Filter.defaultProps = {
   onChangeView: () => {},
   onSearchKeyword: () => {},
   onSelectLand: () => {},
+  onSearch: () => {},
 };
 
 Filter.propTypes = {
@@ -251,6 +284,7 @@ Filter.propTypes = {
   onChangeView: PropTypes.func,
   onSearchKeyword: PropTypes.func,
   onSelectLand: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 export default Filter;
