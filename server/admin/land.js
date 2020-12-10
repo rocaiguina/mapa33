@@ -53,8 +53,9 @@ function uploadLandShape(req) {
         .catch(function(err) {
           reject(err);
         });
+    } else {
+      return resolve(null);
     }
-    return resolve(null);
   });
 }
 
@@ -108,8 +109,9 @@ function uploadSocialPhotograph(req) {
         .catch(function(err) {
           reject(err);
         });
+    } else {
+      return resolve(null);
     }
-    return resolve(null);
   });
 }
 
