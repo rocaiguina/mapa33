@@ -603,11 +603,12 @@
     map.addSource('lot', {
       'type': 'geojson',
       'data': {
-        'type': 'Feature',
-        'geometry': {
-        'type': 'Polygon',
-        'coordinates': JSON.parse('{{ object.geom.coordinates | dump | safe }}')
-        }
+        'type': 'FeatureCollection',
+        features: [{
+          "type": "Feature",
+          "properties": {},
+          "geometry": JSON.parse('{{ object.geom | dump | safe }}')
+        }],
       }
     });
 
