@@ -71,7 +71,8 @@ function forgotPassword(req, res) {
         expired: date,
       })
         .then(function() {
-          const recoveryPasswordTemplateId = "d-024b5f22e90e4533961996256953aea6";
+          const recoveryPasswordTemplateId =
+            'd-024b5f22e90e4533961996256953aea6';
           // variables para email
           const sitio = process.env.SERVER_URL + '/reset-password/';
           const contacto = process.env.SERVER_URL + '/contact-us';
@@ -82,7 +83,9 @@ function forgotPassword(req, res) {
             from: process.env.DEFAULT_EMAIL_FROM,
             templateId: recoveryPasswordTemplateId,
             dynamic_template_data: {
-              site: sitio, token: token, contact: contacto
+              site: sitio,
+              token: token,
+              contact: contacto,
             },
           };
           sgMail.send(msg).then(

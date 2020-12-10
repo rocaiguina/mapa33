@@ -13,22 +13,17 @@ class Item extends React.Component {
   };
   
   render() {
-    // const badgeLevelClass = ClassNames('land-level', {
-    //   'land-level-protected': this.props.level == 'conserved',
-    //   'land-level-proposed': ['basic', 'pledge'].includes(this.props.level),
-    // });
-
     let owner = '';
     if (this.props.owner != null) {
       owner = this.props.owner.first_name + ' ' + this.props.owner.last_name;
     }
+    const { landShape } = this.props;
 
     return (
       <div className="land-list-row">
         <div className="media">
           <div className="media-left">
-            {/* <span className={badgeLevelClass}></span> */}
-            <img src={this.props.landShape} width="50" height="50"/>
+            <img src={landShape || '/images/no-land-image.jpg'} width="50" />
           </div>
           <div className="media-body">
             <Row>

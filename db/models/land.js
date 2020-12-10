@@ -139,13 +139,13 @@ module.exports = (sequelize, DataTypes) => {
         if (this.land_shape) {
           return FileStorage.getUrl(this.land_shape);
         }
-        return '';
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
       },
       socialPhotographURL() {
         if (this.social_photograph) {
           return FileStorage.getUrl(this.social_photograph);
         }
-        return '';
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
       }
     }
   });
