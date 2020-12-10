@@ -3,7 +3,7 @@ module.exports = {
     let latArr = [];
     let lngArr = [];
 
-    geojson.forEach((item) => {
+    geojson.forEach(item => {
       latArr.push(item[0]);
       lngArr.push(item[1]);
     });
@@ -21,12 +21,12 @@ module.exports = {
     let polygonWidth = (maxLat - minLat) * growFactor;
 
     let points = geojson
-      .map((item) => {
+      .map(item => {
         return `${(item[0] + Math.abs(minLat)) * growFactor},${(item[1] -
           Math.abs(minLng)) *
           growFactor}`;
       })
-      .reduce((acc, curr, i) => acc + " " + curr);
+      .reduce((acc, curr) => acc + ' ' + curr);
 
     return `<svg width="${pixelDimension}" height="${pixelDimension}">
   <polygon

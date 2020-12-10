@@ -100,7 +100,7 @@ class UserController {
       interested_volunteer: cleaned_data.interested_volunteer,
     })
       .then(function(user) {
-        const userRegisterTemplateId = "d-e6641e63796d4c63b5e03cf5a25b78cf";
+        const userRegisterTemplateId = 'd-e6641e63796d4c63b5e03cf5a25b78cf';
         const site = process.env.SERVER_URL + '/profile';
 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);

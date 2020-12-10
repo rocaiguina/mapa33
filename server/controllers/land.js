@@ -360,7 +360,7 @@ class LandController {
         const result = land.get({ plain: true });
         delete result.geom;
         // variables para email
-        const createLandTemplateId = "d-3a8e6bb92266433f9f60bcae4e62540f";
+        const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
         const contacto = process.env.SERVER_URL + '/contact-us';
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
@@ -548,8 +548,10 @@ class LandController {
                   User.findOne({
                     where: { id: land.user_id },
                   }).then(function(user) {
-                    const followUpTemplateId = "d-48aaa5ef91144316b0212d9bce04eeea";
-                    const site = process.env.SERVER_URL + '/land/' + req.params.id;
+                    const followUpTemplateId =
+                      'd-48aaa5ef91144316b0212d9bce04eeea';
+                    const site =
+                      process.env.SERVER_URL + '/land/' + req.params.id;
                     const name = user.first_name + ' ' + user.last_name;
                     const proposalName = land.name;
                     const likes = land.likes;

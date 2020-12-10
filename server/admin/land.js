@@ -40,79 +40,77 @@ function uploadLandShape(req) {
       const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500);
       const filename = RandomToken(10) + '.png';
       const filepath = `lands/polygon/${filename}`;
-      req.land.land_shape = filepath;
-
       const image = Buffer.from(svg);
       sharp(image)
         .toFormat('png')
         .toBuffer()
         .then(newImage => {
-          return FileStorage.put(filepath, newImage)
-            .then(function(response) {
-              resolve(response);
-            })
-            .catch(function(err) {
-              reject(err);
-            });
+          return FileStorage.put(filepath, newImage);
         })
-        .catch(function(err) {
-          console.error(err);
-        });
-    }
-    return resolve(null);
-  });
-}
-
-async function uploadSocialPhotograph(req) {
-  if (!req.land.social_photograph && req.body.status === 'approved') {
-    const photograph = req.land.dataValues.photograph;
-    const name = req.land.dataValues.name;
-    const ownerName = req.land.dataValues.metadata.owner_name;
-    const location = req.land.dataValues.location;
-    const areaSize = req.land.dataValues.area_size;
-  
-    const payload = { 
-      html: getSocialImageHtml(photograph, name, ownerName, location, areaSize),
-      viewport_width: 760,
-      viewport_height: 376 
-    };  
-    const headers = { auth: {
-      username: '0c55bca0-4073-4054-a288-0bc5c72e9cad',
-      password: 'a1774ae8-7c16-4846-bc2e-91c3ad2f4ce0'
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const filename = RandomToken(10) + '.jpg';
-    const filepath = `lands/social/${filename}`;
-    req.land.social_photograph = filepath;
-
-    try {
-      const imageUrl = await axios.post(
-        'https://hcti.io/v1/image', 
-        JSON.stringify(payload), 
-        headers
-      );
-      const bufferData = await axios
-      .get(imageUrl.data.url, {
-        responseType: 'arraybuffer'
-      });
-      const image = await Buffer.from(bufferData.data);
-      axios.delete(imageUrl); // Delete image from hcti
-      return FileStorage.put(filepath, image)
         .then(function(response) {
           resolve(response);
         })
         .catch(function(err) {
           reject(err);
         });
-    } catch (error) {
-      console.error(error);
     }
-  }
-  return resolve(null);
+    return resolve(null);
+  });
+}
+
+function uploadSocialPhotograph(req) {
+  return new Promise(function(resolve, reject) {
+    if (!req.land.social_photograph && req.body.status === 'approved') {
+      const photograph = req.land.dataValues.photograph;
+      const name = req.land.dataValues.name;
+      const ownerName = req.land.dataValues.metadata.owner_name;
+      const location = req.land.dataValues.location;
+      const areaSize = req.land.dataValues.area_size;
+
+      const payload = {
+        html: getSocialImageHtml(
+          photograph,
+          name,
+          ownerName,
+          location,
+          areaSize
+        ),
+        viewport_width: 760,
+        viewport_height: 376,
+      };
+      const headers = {
+        auth: {
+          username: '0c55bca0-4073-4054-a288-0bc5c72e9cad',
+          password: 'a1774ae8-7c16-4846-bc2e-91c3ad2f4ce0',
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const filename = RandomToken(10) + '.jpg';
+      const filepath = `lands/social/${filename}`;
+
+      axios
+        .post('https://hcti.io/v1/image', JSON.stringify(payload), headers)
+        .then(function(imageUrl) {
+          // TODO: axios.delete(imageUrl); // Should we delete the image from hcti?
+          return axios.get(imageUrl.data.url, {
+            responseType: 'arraybuffer',
+          });
+        })
+        .then(function(bufferData) {
+          return FileStorage.put(filepath, Buffer.from(bufferData.data));
+        })
+        .then(function(response) {
+          resolve(response);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    }
+    return resolve(null);
+  });
 }
 
 class LandAdminController {
@@ -137,7 +135,7 @@ class LandAdminController {
 
     if (req.query.q) {
       options.where.name = {
-        [Op.iLike]: '%'+ req.query.q + '%',
+        [Op.iLike]: '%' + req.query.q + '%',
       };
       filters.q = req.query.q;
     }
@@ -245,15 +243,14 @@ class LandAdminController {
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }
 
-    // Upload land shape.
-    uploadLandShape(req);
+    Promise.all([
+      uploadLandShape(req),
+      uploadSocialPhotograph(req),
+      uploadPhotograph(req),
+    ])
+      .then(function(photos) {
+        let [landShapeUrl, socialPhotograhUrl, fileUrl] = photos;
 
-    //Upload social photograph
-    uploadSocialPhotograph(req);
-
-    // Upload photograph.
-    uploadPhotograph(req)
-      .then(function(fileUrl) {
         const cleaned_data = result.value;
         const notifyStatusChanged = cleaned_data.status != land.status;
 
@@ -300,6 +297,14 @@ class LandAdminController {
           land.photograph = fileUrl;
         }
 
+        if (landShapeUrl) {
+          land.land_shape = landShapeUrl;
+        }
+
+        if (socialPhotograhUrl) {
+          land.social_photograph = socialPhotograhUrl;
+        }
+
         land
           .save()
           .then(function() {
@@ -309,7 +314,8 @@ class LandAdminController {
                 const sitio = process.env.SERVER_URL + '/land/' + land.id;
                 const contacto = process.env.SERVER_URL + '/contact-us';
                 const terrainName = land.name;
-                const landApprovedTemplateId = "d-864a041ce69345a28d3a5c1dd530700a";
+                const landApprovedTemplateId =
+                  'd-864a041ce69345a28d3a5c1dd530700a';
 
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
@@ -331,7 +337,8 @@ class LandAdminController {
               } else if (cleaned_data.status == 'denied') {
                 const contacto = process.env.SERVER_URL + '/contact-us';
                 const notes = req.land.notes;
-                const landDeniedTemplateId = "d-3ff254035db74cec8eb0ce4e24d993d1";
+                const landDeniedTemplateId =
+                  'd-3ff254035db74cec8eb0ce4e24d993d1';
 
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
