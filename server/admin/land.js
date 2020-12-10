@@ -138,14 +138,19 @@ class LandAdminController {
     let options = {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
-      where: {},
+      where: { status: 'new'},
       order: [['name', 'ASC']],
     };
-    let filters = {};
+    let filters = { status: 'new' };
 
     if (req.query.status) {
-      options.where.status = req.query.status;
-      filters.status = req.query.status;
+      if (req.query.status !== "all") {
+        options.where.status =  req.query.status;
+        filters.status = req.query.status;
+      } else {
+        options.where =  {};
+        filters = {};
+      }      
     }
 
     if (req.query.level) {
