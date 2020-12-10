@@ -103,15 +103,9 @@
                   {% endif %}
                 </td>
                 <td>{{ item.location }}</td>
-                <td>
-                    <p>{{item.plots_count}}</p>
-                </td>
-                <td>
-                    <p>{{item.area_type}}</p>
-                </td>
-                <td>
-                    <p>{{item.likes}}</p>
-                </td>
+                <td>{{item.plots_count}}</td>
+                <td>{{item.area_type}}</td>
+                <td>{{item.likes}}</td>
                 <td>
                   {% if item.status == 'new' %}
                     <span class="label label-warning text-uppercase">{{ item.status }}</span>
