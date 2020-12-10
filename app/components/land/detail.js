@@ -40,7 +40,7 @@ class LandDetail extends React.Component {
     });
 
     const main_attributes = this.props.main_attributes || [];
-    const main_uses = this.props.main_uses || [];
+    const proposed_uses = this.props.proposed_uses || [];
 
     return (
       <div className="land-detail">
@@ -182,7 +182,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('scientist_research')
                     ? '/images/memory/icons-scientist-research.svg'
                     : '/images/memory/icons-scientist-research-disabled.svg'
                 }
@@ -194,7 +194,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('environment_monitoring')
                     ? '/images/memory/icons-environment-monitoring.svg'
                     : '/images/memory/icons-environment-monitoring-disabled.svg'
                 }
@@ -210,7 +210,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('spirit_uses')
                     ? '/images/memory/icons-spiritual-uses.svg'
                     : '/images/memory/icons-spiritual-uses-disabled.svg'
                 }
@@ -226,7 +226,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('educational')
                     ? '/images/memory/icons-education.svg'
                     : '/images/memory/icons-education-disabled.svg'
                 }
@@ -242,7 +242,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('recreation')
                     ? '/images/memory/icons-recreation.svg'
                     : '/images/memory/icons-recreation-disabled.svg'
                 }
@@ -254,7 +254,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('turism')
                     ? '/images/memory/icons-tourism.svg'
                     : '/images/memory/icons-tourism-disabled.svg'
                 }
@@ -266,7 +266,7 @@ class LandDetail extends React.Component {
             <div className="land-proposal-use">
               <img
                 src={
-                  main_uses.includes('scientist_research')
+                  proposed_uses.includes('sustainable_uses')
                     ? '/images/memory/icons-sustainable-uses.svg'
                     : '/images/memory/icons-sustainable-uses-disabled.svg'
                 }
