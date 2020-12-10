@@ -11,7 +11,7 @@ const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
 const axios = require('axios');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
-const { geojsonToSvg } = require('../utils/geojsonToSvg');
+const geojsonToSvg = require('../utils/geojsonToSvg');
 
 const sgMail = require('@sendgrid/mail');
 const FileStorage = require('../utils/file-storage');
@@ -36,8 +36,12 @@ function uploadPhotograph(req) {
 
 function uploadLandShape(req) {
   return new Promise(function(resolve, reject) {
+    const landGeom = req.land.dataValues.geom;
     if (!req.land.land_shape && req.body.status === 'approved') {
-      const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500);
+      const svg =
+      landGeom.type === 'MultiPolygon'
+        ? geojsonToSvg.multipolygon(landGeom.coordinates, 500)
+        : geojsonToSvg.polygon(landGeom.coordinates, 500);
       const filename = RandomToken(10) + '.png';
       const filepath = `lands/polygon/${filename}`;
       const image = Buffer.from(svg);
