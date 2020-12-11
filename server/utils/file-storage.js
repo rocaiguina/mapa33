@@ -27,7 +27,7 @@ const driver = process.env.NODE_ENV === 'production' ? 's3' : 'local';
 const storage = new StorageManager(config).disk(driver);
 
 module.exports.getUrl = function(location) {
-  if (driver == 'local') {
+  if (driver === 'local') {
     return `${process.env.SERVER_URL}${location}`;
   }
   return storage.getUrl(location);
