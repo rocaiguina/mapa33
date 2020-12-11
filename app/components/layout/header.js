@@ -42,9 +42,7 @@ class Header extends Component {
             <Row>
               <Col md={20}>
                 {this.props.title && (
-                  <div className="page-title">
-                    {this.props.title}
-                  </div>
+                  <div className="page-title">{this.props.title}</div>
                 )}
                 <div>{this.props.subtitle}</div>
               </Col>
@@ -55,7 +53,11 @@ class Header extends Component {
             style={{
               margin: '15px 0 0 0',
               borderStyle: 'dotted',
-              borderColor: this.props.disableBorder ? 'transparent' : this.props.dark ? '#fff' : '#000',
+              borderColor: this.props.disableBorder
+                ? 'transparent'
+                : this.props.dark
+                ? '#fff'
+                : '#000',
             }}
           />
         </div>

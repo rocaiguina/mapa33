@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
 class Item extends React.Component {
@@ -11,7 +10,7 @@ class Item extends React.Component {
     const { id, onLike } = this.props;
     onLike(id);
   };
-  
+
   render() {
     let owner = '';
     if (this.props.owner != null) {
@@ -45,7 +44,11 @@ class Item extends React.Component {
               </Col>
               <Col xs={12} md={3}>
                 {this.props.level != 'conserved' && (
-                  <a href="#" className="like-counter" onClick={this.handleOnLike}>
+                  <a
+                    href="#"
+                    className="like-counter"
+                    onClick={this.handleOnLike}
+                  >
                     <Icon type="heart" theme="filled" />
                     {Numeral(this.props.likes).format('0,0')}
                   </a>
@@ -70,6 +73,7 @@ class Item extends React.Component {
 Item.defaultProps = {
   area_size: 0,
   likes: 0,
+  landShape: '',
   owner: {
     first_name: '',
     last_name: '',
@@ -85,6 +89,7 @@ Item.propTypes = {
   location: PropTypes.string,
   area_size: PropTypes.number,
   likes: PropTypes.number,
+  landShape: PropTypes.string,
   onLike: PropTypes.func,
 };
 

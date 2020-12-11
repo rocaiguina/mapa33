@@ -111,7 +111,7 @@ class MemoryListContainer extends React.Component {
               disabled={!hasMore}
               onClick={this.handleLoadMore}
             >
-              LOAD MORE
+              VER MÁS
             </Button>
           </div>
         )}

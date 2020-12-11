@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
+import Moment from 'moment';
 
 import MemoryForm from '../components/memory/MemoryForm';
 import MemoryPreview from '../components/memory/MemoryPreview';
 import MemorySuccessfulView from '../components/memory/MemorySuccessfulView';
-
+import AuthService from '../services/auth';
 import LandAPI from '../api/land';
 
 class MemoryModalRegisterContainer extends React.Component {
@@ -129,44 +130,6 @@ class MemoryModalRegisterContainer extends React.Component {
     }
 
     return multimediaPreview;
-    // return [
-    //   {
-    //     id: 'rc-1029',
-    //     name: "cuadrado.png",
-    //     type: "youtube",
-    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
-    //   },
-    //   {
-    //     id: 'rc-1029',
-    //     name: "cuadrado.png",
-    //     type: "spotify",
-    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
-    //   },
-    //   {
-    //     id: 'rc-1029',
-    //     name: "cuadrado.png",
-    //     type: "audio",
-    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
-    //   },
-    //   {
-    //     id: 'rc-1029',
-    //     name: "cuadrado.png",
-    //     type: "video",
-    //     url: "https://www.youtube.com/embed/ViSpQbSnjHQ",
-    //   },
-    //   {
-    //     id: 'rc-1030',
-    //     name: "cuadrado.png",
-    //     type: "image",
-    //     url: "https://dummyimage.com/600x400/000/fff",
-    //   },
-    //   {
-    //     id: 'rc-1032',
-    //     name: "cuadrado.png",
-    //     type: "image",
-    //     url: "https://dummyimage.com/600x400/000/fff",
-    //   },
-    // ];
   }
 
   render() {
@@ -179,6 +142,7 @@ class MemoryModalRegisterContainer extends React.Component {
       multimedia,
       step,
     } = this.state;
+    const user = AuthService.getLoggedUser();
     const multimediaPreview = this.getMultimediaPreview();
     return (
       <Modal
@@ -204,8 +168,8 @@ class MemoryModalRegisterContainer extends React.Component {
             title={title}
             description={description}
             multimedia={multimediaPreview}
-            createdAt="10/10/2020"
-            author="Jorge Moreira"
+            createdAt={Moment().format('DD/MM/YYYY')}
+            author={user && user.full_name}
             onSubmit={this.handleOnSubmit}
             onMakeChanges={this.handleOnMakeChanges}
           />

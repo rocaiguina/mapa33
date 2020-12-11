@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { notification } from 'antd';
 import RegisterWizard from '../../components/register-wizard';
-import UserApi from '../../api/user';
 import LandApi from '../../api/land';
 import AuthService from '../../services/auth';
 
@@ -47,25 +46,30 @@ class RegisterLand extends React.Component {
   componentDidMount() {
     const self = this;
     if (AuthService.isUserLogged()) {
-      UserApi.getProfile()
-        .then(profile => {
-          this.setState({
-            user: profile,
-          });
-        })
-        .catch(err => {
-          if (err.status == 401) {
-            AuthService.logout();
-            return self.props.history.replace(
-              '/register/user?next=/register/propose-land'
-            );
-          }
-          notification.error({
-            message: 'Error',
-            description:
-              'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
-          });
-        });
+      const user = AuthService.getLoggedUser();
+      this.setState({
+        user,
+      });
+      // UserApi.getProfile()
+      //   .then(profile => {
+      //     this.setState({
+      //       user: profile,
+      //     });
+      //   })
+      //   .catch(err => {
+      //     if (err.status == 401) {
+      //       AuthService.logout();
+      //       logout();
+      //       return self.props.history.replace(
+      //         '/register/user?next=/register/propose-land'
+      //       );
+      //     }
+      //     notification.error({
+      //       message: 'Error',
+      //       description:
+      //         'No se logró recuperar los datos de tu perfil. Por favor intenta nuevamente.',
+      //     });
+      //   });
     } else {
       return self.props.history.replace(
         '/register/user?next=/register/propose-land'
@@ -82,6 +86,7 @@ class RegisterLand extends React.Component {
       .catch(err => {
         if (err.status == 401) {
           // TODO: Display a login popup.
+          AuthService.logout();
           history.push('/login');
         } else {
           setSubmitting(false);

@@ -50,7 +50,15 @@ class LandListViewContainer extends React.Component {
     const { maplist } = this.state;
     const limit = 12;
     this.setState({ loading: true });
-    LandApi.find({ keywords, level, location, use_type, area_size, page, limit })
+    LandApi.find({
+      keywords,
+      level,
+      location,
+      use_type,
+      area_size,
+      page,
+      limit,
+    })
       .then(response => {
         const {
           docs,

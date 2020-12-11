@@ -1,6 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
+const Mime = require('mime-types');
 const sharp = require('sharp');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
@@ -22,7 +23,10 @@ function uploadPhotograph(req) {
     if (req.file) {
       const filename = RandomToken(10) + '.jpg';
       const filepath = `lands/${filename}`;
-      return FileStorage.put(filepath, req.file.buffer)
+      const fileOpts = {
+        ContentType: Mime.lookup(filename),
+      };
+      return FileStorage.put(filepath, req.file.buffer, fileOpts)
         .then(function(response) {
           resolve(response);
         })
@@ -40,12 +44,15 @@ function uploadLandShape(req) {
       const svg = geojsonToSvg(req.land.dataValues.geom.coordinates[0], 500);
       const filename = RandomToken(10) + '.png';
       const filepath = `lands/polygon/${filename}`;
+      const fileOpts = {
+        ContentType: Mime.lookup(filename),
+      };
       const image = Buffer.from(svg);
       sharp(image)
         .toFormat('png')
         .toBuffer()
         .then(newImage => {
-          return FileStorage.put(filepath, newImage);
+          return FileStorage.put(filepath, newImage, fileOpts);
         })
         .then(function(response) {
           resolve(response);
@@ -91,6 +98,9 @@ function uploadSocialPhotograph(req) {
 
       const filename = RandomToken(10) + '.jpg';
       const filepath = `lands/social/${filename}`;
+      const fileOpts = {
+        ContentType: Mime.lookup(filename),
+      };
 
       axios
         .post('https://hcti.io/v1/image', JSON.stringify(payload), headers)
@@ -101,7 +111,11 @@ function uploadSocialPhotograph(req) {
           });
         })
         .then(function(bufferData) {
-          return FileStorage.put(filepath, Buffer.from(bufferData.data));
+          return FileStorage.put(
+            filepath,
+            Buffer.from(bufferData.data),
+            fileOpts
+          );
         })
         .then(function(response) {
           resolve(response);
