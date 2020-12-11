@@ -100,6 +100,23 @@ class UserController {
       interested_volunteer: cleaned_data.interested_volunteer,
     })
       .then(function(user) {
+        // Authenticate user on regiser.
+        delete user.dataValues.password;
+        delete user.dataValues.role;
+        const payload = {
+          id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET);
+        res.cookie('access_token', token, {
+          expires: new Date(Date.now() + 3600000),
+          httpOnly: true,
+          secure: false, // set to true if your using https
+        });
+        res.json(user);
+
+        // Send email notification.
         const userRegisterTemplateId = 'd-e6641e63796d4c63b5e03cf5a25b78cf';
         const site = process.env.SERVER_URL + '/profile';
 
@@ -121,21 +138,6 @@ class UserController {
             }
           }
         );
-
-        // Authenticate user on regiser.
-        const payload = {
-          id: user.id,
-          first_name: user.first_name,
-          last_name: user.last_name,
-        };
-        const token = jwt.sign(payload, process.env.JWT_SECRET);
-        res.cookie('access_token', token, {
-          expires: new Date(Date.now() + 3600000),
-          httpOnly: true,
-          secure: false, // set to true if your using https
-        });
-
-        res.json(payload);
       })
       .catch(function(err) {
         res.status(400).send(err);
