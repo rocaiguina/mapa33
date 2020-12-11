@@ -29,7 +29,7 @@
                         <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.status if filters.status else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
                         <ul class="dropdown-menu pull-left">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=">All</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=all">All</a>
                             </li>
                             <li role="presentation">
                                 <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=new">New</a>
@@ -103,15 +103,9 @@
                   {% endif %}
                 </td>
                 <td>{{ item.location }}</td>
-                <td>
-                    <p>{{item.plots_count}}</p>
-                </td>
-                <td>
-                    <p>{{item.area_type}}</p>
-                </td>
-                <td>
-                    <p>{{item.likes}}</p>
-                </td>
+                <td>{{item.plots_count}}</td>
+                <td>{{item.area_type}}</td>
+                <td>{{item.likes}}</td>
                 <td>
                   {% if item.status == 'new' %}
                     <span class="label label-warning text-uppercase">{{ item.status }}</span>
