@@ -1,5 +1,6 @@
 'use strict';
 
+const Mime = require('mime-types');
 const Path = require('path');
 const RandomToken = require('random-token');
 const FileStorage = require('../utils/file-storage');
@@ -23,8 +24,11 @@ const put = (req, res) => {
     const fileName = RandomToken(10) + fileExtension;
     const filePath = `multimedia/${fileName}`;
     const fileContent = req.file.buffer;
+    const fileOpts = {
+      ContentType: Mime.lookup(fileName),
+    };
 
-    FileStorage.put(filePath, fileContent)
+    FileStorage.put(filePath, fileContent, fileOpts)
       .then(function() {
         res.send({
           fieldname: req.file.fieldname,

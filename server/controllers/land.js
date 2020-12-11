@@ -1,6 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
+const Mime = require('mime-types');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
 const Sequelize = require('sequelize');
@@ -392,6 +393,9 @@ class LandController {
       const image = Base64Img.img(req.body.base64Img);
       const filename = RandomToken(10) + '.jpg';
       const filepath = `lands/${filename}`;
+      const fileOpts = {
+        ContentType: Mime.lookup(filename),
+      };
       // Resize image
       const input = Buffer.from(image.base64, 'base64');
       sharp(input)
@@ -400,7 +404,7 @@ class LandController {
         .toBuffer()
         .then(newImage => {
           // Store image
-          FileStorage.put(filepath, newImage)
+          FileStorage.put(filepath, newImage, fileOpts)
             .then(function(response) {
               req.photograph_filepath = response;
               next();

@@ -25,6 +25,8 @@ function login(req, res) {
           user.password
         );
         if (matchCredentials) {
+          delete user.dataValues.password;
+          delete user.dataValues.role;
           const payload = {
             id: user.id,
             first_name: user.first_name,
@@ -33,11 +35,11 @@ function login(req, res) {
           };
           const token = jwt.sign(payload, process.env.JWT_SECRET);
           res.cookie('access_token', token, {
-            expires: new Date(Date.now() + 3600000),
+            expires: new Date(Date.now() + 3600000), // 1 hour
             httpOnly: true,
             secure: false, // set to true if your using https
           });
-          return res.send(payload);
+          return res.send(user);
         }
       }
       res.status(400).send('Authentication failed.');

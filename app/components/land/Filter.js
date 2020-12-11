@@ -14,7 +14,7 @@ class Filter extends React.Component {
     };
   }
 
-  handleOnSearchKeyword = (value) => {
+  handleOnSearchKeyword = value => {
     this.setState({
       text: value,
     });
@@ -26,7 +26,7 @@ class Filter extends React.Component {
     this.props.onSearch(text);
   };
 
-  handleOnKeyPress = (e) => {
+  handleOnKeyPress = e => {
     if (e.which === 13 || e.keyCode === 13) {
       const { text } = this.state;
       this.props.onSearch(text);
@@ -44,9 +44,7 @@ class Filter extends React.Component {
       onChangeSize,
       onChangeStatus,
       onChangeView,
-      onSearchKeyword,
       onSelectLand,
-      onSearch,
     } = this.props;
     return (
       <div className="land-filter">

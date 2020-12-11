@@ -114,9 +114,9 @@ module.exports = {
         <div class="container">
           <img src="${FileStorage.getUrl(photograph)}" class="map" />
           <img src="${process.env.SERVER_URL +
-            'images/M33-FondoNegro.svg'}" class="logo" />
+            '/images/M33-FondoNegro.svg'}" class="logo" />
           <img src="${process.env.SERVER_URL +
-            'images/colorline.png'}" class="line" />
+            '/images/colorline.png'}" class="line" />
           <div class="right-column">
             <p class="title">
               ${name}
