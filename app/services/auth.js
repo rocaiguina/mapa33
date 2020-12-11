@@ -42,6 +42,10 @@ export const logout = function() {
 };
 
 export const authenticate = function(user) {
+  const sessionExpiresAt = Moment()
+    .add(USER_SESSION_TIME, 'seconds')
+    .format(DATE_TIME_FORMAT);
+  localStorage.setItem(USER_SESSION_EXPIRES_AT, sessionExpiresAt);
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 };
 

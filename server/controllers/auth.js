@@ -73,6 +73,9 @@ function forgotPassword(req, res) {
         expired: date,
       })
         .then(function() {
+          res.send();
+
+          // Send email notification.
           const recoveryPasswordTemplateId =
             'd-024b5f22e90e4533961996256953aea6';
           // variables para email
