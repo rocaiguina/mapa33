@@ -29,12 +29,12 @@ const put = (req, res) => {
     };
 
     FileStorage.put(filePath, fileContent, fileOpts)
-      .then(function() {
+      .then(function(response) {
         res.send({
           fieldname: req.file.fieldname,
           originalname: req.file.originalname,
           mimetype: req.file.mimetype,
-          url: FileStorage.getUrl(filePath),
+          url: FileStorage.getUrl(response),
         });
       })
       .catch(function(err) {

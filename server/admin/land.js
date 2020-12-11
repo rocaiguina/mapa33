@@ -43,9 +43,9 @@ function uploadLandShape(req) {
     const landGeom = req.land.dataValues.geom;
     if (!req.land.land_shape && req.body.status === 'approved') {
       const svg =
-      landGeom.type === 'MultiPolygon'
-        ? geojsonToSvg.multipolygon(landGeom.coordinates, 500)
-        : geojsonToSvg.polygon(landGeom.coordinates, 500);
+        landGeom.type === 'MultiPolygon'
+          ? geojsonToSvg.multipolygon(landGeom.coordinates, 500)
+          : geojsonToSvg.polygon(landGeom.coordinates, 500);
       const filename = RandomToken(10) + '.png';
       const filepath = `lands/polygon/${filename}`;
       const fileOpts = {
@@ -138,19 +138,19 @@ class LandAdminController {
     let options = {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
-      where: { status: 'new'},
+      where: { status: 'new' },
       order: [['name', 'ASC']],
     };
     let filters = { status: 'new' };
 
     if (req.query.status) {
-      if (req.query.status !== "all") {
-        options.where.status =  req.query.status;
+      if (req.query.status !== 'all') {
+        options.where.status = req.query.status;
         filters.status = req.query.status;
       } else {
-        options.where =  {};
+        options.where = {};
         filters = {};
-      }      
+      }
     }
 
     if (req.query.level) {
