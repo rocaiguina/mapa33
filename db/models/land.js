@@ -52,11 +52,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: [],
     },
-    protection_reasons: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
-      defaultValue: [],
-    },
     coordinates: {
       type: DataTypes.GEOMETRY,
       allowNull: true,
