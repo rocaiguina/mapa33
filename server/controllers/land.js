@@ -349,8 +349,7 @@ class LandController {
       acquisition_type: '',
       year_estab: '',
       year_acquisition: '',
-      reason_conservation:
-        LAND_PROTECTION_REASONS[cleaned_data.importance_of_knowing] || '',
+      reason_conservation: cleaned_data.importance_of_knowing || '',
       user_id: req.user.id,
       ownership: cleaned_data.are_u_owner ? cleaned_data.are_u_owner : null,
       notes: '',
