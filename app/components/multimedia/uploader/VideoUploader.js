@@ -57,7 +57,7 @@ const VideoUploader = props => {
             <Upload
               accept="video/*"
               className="ant-upload-block"
-              action="http://localhost:3000/api/file"
+              action="/api/file"
               onChange={handleOnChange}
               defaultFileList={files}
             >
