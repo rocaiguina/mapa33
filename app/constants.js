@@ -1,5 +1,13 @@
 'use strict';
 
+export const LAND_STATUS_NEW = 'new';
+export const LAND_STATUS_DENIED = 'denied';
+export const LAND_STATUS_APPROVED = 'approved';
+
+export const MEMORY_STATUS_NEW = 'NEW';
+export const MEMORY_STATUS_APPROVED = 'APPROVED';
+export const MEMORY_STATUS_REJECTED = 'REJECTED';
+
 export const LAND_LEVELS = [
   {
     value: 'basic',

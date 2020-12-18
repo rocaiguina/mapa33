@@ -3,6 +3,7 @@ import { Col, Divider, Row, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import ProfileActivity from '../../containers/user/ProfileActivity';
 
 const dateFormat = 'YYYY-MM-DD';
 const dateHumanFormat = 'MMMM YYYY';
@@ -100,6 +101,8 @@ class Profile extends React.Component {
               style={{ borderStyle: 'dotted', marginBottom: '12px' }}
             />
             <Row className="m-b-15">
+              <ProfileActivity />
+              {/*
               <h3 style={{ fontWeight: 900, color: '#fff' }}>
                 Áreas Propuestas
               </h3>
@@ -121,6 +124,7 @@ class Profile extends React.Component {
                 </Col>
                 <Col md={12} sm={12}></Col>
               </Row>
+              */}
             </Row>
           </Col>
         </Row>

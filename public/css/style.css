@@ -1410,17 +1410,39 @@ ul.actions {
 .ant-btn-link.ant-btn-purple {
   color: #F073A8;
 }
+
 .ant-btn.ant-btn-purple {
   background-color: #F073A8;
   border-color: #F073A8;
   color: #ffffff;
 }
-
 .ant-btn.ant-btn-purple:hover,
 .ant-btn.ant-btn-purple:focus {
   background-color: #dc6396;
   border-color: #dc6396;
   color: #ffffff !important;
+}
+
+.ant-btn.ant-btn-background-ghost.ant-btn-purple {
+  background: transparent;
+  border-color: #F073A8;
+  color: #F073A8;
+}
+.ant-btn.ant-btn-background-ghost.ant-btn-purple:hover,
+.ant-btn.ant-btn-background-ghost.ant-btn-purple:focus {
+  border-color: #F073A8;
+  color: #F073A8 !important;
+}
+
+.ant-btn.ant-btn-background-ghost.ant-btn-turquoise {
+  background: transparent;
+  border-color: #4f978d;
+  color: #4f978d;
+}
+.ant-btn.ant-btn-background-ghost.ant-btn-turquoise:hover,
+.ant-btn.ant-btn-background-ghost.ant-btn-turquoise:focus {
+  border-color: #4f978d;
+  color: #4f978d !important;
 }
 
 .ant-btn.ant-btn-orange {
@@ -2451,6 +2473,80 @@ a.mapboxgl-ctrl-logo {
   border-radius: 12px;
 }
 
+/* Custom tabs */
+.ant-tabs.tab-style2 .ant-tabs-bar {
+  border-bottom-color: transparent;
+}
+.ant-tabs.tab-style2 .ant-tabs-nav .ant-tabs-tab {
+  color: #fff;
+  margin: 0 40px 0 0;
+  padding: 0;
+}
+.ant-tabs.tab-style2 .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab::after {
+  border-left: 1px dotted #F073A8;
+  content: '';
+  height: 80%;
+  left: -20px;
+  position: absolute;
+  top: 1px;
+}
+.ant-tabs.tab-style2 .ant-tabs-nav .ant-tabs-tab h3 {
+  font-weight: 500;
+}
+.ant-tabs.tab-style2 .ant-tabs-nav .ant-tabs-tab h3 span {
+  display: block;
+}
+.ant-tabs.tab-style2 .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  color: #F073A8;
+}
+.ant-tabs.tab-style2 .ant-tabs-ink-bar {
+  background-color: #F073A8;
+}
+
+/* Custom modal confirm */
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-body {
+  padding: 20px 20px 18px;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-content {
+  border-radius: 24px;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-body .anticon {
+  display: none;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-body .ant-modal-confirm-title {
+  border-bottom: 1px dotted #000;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-body .ant-modal-confirm-content {
+  color: #000;
+  margin-left: 0px !important;
+  margin-top: 34px;
+  text-align: center;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns {
+  display: flex;
+  flex-direction: row;
+  float: none;
+  margin-top: 34px;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn {
+  flex: 1;
+  border-radius: 32px;
+  background-color: #969696;
+  border-color: #969696;
+  color: #434343;
+  font-size: 16px;
+  height: 40px;
+  padding: 0 15px;
+}
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn:hover,
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn:focus {
+  background-color: #969696;
+  border-color: #969696 !important;
+  color: #434343 !important;
+}
+
 /* Style Forms */
 .form-style2 .form-group {
   margin-bottom: 0.5rem;
@@ -2631,4 +2727,26 @@ a.mapboxgl-ctrl-logo {
     width: 14.285714285714285714285714285714%;
     *width: 14.285714285714285714285714285714%;
   }
+}
+
+/* Profile */
+.activity-item {
+  border-bottom: 1px solid #404040;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.activity-title {
+  color: #fff;
+  font-size: 1.17em;
+  font-weight: 500;
+}
+.activity-title:hover,
+.activity-title:focus {
+  color: #f576a9;
+}
+.activity-controls {
+  text-align: right;
+}
+.activity-controls .ant-btn + .ant-btn {
+  margin-left: 10px;
 }

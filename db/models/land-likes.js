@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   LandLikes.associate = function(models) {
     // associations can be defined here
+    LandLikes.belongsTo(models.Land, { as: 'land', foreignKey: 'land_id' });
   };
   return LandLikes;
 };
