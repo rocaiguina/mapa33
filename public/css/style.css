@@ -1279,6 +1279,10 @@ ul.actions {
 }
 
 /* Custom spin */
+.container-spin {
+  padding: 15px 0;
+  text-align: center;
+}
 .ant-spin .ant-spin-text {
   color: #999;
 }
@@ -2547,6 +2551,29 @@ a.mapboxgl-ctrl-logo {
   color: #434343 !important;
 }
 
+/* Custom radio */
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper {
+  border-radius: 0;
+  padding: 0 10px;
+  min-width: 36px;
+}
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper + .ant-radio-button-wrapper {
+  margin-left: 5px;
+}
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper:not(:first-child)::before {
+  content: none;
+}
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled:first-child,
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled:hover {
+  background: transparent;
+  color: #fff;
+}
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled.ant-radio-button-wrapper-checked {
+  background: #F073A8;
+  border-color: #F073A8;
+  color: #000;
+}
+
 /* Style Forms */
 .form-style2 .form-group {
   margin-bottom: 0.5rem;
@@ -2730,9 +2757,23 @@ a.mapboxgl-ctrl-logo {
 }
 
 /* Profile */
+.profile-username {
+  font-size: 18px;
+  line-height: 40px;
+  margin-top: 10px;
+  position: relative;
+}
+.profile-username h2 {
+  margin-bottom: 0.3em;
+}
+.activity-list {
+  height: 230px;
+  overflow: auto;
+}
 .activity-item {
   border-bottom: 1px solid #404040;
   margin-bottom: 10px;
+  overflow: hidden;
   padding-bottom: 10px;
 }
 .activity-title {

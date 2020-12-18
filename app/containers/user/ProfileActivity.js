@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Modal, notification } from 'antd';
+import { Modal, notification, Spin } from 'antd';
 
 import MyActivities from '../../components/activity/MyActivities';
 import ProfileApi from '../../api/profile';
@@ -7,6 +7,7 @@ import ProfileApi from '../../api/profile';
 const { confirm } = Modal;
 
 const ProfileActivity = () => {
+  const [loading, setLoading] = useState(true);
   const [proposedLands, setProposedLands] = useState([]);
   const [memories, setMemories] = useState([]);
   const [supportedLands, setSupportedLands] = useState([]);
@@ -114,11 +115,20 @@ const ProfileActivity = () => {
         setProposedLands(response.proposedLands);
         setMemories(response.memories);
         setSupportedLands(response.supportedLands);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="container-spin">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <MyActivities

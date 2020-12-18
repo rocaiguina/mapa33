@@ -20,7 +20,6 @@ const MyActivities = props => {
 
   return (
     <div>
-      <h3>Mi actividad de Áreas</h3>
       <Tabs className="tab-style2">
         <TabPane
           key="proposed"
@@ -30,19 +29,21 @@ const MyActivities = props => {
             </h3>
           }
         >
-          {proposedLands.map(item => (
-            <ProposedLandActivityItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              status={item.status}
-              createdAt={item.createdAt}
-              onDelete={onDeleteProposedLand}
-            />
-          ))}
-          {proposedLands.length === 0 && (
-            <p className="text-gray">No tienes propuestas registradas.</p>
-          )}
+          <div className="activity-list">
+            {proposedLands.map(item => (
+              <ProposedLandActivityItem
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                status={item.status}
+                createdAt={item.createdAt}
+                onDelete={onDeleteProposedLand}
+              />
+            ))}
+            {proposedLands.length === 0 && (
+              <p className="text-gray">No tienes propuestas registradas.</p>
+            )}
+          </div>
         </TabPane>
         <TabPane
           key="memories"
@@ -52,19 +53,21 @@ const MyActivities = props => {
             </h3>
           }
         >
-          {memories.map(item => (
-            <MemoryActivityItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              status={item.status}
-              landId={item.land_id}
-              onDelete={onDeleteMemory}
-            />
-          ))}
-          {memories.length === 0 && (
-            <p className="text-gray">No tienes memorias registradas.</p>
-          )}
+          <div className="activity-list">
+            {memories.map(item => (
+              <MemoryActivityItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                status={item.status}
+                landId={item.land_id}
+                onDelete={onDeleteMemory}
+              />
+            ))}
+            {memories.length === 0 && (
+              <p className="text-gray">No tienes memorias registradas.</p>
+            )}
+          </div>
         </TabPane>
         <TabPane
           key="supported"
@@ -74,17 +77,19 @@ const MyActivities = props => {
             </h3>
           }
         >
-          {supportedLands.map(item => (
-            <SupportedLandActivityItem
-              key={item.id}
-              id={item.id}
-              land={item.land}
-              onUnLike={onUnLike}
-            />
-          ))}
-          {supportedLands.length === 0 && (
-            <p className="text-gray">No tienes propuestas apoyadas.</p>
-          )}
+          <div className="activity-list">
+            {supportedLands.map(item => (
+              <SupportedLandActivityItem
+                key={item.id}
+                id={item.id}
+                land={item.land}
+                onUnLike={onUnLike}
+              />
+            ))}
+            {supportedLands.length === 0 && (
+              <p className="text-gray">No tienes propuestas apoyadas.</p>
+            )}
+          </div>
         </TabPane>
       </Tabs>
     </div>
