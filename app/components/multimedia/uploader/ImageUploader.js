@@ -33,7 +33,7 @@ const ImageUploader = props => {
         <Upload
           accept="image/*"
           className="ant-upload-block"
-          action="http://localhost:3000/api/file"
+          action="/api/file"
           onChange={handleOnChange}
           defaultFileList={files}
           showUploadList={{

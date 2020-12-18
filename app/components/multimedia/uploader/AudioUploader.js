@@ -57,7 +57,7 @@ const AudioUploader = props => {
             <Upload
               accept="audio/*"
               className="ant-upload-block"
-              action="http://localhost:3000/api/file"
+              action="/api/file"
               onChange={handleOnChange}
               defaultFileList={files}
             >
