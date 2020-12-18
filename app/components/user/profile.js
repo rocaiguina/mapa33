@@ -77,13 +77,13 @@ class Profile extends React.Component {
                 <p className="text-darkgray">Código postal</p>
               </Col>
             </Row>
-            <Row>
+            <Row className="m-b-15">
               <Col xs={16}>
                 Deseo recibir contenido personalizado de Para la Naturaleza
               </Col>
               <Col xs={8}>
                 <Radio.Group
-                  defaultValue={profile.advs_by_email || profile.advs_by_zip}
+                  value={profile.advs_by_email}
                   buttonStyle="solid"
                   className="radio-group-style2"
                   disabled
