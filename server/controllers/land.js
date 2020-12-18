@@ -83,7 +83,9 @@ class LandController {
     }
 
     if (use_type) {
-      conditions.use_type = use_type;
+      conditions.main_uses = {
+        [Op.contains]: [use_type],
+      };
     }
 
     if (area_size) {

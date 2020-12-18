@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { AutoComplete, Button, Col, Icon, Input, Row, Select } from 'antd';
 
 import CIcon from '../ui/Icon';
+import { LAND_MAIN_USES } from '../../constants';
 
 const { Option } = Select;
 
@@ -198,7 +199,9 @@ class Filter extends React.Component {
                 style={{ width: '100%' }}
               >
                 <Option value="">Todas</Option>
-                <Option value="Agricolas">Agricolas</Option>
+                {LAND_MAIN_USES.map(item => (
+                  <Option value={item.value}>{item.label}</Option>
+                ))}
               </Select>
             </Col>
             <Col md={6} xs={12}>
