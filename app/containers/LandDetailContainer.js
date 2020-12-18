@@ -166,6 +166,7 @@ class LandDetailContainer extends React.Component {
       <BaseLayout
         dark
         title={title}
+        className="main-auto-height"
         footerRightComponent={
           <ProposeButton title="Proponer área" icon="plus" />
         }
