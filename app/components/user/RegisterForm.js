@@ -331,33 +331,18 @@ class RegisterForm extends React.Component {
               </Col>
               <Col md={8}>
                 <div className="m-b-20 m-t-20">
+                  <br />
+                  <br />
+                  <br />
+                  <br />
                   <div className="form-check">
                     <Checkbox
                       name="advs_by_email"
                       defaultChecked={false}
                       onChange={handleChange}
                     >
-                      Deseo recibir promociones de Para la Naturaleza en mi
-                      correo electrónico
-                    </Checkbox>
-                  </div>
-                  <div className="form-check">
-                    <Checkbox
-                      name="advs_by_zip"
-                      defaultChecked={false}
-                      onChange={handleChange}
-                    >
-                      Deseo recibir promociones de Para la Naturalesa en mi
-                      dirección postal
-                    </Checkbox>
-                  </div>
-                  <div className="form-check">
-                    <Checkbox
-                      name="interested_volunteer"
-                      defaultChecked={false}
-                      onChange={handleChange}
-                    >
-                      Intereso ser voluntario / voluntaria
+                      Deseo recibir contenido personalizado de Para la
+                      Naturaleza
                     </Checkbox>
                   </div>
                   <div className="form-check">

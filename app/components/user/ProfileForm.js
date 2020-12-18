@@ -271,7 +271,7 @@ class ProfileForm extends React.Component {
               </Col>
               <Col md={12}>
                 <Row>
-                  <Col md={16} className="blockprofilecheckbox m-b-10 m-t-10">
+                  <Col md={16} className="blockprofilecheckbox m-b-10">
                     <div className="form-check">
                       <Checkbox
                         name="advs_by_email"
@@ -279,19 +279,8 @@ class ProfileForm extends React.Component {
                         checked={values.advs_by_email}
                         onChange={handleChange}
                       >
-                        Deseo recibir promociones de Para la Naturaleza en mi
-                        correo electrónico
-                      </Checkbox>
-                    </div>
-                    <div className="form-check">
-                      <Checkbox
-                        name="advs_by_zip"
-                        style={{ color: '#fff' }}
-                        checked={values.advs_by_zip}
-                        onChange={handleChange}
-                      >
-                        Deseo recibir promociones de Para la Naturaleza en mi
-                        dirección postal
+                        Deseo recibir contenido personalizado de Para la
+                        Naturaleza
                       </Checkbox>
                     </div>
                   </Col>

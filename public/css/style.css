@@ -2556,6 +2556,7 @@ a.mapboxgl-ctrl-logo {
   border-radius: 0;
   padding: 0 10px;
   min-width: 36px;
+  border-left: 1px solid;
 }
 .ant-radio-group.radio-group-style2 .ant-radio-button-wrapper + .ant-radio-button-wrapper {
   margin-left: 5px;
@@ -2563,6 +2564,7 @@ a.mapboxgl-ctrl-logo {
 .ant-radio-group.radio-group-style2 .ant-radio-button-wrapper:not(:first-child)::before {
   content: none;
 }
+.ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled,
 .ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled:first-child,
 .ant-radio-group.radio-group-style2 .ant-radio-button-wrapper-disabled:hover {
   background: transparent;
