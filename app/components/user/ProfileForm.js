@@ -313,33 +313,6 @@ class ProfileForm extends React.Component {
                     Guardar Cambios
                   </Button>
                 </div>
-                <Divider
-                  dashed
-                  style={{ borderStyle: 'dotted', marginBottom: '12px' }}
-                />
-                <Row className="m-b-15">
-                  <h3 style={{ fontWeight: 900, color: '#fff' }}>
-                    Áreas Propuestas
-                  </h3>
-                  <Row>
-                    <Col md={12} sm={24} xs={24} className="toptableprofile">
-                      <h3 style={{ color: '#fff', padding: '5px 10px' }}>
-                        {values.proposed_areas} <span>Áreas propuestas</span>
-                      </h3>
-                    </Col>
-                    <Col md={12} sm={12} xs={12} className="lefttableprofile">
-                      <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
-                        {values.approved_areas} <span>Áreas aceptadas</span>
-                      </h3>
-                    </Col>
-                    <Col md={12} sm={12} xs={12} className="righttableprofile">
-                      <h3 style={{ color: '#f576a9', padding: '5px 10px' }}>
-                        {values.supported_areas} <span>Áreas apoyadas</span>
-                      </h3>
-                    </Col>
-                    <Col md={12} sm={12}></Col>
-                  </Row>
-                </Row>
               </Col>
             </Row>
           </form>
