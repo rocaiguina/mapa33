@@ -6,7 +6,7 @@ import Numeral from 'numeral';
 
 import Coordinates from '../ui/Coordinates';
 
-import { LAND_ATTRIBUTE } from '../../constants';
+import { LAND_ATTRIBUTE, LAND_PROTECTION_REASON } from '../../constants';
 
 class LandDetail extends React.Component {
   constructor(props) {
@@ -41,6 +41,12 @@ class LandDetail extends React.Component {
 
     const main_attributes = this.props.main_attributes || [];
     const proposed_uses = this.props.proposed_uses || [];
+
+    const reasonConservation = LAND_PROTECTION_REASON[
+      this.props.reason_conservation
+    ]
+      ? LAND_PROTECTION_REASON[this.props.reason_conservation]
+      : 'No definido.';
 
     return (
       <div className="land-detail">
@@ -138,7 +144,7 @@ class LandDetail extends React.Component {
                     : ' este terreno '}
                   en particular?
                 </h3>
-                <p>{this.props.reason_conservation || 'No definido.'}</p>
+                <p>{reasonConservation}</p>
               </div>
               <div className="land-support hidden-xs">
                 <Button

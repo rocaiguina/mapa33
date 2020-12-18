@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Divider, notification, Row } from 'antd';
+import { Button, Col, Divider, notification, Row, Spin } from 'antd';
 import { DiscussionEmbed } from 'disqus-react';
 
 import BaseLayout from '../components/layout/base';
@@ -34,6 +34,7 @@ class LandDetailContainer extends React.Component {
       coordinates: {},
       disabledLike: true,
       shareMemories: false,
+      loading: true,
     };
   }
 
@@ -63,6 +64,7 @@ class LandDetailContainer extends React.Component {
           area_size: land.area_size,
           plots_count: land.plots_count,
           coordinates: land.coordinates || { coordinates: [] },
+          loading: false,
         });
       })
       .catch(() => {
@@ -157,6 +159,7 @@ class LandDetailContainer extends React.Component {
       coordinates,
       disabledLike,
       shareMemories,
+      loading,
     } = this.state;
     const title =
       level == 'conserved'
@@ -171,82 +174,91 @@ class LandDetailContainer extends React.Component {
           <ProposeButton title="Proponer área" icon="plus" />
         }
       >
-        <LandDetail
-          id={id}
-          name={name}
-          level={level}
-          photograph={photograph}
-          owner={owner}
-          likes={likes}
-          reason_conservation={reason_conservation}
-          location={location}
-          main_attributes={main_attributes}
-          other_main_attributes={other_main_attributes}
-          main_uses={main_uses}
-          other_main_uses={other_main_uses}
-          proposed_uses={proposed_uses}
-          area_size={area_size}
-          plots_count={plots_count}
-          coordinates={coordinates}
-          disabledLike={disabledLike}
-          onClickLike={this.handleOnClickLike}
-        />
-        <Divider dashed style={{ borderStyle: 'dotted' }} />
-        <Row gutter={16}>
-          <Col md={18}>
-            <h3 className="text-bold text-uppercase m-b-15">
-              MEMORIAS DE <br />
-              {name}
-            </h3>
-          </Col>
-          <Col md={6}>
-            <div className="form-group">
-              <Button
-                block
-                shape="round"
-                className="ant-btn-purple"
-                size="large"
-                onClick={this.handleOnShareMemories}
-                style={{
-                  height: '54px',
-                  lineHeight: '52px',
-                }}
-              >
-                Comparte tus memorias
-              </Button>
-            </div>
-          </Col>
-        </Row>
-        <MemoryListContainer landId={id} />
-        <Divider dashed style={{ borderStyle: 'dotted' }} />
-        <Row gutter={16}>
-          <Col md={8}>
-            <h3 className="text-bold m-b-20">
-              CONECTA CON LA COMUNIDAD DEL TERRENO DEL FUTURO
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation.
-            </p>
-          </Col>
-          <Col md={16}>
-            <div className="land-disqus">
-              <DiscussionEmbed
-                shortname="mapa33"
-                config={{
-                  identifier: id,
-                  title: name,
-                }}
-              />
-            </div>
-          </Col>
-        </Row>
-        <MemoryModalRegisterContainer
-          landId={id}
-          visible={shareMemories}
-          onClose={this.handleOnCloseMemoriesModal}
-        />
+        {loading && (
+          <div className="container-spin">
+            <Spin />
+          </div>
+        )}
+        {!loading && (
+          <>
+            <LandDetail
+              id={id}
+              name={name}
+              level={level}
+              photograph={photograph}
+              owner={owner}
+              likes={likes}
+              reason_conservation={reason_conservation}
+              location={location}
+              main_attributes={main_attributes}
+              other_main_attributes={other_main_attributes}
+              main_uses={main_uses}
+              other_main_uses={other_main_uses}
+              proposed_uses={proposed_uses}
+              area_size={area_size}
+              plots_count={plots_count}
+              coordinates={coordinates}
+              disabledLike={disabledLike}
+              onClickLike={this.handleOnClickLike}
+            />
+            <Divider dashed style={{ borderStyle: 'dotted' }} />
+            <Row gutter={16}>
+              <Col md={18}>
+                <h3 className="text-bold text-uppercase m-b-15">
+                  MEMORIAS DE <br />
+                  {name}
+                </h3>
+              </Col>
+              <Col md={6}>
+                <div className="form-group">
+                  <Button
+                    block
+                    shape="round"
+                    className="ant-btn-purple"
+                    size="large"
+                    onClick={this.handleOnShareMemories}
+                    style={{
+                      height: '54px',
+                      lineHeight: '52px',
+                    }}
+                  >
+                    Comparte tus memorias
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+            <MemoryListContainer landId={id} />
+            <Divider dashed style={{ borderStyle: 'dotted' }} />
+            <Row gutter={16}>
+              <Col md={8}>
+                <h3 className="text-bold m-b-20">
+                  CONECTA CON LA COMUNIDAD DEL TERRENO DEL FUTURO
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation.
+                </p>
+              </Col>
+              <Col md={16}>
+                <div className="land-disqus">
+                  <DiscussionEmbed
+                    shortname="mapa33"
+                    config={{
+                      identifier: id,
+                      title: name,
+                    }}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <MemoryModalRegisterContainer
+              landId={id}
+              visible={shareMemories}
+              onClose={this.handleOnCloseMemoriesModal}
+            />
+          </>
+        )}
       </BaseLayout>
     );
   }
