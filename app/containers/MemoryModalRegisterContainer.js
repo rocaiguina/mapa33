@@ -16,19 +16,19 @@ class MemoryModalRegisterContainer extends React.Component {
       title: '',
       description: '',
       mediaType: undefined,
-      embedURL: '',
+      embed: '',
       multimedia: [],
       step: 'form', // form, preview, done
     };
   }
 
   handleOnContinue = values => {
-    const { title, description, mediaType, embedURL, multimedia } = values;
+    const { title, description, mediaType, embed, multimedia } = values;
     this.setState({
       title,
       description,
       mediaType,
-      embedURL,
+      embed,
       multimedia,
       step: 'preview',
     });
@@ -73,7 +73,7 @@ class MemoryModalRegisterContainer extends React.Component {
   };
 
   getMultimediaData() {
-    const { mediaType, embedURL } = this.state;
+    const { mediaType, embed } = this.state;
 
     const multimediaData = this.state.multimedia.map(item => ({
       name: item && item.name,
@@ -81,7 +81,7 @@ class MemoryModalRegisterContainer extends React.Component {
       url: item && item.response && item.response.url,
     }));
 
-    if (embedURL) {
+    if (embed) {
       let type = '';
       switch (mediaType) {
         case 'video':
@@ -94,7 +94,7 @@ class MemoryModalRegisterContainer extends React.Component {
       multimediaData.push({
         name: '',
         type,
-        url: embedURL,
+        url: embed,
       });
     }
 
@@ -102,7 +102,7 @@ class MemoryModalRegisterContainer extends React.Component {
   }
 
   getMultimediaPreview() {
-    const { mediaType, embedURL } = this.state;
+    const { mediaType, embed } = this.state;
 
     const multimediaPreview = this.state.multimedia.map(item => ({
       id: item && item.uid,
@@ -111,7 +111,7 @@ class MemoryModalRegisterContainer extends React.Component {
       url: item && item.response && item.response.url,
     }));
 
-    if (embedURL) {
+    if (embed) {
       let type = '';
       switch (mediaType) {
         case 'video':
@@ -125,7 +125,7 @@ class MemoryModalRegisterContainer extends React.Component {
         id: 1,
         name: '',
         type,
-        url: embedURL,
+        url: embed,
       });
     }
 
@@ -138,7 +138,7 @@ class MemoryModalRegisterContainer extends React.Component {
       title,
       description,
       mediaType,
-      embedURL,
+      embed,
       multimedia,
       step,
     } = this.state;
@@ -158,7 +158,7 @@ class MemoryModalRegisterContainer extends React.Component {
             title={title}
             description={description}
             mediaType={mediaType}
-            embedURL={embedURL}
+            embed={embed}
             multimedia={multimedia}
             onSubmit={this.handleOnContinue}
           />

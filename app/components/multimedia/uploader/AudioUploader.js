@@ -3,10 +3,13 @@ import { Button, Icon, Input, Upload } from 'antd';
 import PropTypes from 'prop-types';
 
 import PreviewAudio from '../previews/PreviewAudio';
-import PreviewSpotify from '../previews/PreviewSpotify';
+import PreviewOEmbed from '../previews/PreviewOEmbed';
+import EmbedEngine from '../../../utils/url-embed/EmbedEngine';
+
+const EmbedEnginer = new EmbedEngine();
 
 const AudioUploader = props => {
-  const { embedURL, files, onChangeEmbedURL, onRemove, onUpload } = props;
+  const { embed, files, onChangeEmbed, onRemove, onUpload } = props;
 
   const handleOnChange = useCallback(
     ({ file }) => {
@@ -20,11 +23,17 @@ const AudioUploader = props => {
     [onUpload, onRemove]
   );
 
-  const handleOnChangeEmbedURL = useCallback(
+  const handleOnChangeEmbed = useCallback(
     event => {
-      onChangeEmbedURL(event.target.value);
+      if (event.target.value) {
+        EmbedEnginer.getEmbed(event.target.value)
+          .then(embed => {
+            onChangeEmbed(embed.data.html);
+          })
+          .catch(() => {});
+      }
     },
-    [onChangeEmbedURL]
+    [onChangeEmbed]
   );
 
   const file = files.length > 0 ? files[0] : false;
@@ -36,8 +45,8 @@ const AudioUploader = props => {
           title={file.name}
         />
       )}
-      {embedURL && <PreviewSpotify src={embedURL} title="" />}
-      {(file || embedURL) && (
+      {embed && <PreviewOEmbed html={embed} />}
+      {(file || embed) && (
         <Button
           block
           type="link"
@@ -48,7 +57,7 @@ const AudioUploader = props => {
           Eliminar Audio
         </Button>
       )}
-      {!(file || embedURL) && (
+      {!(file || embed) && (
         <div className="form-style2">
           <div className="form-group">
             <label>Buscar audio en tu dispositivo</label>
@@ -72,8 +81,8 @@ const AudioUploader = props => {
           <div className="form-group">
             <label>Añade enlace URL</label>
             <Input
-              defaultValue={embedURL}
-              onChange={handleOnChangeEmbedURL}
+              defaultValue={embed}
+              onChange={handleOnChangeEmbed}
               className="form-control"
             />
             <span className="form-text">
@@ -88,8 +97,8 @@ const AudioUploader = props => {
 
 AudioUploader.defaultProps = {
   files: [],
-  embedURL: '',
-  onChangeEmbedURL: () => {},
+  embed: '',
+  onChangeEmbed: () => {},
   onUpload: () => {},
   onRemove: () => {},
 };
@@ -104,8 +113,8 @@ AudioUploader.propTypes = {
       }),
     })
   ),
-  embedURL: PropTypes.string,
-  onChangeEmbedURL: PropTypes.func,
+  embed: PropTypes.string,
+  onChangeEmbed: PropTypes.func,
   onUpload: PropTypes.func,
   onRemove: PropTypes.func,
 };

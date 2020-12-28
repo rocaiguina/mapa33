@@ -92,7 +92,9 @@
                     </div>
                     {% elif item.type == 'youtube' %}
                     <div class="embed-responsive embed-responsive-16by9">
-                      <iframe class="embed-responsive-item" src="{{ item.url }}"></iframe>
+                      <div class="embed-responsive-item">
+                        {{ item.url | safe }}
+                      </div>
                     </div>
                     {% elif item.type == 'audio' %}
                     <div className="embed-responsive embed-responsive-16by9">
@@ -101,8 +103,10 @@
                       </audio>
                     </div>
                     {% elif item.type == 'spotify' %}
-                    <div>
-                      <iframe src="{{ item.url }}"></iframe>
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <div class="embed-responsive-item">
+                        {{ item.url | safe }}
+                      </div>
                     </div>
                     {% endif %}
                     <div class="carousel-caption">

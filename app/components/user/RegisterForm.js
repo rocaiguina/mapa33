@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Col,
-  Input,
-  Row,
-  Select,
-  Checkbox,
-  Typography,
-} from 'antd';
+import { Button, Col, Input, Row, Select, Checkbox, Typography } from 'antd';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -171,8 +163,12 @@ class RegisterForm extends React.Component {
                           this.handleOnChangeBirthdayDay(value, setFieldValue);
                         }}
                       >
-                        {Array.from({length: 31}, (_, i) => i + 1).map(option => 
-                          <Option key={option} value={option}>{option}</Option>
+                        {Array.from({ length: 31 }, (_, i) => i + 1).map(
+                          option => (
+                            <Option key={option} value={option}>
+                              {option}
+                            </Option>
+                          )
                         )}
                       </Select>
                       <Select
@@ -181,7 +177,10 @@ class RegisterForm extends React.Component {
                         placeholder="*Mes:"
                         style={{ width: 'calc(33% - 5.3px)', marginRight: 8 }}
                         onChange={value => {
-                          this.handleOnChangeBirthdayMonth(value, setFieldValue);
+                          this.handleOnChangeBirthdayMonth(
+                            value,
+                            setFieldValue
+                          );
                         }}
                       >
                         <Option value={0}>Enero</Option>
@@ -206,9 +205,13 @@ class RegisterForm extends React.Component {
                           this.handleOnChangeBirthdayYear(value, setFieldValue);
                         }}
                       >
-                        {[...Array(100)].map((year, i) => new Date().getFullYear() - i)
-                          .map(option => <Option key={option} value={option}>{option}</Option>)
-                        }
+                        {[...Array(100)]
+                          .map((year, i) => new Date().getFullYear() - i)
+                          .map(option => (
+                            <Option key={option} value={option}>
+                              {option}
+                            </Option>
+                          ))}
                       </Select>
                       <Text type="danger">{errors.birthday}</Text>
                     </div>

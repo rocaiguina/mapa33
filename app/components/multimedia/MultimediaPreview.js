@@ -3,16 +3,15 @@ import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import PreviewImage from './previews/PreviewImage';
 import PreviewVideo from './previews/PreviewVideo';
-import PreviewYoutube from './previews/PreviewYoutube';
 import PreviewAudio from './previews/PreviewAudio';
-import PreviewSpotify from './previews/PreviewSpotify';
+import PreviewOEmbed from './previews/PreviewOEmbed';
 
 const PREVIEW_COMPONENTS = {
   image: PreviewImage,
   video: PreviewVideo,
-  youtube: PreviewYoutube,
+  youtube: PreviewOEmbed,
   audio: PreviewAudio,
-  spotify: PreviewSpotify,
+  spotify: PreviewOEmbed,
 };
 
 const MultimediaPreview = props => {

@@ -18,21 +18,14 @@ const memoryValidationSchema = Yup.object().shape({
 });
 
 const MemoryForm = props => {
-  const {
-    title,
-    description,
-    mediaType,
-    embedURL,
-    multimedia,
-    onSubmit,
-  } = props;
+  const { title, description, mediaType, embed, multimedia, onSubmit } = props;
   const [mediaTypeSelected, setMediaTypeSelected] = useState(mediaType);
   const [uploadedFiles, setUploadedFiles] = useState(multimedia);
-  const [currentEmbedURL, setCurrentEmbedURL] = useState(embedURL);
+  const [currentEmbed, setCurrentEmbed] = useState(embed);
 
   const handleOnChangeMediaType = useCallback(
     event => {
-      if ((uploadedFiles && uploadedFiles.length > 0) || currentEmbedURL) {
+      if ((uploadedFiles && uploadedFiles.length > 0) || currentEmbed) {
         return confirm({
           title: '¿Estás seguro de que quieres hacer esto?',
           content:
@@ -40,13 +33,13 @@ const MemoryForm = props => {
           onOk() {
             setUploadedFiles([]);
             setMediaTypeSelected(event.target.value);
-            setCurrentEmbedURL('');
+            setCurrentEmbed('');
           },
         });
       }
       setMediaTypeSelected(event.target.value);
     },
-    [uploadedFiles, currentEmbedURL]
+    [uploadedFiles, currentEmbed]
   );
 
   const handleOnUploadFile = useCallback(file => {
@@ -61,7 +54,7 @@ const MemoryForm = props => {
         const files = uploadedFiles.filter(item => item.uid !== file.uid);
         setUploadedFiles(files);
       }
-      setCurrentEmbedURL('');
+      setCurrentEmbed('');
     },
     [uploadedFiles]
   );
@@ -72,11 +65,11 @@ const MemoryForm = props => {
         ...values,
         multimedia: uploadedFiles,
         mediaType: mediaTypeSelected,
-        embedURL: currentEmbedURL,
+        embed: currentEmbed,
       };
       onSubmit(data);
     },
-    [uploadedFiles, mediaTypeSelected, currentEmbedURL]
+    [uploadedFiles, mediaTypeSelected, currentEmbed]
   );
 
   return (
@@ -176,8 +169,8 @@ const MemoryForm = props => {
               {mediaTypeSelected === 'video' && (
                 <VideoUploader
                   files={uploadedFiles}
-                  embedURL={currentEmbedURL}
-                  onChangeEmbedURL={setCurrentEmbedURL}
+                  embed={currentEmbed}
+                  onChangeEmbed={setCurrentEmbed}
                   onUpload={handleOnUploadFile}
                   onRemove={handleOnRemoveFile}
                 />
@@ -185,8 +178,8 @@ const MemoryForm = props => {
               {mediaTypeSelected === 'audio' && (
                 <AudioUploader
                   files={uploadedFiles}
-                  embedURL={currentEmbedURL}
-                  onChangeEmbedURL={setCurrentEmbedURL}
+                  embed={currentEmbed}
+                  onChangeEmbed={setCurrentEmbed}
                   onUpload={handleOnUploadFile}
                   onRemove={handleOnRemoveFile}
                 />
@@ -214,7 +207,7 @@ MemoryForm.defaultProps = {
   title: '',
   description: '',
   mediaType: undefined,
-  embedURL: '',
+  embed: '',
   multimedia: [],
   onSubmit: () => {},
 };
@@ -223,7 +216,7 @@ MemoryForm.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   mediaType: PropTypes.string,
-  embedURL: PropTypes.string,
+  embed: PropTypes.string,
   multimedia: PropTypes.arrayOf(
     PropTypes.shape({
       uid: PropTypes.string,

@@ -199,8 +199,10 @@ class Filter extends React.Component {
                 style={{ width: '100%' }}
               >
                 <Option value="">Todas</Option>
-                {LAND_MAIN_USES.map(item => (
-                  <Option value={item.value}>{item.label}</Option>
+                {LAND_MAIN_USES.map((item, index) => (
+                  <Option key={index} value={item.value}>
+                    {item.label}
+                  </Option>
                 ))}
               </Select>
             </Col>

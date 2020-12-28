@@ -3,10 +3,13 @@ import { Button, Icon, Input, Upload } from 'antd';
 import PropTypes from 'prop-types';
 
 import PreviewVideo from '../previews/PreviewVideo';
-import PreviewYoutube from '../previews/PreviewYoutube';
+import PreviewOEmbed from '../previews/PreviewOEmbed';
+import EmbedEngine from '../../../utils/url-embed/EmbedEngine';
+
+const EmbedEnginer = new EmbedEngine();
 
 const VideoUploader = props => {
-  const { embedURL, files, onChangeEmbedURL, onRemove, onUpload } = props;
+  const { embed, files, onChangeEmbed, onRemove, onUpload } = props;
 
   const handleOnChange = useCallback(
     ({ file }) => {
@@ -20,11 +23,17 @@ const VideoUploader = props => {
     [onUpload, onRemove]
   );
 
-  const handleOnChangeEmbedURL = useCallback(
+  const handleOnChangeEmbed = useCallback(
     event => {
-      onChangeEmbedURL(event.target.value);
+      if (event.target.value) {
+        EmbedEnginer.getEmbed(event.target.value)
+          .then(embed => {
+            onChangeEmbed(embed.data.html);
+          })
+          .catch(() => {});
+      }
     },
-    [onChangeEmbedURL]
+    [onChangeEmbed]
   );
 
   const file = files.length > 0 ? files[0] : false;
@@ -36,8 +45,8 @@ const VideoUploader = props => {
           title={file.name}
         />
       )}
-      {embedURL && <PreviewYoutube src={embedURL} title="" />}
-      {(file || embedURL) && (
+      {embed && <PreviewOEmbed src={embed} />}
+      {(file || embed) && (
         <Button
           block
           type="link"
@@ -48,7 +57,7 @@ const VideoUploader = props => {
           Eliminar Video
         </Button>
       )}
-      {!(file || embedURL) && (
+      {!(file || embed) && (
         <div className="form-style2">
           <div className="form-group">
             <label>Buscar video en tu dispositivo</label>
@@ -72,8 +81,8 @@ const VideoUploader = props => {
           <div className="form-group">
             <label>Añade video de Youtube</label>
             <Input
-              defaultValue={embedURL}
-              onChange={handleOnChangeEmbedURL}
+              defaultValue={embed}
+              onChange={handleOnChangeEmbed}
               className="form-control"
             />
             <span className="form-text">Inserta URL de Youtube Aquí</span>
@@ -86,8 +95,8 @@ const VideoUploader = props => {
 
 VideoUploader.defaultProps = {
   files: [],
-  embedURL: '',
-  onChangeEmbedURL: () => {},
+  embed: '',
+  onChangeEmbed: () => {},
   onUpload: () => {},
   onRemove: () => {},
 };
@@ -102,8 +111,8 @@ VideoUploader.propTypes = {
       }),
     })
   ),
-  embedURL: PropTypes.string,
-  onChangeEmbedURL: PropTypes.func,
+  embed: PropTypes.string,
+  onChangeEmbed: PropTypes.func,
   onUpload: PropTypes.func,
   onRemove: PropTypes.func,
 };

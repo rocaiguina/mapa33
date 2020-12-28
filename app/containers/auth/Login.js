@@ -1,6 +1,8 @@
 import React from 'react';
 import { notification } from 'antd';
 import PropTypes from 'prop-types';
+import QueryString from 'query-string';
+
 import BaseLayout from '../../components/layout/base';
 import LoginForm from '../../components/auth/LoginForm';
 import Auth from '../../services/auth';
@@ -8,10 +10,10 @@ import Auth from '../../services/auth';
 class Login extends React.Component {
   handleOnSubmit = (values, { setSubmitting }) => {
     const { history, location } = this.props;
-    const queryParams = new URLSearchParams(location.search);
+    const queryParams = QueryString.parse(location.search);
     Auth.login(values)
       .then(() => {
-        const next = queryParams.get('next') || '/profile';
+        const next = queryParams.next || '/profile';
         history.push(next);
       })
       .catch(() => {
