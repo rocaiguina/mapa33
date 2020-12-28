@@ -4,16 +4,15 @@ import Moment from 'moment';
 import { Card, Col, Row } from 'antd';
 import PreviewImage from '../multimedia/previews/PreviewImage';
 import PreviewVideo from '../multimedia/previews/PreviewVideo';
-import PreviewYoutube from '../multimedia/previews/PreviewYoutube';
 import PreviewAudio from '../multimedia/previews/PreviewAudio';
-import PreviewSpotify from '../multimedia/previews/PreviewSpotify';
+import PreviewOEmbed from '../multimedia/previews/PreviewOEmbed';
 
 const PREVIEW_COMPONENTS = {
   image: PreviewImage,
   video: PreviewVideo,
-  youtube: PreviewYoutube,
+  youtube: PreviewOEmbed,
   audio: PreviewAudio,
-  spotify: PreviewSpotify,
+  spotify: PreviewOEmbed,
 };
 
 const MemoryCard = props => {

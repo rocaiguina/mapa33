@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
+// eslint-disable-next-line node/no-extraneous-import
 import { withRouter } from 'react-router';
 import * as Yup from 'yup';
 import { Modal } from 'antd';

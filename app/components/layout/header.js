@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Button, Col, Divider, Row } from 'antd';
+// eslint-disable-next-line node/no-extraneous-import
 import { withRouter } from 'react-router';
 
 import Icon from '../ui/Icon';
