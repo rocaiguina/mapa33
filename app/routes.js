@@ -10,6 +10,7 @@ import AboutUsPage from './containers/info/AboutUsInfo';
 import RegisterLandSuccessful from './containers/land/RegisterLandSuccessful';
 import RegisterLand from './containers/land/RegisterLand';
 import LandDetailContainer from './containers/LandDetailContainer';
+import LandEditDetailContainer from './containers/LandEditDetailContainer';
 import LandListViewContainer from './containers/LandListViewContainer';
 import LandCardsViewContainer from './containers/LandCardsViewContainer';
 import RegisterUser from './containers/user/RegisterUser';
@@ -77,6 +78,11 @@ function Routes() {
           exact={true}
           path="/land/:landId"
           component={LandDetailContainer}
+        />
+        <Route
+          exact={true}
+          path="/land/:landId/edit"
+          component={LandEditDetailContainer}
         />
         <Route exact={true} path="/contact-us" component={ContactUsPage} />
         <Route exact={true} path="/faq" component={FaqPage} />
