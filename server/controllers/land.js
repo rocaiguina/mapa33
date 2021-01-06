@@ -7,10 +7,11 @@ const RandomToken = require('random-token');
 const Sequelize = require('sequelize');
 const sgMail = require('@sendgrid/mail');
 const sharp = require('sharp');
+const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
-const { LAND_PROTECTION_REASONS } = require('../../config/constants');
+const { LAND_PROTECTION_REASONS, LAND_STATUS } = require('../../config/constants');
 
 const Land = Models.Land;
 const User = Models.User;
@@ -20,6 +21,8 @@ const Op = Sequelize.Op;
 const ALL_LAND_LEVELS = ['basic', 'pledge', 'conserved'];
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
+
+const LAND_STATUS_NEW = LAND_STATUS[0]['value'];
 
 class LandController {
   findAutoComplete(req, res) {
@@ -123,23 +126,6 @@ class LandController {
       .catch(function(err) {
         res.status(400).send(err);
       });
-    // Land.findAll({
-    //   where: conditions,
-    //   attributes: { exclude: ['geom'] },
-    //   include: [
-    //     {
-    //       model: User,
-    //       as: 'user',
-    //       attributes: ['first_name', 'last_name'],
-    //     },
-    //   ],
-    // })
-    //   .then(function(lands) {
-    //     res.send(lands);
-    //   })
-    //   .catch(function(err) {
-    //     res.status(400).send(err);
-    //   });
   }
 
   findGeoJson(req, res) {
@@ -423,46 +409,55 @@ class LandController {
   }
 
   update(req, res, next) {
-    var data = req.body;
+    const data = req.body;
     const validationSchema = {
-      name: Joi.string().required(),
-      level: Joi.string().required(),
-      status: Joi.string().required(),
-      geom: Joi.object({
-        type: Joi.string(),
-        coordinates: Joi.array(),
-      }).required(),
-      location: Joi.string().required(),
-      entity: Joi.string().required(),
-      use_type: Joi.string().required(),
-      acquisition_type: Joi.string().required(),
-      year_acquisition: Joi.number()
-        .integer()
-        .required(),
-      reason_conservation: Joi.string().required(),
+      name: Joi.string().allow(null, ''),
+      reason_conservation: Joi.string().allow(null, ''),
+      proposed_uses: Joi.array().allow(null),
+      main_attributes: Joi.array().allow(null),
+      other_main_attributes: Joi.string().allow(null, ''),
     };
 
     // Validata data.
     const result = Joi.validate(data, validationSchema);
 
     if (result.error) {
-      res.status(400).send(result.error);
-      return next();
+      return res.status(400).send(result.error);
     }
 
     const cleaned_data = result.value;
 
-    var land = req.land;
+    const land = req.land;
 
-    land.level = cleaned_data.level;
-    land.status = cleaned_data.status;
-    land.geom = cleaned_data.geom;
-    land.location = cleaned_data.location;
-    land.entity = cleaned_data.entity;
-    land.use_type = cleaned_data.use_type;
-    land.acquisition_type = cleaned_data.acquisition_type;
-    land.year_acquisition = cleaned_data.year_acquisition;
-    land.reason_conservation = cleaned_data.reason_conservation;
+    if (req.user.role !== 'administrator' && req.user.id !== land.user_id) {
+      return res.status(401).send('Unauthorized');
+    }
+
+    if (land.status !== LAND_STATUS_NEW) {
+      return res.status(405).send('Not allowed');
+    }
+
+    const expiredAt = Moment(land.createdAt).add(24, 'hours');
+    if (Moment().isAfter(expiredAt)) {
+      return res.status(405).send('Not allowed. Expire createdAt.');
+    }
+
+    if (cleaned_data.name) {
+      land.name = cleaned_data.name;
+    }
+
+    if (cleaned_data.reason_conservation) {
+      land.reason_conservation = cleaned_data.reason_conservation;
+    }
+
+    if (cleaned_data.proposed_uses) {
+      land.proposed_uses = cleaned_data.proposed_uses;
+    }
+
+    if (cleaned_data.main_attributes) {
+      land.main_attributes = cleaned_data.main_attributes;
+      land.other_main_attributes = cleaned_data.other_main_attributes;
+    }
 
     land
       .save()
@@ -471,9 +466,6 @@ class LandController {
       })
       .catch(function(err) {
         res.status(400).send(err);
-      })
-      .finally(function() {
-        next();
       });
   }
 

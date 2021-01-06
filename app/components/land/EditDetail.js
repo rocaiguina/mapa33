@@ -50,11 +50,11 @@ class LandEditDetail extends React.Component {
     });
   };
 
-  handleOnSubmitEditProposedUses = data => {
-    console.log(data);
+  handleOnSubmitEditProposedUses = proposedUses => {
     this.setState({
       editProposedUses: false,
     });
+    this.props.onChangeLandProposedUses(proposedUses);
   };
 
   handleOnEditMainAttributes = event => {
@@ -70,11 +70,11 @@ class LandEditDetail extends React.Component {
     });
   };
 
-  handleOnSubmitEditMainAttributes = data => {
-    console.log(data);
+  handleOnSubmitEditMainAttributes = (mainAttributes, otherMainAttributes) => {
     this.setState({
       editMainAttributes: false,
     });
+    this.props.onChangeLandMainAttributes(mainAttributes, otherMainAttributes);
   };
 
   handleOnEditReasonConservation = event => {
@@ -90,11 +90,11 @@ class LandEditDetail extends React.Component {
     });
   };
 
-  handleOnSubmitEditReasonConservation = data => {
-    console.log(data);
+  handleOnSubmitEditReasonConservation = reasonConservation => {
     this.setState({
       editReasonConservation: false,
     });
+    this.props.onChangeLandReasonConservation(reasonConservation);
   };
 
   handleOnEditLandName = event => {
@@ -110,11 +110,11 @@ class LandEditDetail extends React.Component {
     });
   };
 
-  handleOnSubmitEditLandName = data => {
-    console.log(data);
+  handleOnSubmitEditLandName = landName => {
     this.setState({
       editLandName: false,
     });
+    this.props.onChangeLandName(landName);
   };
 
   render() {
@@ -435,47 +435,57 @@ class LandEditDetail extends React.Component {
           <h3 className="text-bold">FICHA TÉCNICA</h3>
           <Row gutter={16}>
             <Col md={3} xs={12}>
-              <div className="land-data-sheet">
-                <h4>Localizado:</h4>
-                <p>{this.props.location || 'No definido.'}</p>
+              <div style={{ paddingTop: '12px' }}>
+                <div className="land-data-sheet">
+                  <h4>Localizado:</h4>
+                  <p>{this.props.location || 'No definido.'}</p>
+                </div>
               </div>
             </Col>
             <Col md={3} xs={12}>
-              <div className="land-data-sheet">
-                <h4>Extensión:</h4>
-                <p>
-                  {Numeral(this.props.area_size).format('0,0') + ' cuerdas'}
-                </p>
+              <div style={{ paddingTop: '12px' }}>
+                <div className="land-data-sheet">
+                  <h4>Extensión:</h4>
+                  <p>
+                    {Numeral(this.props.area_size).format('0,0') + ' cuerdas'}
+                  </p>
+                </div>
               </div>
             </Col>
-            <Col md={6}>
-              <div className="land-data-sheet">
-                <h4>Estado actual del terreno:</h4>
-                <p>Abandonado</p>
+            <Col md={6} xs={24}>
+              <div style={{ paddingTop: '12px' }}>
+                <div className="land-data-sheet">
+                  <h4>Estado actual del terreno:</h4>
+                  <p>Abandonado</p>
+                </div>
               </div>
             </Col>
             <Col md={3} xs={12}>
-              <div className="land-data-sheet">
-                <h4>Compuesto:</h4>
-                <p>{this.props.plots_count + ' parcelas'}</p>
+              <div style={{ paddingTop: '12px' }}>
+                <div className="land-data-sheet">
+                  <h4>Compuesto:</h4>
+                  <p>{this.props.plots_count + ' parcelas'}</p>
+                </div>
               </div>
             </Col>
             <Col md={3} xs={12}>
-              <div className="land-data-sheet">
-                <h4>Coordenadas</h4>
-                <p>
-                  <Coordinates point={this.props.coordinates.coordinates} />
-                </p>
+              <div style={{ paddingTop: '12px' }}>
+                <div className="land-data-sheet">
+                  <h4>Coordenadas</h4>
+                  <p>
+                    <Coordinates point={this.props.coordinates.coordinates} />
+                  </p>
+                </div>
               </div>
             </Col>
-            <Col md={6}>
+            <Col md={6} xs={24}>
               <div className="land-edit-field">
                 <div className="land-data-sheet">
                   <h4>Atributos principales del lugar:</h4>
                   <p>
                     {main_attributes.length > 0
                       ? main_attributes.map((item, index) => (
-                          <span key={index}>
+                          <span key={index} className="land-attr">
                             {item == 'others'
                               ? this.props.other_main_attributes
                               : LAND_ATTRIBUTE[item] || 'No definido'}
@@ -529,6 +539,10 @@ LandEditDetail.defaultProps = {
   main_attributes: [],
   main_uses: [],
   proposed_uses: [],
+  onChangeLandName: () => {},
+  onChangeLandReasonConservation: () => {},
+  onChangeLandProposedUses: () => {},
+  onChangeLandMainAttributes: () => {},
 };
 
 LandEditDetail.propTypes = {
@@ -550,6 +564,10 @@ LandEditDetail.propTypes = {
   coordinates: PropTypes.object,
   onClickLike: PropTypes.func,
   disabledLike: PropTypes.bool,
+  onChangeLandName: PropTypes.func,
+  onChangeLandReasonConservation: PropTypes.func,
+  onChangeLandProposedUses: PropTypes.func,
+  onChangeLandMainAttributes: PropTypes.func,
 };
 
 export default LandEditDetail;

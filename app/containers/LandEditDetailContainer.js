@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Divider, notification, Row, Spin } from 'antd';
+import { Button, Col, Divider, Modal, notification, Row, Spin } from 'antd';
 import { DiscussionEmbed } from 'disqus-react';
+import { Link } from 'react-router-dom';
 
 import BaseLayout from '../components/layout/base';
 import ProposeButton from '../components/map-view/ProposeButton';
@@ -31,6 +32,7 @@ class LandEditDetailContainer extends React.Component {
       coordinates: {},
       disabledLike: true,
       loading: true,
+      successfulLandEditModal: false,
     };
   }
 
@@ -71,6 +73,92 @@ class LandEditDetailContainer extends React.Component {
       });
   }
 
+  handleOnChangeLandName = name => {
+    const { landId } = this.props.match.params;
+    const self = this;
+    LandApi.update(landId, { name })
+      .then(() => {
+        self.setState({
+          name,
+          successfulLandEditModal: true,
+        });
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró actualizar la información. Por favor intenta nuevamente.',
+        });
+      });
+  };
+
+  handleOnChangeLandReasonConservation = reason_conservation => {
+    const { landId } = this.props.match.params;
+    const self = this;
+    LandApi.update(landId, { reason_conservation })
+      .then(() => {
+        self.setState({
+          reason_conservation,
+          successfulLandEditModal: true,
+        });
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró actualizar la información. Por favor intenta nuevamente.',
+        });
+      });
+  };
+
+  handleOnChangeLandProposedUses = proposed_uses => {
+    const { landId } = this.props.match.params;
+    const self = this;
+    LandApi.update(landId, { proposed_uses })
+      .then(() => {
+        self.setState({
+          proposed_uses,
+          successfulLandEditModal: true,
+        });
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró actualizar la información. Por favor intenta nuevamente.',
+        });
+      });
+  };
+
+  handleOnChangeLandMainAttributes = (
+    main_attributes,
+    other_main_attributes
+  ) => {
+    const { landId } = this.props.match.params;
+    const self = this;
+    LandApi.update(landId, { main_attributes, other_main_attributes })
+      .then(() => {
+        self.setState({
+          main_attributes,
+          other_main_attributes,
+          successfulLandEditModal: true,
+        });
+      })
+      .catch(() => {
+        notification.error({
+          message: 'Error',
+          description:
+            'No se logró actualizar la información. Por favor intenta nuevamente.',
+        });
+      });
+  };
+
+  handleOnCloseSuccessfulEditModal = () => {
+    this.setState({
+      successfulLandEditModal: false,
+    });
+  };
+
   render() {
     const id = parseInt(this.props.match.params.landId);
     const {
@@ -90,6 +178,7 @@ class LandEditDetailContainer extends React.Component {
       plots_count,
       coordinates,
       loading,
+      successfulLandEditModal,
     } = this.state;
     const title =
       level == 'conserved'
@@ -128,6 +217,12 @@ class LandEditDetailContainer extends React.Component {
               area_size={area_size}
               plots_count={plots_count}
               coordinates={coordinates}
+              onChangeLandName={this.handleOnChangeLandName}
+              onChangeLandReasonConservation={
+                this.handleOnChangeLandReasonConservation
+              }
+              onChangeLandProposedUses={this.handleOnChangeLandProposedUses}
+              onChangeLandMainAttributes={this.handleOnChangeLandMainAttributes}
             />
             <Divider dashed style={{ borderStyle: 'dotted' }} />
             <Row gutter={16}>
@@ -181,6 +276,49 @@ class LandEditDetailContainer extends React.Component {
             </Row>
           </>
         )}
+        <Modal
+          visible={successfulLandEditModal}
+          width={360}
+          footer={null}
+          onCancel={this.handleOnCloseSuccessfulEditModal}
+          destroyOnClose
+          wrapClassName="ant-modal-style2"
+        >
+          <div className="text-center m-t-20 m-b-40">
+            <img src="/images/memory/icons-check-circle.svg" width="140" />
+          </div>
+          <h3 className="fw-bold">
+            LA PROPUESTA FUE EDITADA DE MANERA EXITOSA
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+          <div className="m-b-10">
+            <Link
+              to={`/land/${id}`}
+              className="ant-btn ant-btn-lg ant-btn-round ant-btn-block ant-btn-purple"
+            >
+              <span className="text-black">Ir a Tarjeta de Propuesta</span>
+            </Link>
+          </div>
+          <div className="m-b-10">
+            <Link
+              to="/profile"
+              className="ant-btn ant-btn-lg ant-btn-round ant-btn-block ant-btn-turquoise"
+            >
+              Volver a Mi Perfil
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/"
+              className="ant-btn ant-btn-lg ant-btn-round ant-btn-block ant-btn-turquoise"
+            >
+              Ir al Mapa
+            </Link>
+          </div>
+        </Modal>
       </BaseLayout>
     );
   }

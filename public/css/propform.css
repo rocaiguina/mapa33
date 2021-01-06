@@ -494,7 +494,7 @@ button[data-test-id="button-primary"]{
   margin: 10px !important;
 }
 .footer{
-  z-index: 9 !important;
+  z-index: 12 !important;
 }
 .stepguideborder .m33-btn-bordered{
   border: 2px solid #f073a8 !important;
