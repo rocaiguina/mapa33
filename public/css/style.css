@@ -606,7 +606,6 @@ body {
   }
 }
 
-
 /* Footer */
 .footer {
   bottom: 0;
@@ -698,6 +697,12 @@ body {
   .footer .wizard-progress {
     text-align: right;
   }
+}
+
+/* Header & Footer fix */
+body.switch-scrolling-effect .header,
+body.switch-scrolling-effect .footer {
+  width: calc(100% - 15px);
 }
 
 /* Pages */
@@ -1008,6 +1013,16 @@ ul.actions {
 
 .land-edit-btn-right {
   right: -60px;
+}
+
+@media (max-width: 767px) {
+  .land-edit-btn-left,
+  .land-edit-btn-right {
+    bottom: 5px;
+    left: auto;
+    right: 5px;
+    top: auto;
+  }
 }
 
 /* Toolbar */
@@ -1468,6 +1483,18 @@ ul.actions {
 .ant-btn.ant-btn-background-ghost.ant-btn-purple:focus {
   border-color: #F073A8;
   color: #F073A8 !important;
+}
+
+.ant-btn.ant-btn-turquoise {
+  background: #4f978d;
+  border-color: #4f978d;
+  color: #434343;
+}
+.ant-btn.ant-btn-turquoise:hover,
+.ant-btn.ant-btn-turquoise:focus {
+  background: #3f887e;
+  border-color: #3f887e;
+  color: #434343 !important;
 }
 
 .ant-btn.ant-btn-background-ghost.ant-btn-turquoise {
@@ -1961,6 +1988,9 @@ ul.actions {
 /* Utils */
 .fit {
   height: 100%;
+}
+.fw-bold {
+  font-weight: bold;
 }
 .text-18 {
   font-size: 18px;
@@ -2569,18 +2599,29 @@ a.mapboxgl-ctrl-logo {
 .ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn {
   flex: 1;
   border-radius: 32px;
-  background-color: #969696;
-  border-color: #969696;
-  color: #434343;
+  background-color: #f073a8;
+  border-color: #f073a8;
+  color: #000;
   font-size: 16px;
   height: 40px;
   padding: 0 15px;
 }
 .ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn:hover,
 .ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn:focus {
+  background-color: #f073a8;
+  border-color: #f073a8 !important;
+  color: #000 !important;
+}
+
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn.ant-btn-primary {
+  background-color: #969696;
+  border-color: #969696;
+}
+
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn.ant-btn-primary:hover,
+.ant-modal-confirm.modal-confirm-style2 .ant-modal-confirm-btns .ant-btn.ant-btn-primary:focus {
   background-color: #969696;
   border-color: #969696 !important;
-  color: #434343 !important;
 }
 
 /* Custom radio */
@@ -2760,6 +2801,10 @@ a.mapboxgl-ctrl-logo {
 }
 .land-data-sheet p {
   line-height: 1.2;
+}
+.land-data-sheet p .land-attr + .land-attr::before {
+  content: ',';
+  margin-right: 5px;
 }
 .land-proposal-use img {
   margin-bottom: 0.5em;

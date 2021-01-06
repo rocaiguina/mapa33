@@ -15,6 +15,21 @@ export const register = function(data) {
   });
 };
 
+export const update = function(id, data) {
+  return new Promise((resolve, reject) => {
+    Axios.put(`/api/land/${id}`, data)
+      .then(response => {
+        if (response.status == 200) {
+          return resolve(response.data);
+        }
+        reject(response.data);
+      })
+      .catch(err => {
+        reject(err.response);
+      });
+  });
+};
+
 export const get = function(id) {
   return new Promise((resolve, reject) => {
     Axios.get(`/api/land/${id}`)
@@ -122,6 +137,7 @@ export const getMemories = function(landId, page) {
 
 export default {
   register,
+  update,
   get,
   find,
   findAutoComplete,
