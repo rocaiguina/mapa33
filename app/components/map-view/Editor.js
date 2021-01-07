@@ -14,7 +14,8 @@ import centroid from '@turf/centroid';
 import Numeral from 'numeral';
 import Button from '../ui/Button';
 
-mapboxgl.accessToken = MAPBOX_TOKEN
+/* eslint-disable-next-line no-undef */
+mapboxgl.accessToken = MAPBOX_TOKEN;
 let map = null;
 let miniMap = null;
 let tmpMap = null;
@@ -61,7 +62,7 @@ class Editor extends Component {
 
   componentDidMount() {
     const { center, lots, zoom } = this.props;
-    
+
     map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
@@ -201,7 +202,7 @@ class Editor extends Component {
         .catch(error => {
           console.log(error);
         });
-  
+
       map.addLayer(
         {
           id: 'protected_areas',
@@ -347,13 +348,17 @@ class Editor extends Component {
       let html = `
         <div class="mapbox-editor-popup">
           <p class="catastro">
-            <b>Catastro:</b> ${e.features[0].properties.catastro || 'No disponible'}
+            <b>Catastro:</b> ${e.features[0].properties.catastro ||
+              'No disponible'}
           </p>
           <p class="municipio">
-            <b>Municipio:</b> ${e.features[0].properties.muni_norml || 'No disponible'}
+            <b>Municipio:</b> ${e.features[0].properties.muni_norml ||
+              'No disponible'}
           </p>
           <p class="address">
-            <b>Dirrección:</b> ${this.toProperCase(e.features[0].properties.dir_fisica)}
+            <b>Dirrección:</b> ${this.toProperCase(
+              e.features[0].properties.dir_fisica
+            )}
           </p>
         </div>
       `;
@@ -400,7 +405,7 @@ class Editor extends Component {
       popup.remove();
     });
 
-    let layerClicked = {id: '', coords: {}};
+    let layerClicked = { id: '', coords: {} };
 
     map.on('click', 'proposed-lots', e => {
       layerClicked.coords = e.point;
@@ -415,12 +420,18 @@ class Editor extends Component {
       const { id } = e.features[0].properties;
       const { lots } = this.props;
       const exist = lots.indexOf(id) > -1;
-         
-      if (layerClicked.coords.x === e.point.x && layerClicked.coords.y === e.point.y) {
-        let errDescription = 
-        layerClicked.id === 'proposed-lots' ? 'Este terreno ya esta propuesto.' : 
-        layerClicked.id === 'protected_areas' ? 'Este terreno ya esta protegido.' : "";
-        
+
+      if (
+        layerClicked.coords.x === e.point.x &&
+        layerClicked.coords.y === e.point.y
+      ) {
+        let errDescription =
+          layerClicked.id === 'proposed-lots'
+            ? 'Este terreno ya esta propuesto.'
+            : layerClicked.id === 'protected_areas'
+            ? 'Este terreno ya esta protegido.'
+            : '';
+
         notification.error({
           message: 'Error',
           description: errDescription,
