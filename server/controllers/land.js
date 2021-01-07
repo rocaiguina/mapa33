@@ -11,7 +11,7 @@ const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
-const { LAND_PROTECTION_REASONS, LAND_STATUS } = require('../../config/constants');
+const { LAND_STATUS } = require('../../config/constants');
 
 const Land = Models.Land;
 const User = Models.User;
@@ -408,7 +408,7 @@ class LandController {
     }
   }
 
-  update(req, res, next) {
+  update(req, res) {
     const data = req.body;
     const validationSchema = {
       name: Joi.string().allow(null, ''),

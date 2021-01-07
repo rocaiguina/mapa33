@@ -3,7 +3,7 @@ module.exports = {
     let latArr = [];
     let lngArr = [];
 
-    geojson[0].forEach((item) => {
+    geojson[0].forEach(item => {
       latArr.push(item[0]);
       lngArr.push(item[1]);
     });
@@ -41,8 +41,8 @@ module.exports = {
     let latArr = [];
     let lngArr = [];
 
-    geojson.forEach((polygon) => {
-      polygon[0].forEach((coor) => {
+    geojson.forEach(polygon => {
+      polygon[0].forEach(coor => {
         latArr.push(coor[0]);
         lngArr.push(coor[1]);
       });
@@ -57,9 +57,9 @@ module.exports = {
       maxLng - minLng > maxLat - minLat ? maxLng - minLng : maxLat - minLat;
     let growFactor = pixelDimension / largestSide;
 
-    const polygons = geojson.map((polygon) => {
+    const polygons = geojson.map(polygon => {
       let points = polygon[0]
-        .map((item) => {
+        .map(item => {
           return `${(item[0] + Math.abs(minLat)) * growFactor},${(item[1] -
             Math.abs(minLng)) *
             growFactor}`;
@@ -72,7 +72,7 @@ module.exports = {
     const polygonsHeight = (maxLng - minLng) * growFactor;
     const polygonsWidth = (maxLat - minLat) * growFactor;
     const svgPolygons = polygons.map(
-      (polygon) => `<polygon
+      polygon => `<polygon
     fill="#F073A8"
     points="${polygon}"
   />`
