@@ -7,7 +7,12 @@ import PropTypes from 'prop-types';
 const { Text } = Typography;
 
 const resetPasswordValidationSchema = Yup.object().shape({
-  new_password: Yup.string().required('Campo requerido.'),
+  new_password: Yup.string()
+    .required('Campo requerido.')
+    .matches(
+      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*[0-9a-z])((?=.*[A-Z]){1}).*$/,
+      'Contraseña insegura.'
+    ),
   confirm_password: Yup.string()
     .required('Campo requerido.')
     .oneOf([Yup.ref('new_password'), null], 'No coinciden las contraseñas.'),
