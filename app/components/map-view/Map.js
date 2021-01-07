@@ -10,7 +10,8 @@ import Icon from '../ui/Icon';
 import ToolBar from './Toolbar';
 import LandApi from '../../api/land';
 
-mapboxgl.accessToken = MAPBOX_TOKEN
+/* eslint-disable-next-line no-undef */
+mapboxgl.accessToken = MAPBOX_TOKEN;
 let map = null;
 
 function buildPopup(land) {
@@ -29,19 +30,21 @@ function buildPopup(land) {
     `;
   }
 
-  let html =
-    '<div class="mapbox-land-popup">' +
-      '<div class="land-photo">' +
-        '<a href="' + url + '" style="background-image:url(' + photograph + ')"></a>' +
-      '</div>' +
-      '<div class="land-details">' +
-        '<h4 class="land-title">' +
-          '<a href="' + url + '">' + land.name + '</a>' +
-        '</h4>' +
-        '<div class="separator"></div>' +
-        details +
-      '</div>' +
-    '</div>';
+  let html = `
+    <div class="mapbox-land-popup">
+      <div class="land-photo">
+        <a href="${url}" style="background-image:url('${photograph}')"></a>
+      </div>
+      <div class="land-details">
+        <h4 class="land-title">
+          <a href="${url}">${land.name}</a>
+        </h4>
+        <div class="separator"></div>
+        ${details}
+      </div>
+    </div>
+  `;
+
   return html;
 }
 
@@ -90,7 +93,7 @@ class Map extends Component {
           layout: {
             visibility: 'visible',
           },
-          filter: ["==", 'user_id', 13],
+          filter: ['==', 'user_id', 13],
           // paint: {
           //   'fill-color': {
           //     property: 'user_id',
@@ -114,7 +117,7 @@ class Map extends Component {
           //     ],
           //   },
           // },
-          paint: {'fill-color': '#5bbcae'}
+          paint: { 'fill-color': '#5bbcae' },
         },
         'waterway-label'
       );
