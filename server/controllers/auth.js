@@ -125,9 +125,7 @@ function resetPassword(req, res) {
       if (resetPassword.expired >= now) {
         var data = req.body;
         const validationSchema = {
-          new_password: Joi.string()
-            .required()
-            .regex(/^[a-zA-Z0-9]{8,18}$/),
+          new_password: Joi.string().required(),
           confirm_password: Joi.any()
             .valid(Joi.ref('new_password'))
             .required()
