@@ -1018,9 +1018,9 @@ ul.actions {
 @media (max-width: 767px) {
   .land-edit-btn-left,
   .land-edit-btn-right {
-    bottom: 5px;
+    bottom: 1px;
     left: auto;
-    right: 5px;
+    right: 1px;
     top: auto;
   }
 }

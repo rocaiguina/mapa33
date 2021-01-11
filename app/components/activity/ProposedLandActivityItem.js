@@ -39,9 +39,12 @@ const ProposedLandActivityItem = props => {
             </span>
           )}
           {canEdit && (
-            <Button shape="round" size="small" ghost className="ant-btn-purple">
+            <Link
+              to={`/land/${id}/edit`}
+              className="ant-btn ant-btn-purple ant-btn-round ant-btn-sm ant-btn-background-ghost"
+            >
               Editar
-            </Button>
+            </Link>
           )}
           {(canEdit || status !== LAND_STATUS_NEW) && (
             <Button
