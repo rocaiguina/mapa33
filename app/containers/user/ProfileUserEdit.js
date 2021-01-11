@@ -58,6 +58,7 @@ class ProfileUserEdit extends React.Component {
   }
 
   handleOnSubmit = (values, { setSubmitting }) => {
+    const self = this;
     UserApi.updateProfile(values)
       .then(() => {
         setSubmitting(false);
@@ -65,6 +66,7 @@ class ProfileUserEdit extends React.Component {
           message: 'Actualización satisfactoria',
           description: 'Se ha actualizado la información de tu perfil.',
         });
+        self.props.history.push('/profile');
       })
       .catch(() => {
         setSubmitting(false);

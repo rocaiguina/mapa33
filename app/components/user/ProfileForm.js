@@ -157,7 +157,7 @@ class ProfileForm extends React.Component {
                         className="inputprop blackstyleinput"
                         type="text"
                         value={values.email}
-                        readonly
+                        readOnly
                         disabled
                       />
                       <label className="text-darkgray">
