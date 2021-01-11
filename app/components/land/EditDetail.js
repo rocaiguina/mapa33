@@ -28,15 +28,6 @@ class LandEditDetail extends React.Component {
     this.setState({ loading });
   };
 
-  handleOnClickLike = () => {
-    if (this.props.onClickLike) {
-      this.setState({
-        loading: true,
-      });
-      this.props.onClickLike({ id: this.props.id }, this.setSubmitting);
-    }
-  };
-
   handleOnEditProposedUses = event => {
     event.preventDefault();
     this.setState({
@@ -148,7 +139,11 @@ class LandEditDetail extends React.Component {
         <div className="land-detail">
           <div className="m-b-20">
             <Row type="flex" gutter={16}>
-              <Col md={6} style={{ display: 'flex', flexDirection: 'column' }}>
+              <Col
+                md={6}
+                xs={24}
+                style={{ display: 'flex', flexDirection: 'column' }}
+              >
                 <div className="land-edit-field">
                   <h2 className="land-title">{this.props.name}</h2>
                   <a
@@ -170,16 +165,9 @@ class LandEditDetail extends React.Component {
                 </div>
                 <div style={{ flex: '1 0 auto' }}></div>
                 <div className="land-share hidden-xs">
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                      document.location.href
-                    )}`}
-                    className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg"
-                  >
+                  <Button shape="round" className="ant-btn-orange" size="large">
                     <span className="text-bold text-18">Compartir</span>
-                  </a>
+                  </Button>
                 </div>
               </Col>
               <Col md={10}>
@@ -198,16 +186,14 @@ class LandEditDetail extends React.Component {
                     </Col>
                     <Col span={12}>
                       <div className="land-share">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                            document.location.href
-                          )}`}
-                          className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg ant-btn-block"
+                        <Button
+                          shape="round"
+                          className="ant-btn-orange"
+                          size="large"
+                          block
                         >
                           <span className="text-bold text-18">Compartir</span>
-                        </a>
+                        </Button>
                       </div>
                     </Col>
                   </Row>
@@ -222,7 +208,6 @@ class LandEditDetail extends React.Component {
                         this.props.level == 'conserved'
                       }
                       loading={this.state.loading}
-                      onClick={this.handleOnClickLike}
                     >
                       <span className="text-bold text-18 text-black">
                         {this.props.level == 'conserved'
@@ -292,7 +277,6 @@ class LandEditDetail extends React.Component {
                       this.props.disabledLike || this.props.level == 'conserved'
                     }
                     loading={this.state.loading}
-                    onClick={this.handleOnClickLike}
                   >
                     <span className="text-bold text-18 text-black">
                       {this.props.level == 'conserved'
