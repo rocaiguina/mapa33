@@ -53,7 +53,10 @@ class Profile extends React.Component {
           <Col md={12}>
             <Row gutter={16}>
               <Col md={12}>
-                <h3>Agosto 21,1989</h3>
+                <h3>{profile.birthday
+                  ? moment(profile.birthday, dateFormat).format('MMMM DD, YYYY')
+                  : 'No date.'}
+                </h3>
                 <p className="text-darkgray">Nacimiento</p>
                 <h3>{profile.email}</h3>
                 <p className="text-darkgray">Correo Electrónico</p>
