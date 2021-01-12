@@ -7,13 +7,18 @@ module.exports = {
   entry: './app/origin.js',
   output: {
     path: path.join(__dirname, 'public/dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   mode: 'production',
   context: __dirname,
   devtool: 'source-map',
   externals: {
     "fs": "require('fs')"
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
