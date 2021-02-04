@@ -1,16 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Col,
-  Input,
-  Row,
-  DatePicker,
-  Select,
-  Checkbox,
-  Typography,
-} from 'antd';
+import { Button, Col, Input, Row, DatePicker, Select, Typography } from 'antd';
 
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
@@ -269,6 +260,7 @@ class ProfileForm extends React.Component {
                 </Row>
               </Col>
               <Col md={12}>
+                {/*
                 <Row>
                   <Col md={16} className="blockprofilecheckbox m-b-10">
                     <div className="form-check">
@@ -284,6 +276,7 @@ class ProfileForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
+                */}
                 <div className="form-group text-center visible-xs m-t-10">
                   <Link
                     to="/profile"

@@ -254,7 +254,9 @@ class LandEditDetailContainer extends React.Component {
             <Row gutter={16}>
               <Col md={8}>
                 <h3 className="text-bold m-b-20">
-                  CONECTA CON LA COMUNIDAD DEL TERRENO DEL FUTURO
+                  CONECTA CON LA COMUNIDAD DEL
+                  <br />
+                  <span className="text-uppercase">{name}</span>
                 </h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
