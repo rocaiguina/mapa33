@@ -13,6 +13,8 @@
                     <div class="input-group">
                         <div class="fg-line">
                             <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ filters.q }}">
+                            <input type="hidden" name="level" value="{{ filters.level }}" />
+                            <input type="hidden" name="status" value="{{ filters.status if filters.status else "all" }}" />
                         </div>
                         <span class="input-group-addon last">
                             <button type="submit" class="btn btn-link">
@@ -29,16 +31,16 @@
                         <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.status if filters.status else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
                         <ul class="dropdown-menu pull-left">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=all">All</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&q={{ filters.q }}&status=all">All</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=new">New</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&q={{ filters.q }}&status=new">New</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=approved">Approved</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&q={{ filters.q }}&status=approved">Approved</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&status=denied">Denied</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?level={{ filters.level }}&q={{ filters.q }}&status=denied">Denied</a>
                             </li>
                         </ul>
                     </div>
@@ -47,16 +49,16 @@
                         <a href="#" class="dropdown-toggle btn btn-default waves-effect" data-toggle="dropdown" aria-expanded="false">{{ filters.level if filters.level else 'All' |capitalize }} <i class="zmdi zmdi-caret-down"></i></a>
                         <ul class="dropdown-menu pull-right">
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=">All</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&q={{ filters.q }}&level=">All</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=basic">Basic</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&q={{ filters.q }}&level=basic">Basic</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=pledge">Pledge</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&q={{ filters.q }}&level=pledge">Pledge</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&level=conserved">Conserved</a>
+                                <a role="menuitem" tabindex="-1" href="/admin/land?status={{ filters.status }}&q={{ filters.q }}&level=conserved">Conserved</a>
                             </li>
                         </ul>
                     </div>

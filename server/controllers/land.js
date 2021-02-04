@@ -23,6 +23,7 @@ const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
 const LAND_STATUS_NEW = LAND_STATUS[0]['value'];
+const LAND_STATUS_APPROVED = LAND_STATUS[2]['value'];
 
 class LandController {
   findAutoComplete(req, res) {
@@ -64,7 +65,7 @@ class LandController {
         conditions.level = {
           [Op.in]: PROPOSED_LAND_LEVELS,
         };
-        conditions.status = 'approved';
+        conditions.status = LAND_STATUS_APPROVED;
         break;
       case 'conserved':
         conditions.level = {
@@ -75,7 +76,7 @@ class LandController {
         conditions.level = {
           [Op.in]: ALL_LAND_LEVELS,
         };
-        conditions.status = 'approved';
+        conditions.status = LAND_STATUS_APPROVED;
         break;
     }
 
@@ -138,7 +139,7 @@ class LandController {
         conditions.level = {
           [Op.in]: PROPOSED_LAND_LEVELS,
         };
-        conditions.status = 'approved';
+        conditions.status = LAND_STATUS_APPROVED;
         break;
       case 'conserved':
         conditions.level = {
@@ -341,7 +342,7 @@ class LandController {
       user_id: req.user.id,
       ownership: cleaned_data.are_u_owner ? cleaned_data.are_u_owner : null,
       notes: '',
-      status: 'new',
+      status: LAND_STATUS_APPROVED,
     })
       .then(function(land) {
         // Calculate coordinate.
