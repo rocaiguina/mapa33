@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Divider, Radio, Row } from 'antd';
+import { Col, Divider, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -53,9 +53,12 @@ class Profile extends React.Component {
           <Col md={12}>
             <Row gutter={16}>
               <Col md={12}>
-                <h3>{profile.birthday
-                  ? moment(profile.birthday, dateFormat).format('MMMM DD, YYYY')
-                  : 'No date.'}
+                <h3>
+                  {profile.birthday
+                    ? moment(profile.birthday, dateFormat).format(
+                        'MMMM DD, YYYY'
+                      )
+                    : 'No date.'}
                 </h3>
                 <p className="text-darkgray">Nacimiento</p>
                 <h3>{profile.email}</h3>
@@ -80,6 +83,7 @@ class Profile extends React.Component {
                 <p className="text-darkgray">Código postal</p>
               </Col>
             </Row>
+            {/*
             <Row className="m-b-15">
               <Col xs={16}>
                 Deseo recibir contenido personalizado de Para la Naturaleza
@@ -96,6 +100,7 @@ class Profile extends React.Component {
                 </Radio.Group>
               </Col>
             </Row>
+            */}
           </Col>
           <Col md={12}>
             <Divider

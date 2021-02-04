@@ -88,7 +88,7 @@ const store = (req, res) => {
     title,
     description,
     media_type,
-    status: MEMORY_STATUS.NEW,
+    status: MEMORY_STATUS.APPROVED,
     user_id: req && req.user && req.user.id,
     land_id: req.params.landId,
   })
