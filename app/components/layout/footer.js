@@ -31,8 +31,7 @@ class Footer extends Component {
             <Col md={12} xs={xs[1]}>
               <div className="second-column">
                 <p>
-                  Nuestra meta es proteger el 33% de las islas de Puerto Rico
-                  para el 2033. Ayúdanos a hacer historia.
+                Espacio virtual para fomentar la participación ciudadana en la conservación de terrenos y promover la protección del 33% de los terrenos de Puerto Rico para el 2033. 
                 </p>
               </div>
             </Col>
