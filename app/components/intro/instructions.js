@@ -13,34 +13,29 @@ class Instructions extends React.Component {
         footer={null}
         className="ant-modal-green ant-modal-full"
       >
-        <h3 className="text-bold">¿Qué es Mapa-33?</h3>
+        <h3 className="text-bold">¡Hola!</h3>
         <p>
-          Mapa-33 es una herramienta en línea para asistir en la conservación de
-          terrenos del archipiélago de Puerto Rico.
-        </p>
-        <h3 className="text-bold">¿Cómo funciona?</h3>
-        <p>
-          Siguiendo los pasos indicados, podrás explorar el mapa, identificar
-          terrenos y crear una propuesta para iniciar el proceso de
-          conservación.
-        </p>
-        <h3 className="text-bold">¿Cuál es la meta?</h3>
-        <p>
-          La meta común del Mapa es proteger 33% del terreno puertorriqueño para
-          el año 2033.
+          El futuro es ahora y la meta común es conservar el 33% de Puerto Rico para el 2033. Mapa-33 es una herramienta interactiva y educativa que nos ayuda a conocer lo que queremos conservar y lo que es importante para todos. 
         </p>
         <p>
-          Participar de la creación del Mapa-33 incluye proponer terrenos para
-          conservación, mostrar apoyo a propuestas existentes y visibilizar
-          propuestas de tu interés a través de tus redes sociales.
+          Mapa-33 es un trabajo en equipo y todos debemos formar parte. Con tu ayuda podremos crear el mapa que queremos para el 2033.
+        </p>
+        <h3>Qué puedes hacer:</h3>
+        <p>
+          1. Proponer un terreno que es importante para ti, para la comunidad o porque guarda buenas memorias o experiencias. 
+        </p>
+        <p>
+          2. Apoyar las propuestas de los demás. Si el terreno que quieres proponer ya está en el mapa, tienes la posibilidad de apoyar la propuesta y compartirla.
+        </p>
+        <p>
+        NOTA: Toda solicitud de propuesta será evaluada antes de ser publicada en el mapa. Y debes registrarte para poder proponer o apoyar propuestas.
         </p>
         <p className="m-b-30">
-          Mapa-33 depende de ti para asegurar el bienestar ecológico de Puerto
-          Rico. Únete.
+        Ahora, sigue las instrucciones a continuación y bienvenido a Mapa-33.
         </p>
         <div className="text-center">
           <Button type="primary" onClick={this.props.onClose}>
-            EXPLORA EL MAPA <Icon type="arrow-right" />
+            COMENZAR<Icon type="arrow-right" />
           </Button>
         </div>
       </Modal>

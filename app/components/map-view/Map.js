@@ -76,7 +76,7 @@ class Map extends Component {
     map.on('load', () => {
       map.addSource('protected_areas', {
         type: 'vector',
-        url: 'mapbox://rocaiguina.bzaytugl',
+        url: 'mapbox://rocaiguina.d6j1xz6t',
       });
 
       map.addSource('lots', {
@@ -89,11 +89,11 @@ class Map extends Component {
           id: 'protected_areas',
           type: 'fill',
           source: 'protected_areas',
-          'source-layer': 'lands',
+          'source-layer': 'lands-380u2f',
           layout: {
             visibility: 'visible',
           },
-          filter: ['==', 'user_id', 13],
+          // filter: ['!=', 'id', 214],
           // paint: {
           //   'fill-color': {
           //     property: 'user_id',
