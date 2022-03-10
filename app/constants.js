@@ -8,17 +8,21 @@ export const MEMORY_STATUS_NEW = 'NEW';
 export const MEMORY_STATUS_APPROVED = 'APPROVED';
 export const MEMORY_STATUS_REJECTED = 'REJECTED';
 
+export const LAND_LEVEL_BASIC = 'basic';
+export const LAND_LEVEL_PLEDGE = 'pledge';
+export const LAND_LEVEL_CONSERVED = 'conserved';
+
 export const LAND_LEVELS = [
   {
-    value: 'basic',
+    value: LAND_LEVEL_BASIC,
     label: 'Basic',
   },
   {
-    value: 'pledge',
+    value: LAND_LEVEL_PLEDGE,
     label: 'Pledge',
   },
   {
-    value: 'conserved',
+    value: LAND_LEVEL_CONSERVED,
     label: 'Conserved',
   },
 ];

@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import ImageUploader from '../multimedia/uploader/ImageUploader';
 import VideoUploader from '../multimedia/uploader/VideoUploader';
 import AudioUploader from '../multimedia/uploader/AudioUploader';
+import { LAND_LEVEL_CONSERVED } from '../../constants';
 
 const { TextArea } = Input;
 const { Text } = Typography;
@@ -18,7 +19,16 @@ const memoryValidationSchema = Yup.object().shape({
 });
 
 const MemoryForm = props => {
-  const { title, description, mediaType, embed, multimedia, onSubmit } = props;
+  const {
+    title,
+    description,
+    mediaType,
+    embed,
+    multimedia,
+    landName,
+    landLevel,
+    onSubmit,
+  } = props;
   const [mediaTypeSelected, setMediaTypeSelected] = useState(mediaType);
   const [uploadedFiles, setUploadedFiles] = useState(multimedia);
   const [currentEmbed, setCurrentEmbed] = useState(embed);
@@ -75,13 +85,21 @@ const MemoryForm = props => {
   return (
     <Row gutter={30}>
       <Col md={12}>
-        <h2 className="memory-title">
-          COMPARTE TUS MEMORIAS DE EL TERRENO DEL FUTURO
+        <h2 className="memory-title text-uppercase">
+          COMPARTE TUS MEMORIAS DE {landName}
         </h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        {landLevel === LAND_LEVEL_CONSERVED ? (
+          <p>
+            Sé parte del foro comunitario y comparte tus experiencias o
+            sugerencias del área protegida.
+          </p>
+        ) : (
+          <p>
+            Cada propuesta necesita una comunidad que la apoye. Sé parte
+            del proceso de propuesta y aporta al foro comunitario de la
+            propuesta con tus experiencias o sugerencias.
+          </p>
+        )}
       </Col>
       <Col md={12}>
         <Formik
@@ -209,6 +227,8 @@ MemoryForm.defaultProps = {
   mediaType: undefined,
   embed: '',
   multimedia: [],
+  landName: '',
+  landLevel: '',
   onSubmit: () => {},
 };
 
@@ -217,6 +237,8 @@ MemoryForm.propTypes = {
   description: PropTypes.string,
   mediaType: PropTypes.string,
   embed: PropTypes.string,
+  landName: PropTypes.string,
+  landLevel: PropTypes.string,
   multimedia: PropTypes.arrayOf(
     PropTypes.shape({
       uid: PropTypes.string,

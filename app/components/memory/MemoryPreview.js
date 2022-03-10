@@ -10,6 +10,7 @@ const MemoryPreview = props => {
     description,
     createdAt,
     author,
+    landName,
     multimedia,
     onSubmit,
     onMakeChanges,
@@ -19,8 +20,8 @@ const MemoryPreview = props => {
     <div className="memory-preview">
       <Row gutter={30}>
         <Col md={12}>
-          <h2 className="memory-title">
-            ESTA ES TU MEMORIA DE EL TERRENO DEL FUTURO
+          <h2 className="memory-title text-uppercase">
+            ESTA ES TU MEMORIA DE {landName}
           </h2>
         </Col>
         <Col md={12}>
@@ -75,6 +76,7 @@ MemoryPreview.defaultProps = {
   description: '',
   createdAt: '',
   author: '',
+  landName: '',
   multimedia: [],
   onSubmit: () => {},
   onMakeChanges: () => {},
@@ -85,6 +87,7 @@ MemoryPreview.propTypes = {
   description: PropTypes.string,
   createdAt: PropTypes.string,
   author: PropTypes.string,
+  landName: PropTypes.string,
   multimedia: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

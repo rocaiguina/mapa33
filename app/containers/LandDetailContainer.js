@@ -12,6 +12,7 @@ import MemoryModalRegisterContainer from './MemoryModalRegisterContainer';
 
 import LandApi from '../api/land';
 import AuthService from '../services/auth';
+import { LAND_LEVEL_CONSERVED } from '../constants';
 
 class LandDetailContainer extends React.Component {
   constructor(props) {
@@ -236,11 +237,18 @@ class LandDetailContainer extends React.Component {
                   <br />
                   <span className="text-uppercase">{name}</span>
                 </h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation.
-                </p>
+                {level === LAND_LEVEL_CONSERVED ? (
+                  <p>
+                    Sé parte del foro comunitario y comparte tus experiencias o
+                    sugerencias del área protegida.
+                  </p>
+                ) : (
+                  <p>
+                    Cada propuesta necesita una comunidad que la apoye. Sé parte
+                    del proceso de propuesta y aporta al foro comunitario de la
+                    propuesta con tus experiencias o sugerencias.
+                  </p>
+                )}
               </Col>
               <Col md={16}>
                 <div className="land-disqus">
@@ -256,6 +264,8 @@ class LandDetailContainer extends React.Component {
             </Row>
             <MemoryModalRegisterContainer
               landId={id}
+              landName={name}
+              landLevel={level}
               visible={shareMemories}
               onClose={this.handleOnCloseMemoriesModal}
             />
