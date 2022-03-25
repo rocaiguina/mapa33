@@ -36,6 +36,7 @@ class LandDetailContainer extends React.Component {
       disabledLike: true,
       shareMemories: false,
       loading: true,
+      reloadMemoryList: Math.random(),
     };
   }
 
@@ -134,10 +135,15 @@ class LandDetailContainer extends React.Component {
     }
   };
 
-  handleOnCloseMemoriesModal = () => {
+  handleOnCloseMemoriesModal = (created) => {
     this.setState({
       shareMemories: false,
     });
+    if (created) {
+      this.setState({
+        reloadMemoryList: Math.random(),
+      });
+    }
   };
 
   render() {
@@ -161,6 +167,7 @@ class LandDetailContainer extends React.Component {
       disabledLike,
       shareMemories,
       loading,
+      reloadMemoryList,
     } = this.state;
     const title =
       level == 'conserved'
@@ -228,7 +235,7 @@ class LandDetailContainer extends React.Component {
                 </div>
               </Col>
             </Row>
-            <MemoryListContainer landId={id} />
+            <MemoryListContainer landId={id} key={reloadMemoryList}/>
             <Divider dashed style={{ borderStyle: 'dotted' }} />
             <Row gutter={16}>
               <Col md={8}>

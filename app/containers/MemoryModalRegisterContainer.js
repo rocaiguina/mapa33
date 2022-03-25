@@ -69,7 +69,8 @@ class MemoryModalRegisterContainer extends React.Component {
       multimedia: [],
       step: 'form',
     });
-    this.props.onClose();
+    const created = this.state.step == 'done';
+    this.props.onClose(created);
   };
 
   getMultimediaData() {
