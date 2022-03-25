@@ -233,7 +233,7 @@ class LandDetailContainer extends React.Component {
             <Row gutter={16}>
               <Col md={8}>
                 <h3 className="text-bold m-b-20">
-                  CONECTA CON LA COMUNIDAD DEL
+                  CONECTA CON LA COMUNIDAD DE
                   <br />
                   <span className="text-uppercase">{name}</span>
                 </h3>
