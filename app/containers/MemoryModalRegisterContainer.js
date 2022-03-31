@@ -69,7 +69,8 @@ class MemoryModalRegisterContainer extends React.Component {
       multimedia: [],
       step: 'form',
     });
-    this.props.onClose();
+    const created = this.state.step == 'done';
+    this.props.onClose(created);
   };
 
   getMultimediaData() {
@@ -133,7 +134,7 @@ class MemoryModalRegisterContainer extends React.Component {
   }
 
   render() {
-    const { visible } = this.props;
+    const { visible, landName, landLevel } = this.props;
     const {
       title,
       description,
@@ -160,6 +161,8 @@ class MemoryModalRegisterContainer extends React.Component {
             mediaType={mediaType}
             embed={embed}
             multimedia={multimedia}
+            landName={landName}
+            landLevel={landLevel}
             onSubmit={this.handleOnContinue}
           />
         )}
@@ -170,6 +173,7 @@ class MemoryModalRegisterContainer extends React.Component {
             multimedia={multimediaPreview}
             createdAt={Moment().format('DD/MM/YYYY')}
             author={user && user.full_name}
+            landName={landName}
             onSubmit={this.handleOnSubmit}
             onMakeChanges={this.handleOnMakeChanges}
           />
@@ -182,12 +186,16 @@ class MemoryModalRegisterContainer extends React.Component {
 
 MemoryModalRegisterContainer.defaultValues = {
   landId: 0,
+  landName: '',
+  landLevel: '',
   visible: false,
   onClose: () => {},
 };
 
 MemoryModalRegisterContainer.propTypes = {
   landId: PropTypes.number,
+  landName: PropTypes.string,
+  landLevel: PropTypes.string,
   visible: PropTypes.bool,
   onClose: PropTypes.func,
 };

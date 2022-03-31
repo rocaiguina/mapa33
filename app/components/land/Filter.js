@@ -71,7 +71,7 @@ class Filter extends React.Component {
           </Row>
           <Row gutter={16}>
             <Col md={6} xs={12}>
-              <label>Region</label>
+              <label>Pueblo</label>
               <Select
                 size="large"
                 className="ant-select-black ant-select-round"

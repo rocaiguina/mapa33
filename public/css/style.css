@@ -1850,7 +1850,7 @@ ul.actions {
 
 @media (min-width: 375px) and (min-height: 812px) {
   .mapbox-editor {
-    height: 83vh;
+    height: 76vh;
   }
 }
 
@@ -2687,6 +2687,9 @@ a.mapboxgl-ctrl-logo {
 }
 .slick-slide-memory {
   margin-bottom: 1rem;
+}
+.memory-preview-audio audio {
+  width: 100%;
 }
 .memory-preview-video {
   background-color: #fff;
