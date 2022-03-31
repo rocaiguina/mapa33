@@ -9,7 +9,7 @@ const PreviewSound = props => {
     <div
       className={ClassNames({
         'memory-preview': true,
-        'memory-preview-video': true,
+        'memory-preview-audio': true,
         'memory-preview-round': round,
       })}
     >

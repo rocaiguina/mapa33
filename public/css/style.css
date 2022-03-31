@@ -2688,6 +2688,9 @@ a.mapboxgl-ctrl-logo {
 .slick-slide-memory {
   margin-bottom: 1rem;
 }
+.memory-preview-audio audio {
+  width: 100%;
+}
 .memory-preview-video {
   background-color: #fff;
 }

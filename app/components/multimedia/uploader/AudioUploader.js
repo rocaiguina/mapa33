@@ -45,7 +45,7 @@ const AudioUploader = props => {
           title={file.name}
         />
       )}
-      {embed && <PreviewOEmbed html={embed} />}
+      {embed && <PreviewOEmbed src={embed} />}
       {(file || embed) && (
         <Button
           block
