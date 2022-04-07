@@ -95,9 +95,9 @@ const MemoryForm = props => {
           </p>
         ) : (
           <p>
-            Cada propuesta necesita una comunidad que la apoye. Sé parte
-            del proceso de propuesta y aporta al foro comunitario de la
-            propuesta con tus experiencias o sugerencias.
+            Cada propuesta necesita una comunidad que la apoye. Sé parte del
+            proceso de propuesta y aporta al foro comunitario de la propuesta
+            con tus experiencias o sugerencias.
           </p>
         )}
       </Col>

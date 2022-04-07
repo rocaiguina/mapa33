@@ -44,9 +44,11 @@ class NameLand extends React.Component {
           <Row gutter={30}>
             <Col md={8} />
             <Col md={8}>
-              <h2>
-                ¿Qué nombre se debe utilizar para identificar este terreno?
+              <h2 className="text-center">
+                Ya casi terminas la propuesta pero antes necesitamos saber cómo
+                identificarla.
               </h2>
+              <h2 className="text-center">Nombra tu propuesta aquí:</h2>
               <div className="form-group">
                 <Input
                   name="land_name"
@@ -55,6 +57,7 @@ class NameLand extends React.Component {
                   value={this.props.land_name}
                   maxLength={50}
                   onChange={this.props.handleChange}
+                  placeholder="Nombre"
                 />
                 {errors.land_name && (
                   <Text type="danger">{errors.land_name}</Text>

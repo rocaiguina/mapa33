@@ -6,7 +6,7 @@ import Numeral from 'numeral';
 
 import Coordinates from '../ui/Coordinates';
 
-import { LAND_ATTRIBUTE, LAND_PROTECTION_REASON } from '../../constants';
+import { LAND_ATTRIBUTE, LAND_MAIN_USE } from '../../constants';
 
 class LandDetail extends React.Component {
   constructor(props) {
@@ -40,13 +40,8 @@ class LandDetail extends React.Component {
     });
 
     const main_attributes = this.props.main_attributes || [];
+    const main_uses = this.props.main_uses || [];
     const proposed_uses = this.props.proposed_uses || [];
-
-    const reasonConservation = LAND_PROTECTION_REASON[
-      this.props.reason_conservation
-    ]
-      ? LAND_PROTECTION_REASON[this.props.reason_conservation]
-      : 'No definido.';
 
     return (
       <div className="land-detail">
@@ -138,13 +133,13 @@ class LandDetail extends React.Component {
               </div>
               <div className="land-reason-conservation">
                 <h3>
-                  ¿Por qué es importante la protección de
+                  ¿Por qué es importante proteger
                   {this.props.plots_count > 1
-                    ? ' estos terrenos '
-                    : ' este terreno '}
-                  en particular?
+                    ? ' estos terrenos'
+                    : ' este terreno'}
+                  ?
                 </h3>
-                <p>{reasonConservation}</p>
+                <p>{this.props.importance_of_protection || 'No definido.'}</p>
               </div>
               <div className="land-support hidden-xs">
                 <Button
@@ -277,11 +272,7 @@ class LandDetail extends React.Component {
                     : '/images/memory/icons-sustainable-uses-disabled.svg'
                 }
               />
-              <p>
-                Usos
-                <br />
-                sostenibles
-              </p>
+              <p>Agroecología</p>
             </div>
           </Col>
         </Row>
@@ -297,13 +288,25 @@ class LandDetail extends React.Component {
           <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Extensión:</h4>
-              <p>{Numeral(this.props.area_size).format('0,0') + ' cuerdas'}</p>
+              <p>
+                {Numeral(this.props.area_size).format('0,0')} m<sup>2</sup>
+              </p>
             </div>
           </Col>
           <Col md={6}>
             <div className="land-data-sheet">
-              <h4>Estado actual del terreno:</h4>
-              <p>Abandonado</p>
+              <h4>Usos actuales:</h4>
+              <p>
+                {main_uses.length > 0
+                  ? main_uses.map((item, index) => (
+                      <span key={index}>
+                        {item == 'others'
+                          ? this.props.other_main_attributes
+                          : LAND_MAIN_USE[item] || 'No definido'}
+                      </span>
+                    ))
+                  : 'No definido.'}
+              </p>
             </div>
           </Col>
           <Col md={3} xs={12}>
@@ -356,6 +359,7 @@ LandDetail.propTypes = {
   owner: PropTypes.object,
   likes: PropTypes.number,
   reason_conservation: PropTypes.string,
+  importance_of_protection: PropTypes.string,
   location: PropTypes.string,
   main_attributes: PropTypes.array,
   other_main_attributes: PropTypes.string,

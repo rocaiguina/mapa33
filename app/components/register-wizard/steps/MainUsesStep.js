@@ -98,6 +98,7 @@ class MainUsesStep extends React.Component {
                   size="large"
                   value={this.props.lands_other_main_uses}
                   onChange={this.props.handleChange}
+                  maxLength="100"
                 />
               )}
             </Col>

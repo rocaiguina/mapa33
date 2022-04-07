@@ -1,42 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row, Typography } from 'antd';
+import { Col, Input, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { TextArea } = Input;
 const { Text } = Typography;
 
-class MortgageStep extends React.Component {
+class AlreadyProposedUsesStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasContamination: props.has_already_proposed_uses == 'yes',
       errors: {},
     };
   }
 
   handleOnChange = e => {
-    const self = this;
     this.props.handleChange(e);
-    setTimeout(function() {
-      self.props.next();
-    }, 400);
+    this.setState({
+      hasContamination: e.target.value === 'yes',
+    });
   };
 
   handleOnNext = () => {
-    if (this.props.has_mortgage !== null) {
+    if (this.props.has_already_proposed_uses !== null) {
       this.props.next();
     } else {
       this.setState({
-        errors: { has_mortgage: 'Campo requerido' },
+        errors: { has_already_proposed_uses: 'Campo requerido' },
       });
     }
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, hasContamination } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
@@ -44,11 +45,11 @@ class MortgageStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={11} steps={20} />
+          <Progress onNext={this.handleOnNext} step={15} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={11} steps={20} />
+          <TopNavigator previous={this.props.previous} step={15} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -56,9 +57,9 @@ class MortgageStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Existe una hipoteca sobre el terreno?</h2>
-              {errors.has_mortgage && (
-                <Text type="danger">{errors.has_mortgage}</Text>
+              <h2>¿Hay algún uso ya propuesto para este terreno?</h2>
+              {errors.has_already_proposed_uses && (
+                <Text type="danger">{errors.has_already_proposed_uses}</Text>
               )}
             </Col>
             <Col
@@ -68,24 +69,44 @@ class MortgageStep extends React.Component {
               }}
             >
               <Radio.Group
-                name="has_mortgage"
+                name="has_already_proposed_uses"
                 buttonStyle="solid"
-                value={this.props.has_mortgage}
+                value={this.props.has_already_proposed_uses}
                 onChange={this.handleOnChange}
               >
                 <Radio.Button
                   className="inputprop radioprop radiosi form1"
-                  value={true}
+                  value="yes"
                 >
                   Si
                 </Radio.Button>
                 <Radio.Button
                   className="inputprop radioprop radiono form1"
-                  value={false}
+                  value="no"
                 >
                   No
                 </Radio.Button>
+                <Radio.Button
+                  className="inputprop radioprop radiono form1"
+                  value="unknown"
+                >
+                  No sé
+                </Radio.Button>
               </Radio.Group>
+
+              {hasContamination && (
+                <div className="text-left">
+                  <label>Describe el tipo de uso propuesto:</label>
+                  <TextArea
+                    name="proposed_uses_description"
+                    className="form-control"
+                    value={this.props.proposed_uses_description}
+                    onChange={this.props.handleChange}
+                    rows={4}
+                    maxLength="150"
+                  />
+                </div>
+              )}
             </Col>
           </Row>
           <BottomNavigator
@@ -98,12 +119,13 @@ class MortgageStep extends React.Component {
   }
 }
 
-MortgageStep.propTypes = {
-  has_mortgage: PropTypes.bool,
+AlreadyProposedUsesStep.propTypes = {
+  has_already_proposed_uses: PropTypes.string,
+  proposed_uses_description: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,
   onClose: PropTypes.func,
 };
 
-export default MortgageStep;
+export default AlreadyProposedUsesStep;

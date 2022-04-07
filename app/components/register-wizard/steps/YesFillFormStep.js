@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row, Input, Typography } from 'antd';
+import { Button, Col, Row, Input, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
@@ -25,6 +25,10 @@ class YesFillFormStep extends React.Component {
         errors: { owner_name: 'Campo requerido' },
       });
     }
+  };
+
+  handleOnNoContactInformation = () => {
+    this.props.next();
   };
 
   render() {
@@ -80,6 +84,15 @@ class YesFillFormStep extends React.Component {
               </div>
             </Col>
           </Row>
+          <div className="text-center">
+            <Button
+              className="ant-btn-purple"
+              type="link"
+              onClick={this.handleOnNoContactInformation}
+            >
+              No tengo su información de contacto
+            </Button>
+          </div>
           <BottomNavigator
             onPrevious={this.props.previous}
             onNext={this.handleOnNext}

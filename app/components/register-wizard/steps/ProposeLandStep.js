@@ -57,7 +57,7 @@ class ProposeLandStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Quieres proponer un terreno?</h2>
+              <h2>¿Quieres proponer un terreno para la conservación?</h2>
               {errors.want_propose && (
                 <Text type="danger">{errors.want_propose}</Text>
               )}

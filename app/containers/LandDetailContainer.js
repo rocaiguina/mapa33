@@ -24,6 +24,7 @@ class LandDetailContainer extends React.Component {
       owner: null,
       likes: 0,
       reason_conservation: '',
+      importance_of_protection: '',
       location: '',
       main_attributes: [],
       other_main_attributes: '',
@@ -57,6 +58,7 @@ class LandDetailContainer extends React.Component {
           owner: land.owner,
           likes: land.likes,
           reason_conservation: land.reason_conservation,
+          importance_of_protection: land.metadata.importance_of_protection,
           location: land.location,
           main_attributes: land.main_attributes,
           other_main_attributes: land.other_main_attributes,
@@ -135,7 +137,7 @@ class LandDetailContainer extends React.Component {
     }
   };
 
-  handleOnCloseMemoriesModal = (created) => {
+  handleOnCloseMemoriesModal = created => {
     this.setState({
       shareMemories: false,
     });
@@ -155,6 +157,7 @@ class LandDetailContainer extends React.Component {
       owner,
       likes,
       reason_conservation,
+      importance_of_protection,
       location,
       main_attributes,
       other_main_attributes,
@@ -197,6 +200,7 @@ class LandDetailContainer extends React.Component {
               owner={owner}
               likes={likes}
               reason_conservation={reason_conservation}
+              importance_of_protection={importance_of_protection}
               location={location}
               main_attributes={main_attributes}
               other_main_attributes={other_main_attributes}
@@ -235,7 +239,7 @@ class LandDetailContainer extends React.Component {
                 </div>
               </Col>
             </Row>
-            <MemoryListContainer landId={id} key={reloadMemoryList}/>
+            <MemoryListContainer landId={id} key={reloadMemoryList} />
             <Divider dashed style={{ borderStyle: 'dotted' }} />
             <Row gutter={16}>
               <Col md={8}>
@@ -246,14 +250,14 @@ class LandDetailContainer extends React.Component {
                 </h3>
                 {level === LAND_LEVEL_CONSERVED ? (
                   <p>
-                    Sé parte del foro comunitario y comparte tus experiencias o
-                    sugerencias del área protegida.
+                    Sé parte del foro comunitario del área protegida y comparte
+                    tus experiencias o sugerencias.
                   </p>
                 ) : (
                   <p>
                     Cada propuesta necesita una comunidad que la apoye. Sé parte
-                    del proceso de propuesta y aporta al foro comunitario de la
-                    propuesta con tus experiencias o sugerencias.
+                    del proceso de propuesta y aporta al foro comunitario con
+                    tus experiencias o sugerencias.
                   </p>
                 )}
               </Col>

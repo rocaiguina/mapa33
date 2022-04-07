@@ -78,11 +78,7 @@ class MapStep extends React.Component {
     const { showMapGuide } = this.state;
     return (
       <BaseLayout
-        title={
-          <span>
-            ESCOGE TU TERRENO<span className="hidden-xs">/PROPUESTA</span>
-          </span>
-        }
+        title={<span>ESCOGE EL TERRENO</span>}
         onClose={this.props.onClose}
         verticalAlign="top"
         footerXs={footerXs}

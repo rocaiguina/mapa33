@@ -13,7 +13,6 @@ import {
   LAND_ATTRIBUTE,
   LAND_MAIN_USE,
   LAND_PROPOSED_USE,
-  LAND_PROTECTION_REASON,
 } from '../../../constants';
 
 class SubmitStep extends React.Component {
@@ -55,14 +54,8 @@ class SubmitStep extends React.Component {
               </div>
             </Col>
             <Col md={8}>
-              <p className="lead">
-                ¿Por qué es importante la protección de este terreno en
-                particular?
-              </p>
-              <p>
-                {LAND_PROTECTION_REASON[this.props.reason_conservation] ||
-                  'No definido.'}
-              </p>
+              <p className="lead">¿Por qué se debe proteger este terreno?</p>
+              <p>{this.props.importance_of_protection || 'No definido.'}</p>
             </Col>
           </Row>
 
@@ -91,7 +84,10 @@ class SubmitStep extends React.Component {
                       <Badge
                         title="Extensión"
                         description={
-                          Numeral(this.props.area_size).format('0,0') + ' acres'
+                          <span>
+                            {Numeral(this.props.area_size).format('0,0')} m
+                            <sup>2</sup>
+                          </span>
                         }
                         color="default"
                         shape="round"
@@ -192,7 +188,7 @@ SubmitStep.propTypes = {
   name: PropTypes.string,
   photograph: PropTypes.string,
   owner: PropTypes.string,
-  reason_conservation: PropTypes.string,
+  importance_of_protection: PropTypes.string,
   location: PropTypes.string,
   main_attributes: PropTypes.array,
   other_main_attributes: PropTypes.string,

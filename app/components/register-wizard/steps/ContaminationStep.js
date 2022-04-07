@@ -1,28 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Radio, Row, Typography } from 'antd';
+import { Col, Input, Radio, Row, Typography } from 'antd';
 
 import BaseLayout from '../../layout/base';
 import BottomNavigator from '../BottomNavigator';
 import TopNavigator from '../TopNavigator';
 import Progress from '../Progress';
 
+const { TextArea } = Input;
 const { Text } = Typography;
 
 class ContaminationStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasContamination: props.has_contamination == 'yes',
       errors: {},
     };
   }
 
   handleOnChange = e => {
-    const self = this;
     this.props.handleChange(e);
-    setTimeout(function() {
-      self.props.next();
-    }, 400);
+    this.setState({
+      hasContamination: e.target.value === 'yes',
+    });
   };
 
   handleOnNext = () => {
@@ -36,7 +37,7 @@ class ContaminationStep extends React.Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, hasContamination } = this.state;
     return (
       <BaseLayout
         title="FORMULARIO DE PROPUESTA"
@@ -44,11 +45,11 @@ class ContaminationStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={16} steps={20} />
+          <Progress onNext={this.handleOnNext} step={17} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={16} steps={20} />
+          <TopNavigator previous={this.props.previous} step={17} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -57,7 +58,8 @@ class ContaminationStep extends React.Component {
               }}
             >
               <h2>
-                ¿El terreno ha tenido problemas de contaminación en el pasado?
+                ¿El terreno ha tenido problemas de contaminación? Por ejemplo:
+                vertedero clandestino, derrames químicos, aguas negras u otros.
               </h2>
               {errors.has_contamination && (
                 <Text type="danger">{errors.has_contamination}</Text>
@@ -94,6 +96,20 @@ class ContaminationStep extends React.Component {
                   No sé
                 </Radio.Button>
               </Radio.Group>
+
+              {hasContamination && (
+                <div className="text-left">
+                  <label>Describe el tipo de contaminación:</label>
+                  <TextArea
+                    name="contamination_description"
+                    className="form-control"
+                    value={this.props.contamination_description}
+                    onChange={this.props.handleChange}
+                    rows={4}
+                    maxLength="150"
+                  />
+                </div>
+              )}
             </Col>
           </Row>
           <BottomNavigator
@@ -108,6 +124,7 @@ class ContaminationStep extends React.Component {
 
 ContaminationStep.propTypes = {
   has_contamination: PropTypes.string,
+  contamination_description: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,

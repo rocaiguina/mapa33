@@ -15,6 +15,7 @@ import ProblemLandStep from './steps/ProblemLandStep';
 import MortgageStep from './steps/MortgageStep';
 import MainUsesStep from './steps/MainUsesStep';
 import HowManyStructuresStep from './steps/HowManyStructuresStep';
+import AlreadyProposedUsesStep from './steps/AlreadyProposedUsesStep';
 import MainAttributesStep from './steps/MainAttributesStep';
 import SurveyingStep from './steps/SurveyingStep';
 import ContaminationStep from './steps/ContaminationStep';
@@ -26,6 +27,7 @@ import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
 import CatastroNumberStep from './steps/CatastroNumberStep';
 import MapStep from './steps/MapStep';
 import ReviewLandStep from './steps/ReviewLandStep';
+import ImportanceProtectionStep from './steps/ImportanceProtectionStep';
 import NameLandStep from './steps/NameLand';
 
 const landValidationSchema = Yup.object().shape({
@@ -198,6 +200,30 @@ class RegisterWizard extends React.Component {
                   )}
                 />
                 <Step
+                  id="importance-protection"
+                  render={({ next, previous }) => (
+                    <ImportanceProtectionStep
+                      importance_of_protection={values.importance_of_protection}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      onClose={this.handleOnClose}
+                    />
+                  )}
+                />
+                <Step
+                  id="importance"
+                  render={({ next, previous }) => (
+                    <ImportanceOfKnowingStep
+                      importance_of_knowing={values.importance_of_knowing}
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      onClose={this.handleOnClose}
+                    />
+                  )}
+                />
+                <Step
                   id="are-you-owner"
                   render={({ next, previous }) => (
                     <AreYouOwnerStep
@@ -345,6 +371,23 @@ class RegisterWizard extends React.Component {
                   )}
                 />
                 <Step
+                  id="already-proposed-uses"
+                  render={({ next, previous }) => (
+                    <AlreadyProposedUsesStep
+                      has_already_proposed_uses={
+                        values.has_already_proposed_uses
+                      }
+                      proposed_uses_description={
+                        values.proposed_uses_description
+                      }
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      onClose={this.handleOnClose}
+                    />
+                  )}
+                />
+                <Step
                   id="main-attributes"
                   render={({ next, previous }) => (
                     <MainAttributesStep
@@ -363,18 +406,9 @@ class RegisterWizard extends React.Component {
                   render={({ next, previous }) => (
                     <ContaminationStep
                       has_contamination={values.has_contamination}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="importance"
-                  render={({ next, previous }) => (
-                    <ImportanceOfKnowingStep
-                      importance_of_knowing={values.importance_of_knowing}
+                      contamination_description={
+                        values.contamination_description
+                      }
                       next={next}
                       previous={previous}
                       handleChange={handleChange}
@@ -414,7 +448,7 @@ class RegisterWizard extends React.Component {
                       name={values.land_name}
                       photograph={values.base64Img}
                       owner={values.owner_name}
-                      reason_conservation={values.importance_of_knowing}
+                      importance_of_protection={values.importance_of_protection}
                       location={values.location}
                       main_attributes={values.lands_attributes}
                       other_main_attributes={values.lands_other_attributes}

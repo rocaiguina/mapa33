@@ -1459,7 +1459,13 @@ ul.actions {
 }
 /* Custom buttons */
 .ant-btn-link.ant-btn-purple {
-  color: #F073A8;
+  color: #F073A8 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+.ant-btn.ant-btn-link.ant-btn-purple:hover,
+.ant-btn.ant-btn-link.ant-btn-purple:focus {
+  color: #F073A8 !important;
 }
 
 .ant-btn.ant-btn-purple {

@@ -57,7 +57,7 @@ class WhichUseStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Qué uso crees que debe de tener el espacio conservado?</h2>
+              <h2>¿Cuáles usos propones para el terreno?</h2>
               {errors.which_uses && (
                 <Text type="danger">{errors.which_uses}</Text>
               )}

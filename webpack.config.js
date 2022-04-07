@@ -9,7 +9,7 @@ module.exports = {
     path: path.join(__dirname, 'public/dist'),
     filename: '[name].js'
   },
-  mode: 'production',
+  mode: 'development',
   context: __dirname,
   devtool: 'source-map',
   externals: {

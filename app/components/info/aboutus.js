@@ -15,19 +15,16 @@ class AboutUs extends React.Component {
               <img src={'/images/logo-white.png'} className="img-responsive" />
             </div>
             <p>
-              Mapa-33 es una herramienta diseñada para integrar la participación ciudadana en la conservación de terrenos. Debido a las situaciones  nuestra meta común: la conservación del 33% de los terrenos en Puerto Rico para el 2033. 
+              Mapa-33 es una herramienta diseñada para integrar la participación ciudadana en la conservación del archipiélago de Puerto Rico. Esta iniciativa surge como respuesta a la meta del país para proteger el 33% de los terrenos de Puerto Rico para el 2033.
             </p>
             <p>
-              Los Estados Unidos y Costa Rica dedican un 26% de su territorio a la conservación y nuestros vecinos antillanos en la República Dominicana un 24%, Cuba 17% e Islas Vírgenes—cuyo sustento depende casi completamente del turismo—protege hasta el 52% de su territorio.
+              Costa Rica dedica un 28% de su territorio a la conservación y nuestros vecinos antillanos en la República Dominicana un 26%, Cuba 22% e Islas Vírgenes—cuyo sustento depende casi completamente del turismo—protege un 32% de sus territorios. Estados Unidos, combinando sus reservas terrestres y marinas, protege un 26% y recientemente apoyó la meta global que propone conservar el 30% para el 2030. La misma ha sido adoptada por 85 países comprometidos con la protección de sus ecosistemas.
             </p>
             <p>
-              Sin embargo en Puerto Rico el total de los terrenos protegidos por entidades gubernamentales y privadas es de solamente un 16%. Nuestra meta es ambiciosa y a largo plazo, pero creemos que es posible alcanzarla si se convierte en la meta común de todos.
+              Sin embargo, el total de los terrenos designados como protegidos por entidades gubernamentales y privadas en Puerto Rico es sólo un 16%. La meta es ambiciosa y a largo plazo, pero creemos que es posible alcanzarla si se convierte en una prioridad para todos.
             </p>
             <p>
-              A través de esta plataforma puedes proponer terrenos que, después de un proceso de evaluación, serán propuestas visibles en la herramienta. También puedes apoyar propuestas que ya estén en el mapa ayudándoles a lograr un mayor alcance y exposición. 
-            </p>
-            <p>
-              La conservación es un esfuerzo colectivo y es por eso que juntos crearemos el mapa del 2033. 
+              Conservar es un esfuerzo de país y es una responsabilidad colectiva crear en comunidad el  mapa que queremos.
             </p>
           </Col>
         </Row>
