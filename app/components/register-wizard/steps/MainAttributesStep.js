@@ -52,11 +52,11 @@ class MainAttributesStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={15} steps={20} />
+          <Progress onNext={this.handleOnNext} step={16} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={15} steps={20} />
+          <TopNavigator previous={this.props.previous} step={16} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -65,8 +65,7 @@ class MainAttributesStep extends React.Component {
               }}
             >
               <h2>
-                ¿Cuáles son los principales atributos que resaltan el valor para
-                la conservación de esta propiedad?
+                ¿Cuáles de los siguientes atributos identificas en el terreno?
               </h2>
               {errors.lands_attributes && (
                 <Text type="danger">{errors.lands_attributes}</Text>
@@ -99,6 +98,7 @@ class MainAttributesStep extends React.Component {
                   size="large"
                   value={this.props.lands_other_attributes}
                   onChange={this.props.handleChange}
+                  maxLength="100"
                 />
               )}
             </Col>

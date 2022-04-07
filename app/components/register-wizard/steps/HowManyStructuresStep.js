@@ -96,6 +96,7 @@ class HowManyStructuresStep extends React.Component {
                   size="large"
                   value={this.props.lands_other_structures}
                   onChange={this.props.handleChange}
+                  maxLength="100"
                 />
               )}
             </Col>

@@ -45,7 +45,7 @@ class ReviewLandStep extends React.Component {
                   <p>
                     <strong>Área</strong>
                     <br />
-                    {Numeral(this.props.area).format('0,0')} acres
+                    {Numeral(this.props.area).format('0,0')} m<sup>2</sup>
                   </p>
                   <p>
                     <strong>Municipio</strong>

@@ -44,11 +44,11 @@ class SurveyingStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={10} steps={20} />
+          <Progress onNext={this.handleOnNext} step={12} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={10} steps={20} />
+          <TopNavigator previous={this.props.previous} step={12} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}

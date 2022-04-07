@@ -431,7 +431,7 @@ class LandEditDetail extends React.Component {
                 <div className="land-data-sheet">
                   <h4>Extensión:</h4>
                   <p>
-                    {Numeral(this.props.area_size).format('0,0') + ' cuerdas'}
+                    {Numeral(this.props.area_size).format('0,0')} m<sup>2</sup>
                   </p>
                 </div>
               </div>

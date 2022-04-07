@@ -6,16 +6,16 @@ import BaseLayout from '../../components/layout/base';
 class RegisterLandSuccessful extends React.Component {
   render() {
     return (
-      <BaseLayout title="REGISTRO SATISFACTORIO" showCloseBtn={true}>
+      <BaseLayout title="REGISTRO" showCloseBtn={true}>
         <div className="jumbotron text-center">
-          <p className="lead">¡Gracias por unirte a la meta común.!</p>
+          <p className="lead">¡Gracias por proponer un terreno!</p>
           <Row>
             <Col md={{ offset: 6, span: 12 }}>
               <p className="lead">
-                Ahora nuestro equipo evaluará tu propuesta.
+                Juntos estamos creando el mapa que queremos.
                 <br />
-                Verifica tu correo electrónico para nuestras notificaciones
-                sobre el proceso de evaluación y aprobación de propuesta.
+                Verifica tu correo electrónico para notificaciones sobre los
+                próximos pasos.
               </p>
             </Col>
           </Row>

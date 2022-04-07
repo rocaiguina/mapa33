@@ -16,8 +16,7 @@ class HomeGuideTour extends React.Component {
             <div className="joyride-body">
               <h4>Visualizar</h4>
               <p>
-                Escoge cómo quieres ver las áreas/los terrenos del mapa: Lista,
-                Tarjetas o Mapa.
+                Escoge cómo quieres ver las áreas, modo: Lista, Tarjetas o Mapa.
               </p>
             </div>
           ),
@@ -30,9 +29,8 @@ class HomeGuideTour extends React.Component {
             <div className="joyride-body">
               <h4>Capas</h4>
               <p>
-                Ajusta el mapa para que muestre capas de información por
-                colores. Estos corresponden a las siguientes categorías: Áreas
-                Propuestas, Áreas Protegidas o Ambas.
+                Ajusta el mapa para que muestre las capas de información por
+                colores: Áreas Propuestas, Áreas Protegidas o Ambas.
               </p>
             </div>
           ),
@@ -43,10 +41,7 @@ class HomeGuideTour extends React.Component {
           content: (
             <div className="joyride-body">
               <h4>Proponer</h4>
-              <p>
-                Envía tu propuesta para áreas o terrenos que deseas sean
-                conservados.
-              </p>
+              <p>¡Comienza tu propuesta!</p>
             </div>
           ),
           placement: 'top',
@@ -57,9 +52,8 @@ class HomeGuideTour extends React.Component {
             <div className="joyride-body">
               <h4>El Mapa</h4>
               <p>
-                El mapa muestra los distintos tipos de áreas (o terrenos) que
-                componen el archipiélago de Puerto Rico. Puedes interactuar con
-                las regiones marcadas para ver sus propuestas/tarjetas.
+                El mapa muestra los distintos tipos de áreas protegidas y
+                propuestas que componen el archipiélago de Puerto Rico.
               </p>
             </div>
           ),
@@ -71,7 +65,8 @@ class HomeGuideTour extends React.Component {
             <div className="joyride-body">
               <h4>Perfil</h4>
               <p>
-                Regístrate para proponer áreas (o terrenos) y mostrar tu apoyo.
+                Debes registrarte para proponer áreas y apoyar propuestas
+                publicadas.
               </p>
             </div>
           ),
@@ -151,7 +146,11 @@ class HomeGuideTour extends React.Component {
             </h1>
             <Button
               className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
-              style={{ borderRadius: '15px', fontWeight: 'bold' }}
+              style={{
+                borderRadius: '15px',
+                fontWeight: 'bold',
+                lineHeight: '26px',
+              }}
               onClick={this.handleOnCloseTutorial}
             >
               Cerrar explicación

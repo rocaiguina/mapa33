@@ -31,7 +31,9 @@ class Footer extends Component {
             <Col md={12} xs={xs[1]}>
               <div className="second-column">
                 <p>
-                Espacio virtual para fomentar la participación ciudadana en la conservación de terrenos y promover la protección del 33% de los terrenos de Puerto Rico para el 2033. 
+                  Una herramienta para fomentar la participación ciudadana en la
+                  conservación de terrenos y promover la protección del 33% de
+                  Puerto Rico para el 2033.
                 </p>
               </div>
             </Col>

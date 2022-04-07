@@ -38,7 +38,7 @@ class Item extends React.Component {
                   <br />
                 </span>
                 <span>
-                  {Numeral(this.props.area_size).format('0,0')} cuerdas de
+                  {Numeral(this.props.area_size).format('0,0')} m<sup>2</sup> de
                   extensión
                 </span>
               </Col>

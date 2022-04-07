@@ -118,7 +118,7 @@ class RegisterForm extends React.Component {
                         name="last_name"
                         className="inputprop"
                         type="text"
-                        placeholder="*Apellidos:"
+                        placeholder="*Apellido:"
                         onChange={handleChange}
                       />
                       <Text type="danger">{errors.last_name}</Text>
@@ -144,7 +144,7 @@ class RegisterForm extends React.Component {
                         name="password"
                         className="inputprop"
                         type="password"
-                        placeholder="*Contraseña:"
+                        placeholder="*Crear contraseña:"
                         onChange={handleChange}
                       />
                       <Text type="danger">{errors.password}</Text>
@@ -221,14 +221,15 @@ class RegisterForm extends React.Component {
                       <Select
                         name="gender"
                         className="inputprop"
-                        placeholder="Sexo:"
+                        placeholder="Género:"
                         style={{ width: '100%' }}
                         onChange={value => {
                           this.handleOnChangeGender(value, setFieldValue);
                         }}
                       >
-                        <Option value="F">Femenino</Option>
-                        <Option value="M">Masculino</Option>
+                        <Option value="F">Mujer</Option>
+                        <Option value="M">Hombre</Option>
+                        <Option value="O">Otro</Option>
                       </Select>
                     </div>
                   </Col>
@@ -251,19 +252,6 @@ class RegisterForm extends React.Component {
                     </div>
                   </Col>
                   <Col md={12}>
-                    <div className="form-group">
-                      <Input
-                        name="company"
-                        className="inputprop"
-                        type="text"
-                        placeholder="Compañia:"
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col md={24}>
                     <div className="form-group">
                       <Input
                         name="address"
@@ -295,7 +283,7 @@ class RegisterForm extends React.Component {
                         name="estate"
                         className="inputprop"
                         type="text"
-                        placeholder="Estado/Territorio:"
+                        placeholder="Estado:"
                         onChange={handleChange}
                       />
                     </div>
@@ -331,14 +319,16 @@ class RegisterForm extends React.Component {
                     </div>
                   </Col>
                 </Row>
+                <p>
+                  Utilizaremos esta información para propósitos de registro y
+                  contacto directo. Ninguna información de identificación
+                  personal será publicada en la herramienta.
+                </p>
               </Col>
               <Col md={8}>
                 <div className="m-b-20 m-t-20">
                   <br />
-                  <br />
-                  <br />
-                  <br />
-                  <div className="form-check">
+                  <div className="form-check m-t-10">
                     <Checkbox
                       name="advs_by_email"
                       defaultChecked={false}

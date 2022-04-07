@@ -37,11 +37,11 @@ class ImportanceOfKnowingStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={17} steps={20} />
+          <Progress onNext={this.handleOnNext} step={5} steps={20} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={17} steps={20} />
+          <TopNavigator previous={this.props.previous} step={5} steps={20} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -49,10 +49,7 @@ class ImportanceOfKnowingStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>
-                ¿Por qué es importante la protección de este terreno en
-                particular?
-              </h2>
+              <h2>¿Por qué se debe proteger este terreno?</h2>
               {errors.importance_of_knowing && (
                 <Text type="danger">{errors.importance_of_knowing}</Text>
               )}
