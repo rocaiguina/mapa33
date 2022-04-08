@@ -17,3 +17,4 @@ public/dist
 
 # Environment variables
 .env
+/nodejstest.cer
