@@ -1233,7 +1233,7 @@ ul.actions {
     left: 0;
   }
   .land-list-wrapper {
-    padding-top: 67px;
+    padding-top: 180px;
   }
   .land-filter .ant-select-lg .ant-select-selection--single,
   .land-filter .ant-btn-round.ant-btn-lg {
@@ -1934,7 +1934,7 @@ ul.actions {
 
 /* Land list */
 .land-list-wrapper {
-  margin-top: 80px;
+  margin-top: 134px;
 }
 .land-list-pagination-info {
   margin-bottom: 15px;
