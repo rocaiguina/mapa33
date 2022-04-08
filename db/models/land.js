@@ -63,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     metadata: {
       type: DataTypes.JSON,
       allowNull: true,
+      defaultValue: {},
     },
     plots_count: {
       type: DataTypes.INTEGER,

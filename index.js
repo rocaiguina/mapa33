@@ -5,6 +5,7 @@ const app = express();
 const { resolve } = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const sequelizeSessionStore = require('connect-session-sequelize');
 const db = require('./db/models');
 const server = require('./server');
 const morgan = require('morgan');
@@ -40,8 +41,16 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 // session middleware
+var SequelizeStore = sequelizeSessionStore(session.Store);
+
 let sessionConfig = {
   secret: 'mapa33secretcookie',
+  store: new SequelizeStore({
+    db: db.sequelize,
+    proxy: true,
+  }),
+  resave: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000,
     secure: false

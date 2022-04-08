@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BaseLayout from '../components/layout/base';
-import Intro from '../components/intro';
 import Legend2 from '../components/map-view/Legend2';
 import Map from '../components/map-view/Map';
 import Instructions from '../components/intro/instructions';
@@ -13,7 +12,6 @@ class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showIntro: false,
       showInstructions: false,
       showGuide: false,
       areaView: '',
@@ -24,24 +22,13 @@ class HomeContainer extends React.Component {
   }
 
   componentDidMount() {
-    var showIntro = LocalStorage.getItem('showIntro', '1');
     var showInstructions = LocalStorage.getItem('showInstructions', '1');
     var showGuide = LocalStorage.getItem('showInstructions', '1');
     this.setState({
-      showIntro: showIntro == '1',
-      showInstructions: showIntro == '0' && showInstructions == '1',
-      showGuide:
-        showIntro == '0' && showInstructions == '0' && showGuide == '1',
+      showInstructions: showInstructions == '1',
+      showGuide: showInstructions == '0' && showGuide == '1',
     });
   }
-
-  handleOnEndIntro = () => {
-    this.setState({
-      showIntro: false,
-      showInstructions: true,
-    });
-    LocalStorage.setItem('showIntro', '0');
-  };
 
   handleOnCloseInstructions = () => {
     this.setState({
@@ -83,37 +70,34 @@ class HomeContainer extends React.Component {
   };
 
   render() {
-    const { showIntro, showGuide, showInstructions } = this.state;
-    const title = showIntro ? null : <Legend2 />;
+    const { showGuide, showInstructions } = this.state;
+    const title = <Legend2 />;
     return (
       <BaseLayout
         dark
         title={title}
-        showCloseBtn={!showIntro}
+        showCloseBtn={true}
         disableBorder
         footerRightComponent={
-          !showIntro && <ProposeButton title="Proponer área" icon="plus" />
+          <ProposeButton title="Proponer área" icon="plus" />
         }
       >
-        {showIntro && <Intro onEnd={this.handleOnEndIntro} />}
-        {!showIntro && (
-          <div>
-            <Map
-              areaView={this.state.areaView}
-              modeView={this.state.modeView}
-              onChangeMode={this.handleOnChangeMode}
-              onChangeArea={this.handleOnChangeArea}
+        <div>
+          <Map
+            areaView={this.state.areaView}
+            modeView={this.state.modeView}
+            onChangeMode={this.handleOnChangeMode}
+            onChangeArea={this.handleOnChangeArea}
+          />
+          {showGuide && (
+            <HomeGuideTour
+              run={this.state.run}
+              onNext={this.handleOnNextTour}
+              onFinish={this.handleOnCloseTour}
+              onClose={this.handleOnCloseTour}
             />
-            {showGuide && (
-              <HomeGuideTour
-                run={this.state.run}
-                onNext={this.handleOnNextTour}
-                onFinish={this.handleOnCloseTour}
-                onClose={this.handleOnCloseTour}
-              />
-            )}
-          </div>
-        )}
+          )}
+        </div>
         <Instructions
           visible={showInstructions}
           onClose={this.handleOnCloseInstructions}

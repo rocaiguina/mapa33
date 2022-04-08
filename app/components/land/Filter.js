@@ -57,7 +57,7 @@ class Filter extends React.Component {
                 size="large"
                 style={{ width: '100%' }}
                 dataSource={dataLand}
-                placeholder="Entra keywords"
+                placeholder="Buscar por nombre"
                 onSearch={this.handleOnSearchKeyword}
                 onSelect={onSelectLand}
                 defaultActiveFirstOption={false}
