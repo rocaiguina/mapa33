@@ -15,10 +15,6 @@ const MemorySuccessfulView = props => {
         <div style={{ padding: '0 15px' }}>
           <br />
           <h2>TU MEMORIA FUE SOMETIDA DE MANERA EXITOSA</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
           <div className="form-group">
             <Button
               block
