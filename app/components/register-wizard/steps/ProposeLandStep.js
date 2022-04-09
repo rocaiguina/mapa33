@@ -45,11 +45,11 @@ class ProposeLandStep extends React.Component {
         showCloseBtn={true}
         closeLink="/"
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={1} steps={20} />
+          <Progress onNext={this.handleOnNext} step={1} steps={21} />
         }
       >
         <div className="main-content">
-          <TopNavigator disabledPrevious step={1} steps={20} />
+          <TopNavigator disabledPrevious step={1} steps={21} />
           <Row gutter={30}>
             <Col
               md={12}

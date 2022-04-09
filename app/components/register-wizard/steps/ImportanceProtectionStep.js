@@ -37,11 +37,11 @@ class ImportanceProtectionStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={4} steps={20} />
+          <Progress onNext={this.handleOnNext} step={4} steps={21} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={4} steps={20} />
+          <TopNavigator previous={this.props.previous} step={4} steps={21} />
           <h2 className="text-center">
             ¿Por qué es importante proteger este terreno?
           </h2>

@@ -10,11 +10,11 @@ import Progress from '../Progress';
 const { TextArea } = Input;
 const { Text } = Typography;
 
-class AlreadyProposedUsesStep extends React.Component {
+class ControversiesStep extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasContamination: props.has_already_proposed_uses == 'yes',
+      hasContamination: props.has_controversies == 'yes',
       errors: {},
     };
   }
@@ -27,11 +27,11 @@ class AlreadyProposedUsesStep extends React.Component {
   };
 
   handleOnNext = () => {
-    if (this.props.has_already_proposed_uses !== null) {
+    if (this.props.has_controversies !== null) {
       this.props.next();
     } else {
       this.setState({
-        errors: { has_already_proposed_uses: 'Campo requerido' },
+        errors: { has_controversies: 'Campo requerido' },
       });
     }
   };
@@ -45,11 +45,11 @@ class AlreadyProposedUsesStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={15} steps={21} />
+          <Progress onNext={this.handleOnNext} step={18} steps={21} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={15} steps={21} />
+          <TopNavigator previous={this.props.previous} step={18} steps={21} />
           <Row gutter={30}>
             <Col
               md={12}
@@ -57,9 +57,12 @@ class AlreadyProposedUsesStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Hay algún uso ya propuesto para este terreno?</h2>
-              {errors.has_already_proposed_uses && (
-                <Text type="danger">{errors.has_already_proposed_uses}</Text>
+              <h2>
+                ¿Existen controversias de herencia, titularidad, registro de
+                propiedad o de alguna otra índole legal?
+              </h2>
+              {errors.has_controversies && (
+                <Text type="danger">{errors.has_controversies}</Text>
               )}
             </Col>
             <Col
@@ -69,9 +72,9 @@ class AlreadyProposedUsesStep extends React.Component {
               }}
             >
               <Radio.Group
-                name="has_already_proposed_uses"
+                name="has_controversies"
                 buttonStyle="solid"
-                value={this.props.has_already_proposed_uses}
+                value={this.props.has_controversies}
                 onChange={this.handleOnChange}
               >
                 <Radio.Button
@@ -96,14 +99,14 @@ class AlreadyProposedUsesStep extends React.Component {
 
               {hasContamination && (
                 <div className="text-left">
-                  <label>Describe el tipo de uso propuesto:</label>
+                  <label>Explica más aquí:</label>
                   <TextArea
-                    name="proposed_uses_description"
+                    name="controversies_description"
                     className="form-control"
-                    value={this.props.proposed_uses_description}
+                    value={this.props.controversies_description}
                     onChange={this.props.handleChange}
                     rows={4}
-                    maxLength="150"
+                    maxLength="200"
                   />
                 </div>
               )}
@@ -119,13 +122,13 @@ class AlreadyProposedUsesStep extends React.Component {
   }
 }
 
-AlreadyProposedUsesStep.propTypes = {
-  has_already_proposed_uses: PropTypes.string,
-  proposed_uses_description: PropTypes.string,
+ControversiesStep.propTypes = {
+  has_controversies: PropTypes.string,
+  controversies_description: PropTypes.string,
   next: PropTypes.func,
   previous: PropTypes.func,
   handleChange: PropTypes.func,
   onClose: PropTypes.func,
 };
 
-export default AlreadyProposedUsesStep;
+export default ControversiesStep;

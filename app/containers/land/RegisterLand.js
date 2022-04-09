@@ -30,6 +30,8 @@ class RegisterLand extends React.Component {
       proposed_uses_description: null,
       has_contamination: null,
       contamination_description: null,
+      has_controversies: null,
+      controversies_description: null,
       which_uses: [],
       importance_of_protection: '',
       importance_of_knowing: '',
