@@ -249,6 +249,7 @@ class LandAdminController {
         .single(),
       other_main_attributes: Joi.string().allow(null, ''),
       has_contamination: Joi.string().allow(null, ''),
+      has_controversies: Joi.string().allow(null, ''),
       proposed_uses: Joi.array()
         .empty('')
         .default([])
@@ -315,6 +316,7 @@ class LandAdminController {
           lands_structures: cleaned_data.lands_structures,
           lands_other_structures: cleaned_data.lands_other_structures,
           has_contamination: cleaned_data.has_contamination,
+          has_controversies: cleaned_data.has_controversies,
           know_owner: cleaned_data.know_owner,
         };
 

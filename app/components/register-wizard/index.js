@@ -19,6 +19,7 @@ import AlreadyProposedUsesStep from './steps/AlreadyProposedUsesStep';
 import MainAttributesStep from './steps/MainAttributesStep';
 import SurveyingStep from './steps/SurveyingStep';
 import ContaminationStep from './steps/ContaminationStep';
+import ControversiesStep from './steps/ControversiesStep';
 import KnowOwnerStep from './steps/KnowOwnerStep';
 import YesFillFormStep from './steps/YesFillFormStep';
 import WhichUseStep from './steps/WhichUseStep';
@@ -408,6 +409,21 @@ class RegisterWizard extends React.Component {
                       has_contamination={values.has_contamination}
                       contamination_description={
                         values.contamination_description
+                      }
+                      next={next}
+                      previous={previous}
+                      handleChange={handleChange}
+                      onClose={this.handleOnClose}
+                    />
+                  )}
+                />
+                <Step
+                  id="controversies"
+                  render={({ next, previous }) => (
+                    <ControversiesStep
+                      has_controversies={values.has_controversies}
+                      controversies_description={
+                        values.controversies_description
                       }
                       next={next}
                       previous={previous}

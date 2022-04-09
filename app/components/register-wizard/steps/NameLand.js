@@ -36,11 +36,11 @@ class NameLand extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={19} steps={20} />
+          <Progress onNext={this.handleOnNext} step={20} steps={21} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={19} steps={20} />
+          <TopNavigator previous={this.props.previous} step={20} steps={21} />
           <Row gutter={30}>
             <Col md={8} />
             <Col md={8}>
