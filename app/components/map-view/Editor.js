@@ -23,7 +23,7 @@ let hoveredStateId = null;
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   countries: 'us',
-  placeholder: 'Municipio o dirección...',
+  placeholder: 'Código postal o dirección física...',
   bbox: [
     -67.34555313044709,
     17.881642210059354,

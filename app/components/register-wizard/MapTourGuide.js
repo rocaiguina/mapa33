@@ -51,7 +51,7 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Busca un municipio o dirección
+                Busca tu código postal o dirección física
               </h5>
             </div>
           ),

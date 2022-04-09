@@ -56,7 +56,7 @@ class AreYouOwnerStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Eres Dueño del terreno?</h2>
+              <h2>¿Eres dueño/a del terreno?</h2>
               {errors.are_u_owner && (
                 <Text type="danger">{errors.are_u_owner}</Text>
               )}
