@@ -9,10 +9,7 @@ module.exports = {
     dialect: 'postgres',
     operatorsAliases: false,
     use_env_variable: 'DATABASE_URL',
-    ssl: true,
-    dialectOptions: {
-      ssl: true,
-    },
+    dialectOptions: {},
   },
   test: {
     username: 'postgres',
