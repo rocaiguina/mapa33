@@ -30,7 +30,7 @@ class Item extends React.Component {
                 <h4 className="land-name">
                   <Link to={`/land/${this.props.id}`}>{this.props.name}</Link>
                 </h4>
-                <span className="hidden-xs">{owner}</span>
+                {/* <span className="hidden-xs">{owner}</span> */}
               </Col>
               <Col xs={24} md={6}>
                 <span className="hidden-xs">
