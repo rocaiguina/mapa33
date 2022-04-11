@@ -49,7 +49,7 @@ class ImportanceOfKnowingStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Por qué quieres proteger este terreno en particular?</h2>
+              <h2>¿Por qué se debe proteger este terreno?</h2>
               {errors.importance_of_knowing && (
                 <Text type="danger">{errors.importance_of_knowing}</Text>
               )}

@@ -77,7 +77,7 @@ class InheritanceLandStep extends React.Component {
                   className="inputprop radioprop radiosi form2"
                   value={true}
                 >
-                  Si
+                  Sí
                 </Radio.Button>
                 <Radio.Button
                   className="inputprop radioprop radiono form2"

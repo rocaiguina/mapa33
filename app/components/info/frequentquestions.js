@@ -20,15 +20,15 @@ class FrequentQuestions extends React.Component {
             <p>Aquí puedes:</p>
             <ul>
               <li>
-                (1)<strong> Proponer un terreno</strong> de importancia para ti
-                y tu comunidad.
+                <strong> Proponer un terreno</strong> de importancia para ti y
+                tu comunidad.
               </li>
               <li>
-                (2)<strong> Conectar</strong> con otras propuestas y sus
+                <strong> Conectar</strong> con otras propuestas y sus
                 comunidades.
               </li>
               <li>
-                (3)<strong> Apoyar propuestas</strong> sometidas por otros
+                <strong> Apoyar propuestas</strong> sometidas por otros
                 ciudadanos.
               </li>
               <li>

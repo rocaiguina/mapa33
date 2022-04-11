@@ -77,7 +77,7 @@ class InheritanceAgreeStep extends React.Component {
                   className="inputprop radioprop radiosi form3"
                   value={true}
                 >
-                  Si
+                  Sí
                 </Radio.Button>
                 <Radio.Button
                   className="inputprop radioprop radiono form3"
