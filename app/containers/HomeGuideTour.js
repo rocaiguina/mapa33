@@ -11,12 +11,13 @@ class HomeGuideTour extends React.Component {
       stepIndex: 0,
       steps: [
         {
-          target: '#visualizar_guide',
+          target: '#user_guide',
           content: (
             <div className="joyride-body">
-              <h4>Visualizar</h4>
+              <h4>Perfil</h4>
               <p>
-                Escoge cómo quieres ver las áreas, modo: Lista, Tarjetas o Mapa.
+                Debes registrarte para proponer áreas y apoyar propuestas
+                publicadas.
               </p>
             </div>
           ),
@@ -37,11 +38,13 @@ class HomeGuideTour extends React.Component {
           placement: 'top',
         },
         {
-          target: '#propose_guide',
+          target: '#visualizar_guide',
           content: (
             <div className="joyride-body">
-              <h4>Proponer</h4>
-              <p>¡Comienza tu propuesta!</p>
+              <h4>Visualizar</h4>
+              <p>
+                Escoge cómo quieres ver las áreas, modo: Lista, Tarjetas o Mapa.
+              </p>
             </div>
           ),
           placement: 'top',
@@ -60,14 +63,11 @@ class HomeGuideTour extends React.Component {
           placement: 'bottom',
         },
         {
-          target: '#user_guide',
+          target: '#propose_guide',
           content: (
             <div className="joyride-body">
-              <h4>Perfil</h4>
-              <p>
-                Debes registrarte para proponer áreas y apoyar propuestas
-                publicadas.
-              </p>
+              <h4>Proponer</h4>
+              <p>¡Comienza tu propuesta!</p>
             </div>
           ),
           placement: 'top',
