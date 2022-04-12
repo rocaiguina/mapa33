@@ -178,6 +178,7 @@ class ProfileForm extends React.Component {
                       >
                         <Option value="F">Femenino</Option>
                         <Option value="M">Masculino</Option>
+                        <Option value="O">Otro</Option>
                       </Select>
                       <label className="text-darkgray">Género</label>
                       <Text type="danger">{errors.gender}</Text>

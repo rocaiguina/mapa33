@@ -12,6 +12,12 @@ export const LAND_LEVEL_BASIC = 'basic';
 export const LAND_LEVEL_PLEDGE = 'pledge';
 export const LAND_LEVEL_CONSERVED = 'conserved';
 
+export const GENDER = {
+  F: 'Femenino',
+  M: 'Masculino',
+  O: 'Otro',
+};
+
 export const LAND_LEVELS = [
   {
     value: LAND_LEVEL_BASIC,

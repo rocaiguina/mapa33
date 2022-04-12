@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ProfileActivity from '../../containers/user/ProfileActivity';
+import { GENDER } from '../../constants';
 
 const dateFormat = 'YYYY-MM-DD';
 const dateHumanFormat = 'MMMM YYYY';
@@ -65,10 +66,8 @@ class Profile extends React.Component {
                 <p className="text-darkgray">Correo Electrónico</p>
                 <h3>{profile.phone}</h3>
                 <p className="text-darkgray">Teléfono</p>
-                <h3>{profile.gender == 'F' ? 'Femenino' : 'Masculino'}</h3>
+                <h3>{profile.gender ? GENDER[profile.gender] : ''}</h3>
                 <p className="text-darkgray">Género</p>
-                <h3>{profile.company}</h3>
-                <p className="text-darkgray">Nombre de compañia</p>
               </Col>
               <Col md={12}>
                 <h3>{profile.address}</h3>
