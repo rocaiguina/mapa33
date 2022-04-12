@@ -98,7 +98,7 @@ class SubmitStep extends React.Component {
                     <Col xs={12} md={12}>
                       <Badge
                         title="Compuesto"
-                        description={this.props.plots_count + ' parcelas'}
+                        description={this.props.plots_count + ' parcela' + (this.props.plots_count > 1 ? 's' : '')}
                         color="default"
                         shape="round"
                       />

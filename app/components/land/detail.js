@@ -312,7 +312,7 @@ class LandDetail extends React.Component {
           <Col md={3} xs={12}>
             <div className="land-data-sheet">
               <h4>Compuesto:</h4>
-              <p>{this.props.plots_count + ' parcelas'}</p>
+              <p>{this.props.plots_count + ' parcela' + (this.props.plots_count > 1 ? 's' : '')}</p>
             </div>
           </Col>
           <Col md={3} xs={12}>
