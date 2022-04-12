@@ -9,15 +9,10 @@ import { Wizard, Steps, Step } from 'react-albus';
 
 import AreYouOwnerStep from './steps/AreYouOwnerStep';
 import ProposeLandStep from './steps/ProposeLandStep';
-import InheritanceLandStep from './steps/InheritanceLandStep';
-import InheritanceAgreeStep from './steps/InheritanceAgreeStep';
-import ProblemLandStep from './steps/ProblemLandStep';
-import MortgageStep from './steps/MortgageStep';
 import MainUsesStep from './steps/MainUsesStep';
 import HowManyStructuresStep from './steps/HowManyStructuresStep';
 import AlreadyProposedUsesStep from './steps/AlreadyProposedUsesStep';
 import MainAttributesStep from './steps/MainAttributesStep';
-import SurveyingStep from './steps/SurveyingStep';
 import ContaminationStep from './steps/ContaminationStep';
 import ControversiesStep from './steps/ControversiesStep';
 import KnowOwnerStep from './steps/KnowOwnerStep';
@@ -25,7 +20,6 @@ import YesFillFormStep from './steps/YesFillFormStep';
 import WhichUseStep from './steps/WhichUseStep';
 import SubmitStep from './steps/SubmitStep';
 import ImportanceOfKnowingStep from './steps/ImportanceOfKnowingStep';
-import CatastroNumberStep from './steps/CatastroNumberStep';
 import MapStep from './steps/MapStep';
 import ReviewLandStep from './steps/ReviewLandStep';
 import ImportanceProtectionStep from './steps/ImportanceProtectionStep';
@@ -84,20 +78,10 @@ class RegisterWizard extends React.Component {
           setFieldValue('owner_name', values.user.full_name);
           setFieldValue('owner_email', values.user.email);
           setFieldValue('owner_phone', values.user.phone);
-          push('catastro-number');
-        } else {
-          push('know-owner');
-        }
-        break;
-      case 'inheritance':
-        if (values.inheritance_land === false) {
-          push('problem');
+          push();
         } else {
           push();
         }
-        break;
-      case 'survey':
-        push('main-uses');
         break;
       case 'know-owner':
         if (values.know_owner) {
@@ -233,82 +217,6 @@ class RegisterWizard extends React.Component {
                       previous={previous}
                       handleChange={handleChange}
                       setFieldValue={setFieldValue}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-
-                {/* Owner Flow */}
-                <Step
-                  id="catastro-number"
-                  render={({ next, previous }) => (
-                    <CatastroNumberStep
-                      catastro_numbers={values.catastro_numbers}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="inheritance"
-                  render={({ next, previous }) => (
-                    <InheritanceLandStep
-                      inheritance_land={values.inheritance_land}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="inheritance-agreement"
-                  render={({ next, previous }) => (
-                    <InheritanceAgreeStep
-                      inheritance_agree={values.inheritance_agree}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="problem"
-                  render={({ next, previous }) => (
-                    <ProblemLandStep
-                      lands_problem={values.lands_problem}
-                      lands_other_problem={values.lands_other_problem}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      setFieldValue={setFieldValue}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="mortgage"
-                  render={({ next, previous }) => (
-                    <MortgageStep
-                      has_mortgage={values.has_mortgage}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
-                      onClose={this.handleOnClose}
-                    />
-                  )}
-                />
-                <Step
-                  id="survey"
-                  render={({ next, previous }) => (
-                    <SurveyingStep
-                      has_surveying={values.has_surveying}
-                      next={next}
-                      previous={previous}
-                      handleChange={handleChange}
                       onClose={this.handleOnClose}
                     />
                   )}
