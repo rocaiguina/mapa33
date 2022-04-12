@@ -45,11 +45,11 @@ class ContaminationStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={17} steps={21} />
+          <Progress onNext={this.handleOnNext} step={13} steps={17} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={17} steps={21} />
+          <TopNavigator previous={this.props.previous} step={13} steps={17} />
           <Row gutter={30}>
             <Col
               md={12}

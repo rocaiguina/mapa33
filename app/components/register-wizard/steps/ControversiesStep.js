@@ -45,11 +45,11 @@ class ControversiesStep extends React.Component {
         footerXs={[14, 0, 10]}
         showCloseBtn={true}
         footerRightComponent={
-          <Progress onNext={this.handleOnNext} step={18} steps={21} />
+          <Progress onNext={this.handleOnNext} step={14} steps={17} />
         }
       >
         <div className="main-content">
-          <TopNavigator previous={this.props.previous} step={18} steps={21} />
+          <TopNavigator previous={this.props.previous} step={14} steps={17} />
           <Row gutter={30}>
             <Col
               md={12}

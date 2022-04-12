@@ -224,15 +224,6 @@ class LandAdminController {
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
         .allow(null, ''),
       owner_phone: Joi.string().allow(null, ''),
-      inheritance_land: Joi.boolean(),
-      inheritance_agree: Joi.boolean(),
-      lands_problem: Joi.array()
-        .empty('')
-        .default([])
-        .single(),
-      lands_other_problem: Joi.string().allow(null, ''),
-      has_mortgage: Joi.boolean(),
-      has_surveying: Joi.boolean(),
       main_uses: Joi.array()
         .empty('')
         .default([])
@@ -307,12 +298,6 @@ class LandAdminController {
           owner_name: cleaned_data.owner_name,
           owner_email: cleaned_data.owner_email,
           owner_phone: cleaned_data.owner_phone,
-          inheritance_land: cleaned_data.inheritance_land,
-          inheritance_agree: cleaned_data.inheritance_agree,
-          lands_problem: cleaned_data.lands_problem,
-          lands_other_problem: cleaned_data.lands_other_problem,
-          has_mortgage: cleaned_data.has_mortgage,
-          has_surveying: cleaned_data.has_surveying,
           lands_structures: cleaned_data.lands_structures,
           lands_other_structures: cleaned_data.lands_other_structures,
           has_contamination: cleaned_data.has_contamination,
