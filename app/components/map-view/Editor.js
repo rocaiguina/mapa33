@@ -760,27 +760,39 @@ class Editor extends Component {
           <div className="toolbar toolbar-mapeditor">
             <ul>
               <li>
-                <Button id="zoomInBtn" onClick={this.handleZoomIn} title="Ampliar">
+                <Button
+                  id="zoomInBtn"
+                  onClick={this.handleZoomIn}
+                  title="Ampliar"
+                >
                   <i className="fas fa-fw fa-search-plus"></i>
                 </Button>
               </li>
               <li>
-                <Button id="zoomOutBtn" onClick={this.handleZoomOut} title="Disminuir">
+                <Button
+                  id="zoomOutBtn"
+                  onClick={this.handleZoomOut}
+                  title="Disminuir"
+                >
                   <i className="fas fa-fw fa-search-minus"></i>
                 </Button>
               </li>
+
               <li>
-                <Button id="mapPointerBtn" onClick={this.setSel}>
-                  <i className="fas fa-fw fa-hand-pointer"></i>
-                </Button>
-              </li>
-              <li>
-                <Button id="trashBtn" onClick={this.trashPolygons} title="Zafacón">
+                <Button
+                  id="trashBtn"
+                  onClick={this.trashPolygons}
+                  title="Zafacón"
+                >
                   <i className="fas fa-fw fa-trash-alt"></i>
                 </Button>
               </li>
               <li>
-                <Button id="myLocationBtn" onClick={this.setLoc} title="Ubicación actual">
+                <Button
+                  id="myLocationBtn"
+                  onClick={this.setLoc}
+                  title="Ubicación actual"
+                >
                   <i className="fas fa-fw fa-map-marker-alt"></i>
                 </Button>
               </li>

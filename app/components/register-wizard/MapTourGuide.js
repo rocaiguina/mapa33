@@ -69,17 +69,17 @@ class MapTourGuide extends React.Component {
           ),
           placement: 'top',
         },
-        {
-          target: '#mapPointerBtn',
-          content: (
-            <div>
-              <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Puedes seleccionar hasta tres parcelas.
-              </h5>
-            </div>
-          ),
-          placement: 'top',
-        },
+        // {
+        //   target: '#mapPointerBtn',
+        //   content: (
+        //     <div>
+        //       <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
+        //         Puedes seleccionar hasta tres parcelas.
+        //       </h5>
+        //     </div>
+        //   ),
+        //   placement: 'top',
+        // },
         {
           target: '#trashBtn',
           content: (
@@ -96,7 +96,8 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Cuando ya tengas el terreno seleccionado, presiona el botón de continuar.
+                Cuando ya tengas el terreno seleccionado, presiona el botón de
+                continuar.
               </h5>
             </div>
           ),
@@ -150,6 +151,7 @@ class MapTourGuide extends React.Component {
           continuous={true}
           disableOverlayClose={true}
           hideBackButton={true}
+          hideCloseButton={true}
           spotlightPadding={0}
           styles={{
             options: {
@@ -169,7 +171,7 @@ class MapTourGuide extends React.Component {
               style={{ color: 'white', fontWeight: 'bold' }}
               className="guide_up"
             >
-              <span>Explicación&nbsp;</span>&nbsp; {stepGuide + 1}/5
+              <span>Explicación&nbsp;</span>&nbsp; {stepGuide + 1}/4
             </h1>
             <Button
               className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
