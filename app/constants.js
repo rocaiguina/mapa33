@@ -177,9 +177,14 @@ export const LAND_STRUCTURES = [
 ];
 
 export const LAND_ATTRIBUTE = {
-  nature: 'Naturaleza',
-  educational: 'Educativos',
-  landscape: 'Paisajistas y escénicos',
+  forest: 'Bosque',
+  coast: 'Costa',
+  endangered_species: 'Especies endémicas o en peligro de extinción',
+  lake: 'Lago o laguna',
+  mangle: 'Mangle',
+  landscape: 'Paisaje',
+  pastureland: 'Pastizal',
+  river: 'Río o quebrada',
   others: 'Otros',
 };
 
