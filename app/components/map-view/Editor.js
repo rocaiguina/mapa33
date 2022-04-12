@@ -109,7 +109,7 @@ class Editor extends Component {
 
       map.addSource('protected_areas', {
         type: 'vector',
-        url: 'mapbox://rocaiguina.bzaytugl',
+        url: 'mapbox://rocaiguina.d6j1xz6t',
       });
 
       map.addLayer(
@@ -208,33 +208,11 @@ class Editor extends Component {
           id: 'protected_areas',
           type: 'fill',
           source: 'protected_areas',
-          'source-layer': 'lands',
+          'source-layer': 'lands-380u2f',
           layout: {
             visibility: 'visible',
           },
-          paint: {
-            'fill-color': {
-              property: 'user_id',
-              stops: [
-                [2, '#3e9687'],
-                [3, '#85e0d0'],
-                [4, '#02c6a1'],
-                [5, '#3e9687'],
-                [6, '#02c6a1'],
-                [7, '#85e0d0'],
-                [8, '#5bbcae'],
-                [9, '#02c6a1'],
-                [10, '#3e9687'],
-                [11, '#85e0d0'],
-                [12, '#5bbcae'],
-                [13, '#85e0d0'],
-                [14, '#02c6a1'],
-                [15, '#5bbcae'],
-                [16, '#5bbcae'],
-                [17, '#3e9687'],
-              ],
-            },
-          },
+          paint: { 'fill-color': '#5bbcae' },
         },
         'waterway-label'
       );
