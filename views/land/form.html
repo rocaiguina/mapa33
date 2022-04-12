@@ -28,7 +28,7 @@
                     <img src={%if object.photographURL%}{{object.photographURL}} {% else %} "https://dummyimage.com/600x400/cccccc/000000" {% endif %} class="img-responsive" />
                 </div>
                 <p class="text-center">
-                  <a href="/land/{{ object.id }}">Ver Tarjeta Pública <i class="zmdi zmdi-open-in-new"></i></a>
+                  <a href="/land/{{ object.id }}" target="_blank">Ver Tarjeta Pública <i class="zmdi zmdi-open-in-new"></i></a>
                 </p>
                 <div class="form-group {{ 'has-error' if field_errors.photograph else '' }}" >
                     <div class="fg-line">
