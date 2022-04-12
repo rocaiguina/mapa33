@@ -13,7 +13,7 @@ class MapStep extends React.Component {
       run: true,
       hasRunned: false,
       loading: false,
-      showMapGuide: false,
+      showMapGuide: true,
     };
   }
 

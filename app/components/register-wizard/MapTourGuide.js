@@ -51,7 +51,7 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Busca un municipio o dirección
+                Busca el terreno escribiendo la dirección física o código postal
               </h5>
             </div>
           ),
@@ -63,7 +63,7 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Encuentra tu posición exacta en el mapa
+                Puedes explorar el mapa y buscar el terreno manualmente.
               </h5>
             </div>
           ),
@@ -74,7 +74,7 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Selecciona la parcela haciendo tap o click
+                Puedes seleccionar hasta tres parcelas.
               </h5>
             </div>
           ),
@@ -96,7 +96,7 @@ class MapTourGuide extends React.Component {
           content: (
             <div>
               <h5 style={{ textAlign: 'left', paddingTop: '5px' }}>
-                Cuando tengas tu terreno seleccionado pulsa aquí para someter
+                Cuando ya tengas el terreno seleccionado, presiona el botón de continuar.
               </h5>
             </div>
           ),
@@ -173,7 +173,11 @@ class MapTourGuide extends React.Component {
             </h1>
             <Button
               className="ant-btn m33-btn ant-btn-secondary ant-btn-lg guide_up"
-              style={{ borderRadius: '15px', fontWeight: 'bold' }}
+              style={{
+                borderRadius: '15px',
+                fontWeight: 'bold',
+                lineHeight: '26px',
+              }}
               onClick={this.handleOnCloseTutorial}
             >
               Cerrar explicación
