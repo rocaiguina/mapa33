@@ -339,8 +339,8 @@ class LandEditDetail extends React.Component {
                   <img
                     src={
                       proposed_uses.includes('conservation')
-                        ? '/images/memory/icons-scientist-research.svg'
-                        : '/images/memory/icons-scientist-research-disabled.svg'
+                        ? '/images/memory/icons-sustainable-uses.svg'
+                        : '/images/memory/icons-sustainable-uses-disabled.svg'
                     }
                   />
                   <p>{LAND_PROPOSED_USE['conservation']}</p>
