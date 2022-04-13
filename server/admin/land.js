@@ -139,7 +139,7 @@ class LandAdminController {
       page: req.query.page || 1,
       paginate: req.query.limit || 10,
       where: { status: 'new' },
-      order: [['name', 'ASC']],
+      order: [['createdAt', 'DESC']],
     };
     let filters = { status: 'new' };
 
