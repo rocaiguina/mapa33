@@ -1,0 +1,19 @@
+--- 
+branch-defaults: 
+  default: 
+    environment: mapa33-master-3
+    group_suffix: ~
+global: 
+  application_name: mapa-ebs
+  branch: ~
+  default_ec2_keyname: nodejstest
+  default_platform: "Docker running on 64bit Amazon Linux 2"
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: ~
+  platform_name: ~
+  platform_version: ~
+  profile: ~
+  repository: ~
+  sc: ~
+  workspace_type: Application

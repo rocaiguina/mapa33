@@ -81,7 +81,7 @@ class ContaminationStep extends React.Component {
                   className="inputprop radioprop radiosi form1"
                   value="yes"
                 >
-                  Si
+                  Sí
                 </Radio.Button>
                 <Radio.Button
                   className="inputprop radioprop radiono form1"

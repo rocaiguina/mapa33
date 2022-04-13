@@ -1,4 +1,6 @@
 export const COUNTRIES = [
+  'Puerto Rico',
+  'Estados Unidos de América',
   'Afganistán',
   'Albania',
   'Alemania',
@@ -64,7 +66,6 @@ export const COUNTRIES = [
   'Eslovaquia',
   'Eslovenia',
   'España',
-  'Estados Unidos de América',
   'Estonia',
   'Etiopía',
   'Filipinas',
@@ -185,7 +186,6 @@ export const COUNTRIES = [
   'Polinesia Francesa',
   'Polonia',
   'Portugal',
-  'Puerto Rico',
   'Qatar',
   'Reino Unido',
   'República Centroafricana',

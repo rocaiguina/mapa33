@@ -16,8 +16,7 @@ class HomeGuideTour extends React.Component {
             <div className="joyride-body">
               <h4>Perfil</h4>
               <p>
-                Debes registrarte para proponer áreas y apoyar propuestas
-                publicadas.
+                Regístrate para proponer áreas y apoyar propuestas publicadas.
               </p>
             </div>
           ),
@@ -120,6 +119,7 @@ class HomeGuideTour extends React.Component {
           continuous={true}
           disableOverlayClose={true}
           hideBackButton={true}
+          hideCloseButton={true}
           spotlightPadding={0}
           floaterProps={{
             className: 'home-tour-guide',

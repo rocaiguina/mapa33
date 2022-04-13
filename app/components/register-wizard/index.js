@@ -24,6 +24,7 @@ import MapStep from './steps/MapStep';
 import ReviewLandStep from './steps/ReviewLandStep';
 import ImportanceProtectionStep from './steps/ImportanceProtectionStep';
 import NameLandStep from './steps/NameLand';
+import { set } from 'lodash';
 
 const landValidationSchema = Yup.object().shape({
   land_name: Yup.string().required('Nombre del terreno requerido'),
@@ -78,7 +79,7 @@ class RegisterWizard extends React.Component {
           setFieldValue('owner_name', values.user.full_name);
           setFieldValue('owner_email', values.user.email);
           setFieldValue('owner_phone', values.user.phone);
-          push();
+          push('main-uses');
         } else {
           push();
         }

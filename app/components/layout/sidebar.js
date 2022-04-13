@@ -31,27 +31,25 @@ class Sidebar extends React.Component {
             <Link to="/about-us">Sobre Mapa-33</Link>
           </li>
           <li>
-            <Link to="/">Mapa Inicial</Link>
+            <Link to="/">Inicio</Link>
           </li>
           <li>
-            <Link to="/map/list">Listado de Áreas</Link>
+            <Link to="/map/list">Listado de áreas</Link>
           </li>
           <li>
-            <Link to="/register/propose-land">Proponer Área</Link>
+            <Link to="/register/propose-land">Proponer área</Link>
           </li>
           <li>
-            <Link to="/faq">FAQ</Link>
+            <Link to="/faq">Preguntas frecuentes</Link>
           </li>
           <li>
             <Link to="/contact-us">Contacto</Link>
           </li>
           <li>
-            <Link to="/profile">Mi perfíl</Link>
+            <Link to="/profile">Mi perfil </Link>
           </li>
         </ul>
         <div className="naturaleza">
-          <a href="#">Visitar Página</a>
-          <br />
           <img src="/images/naturaleza.png" alt="naturaleza" />
         </div>
       </Drawer>

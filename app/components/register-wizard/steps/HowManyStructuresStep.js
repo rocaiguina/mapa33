@@ -64,7 +64,7 @@ class HowManyStructuresStep extends React.Component {
                 textAlign: 'center',
               }}
             >
-              <h2>¿Qué tipo de estructuras hay en el terreno?</h2>
+              <h2>¿Qué tipo de infraestructura hay en el terreno?</h2>
               {errors.lands_structures && (
                 <Text type="danger">{errors.lands_structures}</Text>
               )}
