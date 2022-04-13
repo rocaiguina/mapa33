@@ -17,7 +17,7 @@ const AdminMiddleware = require('../middlewares/admin');
 const fileUploader = multer();
 
 router.get('/', function(req, res) {
-  res.redirect('/admin/land');
+  res.redirect('/admin/land?status=approved&q=&level=basic');
 });
 // TODO: Routes account
 router.get('/login', AuthAdminController.login, AdminMiddleware.admin_access);

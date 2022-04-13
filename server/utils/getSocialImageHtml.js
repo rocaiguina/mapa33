@@ -128,7 +128,7 @@ module.exports = {
             <p class="info">
               <span>${location}</span>
               <br />
-              <span>${Numeral(areaSize).format('0,0')} cuerdas</span>
+              <span>${Numeral(areaSize).format('0,0')} m<sup>2</sup></span>
             </p>
           </div>
           <div class="text-box">

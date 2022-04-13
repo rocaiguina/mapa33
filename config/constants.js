@@ -66,16 +66,36 @@ module.exports.LAND_ISSUES = [
 
 module.exports.LAND_MAIN_USES = [
   {
-    value: 'residential',
-    label: 'Residencial',
+    value: 'agricole',
+    label: 'Agrícola',
+  },
+  {
+    value: 'nature_forest',
+    label: 'Área natural',
   },
   {
     value: 'commercial',
     label: 'Comercial',
   },
   {
-    value: 'nature_forest',
-    label: 'Natural/Bosque',
+    value: 'industrial',
+    label: 'Industrial',
+  },
+  {
+    value: 'recreational',
+    label: 'Recreativo',
+  },
+  {
+    value: 'residential',
+    label: 'Residencial',
+  },
+  {
+    value: 'tourism',
+    label: 'Turismo',
+  },
+  {
+    value: 'unknow',
+    label: 'No sé',
   },
   {
     value: 'others',
@@ -85,16 +105,40 @@ module.exports.LAND_MAIN_USES = [
 
 module.exports.LAND_STRUCTURES = [
   {
+    value: 'agricultural',
+    label: 'Agrícola',
+  },
+  {
+    value: 'commercial',
+    label: 'Comercial / oficina',
+  },
+  {
+    value: 'energy',
+    label: 'Energía',
+  },
+  {
+    value: 'industrial',
+    label: 'Industrial',
+  },
+  {
     value: 'residential',
     label: 'Residencial',
   },
   {
-    value: 'commercial',
-    label: 'Comercial/Oficina',
+    value: 'telecommunications',
+    label: 'Telecomunicaciones',
   },
   {
-    value: 'agricultural',
-    label: 'Agrícola',
+    value: 'tourism',
+    label: 'Turístico',
+  },
+  {
+    value: 'none',
+    label: 'Ninguna',
+  },
+  {
+    value: 'unknow',
+    label: 'No sé',
   },
   {
     value: 'others',
@@ -104,16 +148,36 @@ module.exports.LAND_STRUCTURES = [
 
 module.exports.LAND_ATTRIBUTES = [
   {
-    value: 'nature',
-    label: 'Naturaleza',
+    value: 'forest',
+    label: 'Bosque',
   },
   {
-    value: 'educational',
-    label: 'Educativos',
+    value: 'coast',
+    label: 'Costa',
+  },
+  {
+    value: 'endangered_species',
+    label: 'Especies endémicas o en peligro de extinción',
+  },
+  {
+    value: 'lake',
+    label: 'Lago o laguna',
+  },
+  {
+    value: 'mangle',
+    label: 'Mangle',
   },
   {
     value: 'landscape',
-    label: 'Paisajistas y escénicos',
+    label: 'Paisaje',
+  },
+  {
+    value: 'pastureland',
+    label: 'Pastizal',
+  },
+  {
+    value: 'river',
+    label: 'Río o quebrada',
   },
   {
     value: 'others',
@@ -123,32 +187,32 @@ module.exports.LAND_ATTRIBUTES = [
 
 module.exports.LAND_PROPOSED_USES = [
   {
-    value: 'scientist_research',
-    label: 'Investigación científica',
+    value: 'sustainable_uses',
+    label: 'Agroecología',
+  },
+  {
+    value: 'spirit_uses',
+    label: 'Bienestar, usos espirituales',
+  },
+  {
+    value: 'conservation',
+    label: 'Conservación estricta',
+  },
+  {
+    value: 'tourism',
+    label: 'Ecoturismo',
+  },
+  {
+    value: 'educational',
+    label: 'Educación e investigación científica',
   },
   {
     value: 'environment_monitoring',
     label: 'Monitoreo ambiental',
   },
   {
-    value: 'spirit_uses',
-    label: 'Usos espirituales',
-  },
-  {
-    value: 'educational',
-    label: 'Educación',
-  },
-  {
     value: 'recreation',
     label: 'Recreación',
-  },
-  {
-    value: 'turism',
-    label: 'Turismo',
-  },
-  {
-    value: 'sustainable_uses',
-    label: 'Usos sostenibles',
   },
 ];
 

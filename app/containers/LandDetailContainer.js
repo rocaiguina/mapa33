@@ -58,7 +58,8 @@ class LandDetailContainer extends React.Component {
           owner: land.owner,
           likes: land.likes,
           reason_conservation: land.reason_conservation,
-          importance_of_protection: land.metadata && land.metadata.importance_of_protection,
+          importance_of_protection:
+            land.metadata && land.metadata.importance_of_protection,
           location: land.location,
           main_attributes: land.main_attributes,
           other_main_attributes: land.other_main_attributes,

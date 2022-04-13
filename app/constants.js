@@ -228,13 +228,13 @@ export const LAND_ATTRIBUTES = [
 ];
 
 export const LAND_PROPOSED_USE = {
-  scientist_research: 'Investigación científica',
-  environment_monitoring: 'Monitoreo ambiental',
-  spirit_uses: 'Bienestar, usos espirituales',
-  educational: 'Educación',
-  recreation: 'Recreación',
-  turism: 'Turismo',
   sustainable_uses: 'Agroecología',
+  spirit_uses: 'Bienestar, usos espirituales',
+  conservation: 'Conservación estricta',
+  tourism: 'Ecoturismo',
+  educational: 'Educación e investigación científica',
+  environment_monitoring: 'Monitoreo ambiental',
+  recreation: 'Recreación',
 };
 
 export const LAND_PROPOSED_USES = [
@@ -247,16 +247,16 @@ export const LAND_PROPOSED_USES = [
     label: 'Bienestar, usos espirituales',
   },
   {
-    value: 'turism',
+    value: 'conservation',
+    label: 'Conservación estricta',
+  },
+  {
+    value: 'tourism',
     label: 'Ecoturismo',
   },
   {
     value: 'educational',
-    label: 'Educación',
-  },
-  {
-    value: 'scientist_research',
-    label: 'Investigación científica',
+    label: 'Educación e investigación científica',
   },
   {
     value: 'environment_monitoring',

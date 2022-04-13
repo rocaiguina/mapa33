@@ -11,6 +11,7 @@ const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
+const SocialImageCreator = require('../utils/social-image-creator');
 const { LAND_STATUS, SENDGRID_TEMPLATES } = require('../../config/constants');
 
 const Land = Models.Land;
@@ -343,9 +344,40 @@ class LandController {
       status: LAND_STATUS_APPROVED,
     })
       .then(function(land) {
-        // Calculate coordinate.
-        const result = land.get({ plain: true });
-        delete result.geom;
+        // Create socialPhotograph
+        SocialImageCreator.createPhotograp(land)
+          .then(socialPhotographUrl => {
+            if (socialPhotographUrl) {
+              land.social_photograph = socialPhotographUrl;
+              land.save()
+                .then(() => {})
+                .catch(err => { console.error(err); });
+            }
+          })
+          .catch(err => { console.error(err); });
+
+        // Send email notification
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const landUrl = `${process.env.SERVER_URL}/land/${land.id}`;
+        const mailOptions = {
+          to: req.user.email,
+          from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
+          templateId: SENDGRID_TEMPLATES.LAND_APPROVED,
+          dynamic_template_data: {
+            site: process.env.SERVER_URL,
+            fullname: req.user.first_name,
+            landUrl,
+            landPhotograph: FileStorage.getUrl(land.photograph),
+            landFacebookShareUrl: `https://www.facebook.com/sharer.php?u=${landUrl}`,
+          },
+        };
+        sgMail.send(mailOptions).then(
+          () => {},
+          error => {
+            console.error(error);
+          }
+        );
+
         // variables para email
         // const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
         // const contacto = process.env.SERVER_URL + '/contact-us';
@@ -367,6 +399,8 @@ class LandController {
         //     }
         //   }
         // );
+        const result = land.get({ plain: true });
+        delete result.geom;
         res.json(result);
       })
       .catch(function(err) {

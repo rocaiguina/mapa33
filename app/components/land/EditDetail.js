@@ -10,7 +10,11 @@ import EditLandMainAttributesModal from './modals/EditLandMainAttributesModal';
 import EditLandReasonConservationModal from './modals/EditLandReasonConservationModal';
 import EditLandNameModal from './modals/EditLandNameModal';
 
-import { LAND_ATTRIBUTE, LAND_PROTECTION_REASON } from '../../constants';
+import {
+  LAND_ATTRIBUTE,
+  LAND_PROTECTION_REASON,
+  LAND_PROPOSED_USE,
+} from '../../constants';
 
 class LandEditDetail extends React.Component {
   constructor(props) {
@@ -310,28 +314,12 @@ class LandEditDetail extends React.Component {
                 <div className="land-proposal-use">
                   <img
                     src={
-                      proposed_uses.includes('scientist_research')
-                        ? '/images/memory/icons-scientist-research.svg'
-                        : '/images/memory/icons-scientist-research-disabled.svg'
+                      proposed_uses.includes('sustainable_uses')
+                        ? '/images/memory/icons-sustainable-uses.svg'
+                        : '/images/memory/icons-sustainable-uses-disabled.svg'
                     }
                   />
-                  <p>Investigación científica</p>
-                </div>
-              </Col>
-              <Col md={12} sm={12} xs={12}>
-                <div className="land-proposal-use">
-                  <img
-                    src={
-                      proposed_uses.includes('environment_monitoring')
-                        ? '/images/memory/icons-environment-monitoring.svg'
-                        : '/images/memory/icons-environment-monitoring-disabled.svg'
-                    }
-                  />
-                  <p>
-                    Monitoreo
-                    <br />
-                    ambiental
-                  </p>
+                  <p>{LAND_PROPOSED_USE['sustainable_uses']}</p>
                 </div>
               </Col>
               <Col md={12} sm={12} xs={12}>
@@ -343,11 +331,31 @@ class LandEditDetail extends React.Component {
                         : '/images/memory/icons-spiritual-uses-disabled.svg'
                     }
                   />
-                  <p>
-                    Usos
-                    <br />
-                    espirituales
-                  </p>
+                  <p>{LAND_PROPOSED_USE['spirit_uses']}</p>
+                </div>
+              </Col>
+              <Col md={12} sm={12} xs={12}>
+                <div className="land-proposal-use">
+                  <img
+                    src={
+                      proposed_uses.includes('conservation')
+                        ? '/images/memory/icons-scientist-research.svg'
+                        : '/images/memory/icons-scientist-research-disabled.svg'
+                    }
+                  />
+                  <p>{LAND_PROPOSED_USE['conservation']}</p>
+                </div>
+              </Col>
+              <Col md={12} sm={12} xs={12}>
+                <div className="land-proposal-use">
+                  <img
+                    src={
+                      proposed_uses.includes('tourism')
+                        ? '/images/memory/icons-tourism.svg'
+                        : '/images/memory/icons-tourism-disabled.svg'
+                    }
+                  />
+                  <p>{LAND_PROPOSED_USE['tourism']}</p>
                 </div>
               </Col>
               <Col md={12} sm={12} xs={12}>
@@ -359,11 +367,19 @@ class LandEditDetail extends React.Component {
                         : '/images/memory/icons-education-disabled.svg'
                     }
                   />
-                  <p>
-                    Educación
-                    <br />
-                    &nbsp;
-                  </p>
+                  <p>{LAND_PROPOSED_USE['educational']}</p>
+                </div>
+              </Col>
+              <Col md={12} sm={12} xs={12}>
+                <div className="land-proposal-use">
+                  <img
+                    src={
+                      proposed_uses.includes('environment_monitoring')
+                        ? '/images/memory/icons-environment-monitoring.svg'
+                        : '/images/memory/icons-environment-monitoring-disabled.svg'
+                    }
+                  />
+                  <p>{LAND_PROPOSED_USE['environment_monitoring']}</p>
                 </div>
               </Col>
               <Col md={12} sm={12} xs={12}>
@@ -375,35 +391,7 @@ class LandEditDetail extends React.Component {
                         : '/images/memory/icons-recreation-disabled.svg'
                     }
                   />
-                  <p>Recreación</p>
-                </div>
-              </Col>
-              <Col md={12} sm={12} xs={12}>
-                <div className="land-proposal-use">
-                  <img
-                    src={
-                      proposed_uses.includes('turism')
-                        ? '/images/memory/icons-tourism.svg'
-                        : '/images/memory/icons-tourism-disabled.svg'
-                    }
-                  />
-                  <p>Turismo</p>
-                </div>
-              </Col>
-              <Col md={12} sm={12} xs={12}>
-                <div className="land-proposal-use">
-                  <img
-                    src={
-                      proposed_uses.includes('sustainable_uses')
-                        ? '/images/memory/icons-sustainable-uses.svg'
-                        : '/images/memory/icons-sustainable-uses-disabled.svg'
-                    }
-                  />
-                  <p>
-                    Usos
-                    <br />
-                    sostenibles
-                  </p>
+                  <p>{LAND_PROPOSED_USE['recreation']}</p>
                 </div>
               </Col>
             </Row>
@@ -448,7 +436,11 @@ class LandEditDetail extends React.Component {
               <div style={{ paddingTop: '12px' }}>
                 <div className="land-data-sheet">
                   <h4>Compuesto:</h4>
-                  <p>{this.props.plots_count + ' parcela' + (this.props.plots_count > 1 ? 's' : '')}</p>
+                  <p>
+                    {this.props.plots_count +
+                      ' parcela' +
+                      (this.props.plots_count > 1 ? 's' : '')}
+                  </p>
                 </div>
               </div>
             </Col>

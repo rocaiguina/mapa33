@@ -42,7 +42,9 @@ class SubmitStep extends React.Component {
           <Row gutter={30}>
             <Col md={6}>
               <h2>{this.props.name}</h2>
-              <h3>{this.props.owner || 'No definido.'}</h3>
+              {this.props.owner && (
+                <h3>{this.props.owner}</h3>
+              )}
             </Col>
             <Col md={10}>
               <div className="form-group">
@@ -98,7 +100,11 @@ class SubmitStep extends React.Component {
                     <Col xs={12} md={12}>
                       <Badge
                         title="Compuesto"
-                        description={this.props.plots_count + ' parcela' + (this.props.plots_count > 1 ? 's' : '')}
+                        description={
+                          this.props.plots_count +
+                          ' parcela' +
+                          (this.props.plots_count > 1 ? 's' : '')
+                        }
                         color="default"
                         shape="round"
                       />

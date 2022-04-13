@@ -30,6 +30,7 @@ class MemoryAdminController {
           attributes: ['first_name', 'last_name'],
         },
       ],
+      order: [['createdAt', 'DESC']],
     };
     let filters = {};
 
