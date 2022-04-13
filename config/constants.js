@@ -207,3 +207,11 @@ module.exports.MEMORY_STATUS_LIST = [
     label: 'Approved',
   },
 ];
+
+module.exports.SENDGRID_TEMPLATES = {
+  LAND_APPROVED: 'd-864a041ce69345a28d3a5c1dd530700a',
+  LAND_DENIED: 'd-3ff254035db74cec8eb0ce4e24d993d1',
+  LAND_FOLLOW_UP: 'd-48aaa5ef91144316b0212d9bce04eeea',
+  USER_PASSWORD_RECOVER: 'd-024b5f22e90e4533961996256953aea6',
+  USER_REGISTER: 'd-e6641e63796d4c63b5e03cf5a25b78cf',
+};

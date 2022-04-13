@@ -8,6 +8,8 @@ const Models = require('../../db/models');
 
 const sgMail = require('@sendgrid/mail');
 
+const { SENDGRID_TEMPLATES } = require('../../config/constants');
+
 const User = Models.User;
 const ResetPassword = Models.ResetPassword;
 
@@ -76,21 +78,14 @@ function forgotPassword(req, res) {
           res.send();
 
           // Send email notification.
-          const recoveryPasswordTemplateId =
-            'd-024b5f22e90e4533961996256953aea6';
-          // variables para email
-          const sitio = process.env.SERVER_URL + '/reset-password/';
-          const contacto = process.env.SERVER_URL + '/contact-us';
-
           sgMail.setApiKey(process.env.SENDGRID_API_KEY);
           const msg = {
             to: req.body.email,
             from: process.env.DEFAULT_EMAIL_FROM,
-            templateId: recoveryPasswordTemplateId,
+            templateId: SENDGRID_TEMPLATES.USER_PASSWORD_RECOVER,
             dynamic_template_data: {
-              site: sitio,
-              token: token,
-              contact: contacto,
+              site: process.env.SERVER_URL,
+              recoverPasswordUrl: `${process.env.SERVER_URL}/reset-password/${token}`,
             },
           };
           sgMail.send(msg).then(

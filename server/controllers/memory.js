@@ -104,26 +104,26 @@ const store = (req, res) => {
     })
     .then(() => {
       // variables para email
-      const createMemoryTemplateId = 'd-dcc09eed78384160b97928400c5fcc33';
-      const contacto = process.env.SERVER_URL + '/contact-us';
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      const msg = {
-        to: req.user.email,
-        from: process.env.DEFAULT_EMAIL_FROM,
-        templateId: createMemoryTemplateId,
-        dynamic_template_data: {
-          contact: contacto,
-        },
-      };
-      sgMail.send(msg).then(
-        () => {},
-        error => {
-          console.error(error);
-          if (error.response) {
-            console.error(error.response.body);
-          }
-        }
-      );
+      // const createMemoryTemplateId = 'd-dcc09eed78384160b97928400c5fcc33';
+      // const contacto = process.env.SERVER_URL + '/contact-us';
+      // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      // const msg = {
+      //   to: req.user.email,
+      //   from: process.env.DEFAULT_EMAIL_FROM,
+      //   templateId: createMemoryTemplateId,
+      //   dynamic_template_data: {
+      //     contact: contacto,
+      //   },
+      // };
+      // sgMail.send(msg).then(
+      //   () => {},
+      //   error => {
+      //     console.error(error);
+      //     if (error.response) {
+      //       console.error(error.response.body);
+      //     }
+      //   }
+      // );
 
       res.send(createdMemory.get({ plain: true }));
     })

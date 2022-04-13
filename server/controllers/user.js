@@ -6,6 +6,7 @@ const User = Models.User;
 const Land = Models.Land;
 const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
+const Constants = require('../../config/constants');
 
 const jwt = require('jsonwebtoken');
 
@@ -117,16 +118,15 @@ class UserController {
         res.json(user);
 
         // Send email notification.
-        const userRegisterTemplateId = 'd-e6641e63796d4c63b5e03cf5a25b78cf';
-        const site = process.env.SERVER_URL + '/profile';
-
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: req.body.email,
           from: process.env.DEFAULT_EMAIL_FROM,
-          templateId: userRegisterTemplateId,
+          templateId: Constants.SENDGRID_TEMPLATES.USER_REGISTER,
           dynamic_template_data: {
-            site: site,
+            site: process.env.SERVER_URL,
+            proposeUrl: `${process.env.SERVER_URL}/register/propose-land`,
+            mapUrl: process.env.SERVER_URL,
           },
         };
         sgMail.send(msg).then(

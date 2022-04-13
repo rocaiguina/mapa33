@@ -322,22 +322,18 @@ class LandAdminController {
           .then(function() {
             if (req.land.id && notifyStatusChanged) {
               if (cleaned_data.status == 'approved') {
-                // variables para email
-                const sitio = process.env.SERVER_URL + '/land/' + land.id;
-                const contacto = process.env.SERVER_URL + '/contact-us';
-                const terrainName = land.name;
-                const landApprovedTemplateId =
-                  'd-864a041ce69345a28d3a5c1dd530700a';
-
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const landUrl = `${process.env.SERVER_URL}/land/${land.id}`;
                 const mailOptions = {
                   to: land.user.email,
                   from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
-                  templateId: landApprovedTemplateId,
+                  templateId: Constants.SENDGRID_TEMPLATES.LAND_APPROVED,
                   dynamic_template_data: {
-                    terrain_name: terrainName,
-                    site: sitio,
-                    contact: contacto,
+                    site: process.env.SERVER_URL,
+                    fullname: land.user.first_name,
+                    landUrl,
+                    landPhotograph: FileStorage.getUrl(land.photograph),
+                    landFacebookShareUrl: `https://www.facebook.com/sharer.php?u=${landUrl}`,
                   },
                 };
                 sgMail.send(mailOptions).then(
@@ -347,19 +343,14 @@ class LandAdminController {
                   }
                 );
               } else if (cleaned_data.status == 'denied') {
-                const contacto = process.env.SERVER_URL + '/contact-us';
-                const notes = req.land.notes;
-                const landDeniedTemplateId =
-                  'd-3ff254035db74cec8eb0ce4e24d993d1';
-
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
                   to: land.user.email,
                   from: process.env.DEFAULT_EMAIL_FROM,
-                  templateId: landDeniedTemplateId,
+                  templateId: Constants.SENDGRID_TEMPLATES.LAND_DENIED,
                   dynamic_template_data: {
-                    notes: notes,
-                    contact: contacto,
+                    site: process.env.SERVER_URL,
+                    fullname: land.user.first_name,
                   },
                 };
                 sgMail.send(mailOptions).then(

@@ -11,7 +11,7 @@ const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
-const { LAND_STATUS } = require('../../config/constants');
+const { LAND_STATUS, SENDGRID_TEMPLATES } = require('../../config/constants');
 
 const Land = Models.Land;
 const User = Models.User;
@@ -347,26 +347,26 @@ class LandController {
         const result = land.get({ plain: true });
         delete result.geom;
         // variables para email
-        const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
-        const contacto = process.env.SERVER_URL + '/contact-us';
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        const msg = {
-          to: req.user.email,
-          from: process.env.DEFAULT_EMAIL_FROM,
-          templateId: createLandTemplateId,
-          dynamic_template_data: {
-            contact: contacto,
-          },
-        };
-        sgMail.send(msg).then(
-          () => {},
-          error => {
-            console.error(error);
-            if (error.response) {
-              console.error(error.response.body);
-            }
-          }
-        );
+        // const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
+        // const contacto = process.env.SERVER_URL + '/contact-us';
+        // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        // const msg = {
+        //   to: req.user.email,
+        //   from: process.env.DEFAULT_EMAIL_FROM,
+        //   templateId: createLandTemplateId,
+        //   dynamic_template_data: {
+        //     contact: contacto,
+        //   },
+        // };
+        // sgMail.send(msg).then(
+        //   () => {},
+        //   error => {
+        //     console.error(error);
+        //     if (error.response) {
+        //       console.error(error.response.body);
+        //     }
+        //   }
+        // );
         res.json(result);
       })
       .catch(function(err) {
@@ -544,24 +544,15 @@ class LandController {
                   User.findOne({
                     where: { id: land.user_id },
                   }).then(function(user) {
-                    const followUpTemplateId =
-                      'd-48aaa5ef91144316b0212d9bce04eeea';
-                    const site =
-                      process.env.SERVER_URL + '/land/' + req.params.id;
-                    const name = user.first_name + ' ' + user.last_name;
-                    const proposalName = land.name;
-                    const likes = land.likes;
-
                     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                     const msg = {
                       to: user.email,
                       from: process.env.DEFAULT_EMAIL_FROM,
-                      templateId: followUpTemplateId,
+                      templateId: SENDGRID_TEMPLATES.LAND_FOLLOW_UP,
                       dynamic_template_data: {
-                        name: name,
-                        site: site,
-                        proposal_name: proposalName,
-                        likes: likes,
+                        fullname: user.first_name,
+                        site: process.env.SERVER_URL,
+                        landPhotograph: FileStorage.getUrl(land.photograph),
                       },
                     };
                     sgMail.send(msg).then(
