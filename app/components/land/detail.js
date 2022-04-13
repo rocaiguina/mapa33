@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Numeral from 'numeral';
 
+import SocialShareModal from './modals/SocialShareModal';
 import Coordinates from '../ui/Coordinates';
 
 import {
@@ -17,6 +18,7 @@ class LandDetail extends React.Component {
     super(props);
     this.state = {
       loading: false,
+      shareOpen: false,
     };
   }
 
@@ -31,6 +33,18 @@ class LandDetail extends React.Component {
       });
       this.props.onClickLike({ id: this.props.id }, this.setSubmitting);
     }
+  };
+
+  handleOnClickShare = () => {
+    this.setState({
+      shareOpen: true,
+    });
+  };
+
+  handleOnCloseShareModal = () => {
+    this.setState({
+      shareOpen: false,
+    });
   };
 
   render() {
@@ -60,16 +74,14 @@ class LandDetail extends React.Component {
               </div>
               <div style={{ flex: '1 0 auto' }}></div>
               <div className="land-share hidden-xs">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                    document.location.href
-                  )}`}
-                  className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg"
+                <Button
+                  className="ant-btn-orange"
+                  onClick={this.handleOnClickShare}
+                  size="large"
+                  shape="round"
                 >
                   <span className="text-bold text-18">Compartir</span>
-                </a>
+                </Button>
               </div>
             </Col>
             <Col md={10}>
@@ -88,16 +100,15 @@ class LandDetail extends React.Component {
                   </Col>
                   <Col span={12}>
                     <div className="land-share">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                          document.location.href
-                        )}`}
-                        className="ant-btn ant-btn-orange ant-btn-round ant-btn-lg ant-btn-block"
+                      <Button
+                        block
+                        className="ant-btn-orange"
+                        onClick={this.handleOnClickShare}
+                        size="large"
+                        shape="round"
                       >
                         <span className="text-bold text-18">Compartir</span>
-                      </a>
+                      </Button>
                     </div>
                   </Col>
                 </Row>
@@ -343,6 +354,11 @@ class LandDetail extends React.Component {
             </div>
           </Col>
         </Row>
+        <SocialShareModal
+          link={document.location.href}
+          onClose={this.handleOnCloseShareModal}
+          visible={this.state.shareOpen}
+        />
       </div>
     );
   }
