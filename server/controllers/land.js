@@ -356,6 +356,28 @@ class LandController {
           })
           .catch(err => { console.error(err); });
 
+        // Send email notification
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        const landUrl = `${process.env.SERVER_URL}/land/${land.id}`;
+        const mailOptions = {
+          to: req.user.email,
+          from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
+          templateId: SENDGRID_TEMPLATES.LAND_APPROVED,
+          dynamic_template_data: {
+            site: process.env.SERVER_URL,
+            fullname: req.user.first_name,
+            landUrl,
+            landPhotograph: FileStorage.getUrl(land.photograph),
+            landFacebookShareUrl: `https://www.facebook.com/sharer.php?u=${landUrl}`,
+          },
+        };
+        sgMail.send(mailOptions).then(
+          () => {},
+          error => {
+            console.error(error);
+          }
+        );
+
         // variables para email
         // const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
         // const contacto = process.env.SERVER_URL + '/contact-us';

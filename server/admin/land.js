@@ -321,28 +321,7 @@ class LandAdminController {
           .save()
           .then(function() {
             if (req.land.id && notifyStatusChanged) {
-              if (cleaned_data.status == 'approved') {
-                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-                const landUrl = `${process.env.SERVER_URL}/land/${land.id}`;
-                const mailOptions = {
-                  to: land.user.email,
-                  from: process.env.DEFAULT_EMAIL_FROM, // list of receivers
-                  templateId: Constants.SENDGRID_TEMPLATES.LAND_APPROVED,
-                  dynamic_template_data: {
-                    site: process.env.SERVER_URL,
-                    fullname: land.user.first_name,
-                    landUrl,
-                    landPhotograph: FileStorage.getUrl(land.photograph),
-                    landFacebookShareUrl: `https://www.facebook.com/sharer.php?u=${landUrl}`,
-                  },
-                };
-                sgMail.send(mailOptions).then(
-                  () => {},
-                  error => {
-                    console.error(error);
-                  }
-                );
-              } else if (cleaned_data.status == 'denied') {
+              if (cleaned_data.status == 'denied') {
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const mailOptions = {
                   to: land.user.email,
