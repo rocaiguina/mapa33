@@ -24,7 +24,6 @@ import MapStep from './steps/MapStep';
 import ReviewLandStep from './steps/ReviewLandStep';
 import ImportanceProtectionStep from './steps/ImportanceProtectionStep';
 import NameLandStep from './steps/NameLand';
-import { set } from 'lodash';
 
 const landValidationSchema = Yup.object().shape({
   land_name: Yup.string().required('Nombre del terreno requerido'),
