@@ -75,18 +75,12 @@ function uploadSocialPhotograph(req) {
     if (!req.land.social_photograph && req.body.status === 'approved') {
       const photograph = req.land.dataValues.photograph;
       const name = req.land.dataValues.name;
-      const ownerName = req.land.dataValues.metadata.owner_name;
+
       const location = req.land.dataValues.location;
       const areaSize = req.land.dataValues.area_size;
 
       const payload = {
-        html: getSocialImageHtml(
-          photograph,
-          name,
-          ownerName,
-          location,
-          areaSize
-        ),
+        html: getSocialImageHtml(photograph, name, location, areaSize),
         viewport_width: 760,
         viewport_height: 376,
       };
