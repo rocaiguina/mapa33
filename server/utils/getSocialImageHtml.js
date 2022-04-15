@@ -2,13 +2,7 @@ const FileStorage = require('./file-storage');
 const Numeral = require('numeral');
 
 module.exports = {
-  getSocialImageHtml: function(
-    photograph,
-    name,
-    ownerName,
-    location,
-    areaSize
-  ) {
+  getSocialImageHtml: function(photograph, name, location, areaSize) {
     return `<!DOCTYPE html>
     <html>
       <head>
@@ -120,9 +114,6 @@ module.exports = {
           <div class="right-column">
             <p class="title">
               ${name}
-            </p>
-            <p class="user-name">
-              ${ownerName}
             </p>
             <hr />
             <p class="info">
