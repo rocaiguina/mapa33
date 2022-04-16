@@ -574,7 +574,7 @@ class LandController {
               where: { id: req.params.id },
             })
               .then(function() {
-                if ((land.likes + 1) % 100 == 0) {
+                if ((land.likes + 1) % 25 == 0) {
                   User.findOne({
                     where: { id: land.user_id },
                   }).then(function(user) {
