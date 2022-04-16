@@ -310,8 +310,13 @@ class LandDetail extends React.Component {
                 {main_uses.length > 0
                   ? main_uses.map((item, index) => (
                       <span key={index}>
-                        {item == 'others'
-                          ? this.props.other_main_attributes
+                        {index !== 0
+                          ? ', ' +
+                            (item == 'others'
+                              ? this.props.other_main_uses
+                              : LAND_MAIN_USE[item] || 'No definido')
+                          : item == 'others'
+                          ? this.props.other_main_uses
                           : LAND_MAIN_USE[item] || 'No definido'}
                       </span>
                     ))
@@ -344,7 +349,12 @@ class LandDetail extends React.Component {
                 {main_attributes.length > 0
                   ? main_attributes.map((item, index) => (
                       <span key={index}>
-                        {item == 'others'
+                        {index !== 0
+                          ? ', ' +
+                            (item == 'others'
+                              ? this.props.other_main_attributes
+                              : LAND_ATTRIBUTE[item] || 'No definido')
+                          : item == 'others'
                           ? this.props.other_main_attributes
                           : LAND_ATTRIBUTE[item] || 'No definido'}
                       </span>
