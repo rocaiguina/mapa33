@@ -52,18 +52,30 @@ class UserController {
       last_name: Joi.string().required(),
       email: Joi.string().required(),
       password: Joi.string().required(),
-      phone: Joi.string().required(),
-      birthday: Joi.string().required(),
-      gender: Joi.string().allow(''),
+      phone: Joi.string()
+        .optional()
+        .allow(null, ''),
+      birthday: Joi.string()
+        .optional()
+        .allow(null, ''),
+      gender: Joi.string()
+        .optional()
+        .allow(null, ''),
       company: Joi.string()
         .optional()
         .allow(null, ''),
-      address: Joi.string().required(),
-      city: Joi.string().required(),
+      address: Joi.string()
+        .optional()
+        .allow(null, ''),
+      city: Joi.string()
+        .optional()
+        .allow(null, ''),
       estate: Joi.string()
         .optional()
         .allow(null, ''),
-      country: Joi.string().required(),
+      country: Joi.string()
+        .optional()
+        .allow(null, ''),
       zip_code: Joi.string().required(),
       advs_by_email: Joi.boolean(),
       advs_by_zip: Joi.boolean(),
@@ -149,16 +161,25 @@ class UserController {
       full_name: Joi.string().required(),
       birthday: Joi.string().required(),
       phone: Joi.string().required(),
-      gender: Joi.string().allow(''),
+      gender: Joi.string()
+        .allow('')
+        .optional()
+        .allow(null, ''),
       company: Joi.string()
         .optional()
         .allow(null, ''),
-      address: Joi.string().required(),
-      city: Joi.string().required(),
+      address: Joi.string()
+        .optional()
+        .allow(null, ''),
+      city: Joi.string()
+        .optional()
+        .allow(null, ''),
       estate: Joi.string()
         .optional()
         .allow(null, ''),
-      country: Joi.string().required(),
+      country: Joi.string()
+        .optional()
+        .allow(null, ''),
       zip_code: Joi.string().required(),
       advs_by_email: Joi.boolean(),
       advs_by_zip: Joi.boolean(),
