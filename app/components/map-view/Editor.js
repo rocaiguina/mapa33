@@ -109,7 +109,7 @@ class Editor extends Component {
 
       map.addSource('protected_areas', {
         type: 'vector',
-        url: 'mapbox://rocaiguina.d6j1xz6t',
+        url: 'mapbox://rocaiguina.bzaytugl',
       });
 
       map.addLayer(
