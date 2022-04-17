@@ -76,7 +76,10 @@ class UserController {
       country: Joi.string()
         .optional()
         .allow(null, ''),
-      zip_code: Joi.string().required(),
+      zip_code: Joi.string()
+        .allow('')
+        .optional()
+        .allow(null, ''),
       advs_by_email: Joi.boolean(),
       advs_by_zip: Joi.boolean(),
       interested_volunteer: Joi.boolean(),
@@ -159,8 +162,14 @@ class UserController {
   update(req, res, next) {
     const validationSchema = {
       full_name: Joi.string().required(),
-      birthday: Joi.string().required(),
-      phone: Joi.string().required(),
+      birthday: Joi.string()
+        .allow('')
+        .optional()
+        .allow(null, ''),
+      phone: Joi.string()
+        .allow('')
+        .optional()
+        .allow(null, ''),
       gender: Joi.string()
         .allow('')
         .optional()
@@ -180,7 +189,10 @@ class UserController {
       country: Joi.string()
         .optional()
         .allow(null, ''),
-      zip_code: Joi.string().required(),
+      zip_code: Joi.string()
+        .allow('')
+        .optional()
+        .allow(null, ''),
       advs_by_email: Joi.boolean(),
       advs_by_zip: Joi.boolean(),
     };

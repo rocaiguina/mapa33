@@ -16,11 +16,6 @@ const { Text } = Typography;
 const profileValidationSchema = Yup.object().shape({
   full_name: Yup.string().required('Campo requerido.'),
   birthday: Yup.date().required('Campo requerido.'),
-  phone: Yup.string().required('Campo requerido.'),
-  address: Yup.string().required('Campo requerido.'),
-  city: Yup.string().required('Campo requerido.'),
-  country: Yup.string().required('Campo requerido.'),
-  zip_code: Yup.string().required('Campo requerido.'),
 });
 
 class ProfileForm extends React.Component {
