@@ -73,14 +73,13 @@ function uploadLandShape(req) {
 function uploadSocialPhotograph(req) {
   return new Promise(function(resolve, reject) {
     if (!req.land.social_photograph && req.body.status === 'approved') {
-      const photograph = req.land.dataValues.photograph;
+      const photographURL = req.land.photographURL;
       const name = req.land.dataValues.name;
-
       const location = req.land.dataValues.location;
-      const areaSize = req.land.dataValues.area_size;
+      const coordinates = req.land.humanCoordinates;
 
       const payload = {
-        html: getSocialImageHtml(photograph, name, location, areaSize),
+        html: getSocialImageHtml(photographURL, name, location, coordinates),
         viewport_width: 760,
         viewport_height: 376,
       };

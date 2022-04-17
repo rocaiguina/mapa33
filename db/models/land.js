@@ -1,6 +1,7 @@
 'use strict';
 
 const sequelizePaginate = require('sequelize-paginate');
+const Numeral = require('numeral');
 const FileStorage = require('../../server/utils/file-storage');
 
 module.exports = (sequelize, DataTypes) => {
@@ -142,6 +143,12 @@ module.exports = (sequelize, DataTypes) => {
           return FileStorage.getUrl(this.social_photograph);
         }
         return process.env.SERVER_URL +  '/images/no-land-image.jpg';
+      },
+      humanCoordinates() {
+        if (this.coordinates && this.coordinates.coordinates) {
+          return `${Numeral(this.coordinates.coordinates[0]).format('0,0.00')},${Numeral(this.coordinates.coordinates[1]).format('0,0.00')}`;
+        }
+        return '';
       }
     }
   });

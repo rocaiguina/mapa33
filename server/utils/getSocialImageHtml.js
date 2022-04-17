@@ -1,8 +1,5 @@
-const FileStorage = require('./file-storage');
-const Numeral = require('numeral');
-
 module.exports = {
-  getSocialImageHtml: function(photograph, name, location, areaSize) {
+  getSocialImageHtml: function(photographUrl, name, location, coordinates) {
     return `<!DOCTYPE html>
     <html>
       <head>
@@ -47,7 +44,7 @@ module.exports = {
             position: absolute;
             bottom: 12px;
             left: 22px;
-            width: 716px;
+            width: 390px;
             height: 4px;
           }
           .right-column {
@@ -74,11 +71,18 @@ module.exports = {
             margin-bottom: 16px;
             margin-top: 0;
           }
+          .info-title {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            line-height: 0.4rem;
+            margin-bottom: 0px;
+          }
           .info {
             font-size: 20px;
             font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-            line-height: 1.2;
-            margin-bottom: 12px;
+            line-height: 1;
+            margin-bottom: 2rem;
           }
           .text-box {
             position: absolute;
@@ -88,7 +92,7 @@ module.exports = {
             right: 22px;
             bottom: 28px;
             font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-            background-color: #2e84c6;
+            background-color: #f073a8;
             color: #181a19;
             font-weight: bold;
             font-size: 16px;
@@ -106,7 +110,7 @@ module.exports = {
       </head>
       <body>
         <div class="container">
-          <img src="${FileStorage.getUrl(photograph)}" class="map" />
+          <img src="${photographUrl}" class="map" />
           <img src="${process.env.SERVER_URL +
             '/images/M33-FondoNegro.svg'}" class="logo" />
           <img src="${process.env.SERVER_URL +
@@ -116,10 +120,13 @@ module.exports = {
               ${name}
             </p>
             <hr />
+            <p class="info-title">Coordenadas</p>
             <p class="info">
-              <span>${location}</span>
-              <br />
-              <span>${Numeral(areaSize).format('0,0')} m<sup>2</sup></span>
+              <span>${coordinates}</span>
+            </p>
+            <p class="info-title">Localizado</p>
+            <p class="info">
+              <span>${location || ''}</span>
             </p>
           </div>
           <div class="text-box">

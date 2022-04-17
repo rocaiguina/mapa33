@@ -10,19 +10,17 @@ const { getSocialImageHtml } = require('./getSocialImageHtml');
 module.exports.createPhotograp = function(land) {
   return new Promise(function(resolve, reject) {
     if (!land.social_photograph) {
-      const photograph = land.photograph;
+      const photographURL = land.photographURL;
       const name = land.name;
-      const ownerName = land.metadata.owner_name;
       const location = land.location;
-      const areaSize = land.area_size;
+      const coordinates = land.humanCoordinates;
 
       const payload = {
         html: getSocialImageHtml(
-          photograph,
+          photographURL,
           name,
-          ownerName,
           location,
-          areaSize
+          coordinates
         ),
         viewport_width: 760,
         viewport_height: 376,
