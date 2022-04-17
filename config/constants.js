@@ -220,30 +220,34 @@ module.exports.LAND_PROTECTION_REASONS = [
   {
     value: 'nature',
     label:
-      'Es un espacio 100% natural y quiero evitar cualquier perturbación e impacto humano.',
+      'Es rico en naturaleza y quiero evitar cualquier perturbación e impacto humano adicional.',
   },
   {
     value: 'nature_low_human',
-    label:
-      'Es un lugar natural con bajo impacto humano y quiero evitar mayores perturbaciones.',
+    label: 'Es ideal para promover la educación y el uso recreativo.',
   },
   {
     value: 'nature_special',
     label:
-      'Es un lugar con rasgos naturales especiales(p.e. arboledas, mogotes, lagunas, cuevas)',
+      'Tiene rasgos naturales especiales (ej. arboledas, mogotes, lagunas, cuevas).',
   },
   {
     value: 'species_protection',
-    label: 'Es un lugar donde habitan especies que deber ser protegidas',
+    label: 'Habitan especies que deben ser protegidas.',
   },
   {
     value: 'historic',
-    label: 'Es un lugar con historia natural y cultural que debe ser protegida',
+    label: 'Tiene historia natural y cultural que debe ser protegida.',
   },
   {
     value: 'conservation',
     label:
-      'Es un lugar óptimo donde la conservación y el desarrollo sustentable pueden ocurrir a la vez.',
+      'Se puede practicar la conservación y el desarrollo sustentable.(ej. agroecología, ecoturismo)',
+  },
+  {
+    value: 'emotional',
+    label:
+      'Tiene valor emocional, espiritual y/o cultural para mí y mi comunidad.',
   },
 ];
 

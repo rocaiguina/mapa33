@@ -108,7 +108,7 @@
                     <small class="help-block">{{ field_errors.status.message }}</small>
                     {% endif %}
                 </div>
-                                
+
                 <div class="form-group {{ 'has-error' if field_errors.plots_count else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Número de parcelas</label>
@@ -128,24 +128,7 @@
                     <small class="help-block">{{ field_errors.area_size.message }}</small>
                     {% endif %}
                 </div>
-                
-                <!-- <div class="form-group {{ 'has-error' if field_errors.area_type else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Tipo de área</label>
-                        <div class="select">
-                            <select name="area_type" class="form-control ">
-                                <option value="">--------</option>
-                                {% for item in types %}
-                                <option {% if object.area_type == item.value %}selected{% endif %} value="{{ item.value }}">{{ item.label }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    {% if field_errors.area_type %}
-                    <small class="help-block">{{ field_errors.area_type.message }}</small>
-                    {% endif %}
-                </div> -->
-                               
+
                 <div class="form-group {{ 'has-error' if field_errors.location else '' }}">
                     <div class="fg-line">
                         <label class="control-label">Ubicación</label>
@@ -155,46 +138,6 @@
                     <small class="help-block">{{ field_errors.location.message }}</small>
                     {% endif %}
                 </div>
-                
-                <!-- <div class="form-group {{ 'has-error' if field_errors.entity else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Entidad</label>
-                        <input type="text" class="form-control input-sm" name="entity" value="{{ field_errors.entity.value if field_errors.entity else object.entity }}">
-                    </div>
-                    {% if field_errors.entity %}
-                    <small class="help-block">{{ field_errors.entity.message }}</small>
-                    {% endif %}
-                </div> -->
-                
-                <!-- <div class="form-group {{ 'has-error' if field_errors.acquisition_type else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Tipo de adquisición</label>
-                        <input type="text" class="form-control input-sm" name="acquisition_type" value="{{ field_errors.acquisition_type.value if field_errors.acquisition_type else object.acquisition_type }}">
-                    </div>
-                    {% if field_errors.acquisition_type %}
-                    <small class="help-block">{{ field_errors.acquisition_type.message }}</small>
-                    {% endif %}
-                </div> -->
-                
-                <!-- <div class="form-group {{ 'has-error' if field_errors.year_acquisition else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">Año de adquisición</label>
-                        <input type="number" step="1" class="form-control input-sm" name="year_acquisition" value="{{ field_errors.year_acquisition.value if field_errors.year_acquisition else object.year_acquisition }}">
-                    </div>
-                    {% if field_errors.year_acquisition %}
-                    <small class="help-block">{{ field_errors.year_acquisition.message }}</small>
-                    {% endif %}
-                </div> -->
-                
-                <!-- <div class="form-group {{ 'has-error' if field_errors.year_estab else '' }}" >
-                    <div class="fg-line">
-                        <label class="control-label">Año de establecimiento</label>
-                        <input type="number" step="1" class="form-control input-sm" name="year_estab" value="{{ field_errors.year_estab.value if field_errors.year_estab else object.year_estab }}">
-                    </div>
-                    {% if field_errors.year_estab %}
-                    <small class="help-block">{{ field_errors.year_estab.message }}</small>
-                    {% endif %}
-                </div> -->
                 
                 <div class="form-group {{ 'has-error' if field_errors.ownership else '' }}">
                     <div class="fg-line">
@@ -206,16 +149,54 @@
                     <small class="help-block">{{ field_errors.ownership.message }}</small>
                     {% endif %}
                 </div>
-                               
-                <!-- <div class="form-group {{ 'has-error' if field_errors.notes else '' }}">
+
+                <div class="form-group {{ 'has-error' if field_errors.importance_of_protection else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Notas</label>
-                        <textarea class="form-control" rows="5" name="notes">{{ field_errors.notes.value if field_errors.notes else object.notes }}</textarea>
+                        <label class="control-label">¿Por qué es importante proteger este terreno?</label>
+                        <textarea class="form-control" rows="5" name="importance_of_protection">{{ field_errors.importance_of_protection.value if field_errors.importance_of_protection else object.metadata.importance_of_protection }}</textarea>
                     </div>
-                    {% if field_errors.notes %}
-                    <small class="help-block">{{ field_errors.notes.message }}</small>
+                    {% if field_errors.importance_of_protection %}
+                    <small class="help-block">{{ field_errors.importance_of_protection.message }}</small>
                     {% endif %}
-                </div> -->
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Por qué se debe proteger este terreno?</label>
+                        {% for item in protection_reasons %}
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="reason_conservation" style="opacity: 1;" value="{{ item.value }}" {% if object.reason_conservation == item.value %}checked{% endif %} >
+                              {{ item.label }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if field_errors.reason_conservation %}
+                    <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.are_u_owner else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Es Dueño?</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="true" {% if object.metadata.are_u_owner == true %}checked{% endif %} >
+                              SI
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="false" {% if object.metadata.are_u_owner == false %}checked{% endif %}>
+                              NO
+                            </label>
+                        </div>
+                        {% if field_errors.are_u_owner %}
+                        <small class="help-block">{{ field_errors.are_u_owner.message }}</small>
+                        {% endif %}
+                    </div>
+                </div>
                 
                 <div class="form-group {{ 'has-error' if field_errors.know_owner else '' }}">
                     <div class="fg-line">
@@ -231,33 +212,12 @@
                               <input type="radio" name="know_owner" style="opacity: 1;" value="false" {% if object.metadata.know_owner == false %}checked{% endif %} >
                               NO
                             </label>
-                        </div>                        
+                        </div>
                         {% if field_errors.know_owner %}
                         <small class="help-block">{{ field_errors.know_owner.message }}</small>
                         {% endif %}
-                    </div>                    
-                </div> 
-                
-                <div class="form-group {{ 'has-error' if field_errors.are_u_owner else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">¿Es Dueño?</label>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="true" {% if object.metadata.are_u_owner == true %}checked{% endif %} >
-                              SI
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="are_u_owner" style="opacity: 1;" value="false" {% if object.metadata.are_u_owner == false %}checked{% endif %}>
-                              NO
-                            </label>
-                        </div>                        
-                        {% if field_errors.are_u_owner %}
-                        <small class="help-block">{{ field_errors.are_u_owner.message }}</small>
-                        {% endif %}
-                    </div>                    
-                </div>            
+                    </div>
+                </div>
                                 
                 <div class="form-group {{ 'has-error' if field_errors.catastro_numbers else '' }}">
                     <div class="fg-line">
@@ -309,7 +269,7 @@
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="other_main_uses" value="{{ field_errors.other_main_uses.value if field_errors.other_main_uses else object.other_main_uses }}">                        
+                        <input type="text" class="form-control input-sm" name="other_main_uses" value="{{ field_errors.other_main_uses.value if field_errors.other_main_uses else object.other_main_uses }}">
                     </div>    
                     {% if field_errors.other_main_uses %}
                     <small class="help-block">{{ field_errors.other_main_uses.message }}</small>
@@ -321,7 +281,7 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.lands_structures else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Infraestructura en el terreno</label>
+                        <label class="control-label">¿Qué tipo de infraestructura hay en el terreno?</label>
                         {% for item in structures %}
                         <div class="checkbox">
                             <label>
@@ -329,7 +289,7 @@
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="text" class="form-control input-sm" name="lands_other_structures" value="{{ field_errors.metadata.lands_other_structures.value if field_errors.metadata.lands_other_structures else object.metadata.lands_other_structures }}">                        
+                        <input type="text" class="form-control input-sm" name="lands_other_structures" value="{{ field_errors.metadata.lands_other_structures.value if field_errors.metadata.lands_other_structures else object.metadata.lands_other_structures }}">
                     </div>    
                     {% if field_errors.lands_other_structures %}
                     <small class="help-block">{{ field_errors.lands_other_structures.message }}</small>
@@ -338,10 +298,47 @@
                     <small class="help-block">{{ field_errors.lands_structures.message }}</small>
                     {% endif %}
                 </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.has_already_proposed_uses else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Hay algún uso ya propuesto para este terreno?</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_already_proposed_uses" style="opacity: 1;" value="yes" {% if object.metadata.has_already_proposed_uses == "yes" %}checked{% endif %} >
+                              Sí
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_already_proposed_uses" style="opacity: 1;" value="no" {% if object.metadata.has_already_proposed_uses == "no" %}checked{% endif %} >
+                              No
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_already_proposed_uses" style="opacity: 1;" value="unknown" {% if object.metadata.has_already_proposed_uses == "unknown" %}checked{% endif %} >
+                              No sé
+                            </label>
+                        </div>
+                        {% if field_errors.has_already_proposed_uses %}
+                        <small class="help-block">{{ field_errors.has_already_proposed_uses.message }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.proposed_uses_description else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Tipo de uso propuesto</label>
+                        <textarea class="form-control" rows="2" name="proposed_uses_description">{{ object.metadata.proposed_uses_description }}</textarea>
+                    </div>
+                    {% if field_errors.proposed_uses_description %}
+                    <small class="help-block">{{ field_errors.proposed_uses_description.message }}</small>
+                    {% endif %}
+                </div>
                 
                 <div class="form-group {{ 'has-error' if field_errors.main_attributes else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Atributos Principales</label>
+                        <label class="control-label">¿Cuáles de los siguientes atributos identificas en el terreno?</label>
                         {% for item in attributes %}
                         <div class="checkbox">
                             <label>
@@ -361,34 +358,81 @@
                 
                 <div class="form-group {{ 'has-error' if field_errors.has_contamination else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">Contaminada</label>
+                        <label class="control-label">¿El terreno ha tenido problemas de contaminación? Por ejemplo: vertedero clandestino, derrames químicos, aguas negras u otros.</label>
                         <div class="radio">
                             <label>
                               <input type="radio" name="has_contamination" style="opacity: 1;" value="yes" {% if object.metadata.has_contamination == "yes" %}checked{% endif %} >
-                              SI
+                              Sí
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                               <input type="radio" name="has_contamination" style="opacity: 1;" value="no" {% if object.metadata.has_contamination == "no" %}checked{% endif %} >
-                              NO
+                              No
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                               <input type="radio" name="has_contamination" style="opacity: 1;" value="unknown" {% if object.metadata.has_contamination == "unknown" %}checked{% endif %} >
-                              NO SÉ
+                              No sé
                             </label>
                         </div>
                         {% if field_errors.has_contamination %}
                         <small class="help-block">{{ field_errors.has_contamination.message }}</small>
                         {% endif %}
-                    </div>                    
+                    </div>
                 </div> 
+
+                <div class="form-group {{ 'has-error' if field_errors.contamination_description else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Tipo de contaminación</label>
+                        <textarea class="form-control" rows="2" name="contamination_description">{{ object.metadata.contamination_description }}</textarea>
+                    </div>
+                    {% if field_errors.contamination_description %}
+                    <small class="help-block">{{ field_errors.contamination_description.message }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ 'has-error' if field_errors.has_controversies else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Existen controversias de herencia, titularidad, registro de propiedad o de alguna otra índole legal?</label>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_controversies" style="opacity: 1;" value="yes" {% if object.metadata.has_controversies == "yes" %}checked{% endif %} >
+                              Sí
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_controversies" style="opacity: 1;" value="no" {% if object.metadata.has_controversies == "no" %}checked{% endif %} >
+                              No
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="has_controversies" style="opacity: 1;" value="unknown" {% if object.metadata.has_controversies == "unknown" %}checked{% endif %} >
+                              No sé
+                            </label>
+                        </div>
+                        {% if field_errors.has_controversies %}
+                        <small class="help-block">{{ field_errors.has_controversies.message }}</small>
+                        {% endif %}
+                    </div>
+                </div> 
+
+                <div class="form-group {{ 'has-error' if field_errors.controversies_description else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">Explica las controversias</label>
+                        <textarea class="form-control" rows="2" name="controversies_description">{{ object.metadata.controversies_description }}</textarea>
+                    </div>
+                    {% if field_errors.controversies_description %}
+                    <small class="help-block">{{ field_errors.controversies_description.message }}</small>
+                    {% endif %}
+                </div>
                 
                 <div class="form-group {{ 'has-error' if field_errors.proposed_uses else '' }}">
                     <div class="fg-line">
-                        <label class="control-label">¿Cuál uso le darías al terreno?</label>
+                        <label class="control-label">¿Cuáles usos propones para el terreno?</label>
                         {% for item in proposed_uses %}
                         <div class="checkbox">
                             <label>
@@ -399,24 +443,7 @@
                         {% if field_errors.proposed_uses %}
                         <small class="help-block">{{ field_errors.proposed_uses.message }}</small>
                         {% endif %}
-                    </div>                    
-                </div> 
-
-                <div class="form-group {{ 'has-error' if field_errors.reason_conservation else '' }}">
-                    <div class="fg-line">
-                        <label class="control-label">¿Por qué es importante la protección de este terreno en particular?</label>
-                        {% for item in protection_reasons %}
-                        <div class="radio">
-                            <label>
-                              <input type="radio" name="reason_conservation" style="opacity: 1;" value="{{ item.value }}" {% if object.reason_conservation == item.value %}checked{% endif %} >
-                              {{ item.label }}
-                            </label>
-                        </div>
-                        {% endfor %}
                     </div>
-                    {% if field_errors.reason_conservation %}
-                    <small class="help-block">{{ field_errors.reason_conservation.message }}</small>
-                    {% endif %}
                 </div>
 
                 <button type="submit" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Guardar">

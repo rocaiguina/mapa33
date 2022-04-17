@@ -201,6 +201,7 @@ class LandAdminController {
       ownership: Joi.string().allow(null, ''),
       status: Joi.string().allow(null, ''),
       reason_conservation: Joi.string().allow(null, ''),
+      importance_of_protection: Joi.string().allow(null, ''),
       notes: Joi.string().allow(null, ''),
       know_owner: Joi.boolean(),
       are_u_owner: Joi.boolean(),
@@ -228,8 +229,12 @@ class LandAdminController {
         .default([])
         .single(),
       other_main_attributes: Joi.string().allow(null, ''),
+      has_already_proposed_uses: Joi.string().allow(null, ''),
+      proposed_uses_description: Joi.string().allow(null, ''),
       has_contamination: Joi.string().allow(null, ''),
+      contamination_description: Joi.string().allow(null, ''),
       has_controversies: Joi.string().allow(null, ''),
+      controversies_description: Joi.string().allow(null, ''),
       proposed_uses: Joi.array()
         .empty('')
         .default([])
@@ -289,8 +294,13 @@ class LandAdminController {
           owner_phone: cleaned_data.owner_phone,
           lands_structures: cleaned_data.lands_structures,
           lands_other_structures: cleaned_data.lands_other_structures,
+          importance_of_protection: cleaned_data.importance_of_protection,
+          has_already_proposed_uses: cleaned_data.has_already_proposed_uses,
+          proposed_uses_description: cleaned_data.proposed_uses_description,
           has_contamination: cleaned_data.has_contamination,
+          contamination_description: cleaned_data.contamination_description,
           has_controversies: cleaned_data.has_controversies,
+          controversies_description: cleaned_data.controversies_description,
           know_owner: cleaned_data.know_owner,
         };
 
