@@ -369,6 +369,9 @@ class LandController {
             landUrl,
             landPhotograph: FileStorage.getUrl(land.photograph),
             landFacebookShareUrl: `https://www.facebook.com/sharer.php?u=${landUrl}`,
+            landTwitterShareUrl: `https://twitter.com/intent/tweet?url=${landUrl}`,
+            landWhatsappShareUrl: `whatsapp://send?text=${landUrl}`,
+            landEmailShareUrl: `mailto:?subject=I wanted you to see this site&amp;body=Check out this site ${landUrl}`,
           },
         };
         sgMail.send(mailOptions).then(
