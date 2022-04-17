@@ -1,16 +1,18 @@
 'use strict';
 
 const axios = require('axios');
+const sharp = require('sharp');
 const Mime = require('mime-types');
 const RandomToken = require('random-token');
 
+const geojsonToSvg = require('./geojsonToSvg');
 const FileStorage = require('./file-storage');
 const { getSocialImageHtml } = require('./getSocialImageHtml');
 
-module.exports.createPhotograp = function(land) {
+module.exports.createSocialPhotograp = function(land) {
   return new Promise(function(resolve, reject) {
-    if (!land.social_photograph) {
-      const photographURL = land.photographURL;
+    const photographURL = land.photographURL;
+    if (photographURL) {
       const name = land.name;
       const location = land.location;
       const coordinates = land.humanCoordinates;
@@ -67,3 +69,35 @@ module.exports.createPhotograp = function(land) {
     }
   });
 };
+
+module.exports.createLandShapePhotograph = function (land) {
+  return new Promise(function(resolve, reject) {
+    const landGeom = land.geom;
+    if (landGeom) {
+      const svg =
+        landGeom.type === 'MultiPolygon'
+          ? geojsonToSvg.multipolygon(landGeom.coordinates, 500)
+          : geojsonToSvg.polygon(landGeom.coordinates, 500);
+      const filename = RandomToken(10) + '.png';
+      const filepath = `lands/polygon/${filename}`;
+      const fileOpts = {
+        ContentType: Mime.lookup(filename),
+      };
+      const image = Buffer.from(svg);
+      sharp(image)
+        .toFormat('png')
+        .toBuffer()
+        .then(newImage => {
+          return FileStorage.put(filepath, newImage, fileOpts);
+        })
+        .then(function(response) {
+          resolve(response);
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    } else {
+      return resolve(null);
+    }
+  });
+}

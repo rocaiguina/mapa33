@@ -11,7 +11,7 @@ const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
-const SocialImageCreator = require('../utils/social-image-creator');
+const LandImageCreator = require('../utils/land-image-creator');
 const { LAND_STATUS, SENDGRID_TEMPLATES } = require('../../config/constants');
 
 const Land = Models.Land;
@@ -344,15 +344,25 @@ class LandController {
       status: LAND_STATUS_APPROVED,
     })
       .then(function(land) {
-        // Create socialPhotograph
-        SocialImageCreator.createPhotograp(land)
-          .then(socialPhotographUrl => {
+        // Create social and landshap photograph
+        Promise.all([
+          LandImageCreator.createSocialPhotograp(land),
+          LandImageCreator.createLandShapePhotograph(land),
+        ])
+          .then(function(photos) {
+            const [socialPhotographUrl, landShapePhotographUrl] = photos;
+
             if (socialPhotographUrl) {
               land.social_photograph = socialPhotographUrl;
-              land.save()
+            }
+
+            if (landShapePhotographUrl) {
+              land.land_shape = landShapePhotographUrl;
+            }
+
+            land.save()
                 .then(() => {})
                 .catch(err => { console.error(err); });
-            }
           })
           .catch(err => { console.error(err); });
 
