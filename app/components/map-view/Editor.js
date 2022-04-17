@@ -208,7 +208,7 @@ class Editor extends Component {
           id: 'protected_areas',
           type: 'fill',
           source: 'protected_areas',
-          'source-layer': 'lands-380u2f',
+          'source-layer': 'lands',
           layout: {
             visibility: 'visible',
           },
