@@ -360,11 +360,16 @@ class LandController {
               land.land_shape = landShapePhotographUrl;
             }
 
-            land.save()
-                .then(() => {})
-                .catch(err => { console.error(err); });
+            land
+              .save()
+              .then(() => {})
+              .catch(err => {
+                console.error(err);
+              });
           })
-          .catch(err => { console.error(err); });
+          .catch(err => {
+            console.error(err);
+          });
 
         // Send email notification
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);

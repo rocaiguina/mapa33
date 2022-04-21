@@ -28,7 +28,8 @@ const storage = new StorageManager(config).disk(driver);
 
 module.exports.getUrl = function(location) {
   if (driver === 'local') {
-    return `${process.env.SERVER_URL}${location}`;
+    const cleanLocation = location.replace('public/', '');
+    return `${process.env.SERVER_URL}/${cleanLocation}`;
   }
   return storage.getUrl(location);
 };

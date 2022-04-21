@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 const Paginator = require('paginator');
-const sgMail = require('@sendgrid/mail');
+// const sgMail = require('@sendgrid/mail');
 
 const Models = require('../../db/models');
 const Memory = Models.Memory;

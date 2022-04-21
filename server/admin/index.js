@@ -54,6 +54,13 @@ router.post(
   LandAdminController.save
 );
 router.post(
+  '/land/:id/shared-photo/generate',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
+  LandMiddleware.lookup,
+  LandAdminController.generate_share_photograph
+);
+router.post(
   '/land/:id/remove',
   AuthMiddleware.login_required,
   AdminMiddleware.admin_access,

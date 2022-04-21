@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const axios = require('axios');
 const sharp = require('sharp');
 const Mime = require('mime-types');
@@ -18,12 +19,7 @@ module.exports.createSocialPhotograp = function(land) {
       const coordinates = land.humanCoordinates;
 
       const payload = {
-        html: getSocialImageHtml(
-          photographURL,
-          name,
-          location,
-          coordinates
-        ),
+        html: getSocialImageHtml(photographURL, name, location, coordinates),
         viewport_width: 760,
         viewport_height: 376,
       };
@@ -37,7 +33,9 @@ module.exports.createSocialPhotograp = function(land) {
         },
       };
 
-      const filename = RandomToken(10) + '.jpg';
+      const filename = land.social_photograph
+        ? path.basename(land.social_photograph)
+        : RandomToken(10) + '.jpg';
       const filepath = `lands/social/${filename}`;
       const fileOpts = {
         ContentType: Mime.lookup(filename),
@@ -70,7 +68,7 @@ module.exports.createSocialPhotograp = function(land) {
   });
 };
 
-module.exports.createLandShapePhotograph = function (land) {
+module.exports.createLandShapePhotograph = function(land) {
   return new Promise(function(resolve, reject) {
     const landGeom = land.geom;
     if (landGeom) {
@@ -100,4 +98,4 @@ module.exports.createLandShapePhotograph = function (land) {
       return resolve(null);
     }
   });
-}
+};
