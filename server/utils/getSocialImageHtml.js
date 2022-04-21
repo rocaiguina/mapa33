@@ -56,7 +56,7 @@ module.exports = {
             background-color: #181a19;
           }
           .title {
-            font-size: 36px;
+            font-size: 26px;
             font-weight: bold;
             font-family: "Whyte", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
             line-height: 1.2;
