@@ -12,6 +12,7 @@ const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
 const LandImageCreator = require('../utils/land-image-creator');
+const Subscriptions = require('../utils/subscriptions');
 const { LAND_STATUS, SENDGRID_TEMPLATES } = require('../../config/constants');
 
 const Land = Models.Land;
@@ -395,6 +396,18 @@ class LandController {
             console.error(error);
           }
         );
+
+        // Update subscription
+        Subscriptions.update({
+          email: req.user.email,
+          proponente: 'yes',
+          propietario: land.metadata.are_u_owner ? 'yes' : 'no',
+          usosPropuestos: land.proposed_uses.join(', '),
+        })
+          .then(() => {})
+          .catch(err => {
+            console.error(err);
+          });
 
         // variables para email
         // const createLandTemplateId = 'd-3a8e6bb92266433f9f60bcae4e62540f';
