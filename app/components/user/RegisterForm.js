@@ -153,12 +153,9 @@ class RegisterForm extends React.Component {
                         onChange={handleChange}
                       >
                         He leído y acepto la{' '}
-                        <Link
-                          to="/page/terms-and-conditions"
-                          style={{ color: '#222' }}
-                        >
+                        <a target="_blank" href="/images/PP-mapa33.pdf">
                           POLÍTICA DE PRIVACIDAD
-                        </Link>
+                        </a>
                       </Checkbox>
                       <Text type="danger">{errors.terms_and_conditions}</Text>
                     </div>

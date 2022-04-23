@@ -59,7 +59,7 @@ class ContaminationStep extends React.Component {
             >
               <h2>
                 ¿El terreno ha tenido problemas de contaminación? Por ejemplo:
-                vertedero clandestino, derrames químicos, aguas negras u otros.
+                vertedero clandestino, derrames químicos, aguas usadas u otros.
               </h2>
               {errors.has_contamination && (
                 <Text type="danger">{errors.has_contamination}</Text>
