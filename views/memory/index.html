@@ -97,10 +97,10 @@
     <div class="text-center">
         <ul class="pagination">
             <li {% if not paginator.has_previous_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/land?page={{ paginator.previous_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
+              <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/memory?page={{ paginator.previous_page }}{% endif %}&status={{filters.status}}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
             </li>
             <li {% if not paginator.has_next_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_next_page %}#{% else %}/admin/land?page={{ paginator.next_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
+              <a href="{% if not paginator.has_next_page %}#{% else %}/admin/memory?page={{ paginator.next_page }}{% endif %}&status={{filters.status}}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
             </li>
         </ul>
     </div>
@@ -110,7 +110,7 @@
   <input type="hidden" name="crumb" value="{{crumb}}"/>
 </form>
 
-<a href="/admin/land/-1" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-original-title="Add Land"><i class="zmdi zmdi-plus"></i></a>
+<a href="/admin/memory/-1" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-original-title="Add Memory"><i class="zmdi zmdi-plus"></i></a>
 
 {% endblock %}
 

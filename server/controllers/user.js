@@ -7,6 +7,7 @@ const Land = Models.Land;
 const LandLikes = Models.LandLikes;
 const encryptor = require('../../server/utils/encryptor');
 const Constants = require('../../config/constants');
+const Subscriptions = require('../utils/subscriptions');
 
 const jwt = require('jsonwebtoken');
 
@@ -135,7 +136,7 @@ class UserController {
         // Send email notification.
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
-          to: req.body.email,
+          to: user.email,
           from: process.env.DEFAULT_EMAIL_FROM,
           templateId: Constants.SENDGRID_TEMPLATES.USER_REGISTER,
           dynamic_template_data: {
@@ -153,6 +154,21 @@ class UserController {
             }
           }
         );
+
+        // Subscribe to sendgrid list
+        Subscriptions.create({
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+          postalCode: user.zip_code,
+          optIn: user.advs_by_email,
+        })
+          .then(response => {
+            console.log('SUBSCRIPTION SUCCESSFUL', response);
+          })
+          .catch(err => {
+            console.error(err);
+          });
       })
       .catch(function(err) {
         res.status(400).send(err);

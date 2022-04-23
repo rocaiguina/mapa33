@@ -13,6 +13,7 @@ const Validator = require('../utils/validator');
 const axios = require('axios');
 const { getSocialImageHtml } = require('../utils/getSocialImageHtml');
 const geojsonToSvg = require('../utils/geojsonToSvg');
+const LandImageCreator = require('../utils/land-image-creator');
 
 const sgMail = require('@sendgrid/mail');
 const FileStorage = require('../utils/file-storage');
@@ -387,6 +388,18 @@ class LandAdminController {
       .destroy()
       .then(function() {
         res.redirect('/admin/land');
+      })
+      .catch(function(err) {
+        next(err);
+      });
+  }
+
+  generate_share_photograph(req, res, next) {
+    const land = req.land;
+    LandImageCreator.createSocialPhotograp(land)
+      .then(function() {
+        req.flash('success', 'Photograph has been generated.');
+        res.redirect('/admin/land/' + land.id);
       })
       .catch(function(err) {
         next(err);

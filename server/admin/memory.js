@@ -23,6 +23,7 @@ class MemoryAdminController {
           model: Land,
           as: 'land',
           attributes: ['name'],
+          required: true,
         },
         {
           model: User,
