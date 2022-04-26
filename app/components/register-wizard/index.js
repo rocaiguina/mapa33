@@ -94,7 +94,6 @@ class RegisterWizard extends React.Component {
         push();
         break;
     }
-    console.log(step, values);
   };
 
   handleOnClose = () => {

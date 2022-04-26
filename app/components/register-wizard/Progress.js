@@ -4,7 +4,7 @@ import { Button } from 'antd';
 
 class Progress extends React.Component {
   render() {
-    const { nextBtnHtmlType, nextText, step, steps, onNext } = this.props;
+    const { nextBtnHtmlType, nextBtnLoading, nextText, step, steps, onNext } = this.props;
     return (
       <div className="wizard-progress">
         <div className="text-right visible-xs">
@@ -14,6 +14,7 @@ class Progress extends React.Component {
             shape="round"
             size="large"
             onClick={onNext}
+            loading={nextBtnLoading}
           >
             {nextText || 'Continuar'}
           </Button>

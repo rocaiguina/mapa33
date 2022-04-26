@@ -30,8 +30,8 @@ class SubmitStep extends React.Component {
         footerRightComponent={
           <Progress
             nextBtnHtmlType="submit"
+            nextBtnLoading={this.props.isSubmitting}
             nextText="Proponer"
-            onNext={this.handleOnNext}
             step={17}
             steps={17}
           />
