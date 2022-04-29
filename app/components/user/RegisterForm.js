@@ -82,7 +82,7 @@ class RegisterForm extends React.Component {
           <form onSubmit={handleSubmit}>
             <div className="m-b-15">
               <Row gutter={16}>
-                <Col md={8} offset={8}>
+                <Col md={{ span: 8, offset: 8 }}>
                   <h2>Regístrate</h2>
                   <div className="form-group">
                     <Input
