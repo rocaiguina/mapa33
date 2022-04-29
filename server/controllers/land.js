@@ -398,7 +398,7 @@ class LandController {
         );
 
         // Update subscription
-        Subscriptions.update({
+        Subscriptions.create({
           email: req.user.email,
           proponente: 'yes',
           propietario: land.metadata.are_u_owner ? 'yes' : 'no',
@@ -430,11 +430,13 @@ class LandController {
         //     }
         //   }
         // );
+
         const result = land.get({ plain: true });
         delete result.geom;
         res.json(result);
       })
       .catch(function(err) {
+        console.dir(err, { depth: 10 });
         res.status(400).send(err);
       });
   }
