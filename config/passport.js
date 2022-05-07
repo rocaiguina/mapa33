@@ -3,7 +3,7 @@
 const passport        = require('passport');
 const LocalStrategy   = require('passport-local');
 
-const encryptor       = require('../server/utils/encryptor');
+const encryptor       = require('../src/utils/encryptor');
 const models          = require('../db/models');
 const User            = models.User;
 
@@ -38,7 +38,7 @@ passport.serializeUser(function (user, done) {
 });
 passport.deserializeUser(function (id, done) {
   User
-    .findById(id)
+    .findByPk(id)
     .then(function (user) {
       done(null, user.get({plain: true}));
     })

@@ -41,13 +41,7 @@ PORT=3000
 
 6. Run the server project.
 
-`npm run dev-start`
-
-7. Open a new terminal and build the "react app"
-
-`npm run build`
-
-8. Open your browser `http://localhost:3000/` and enjoy!. :)
+`npm run dev`
 
 
 # API DOCS

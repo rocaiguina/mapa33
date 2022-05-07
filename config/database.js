@@ -7,7 +7,6 @@ require('dotenv-safe').config({
 module.exports = {
   development: {
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: 'DATABASE_URL',
     dialectOptions: {},
   },
@@ -17,13 +16,11 @@ module.exports = {
     database: 'mapa33-test',
     host: '127.0.0.1',
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: 'DATABASE_URL',
     //logging: false,
   },
   production: {
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: 'DATABASE_URL',
     ssl: true,
     dialectOptions: {

@@ -2,7 +2,7 @@
 
 const sequelizePaginate = require('sequelize-paginate');
 const Numeral = require('numeral');
-const FileStorage = require('../../server/utils/file-storage');
+const FileStorage = require('../../src/utils/file-storage');
 
 module.exports = (sequelize, DataTypes) => {
   const Land = sequelize.define('Land', {

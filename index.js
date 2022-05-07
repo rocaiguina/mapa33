@@ -7,15 +7,15 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const sequelizeSessionStore = require('connect-session-sequelize');
 const db = require('./db/models');
-const server = require('./server');
+const server = require('./src');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const nunjucks = require('nunjucks');
 const session = require('express-session');
 const passport = require('passport');
-const flash = require('./server/middlewares/flash');
-const land = require('./server/public/land');
+const flash = require('./src/middlewares/flash');
+const land = require('./src/public/land');
 
 // configure template engine
 const nunjucksEnv = nunjucks.configure('views', {
@@ -32,7 +32,14 @@ app.set('view engine', 'html');
 app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
 // cors
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: [
+    'http://localhost:3000',
+    'http://mapa-33.com',
+    'https://mapa-33.com',
+  ]
+}));
 
 // cookie parser
 app.use(cookieParser());
@@ -70,19 +77,11 @@ app.use(bodyParser.json({ limit: '5mb' }));
 
 // prepend '/' to URIs
 app.use('/api', server);
-app.use('/admin', require('./server/admin'));
-
-// Add og:tags for land page
-app.get('/land/:id', land.get);
-
-// request any page and receive index.html
-app.get('/*', function (req, res) {
-  res.render('public/index');
-});
+app.use('/admin', require('./src/admin'));
 
 if (process.env.NODE_ENV != 'test') {
   // server listening!
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 5000;
   const dbName = process.env.DATABASE_NAME;
   app.listen(port, () => {
     console.log(chalk.cyan('Server is listening'), chalk.yellow(process.env.SERVER_URL || `http://localhost:${port}`));
