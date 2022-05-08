@@ -67,7 +67,7 @@ class Editor extends Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/satellite-streets-v10',
       center: center,
-      zoom: zoom,
+      zoom: 9,
       attributionControl: false,
     });
 
@@ -418,10 +418,10 @@ class Editor extends Component {
       }
 
       if (!exist) {
-        if (lots.length >= 50) {
+        if (lots.length >= 3) {
           notification.error({
             message: 'Error',
-            description: 'No puede elegir más de 50 parcelas.',
+            description: 'No puede elegir más de 3 parcelas.',
           });
           return;
         }
