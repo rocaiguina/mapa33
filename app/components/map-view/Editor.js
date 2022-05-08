@@ -418,10 +418,10 @@ class Editor extends Component {
       }
 
       if (!exist) {
-        if (lots.length >= 3) {
+        if (lots.length >= 50) {
           notification.error({
             message: 'Error',
-            description: 'No puede elegir más de 3 parcelas.',
+            description: 'No puede elegir más de 50 parcelas.',
           });
           return;
         }
