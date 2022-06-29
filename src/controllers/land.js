@@ -499,15 +499,6 @@ class LandController {
       return res.status(401).send('Unauthorized');
     }
 
-    if (land.status !== LAND_STATUS_NEW) {
-      return res.status(405).send('Not allowed');
-    }
-
-    const expiredAt = Moment(land.createdAt).add(24, 'hours');
-    if (Moment().isAfter(expiredAt)) {
-      return res.status(405).send('Not allowed. Expire createdAt.');
-    }
-
     if (cleaned_data.name) {
       land.name = cleaned_data.name;
     }
