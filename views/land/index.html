@@ -132,14 +132,7 @@
     </div>
 
     <div class="text-center">
-        <ul class="pagination">
-            <li {% if not paginator.has_previous_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_previous_page %}#{% else %}/admin/land?page={{ paginator.previous_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Previous"><i class="zmdi zmdi-chevron-left"></i></a>
-            </li>
-            <li {% if not paginator.has_next_page %}class="disabled"{% endif %}>
-              <a href="{% if not paginator.has_next_page %}#{% else %}/admin/land?page={{ paginator.next_page }}{% endif %}&status={{filters.status}}&level={{filters.level}}" aria-label="Next"><i class="zmdi zmdi-chevron-right"></i></a>
-            </li>
-        </ul>
+        {% include 'partials/pagination.html' %}
     </div>
 </div>
 

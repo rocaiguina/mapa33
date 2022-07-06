@@ -10,6 +10,7 @@ const Op = Sequelize.Op;
 const Validator = require('../utils/validator');
 const encryptor = require('../utils/encryptor');
 const stringify = require('csv-stringify');
+const querystring = require('query-string');
 
 class UserAdminController {
   findAll(req, res, next) {
@@ -34,10 +35,13 @@ class UserAdminController {
           options.page
         );
         data.current_page = paginator.current_page;
+        data.total_pages = paginator.total_pages;
         data.next_page = paginator.next_page;
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
+        data.url_path = '/admin/user';
+        data.url_query_params = querystring.stringify(filters);
         res.render('user/index', { paginator: data, filters });
       })
       .catch(function(err) {

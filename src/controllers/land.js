@@ -7,7 +7,6 @@ const RandomToken = require('random-token');
 const Sequelize = require('sequelize');
 const sgMail = require('@sendgrid/mail');
 const sharp = require('sharp');
-const Moment = require('moment');
 const Base64Img = require('../utils/base64-img');
 const Models = require('../../db/models');
 const FileStorage = require('../utils/file-storage');
@@ -24,7 +23,6 @@ const ALL_LAND_LEVELS = ['basic', 'pledge', 'conserved'];
 const PROPOSED_LAND_LEVELS = ['basic', 'pledge'];
 const CONSERVED_LAND_LEVELS = ['conserved'];
 
-const LAND_STATUS_NEW = LAND_STATUS[0]['value'];
 const LAND_STATUS_APPROVED = LAND_STATUS[2]['value'];
 
 class LandController {

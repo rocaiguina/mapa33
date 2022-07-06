@@ -6,6 +6,7 @@ const sharp = require('sharp');
 const Paginator = require('paginator');
 const RandomToken = require('random-token');
 const Sequelize = require('sequelize');
+const querystring = require('query-string');
 const Models = require('../../db/models');
 const Land = Models.Land;
 const Op = Sequelize.Op;
@@ -161,10 +162,13 @@ class LandAdminController {
           options.page
         );
         data.current_page = paginator.current_page;
+        data.total_pages = paginator.total_pages;
         data.next_page = paginator.next_page;
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
+        data.url_path = '/admin/land';
+        data.url_query_params = querystring.stringify(filters);
         res.render('land/index', { paginator: data, filters });
       })
       .catch(function(err) {
