@@ -135,6 +135,7 @@ class LandAdminController {
       paginate: req.query.limit || 10,
       where: {},
       order: [['createdAt', 'DESC']],
+      attributes: { exclude: ['geom'] }
     };
     let filters = {};
 
@@ -167,6 +168,9 @@ class LandAdminController {
         data.previous_page = paginator.previous_page;
         data.has_previous_page = paginator.has_previous_page;
         data.has_next_page = paginator.has_next_page;
+        data.first_result = paginator.first_result;
+        data.last_result = paginator.last_result;
+        data.total_results = paginator.total_results;
         data.url_path = '/admin/land';
         data.url_query_params = querystring.stringify(filters);
         res.render('land/index', { paginator: data, filters });

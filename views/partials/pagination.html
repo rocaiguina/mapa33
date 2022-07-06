@@ -1,3 +1,6 @@
+<p>
+    {{ paginator.first_result + 1 }} - {{ paginator.last_result + 1 }} de {{ paginator.total_results }} registros
+</p>
 <ul class="pagination">
 <!-- Previous Page Link -->
 {% if paginator.current_page == 1 %}
@@ -11,7 +14,7 @@
 {% endif %}
 
 <!-- Pagination Elements -->
-{% for page_number in range(1, paginator.total_pages) %}
+{% for page_number in range(1, paginator.total_pages + 1) %}
     {% if paginator.current_page == page_number %}
     <li class="page-item disabled" aria-disabled="true">
         <span class="page-link" aria-hidden="true">{{ page_number }}</span>
