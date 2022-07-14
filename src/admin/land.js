@@ -135,7 +135,7 @@ class LandAdminController {
       paginate: req.query.limit || 10,
       where: {},
       order: [['createdAt', 'DESC']],
-      attributes: { exclude: ['geom'] }
+      attributes: { exclude: ['geom'] },
     };
     let filters = {};
 
@@ -408,6 +408,32 @@ class LandAdminController {
       .then(function() {
         req.flash('success', 'Photograph has been generated.');
         res.redirect('/admin/land/' + land.id);
+      })
+      .catch(function(err) {
+        next(err);
+      });
+  }
+
+  regenerateSlug(req, res, next) {
+    Land.findAll({
+      attributes: ['id', 'name'],
+    })
+      .then(function(lands) {
+        return Promise.all(
+          lands.map(function(item) {
+            return item.regenerateSlug();
+          })
+        );
+      })
+      .then(function(lands) {
+        return Promise.all(
+          lands.map(function(item) {
+            return item.save();
+          })
+        );
+      })
+      .then(function() {
+        res.send('OK');
       })
       .catch(function(err) {
         next(err);

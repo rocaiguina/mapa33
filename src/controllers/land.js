@@ -151,6 +151,7 @@ class LandController {
     Land.findAll({
       attributes: [
         'id',
+        'slug',
         'name',
         'likes',
         'level',
@@ -218,8 +219,11 @@ class LandController {
   }
 
   lookup(req, res, next) {
+    const where = /^\d+$/.test(req.params.id)
+      ? { id: req.params.id }
+      : { slug: req.params.id };
     Land.findOne({
-      where: { id: req.params.id },
+      where,
       attributes: { exclude: ['geom'] },
       include: [
         {

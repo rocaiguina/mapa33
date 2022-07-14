@@ -3,12 +3,17 @@
 const sequelizePaginate = require('sequelize-paginate');
 const Numeral = require('numeral');
 const FileStorage = require('../../src/utils/file-storage');
+const SequelizeSlugify = require('sequelize-slugify');
 
 module.exports = (sequelize, DataTypes) => {
   const Land = sequelize.define('Land', {
     name: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    slug: {
+      type: DataTypes.STRING,
+      unique: true,
     },
     level: {
       type: DataTypes.STRING, // basic, pledge, conserved
@@ -159,6 +164,11 @@ module.exports = (sequelize, DataTypes) => {
 
   // Paginate plugin
   sequelizePaginate.paginate(Land);
+
+  SequelizeSlugify.slugifyModel(Land, {
+    source: ['id', 'name'],
+    suffixSource: ['id'],
+  });
 
   return Land;
 };

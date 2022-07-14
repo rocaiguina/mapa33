@@ -39,6 +39,12 @@ router.get(
   LandAdminController.findAll
 );
 router.get(
+  '/land/regenerate-slug',
+  AuthMiddleware.login_required,
+  AdminMiddleware.admin_access,
+  LandAdminController.regenerateSlug
+);
+router.get(
   '/land/:id',
   AuthMiddleware.login_required,
   AdminMiddleware.admin_access,
