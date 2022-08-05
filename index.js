@@ -36,7 +36,7 @@ app.use(cors({
   credentials: true,
   origin: [
     'http://localhost:3000',
-    'http://54.81.49.73',
+    'http://mapa33-web.s3-website-us-east-1.amazonaws.com',
     'http://mapa-33.com',
     'https://mapa-33.com',
   ]
