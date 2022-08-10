@@ -447,6 +447,16 @@
                     </div>
                 </div>
 
+                <div class="form-group {{ 'has-error' if field_errors.activity_to_protect_this_land else '' }}">
+                    <div class="fg-line">
+                        <label class="control-label">¿Qué se ha hecho o se está haciendo para proteger este espacio?</label>
+                        <textarea class="form-control" rows="2" name="activity_to_protect_this_land">{{ object.metadata.activity_to_protect_this_land }}</textarea>
+                    </div>
+                    {% if field_errors.activity_to_protect_this_land %}
+                    <small class="help-block">{{ field_errors.activity_to_protect_this_land.message }}</small>
+                    {% endif %}
+                </div>
+
                 <button type="submit" class="btn btn-float btn-primary m-btn waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Guardar">
                   <i class="zmdi zmdi-save"></i>
                 </button>

@@ -243,6 +243,7 @@ class LandAdminController {
       contamination_description: Joi.string().allow(null, ''),
       has_controversies: Joi.string().allow(null, ''),
       controversies_description: Joi.string().allow(null, ''),
+      activity_to_protect_this_land: Joi.string().allow(null, ''),
       proposed_uses: Joi.array()
         .empty('')
         .default([])
@@ -309,6 +310,7 @@ class LandAdminController {
           contamination_description: cleaned_data.contamination_description,
           has_controversies: cleaned_data.has_controversies,
           controversies_description: cleaned_data.controversies_description,
+          activity_to_protect_this_land: cleaned_data.activity_to_protect_this_land,
           know_owner: cleaned_data.know_owner,
         };
 
