@@ -40,6 +40,7 @@ function login(req, res) {
             expires: new Date(Date.now() + 3600000), // 1 hour
             httpOnly: true,
             secure: false, // set to true if your using https
+            sameSite: process.env.NODE_ENV === 'development' ? false : 'None',
           });
           return res.send(user);
         }
