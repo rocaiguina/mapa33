@@ -207,6 +207,10 @@ module.exports.LAND_PROPOSED_USES = [
     label: 'Educación e investigación científica',
   },
   {
+    value: 'historic_cultural',
+    label: 'Histórico/Cultural',
+  },
+  {
     value: 'environment_monitoring',
     label: 'Monitoreo ambiental',
   },
