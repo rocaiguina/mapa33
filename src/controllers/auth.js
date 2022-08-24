@@ -39,8 +39,7 @@ function login(req, res) {
           res.cookie('access_token', token, {
             expires: new Date(Date.now() + 3600000), // 1 hour
             httpOnly: true,
-            secure: false, // set to true if your using https
-            sameSite: 'Lax',
+            secure: process.env.NODE_ENV == 'production', // set to true if your using https
           });
           return res.send(user);
         }
