@@ -185,6 +185,8 @@ class LandAdminController {
     var data = req.body;
 
     const validationSchema = {
+      geom: Joi.string(),
+      coordinates: Joi.string(),
       name: Joi.string(),
       level: Joi.string().allow(null, ''),
       plots_count: Joi.number()
@@ -263,6 +265,16 @@ class LandAdminController {
       return res.redirect('/admin/land/' + (land.isNewRecord ? '-1' : land.id));
     }
 
+    if (result.value.geom) {
+      land.geom = JSON.parse(result.value.geom);
+      req.land.geom = JSON.parse(result.value.geom);
+    }
+
+    if (result.value.coordinates) {
+      land.coordinates = JSON.parse(result.value.coordinates);
+      req.land.coordinates = JSON.parse(result.value.coordinates);
+    }
+
     Promise.all([
       uploadLandShape(req),
       uploadSocialPhotograph(req),
@@ -310,7 +322,8 @@ class LandAdminController {
           contamination_description: cleaned_data.contamination_description,
           has_controversies: cleaned_data.has_controversies,
           controversies_description: cleaned_data.controversies_description,
-          activity_to_protect_this_land: cleaned_data.activity_to_protect_this_land,
+          activity_to_protect_this_land:
+            cleaned_data.activity_to_protect_this_land,
           know_owner: cleaned_data.know_owner,
         };
 

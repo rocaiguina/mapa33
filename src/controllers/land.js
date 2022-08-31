@@ -131,6 +131,7 @@ class LandController {
 
   findGeoJson(req, res) {
     let level = req.query.area;
+    let except = req.query.except;
 
     let conditions = {};
 
@@ -146,6 +147,10 @@ class LandController {
           [Op.in]: CONSERVED_LAND_LEVELS,
         };
         break;
+    }
+
+    if (except) {
+      conditions.id = { [Op.notIn]: except.split(',') };
     }
 
     Land.findAll({
@@ -327,7 +332,8 @@ class LandController {
         contamination_description: cleaned_data.contamination_description,
         has_controversies: cleaned_data.has_controversies,
         controversies_description: cleaned_data.controversies_description,
-        activity_to_protect_this_land: cleaned_data.activity_to_protect_this_land,
+        activity_to_protect_this_land:
+          cleaned_data.activity_to_protect_this_land,
         know_owner: cleaned_data.know_owner,
         importance_of_protection: cleaned_data.importance_of_protection,
         has_already_proposed_uses: cleaned_data.has_already_proposed_uses,
@@ -519,6 +525,49 @@ class LandController {
       land.main_attributes = cleaned_data.main_attributes;
       land.other_main_attributes = cleaned_data.other_main_attributes;
     }
+
+    land
+      .save()
+      .then(function() {
+        res.send('');
+      })
+      .catch(function(err) {
+        res.status(400).send(err);
+      });
+  }
+
+  updateGeom(req, res) {
+    const data = req.body;
+    const validationSchema = {
+      geojson: Joi.object({
+        geometry: Joi.object({
+          type: Joi.string(),
+          coordinates: Joi.array(),
+        }),
+      }).required(),
+      coordinates: Joi.object({
+        type: Joi.string(),
+        coordinates: Joi.array(),
+      }).required(),
+    };
+
+    // Validata data.
+    const result = Joi.validate(data, validationSchema);
+
+    if (result.error) {
+      return res.status(400).send(result.error);
+    }
+
+    const cleaned_data = result.value;
+
+    const land = req.land;
+
+    if (req.user.role !== 'administrator' && req.user.id !== land.user_id) {
+      return res.status(401).send('Unauthorized');
+    }
+
+    land.coordinates = cleaned_data.coordinates;
+    land.geom = cleaned_data.geojson.geometry;
 
     land
       .save()

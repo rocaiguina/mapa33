@@ -18,6 +18,9 @@
     <div class="v4-row">
       <div class="v4-col-md-8">
         <div id="map" class="land-map"></div>
+        {% if field_errors.geom %}
+        <small class="help-block">{{ field_errors.geom.message }}</small>
+        {% endif %}
       </div>
       <div class="v4-col-md-4">
         <div class="card m-b-0">
@@ -35,7 +38,7 @@
                 </div>
                 {% if field_errors.photograph %}
                 <small class="help-block">{{ field_errors.photograph.message }}</small>
-                {% endif %}                    
+                {% endif %}
             </div>
             <div class="pmo-contact">
                 <ul>
@@ -57,6 +60,8 @@
   <div class="col-md-8">
     <form id="user-form" method="POST" autocomplete="off" enctype="multipart/form-data">
         <input type="hidden" name="crumb" value="{{crumb}}"/>
+        <input type="hidden" name="geom" />
+        <input type="hidden" name="coordinates" />
         <div class="card">
             <div class="card-header">
                 <h2>Detalles
@@ -538,116 +543,16 @@
     landsStructures.change(toggleOtherLandsStructures).ready(toggleOtherLandsStructures);
     mainAttributes.change(toggleOtherMainAttributes).ready(toggleOtherMainAttributes);
   });
-
-  //Map
-  mapboxgl.accessToken = 'pk.eyJ1Ijoicm9jYWlndWluYSIsImEiOiJjazJsc3oxdWkwYW56M25sazQ0cWZnMG5pIn0.WAKi9fHre9kF116zG1mjXg';
-  var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/satellite-streets-v10',
-    center: JSON.parse('{{ object.coordinates.coordinates | dump | safe }}'),
-    zoom: 12,
-    attributionControl: false,
-  });
-
-  map.on('load', () => {
-    map.addSource('protected_areas', {
-      type: 'vector',
-      url: 'mapbox://rocaiguina.d6j1xz6t',
-    });
-
-    map.addSource('proposed-lots', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-
-    map.addSource('lot', {
-      'type': 'geojson',
-      'data': {
-        'type': 'FeatureCollection',
-        features: [{
-          "type": "Feature",
-          "properties": {},
-          "geometry": JSON.parse('{{ object.geom | dump | safe }}')
-        }],
-      }
-    });
-
-    map.addLayer(
-      {
-        id: 'protected_areas',
-        type: 'fill',
-        source: 'protected_areas',
-        'source-layer': 'lands-380u2f',
-        layout: {
-          visibility: 'visible',
-        },
-        paint: {
-          'fill-color': '#5bbcae'
-        }
-      },
-      'waterway-label'
-    );
-    
-    map.addLayer(
-      {
-        id: 'lot',
-        type: 'fill',
-        source: 'lot',
-        paint: {
-          'fill-color': '#5bbcae',
-          'fill-opacity': 0.75,
-        },
-      },
-      'waterway-label'
-    );
-
-    map.addLayer(
-      {
-        id: 'lot-border',
-        type: 'line',
-        source: 'lot',
-        layout: {
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#5bbcae',
-          'line-opacity': 1,
-          'line-width': 2,
-          'line-offset': -4,
-          'line-dasharray': [0.5, 2],
-        },
-      },
-      'waterway-label'
-    );
-
-    map.addLayer(
-      {
-        id: 'proposed-lots',
-        type: 'fill',
-        source: 'proposed-lots',
-        layout: {
-          visibility: 'visible',
-        },
-        paint: {
-          'fill-color': '#E36D9D',
-        },
-      },
-      'lot'
-    );
-
-
-    fetch(`/api/land/geojson?area=proposed`)
-    .then(response => response.json())
-    .then(data => {
-      map.getSource('proposed-lots').setData(data[0].geojson);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-  })
 </script>
+{% if object.id %}
+<script type="text/javascript">
+    var LAND_CENTER = JSON.parse('{{ object.coordinates.coordinates | dump | safe }}');
+    var LAND_GEOM = JSON.parse('{{ object.geom | dump | safe }}');
+    var LAND_ID = '{{ object.id }}'
+</script>
+<script type="text/javascript" src="/assets/admin/js/lands/map-editor.js"></script>
+{% else %}
+<script type="text/javascript" src="/assets/admin/js/lands/map-creator.js"></script>
+{% endif %}
+
 {% endblock %}

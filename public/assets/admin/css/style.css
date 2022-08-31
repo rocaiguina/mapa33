@@ -110,3 +110,16 @@
     margin-bottom: 0px;
   }
 }
+
+/* Mapbox editor popup */
+.mapbox-editor-popup {
+  padding: 5px 10px;
+}
+.mapbox-editor-popup p {
+  margin-bottom: 0;
+}
+
+/* Mapbox popup */
+.mapboxgl-popup-content {
+  padding: 0 !important;
+}

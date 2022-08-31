@@ -26,6 +26,12 @@ router.put(
   LandController.lookup,
   LandController.update
 );
+router.put(
+  '/:id/geom',
+  JWTMiddleware.requireJWT,
+  LandController.lookup,
+  LandController.updateGeom
+);
 router.delete('/:id', LandController.lookup, LandController.remove);
 router.post('/:id/like', JWTMiddleware.requireJWT, LandController.like);
 router.get('/:id/like', JWTMiddleware.verifyJWT, LandController.checkUserLike);
