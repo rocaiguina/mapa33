@@ -31,6 +31,31 @@ app.set('view engine', 'html');
 // serve static files from public
 app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
+// cookie parser
+app.use(cookieParser());
+
+// logging middleware
+app.use(morgan('dev'));
+
+// session middleware
+var SequelizeStore = sequelizeSessionStore(session.Store);
+
+let sessionConfig = {
+  secret: 'mapa33secretcookie',
+  store: new SequelizeStore({
+    db: db.sequelize,
+  }),
+  proxy: process.env.NODE_ENV == 'production',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 60 * 60 * 1000,
+    secure: process.env.NODE_ENV == 'production'
+  }
+};
+app.use(session(sessionConfig));
+app.use(flash());
+
 // cors
 app.use(cors({
   credentials: true,
@@ -42,37 +67,6 @@ app.use(cors({
     'https://mapa-33.com',
   ]
 }));
-
-// cookie parser
-app.use(cookieParser());
-
-// logging middleware
-app.use(morgan('dev'));
-
-// session middleware
-var SequelizeStore = sequelizeSessionStore(session.Store);
-
-if (process.env.NODE_ENV == 'production') {
-  app.enable('trust proxy');
-  app.set('trust proxy', 'loopback');
-}
-
-let sessionConfig = {
-  secret: 'mapa33secretcookie',
-  store: new SequelizeStore({
-    db: db.sequelize,
-    proxy: true,
-  }),
-  resave: false,
-  proxy: process.env.NODE_ENV == 'production',
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 60 * 60 * 1000,
-    secure: process.env.NODE_ENV == 'production'
-  }
-};
-app.use(session(sessionConfig));
-app.use(flash());
 
 // passport 
 app.use(passport.initialize());
