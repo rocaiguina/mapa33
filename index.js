@@ -54,6 +54,7 @@ var SequelizeStore = sequelizeSessionStore(session.Store);
 
 if (process.env.NODE_ENV == 'production') {
   app.enable('trust proxy');
+  app.set('trust proxy', 'loopback');
 }
 
 let sessionConfig = {
