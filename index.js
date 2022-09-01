@@ -59,6 +59,7 @@ let sessionConfig = {
     proxy: true,
   }),
   resave: false,
+  proxy: process.env.NODE_ENV == 'production',
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000,
