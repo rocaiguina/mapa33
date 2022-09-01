@@ -52,6 +52,10 @@ app.use(morgan('dev'));
 // session middleware
 var SequelizeStore = sequelizeSessionStore(session.Store);
 
+if (process.env.NODE_ENV == 'production') {
+  app.set('trust proxy', 1);
+}
+
 let sessionConfig = {
   secret: 'mapa33secretcookie',
   store: new SequelizeStore({
