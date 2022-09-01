@@ -37,6 +37,7 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://mapa33-web.s3-website-us-east-1.amazonaws.com',
+    'https://d21wj9xgysoor6.cloudfront.net',
     'http://mapa-33.com',
     'https://mapa-33.com',
   ]
@@ -61,7 +62,7 @@ let sessionConfig = {
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000,
-    secure: false
+    secure: process.env.NODE_ENV == 'production'
   }
 };
 app.use(session(sessionConfig));
