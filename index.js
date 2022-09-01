@@ -53,7 +53,7 @@ app.use(morgan('dev'));
 var SequelizeStore = sequelizeSessionStore(session.Store);
 
 if (process.env.NODE_ENV == 'production') {
-  app.set('trust proxy', 1);
+  app.enable('trust proxy');
 }
 
 let sessionConfig = {
