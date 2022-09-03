@@ -31,18 +31,6 @@ app.set('view engine', 'html');
 // serve static files from public
 app.use(express.static(resolve(__dirname, 'public')), express.static(resolve(__dirname, 'public/dist')));
 
-// cors
-app.use(cors({
-  credentials: true,
-  origin: [
-    'http://localhost:3000',
-    'http://mapa33-web.s3-website-us-east-1.amazonaws.com',
-    'https://d21wj9xgysoor6.cloudfront.net',
-    'http://mapa-33.com',
-    'https://mapa-33.com',
-  ]
-}));
-
 // cookie parser
 app.use(cookieParser());
 
@@ -56,8 +44,8 @@ let sessionConfig = {
   secret: 'mapa33secretcookie',
   store: new SequelizeStore({
     db: db.sequelize,
-    proxy: true,
   }),
+  proxy: process.env.NODE_ENV == 'production',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -67,6 +55,18 @@ let sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+// cors
+app.use(cors({
+  credentials: true,
+  origin: [
+    'http://localhost:3000',
+    'http://mapa33-web.s3-website-us-east-1.amazonaws.com',
+    'https://d21wj9xgysoor6.cloudfront.net',
+    'http://mapa-33.com',
+    'https://mapa-33.com',
+  ]
+}));
 
 // passport 
 app.use(passport.initialize());
