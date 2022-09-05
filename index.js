@@ -50,7 +50,8 @@ let sessionConfig = {
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000,
-    secure: process.env.NODE_ENV == 'production'
+    secure: process.env.NODE_ENV == 'production',
+    sameSite: 'None',
   }
 };
 app.use(session(sessionConfig));
