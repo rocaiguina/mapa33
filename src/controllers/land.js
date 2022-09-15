@@ -447,6 +447,7 @@ class LandController {
       })
       .catch(function(err) {
         console.dir(err, { depth: 10 });
+        console.error(err);
         res.status(400).send(err);
       });
   }
@@ -473,10 +474,12 @@ class LandController {
               next();
             })
             .catch(function(err) {
+              console.error(err);
               next(err);
             });
         })
         .catch(function(err) {
+          console.error(err);
           next(err);
         });
     } else {
@@ -532,6 +535,7 @@ class LandController {
         res.send('');
       })
       .catch(function(err) {
+        console.error(err);
         res.status(400).send(err);
       });
   }
@@ -594,6 +598,7 @@ class LandController {
         res.send('');
       })
       .catch(function(err) {
+        console.error(err);
         res.status(400).send(err);
       })
       .finally(function() {
