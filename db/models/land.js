@@ -127,6 +127,43 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, // new, approved, rejected
       allowNull: true,
     },
+    photographURL: {
+      type: DataTypes.VIRTUAL(DataTypes.STRING, ['photograph']),
+      get: function() {
+        if (this.get('photograph')) {
+          return FileStorage.getUrl(this.get('photograph'));
+        }
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
+      }
+    },
+    landShapeURL: {
+      type: DataTypes.VIRTUAL(DataTypes.STRING, ['land_shape']),
+      get: function() {
+        if (this.get('land_shape')) {
+          return FileStorage.getUrl(this.get('land_shape'));
+        }
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
+      }
+    },
+    socialPhotographURL: {
+      type: DataTypes.VIRTUAL(DataTypes.STRING, ['social_photograph']),
+      get: function() {
+        if (this.get('social_photograph')) {
+          return FileStorage.getUrl(this.get('social_photograph'));
+        }
+        return process.env.SERVER_URL +  '/images/no-land-image.jpg';
+      }
+    },
+    humanCoordinates: {
+      type: DataTypes.VIRTUAL(DataTypes.STRING, ['coordinates']),
+      get: function() {
+        var coordinates = this.get('coordinates');
+        if (coordinates && coordinates.coordinates) {
+          return `${Numeral(coordinates.coordinates[0]).format('0,0.00')},${Numeral(coordinates.coordinates[1]).format('0,0.00')}`;
+        }
+        return '';
+      }
+    }
   }, {
     tableName: 'lands',
     paranoid: true,
