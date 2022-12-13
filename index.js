@@ -51,7 +51,7 @@ let sessionConfig = {
   cookie: {
     maxAge: 60 * 60 * 1000,
     secure: process.env.NODE_ENV == 'production',
-    sameSite: 'None',
+    sameSite: process.env.NODE_ENV == 'production' ? 'None' : undefined,
   }
 };
 app.use(session(sessionConfig));

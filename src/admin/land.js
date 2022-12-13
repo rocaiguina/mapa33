@@ -186,7 +186,7 @@ class LandAdminController {
 
     const validationSchema = {
       geom: Joi.string().allow(null, ''),
-      coordinates: Joi.string(),
+      coordinates: Joi.string().allow(null, ''),
       name: Joi.string(),
       level: Joi.string().allow(null, ''),
       plots_count: Joi.number()
