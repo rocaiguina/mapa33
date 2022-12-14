@@ -176,6 +176,7 @@ class LandController {
         };
         lands.forEach(function(item) {
           const properties = item.get({ plain: true });
+          properties.photographURL = item.photographURL;
           delete properties.geom;
           var row = {
             type: 'Feature',
